@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
+import Link from "next/link"; // 👉 L'IMPORT EST ICI !
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
@@ -163,10 +164,11 @@ export default function Home() {
             Le Guide Offert
           </button>
         </div>
-        {/* 👉 NOUVEAU : On cache ces liens sur mobile (hidden md:flex) pour alléger l'écran */}
+        
+        {/* 👉 NOUVEAU : Les vrais liens vers les nouvelles pages */}
         <div className="hidden md:flex gap-6">
-          <a href="#" className="hover:text-white transition-colors tracking-wide uppercase">Nous contacter</a>
-          <a href="#" className="hover:text-white transition-colors tracking-wide uppercase">Mentions légales</a>
+          <Link href="/contact" className="hover:text-white transition-colors tracking-wide uppercase">Nous contacter</Link>
+          <Link href="/mentions-legales" className="hover:text-white transition-colors tracking-wide uppercase">Mentions légales</Link>
         </div>
       </header>
 
@@ -191,7 +193,7 @@ export default function Home() {
 
       </div>
 
-      {/* 👉 NOUVEAU : LE BOUTON D'ACTION FLOTTANT (STYLE APPLE) 👈 */}
+      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="bg-black/30 backdrop-blur-xl p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto transition-transform duration-500">
           <button 
