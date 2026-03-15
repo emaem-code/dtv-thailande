@@ -154,21 +154,27 @@ export default function Home() {
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
       {/* HEADER (Épuré sur mobile) */}
-      <header className="w-full p-4 md:p-6 flex justify-between items-center text-xs md:text-sm font-medium text-gray-400 z-10 flex-none">
-        <div className="flex gap-6">
+      {/* HEADER FAÇON APPLE */}
+      <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none">
+        {/* Bouton Guide (Badge translucide) */}
+        <div className="flex gap-4">
           <button 
             onClick={() => setIsGuideOpen(true)}
-            className="hover:text-white transition-colors tracking-wide uppercase flex items-center gap-2"
+            className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 rounded-full transition-all duration-300 text-gray-300 hover:text-white backdrop-blur-md"
           >
             <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]"></span>
-            Le Guide Offert
+            Le guide offert
           </button>
         </div>
         
-        {/* 👉 NOUVEAU : Les vrais liens vers les nouvelles pages */}
-        <div className="hidden md:flex gap-6">
-          <Link href="/contact" className="hover:text-white transition-colors tracking-wide uppercase">Nous contacter</Link>
-          <Link href="/mentions-legales" className="hover:text-white transition-colors tracking-wide uppercase">Mentions légales</Link>
+        {/* Liens droits (Pilules invisibles qui s'activent au survol) */}
+        <div className="hidden md:flex gap-2">
+          <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
+            Nous contacter
+          </Link>
+          <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
+            Mentions légales
+          </Link>
         </div>
       </header>
 
@@ -182,7 +188,7 @@ export default function Home() {
             <span className="text-gray-400 text-xl md:text-3xl lg:text-4xl">On s'occupe du reste.</span>
           </h1>
           <p className="text-gray-400 text-xs md:text-base max-w-xl mx-auto mt-2">
-            Sécurisez votre dossier. Évitez les pièges de l'ambassade. Partez l'esprit libre.
+            Obtenez le Visa DTV thaïlandais sans charge mentale. Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.
           </p>
         </main>
 
