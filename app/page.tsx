@@ -78,13 +78,13 @@ function VideoSequence() {
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center">
       
-      {/* VERSION MOBILE */}
-      <div className="block md:hidden w-full">
+      {/* VERSION MOBILE & TABLETTE (Tactile) */}
+      <div className="block lg:hidden w-full">
         <MobileVideoCarousel />
       </div>
 
-      {/* VERSION PC */}
-      <div className="hidden md:flex justify-center w-full h-full pb-8">
+      {/* VERSION PC (Grand écran uniquement) */}
+      <div className="hidden lg:flex justify-center w-full h-full pb-8">
         <div className="grid grid-cols-5 gap-[2px] w-full max-w-6xl px-4 h-full max-h-[50vh]">
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
@@ -149,7 +149,7 @@ export default function Home() {
   return (
     // 👉 NOUVEAU : min-h-[100dvh] permet à la page de s'adapter PARFAITEMENT à Safari Mobile
     // 👉 On ajoute pb-28 (padding bottom) pour que le bouton flottant ne cache jamais le contenu
-    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-28 md:pb-24">
+    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-40 md:pb-24">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
