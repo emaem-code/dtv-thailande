@@ -3,100 +3,102 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', title: 'Le Visa DTV' },
-  { id: 1, src: '/video-budget.mp4', title: 'Le Budget' },
-  { id: 2, src: '/video-accompagnement.mp4', title: 'L\'Accompagnement' },
-  { id: 3, src: '/video-temoignage.mp4', title: 'Témoignages' },
-  { id: 4, src: '/video-erreur.mp4', title: 'Les Erreurs à éviter' },
+  { id: 0, src: '/video-dtv.mp4', title: 'Concept DTV' },
+  { id: 1, src: '/video-erreur.mp4', title: 'Erreurs à éviter' },
+  { id: 2, src: '/video-temoignage.mp4', title: 'Témoignage' },
+  { id: 3, src: '/video-accompagnement.mp4', title: 'Notre Accompagnement' },
+  { id: 4, src: '/video-budget.mp4', title: 'Le Budget' },
 ];
 
 export default function MobileVideoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [volume, setVolume] = useState(0); // 0 = Muet par défaut pour l'autoplay
-  const videoRefs = useRef<HTMLVideoElement[]>([]);
+  const [isMuted, setIsMuted] = useState(true); // Muet par défaut
+  
+  // 👉 CORRECTION TYPESCRIPT ICI : On précise bien que ça peut être null
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
-        video.volume = volume;
-        if (index !== currentIndex) {
+        video.muted = isMuted;
+        if (index === currentIndex) {
+          video.play().catch(e => console.log("Autoplay bloqué :", e));
+        } else {
           video.pause();
           video.currentTime = 0;
         }
       }
     });
+  }, [currentIndex, isMuted]);
 
-    const activeVideo = videoRefs.current[currentIndex];
-    if (activeVideo) {
-      activeVideo.play().catch(error => {
-        console.log("Auto-play bloqué, interaction requise:", error);
-      });
-    }
-  }, [currentIndex, volume]);
-
-  const handleVideoEnd = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % videos.length);
   };
 
   const getVideoStyle = (index: number) => {
     const total = videos.length;
-    if (index === currentIndex) return "translate-x-0 scale-100 opacity-100 z-20";
-    if (index === (currentIndex + 1) % total) return "translate-x-[15%] scale-90 opacity-40 z-10";
-    if (index === (currentIndex - 1 + total) % total) return "-translate-x-[150%] scale-75 opacity-0 z-0";
-    return "translate-x-[150%] scale-75 opacity-0 z-0";
+    
+    if (index === currentIndex) {
+      // VIDÉO ACTIVE : Parfaitement au centre
+      return "translate-x-0 scale-100 opacity-100 z-30 shadow-2xl";
+    } 
+    if (index === (currentIndex + 1) % total) {
+      // VIDÉO SUIVANTE : Décalée fortement à droite, plus petite
+      return "translate-x-[85%] scale-90 opacity-40 z-20"; 
+    } 
+    // TOUTES LES AUTRES : Rangées et cachées à gauche
+    return "-translate-x-[150%] scale-50 opacity-0 z-10";
   };
 
   return (
-    <div className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden bg-[#0a0a0a] px-4 py-10">
-      <div className="relative w-full h-full max-w-[320px] aspect-[9/16] preserve-3d">
+    <div className="relative w-full h-[75vh] flex flex-col items-center justify-center overflow-hidden py-10">
+      
+      {/* BOUTON DE SON GLOBAL (En haut à droite, super visible) */}
+      <button
+        onClick={() => setIsMuted(!isMuted)}
+        className="absolute top-4 right-4 z-50 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2 shadow-lg"
+      >
+        {isMuted ? (
+          <>
+            <span className="text-xl">🔇</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Activer le son</span>
+          </>
+        ) : (
+          <>
+            <span className="text-xl">🔊</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Son activé</span>
+          </>
+        )}
+      </button>
+
+      {/* LE CARROUSEL */}
+      <div className="relative w-full max-w-[280px] aspect-[9/16]">
         {videos.map((video, index) => (
           <div
             key={video.id}
-            className={`absolute inset-0 w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 ease-in-out will-change-transform ${getVideoStyle(index)}`}
+            className={`absolute inset-0 w-full h-full rounded-2xl overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
           >
             <video
-              ref={(el) => (videoRefs.current[index] = el!)}
+              // 👉 CORRECTION TYPESCRIPT ICI : Les accolades empêchent le retour de valeur implicite
+              ref={(el) => { videoRefs.current[index] = el; }} 
               src={video.src}
               className="w-full h-full object-cover"
-              loop={false}
               playsInline
-              onEnded={handleVideoEnd}
+              onEnded={handleNext}
             />
             
-            {/* 👇 BOUTON CENTRAL DE SON (Uniquement sur la vidéo active) 👇 */}
-            {index === currentIndex && (
-              <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setVolume(volume === 0 ? 1 : 0); // Alterne entre 0% et 100%
-                  }}
-                  className="pointer-events-auto flex items-center justify-center w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white shadow-xl transition-transform active:scale-90"
-                >
-                  {volume === 0 ? (
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
-                  ) : (
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
-                  )}
-                </button>
-              </div>
-            )}
-
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent p-6 flex items-end">
-              <h3 className="text-white text-xl font-bold tracking-tight">{video.title}</h3>
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 h-1/2 flex flex-col justify-end">
+               <h3 className="text-white font-extrabold text-xl leading-tight mb-2 drop-shadow-lg">
+                 {video.title}
+               </h3>
+               <p className="text-white/50 text-[10px] uppercase tracking-widest">
+                 {index === currentIndex ? "En lecture..." : "À suivre"}
+               </p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-30">
-        {videos.map((_, index) => (
-          <div
-            key={index}
-            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-white w-4' : 'bg-white/30'}`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
