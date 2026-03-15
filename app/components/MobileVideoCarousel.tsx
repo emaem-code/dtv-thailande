@@ -101,15 +101,16 @@ export default function MobileVideoCarousel() {
                   </div>
 
                   {/* 👉 Le bouton est décalé vers l'intérieur (top-8 right-6) et légèrement plus grand (w-9 h-9) */}
+                  {/* 👉 MODIFICATION : Bouton transparent, plus à droite (right-3) et plus bas (top-11) */}
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className="absolute top-8 right-6 z-40 flex items-center justify-center w-9 h-9 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg transition-transform active:scale-90"
+                    className="absolute top-11 right-3 z-40 flex items-center justify-center p-2 transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                      <svg className="w-6 h-6 text-white/90 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
                     ) : (
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                      <svg className="w-6 h-6 text-white/90 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
                     )}
                   </button>
                 </>

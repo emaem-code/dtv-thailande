@@ -154,20 +154,29 @@ export default function Home() {
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
       {/* HEADER FAÇON APPLE */}
-      <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none">
-        {/* Bouton Guide (Badge translucide) */}
-        <div className="flex gap-4">
+      {/* 👉 NOUVEAU : justify-center sur mobile, justify-between sur PC */}
+      <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none">
+        
+        {/* 👉 NOUVEAU : Bouton Guide "Premium" (Halo lumineux + radar) */}
+        <div className="flex relative group">
+          {/* Effet de lueur (Glow) qui s'active au survol */}
+          <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
           <button 
             onClick={() => setIsGuideOpen(true)}
-            className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 rounded-full transition-all duration-300 text-gray-300 hover:text-white backdrop-blur-md"
+            className="relative flex items-center gap-3 px-5 py-2.5 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
           >
-            <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]"></span>
-            Le guide offert
+            {/* Nouveau point orange façon "Radar" (animate-ping) */}
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+            </span>
+            <span className="tracking-wide font-semibold">Le guide offert</span>
           </button>
         </div>
         
         {/* Liens droits (PC uniquement) */}
-        <div className="hidden md:flex gap-2">
+        <div className="hidden md:flex gap-4">
           <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
             Nous contacter
           </Link>
