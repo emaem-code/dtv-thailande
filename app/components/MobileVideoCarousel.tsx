@@ -18,7 +18,7 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 z-20 pointer-events-none bg-gradient-to-b from-black/10 via-black/40 to-black/10">
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 z-20 pointer-events-none bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0.3)_0%,_transparent_65%)]">
       {phrases.map((phrase, i) => (
         <h3 key={i} className={`absolute w-full px-4 text-white font-extrabold text-xl leading-tight tracking-wide transition-all duration-1000 transform drop-shadow-[0_2px_10px_rgba(0,0,0,1)] ${i === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}>
           {phrase}
@@ -30,7 +30,7 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
 
 export default function MobileVideoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true); // Géré par un simple bouton maintenant
+  const [isMuted, setIsMuted] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
@@ -55,15 +55,15 @@ export default function MobileVideoCarousel() {
   const getVideoStyle = (index: number) => {
     const total = videos.length;
     if (index === currentIndex) {
-      return "translate-x-0 scale-100 opacity-100 z-30 shadow-[0_10px_40px_rgba(0,0,0,0.8)] border border-white/10"; // ACTIVE
+      return "translate-x-0 scale-100 opacity-100 z-30 shadow-[0_10px_40px_rgba(0,0,0,0.8)] border border-white/10";
     }
     if (index === (currentIndex + 1) % total) {
-      return "translate-x-[70%] scale-90 opacity-40 z-20 cursor-pointer hover:opacity-60"; // SUIVANTE
+      return "translate-x-[70%] scale-90 opacity-40 z-20 cursor-pointer hover:opacity-60";
     }
     if (index === (currentIndex - 1 + total) % total) {
-      return "-translate-x-[70%] scale-90 opacity-40 z-20 cursor-pointer hover:opacity-60"; // PRÉCÉDENTE
+      return "-translate-x-[70%] scale-90 opacity-40 z-20 cursor-pointer hover:opacity-60";
     }
-    return "translate-x-0 scale-50 opacity-0 z-10 pointer-events-none"; // CACHÉES
+    return "translate-x-0 scale-50 opacity-0 z-10 pointer-events-none";
   };
 
   return (
@@ -88,29 +88,27 @@ export default function MobileVideoCarousel() {
                 onEnded={handleNext}
               />
 
-              {/* Texte Animé (Uniquement sur l'active) */}
               {isActive && <MobileTextOverlay phrases={video.phrases} />}
 
-              {/* Titre et Bouton de Son (Uniquement sur l'active) */}
               {isActive && (
                 <>
-                  {/* Dégradé propre en bas */}
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent pt-24 pb-6 px-4 flex flex-col justify-end pointer-events-none">
-                    <h3 className="text-white font-extrabold text-center text-xl tracking-tight drop-shadow-md">
+                  {/* 👉 MODIFICATION ICI : Le titre et le dégradé sont passés en HAUT (top-0) */}
+                  <div className="absolute top-0 inset-x-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent pt-6 pb-12 px-4 flex flex-col justify-start pointer-events-none z-30">
+                    <h3 className="text-white font-extrabold text-center text-lg md:text-xl tracking-tight drop-shadow-md">
                       {video.title}
                     </h3>
                   </div>
 
-                  {/* 👉 LE NOUVEAU BOUTON DE SON STYLE APPLE (Discret, en bas à droite) */}
+                  {/* 👉 MODIFICATION ICI : Le bouton de son est en HAUT à DROITE (top-4 right-4) */}
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className="absolute bottom-6 right-4 z-40 flex items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg transition-transform active:scale-90"
+                    className="absolute top-4 right-4 z-40 flex items-center justify-center w-8 h-8 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg transition-transform active:scale-90"
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
                     ) : (
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
                     )}
                   </button>
                 </>
