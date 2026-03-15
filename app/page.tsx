@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
-import Link from "next/link"; // 👉 L'IMPORT EST ICI !
+import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
@@ -147,13 +147,12 @@ export default function Home() {
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
 
   return (
-    // 👉 NOUVEAU : min-h-[100dvh] permet à la page de s'adapter PARFAITEMENT à Safari Mobile
-    // 👉 On ajoute pb-28 (padding bottom) pour que le bouton flottant ne cache jamais le contenu
+    // 👉 min-h-[100dvh] permet à la page de s'adapter PARFAITEMENT à Safari Mobile
+    // 👉 On a bien pb-40 pour le mobile et pb-24 pour l'ordi
     <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-40 md:pb-24">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* HEADER (Épuré sur mobile) */}
       {/* HEADER FAÇON APPLE */}
       <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none">
         {/* Bouton Guide (Badge translucide) */}
@@ -167,7 +166,7 @@ export default function Home() {
           </button>
         </div>
         
-        {/* Liens droits (Pilules invisibles qui s'activent au survol) */}
+        {/* Liens droits (PC uniquement) */}
         <div className="hidden md:flex gap-2">
           <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
             Nous contacter
@@ -198,6 +197,13 @@ export default function Home() {
         </section>
 
       </div>
+
+      {/* 👉 LE FOOTER EST LÀ ! 👈 */}
+      <footer className="w-full text-center py-8 flex flex-col md:hidden justify-center items-center gap-4 text-xs font-medium text-gray-500 border-t border-white/5 mt-auto z-10 flex-none relative">
+        <Link href="/contact" className="hover:text-white transition-colors uppercase tracking-wide">Nous contacter</Link>
+        <Link href="/mentions-legales" className="hover:text-white transition-colors uppercase tracking-wide">Mentions légales</Link>
+        <span className="uppercase tracking-wide mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
+      </footer>
 
       {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
