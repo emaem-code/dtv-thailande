@@ -198,11 +198,13 @@ export default function Home() {
 
       </div>
 
-      {/* 👉 LE FOOTER EST LÀ ! 👈 */}
-      <footer className="w-full text-center py-8 flex flex-col md:hidden justify-center items-center gap-4 text-xs font-medium text-gray-500 border-t border-white/5 mt-auto z-10 flex-none relative">
-        <Link href="/contact" className="hover:text-white transition-colors uppercase tracking-wide">Nous contacter</Link>
-        <Link href="/mentions-legales" className="hover:text-white transition-colors uppercase tracking-wide">Mentions légales</Link>
-        <span className="uppercase tracking-wide mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
+      {/* 👉 LE FOOTER FAÇON APPLE (Doux et discret) */}
+      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-12 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
+        <div className="flex gap-6">
+          <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
+          <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
+        </div>
+        <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
       {/* LE BOUTON D'ACTION FLOTTANT */}
