@@ -176,7 +176,7 @@ export default function Home() {
         {/* L'ACCROCHE */}
         <main className="text-center flex-none">
           <h1 className="text-[28px] md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-2 leading-tight">
-            Obtenez votre Visa de 5 ans. <br />
+            Votre Visa de 5 ans. <br />
             <span className="text-gray-400 text-xl md:text-3xl lg:text-4xl">On s'occupe du reste.</span>
           </h1>
           <p className="text-gray-400 text-xs md:text-base max-w-xl mx-auto mt-2">
