@@ -40,11 +40,11 @@ function VideoSequence() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
  const videos = [
-    { id: 0, src: "/video-dtv.mp4", title: "Le passeport liberté", hasText: true, phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-    { id: 1, src: "/video-erreur.mp4", title: "Le piège de l'ambassade", hasText: true, phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-    { id: 2, src: "/video-temoignage.mp4", title: "Ils vivent le rêve", hasText: true, phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-    { id: 3, src: "/video-accompagnement.mp4", title: "La méthode VIP", hasText: true, phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-    { id: 4, src: "/video-budget.mp4", title: "Votre investissement", hasText: true, phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] }
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Le passeport liberté", hasText: true, phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Le piège de l'ambassade", hasText: true, phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils vivent le rêve", hasText: true, phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
+    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "La méthode VIP", hasText: true, phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] }
   ];
 
   useEffect(() => {
@@ -98,7 +98,9 @@ function VideoSequence() {
                 <video 
                   ref={(el) => { videoRefs.current[index] = el; }}
                   src={video.src}
+                  poster={video.poster}
                   playsInline
+                  preload="metadata" 
                   muted={volume === 0}
                   onEnded={handleVideoEnd}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}

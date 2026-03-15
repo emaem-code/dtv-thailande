@@ -3,11 +3,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', title: 'Le passeport\nliberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-  { id: 1, src: '/video-erreur.mp4', title: 'Le piège\nde l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-  { id: 2, src: '/video-temoignage.mp4', title: 'Ils vivent\nle rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-  { id: 3, src: '/video-accompagnement.mp4', title: 'La méthode\nVIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-  { id: 4, src: '/video-budget.mp4', title: 'Votre\ninvestissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
+  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Le passeport\nliberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
+  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Le piège\nde l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
+  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils vivent\nle rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
+  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'La méthode\nVIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'Votre\ninvestissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
 ];
 
 function VideoTitle({ title }: { title: string }) {
@@ -107,11 +107,13 @@ export default function MobileVideoCarousel() {
               onClick={() => handleVideoClick(index)}
               className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
             >
-              <video
+             <video
                 ref={(el) => { videoRefs.current[index] = el; }}
                 src={video.src}
+                poster={video.poster} 
                 className="w-full h-full object-cover"
                 playsInline
+                preload="metadata" 
                 loop={false}
                 onEnded={handleNext}
               />
