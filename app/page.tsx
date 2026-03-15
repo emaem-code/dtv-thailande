@@ -216,15 +216,20 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* LE BOUTON D'ACTION FLOTTANT */}
+      {/* LE BOUTON D'ACTION FLOTTANT (Avec effet "Pulse" subtil) */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
-        <div className="bg-black/30 backdrop-blur-xl p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto transition-transform duration-500">
-          <button 
-            onClick={() => setIsEligibleOpen(true)}
-            className="bg-white text-black px-6 py-4 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-          >
-            Vérifier mon éligibilité (Test Rapide)
-          </button>
+        <div className="relative group pointer-events-auto">
+          {/* L'effet de halo qui respire doucement en arrière-plan */}
+          <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
+          
+          <div className="relative bg-black/40 backdrop-blur-xl p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
+            <button 
+              onClick={() => setIsEligibleOpen(true)}
+              className="bg-white text-black px-6 py-4 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2"
+            >
+              Vérifier mon éligibilité (Test Rapide)
+            </button>
+          </div>
         </div>
       </div>
 
