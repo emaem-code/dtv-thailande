@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 import DtvGuideModal from "./components/DtvGuideModal"; 
+import MobileVideoCarousel from './components/MobileVideoCarousel';
 
 // --- MINI-COMPOSANT : TEXTE ANIMÉ (Version Premium & Lisible) ---
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
@@ -40,45 +41,45 @@ function VideoSequence() {
   const [volume, setVolume] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 👇 C'est ici que tu gères tes vidéos et leurs textes ! 👇
-  // 👇 Ta liste de vidéos DÉFINITIVE et complète ! 👇
+  // Ta liste de vidéos DÉFINITIVE et complète
   const videos = [
     { 
       id: 0, 
-      src: "/video-dtv.mp4", // 👈 Ta vidéo Rêve (Plage/Lifestyle)
+      src: "/video-dtv.mp4", 
       title: "Concept DTV", 
       hasText: true, 
       phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] 
     },
     { 
       id: 1, 
-      src: "/video-erreur.mp4", // 👈 Ta vidéo Peur (Le Refus)
+      src: "/video-erreur.mp4", 
       title: "Erreurs à éviter", 
       hasText: true, 
       phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] 
     },
     { 
       id: 2, 
-      src: "/video-temoignage.mp4", // 👈 Ta vidéo Réassurance (Le gars dans la pénombre)
+      src: "/video-temoignage.mp4", 
       title: "Témoignage", 
       hasText: true, 
       phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] 
     },
     { 
       id: 3, 
-      src: "/video-accompagnement.mp4", // 👈 Ta vidéo Double Réassurance (Le voyage, Muay Thai, etc.)
+      src: "/video-accompagnement.mp4", 
       title: "Notre Accompagnement", 
       hasText: true, 
       phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] 
     },
     { 
       id: 4, 
-      src: "/video-budget.mp4", // 👈 Ta vidéo Prix (Le tapis roulant !)
+      src: "/video-budget.mp4", 
       title: "Le Budget", 
-      hasText: true, // 👈 On active le texte !
+      hasText: true, 
       phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] 
     }
   ];
+
   useEffect(() => {
     videoRefs.current.forEach((vid, index) => {
       if (!vid) return;
@@ -110,87 +111,94 @@ function VideoSequence() {
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center">
       
-      
-
-      {/* LA GRILLE DES 5 VIDÉOS */}
-      <div className="grid grid-cols-5 gap-[2px] w-full max-w-6xl px-4 h-full max-h-[50vh]">
-        {videos.map((video, index) => {
-          const isActive = index === activeIndex;
-
-          return (
-            <div 
-              key={video.id}
-              onClick={() => handleVideoClick(index)}
-              className="bg-[#0a0a0a] relative overflow-hidden cursor-pointer aspect-[9/16] h-full group"
-            >
-              <video 
-                ref={(el) => { videoRefs.current[index] = el; }}
-                src={video.src}
-                playsInline
-                muted={volume === 0}
-                onEnded={handleVideoEnd}
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
-              />
-              
-              <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
-             
-             {/* 👇 CONTRÔLEUR DE VOLUME INTERACTIF 👇 */}
-{isActive && (
-  <div 
-    onClick={(e) => e.stopPropagation()} // Empêche de relancer la vidéo au clic sur le module
-    className="absolute top-3 right-3 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md hover:bg-black/70 border border-white/20 text-white px-3 py-1.5 rounded-full transition-all duration-300 shadow-lg group/volume"
-  >
-    {/* Bouton Muet / Actif */}
-    <button
-      onClick={() => setVolume(volume === 0 ? 0.5 : 0)}
-      className="flex items-center justify-center transition-transform active:scale-90"
-    >
-      {volume === 0 ? (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
-      ) : (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
-      )}
-    </button>
-
-    {/* Slider de volume qui s'ouvre au survol */}
-    <div className="flex items-center w-0 overflow-hidden group-hover/volume:w-20 transition-all duration-300 ease-in-out">
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.1"
-        value={volume}
-        onChange={(e) => setVolume(parseFloat(e.target.value))}
-        className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-white"
-      />
-    </div>
-    
-    {/* Texte d'état (caché sur mobile pour gagner de la place) */}
-    <span className="text-[10px] font-medium tracking-wide hidden sm:inline">
-      {volume === 0 ? "Muet" : `${Math.round(volume * 100)}%`}
-    </span>
-  </div>
-)}
-
-              {/* 👇 LE TEXTE DYNAMIQUE EST APPELÉ ICI 👇 */}
-              {video.hasText && isActive && video.phrases && (
-                <AnimatedTextOverlay phrases={video.phrases} />
-              )}
-
-              <p className={`absolute bottom-4 left-0 w-full text-center font-medium text-[10px] md:text-sm tracking-wide z-10 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
-                {video.title}
-              </p>
-            </div>
-          );
-        })}
+      {/* 👇 VERSION MOBILE (Carrousel) : Caché sur PC 👇 */}
+      <div className="block md:hidden w-full">
+        <MobileVideoCarousel />
       </div>
+
+      {/* 👇 VERSION PC (Grille) : Caché sur Mobile 👇 */}
+      <div className="hidden md:flex justify-center w-full h-full">
+        <div className="grid grid-cols-5 gap-[2px] w-full max-w-6xl px-4 h-full max-h-[50vh]">
+          {videos.map((video, index) => {
+            const isActive = index === activeIndex;
+
+            return (
+              <div 
+                key={video.id}
+                onClick={() => handleVideoClick(index)}
+                className="bg-[#0a0a0a] relative overflow-hidden cursor-pointer aspect-[9/16] h-full group"
+              >
+                <video 
+                  ref={(el) => { videoRefs.current[index] = el; }}
+                  src={video.src}
+                  playsInline
+                  muted={volume === 0}
+                  onEnded={handleVideoEnd}
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
+                />
+                
+                <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+               
+                {/* 👇 CONTRÔLEUR DE VOLUME INTERACTIF 👇 */}
+                {isActive && (
+                  <div 
+                    onClick={(e) => e.stopPropagation()} // Empêche de relancer la vidéo au clic sur le module
+                    className="absolute top-3 right-3 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md hover:bg-black/70 border border-white/20 text-white px-3 py-1.5 rounded-full transition-all duration-300 shadow-lg group/volume"
+                  >
+                    {/* Bouton Muet / Actif */}
+                    <button
+                      onClick={() => setVolume(volume === 0 ? 0.5 : 0)}
+                      className="flex items-center justify-center transition-transform active:scale-90"
+                    >
+                      {volume === 0 ? (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                      )}
+                    </button>
+
+                    {/* Slider de volume qui s'ouvre au survol */}
+                    <div className="flex items-center w-0 overflow-hidden group-hover/volume:w-20 transition-all duration-300 ease-in-out">
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={volume}
+                        onChange={(e) => setVolume(parseFloat(e.target.value))}
+                        className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-white"
+                      />
+                    </div>
+                    
+                    {/* Texte d'état (caché sur mobile pour gagner de la place) */}
+                    <span className="text-[10px] font-medium tracking-wide hidden sm:inline">
+                      {volume === 0 ? "Muet" : `${Math.round(volume * 100)}%`}
+                    </span>
+                  </div>
+                )}
+
+                {/* 👇 LE TEXTE DYNAMIQUE EST APPELÉ ICI 👇 */}
+                {video.hasText && isActive && video.phrases && (
+                  <AnimatedTextOverlay phrases={video.phrases} />
+                )}
+
+                <p className={`absolute bottom-4 left-0 w-full text-center font-medium text-[10px] md:text-sm tracking-wide z-10 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                  {video.title}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
     </div>
   );
 }
 
 // --- LA PAGE PRINCIPALE ---
 export default function Home() {
-  const [isGuideOpen, setIsGuideOpen] = useState(false); const [isEligibleOpen, setIsEligibleOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false); 
+  const [isEligibleOpen, setIsEligibleOpen] = useState(false);
 
   return (
     <div className="h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-hidden">
@@ -236,44 +244,44 @@ export default function Home() {
         {/* 3. L'ACTION (Bouton affiné et remonté) */}
         <div className="flex-none pt-4 pb-6 md:pb-8">
           <button 
-  onClick={() => setIsEligibleOpen(true)}
-  className="bg-white text-black px-8 py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-4 ring-white/10"
->
-  Vérifier mon éligibilité (Test Rapide)
-</button>
+            onClick={() => setIsEligibleOpen(true)}
+            className="bg-white text-black px-8 py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-4 ring-white/10"
+          >
+            Vérifier mon éligibilité (Test Rapide)
+          </button>
         </div>
 
       </div>
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
-{isEligibleOpen && (
-  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-    {/* Fond noir transparent qui ferme la modal au clic */}
-    <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />
-    
-    {/* Le conteneur de ton formulaire - ICI on décide de la largeur ! */}
-    <div className="relative bg-[#0a0a0a] w-full max-w-4xl h-[80vh] rounded-2xl border border-zinc-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-      
-      {/* Bouton pour fermer la modal */}
-      <button 
-        onClick={() => setIsEligibleOpen(false)}
-        className="absolute top-4 right-4 z-[110] text-gray-400 hover:text-white bg-white/5 p-2 rounded-full"
-      >
-        ✕
-      </button>
+      {isEligibleOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Fond noir transparent qui ferme la modal au clic */}
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />
+          
+          {/* Le conteneur de ton formulaire - ICI on décide de la largeur ! */}
+          <div className="relative bg-[#0a0a0a] w-full max-w-4xl h-[80vh] rounded-2xl border border-zinc-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+            
+            {/* Bouton pour fermer la modal */}
+            <button 
+              onClick={() => setIsEligibleOpen(false)}
+              className="absolute top-4 right-4 z-[110] text-gray-400 hover:text-white bg-white/5 p-2 rounded-full"
+            >
+              ✕
+            </button>
 
-      {/* L'iframe Tally qui va maintenant s'étaler sur toute la largeur */}
-      <iframe 
-        src="https://tally.so/embed/b5ky6e?hideTitle=1&transparentBackground=1" 
-        width="100%" 
-        height="100%" 
-        frameBorder="0" 
-        title="Test d'éligibilité DTV"
-      ></iframe>
-    </div>
-  </div>
-)}
+            {/* L'iframe Tally qui va maintenant s'étaler sur toute la largeur */}
+            <iframe 
+              src="https://tally.so/embed/b5ky6e?hideTitle=1&transparentBackground=1" 
+              width="100%" 
+              height="100%" 
+              frameBorder="0" 
+              title="Test d'éligibilité DTV"
+            ></iframe>
+          </div>
+        </div>
+      )}
 
     </div>
   );
