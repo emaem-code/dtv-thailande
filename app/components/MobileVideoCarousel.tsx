@@ -2,12 +2,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
+// 👉 NOUVEAUX TITRES IMPACTANTS
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', title: 'Concept DTV', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-  { id: 1, src: '/video-erreur.mp4', title: 'Erreurs à éviter', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-  { id: 2, src: '/video-temoignage.mp4', title: 'Témoignage', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-  { id: 3, src: '/video-accompagnement.mp4', title: 'Notre Accompagnement', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-  { id: 4, src: '/video-budget.mp4', title: 'Le Budget', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
+  { id: 0, src: '/video-dtv.mp4', title: 'Le passeport liberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
+  { id: 1, src: '/video-erreur.mp4', title: 'Le piège de l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
+  { id: 2, src: '/video-temoignage.mp4', title: 'Ils vivent le rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
+  { id: 3, src: '/video-accompagnement.mp4', title: 'La méthode VIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
+  { id: 4, src: '/video-budget.mp4', title: 'Votre investissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
 ];
 
 function MobileTextOverlay({ phrases }: { phrases: string[] }) {
@@ -92,17 +93,17 @@ export default function MobileVideoCarousel() {
 
               {isActive && (
                 <>
-                  {/* 👉 MODIFICATION ICI : Le titre et le dégradé sont passés en HAUT (top-0) */}
-                  <div className="absolute top-0 inset-x-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent pt-6 pb-12 px-4 flex flex-col justify-start pointer-events-none z-30">
-                    <h3 className="text-white font-extrabold text-center text-lg md:text-xl tracking-tight drop-shadow-md">
+                  {/* 👉 Le titre respire plus bas (pt-12) pour éviter le bord arrondi */}
+                  <div className="absolute top-0 inset-x-0 bg-gradient-to-b from-black/90 via-black/30 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30">
+                    <h3 className="text-white font-extrabold text-center text-lg tracking-wide drop-shadow-lg">
                       {video.title}
                     </h3>
                   </div>
 
-                  {/* 👉 MODIFICATION ICI : Le bouton de son est en HAUT à DROITE (top-4 right-4) */}
+                  {/* 👉 Le bouton est décalé vers l'intérieur (top-8 right-6) et légèrement plus grand (w-9 h-9) */}
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className="absolute top-4 right-4 z-40 flex items-center justify-center w-8 h-8 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg transition-transform active:scale-90"
+                    className="absolute top-8 right-6 z-40 flex items-center justify-center w-9 h-9 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg transition-transform active:scale-90"
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (
