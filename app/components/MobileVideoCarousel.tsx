@@ -2,20 +2,47 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
-// 👉 NOUVEAUX TITRES IMPACTANTS
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', title: 'Le passeport liberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-  { id: 1, src: '/video-erreur.mp4', title: 'Le piège de l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-  { id: 2, src: '/video-temoignage.mp4', title: 'Ils vivent le rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-  { id: 3, src: '/video-accompagnement.mp4', title: 'La méthode VIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-  { id: 4, src: '/video-budget.mp4', title: 'Votre investissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
+  { id: 0, src: '/video-dtv.mp4', title: 'Le passeport\nliberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
+  { id: 1, src: '/video-erreur.mp4', title: 'Le piège\nde l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
+  { id: 2, src: '/video-temoignage.mp4', title: 'Ils vivent\nle rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
+  { id: 3, src: '/video-accompagnement.mp4', title: 'La méthode\nVIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
+  { id: 4, src: '/video-budget.mp4', title: 'Votre\ninvestissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
 ];
 
-function MobileTextOverlay({ phrases }: { phrases: string[] }) {
-  const [index, setIndex] = useState(0);
+function VideoTitle({ title }: { title: string }) {
+  const [isVisible, setIsVisible] = useState(true);
+
   useEffect(() => {
-    const timer = setInterval(() => setIndex((p) => (p + 1) % phrases.length), 4000);
-    return () => clearInterval(timer);
+    const timer = setTimeout(() => setIsVisible(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className={`absolute top-0 inset-x-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <h3 className="text-white font-extrabold text-center text-2xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
+        {title}
+      </h3>
+    </div>
+  );
+}
+
+function MobileTextOverlay({ phrases }: { phrases: string[] }) {
+  const [index, setIndex] = useState(-1);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    const timeout = setTimeout(() => {
+      setIndex(0);
+      interval = setInterval(() => {
+        setIndex((p) => (p + 1) % phrases.length);
+      }, 4000);
+    }, 3500);
+
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
   }, [phrases.length]);
 
   return (
@@ -89,28 +116,20 @@ export default function MobileVideoCarousel() {
                 onEnded={handleNext}
               />
 
-              {isActive && <MobileTextOverlay phrases={video.phrases} />}
-
               {isActive && (
                 <>
-                  {/* 👉 Le titre respire plus bas (pt-12) pour éviter le bord arrondi */}
-                  <div className="absolute top-0 inset-x-0 bg-gradient-to-b from-black/90 via-black/30 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30">
-                    <h3 className="text-white font-extrabold text-center text-lg tracking-wide drop-shadow-lg">
-                      {video.title}
-                    </h3>
-                  </div>
-
-                  {/* 👉 Le bouton est décalé vers l'intérieur (top-8 right-6) et légèrement plus grand (w-9 h-9) */}
-                  {/* 👉 MODIFICATION : Bouton transparent, plus à droite (right-3) et plus bas (top-11) */}
+                  <MobileTextOverlay phrases={video.phrases} />
+                  <VideoTitle title={video.title} />
+                  
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className="absolute top-11 right-3 z-40 flex items-center justify-center p-2 transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                    className="absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (
-                      <svg className="w-6 h-6 text-white/90 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                      <svg className="w-6 h-6 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
                     ) : (
-                      <svg className="w-6 h-6 text-white/90 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                      <svg className="w-6 h-6 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
                     )}
                   </button>
                 </>
