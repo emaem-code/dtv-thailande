@@ -189,14 +189,16 @@ export default function Home() {
       {/* CONTENEUR PRINCIPAL */}
       <div className="flex-1 flex flex-col items-center justify-start md:justify-center w-full max-w-7xl mx-auto px-4 gap-4 md:gap-8 mt-2 md:mt-0">
         
-        {/* L'ACCROCHE */}
-        <main className="text-center flex-none">
-          <h1 className="text-[28px] md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-2 leading-tight">
+        {/* L'ACCROCHE AVEC PRIX */}
+        <main className="text-center flex-none mt-4 md:mt-0">
+          <h1 className="text-[28px] md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3 leading-tight">
             Votre Visa de 5 ans. <br />
             <span className="text-gray-400 text-xl md:text-3xl lg:text-4xl">On s'occupe du reste.</span>
           </h1>
-          <p className="text-gray-400 text-xs md:text-base max-w-xl mx-auto mt-2">
-            Obtenez le Visa DTV thaïlandais sans charge mentale. Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.
+          <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+            L'accompagnement intégral à partir de <span className="text-white font-bold">999 €</span> <br className="hidden md:block" />
+            <span className="text-[11px] md:text-xs opacity-80">(Frais consulaires, traductions assermentées et honoraires inclus)</span>. <br className="hidden md:block" />
+            <span className="block mt-2 text-gray-300">Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.</span>
           </p>
         </main>
 
@@ -216,16 +218,17 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* LE BOUTON D'ACTION FLOTTANT (Avec effet "Pulse" subtil) */}
+      {/* LE BOUTON D'ACTION FLOTTANT (Plus fin sur mobile + Pulse) */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           {/* L'effet de halo qui respire doucement en arrière-plan */}
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
           
-          <div className="relative bg-black/40 backdrop-blur-xl p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
+          <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
             <button 
               onClick={() => setIsEligibleOpen(true)}
-              className="bg-white text-black px-6 py-4 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2"
+              {/* 👉 py-3 au lieu de py-4 pour affiner sur mobile */}
+              className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
               Vérifier mon éligibilité (Test Rapide)
             </button>
