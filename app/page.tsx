@@ -149,7 +149,7 @@ export default function Home() {
   return (
     // 👉 NOUVEAU : min-h-[100dvh] permet à la page de s'adapter PARFAITEMENT à Safari Mobile
     // 👉 On ajoute pb-28 (padding bottom) pour que le bouton flottant ne cache jamais le contenu
-    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-28 md:pb-0">
+    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-28 md:pb-24">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
