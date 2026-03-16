@@ -95,7 +95,7 @@ export default function MobileVideoCarousel() {
   };
 
   return (
-    <div className="relative w-full h-[55vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden py-4">
+    <div className="relative w-full max-w-[260px] md:max-w-[320px] aspect-[9/16] px-2 md:px-0">
       
       <div className="relative w-full max-w-[260px] aspect-[9/16]">
         {videos.map((video, index) => {
