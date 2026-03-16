@@ -109,7 +109,8 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
+              // 👉 LE COMBO ANTI-BUG iOS EST ICI :
+              className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 [transform:translateZ(0)] [mask-image:-webkit-radial-gradient(white,black)] ${getVideoStyle(index)}`}
             >
              <video
                 ref={(el) => { videoRefs.current[index] = el; }}
