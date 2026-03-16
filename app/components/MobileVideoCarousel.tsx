@@ -21,7 +21,7 @@ function VideoTitle({ title }: { title: string }) {
 
   return (
     <div
-      className={`absolute top-0 inset-x-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30 transition-opacity duration-1000 ${
+      className={`absolute top-0 inset-x-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pt-10 pb-12 px-6 flex flex-col justify-start pointer-events-none z-30 transition-opacity duration-1000 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -51,8 +51,7 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases]);
 
   return (
-    // 👉 FIX : Le texte est remonté à 32% (au lieu de 20%) pour esquiver le CTA
-    <div className="absolute bottom-[32%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
+    <div className="absolute bottom-[30%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
         <h3
           key={i}
@@ -112,9 +111,10 @@ export default function MobileVideoCarousel() {
   };
 
   return (
-    // 👉 FIX : Hauteur réduite de 55vh à 48vh pour libérer de la place en bas
-    <div className="relative w-full h-[48vh] min-h-[340px] flex flex-col items-center justify-center overflow-hidden">
-      <div className="relative w-[82%] max-w-[280px] aspect-[9/16] mx-auto">
+    // 👉 FIX MAJEUR : J'ai supprimé h-[48vh] et l'overflow-hidden qui coupaient la vidéo.
+    // La div parent laisse maintenant la vidéo respirer dans son ratio naturel 9:16.
+    <div className="relative w-full py-2 flex flex-col items-center justify-center">
+      <div className="relative w-[82%] max-w-[300px] aspect-[9/16] mx-auto">
         {videos.map((video, index) => {
           const isActive = index === currentIndex;
 
@@ -146,7 +146,7 @@ export default function MobileVideoCarousel() {
 
                   <button
                     onClick={(e) => { e.stopPropagation(); setIsMuted((m) => !m); }}
-                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-700 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
+                    className={`absolute top-6 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-700 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
                       !isMuted
                         ? 'opacity-100 text-white'
                         : showVolume

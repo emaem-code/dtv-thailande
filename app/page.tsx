@@ -25,7 +25,6 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    // 👉 FIX : Le texte PC/Tablette est remonté à 30%
     <div className="absolute bottom-[30%] left-0 w-full flex justify-center z-20 pointer-events-none px-2">
       {phrases.map((phrase, i) => (
         <h3
@@ -43,7 +42,6 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
 
 function HeroText() {
   return (
-    // 👉 FIX : Padding supérieur retiré pour faire remonter le titre principal
     <div className="pb-2 md:pt-0 md:pb-4 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
         Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
@@ -119,7 +117,6 @@ function VideoSequence() {
       </div>
 
       <div className="hidden lg:flex justify-center w-full h-full pb-8">
-        {/* 👉 FIX : Hauteur maximale réduite sur petite tablette horizontale (max-h-[45vh]) et préservée sur PC (xl:max-h-[55vh]) */}
         <div className="grid grid-cols-5 gap-4 w-full max-w-6xl px-4 h-full max-h-[45vh] xl:max-h-[55vh]">
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
@@ -189,14 +186,39 @@ function VideoSequence() {
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 👉 NOUVEAU: État du menu hamburger
+
+  // Empêcher le scroll quand le menu mobile est ouvert
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMobileMenuOpen]);
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-32">
+    // 👉 pb ajusté pour s'assurer que le bas ne bloque pas
+    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-32 md:pb-32">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none absolute top-0 left-0">
-        <div className="flex relative group">
+      {/* 👉 HEADER RESPONSIVE AVEC HAMBURGER À GAUCHE */}
+      <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-[60] absolute top-0 left-0">
+        
+        {/* Menu Mobile Hamburger (Visible uniquement sur mobile) */}
+        <button 
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="md:hidden p-2 -ml-2 text-white hover:text-amber-400 transition-colors focus:outline-none"
+          aria-label="Menu"
+        >
+          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        {/* Espace vide au milieu sur mobile, ou Desktop Navigation */}
+        <div className="hidden md:flex relative group">
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
           <button 
             onClick={() => setIsGuideOpen(true)}
@@ -216,8 +238,37 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 👉 FIX : Réduction du pt-16 à pt-12 pour remonter le tout vers le haut */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-12 md:pt-20">
+      {/* 👉 OVERLAY MENU MOBILE */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center animate-in fade-in duration-300">
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div className="flex flex-col items-center gap-8 text-lg font-medium">
+            <button 
+              onClick={() => { setIsGuideOpen(true); setIsMobileMenuOpen(false); }}
+              className="flex items-center gap-3 text-amber-500 hover:text-amber-400 text-xl font-bold transition-colors"
+            >
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+              </span>
+              Le guide gratuit
+            </button>
+            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Nous contacter</Link>
+            <Link href="/mentions-legales" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Mentions légales</Link>
+          </div>
+        </div>
+      )}
+
+      {/* 👉 REMONTÉE DE L'INTERFACE : padding top réduit (pt-12) */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-14 md:pt-20">
         
         <HeroText />
         
@@ -235,15 +286,15 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      <div className="fixed bottom-2 md:bottom-6 left-0 w-full flex justify-center z-50 px-2 pointer-events-none">
-        {/* 👉 FIX : J'ai légèrement réduit le padding vertical (pt-3 pb-3) pour affiner le bloc */}
-        <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/60 backdrop-blur-2xl rounded-[2rem] px-4 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+      {/* 👉 LE DOCK ÉPURÉ (Juste le texte et le bouton) plaqué tout en bas */}
+      <div className="fixed bottom-3 md:bottom-6 left-0 w-full flex justify-center z-50 px-3 pointer-events-none">
+        <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
           <div className="text-center pointer-events-none">
             <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
               Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
             </p>
-            <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-1">
+            <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-0.5">
               Frais de visa, traductions et honoraires d'agence inclus
             </p>
           </div>
@@ -253,20 +304,11 @@ export default function Home() {
             <div className="relative bg-black/40 backdrop-blur-xl p-1 md:p-1.5 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
               <button
                 onClick={() => setIsEligibleOpen(true)}
-                className="w-full bg-white text-black px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                className="w-full bg-white text-black px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-[13px] md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] whitespace-nowrap"
               >
                 Vérifier mon éligibilité — 2 min
               </button>
             </div>
-          </div>
-
-          <div className="flex gap-4 md:hidden mt-1.5">
-            <Link href="/contact" className="text-gray-500 text-[10px] hover:text-white transition-colors">
-              Nous contacter
-            </Link>
-            <Link href="/mentions-legales" className="text-gray-500 text-[10px] hover:text-white transition-colors">
-              Mentions légales
-            </Link>
           </div>
 
         </div>
