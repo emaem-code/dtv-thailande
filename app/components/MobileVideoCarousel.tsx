@@ -51,7 +51,8 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases]);
 
   return (
-    <div className="absolute bottom-[20%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
+    // 👉 FIX : Le texte est remonté à 32% (au lieu de 20%) pour esquiver le CTA
+    <div className="absolute bottom-[32%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
         <h3
           key={i}
@@ -111,7 +112,8 @@ export default function MobileVideoCarousel() {
   };
 
   return (
-    <div className="relative w-full h-[55vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden py-4">
+    // 👉 FIX : Hauteur réduite de 55vh à 48vh pour libérer de la place en bas
+    <div className="relative w-full h-[48vh] min-h-[340px] flex flex-col items-center justify-center overflow-hidden">
       <div className="relative w-[82%] max-w-[280px] aspect-[9/16] mx-auto">
         {videos.map((video, index) => {
           const isActive = index === currentIndex;
@@ -120,10 +122,9 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              // 👉 RETOUR À LA SIMPLICITÉ : Un simple overflow-hidden et rounded-[32px] standard
               className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
               style={{
-                WebkitMaskImage: '-webkit-radial-gradient(white, black)', // Le seul fix tolérable par Safari
+                WebkitMaskImage: '-webkit-radial-gradient(white, black)',
                 WebkitTransform: 'translateZ(0)',
               }}
             >

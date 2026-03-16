@@ -25,7 +25,8 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    <div className="absolute bottom-[25%] left-0 w-full flex justify-center z-20 pointer-events-none px-2">
+    // 👉 FIX : Le texte PC/Tablette est remonté à 30%
+    <div className="absolute bottom-[30%] left-0 w-full flex justify-center z-20 pointer-events-none px-2">
       {phrases.map((phrase, i) => (
         <h3
           key={i}
@@ -42,7 +43,8 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
 
 function HeroText() {
   return (
-    <div className="pb-2 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+    // 👉 FIX : Padding supérieur retiré pour faire remonter le titre principal
+    <div className="pb-2 md:pt-0 md:pb-4 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
         Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
       </h1>
@@ -117,7 +119,8 @@ function VideoSequence() {
       </div>
 
       <div className="hidden lg:flex justify-center w-full h-full pb-8">
-        <div className="grid grid-cols-5 gap-4 w-full max-w-6xl px-4 h-full max-h-[50vh]">
+        {/* 👉 FIX : Hauteur maximale réduite sur petite tablette horizontale (max-h-[45vh]) et préservée sur PC (xl:max-h-[55vh]) */}
+        <div className="grid grid-cols-5 gap-4 w-full max-w-6xl px-4 h-full max-h-[45vh] xl:max-h-[55vh]">
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
 
@@ -188,7 +191,6 @@ export default function Home() {
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
 
   return (
-    // 👉 On ajoute un pb-48 et md:pb-32 pour s'assurer que le Dock ne cache pas le bas de page
     <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-32">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
@@ -214,7 +216,8 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-16 md:pt-24">
+      {/* 👉 FIX : Réduction du pt-16 à pt-12 pour remonter le tout vers le haut */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-12 md:pt-20">
         
         <HeroText />
         
@@ -222,11 +225,8 @@ export default function Home() {
           <VideoSequence />
         </section>
 
-        {/* ⚠️ L'ancien bloc de texte statique a été supprimé ici car il est maintenant dans le Dock ! */}
-
       </div>
 
-      {/* 👉 FOOTER : Désormais masqué sur mobile (hidden md:flex) */}
       <footer className="hidden md:flex w-full flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
@@ -235,11 +235,10 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* 👉 LE NOUVEAU DOCK FLOTTANT (Texte + Bouton + Mentions Mobile) */}
       <div className="fixed bottom-2 md:bottom-6 left-0 w-full flex justify-center z-50 px-2 pointer-events-none">
-        <div className="relative flex flex-col items-center gap-2 md:gap-3 pointer-events-auto bg-black/60 backdrop-blur-2xl rounded-[2rem] px-4 pt-4 pb-3 md:px-8 md:pt-5 md:pb-5 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+        {/* 👉 FIX : J'ai légèrement réduit le padding vertical (pt-3 pb-3) pour affiner le bloc */}
+        <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/60 backdrop-blur-2xl rounded-[2rem] px-4 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
-          {/* Texte prix */}
           <div className="text-center pointer-events-none">
             <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
               Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
@@ -249,7 +248,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* CTA */}
           <div className="relative group w-full mt-1">
             <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
             <div className="relative bg-black/40 backdrop-blur-xl p-1 md:p-1.5 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
@@ -262,7 +260,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mentions légales — visibles uniquement sur mobile dans le Dock */}
           <div className="flex gap-4 md:hidden mt-1.5">
             <Link href="/contact" className="text-gray-500 text-[10px] hover:text-white transition-colors">
               Nous contacter
