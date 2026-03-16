@@ -221,15 +221,7 @@ export default function Home() {
           <VideoSequence />
         </section>
 
-        {/* 👉 MISE À JOUR : Utilisation d'une marge exacte en pixels [140px] pour forcer le texte à remonter sur PC */}
-        <div className="w-full text-center px-4 mt-2 md:mt-12 mb-28 md:mb-[140px] animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
-          <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
-            Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
-          </p>
-          <p className="text-gray-500 text-[11px] md:text-xs text-center tracking-wide mt-1">
-            Frais de visa, traductions et honoraires d'agence inclus
-          </p>
-        </div>
+        
 
       </div>
 
@@ -241,20 +233,34 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* 👉 MISE À JOUR : Le bouton sur mobile descend à bottom-2 */}
-      <div className="fixed bottom-2 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
-        <div className="relative group pointer-events-auto">
-          <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
-          <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
-            <button 
-              onClick={() => setIsEligibleOpen(true)}
-              className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-            >
-              Vérifier mon éligibilité — 2 min
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* ── BLOC FIXE : texte prix + CTA ── */}
+<div className="fixed bottom-2 md:bottom-6 left-0 w-full flex flex-col items-center z-50 px-4 pointer-events-none gap-2">
+  
+  {/* Texte prix — visible sur tous les écrans, juste au-dessus du bouton */}
+  <div className="pointer-events-none text-center">
+    <p className="text-gray-300 text-xs md:text-sm font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+      Accompagnement clé en main ·{' '}
+      <span className="text-white font-bold">à partir de 999 €</span>
+    </p>
+    <p className="text-gray-500 text-[10px] md:text-[11px] tracking-wide mt-0.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+      Frais de visa, traductions et honoraires d'agence inclus
+    </p>
+  </div>
+
+  {/* CTA */}
+  <div className="relative group pointer-events-auto">
+    <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
+    <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
+      <button
+        onClick={() => setIsEligibleOpen(true)}
+        className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+      >
+        Vérifier mon éligibilité — 2 min
+      </button>
+    </div>
+  </div>
+
+</div>
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
