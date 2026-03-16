@@ -6,13 +6,11 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
-// 👉 1. MISE À JOUR : Le texte PC attend 3 secondes avant d'apparaître
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
-  const [index, setIndex] = useState(-1); // -1 = Rien n'est affiché au début
+  const [index, setIndex] = useState(-1);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    // On attend 3 secondes (la fin du titre) pour afficher la première phrase
     const timeout = setTimeout(() => {
       setIndex(0);
       interval = setInterval(() => {
@@ -59,8 +57,6 @@ function VideoSequence() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [volume, setVolume] = useState(0);
   const [showVolume, setShowVolume] = useState(false);
-  
-  // 👉 2. NOUVEAU : État pour gérer la disparition du titre PC
   const [showTitle, setShowTitle] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -72,13 +68,12 @@ function VideoSequence() {
     { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] }
   ];
 
-  // 👉 3. MISE À JOUR : On gère les 3 secondes du bouton volume ET du titre PC
   useEffect(() => {
     setShowVolume(false);
     setShowTitle(true);
     const timer = setTimeout(() => {
       setShowVolume(true);
-      setShowTitle(false); // Le titre disparaît après 3s
+      setShowTitle(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, [activeIndex]);
@@ -172,7 +167,6 @@ function VideoSequence() {
                   <AnimatedTextOverlay phrases={video.phrases} />
                 )}
 
-                {/* 👉 4. MISE À JOUR : Le titre s'efface sur la vidéo active après 3 secondes */}
                 <p className={`absolute bottom-4 left-0 w-full text-center font-bold text-[11px] md:text-sm tracking-wide z-10 transition-all duration-1000 ${
                   isActive 
                     ? (showTitle ? 'opacity-100 text-white' : 'opacity-0 translate-y-2') 
@@ -227,8 +221,8 @@ export default function Home() {
           <VideoSequence />
         </section>
 
-        {/* 👉 5. MISE À JOUR : mb-20 pour que l'utilisateur puisse scroller bien au-dessus du bouton flottant */}
-        <div className="w-full text-center px-4 mt-0 mb-20 md:mb-6 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300">
+        {/* 👉 MISE À JOUR : Marges PC ajustées (md:mt-4 et md:mb-32) pour le centrer parfaitement au-dessus du CTA */}
+        <div className="w-full text-center px-4 mt-0 md:mt-4 mb-20 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
           <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
           </p>
@@ -247,7 +241,6 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* 👉 6. MISE À JOUR : Bouton descendu un peu plus bas (bottom-4) */}
       <div className="fixed bottom-4 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
