@@ -6,7 +6,6 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
-// --- MINI-COMPOSANT : TEXTE ANIMÉ (PC) ---
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(0);
 
@@ -33,12 +32,10 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-// 👉 NOUVEAU COMPOSANT : LE TEXTE ROTATIF DU HEADER
 function RotatingHeroText() {
   const [index, setIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
-  // L'enchaînement de tes arguments chocs
   const phrases = [
     {
       main: "Votre Visa de 5 ans.\nOn s'occupe du reste.",
@@ -56,18 +53,17 @@ function RotatingHeroText() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsVisible(false); // Disparition
+      setIsVisible(false); 
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % phrases.length);
-        setIsVisible(true); // Apparition de la nouvelle phrase
-      }, 500); // Temps du fondu noir
-    }, 4000); // Temps de lecture (4 secondes par phrase)
+        setIsVisible(true); 
+      }, 500); 
+    }, 4000); 
 
     return () => clearInterval(interval);
   }, [phrases.length]);
 
   return (
-    // Hauteur fixe (h-[120px]) pour ne jamais pousser la vidéo vers le bas !
     <div className="h-[130px] md:h-[150px] flex flex-col items-center justify-center text-center px-4 w-full">
       <h1 className={`text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 whitespace-pre-line transition-all duration-500 transform ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
         {phrases[index].main}
@@ -79,7 +75,6 @@ function RotatingHeroText() {
   );
 }
 
-// --- COMPOSANT MOTEUR DES VIDÉOS (PC) ---
 function VideoSequence() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [volume, setVolume] = useState(0);
@@ -98,7 +93,10 @@ function VideoSequence() {
       if (!vid) return;
       vid.volume = volume;
       if (index === activeIndex) {
-        vid.play().catch(() => console.log("Lecture auto bloquée"));
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => console.log("Lecture auto bloquée"));
+        }
       } else {
         vid.pause();
         vid.currentTime = 0;
@@ -124,12 +122,10 @@ function VideoSequence() {
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center">
       
-      {/* VERSION MOBILE & TABLETTE (Tactile) */}
       <div className="block lg:hidden w-full">
         <MobileVideoCarousel />
       </div>
 
-      {/* VERSION PC (Grand écran uniquement) */}
       <div className="hidden lg:flex justify-center w-full h-full pb-8">
         <div className="grid grid-cols-5 gap-4 w-full max-w-6xl px-4 h-full max-h-[50vh]">
           {videos.map((video, index) => {
@@ -146,7 +142,8 @@ function VideoSequence() {
                   src={video.src}
                   poster={video.poster}
                   playsInline
-                  preload="metadata"
+                  // 👉 OPTIMISATION MAJEURE ICI AUSSI
+                  preload={isActive ? "metadata" : "none"}
                   muted={volume === 0}
                   onEnded={handleVideoEnd}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
@@ -154,7 +151,6 @@ function VideoSequence() {
                 
                 <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
                
-                {/* BOUTON VOLUME PC/TABLETTE (Identique au mobile) */}
                 {isActive && (
                   <button 
                     onClick={(e) => { 
@@ -189,7 +185,6 @@ function VideoSequence() {
   );
 }
 
-// --- LA PAGE PRINCIPALE ---
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
@@ -199,7 +194,6 @@ export default function Home() {
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* HEADER FAÇON APPLE */}
       <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none absolute top-0 left-0">
         <div className="flex relative group">
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -221,20 +215,13 @@ export default function Home() {
         </div>
       </header>
 
-      {/* CONTENEUR PRINCIPAL (pt-24 pour laisser la place au header sans écraser la vidéo) */}
       <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-24 md:pt-28">
-        
-        {/* 👉 LE TEXTE ROTATIF COMPACT */}
         <RotatingHeroText />
-
-        {/* LE CARROUSEL VIDÉO IMMÉDIATEMENT VISIBLE */}
         <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-4">
           <VideoSequence />
         </section>
-
       </div>
 
-      {/* LE FOOTER FAÇON APPLE */}
       <footer className="w-full flex flex-col items-center justify-center gap-3 pt-8 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
@@ -243,7 +230,6 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
@@ -260,7 +246,6 @@ export default function Home() {
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
-      {/* MODAL FORMULAIRE */}
       {isEligibleOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />

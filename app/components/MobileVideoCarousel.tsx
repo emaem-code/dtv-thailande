@@ -66,7 +66,11 @@ export default function MobileVideoCarousel() {
       if (video) {
         video.muted = isMuted;
         if (index === currentIndex) {
-          video.play().catch(e => console.log("Autoplay bloqué :", e));
+          // Promise gérée proprement pour éviter les erreurs de chargement
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => console.log("Autoplay en attente"));
+          }
         } else {
           video.pause();
           video.currentTime = 0;
@@ -113,7 +117,8 @@ export default function MobileVideoCarousel() {
                 poster={video.poster} 
                 className="w-full h-full object-cover rounded-[32px]"
                 playsInline
-                preload="metadata" 
+                // 👉 OPTIMISATION MAJEURE : On bloque le préchargement des vidéos inactives
+                preload={isActive ? "metadata" : "none"}
                 loop={false}
                 onEnded={handleNext}
               />
