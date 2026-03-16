@@ -44,10 +44,12 @@ function HeroText() {
   return (
     <div className="pb-2 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici.
+        {/* 👉 Plus de point final ici */}
+        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
       </h1>
       <p className="text-[13px] md:text-base text-gray-400 mt-1.5 md:mt-2 font-medium max-w-xl mx-auto leading-relaxed">
-        Visa DTV 5 ans. Dossier béton. Zéro charge mentale.
+        {/* 👉 Remplacement des points par des puces discrètes */}
+        Visa DTV 5 ans · Dossier béton · Zéro charge mentale
       </p>
     </div>
   );
@@ -60,12 +62,13 @@ function VideoSequence() {
   const [showTitle, setShowTitle] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // 👉 NOUVEAUX TEXTES SANS POINTS
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans. Légal. Libre.", "Votre vie d'après."] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre.", hasText: true, phrases: ["Un refus. Tout s'effondre.", "On élimine ce risque."] },
-    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui. Du premier coup.", hasText: true, phrases: ["Dossier géré à 100%.", "Visa accepté. Du premier coup."] },
-    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout. Vous ne touchez à rien.", hasText: true, phrases: ["On prend tout en charge.", "Vous faites vos valises."] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] }
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après"] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["45% de dossiers refusés", "Ne faites pas la même erreur"] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Visa accepté du premier coup"] },
+    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Vous faites vos valises", "On s'occupe du reste"] },
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 € tout inclus", hasText: true, phrases: ["À partir de 999 €", "Vérifiez votre éligibilité"] }
   ];
 
   useEffect(() => {
@@ -217,12 +220,11 @@ export default function Home() {
         
         <HeroText />
         
-        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-0 md:my-2">
+        <section className="w-full max-w-7xl px-4 flex items-center justify-center my-0 md:my-4">
           <VideoSequence />
         </section>
 
-        {/* 👉 MISE À JOUR : Marges PC ajustées (md:mt-4 et md:mb-32) pour le centrer parfaitement au-dessus du CTA */}
-        <div className="w-full text-center px-4 mt-0 md:mt-4 mb-20 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
+        <div className="w-full text-center px-4 mt-2 md:mt-8 mb-24 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
           <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
           </p>

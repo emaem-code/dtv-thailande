@@ -2,12 +2,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
+// 👉 NOUVEAUX TEXTES SANS POINTS
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Et si c\'était\ndéjà fait ?', phrases: ["5 ans. Légal. Libre.", "Votre vie d'après."] },
-  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Un refus.\nTout s\'effondre.', phrases: ["Un refus. Tout s'effondre.", "On élimine ce risque."] },
-  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils ont dit oui.\nDu premier coup.', phrases: ["Dossier géré à 100%.", "Visa accepté. Du premier coup."] },
-  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'On prend tout.\nVous ne touchez à rien.', phrases: ["On prend tout en charge.", "Vous faites vos valises."] },
-  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'À partir de 999 €.\nTout inclus.', phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] },
+  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: "Et si c'était\ndéjà fait ?", phrases: ["5 ans de liberté totale", "Votre vie d'après"] },
+  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: "Un refus\net tout s'effondre", phrases: ["45% de dossiers refusés", "Ne faites pas la même erreur"] },
+  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: "Ils ont dit oui\ndu premier coup", phrases: ["Dossier géré à 100%", "Visa accepté du premier coup"] },
+  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: "On prend tout\nen charge", phrases: ["Vous faites vos valises", "On s'occupe du reste"] },
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "À partir de 999 €\ntout inclus", phrases: ["À partir de 999 €", "Vérifiez votre éligibilité"] },
 ];
 
 function VideoTitle({ title }: { title: string }) {
@@ -65,7 +66,6 @@ export default function MobileVideoCarousel() {
   const [showVolume, setShowVolume] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // Timer de 3 secondes pour l'apparition du bouton volume
   useEffect(() => {
     setShowVolume(false);
     const timer = setTimeout(() => setShowVolume(true), 3000);
