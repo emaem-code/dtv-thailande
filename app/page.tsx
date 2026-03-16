@@ -33,13 +33,59 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
+// 👉 NOUVEAU COMPOSANT : LE TEXTE ROTATIF DU HEADER
+function RotatingHeroText() {
+  const [index, setIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // L'enchaînement de tes arguments chocs
+  const phrases = [
+    {
+      main: "Votre Visa de 5 ans.\nOn s'occupe du reste.",
+      sub: "Un dossier béton. Zéro charge mentale."
+    },
+    {
+      main: "Accompagnement intégral\nà partir de 999 €",
+      sub: "(Frais consulaires, traductions et honoraires inclus)"
+    },
+    {
+      main: "Ne laissez rien au hasard.\nZéro erreur.",
+      sub: "Vous n'avez plus qu'à faire vos valises."
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false); // Disparition
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % phrases.length);
+        setIsVisible(true); // Apparition de la nouvelle phrase
+      }, 500); // Temps du fondu noir
+    }, 4000); // Temps de lecture (4 secondes par phrase)
+
+    return () => clearInterval(interval);
+  }, [phrases.length]);
+
+  return (
+    // Hauteur fixe (h-[120px]) pour ne jamais pousser la vidéo vers le bas !
+    <div className="h-[130px] md:h-[150px] flex flex-col items-center justify-center text-center px-4 w-full">
+      <h1 className={`text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 whitespace-pre-line transition-all duration-500 transform ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+        {phrases[index].main}
+      </h1>
+      <p className={`text-xs md:text-sm text-gray-400 mt-2 font-medium transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        {phrases[index].sub}
+      </p>
+    </div>
+  );
+}
+
 // --- COMPOSANT MOTEUR DES VIDÉOS (PC) ---
 function VideoSequence() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [volume, setVolume] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
- const videos = [
+  const videos = [
     { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Le passeport liberté", hasText: true, phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Le piège de l'ambassade", hasText: true, phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils vivent le rêve", hasText: true, phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
@@ -100,7 +146,7 @@ function VideoSequence() {
                   src={video.src}
                   poster={video.poster}
                   playsInline
-                  preload="metadata" 
+                  preload="metadata"
                   muted={volume === 0}
                   onEnded={handleVideoEnd}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
@@ -147,27 +193,6 @@ function VideoSequence() {
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
-  
-  // 👉 NOUVEAU : On prépare l'animation au scroll
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
-  const videoSectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Si le carrousel entre dans l'écran, on lance l'animation
-        if (entry.isIntersecting) {
-          setIsVideoVisible(true);
-        }
-      },
-      { threshold: 0.15 } // Se déclenche quand 15% de la vidéo est visible
-    );
-
-    if (videoSectionRef.current) {
-      observer.observe(videoSectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-40 md:pb-24">
@@ -196,36 +221,21 @@ export default function Home() {
         </div>
       </header>
 
-      {/* CONTENEUR PRINCIPAL */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto">
+      {/* CONTENEUR PRINCIPAL (pt-24 pour laisser la place au header sans écraser la vidéo) */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-24 md:pt-28">
         
-        {/* 👉 NOUVEAU : L'ACCROCHE PREND 65% DE L'ÉCRAN (min-h-[65vh]) */}
-        <main className="w-full min-h-[65vh] flex flex-col items-center justify-center text-center px-4 pt-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-            Votre Visa de 5 ans. <br />
-            On s'occupe du reste.
-          </h1>
-          <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-            L'accompagnement intégral à partir de <span className="text-white font-bold">999 €</span> <br className="hidden md:block" />
-            <span className="text-[11px] md:text-xs opacity-60">(Frais consulaires, traductions assermentées et honoraires inclus)</span>. <br className="hidden md:block" />
-            <span className="block mt-4 text-gray-300 font-medium">Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.</span>
-          </p>
-        </main>
+        {/* 👉 LE TEXTE ROTATIF COMPACT */}
+        <RotatingHeroText />
 
-        {/* 👉 NOUVEAU : LE CARROUSEL AVEC ANIMATION AU SCROLL */}
-        <section 
-          ref={videoSectionRef}
-          className={`flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-2 transition-all duration-1000 ease-out transform ${
-            isVideoVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-24 scale-95"
-          }`}
-        >
+        {/* LE CARROUSEL VIDÉO IMMÉDIATEMENT VISIBLE */}
+        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-4">
           <VideoSequence />
         </section>
 
       </div>
 
       {/* LE FOOTER FAÇON APPLE */}
-      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-12 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
+      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-8 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
