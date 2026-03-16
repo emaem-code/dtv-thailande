@@ -114,13 +114,21 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 [transform:translateZ(0)] [mask-image:-webkit-radial-gradient(white,black)] ${getVideoStyle(index)}`}
+              // On a retiré les anciens hacks Tailwind ([transform...] et [mask...])
+              className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
+              // 👉 LES 3 LIGNES MAGIQUES POUR FORCER SAFARI iOS :
+              style={{
+                WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+                WebkitTransform: 'translateZ(0)',
+                willChange: 'transform',
+              }}
             >
              <video
                 ref={(el) => { videoRefs.current[index] = el; }}
                 src={video.src}
                 poster={video.poster} 
-                className="w-full h-full object-cover rounded-[32px]"
+                // 👉 On a retiré rounded-[32px] ici, c'est le masque au-dessus qui coupe les bords !
+                className="w-full h-full object-cover"
                 playsInline
                 preload={isActive ? "metadata" : "none"}
                 loop={false}
