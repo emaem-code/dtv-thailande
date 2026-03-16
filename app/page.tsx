@@ -147,28 +147,41 @@ function VideoSequence() {
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
+  
+  // 👉 NOUVEAU : On prépare l'animation au scroll
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const videoSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Si le carrousel entre dans l'écran, on lance l'animation
+        if (entry.isIntersecting) {
+          setIsVideoVisible(true);
+        }
+      },
+      { threshold: 0.15 } // Se déclenche quand 15% de la vidéo est visible
+    );
+
+    if (videoSectionRef.current) {
+      observer.observe(videoSectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    // 👉 min-h-[100dvh] permet à la page de s'adapter PARFAITEMENT à Safari Mobile
-    // 👉 On a bien pb-40 pour le mobile et pb-24 pour l'ordi
     <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-40 md:pb-24">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
       {/* HEADER FAÇON APPLE */}
-      {/* 👉 NOUVEAU : justify-center sur mobile, justify-between sur PC */}
-      <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none">
-        
-        {/* 👉 NOUVEAU : Bouton Guide "Premium" (Halo lumineux + radar) */}
+      <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none absolute top-0 left-0">
         <div className="flex relative group">
-          {/* Effet de lueur (Glow) qui s'active au survol */}
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
-          
           <button 
             onClick={() => setIsGuideOpen(true)}
             className="relative flex items-center gap-3 px-5 py-2.5 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
           >
-            {/* Nouveau point orange façon "Radar" (animate-ping) */}
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
@@ -177,41 +190,41 @@ export default function Home() {
           </button>
         </div>
         
-        {/* Liens droits (PC uniquement) */}
         <div className="hidden md:flex gap-4">
-          <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
-            Nous contacter
-          </Link>
-          <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">
-            Mentions légales
-          </Link>
+          <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Nous contacter</Link>
+          <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Mentions légales</Link>
         </div>
       </header>
 
       {/* CONTENEUR PRINCIPAL */}
-      <div className="flex-1 flex flex-col items-center justify-start md:justify-center w-full max-w-7xl mx-auto px-4 gap-4 md:gap-8 mt-2 md:mt-0">
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto">
         
-        {/* L'ACCROCHE AVEC PRIX */}
-        <main className="text-center flex-none mt-4 md:mt-0">
-          <h1 className="text-[28px] md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3 leading-tight">
+        {/* 👉 NOUVEAU : L'ACCROCHE PREND 65% DE L'ÉCRAN (min-h-[65vh]) */}
+        <main className="w-full min-h-[65vh] flex flex-col items-center justify-center text-center px-4 pt-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
             Votre Visa de 5 ans. <br />
-            <span className="text-gray-400 text-xl md:text-3xl lg:text-4xl">On s'occupe du reste.</span>
+            On s'occupe du reste.
           </h1>
           <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             L'accompagnement intégral à partir de <span className="text-white font-bold">999 €</span> <br className="hidden md:block" />
-            <span className="text-[11px] md:text-xs opacity-80">(Frais consulaires, traductions assermentées et honoraires inclus)</span>. <br className="hidden md:block" />
-            <span className="block mt-2 text-gray-300">Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.</span>
+            <span className="text-[11px] md:text-xs opacity-60">(Frais consulaires, traductions assermentées et honoraires inclus)</span>. <br className="hidden md:block" />
+            <span className="block mt-4 text-gray-300 font-medium">Un dossier béton. Zéro erreur. Vous n'avez plus qu'à faire vos valises.</span>
           </p>
         </main>
 
-        {/* LE RÊVE (Vidéos) */}
-        <section className="flex-none md:flex-1 w-full flex items-center justify-center my-2">
+        {/* 👉 NOUVEAU : LE CARROUSEL AVEC ANIMATION AU SCROLL */}
+        <section 
+          ref={videoSectionRef}
+          className={`flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-2 transition-all duration-1000 ease-out transform ${
+            isVideoVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-24 scale-95"
+          }`}
+        >
           <VideoSequence />
         </section>
 
       </div>
 
-      {/* 👉 LE FOOTER FAÇON APPLE (Doux et discret) */}
+      {/* LE FOOTER FAÇON APPLE */}
       <footer className="w-full flex flex-col items-center justify-center gap-3 pt-12 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
@@ -220,14 +233,11 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-     {/* LE BOUTON D'ACTION FLOTTANT (Plus fin sur mobile + Pulse) */}
+      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
-          {/* L'effet de halo qui respire doucement en arrière-plan */}
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
-          
           <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
-            {/* Le bouton affiné (py-3) */}
             <button 
               onClick={() => setIsEligibleOpen(true)}
               className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
