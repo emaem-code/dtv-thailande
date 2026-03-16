@@ -222,7 +222,7 @@ export default function Home() {
         </section>
 
         {/* 👉 MISE À JOUR : mb-28 sur mobile pour repousser le texte vers le haut */}
-        <div className="w-full text-center px-4 mt-2 md:mt-8 mb-28 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
+        <div className="w-full text-center px-4 mt-2 md:mt-8 mb-28 md:mb-60 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
           <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
           </p>
