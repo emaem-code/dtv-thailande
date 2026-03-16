@@ -3,11 +3,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Le passeport\nliberté', phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Le piège\nde l\'ambassade', phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils vivent\nle rêve', phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'La méthode\nVIP', phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'Votre\ninvestissement', phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] },
+  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Et si c\'était\ndéjà fait ?', phrases: ["Réveil face à la mer. Pas de patron. Pas de frontière.", "Le Visa DTV, c'est 5 ans de liberté légale en Thaïlande.", "Votre vie d'après commence avec un dossier."] },
+  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Un refus.\nTout s\'effondre.', phrases: ["Relevé bancaire mal daté. Traduction non conforme. École non reconnue.", "L'ambassade rejette sans explication. Sans recours.", "Des centaines de dossiers refusés chaque mois. Le vôtre ne le sera pas."] },
+  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils ont dit oui.\nDu premier coup.', phrases: ["Dossier complet. Traduit. Vérifié. Soumis.", "Visa reçu. Valises faites. Avion pris.", "Résultat : 100% de nos dossiers accompagnés ont été acceptés."] },
+  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'On prend tout.\nVous ne touchez à rien.', phrases: ["Audit de votre profil. Stratégie personnalisée. Documents préparés.", "Traductions certifiées. Dépôt à l'ambassade. Suivi jusqu'au visa.", "Vous faites vos valises. On fait le reste."] },
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'À partir de 999 €.\nTout inclus.', phrases: ["Frais consulaires, traductions, honoraires : zéro surprise.", "Deux formules. Adaptées à votre situation.", "Vérifiez votre éligibilité en 2 minutes. Gratuit. Sans engagement."] },
 ];
 
 function VideoTitle({ title }: { title: string }) {
@@ -66,7 +66,6 @@ export default function MobileVideoCarousel() {
       if (video) {
         video.muted = isMuted;
         if (index === currentIndex) {
-          // Promise gérée proprement pour éviter les erreurs de chargement
           const playPromise = video.play();
           if (playPromise !== undefined) {
             playPromise.catch(() => console.log("Autoplay en attente"));
@@ -109,7 +108,6 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              // 👉 LE COMBO ANTI-BUG iOS EST ICI :
               className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 [transform:translateZ(0)] [mask-image:-webkit-radial-gradient(white,black)] ${getVideoStyle(index)}`}
             >
              <video
@@ -118,7 +116,6 @@ export default function MobileVideoCarousel() {
                 poster={video.poster} 
                 className="w-full h-full object-cover rounded-[32px]"
                 playsInline
-                // 👉 OPTIMISATION MAJEURE : On bloque le préchargement des vidéos inactives
                 preload={isActive ? "metadata" : "none"}
                 loop={false}
                 onEnded={handleNext}

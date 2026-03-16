@@ -32,44 +32,16 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-function RotatingHeroText() {
-  const [index, setIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-
-  const phrases = [
-    {
-      main: "Votre Visa de 5 ans.\nOn s'occupe du reste.",
-      sub: "Un dossier béton. Zéro charge mentale."
-    },
-    {
-      main: "Accompagnement intégral\nà partir de 999 €",
-      sub: "(Frais consulaires, traductions et honoraires inclus)"
-    },
-    {
-      main: "Ne laissez rien au hasard.\nZéro erreur.",
-      sub: "Vous n'avez plus qu'à faire vos valises."
-    }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false); 
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % phrases.length);
-        setIsVisible(true); 
-      }, 500); 
-    }, 4000); 
-
-    return () => clearInterval(interval);
-  }, [phrases.length]);
-
+// 👉 NOUVEAU COMPOSANT : ACCROCHE FIXE, PUISSANTE ET RASSURANTE
+function HeroText() {
   return (
-    <div className="h-[130px] md:h-[150px] flex flex-col items-center justify-center text-center px-4 w-full">
-      <h1 className={`text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 whitespace-pre-line transition-all duration-500 transform ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        {phrases[index].main}
+    <div className="py-6 md:py-8 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+      <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+        Votre vie en Thaïlande commence ici.
       </h1>
-      <p className={`text-xs md:text-sm text-gray-400 mt-2 font-medium transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        {phrases[index].sub}
+      <p className="text-sm md:text-base text-gray-400 mt-3 md:mt-4 font-medium max-w-xl mx-auto leading-relaxed">
+        Visa DTV 5 ans. Dossier béton. Zéro charge mentale. <br className="hidden md:block" />
+        <span className="text-white font-bold block mt-1">Accompagnement clé en main à partir de 999 €.</span>
       </p>
     </div>
   );
@@ -80,12 +52,13 @@ function VideoSequence() {
   const [volume, setVolume] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // 👉 NOUVEAU STORYTELLING : Le tunnel de vente psychologique
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Le passeport liberté", hasText: true, phrases: ["Votre nouveau quotidien.", "Zéro stress administratif.", "Visa DTV : 5 ans de liberté."] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Le piège de l'ambassade", hasText: true, phrases: ["Une simple erreur de case...", "Un projet de vie annulé.", "Ne laissez rien au hasard."] },
-    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils vivent le rêve", hasText: true, phrases: ["Témoignage client.", "Dossier géré à 100%.", "Visa obtenu en quelques jours."] },
-    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "La méthode VIP", hasText: true, phrases: ["Arrivez sereinement.", "Profitez pleinement.", "On gère le dossier."] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["Un tarif adapté à votre profil.", "Formule Basique ou Esprit Libre.", "Ne payez que ce qu'il vous faut."] }
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["Réveil face à la mer. Pas de patron. Pas de frontière.", "Le Visa DTV, c'est 5 ans de liberté légale en Thaïlande.", "Votre vie d'après commence avec un dossier."] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre.", hasText: true, phrases: ["Relevé bancaire mal daté. Traduction non conforme. École non reconnue.", "L'ambassade rejette sans explication. Sans recours.", "Des centaines de dossiers refusés chaque mois. Le vôtre ne le sera pas."] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui. Du premier coup.", hasText: true, phrases: ["Dossier complet. Traduit. Vérifié. Soumis.", "Visa reçu. Valises faites. Avion pris.", "Résultat : 100% de nos dossiers accompagnés ont été acceptés."] },
+    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout. Vous ne touchez à rien.", hasText: true, phrases: ["Audit de votre profil. Stratégie personnalisée. Documents préparés.", "Traductions certifiées. Dépôt à l'ambassade. Suivi jusqu'au visa.", "Vous faites vos valises. On fait le reste."] },
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["Frais consulaires, traductions, honoraires : zéro surprise.", "Deux formules. Adaptées à votre situation.", "Vérifiez votre éligibilité en 2 minutes. Gratuit. Sans engagement."] }
   ];
 
   useEffect(() => {
@@ -142,7 +115,6 @@ function VideoSequence() {
                   src={video.src}
                   poster={video.poster}
                   playsInline
-                  // 👉 OPTIMISATION MAJEURE ICI AUSSI
                   preload={isActive ? "metadata" : "none"}
                   muted={volume === 0}
                   onEnded={handleVideoEnd}
@@ -205,7 +177,8 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
             </span>
-            <span className="tracking-wide font-semibold">Le guide offert</span>
+            {/* 👉 NOUVEAU TEXTE : "Le guide gratuit" */}
+            <span className="tracking-wide font-semibold">Le guide gratuit</span>
           </button>
         </div>
         
@@ -216,7 +189,8 @@ export default function Home() {
       </header>
 
       <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-24 md:pt-28">
-        <RotatingHeroText />
+        {/* L'ACCROCHE FIXE QUI REMPLACE L'ANIMATION */}
+        <HeroText />
         <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-4">
           <VideoSequence />
         </section>
@@ -230,6 +204,7 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
+      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
@@ -238,7 +213,8 @@ export default function Home() {
               onClick={() => setIsEligibleOpen(true)}
               className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
-              Vérifier mon éligibilité (Test Rapide)
+              {/* 👉 NOUVEAU TEXTE DU CTA PRINCIPAL */}
+              Vérifier mon éligibilité — 2 min
             </button>
           </div>
         </div>
@@ -246,6 +222,7 @@ export default function Home() {
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
+      {/* MODAL FORMULAIRE */}
       {isEligibleOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />
