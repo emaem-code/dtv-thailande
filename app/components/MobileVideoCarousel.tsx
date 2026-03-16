@@ -83,7 +83,10 @@ export default function MobileVideoCarousel() {
       if (!video) return;
       video.muted = isMuted;
       if (index === currentIndex) {
-        video.play().catch(() => {});
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => console.log("Autoplay en attente"));
+        }
       } else {
         video.pause();
         video.currentTime = 0;
@@ -117,12 +120,11 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
+              // 👉 RETOUR À LA SIMPLICITÉ : Un simple overflow-hidden et rounded-[32px] standard
+              className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
               style={{
-                borderRadius: '32px',
-                overflow: 'hidden',
+                WebkitMaskImage: '-webkit-radial-gradient(white, black)', // Le seul fix tolérable par Safari
                 WebkitTransform: 'translateZ(0)',
-                transform: 'translateZ(0)',
               }}
             >
               <video
@@ -130,30 +132,10 @@ export default function MobileVideoCarousel() {
                 src={video.src}
                 poster={video.poster}
                 className="w-full h-full object-cover"
-                style={{ display: 'block', WebkitTransform: 'translateZ(0)' }}
                 playsInline
                 preload={isActive ? 'metadata' : 'none'}
                 loop={false}
                 onEnded={handleNext}
-              />
-
-              {/* ── OVERLAY COINS (Le hack génial de l'assistant) ── */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  zIndex: 15,
-                  pointerEvents: 'none',
-                  borderRadius: '32px',
-                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)',
-                  background: `
-                    radial-gradient(circle at top left, transparent 30px, #0a0a0a 31px) top left / 50% 50% no-repeat,
-                    radial-gradient(circle at top right, transparent 30px, #0a0a0a 31px) top right / 50% 50% no-repeat,
-                    radial-gradient(circle at bottom left, transparent 30px, #0a0a0a 31px) bottom left / 50% 50% no-repeat,
-                    radial-gradient(circle at bottom right, transparent 30px, #0a0a0a 31px) bottom right / 50% 50% no-repeat
-                  `,
-                }}
               />
 
               {isActive && (
