@@ -32,14 +32,14 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-// 👉 1. L'ACCROCHE ÉPURÉE (Plus courte, prend moins de place en hauteur)
+// 👉 1. TEXTE COMPRESSÉ (Plus de padding "pt", juste "pb-2")
 function HeroText() {
   return (
-    <div className="pt-2 pb-4 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+    <div className="pb-2 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
         Votre vie en Thaïlande <br className="block md:hidden" /> commence ici.
       </h1>
-      <p className="text-sm md:text-base text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
+      <p className="text-[13px] md:text-base text-gray-400 mt-1.5 md:mt-2 font-medium max-w-xl mx-auto leading-relaxed">
         Visa DTV 5 ans. Dossier béton. Zéro charge mentale.
       </p>
     </div>
@@ -167,7 +167,6 @@ export default function Home() {
       <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none absolute top-0 left-0">
         <div className="flex relative group">
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
-          {/* 👉 2. BOUTON GUIDE RÉDUIT (px-4 py-2 et texte text-xs md:text-sm) */}
           <button 
             onClick={() => setIsGuideOpen(true)}
             className="relative flex items-center gap-2.5 px-4 py-2 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
@@ -186,17 +185,18 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 👉 3. ESPACEMENT RÉDUIT (pt-20 au lieu de pt-24) */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-20 md:pt-24">
+      {/* 👉 2. PADDING GÉNÉRAL RÉDUIT AU MINIMUM VITAL (pt-16 au lieu de pt-20) */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-16 md:pt-24">
         
         <HeroText />
         
-        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-2">
+        {/* 👉 3. MARGES VIDÉO SUPPRIMÉES (my-0) */}
+        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-0 md:my-2">
           <VideoSequence />
         </section>
 
-        {/* 👉 4. LA MICRO-LIGNE SOUS LE CARROUSEL */}
-        <div className="w-full text-center px-4 mt-2 mb-6 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300">
+        {/* 👉 4. LIGNE DE PRIX COLLÉE AU CARROUSEL (mt-0) */}
+        <div className="w-full text-center px-4 mt-0 mb-4 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300">
           <p className="text-sm md:text-base font-medium text-gray-300">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
           </p>
@@ -204,7 +204,7 @@ export default function Home() {
 
       </div>
 
-      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-4 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
+      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
