@@ -6,6 +6,7 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
+// 👉 NOUVEAU COMPOSANT : Sous-titre épuré
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(0);
 
@@ -17,12 +18,13 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2 z-20 pointer-events-none bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0.3)_0%,_transparent_65%)]">
+    // 👉 Positionné à bottom-[25%] pour être parfaitement lisible au-dessus du titre sur PC
+    <div className="absolute bottom-[25%] left-0 w-full flex justify-center z-20 pointer-events-none px-2">
       {phrases.map((phrase, i) => (
         <h3
           key={i}
-          className={`absolute w-full px-4 text-white font-extrabold text-base md:text-xl lg:text-2xl leading-snug tracking-wide transition-all duration-1000 transform [text-shadow:_0_4px_15px_rgb(0_0_0_/_100%)] ${
-            i === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'
+          className={`absolute w-full px-2 text-white font-bold text-base lg:text-lg leading-tight tracking-normal text-center transition-all duration-1000 transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${
+            i === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
           {phrase}
@@ -32,7 +34,6 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-// 👉 NOUVEAU COMPOSANT : ACCROCHE FIXE, PUISSANTE ET RASSURANTE
 function HeroText() {
   return (
     <div className="py-6 md:py-8 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
@@ -52,13 +53,13 @@ function VideoSequence() {
   const [volume, setVolume] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 👉 NOUVEAU STORYTELLING : Le tunnel de vente psychologique
+  // 👉 NOUVELLES PHRASES : Épurées et percutantes
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["Réveil face à la mer. Pas de patron. Pas de frontière.", "Le Visa DTV, c'est 5 ans de liberté légale en Thaïlande.", "Votre vie d'après commence avec un dossier."] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre.", hasText: true, phrases: ["Relevé bancaire mal daté. Traduction non conforme. École non reconnue.", "L'ambassade rejette sans explication. Sans recours.", "Des centaines de dossiers refusés chaque mois. Le vôtre ne le sera pas."] },
-    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui. Du premier coup.", hasText: true, phrases: ["Dossier complet. Traduit. Vérifié. Soumis.", "Visa reçu. Valises faites. Avion pris.", "Résultat : 100% de nos dossiers accompagnés ont été acceptés."] },
-    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout. Vous ne touchez à rien.", hasText: true, phrases: ["Audit de votre profil. Stratégie personnalisée. Documents préparés.", "Traductions certifiées. Dépôt à l'ambassade. Suivi jusqu'au visa.", "Vous faites vos valises. On fait le reste."] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["Frais consulaires, traductions, honoraires : zéro surprise.", "Deux formules. Adaptées à votre situation.", "Vérifiez votre éligibilité en 2 minutes. Gratuit. Sans engagement."] }
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans. Légal. Libre.", "Votre vie d'après."] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre.", hasText: true, phrases: ["Un refus. Tout s'effondre.", "On élimine ce risque."] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui. Du premier coup.", hasText: true, phrases: ["Dossier géré à 100%.", "Visa accepté. Du premier coup."] },
+    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout. Vous ne touchez à rien.", hasText: true, phrases: ["On prend tout en charge.", "Vous faites vos valises."] },
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] }
   ];
 
   useEffect(() => {
@@ -121,7 +122,8 @@ function VideoSequence() {
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
                 />
                 
-                <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                {/* Le gradient de protection bas pour s'assurer que le texte est lisible */}
+                <div className="absolute bottom-0 w-full h-[40%] bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
                
                 {isActive && (
                   <button 
@@ -144,7 +146,7 @@ function VideoSequence() {
                   <AnimatedTextOverlay phrases={video.phrases} />
                 )}
 
-                <p className={`absolute bottom-4 left-0 w-full text-center font-medium text-[10px] md:text-sm tracking-wide z-10 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                <p className={`absolute bottom-4 left-0 w-full text-center font-bold text-[11px] md:text-sm tracking-wide z-10 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
                   {video.title}
                 </p>
               </div>
@@ -177,7 +179,6 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
             </span>
-            {/* 👉 NOUVEAU TEXTE : "Le guide gratuit" */}
             <span className="tracking-wide font-semibold">Le guide gratuit</span>
           </button>
         </div>
@@ -189,7 +190,6 @@ export default function Home() {
       </header>
 
       <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-24 md:pt-28">
-        {/* L'ACCROCHE FIXE QUI REMPLACE L'ANIMATION */}
         <HeroText />
         <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-4">
           <VideoSequence />
@@ -204,7 +204,6 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
@@ -213,7 +212,6 @@ export default function Home() {
               onClick={() => setIsEligibleOpen(true)}
               className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
-              {/* 👉 NOUVEAU TEXTE DU CTA PRINCIPAL */}
               Vérifier mon éligibilité — 2 min
             </button>
           </div>
@@ -222,7 +220,6 @@ export default function Home() {
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
-      {/* MODAL FORMULAIRE */}
       {isEligibleOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />

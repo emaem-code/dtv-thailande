@@ -3,11 +3,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Et si c\'était\ndéjà fait ?', phrases: ["Réveil face à la mer. Pas de patron. Pas de frontière.", "Le Visa DTV, c'est 5 ans de liberté légale en Thaïlande.", "Votre vie d'après commence avec un dossier."] },
-  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Un refus.\nTout s\'effondre.', phrases: ["Relevé bancaire mal daté. Traduction non conforme. École non reconnue.", "L'ambassade rejette sans explication. Sans recours.", "Des centaines de dossiers refusés chaque mois. Le vôtre ne le sera pas."] },
-  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils ont dit oui.\nDu premier coup.', phrases: ["Dossier complet. Traduit. Vérifié. Soumis.", "Visa reçu. Valises faites. Avion pris.", "Résultat : 100% de nos dossiers accompagnés ont été acceptés."] },
-  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'On prend tout.\nVous ne touchez à rien.', phrases: ["Audit de votre profil. Stratégie personnalisée. Documents préparés.", "Traductions certifiées. Dépôt à l'ambassade. Suivi jusqu'au visa.", "Vous faites vos valises. On fait le reste."] },
-  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'À partir de 999 €.\nTout inclus.', phrases: ["Frais consulaires, traductions, honoraires : zéro surprise.", "Deux formules. Adaptées à votre situation.", "Vérifiez votre éligibilité en 2 minutes. Gratuit. Sans engagement."] },
+  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: 'Et si c\'était\ndéjà fait ?', phrases: ["5 ans. Légal. Libre.", "Votre vie d'après."] },
+  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: 'Un refus.\nTout s\'effondre.', phrases: ["Un refus. Tout s'effondre.", "On élimine ce risque."] },
+  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: 'Ils ont dit oui.\nDu premier coup.', phrases: ["Dossier géré à 100%.", "Visa accepté. Du premier coup."] },
+  { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: 'On prend tout.\nVous ne touchez à rien.', phrases: ["On prend tout en charge.", "Vous faites vos valises."] },
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: 'À partir de 999 €.\nTout inclus.', phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] },
 ];
 
 function VideoTitle({ title }: { title: string }) {
@@ -20,7 +20,8 @@ function VideoTitle({ title }: { title: string }) {
 
   return (
     <div className={`absolute top-0 inset-x-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h3 className="text-white font-extrabold text-center text-2xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
+      {/* 👉 NOUVEAU : Titre affiné (text-xl font-bold au lieu de text-2xl extrabold) */}
+      <h3 className="text-white font-bold text-center text-xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
         {title}
       </h3>
     </div>
@@ -36,7 +37,7 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
       setIndex(0);
       interval = setInterval(() => {
         setIndex((p) => (p + 1) % phrases.length);
-      }, 4000);
+      }, 4500); // Un peu plus lent car on n'a que 2 phrases
     }, 3500);
 
     return () => {
@@ -46,9 +47,14 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 z-20 pointer-events-none bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0.3)_0%,_transparent_65%)]">
+    // 👉 NOUVEAU : Positionné en bas (bottom-[20%]), centré, sans fond sombre envahissant
+    <div className="absolute bottom-[20%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
-        <h3 key={i} className={`absolute w-full px-4 text-white font-extrabold text-xl leading-tight tracking-wide transition-all duration-1000 transform drop-shadow-[0_2px_10px_rgba(0,0,0,1)] ${i === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}>
+        <h3 
+          key={i} 
+          // 👉 NOUVEAU : Typographie affinée (text-base font-bold) et ombre portée pour la lisibilité
+          className={`absolute w-full px-5 text-white font-bold text-base md:text-lg leading-tight tracking-normal text-center transition-all duration-1000 transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${i === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        >
           {phrase}
         </h3>
       ))}
