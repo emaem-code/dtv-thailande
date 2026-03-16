@@ -6,7 +6,6 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 
-// 👉 NOUVEAU COMPOSANT : Sous-titre épuré
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(0);
 
@@ -18,7 +17,6 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    // 👉 Positionné à bottom-[25%] pour être parfaitement lisible au-dessus du titre sur PC
     <div className="absolute bottom-[25%] left-0 w-full flex justify-center z-20 pointer-events-none px-2">
       {phrases.map((phrase, i) => (
         <h3
@@ -34,15 +32,15 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
+// 👉 1. L'ACCROCHE ÉPURÉE (Plus courte, prend moins de place en hauteur)
 function HeroText() {
   return (
-    <div className="py-6 md:py-8 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+    <div className="pt-2 pb-4 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        Votre vie en Thaïlande commence ici.
+        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici.
       </h1>
-      <p className="text-sm md:text-base text-gray-400 mt-3 md:mt-4 font-medium max-w-xl mx-auto leading-relaxed">
-        Visa DTV 5 ans. Dossier béton. Zéro charge mentale. <br className="hidden md:block" />
-        <span className="text-white font-bold block mt-1">Accompagnement clé en main à partir de 999 €.</span>
+      <p className="text-sm md:text-base text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
+        Visa DTV 5 ans. Dossier béton. Zéro charge mentale.
       </p>
     </div>
   );
@@ -53,7 +51,6 @@ function VideoSequence() {
   const [volume, setVolume] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 👉 NOUVELLES PHRASES : Épurées et percutantes
   const videos = [
     { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans. Légal. Libre.", "Votre vie d'après."] },
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre.", hasText: true, phrases: ["Un refus. Tout s'effondre.", "On élimine ce risque."] },
@@ -122,7 +119,6 @@ function VideoSequence() {
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60 grayscale-[30%] group-hover:opacity-80'}`}
                 />
                 
-                {/* Le gradient de protection bas pour s'assurer que le texte est lisible */}
                 <div className="absolute bottom-0 w-full h-[40%] bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
                
                 {isActive && (
@@ -171,15 +167,16 @@ export default function Home() {
       <header className="w-full p-4 md:p-6 flex justify-center md:justify-between items-center text-sm font-medium text-gray-400 z-10 flex-none absolute top-0 left-0">
         <div className="flex relative group">
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+          {/* 👉 2. BOUTON GUIDE RÉDUIT (px-4 py-2 et texte text-xs md:text-sm) */}
           <button 
             onClick={() => setIsGuideOpen(true)}
-            className="relative flex items-center gap-3 px-5 py-2.5 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
+            className="relative flex items-center gap-2.5 px-4 py-2 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
           >
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
             </span>
-            <span className="tracking-wide font-semibold">Le guide gratuit</span>
+            <span className="tracking-wide font-semibold text-xs md:text-sm">Le guide gratuit</span>
           </button>
         </div>
         
@@ -189,14 +186,25 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-24 md:pt-28">
+      {/* 👉 3. ESPACEMENT RÉDUIT (pt-20 au lieu de pt-24) */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-20 md:pt-24">
+        
         <HeroText />
-        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-4">
+        
+        <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-2">
           <VideoSequence />
         </section>
+
+        {/* 👉 4. LA MICRO-LIGNE SOUS LE CARROUSEL */}
+        <div className="w-full text-center px-4 mt-2 mb-6 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300">
+          <p className="text-sm md:text-base font-medium text-gray-300">
+            Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
+          </p>
+        </div>
+
       </div>
 
-      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-8 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
+      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-4 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
@@ -204,6 +212,7 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
+      {/* LE BOUTON D'ACTION FLOTTANT */}
       <div className="fixed bottom-6 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
@@ -220,6 +229,7 @@ export default function Home() {
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
+      {/* MODAL FORMULAIRE */}
       {isEligibleOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />
