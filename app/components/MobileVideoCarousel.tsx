@@ -3,47 +3,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
-  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: "Et si c'était\ndéjà fait ?", phrases: ["5 ans. Légal. Libre", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
-  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: "Un refus.\nTout s'effondre", phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
-  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: "Acceptés.\nDu premier coup", phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
+  { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: "Et si c'était\ndéjà fait ?", phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
+  { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: "Un refus\net tout s'effondre", phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
+  { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: "Acceptés\ndu premier coup", phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
   { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: "On prend tout\nen charge", phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
   { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "Votre\ninvestissement", phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] },
 ];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// POURQUOI LE SVG CLIPPATH ?
-//
-// Sur iOS Safari, les <video> sont rendues par AVFoundation dans un layer natif
-// qui s'affiche PAR-DESSUS le DOM. border-radius, overflow:hidden,
-// WebkitMaskImage — aucun ne peut atteindre ce layer.
-//
-// clipPath avec clipPathUnits="objectBoundingBox" est la seule propriété CSS
-// appliquée APRÈS la composition des layers natifs Apple.
-// Elle opère au niveau du moteur de rendu Metal/CoreAnimation,
-// pas au niveau DOM — c'est pour ça qu'elle clippe réellement la vidéo.
-//
-// rx/ry sont calculés pour max-w-[280px] aspect-[9/16] → 280 × 497px
-//   rx = 32/280  = 0.1143
-//   ry = 32/497  = 0.0644
-// ─────────────────────────────────────────────────────────────────────────────
-function SvgClipDef() {
-  return (
-    <svg
-      width="0"
-      height="0"
-      aria-hidden="true"
-      style={{ position: 'absolute', overflow: 'hidden', pointerEvents: 'none' }}
-    >
-      <defs>
-        <clipPath id="video-rounded-clip" clipPathUnits="objectBoundingBox">
-          <rect x="0" y="0" width="1" height="1" rx="0.1143" ry="0.0644" />
-        </clipPath>
-      </defs>
-    </svg>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 
 function VideoTitle({ title }: { title: string }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -143,85 +108,87 @@ export default function MobileVideoCarousel() {
   };
 
   return (
-    <>
-      {/* Masque SVG déclaré hors du flux — référencé par url(#video-rounded-clip) */}
-      <SvgClipDef />
+    <div className="relative w-full h-[55vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden py-4">
+      <div className="relative w-[82%] max-w-[280px] aspect-[9/16] mx-auto">
+        {videos.map((video, index) => {
+          const isActive = index === currentIndex;
 
-      <div className="relative w-full h-[55vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden py-4">
-        <div className="relative w-[82%] max-w-[280px] aspect-[9/16] mx-auto">
+          return (
+            <div
+              key={video.id}
+              onClick={() => handleVideoClick(index)}
+              className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
+              style={{
+                borderRadius: '32px',
+                overflow: 'hidden',
+                WebkitTransform: 'translateZ(0)',
+                transform: 'translateZ(0)',
+              }}
+            >
+              <video
+                ref={(el) => { videoRefs.current[index] = el; }}
+                src={video.src}
+                poster={video.poster}
+                className="w-full h-full object-cover"
+                style={{ display: 'block', WebkitTransform: 'translateZ(0)' }}
+                playsInline
+                preload={isActive ? 'metadata' : 'none'}
+                loop={false}
+                onEnded={handleNext}
+              />
 
-          {videos.map((video, index) => {
-            const isActive = index === currentIndex;
-
-            return (
+              {/* ── OVERLAY COINS (Le hack génial de l'assistant) ── */}
               <div
-                key={video.id}
-                onClick={() => handleVideoClick(index)}
-                className={`absolute inset-0 w-full h-full transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
+                aria-hidden="true"
                 style={{
-                  // ── Pour Chrome / Firefox / Android ──
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: 15,
+                  pointerEvents: 'none',
                   borderRadius: '32px',
-                  overflow: 'hidden',
-
-                  // ── Pour iOS Safari (AVFoundation layer) ──
-                  // clipPath SVG objectBoundingBox = seule solution qui atteint
-                  // le layer natif Metal/CoreAnimation d'iOS
-                  WebkitClipPath: 'url(#video-rounded-clip)',
-                  clipPath: 'url(#video-rounded-clip)',
-
-                  // Force un compositing layer GPU isolé
-                  WebkitTransform: 'translateZ(0)',
-                  transform: 'translateZ(0)',
-                  isolation: 'isolate',
+                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)',
+                  background: `
+                    radial-gradient(circle at top left, transparent 30px, #0a0a0a 31px) top left / 50% 50% no-repeat,
+                    radial-gradient(circle at top right, transparent 30px, #0a0a0a 31px) top right / 50% 50% no-repeat,
+                    radial-gradient(circle at bottom left, transparent 30px, #0a0a0a 31px) bottom left / 50% 50% no-repeat,
+                    radial-gradient(circle at bottom right, transparent 30px, #0a0a0a 31px) bottom right / 50% 50% no-repeat
+                  `,
                 }}
-              >
-                <video
-                  ref={(el) => { videoRefs.current[index] = el; }}
-                  src={video.src}
-                  poster={video.poster}
-                  className="w-full h-full object-cover"
-                  style={{ display: 'block', WebkitTransform: 'translateZ(0)' }}
-                  playsInline
-                  preload={isActive ? 'metadata' : 'none'}
-                  loop={false}
-                  onEnded={handleNext}
-                />
+              />
 
-                {isActive && (
-                  <>
-                    <MobileTextOverlay phrases={video.phrases} />
-                    <VideoTitle title={video.title} />
+              {isActive && (
+                <>
+                  <MobileTextOverlay phrases={video.phrases} />
+                  <VideoTitle title={video.title} />
 
-                    <button
-                      onClick={(e) => { e.stopPropagation(); setIsMuted((m) => !m); }}
-                      className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-700 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
-                        !isMuted
-                          ? 'opacity-100 text-white'
-                          : showVolume
-                          ? 'opacity-100 animate-pulse text-amber-500'
-                          : 'opacity-0 pointer-events-none'
-                      }`}
-                      aria-label="Toggle mute"
-                    >
-                      {isMuted ? (
-                        <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                        </svg>
-                      ) : (
-                        <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                        </svg>
-                      )}
-                    </button>
-                  </>
-                )}
-              </div>
-            );
-          })}
-
-        </div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setIsMuted((m) => !m); }}
+                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-700 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
+                      !isMuted
+                        ? 'opacity-100 text-white'
+                        : showVolume
+                        ? 'opacity-100 animate-pulse text-amber-500'
+                        : 'opacity-0 pointer-events-none'
+                    }`}
+                    aria-label="Toggle mute"
+                  >
+                    {isMuted ? (
+                      <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                      </svg>
+                    ) : (
+                      <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                      </svg>
+                    )}
+                  </button>
+                </>
+              )}
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 }

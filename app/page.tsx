@@ -61,9 +61,9 @@ function VideoSequence() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans. Légal. Libre", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre", hasText: true, phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
-    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés. Du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
     { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
   ];
@@ -188,7 +188,8 @@ export default function Home() {
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
 
   return (
-    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-40 md:pb-24">
+    // 👉 On ajoute un pb-48 et md:pb-32 pour s'assurer que le Dock ne cache pas le bas de page
+    <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-32">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
@@ -221,11 +222,12 @@ export default function Home() {
           <VideoSequence />
         </section>
 
-        
+        {/* ⚠️ L'ancien bloc de texte statique a été supprimé ici car il est maintenant dans le Dock ! */}
 
       </div>
 
-      <footer className="w-full flex flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
+      {/* 👉 FOOTER : Désormais masqué sur mobile (hidden md:flex) */}
+      <footer className="hidden md:flex w-full flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
@@ -233,34 +235,45 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* ── BLOC FIXE : texte prix + CTA ── */}
-<div className="fixed bottom-2 md:bottom-6 left-0 w-full flex flex-col items-center z-50 px-4 pointer-events-none gap-2">
-  
-  {/* Texte prix — visible sur tous les écrans, juste au-dessus du bouton */}
-  <div className="pointer-events-none text-center">
-    <p className="text-gray-300 text-xs md:text-sm font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
-      Accompagnement clé en main ·{' '}
-      <span className="text-white font-bold">à partir de 999 €</span>
-    </p>
-    <p className="text-gray-500 text-[10px] md:text-[11px] tracking-wide mt-0.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
-      Frais de visa, traductions et honoraires d'agence inclus
-    </p>
-  </div>
+      {/* 👉 LE NOUVEAU DOCK FLOTTANT (Texte + Bouton + Mentions Mobile) */}
+      <div className="fixed bottom-2 md:bottom-6 left-0 w-full flex justify-center z-50 px-2 pointer-events-none">
+        <div className="relative flex flex-col items-center gap-2 md:gap-3 pointer-events-auto bg-black/60 backdrop-blur-2xl rounded-[2rem] px-4 pt-4 pb-3 md:px-8 md:pt-5 md:pb-5 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
-  {/* CTA */}
-  <div className="relative group pointer-events-auto">
-    <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
-    <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
-      <button
-        onClick={() => setIsEligibleOpen(true)}
-        className="bg-white text-black px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-      >
-        Vérifier mon éligibilité — 2 min
-      </button>
-    </div>
-  </div>
+          {/* Texte prix */}
+          <div className="text-center pointer-events-none">
+            <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
+              Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
+            </p>
+            <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-1">
+              Frais de visa, traductions et honoraires d'agence inclus
+            </p>
+          </div>
 
-</div>
+          {/* CTA */}
+          <div className="relative group w-full mt-1">
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
+            <div className="relative bg-black/40 backdrop-blur-xl p-1 md:p-1.5 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
+              <button
+                onClick={() => setIsEligibleOpen(true)}
+                className="w-full bg-white text-black px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-sm md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              >
+                Vérifier mon éligibilité — 2 min
+              </button>
+            </div>
+          </div>
+
+          {/* Mentions légales — visibles uniquement sur mobile dans le Dock */}
+          <div className="flex gap-4 md:hidden mt-1.5">
+            <Link href="/contact" className="text-gray-500 text-[10px] hover:text-white transition-colors">
+              Nous contacter
+            </Link>
+            <Link href="/mentions-legales" className="text-gray-500 text-[10px] hover:text-white transition-colors">
+              Mentions légales
+            </Link>
+          </div>
+
+        </div>
+      </div>
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
