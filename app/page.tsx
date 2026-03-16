@@ -44,11 +44,9 @@ function HeroText() {
   return (
     <div className="pb-2 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        {/* 👉 Plus de point final ici */}
         Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
       </h1>
       <p className="text-[13px] md:text-base text-gray-400 mt-1.5 md:mt-2 font-medium max-w-xl mx-auto leading-relaxed">
-        {/* 👉 Remplacement des points par des puces discrètes */}
         Visa DTV 5 ans · Dossier béton · Zéro charge mentale
       </p>
     </div>
@@ -62,13 +60,12 @@ function VideoSequence() {
   const [showTitle, setShowTitle] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 👉 NOUVEAUX TEXTES SANS POINTS
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après"] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["45% de dossiers refusés", "Ne faites pas la même erreur"] },
-    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Ils ont dit oui du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Visa accepté du premier coup"] },
-    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Vous faites vos valises", "On s'occupe du reste"] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 € tout inclus", hasText: true, phrases: ["À partir de 999 €", "Vérifiez votre éligibilité"] }
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans. Légal. Libre", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus. Tout s'effondre", hasText: true, phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
+    { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés. Du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
+    { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
   ];
 
   useEffect(() => {
@@ -224,7 +221,8 @@ export default function Home() {
           <VideoSequence />
         </section>
 
-        <div className="w-full text-center px-4 mt-2 md:mt-8 mb-24 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
+        {/* 👉 MISE À JOUR : mb-28 sur mobile pour repousser le texte vers le haut */}
+        <div className="w-full text-center px-4 mt-2 md:mt-8 mb-28 md:mb-32 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300 relative z-20">
           <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
           </p>
@@ -243,7 +241,8 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      <div className="fixed bottom-4 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
+      {/* 👉 MISE À JOUR : Le bouton sur mobile descend à bottom-2 */}
+      <div className="fixed bottom-2 md:bottom-8 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
         <div className="relative group pointer-events-auto">
           <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse"></div>
           <div className="relative bg-black/40 backdrop-blur-xl p-1.5 md:p-2 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
