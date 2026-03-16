@@ -131,7 +131,7 @@ function VideoSequence() {
 
       {/* VERSION PC (Grand écran uniquement) */}
       <div className="hidden lg:flex justify-center w-full h-full pb-8">
-        <div className="grid grid-cols-5 gap-[2px] w-full max-w-6xl px-4 h-full max-h-[50vh]">
+        <div className="grid grid-cols-5 gap-4 w-full max-w-6xl px-4 h-full max-h-[50vh]">
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
 
@@ -139,7 +139,7 @@ function VideoSequence() {
               <div 
                 key={video.id}
                 onClick={() => handleVideoClick(index)}
-                className="bg-[#0a0a0a] relative overflow-hidden cursor-pointer aspect-[9/16] h-full group"
+                className="bg-[#0a0a0a] relative overflow-hidden cursor-pointer aspect-[9/16] h-full group rounded-2xl border border-white/5 shadow-2xl"
               >
                 <video 
                   ref={(el) => { videoRefs.current[index] = el; }}
