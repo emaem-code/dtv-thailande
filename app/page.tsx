@@ -154,22 +154,22 @@ function VideoSequence() {
                 
                 <div className="absolute bottom-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
                
+                {/* BOUTON VOLUME PC/TABLETTE (Identique au mobile) */}
                 {isActive && (
-                  <div 
-                    onClick={(e) => e.stopPropagation()} 
-                    className="absolute top-3 right-3 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md hover:bg-black/70 border border-white/20 text-white px-3 py-1.5 rounded-full transition-all duration-300 shadow-lg group/volume"
+                  <button 
+                    onClick={(e) => { 
+                      e.stopPropagation(); 
+                      setVolume(volume === 0 ? 0.8 : 0); 
+                    }} 
+                    className={`absolute top-4 right-4 z-40 flex items-center justify-center p-2 bg-transparent transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${volume === 0 ? 'animate-pulse text-amber-500' : 'text-white'}`}
+                    aria-label="Toggle mute"
                   >
-                    <button onClick={() => setVolume(volume === 0 ? 0.5 : 0)} className="flex items-center justify-center transition-transform active:scale-90">
-                      {volume === 0 ? (
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
-                      ) : (
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
-                      )}
-                    </button>
-                    <div className="flex items-center w-0 overflow-hidden group-hover/volume:w-20 transition-all duration-300 ease-in-out">
-                      <input type="range" min="0" max="1" step="0.1" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-white" />
-                    </div>
-                  </div>
+                    {volume === 0 ? (
+                      <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                    ) : (
+                      <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                    )}
+                  </button>
                 )}
 
                 {video.hasText && isActive && video.phrases && (
