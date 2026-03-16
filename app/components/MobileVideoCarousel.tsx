@@ -143,7 +143,13 @@ export default function MobileVideoCarousel() {
                   
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${isMuted ? 'animate-pulse text-amber-500' : 'text-white'} ${showVolume ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
+                      !isMuted 
+                        ? 'text-white' 
+                        : showVolume 
+                          ? 'animate-pulse text-amber-500' 
+                          : 'text-white/50'
+                    }`}
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (

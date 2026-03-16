@@ -134,7 +134,13 @@ function VideoSequence() {
                       e.stopPropagation(); 
                       setVolume(volume === 0 ? 0.8 : 0); 
                     }} 
-                    className={`absolute top-4 right-4 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${volume === 0 ? 'animate-pulse text-amber-500' : 'text-white'} ${showVolume ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                    className={`absolute top-4 right-4 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${
+                      volume !== 0 
+                        ? 'text-white' 
+                        : showVolume 
+                          ? 'animate-pulse text-amber-500' 
+                          : 'text-white/50'
+                    }`}
                     aria-label="Toggle mute"
                   >
                     {volume === 0 ? (
