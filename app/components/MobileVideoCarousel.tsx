@@ -20,7 +20,6 @@ function VideoTitle({ title }: { title: string }) {
 
   return (
     <div className={`absolute top-0 inset-x-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pt-12 pb-14 px-6 flex flex-col justify-start pointer-events-none z-30 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      {/* 👉 NOUVEAU : Titre affiné (text-xl font-bold au lieu de text-2xl extrabold) */}
       <h3 className="text-white font-bold text-center text-xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
         {title}
       </h3>
@@ -37,7 +36,7 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
       setIndex(0);
       interval = setInterval(() => {
         setIndex((p) => (p + 1) % phrases.length);
-      }, 4500); // Un peu plus lent car on n'a que 2 phrases
+      }, 4500); 
     }, 3500);
 
     return () => {
@@ -47,12 +46,10 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   }, [phrases.length]);
 
   return (
-    // 👉 NOUVEAU : Positionné en bas (bottom-[20%]), centré, sans fond sombre envahissant
     <div className="absolute bottom-[20%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
         <h3 
           key={i} 
-          // 👉 NOUVEAU : Typographie affinée (text-base font-bold) et ombre portée pour la lisibilité
           className={`absolute w-full px-5 text-white font-bold text-base md:text-lg leading-tight tracking-normal text-center transition-all duration-1000 transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${i === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
           {phrase}
@@ -65,7 +62,15 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
 export default function MobileVideoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [showVolume, setShowVolume] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  // Timer de 3 secondes pour l'apparition du bouton volume
+  useEffect(() => {
+    setShowVolume(false);
+    const timer = setTimeout(() => setShowVolume(true), 3000);
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
@@ -105,7 +110,6 @@ export default function MobileVideoCarousel() {
 
   return (
     <div className="relative w-full h-[55vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden py-4">
-      
       <div className="relative w-[82%] max-w-[280px] aspect-[9/16] mx-auto">
         {videos.map((video, index) => {
           const isActive = index === currentIndex;
@@ -114,9 +118,7 @@ export default function MobileVideoCarousel() {
             <div
               key={video.id}
               onClick={() => handleVideoClick(index)}
-              // On a retiré les anciens hacks Tailwind ([transform...] et [mask...])
               className={`absolute inset-0 w-full h-full rounded-[32px] overflow-hidden transition-all duration-500 ease-out bg-zinc-900 ${getVideoStyle(index)}`}
-              // 👉 LES 3 LIGNES MAGIQUES POUR FORCER SAFARI iOS :
               style={{
                 WebkitMaskImage: '-webkit-radial-gradient(white, black)',
                 WebkitTransform: 'translateZ(0)',
@@ -127,7 +129,6 @@ export default function MobileVideoCarousel() {
                 ref={(el) => { videoRefs.current[index] = el; }}
                 src={video.src}
                 poster={video.poster} 
-                // 👉 On a retiré rounded-[32px] ici, c'est le masque au-dessus qui coupe les bords !
                 className="w-full h-full object-cover"
                 playsInline
                 preload={isActive ? "metadata" : "none"}
@@ -142,7 +143,7 @@ export default function MobileVideoCarousel() {
                   
                   <button 
                     onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${isMuted ? 'animate-pulse text-amber-500' : 'text-white'}`}
+                    className={`absolute top-10 right-3 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${isMuted ? 'animate-pulse text-amber-500' : 'text-white'} ${showVolume ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                     aria-label="Toggle mute"
                   >
                     {isMuted ? (
@@ -157,7 +158,6 @@ export default function MobileVideoCarousel() {
           )
         })}
       </div>
-
     </div>
   );
 }

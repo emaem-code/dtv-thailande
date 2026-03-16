@@ -32,7 +32,6 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-// 👉 1. TEXTE COMPRESSÉ (Plus de padding "pt", juste "pb-2")
 function HeroText() {
   return (
     <div className="pb-2 md:pt-4 md:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
@@ -49,6 +48,7 @@ function HeroText() {
 function VideoSequence() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [volume, setVolume] = useState(0);
+  const [showVolume, setShowVolume] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const videos = [
@@ -58,6 +58,13 @@ function VideoSequence() {
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout. Vous ne touchez à rien.", hasText: true, phrases: ["On prend tout en charge.", "Vous faites vos valises."] },
     { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "À partir de 999 €. Tout inclus.", hasText: true, phrases: ["À partir de 999 €.", "Vérifiez votre éligibilité."] }
   ];
+
+  // Timer de 3 secondes pour l'apparition du bouton volume PC
+  useEffect(() => {
+    setShowVolume(false);
+    const timer = setTimeout(() => setShowVolume(true), 3000);
+    return () => clearTimeout(timer);
+  }, [activeIndex]);
 
   useEffect(() => {
     videoRefs.current.forEach((vid, index) => {
@@ -127,7 +134,7 @@ function VideoSequence() {
                       e.stopPropagation(); 
                       setVolume(volume === 0 ? 0.8 : 0); 
                     }} 
-                    className={`absolute top-4 right-4 z-40 flex items-center justify-center p-2 bg-transparent transition-transform active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${volume === 0 ? 'animate-pulse text-amber-500' : 'text-white'}`}
+                    className={`absolute top-4 right-4 z-40 flex items-center justify-center p-2 bg-transparent transition-all duration-1000 active:scale-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] ${volume === 0 ? 'animate-pulse text-amber-500' : 'text-white'} ${showVolume ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                     aria-label="Toggle mute"
                   >
                     {volume === 0 ? (
@@ -150,7 +157,6 @@ function VideoSequence() {
           })}
         </div>
       </div>
-
     </div>
   );
 }
@@ -185,20 +191,21 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 👉 2. PADDING GÉNÉRAL RÉDUIT AU MINIMUM VITAL (pt-16 au lieu de pt-20) */}
       <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-16 md:pt-24">
         
         <HeroText />
         
-        {/* 👉 3. MARGES VIDÉO SUPPRIMÉES (my-0) */}
         <section className="flex-none md:flex-1 w-full max-w-7xl px-4 flex items-center justify-center my-0 md:my-2">
           <VideoSequence />
         </section>
 
-        {/* 👉 4. LIGNE DE PRIX COLLÉE AU CARROUSEL (mt-0) */}
+        {/* Le bloc de prix avec les inclusions */}
         <div className="w-full text-center px-4 mt-0 mb-4 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-300">
-          <p className="text-sm md:text-base font-medium text-gray-300">
+          <p className="text-gray-300 text-sm md:text-base font-medium tracking-wide">
             Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
+          </p>
+          <p className="text-gray-500 text-[11px] md:text-xs text-center tracking-wide mt-1">
+            Frais de visa, traductions et honoraires d'agence inclus
           </p>
         </div>
 
@@ -250,7 +257,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
