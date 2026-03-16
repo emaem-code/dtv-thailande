@@ -111,7 +111,7 @@ export default function MobileVideoCarousel() {
                 ref={(el) => { videoRefs.current[index] = el; }}
                 src={video.src}
                 poster={video.poster} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-[32px]"
                 playsInline
                 preload="metadata" 
                 loop={false}
