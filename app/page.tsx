@@ -45,11 +45,11 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
 
 function HeroText() {
   return (
-    <div className="pb-4 md:pt-4 md:pb-8 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+    <div className="pb-4 lg:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
         Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
       </h1>
-      <p className="text-[14px] md:text-lg text-gray-400 mt-2 md:mt-3 font-medium max-w-xl mx-auto leading-relaxed">
+      <p className="text-[14px] md:text-lg text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
         Visa DTV 5 ans · Dossier béton · Zéro charge mentale
       </p>
     </div>
@@ -112,13 +112,13 @@ function VideoSequence() {
   return (
     <div className="relative w-full flex flex-col items-center justify-center">
       
-      {/* 📱 MOBILE VIEW (Inchangé, car parfait) */}
+      {/* 📱 MOBILE VIEW */}
       <div className="block lg:hidden w-full">
         <MobileVideoCarousel />
       </div>
 
-      {/* 💻 DESKTOP VIEW : ASYMÉTRIE PREMIUM (Nouveau Design) */}
-      <div className="hidden lg:flex flex-row items-center justify-center w-full max-w-6xl px-4 gap-12 xl:gap-24 py-8">
+      {/* 💻 DESKTOP VIEW : ASYMÉTRIE PREMIUM */}
+      <div className="hidden lg:flex flex-row items-center justify-center w-full max-w-6xl px-4 gap-12 xl:gap-20 py-2">
         
         {/* À GAUCHE : Le Lecteur Vidéo "Focus" */}
         <div className="relative w-[340px] xl:w-[380px] aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 shrink-0 bg-[#0a0a0a]">
@@ -140,10 +140,8 @@ function VideoSequence() {
                   className="w-full h-full object-cover"
                 />
                 
-                {/* Dégradé sombre pour lire le texte */}
                 <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none"></div>
                
-                {/* Bouton Son */}
                 {isActive && (
                   <button 
                     onClick={(e) => { 
@@ -167,7 +165,6 @@ function VideoSequence() {
                   </button>
                 )}
 
-                {/* Texte Animé */}
                 {isActive && video.hasText && video.phrases && (
                   <AnimatedTextOverlay phrases={video.phrases} />
                 )}
@@ -176,7 +173,7 @@ function VideoSequence() {
           })}
         </div>
 
-        {/* À DROITE : La Liste des Chapitres (Menu) */}
+        {/* À DROITE : La Liste des Chapitres (Sans le texte Étape) */}
         <div className="flex flex-col gap-3 xl:gap-4 w-full max-w-lg">
           <h3 className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L'accompagnement clé en main</h3>
           
@@ -192,11 +189,9 @@ function VideoSequence() {
                     : 'bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 grayscale-[50%] hover:grayscale-0'
                 }`}
               >
-                {/* Miniature Vidéo */}
                 <div className="relative w-16 h-24 xl:w-20 xl:h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-lg">
                   <img src={video.poster} alt={video.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   
-                  {/* Effet Equalizer quand la vidéo joue */}
                   {isActive && (
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-[1px]">
                       <div className="flex gap-1 items-end h-4">
@@ -208,11 +203,7 @@ function VideoSequence() {
                   )}
                 </div>
 
-                {/* Textes du chapitre */}
-                <div className="flex flex-col">
-                  <span className={`text-[10px] xl:text-xs font-bold mb-1 tracking-wider uppercase ${isActive ? 'text-amber-500' : 'text-gray-500'}`}>
-                    Étape 0{index + 1}
-                  </span>
+                <div className="flex flex-col justify-center">
                   <h4 className={`text-base xl:text-lg font-bold leading-tight mb-1.5 transition-colors ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
                     {video.title.replace('\n', ' ')}
                   </h4>
@@ -246,47 +237,67 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    // 👉 FIX : Suppression du min-h-[100dvh] strict, ajout d'un padding bottom massif pour libérer le scroll (pb-48 md:pb-56)
     <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-56">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* HEADER */}
-      <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-[60] absolute top-0 left-0">
-        
-        <button 
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="md:hidden p-2 -ml-2 text-white hover:text-amber-400 transition-colors focus:outline-none"
-          aria-label="Menu"
-        >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-        </button>
+      {/* 💻 NOUVEAU : SIDEBAR LATÉRALE (Uniquement Desktop) */}
+      <aside className="hidden lg:flex flex-col fixed top-0 left-0 w-64 h-screen border-r border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl z-[60] py-10 px-6 justify-between shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+        <div className="flex flex-col gap-10">
+          
+          {/* Logo / Titre Sidebar */}
+          <div className="px-2">
+            <h2 className="text-xl font-black text-white leading-tight">VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span></h2>
+          </div>
 
-        <div className="hidden md:flex relative group">
-          <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+          {/* Bouton Primaire (Guide) */}
           <button 
             onClick={() => setIsGuideOpen(true)}
-            className="relative flex items-center gap-2.5 px-4 py-2 bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/10 hover:border-white/20 rounded-full transition-all duration-300 text-gray-200 hover:text-white backdrop-blur-md shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
+            className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-gradient-to-b from-amber-500/20 to-amber-500/10 hover:from-amber-500/30 hover:to-amber-500/20 border border-amber-500/50 rounded-2xl transition-all duration-300 text-amber-500 font-bold shadow-[0_0_15px_rgba(245,158,11,0.2)] active:scale-95"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
             </span>
-            <span className="tracking-wide font-semibold text-xs md:text-sm">Le guide gratuit</span>
+            Le guide gratuit
           </button>
+
+          {/* Menu de Navigation unifié */}
+          <nav className="flex flex-col gap-1.5">
+            <button onClick={() => setIsProcessOpen(true)} className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+              Notre Méthode
+            </button>
+            <button onClick={() => setIsFaqOpen(true)} className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              FAQ
+            </button>
+            <Link href="/contact" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              Nous contacter
+            </Link>
+            <Link href="/mentions-legales" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              Mentions légales
+            </Link>
+          </nav>
         </div>
-        
-        <div className="hidden md:flex gap-4 items-center">
-          <button onClick={() => setIsProcessOpen(true)} className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Notre Méthode</button>
-          <button onClick={() => setIsFaqOpen(true)} className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">FAQ</button>
-          <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Nous contacter</Link>
-          <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Mentions légales</Link>
+
+        <div className="text-[10px] text-gray-600 px-2 leading-relaxed">
+          © {new Date().getFullYear()} Visa DTV Thaïlande.<br/>Expertise & Expatriation.
         </div>
+      </aside>
+
+      {/* 📱 HEADER MOBILE (Inchangé) */}
+      <header className="lg:hidden w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-[60] absolute top-0 left-0">
+        <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 -ml-2 text-white hover:text-amber-400 transition-colors focus:outline-none" aria-label="Menu">
+          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
       </header>
 
-      {/* MOBILE MENU */}
+      {/* 📱 MENU MOBILE PLEIN ÉCRAN */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center animate-in fade-in duration-300 lg:hidden">
           <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
@@ -304,29 +315,29 @@ export default function Home() {
         </div>
       )}
 
-      {/* CONTENU PRINCIPAL */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-16 md:pt-24">
+      {/* CONTENU PRINCIPAL (Décalé à droite sur Desktop pour laisser la place à la Sidebar) */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full lg:ml-64 lg:w-[calc(100%-16rem)] mx-auto pt-16 lg:pt-10">
         <HeroText />
         
-        <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 md:mt-8">
+        <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 lg:mt-4">
           <VideoSequence />
         </section>
       </div>
 
-      {/* FOOTER (Normalisé dans le flux) */}
-      <footer className="hidden md:flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
+      {/* FOOTER MOBILE (Disparaît sur Desktop car les liens sont dans la Sidebar) */}
+      <footer className="lg:hidden flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
         <div className="w-24 h-px bg-white/10 mb-4"></div>
-        <div className="flex gap-8">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-4 text-center">
           <button onClick={() => setIsProcessOpen(true)} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
           <button onClick={() => setIsFaqOpen(true)} className="hover:text-gray-300 transition-colors">FAQ</button>
           <Link href="/contact" className="hover:text-gray-300 transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-gray-300 transition-colors">Mentions légales</Link>
         </div>
-        <span className="text-xs text-gray-700 mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande. Expertise & Expatriation.</span>
+        <span className="text-xs text-gray-700 mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande.</span>
       </footer>
 
-      {/* DOCK FLOTTANT DU PRIX */}
-      <div className="fixed bottom-3 md:bottom-8 left-0 w-full flex justify-center z-50 px-3 pointer-events-none">
+      {/* DOCK FLOTTANT DU PRIX (Centré par rapport au contenu sur Desktop) */}
+      <div className="fixed bottom-3 md:bottom-8 left-0 lg:left-64 w-full lg:w-[calc(100%-16rem)] flex justify-center z-50 px-3 pointer-events-none">
         <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-8 md:pt-5 md:pb-5 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
 
           <div className="text-center pointer-events-none">
