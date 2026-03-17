@@ -4,11 +4,11 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const videos = [
   { id: 0, src: '/video-dtv.mp4', poster: '/poster-dtv.jpg', title: "Et si c'était\ndéjà fait ?", phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
-  // 👉 NOUVEAU TEXTE VIDÉO 2 ICI :
   { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: "Un refus\net tout s'effondre", phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
   { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: "Acceptés\ndu premier coup", phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
   { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: "On prend tout\nen charge", phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
-  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "Votre\ninvestissement", phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] },
+  // 👉 FIX : Le prix d'appel passe à 850 €
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "Votre\ninvestissement", phrases: ["À partir de 850 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] },
 ];
 
 function VideoTitle({ title }: { title: string }) {

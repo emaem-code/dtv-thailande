@@ -8,7 +8,6 @@ interface DtvGuideModalProps {
 }
 
 export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
-  // Empêche le défilement de la page en arrière-plan quand le modal est ouvert
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -24,16 +23,13 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
 
   return (
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
-      {/* Overlay sombre avec flou */}
       <div 
         className="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity duration-300" 
         onClick={onClose}
       />
 
-      {/* Conteneur principal du Modal */}
       <div className="relative bg-[#0d0d0d] w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300">
         
-        {/* En-tête fixe avec bouton fermer */}
         <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
           <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Le Guide DTV <span className="text-amber-500">2025-2026</span>
@@ -46,7 +42,6 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
           </button>
         </div>
 
-        {/* Zone de contenu défilable */}
         <div className="flex-1 overflow-y-auto p-6 md:p-10 text-gray-300 space-y-10 custom-scrollbar">
           
           {/* Bouton Télécharger PDF */}
@@ -55,7 +50,6 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
               <h3 className="text-white font-bold text-lg">Emportez ce guide avec vous</h3>
               <p className="text-sm text-gray-400 mt-1">Téléchargez la version PDF complète pour la lire hors ligne.</p>
             </div>
-            {/* 👉 NOTE : Le lien href="/guide-dtv-2025.pdf" cherchera le fichier dans ton dossier "public" */}
             <a 
               href="/guide-dtv-2025.pdf" 
               download
@@ -197,6 +191,91 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
             </div>
           </section>
 
+          {/* 👉 NOUVELLE SECTION 6 : NOS OFFRES ET TARIFS */}
+          <section>
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-black text-sm">6</span>
+              Nos Formules d'Accompagnement
+            </h3>
+            <p className="leading-relaxed text-gray-400 mb-8">
+              Nous gérons votre dossier de A à Z. Les tarifs sont transparents et incluent les frais consulaires (≈350 €) et les traductions certifiées.
+            </p>
+
+            {/* Grille Digital Nomad */}
+            <div className="mb-10">
+              <h4 className="text-lg font-bold text-amber-500 mb-4 border-b border-white/10 pb-2">💻 Profil Digital Nomad (Visa Remote)</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                  <h5 className="font-bold text-white text-lg">Basique</h5>
+                  <p className="text-2xl font-black text-amber-500 my-2">850 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ Préparation & suivi dossier</li>
+                    <li>✓ Frais consulaires inclus</li>
+                    <li>✓ Traductions certifiées incluses</li>
+                  </ul>
+                </div>
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                  <h5 className="font-bold text-white text-lg">Premium</h5>
+                  <p className="text-2xl font-black text-amber-500 my-2">1 300 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
+                    <li>✓ Vol régional (intra-Asie)</li>
+                    <li>✓ Taxi A/R aéroport</li>
+                    <li>✓ Hôtel milieu de gamme (3-5 nuits)</li>
+                  </ul>
+                </div>
+                <div className="bg-amber-500/10 p-5 rounded-2xl border border-amber-500/30">
+                  <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
+                  <p className="text-2xl font-black text-amber-500 my-2">2 400 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
+                    <li>✓ Vol long-courrier (Europe-Asie)</li>
+                    <li>✓ Vols régionaux & Taxis</li>
+                    <li>✓ Hôtel Haut de gamme (7-10 nuits)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Grille Soft Power */}
+            <div>
+              <h4 className="text-lg font-bold text-emerald-500 mb-4 border-b border-white/10 pb-2">🥊 Profil Soft Power (Cuisine ou Muay Thaï)</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                  <h5 className="font-bold text-white text-lg">Basique</h5>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~1 250 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ Inscription école incluse</li>
+                    <li>✓ Préparation & suivi dossier</li>
+                    <li>✓ Frais consulaires inclus</li>
+                    <li>✓ Traductions certifiées incluses</li>
+                  </ul>
+                </div>
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
+                  <h5 className="font-bold text-white text-lg">Premium</h5>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~1 750 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
+                    <li>✓ Vol régional (intra-Asie)</li>
+                    <li>✓ Taxi A/R aéroport</li>
+                    <li>✓ Hôtel milieu de gamme (3-5 nuits)</li>
+                  </ul>
+                </div>
+                <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/30">
+                  <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-emerald-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~2 900 €</p>
+                  <ul className="text-sm text-gray-400 space-y-2">
+                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
+                    <li>✓ Vol long-courrier (Europe-Asie)</li>
+                    <li>✓ Vols régionaux & Taxis</li>
+                    <li>✓ Hôtel Haut de gamme (7-10 nuits)</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-4 italic">* Les tarifs Soft Power sont donnés à titre indicatif et s'ajustent précisément selon l'école choisie (Cuisine ou Muay Thaï).</p>
+            </div>
+          </section>
+
           {/* CTA Footer */}
           <section className="pt-8 pb-4 text-center border-t border-white/10">
             <h3 className="text-2xl font-extrabold text-white mb-3">Ne laissez rien au hasard</h3>
@@ -207,7 +286,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
               onClick={onClose}
               className="px-8 py-4 bg-white hover:bg-gray-200 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95"
             >
-              Fermer le guide
+              Fermer et vérifier mon éligibilité
             </button>
           </section>
 

@@ -60,13 +60,13 @@ function VideoSequence() {
   const [showTitle, setShowTitle] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 👉 NOUVEAU TEXTE VIDÉO 2 ICI AUSSI :
   const videos = [
     { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
+    // 👉 FIX : Le prix d'appel passe à 850 €
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 850 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
   ];
 
   useEffect(() => {
@@ -284,8 +284,9 @@ export default function Home() {
         <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
           <div className="text-center pointer-events-none">
+            {/* 👉 FIX : Le prix d'appel du Dock passe à 850 € */}
             <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
-              Accompagnement clé en main · <span className="text-white font-bold">à partir de 999 €</span>
+              Accompagnement clé en main · <span className="text-white font-bold">à partir de 850 €</span>
             </p>
             <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-0.5">
               Frais de visa, traductions et honoraires d'agence inclus
