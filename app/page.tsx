@@ -60,9 +60,10 @@ function VideoSequence() {
   const [showTitle, setShowTitle] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // 👉 NOUVEAU TEXTE VIDÉO 2 ICI AUSSI :
   const videos = [
     { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
-    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["45% des dossiers sont refusés", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
+    { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
     { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 999 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
@@ -186,9 +187,8 @@ function VideoSequence() {
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 👉 NOUVEAU: État du menu hamburger
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Empêcher le scroll quand le menu mobile est ouvert
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -198,15 +198,12 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    // 👉 pb ajusté pour s'assurer que le bas ne bloque pas
     <div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-32 md:pb-32">
       
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* 👉 HEADER RESPONSIVE AVEC HAMBURGER À GAUCHE */}
       <header className="w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-[60] absolute top-0 left-0">
         
-        {/* Menu Mobile Hamburger (Visible uniquement sur mobile) */}
         <button 
           onClick={() => setIsMobileMenuOpen(true)}
           className="md:hidden p-2 -ml-2 text-white hover:text-amber-400 transition-colors focus:outline-none"
@@ -217,7 +214,6 @@ export default function Home() {
           </svg>
         </button>
 
-        {/* Espace vide au milieu sur mobile, ou Desktop Navigation */}
         <div className="hidden md:flex relative group">
           <div className="absolute inset-0 bg-amber-500/20 blur-md rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
           <button 
@@ -238,7 +234,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 👉 OVERLAY MENU MOBILE */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center animate-in fade-in duration-300">
           <button 
@@ -267,7 +262,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* 👉 REMONTÉE DE L'INTERFACE : padding top réduit (pt-12) */}
       <div className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-14 md:pt-20">
         
         <HeroText />
@@ -286,7 +280,6 @@ export default function Home() {
         <span className="text-xs text-gray-600">© {new Date().getFullYear()} Visa DTV Thaïlande</span>
       </footer>
 
-      {/* 👉 LE DOCK ÉPURÉ (Juste le texte et le bouton) plaqué tout en bas */}
       <div className="fixed bottom-3 md:bottom-6 left-0 w-full flex justify-center z-50 px-3 pointer-events-none">
         <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
