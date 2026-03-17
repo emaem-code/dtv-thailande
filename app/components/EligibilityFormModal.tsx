@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface EligibilityFormModalProps {
   isOpen: boolean;
@@ -10,14 +10,17 @@ interface EligibilityFormModalProps {
 export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFormModalProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // 👉 NOUVEAU : Référence pour le scroll du conteneur
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // État pour stocker toutes les réponses
   const [formData, setFormData] = useState({
     funds: '',
     passport: '',
     job: '',
     email: '',
-    date: '',
+    dateStart: '', // Remplacé "date" par un intervalle
+    dateEnd: '',
     location: '',
     locationDetails: '',
     family: '',
@@ -28,7 +31,6 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     remarks: ''
   });
 
-  // Empêcher le scroll du fond
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -36,6 +38,13 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
   }, [isOpen]);
 
   if (!isOpen) return null;
+
+  // 👉 NOUVEAU : Fonction pour remonter en haut de page en douceur
+  const scrollToTop = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -47,23 +56,26 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
       return;
     }
 
-    // 🛑 FILTRE STRICT : Si le prospect n'a ni les fonds ni le passeport (et ne prévoit pas de les avoir)
     if (formData.funds === 'no' || formData.passport === 'no') {
-      setStep(0); // Étape 0 = Non éligible
+      setStep(0);
+      scrollToTop(); // Remonte au clic
       return;
     }
 
     setStep(2);
+    scrollToTop(); // Remonte au clic
   };
 
-  const prevStep = () => setStep(1);
+  const prevStep = () => {
+    setStep(1);
+    scrollToTop();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      // Envoi des données à Formspree
       const response = await fetch("https://formspree.io/f/mreyokzj", {
         method: "POST",
         headers: {
@@ -75,7 +87,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
           "Statut Pro": formData.job,
           "Épargne 500k THB": formData.funds,
           "Passeport OK": formData.passport,
-          "Date de départ": formData.date,
+          "Période de départ": `Entre le ${formData.dateStart} et le ${formData.dateEnd}`,
           "Lieu de dépôt": formData.location,
           "Détails localisation": formData.locationDetails,
           "Expatriation": formData.family,
@@ -88,7 +100,8 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
       });
 
       if (response.ok) {
-        setStep(3); // Étape 3 = Succès et affichage des tarifs
+        setStep(3);
+        scrollToTop(); // Remonte au clic
       } else {
         alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
@@ -116,11 +129,13 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     );
   };
 
-  // 📊 LOGIQUE D'AFFICHAGE DES TARIFS (Digital Nomad vs Soft Power)
   const isSoftPower = formData.job === 'softpower';
   const priceBasic = isSoftPower ? "1 250 €" : "850 €";
   const pricePremium = isSoftPower ? "1 750 €" : "1 300 €";
   const priceVIP = isSoftPower ? "2 900 €" : "2 400 €";
+
+  // Condition pour afficher l'alerte famille à l'étape 3
+  const isGroupTravel = formData.family === 'married' || formData.family === 'concubinage' || formData.family === 'family';
 
   return (
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
@@ -148,38 +163,31 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
           </div>
         </div>
 
-        {/* Formulaire Scrollable */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+        {/* Formulaire Scrollable avec Référence (Ref) */}
+        <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar scroll-smooth">
           
-          {/* 🔴 ÉTAPE 0 : NON ÉLIGIBLE (Filtre anti-touristes) */}
+          {/* ÉTAPE 0 */}
           {step === 0 && (
             <div className="py-10 flex flex-col items-center text-center animate-in zoom-in duration-500">
-              <div className="w-20 h-20 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-4xl mb-6 border border-red-500/20">
-                ✕
-              </div>
+              <div className="w-20 h-20 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-4xl mb-6 border border-red-500/20">✕</div>
               <h3 className="text-2xl font-black text-white mb-4">Profil Inéligible au Visa DTV</h3>
               <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
-                L'administration thaïlandaise est stricte : disposer d'une garantie financière de 500 000 THB et d'un passeport valide sont des obligations légales incompressibles. Sans ces éléments, aucune ambassade n'acceptera votre dossier.
+                L'administration thaïlandaise est stricte : disposer d'une garantie financière de 500 000 THB et d'un passeport valide sont des obligations légales incompressibles.
               </p>
-              <button 
-                onClick={onClose}
-                className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
-              >
+              <button onClick={onClose} className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95">
                 Fermer
               </button>
             </div>
           )}
 
-          {/* 🟢 ÉTAPE 1 : Éligibilité */}
+          {/* ÉTAPE 1 */}
           {step === 1 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
-              
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">1. Disposez-vous de l'équivalent de 500 000 THB (≈ 14 500 €) d'épargne ? <span className="text-amber-500">*</span></label>
                 <div className="grid grid-cols-1 gap-3">
                   <RadioCard label="Oui, sur un compte accessible" field="funds" value="yes" />
                   <RadioCard label="Pas encore, mais je m'organise pour les avoir bientôt" field="funds" value="soon" />
-                  {/* Option bloquante */}
                   <RadioCard label="Non, et je ne pourrai pas les réunir" field="funds" value="no" />
                 </div>
               </div>
@@ -189,7 +197,6 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <div className="grid grid-cols-1 gap-3">
                   <RadioCard label="Oui, il est à jour" field="passport" value="yes" />
                   <RadioCard label="Pas encore, mais je vais le refaire rapidement" field="passport" value="soon" />
-                  {/* Option bloquante */}
                   <RadioCard label="Non, je n'ai pas de passeport" field="passport" value="no" />
                 </div>
               </div>
@@ -205,28 +212,18 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
 
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">4. À quelle adresse e-mail souhaitez-vous recevoir votre devis ? <span className="text-amber-500">*</span></label>
-                <input 
-                  type="email" 
-                  required
-                  placeholder="votre@email.com"
-                  value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
-                />
+                <input type="email" required placeholder="votre@email.com" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"/>
               </div>
 
               <div className="pt-4">
-                <button 
-                  onClick={nextStep}
-                  className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
-                >
+                <button onClick={nextStep} className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95">
                   Vérifier mon profil →
                 </button>
               </div>
             </div>
           )}
 
-          {/* 🟢 ÉTAPE 2 : Détails du devis */}
+          {/* ÉTAPE 2 */}
           {step === 2 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
               
@@ -235,14 +232,29 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <p className="text-sm text-gray-300">Afin de vous présenter immédiatement nos tarifs personnalisés, veuillez préciser votre projet.</p>
               </div>
 
+              {/* 👉 FIX DATE : Fourchette au lieu d'un seul mois */}
               <div className="space-y-3">
-                <label className="text-white font-bold text-lg">Date de départ approximative :</label>
-                <input 
-                  type="month" 
-                  value={formData.date}
-                  onChange={(e) => handleChange('date', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-amber-500"
-                />
+                <label className="text-white font-bold text-lg">Fourchette de dates de départ :</label>
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <div className="w-full flex-1">
+                    <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tôt</label>
+                    <input 
+                      type="date" 
+                      value={formData.dateStart}
+                      onChange={(e) => handleChange('dateStart', e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
+                    />
+                  </div>
+                  <div className="w-full flex-1">
+                    <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tard</label>
+                    <input 
+                      type="date" 
+                      value={formData.dateEnd}
+                      onChange={(e) => handleChange('dateEnd', e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="space-y-3">
@@ -253,13 +265,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="Amérique du Nord" field="location" value="america" />
                   <RadioCard label="Autre" field="location" value="other" />
                 </div>
-                <input 
-                  type="text" 
-                  placeholder="Précisez le pays et la ville..."
-                  value={formData.locationDetails}
-                  onChange={(e) => handleChange('locationDetails', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"
-                />
+                <input type="text" placeholder="Précisez le pays et la ville..." value={formData.locationDetails} onChange={(e) => handleChange('locationDetails', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"/>
               </div>
 
               {isSoftPower && (
@@ -282,13 +288,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="En famille (Avec enfants)" field="family" value="family" />
                 </div>
                 {formData.family === 'family' && (
-                  <input 
-                    type="number" 
-                    placeholder="Combien d'enfants à charge vous accompagnent ?"
-                    value={formData.childrenCount}
-                    onChange={(e) => handleChange('childrenCount', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"
-                  />
+                  <input type="number" placeholder="Combien d'enfants à charge vous accompagnent ?" value={formData.childrenCount} onChange={(e) => handleChange('childrenCount', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"/>
                 )}
               </div>
 
@@ -302,59 +302,49 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
 
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">Des remarques ou besoins spécifiques ? (Optionnel)</label>
-                <textarea 
-                  rows={3}
-                  value={formData.remarks}
-                  onChange={(e) => handleChange('remarks', e.target.value)}
-                  placeholder="Dites-nous en plus sur votre projet..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-amber-500"
-                />
+                <textarea rows={3} value={formData.remarks} onChange={(e) => handleChange('remarks', e.target.value)} placeholder="Dites-nous en plus sur votre projet..." className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-amber-500"/>
               </div>
 
               <div className="pt-4 flex gap-4">
-                <button 
-                  onClick={prevStep}
-                  className="px-6 py-4 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
-                >
-                  ← Retour
-                </button>
-                <button 
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2"
-                >
-                  {isSubmitting ? (
-                    <><span className="animate-spin text-xl">↻</span> Calcul en cours...</>
-                  ) : (
-                    'Découvrir mes tarifs'
-                  )}
+                <button onClick={prevStep} className="px-6 py-4 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white transition-colors">← Retour</button>
+                <button onClick={handleSubmit} disabled={isSubmitting} className="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2">
+                  {isSubmitting ? <><span className="animate-spin text-xl">↻</span> Calcul...</> : 'Découvrir mes tarifs'}
                 </button>
               </div>
             </div>
           )}
 
-          {/* 🟢 ÉTAPE 3 : Succès & Affichage de la Grille Tarifaire */}
+          {/* ÉTAPE 3 : Succès & Tarifs */}
           {step === 3 && (
             <div className="animate-in fade-in slide-in-from-bottom-8 duration-500">
               
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-4 border border-emerald-500/30 mx-auto">
-                  ✓
-                </div>
+                <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-4 border border-emerald-500/30 mx-auto">✓</div>
                 <h3 className="text-2xl font-black text-white mb-2">Demande transmise avec succès !</h3>
                 <p className="text-gray-400 text-sm">
-                  Notre équipe va analyser votre profil et vous envoyer un devis exact par e-mail. En attendant, voici la base tarifaire pour votre profil <strong className="text-amber-500">{isSoftPower ? 'Soft Power' : 'Digital Nomad'}</strong> :
+                  Notre équipe va analyser votre projet et vous envoyer un devis exact par e-mail. En attendant, voici la base tarifaire pour le profil <strong className="text-amber-500">{isSoftPower ? 'Soft Power' : 'Digital Nomad'}</strong> :
                 </p>
+
+                {/* 👉 FIX ACCOMPAGNANTS : Message dynamique si le client ne part pas seul */}
+                {isGroupTravel && (
+                  <div className="mt-5 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-left">
+                    <p className="text-sm text-amber-500 font-bold mb-1 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                      Accompagnants supplémentaires
+                    </p>
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      Puisque vous voyagez à plusieurs, notez qu'une demande de visa distincte devra être soumise pour vos accompagnants. Des frais supplémentaires seront calculés en toute transparence dans votre devis.
+                    </p>
+                  </div>
+                )}
               </div>
 
-              {/* GRILLE TARIFAIRE DYNAMIQUE */}
+              {/* GRILLES DE PRIX */}
               <div className="space-y-4">
-                
-                {/* Carte Basique */}
                 <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/20 transition-colors">
                   <div>
                     <h4 className="font-bold text-white text-lg">Formule Essentielle</h4>
-                    <p className="text-xs text-gray-400 mt-1">L'administratif uniquement. Frais consulaires, {isSoftPower && "inscription école, "} traductions et suivi inclus.</p>
+                    <p className="text-xs text-gray-400 mt-1">L'administratif. Frais consulaires, {isSoftPower && "école, "} traductions et suivi inclus.</p>
                   </div>
                   <div className="text-left md:text-right flex-none">
                     <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">À partir de</p>
@@ -362,11 +352,10 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   </div>
                 </div>
 
-                {/* Carte Premium */}
                 <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/20 transition-colors">
                   <div>
                     <h4 className="font-bold text-white text-lg">Formule Premium</h4>
-                    <p className="text-xs text-gray-400 mt-1">Formule Essentielle + Vol régional + Hôtel milieu de gamme + Transferts aéroport.</p>
+                    <p className="text-xs text-gray-400 mt-1">Essentielle + Vol régional + Hôtel + Transferts aéroport.</p>
                   </div>
                   <div className="text-left md:text-right flex-none">
                     <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">À partir de</p>
@@ -374,25 +363,20 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   </div>
                 </div>
 
-                {/* Carte VIP */}
                 <div className="bg-amber-500/10 border border-amber-500/30 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div>
                     <h4 className="font-bold text-white text-lg flex items-center gap-2">Formule VIP <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h4>
-                    <p className="text-xs text-gray-400 mt-1">Le tout inclus : Vol long-courrier, hôtels haut de gamme, chauffeurs privés et conciergerie.</p>
+                    <p className="text-xs text-gray-400 mt-1">Tout inclus : Vol Europe, Hôtels Haut de gamme, Chauffeurs privés.</p>
                   </div>
                   <div className="text-left md:text-right flex-none">
                     <p className="text-[10px] text-amber-500/70 uppercase tracking-widest font-bold">À partir de</p>
                     <p className="text-2xl font-black text-amber-500">{priceVIP}</p>
                   </div>
                 </div>
-
               </div>
 
               <div className="mt-8 text-center">
-                <button 
-                  onClick={onClose}
-                  className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
-                >
+                <button onClick={onClose} className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95">
                   Fermer
                 </button>
               </div>

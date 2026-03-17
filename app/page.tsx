@@ -6,6 +6,8 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
+// 👉 NOUVEAU : Import de la FAQ
+import FaqModal from "./components/FaqModal";
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
@@ -66,7 +68,6 @@ function VideoSequence() {
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
-    // 👉 FIX : Le prix d'appel passe à 850 €
     { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 850 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
   ];
 
@@ -189,6 +190,8 @@ export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // 👉 NOUVEAU : État pour la FAQ
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -229,7 +232,9 @@ export default function Home() {
           </button>
         </div>
         
-        <div className="hidden md:flex gap-4">
+        <div className="hidden md:flex gap-4 items-center">
+          {/* 👉 NOUVEAU : Bouton FAQ Desktop */}
+          <button onClick={() => setIsFaqOpen(true)} className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">FAQ</button>
           <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Nous contacter</Link>
           <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Mentions légales</Link>
         </div>
@@ -257,6 +262,8 @@ export default function Home() {
               </span>
               Le guide gratuit
             </button>
+            {/* 👉 NOUVEAU : Bouton FAQ Mobile */}
+            <button onClick={() => { setIsFaqOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">FAQ</button>
             <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Nous contacter</Link>
             <Link href="/mentions-legales" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Mentions légales</Link>
           </div>
@@ -275,6 +282,7 @@ export default function Home() {
 
       <footer className="hidden md:flex w-full flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
+          <button onClick={() => setIsFaqOpen(true)} className="hover:text-white transition-colors">FAQ</button>
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
         </div>
@@ -285,7 +293,6 @@ export default function Home() {
         <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-6 md:pt-4 md:pb-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
 
           <div className="text-center pointer-events-none">
-            {/* 👉 FIX : Le prix d'appel du Dock passe à 850 € */}
             <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
               Accompagnement clé en main · <span className="text-white font-bold">à partir de 850 €</span>
             </p>
@@ -310,10 +317,16 @@ export default function Home() {
       </div>
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
-
+      
       <EligibilityFormModal 
         isOpen={isEligibleOpen} 
         onClose={() => setIsEligibleOpen(false)} 
+      />
+
+      {/* 👉 NOUVEAU : Le composant FAQ Modale */}
+      <FaqModal 
+        isOpen={isFaqOpen} 
+        onClose={() => setIsFaqOpen(false)} 
       />
 
     </div>
