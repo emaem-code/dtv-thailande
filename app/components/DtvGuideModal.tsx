@@ -215,7 +215,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
       </div>
       
       {/* Styles CSS personnalisés pour la barre de défilement du modal */}
-      <style dangerouslySetWidth={{ __html: `
+      <style dangerouslySetInnerHTML={{ __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
         }
