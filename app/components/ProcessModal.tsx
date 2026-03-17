@@ -35,12 +35,12 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
     {
       num: "04",
       title: "Approbation & Logistique VIP",
-      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour une formule Premium ou VIP, prévenez-nous : nous déclenchons la réservation de votre vol vers la Thaïlande et de votre chauffeur privé. Il ne vous reste qu'à imprimer le visa à votre hôtel."
+      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour une formule Premium ou VIP, prévenez-nous : nous déclenchons la réservation de votre vol vers la Thaïlande et de votre chauffeur privé."
     },
     {
       num: "05",
-      title: "Bienvenue en Thaïlande",
-      desc: "À votre atterrissage (Bangkok, Phuket, etc.), présentez simplement votre passeport et votre feuille imprimée. L'officier de l'immigration apposera instantanément votre tampon de 180 jours. Votre nouvelle vie de liberté commence ici."
+      title: "Enregistrement & Bienvenue en Thaïlande",
+      desc: "Imprimez le e-Visa reçu par e-mail. C'est ce document qui vous permettra de faire votre check-in à l'aéroport. À votre atterrissage, présentez votre passeport et cette feuille imprimée : l'immigration apposera instantanément votre tampon de 180 jours. Notez qu'il suffira ensuite d'une simple extension sur place, ou d'un week-end hors du territoire tous les 6 mois, pour relancer vos 180 jours. Votre nouvelle vie de liberté commence ici !"
     }
   ];
 
@@ -90,10 +90,7 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
           <div className="mt-12 text-center pt-8 border-t border-white/10">
             <h4 className="text-2xl font-black text-white mb-4">Prêt à démarrer l'aventure ?</h4>
             <button 
-              onClick={() => {
-                onClose();
-                // Si on voulait ouvrir l'éligibilité automatiquement, on pourrait déclencher un event, mais fermer c'est très bien.
-              }} 
+              onClick={() => { onClose(); }} 
               className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
             >
               Fermer et vérifier mon éligibilité
