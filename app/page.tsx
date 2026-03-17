@@ -6,7 +6,7 @@ import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
-// 👉 NOUVEAU : Import de la FAQ
+import ProcessModal from "./components/ProcessModal";
 import FaqModal from "./components/FaqModal";
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
@@ -190,7 +190,7 @@ export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // 👉 NOUVEAU : État pour la FAQ
+  const [isProcessOpen, setIsProcessOpen] = useState(false);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
 
   useEffect(() => {
@@ -233,7 +233,7 @@ export default function Home() {
         </div>
         
         <div className="hidden md:flex gap-4 items-center">
-          {/* 👉 NOUVEAU : Bouton FAQ Desktop */}
+          <button onClick={() => setIsProcessOpen(true)} className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Notre Méthode</button>
           <button onClick={() => setIsFaqOpen(true)} className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">FAQ</button>
           <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Nous contacter</Link>
           <Link href="/mentions-legales" className="px-4 py-2 rounded-full hover:bg-white/5 hover:text-white transition-all duration-300">Mentions légales</Link>
@@ -327,6 +327,11 @@ export default function Home() {
       <FaqModal 
         isOpen={isFaqOpen} 
         onClose={() => setIsFaqOpen(false)} 
+      />
+
+      <ProcessModal 
+        isOpen={isProcessOpen} 
+        onClose={() => setIsProcessOpen(false)} 
       />
 
     </div>
