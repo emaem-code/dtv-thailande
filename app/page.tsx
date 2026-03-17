@@ -5,6 +5,7 @@ import Script from "next/script";
 import Link from "next/link";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
+import EligibilityFormModal from "./components/EligibilityFormModal";
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
@@ -310,26 +311,10 @@ export default function Home() {
 
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
-      {isEligibleOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setIsEligibleOpen(false)} />
-          <div className="relative bg-[#0a0a0a] w-full max-w-4xl h-[85vh] rounded-2xl border border-zinc-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-            <button 
-              onClick={() => setIsEligibleOpen(false)}
-              className="absolute top-4 right-4 z-[110] text-gray-400 hover:text-white bg-white/10 p-2 rounded-full"
-            >
-              ✕
-            </button>
-            <iframe 
-              src="https://tally.so/embed/b5ky6e?hideTitle=1&transparentBackground=1" 
-              width="100%" 
-              height="100%" 
-              frameBorder="0" 
-              title="Test d'éligibilité DTV"
-            ></iframe>
-          </div>
-        </div>
-      )}
+      <EligibilityFormModal 
+        isOpen={isEligibleOpen} 
+        onClose={() => setIsEligibleOpen(false)} 
+      />
 
     </div>
   );
