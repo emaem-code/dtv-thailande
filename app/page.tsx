@@ -64,7 +64,7 @@ function VideoSequence() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const videos = [
-    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'était déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
+    { id: 0, src: "/video-dtv.mp4", poster: "/poster-dtv.jpg", title: "Et si c'tétait déjà fait ?", hasText: true, phrases: ["5 ans de liberté totale", "Votre vie d'après commence", "On s'en est occupé pour vous"] },
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
@@ -262,7 +262,8 @@ export default function Home() {
               </span>
               Le guide gratuit
             </button>
-            {/* 👉 NOUVEAU : Bouton FAQ Mobile */}
+            {/* 👉 CORRECTION : Ajout du bouton Notre Méthode en mobile */}
+            <button onClick={() => { setIsProcessOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">Notre Méthode</button>
             <button onClick={() => { setIsFaqOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">FAQ</button>
             <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Nous contacter</Link>
             <Link href="/mentions-legales" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Mentions légales</Link>
@@ -282,6 +283,8 @@ export default function Home() {
 
       <footer className="hidden md:flex w-full flex-col items-center justify-center gap-3 pt-2 pb-8 text-sm font-medium text-gray-500 mt-auto z-10 relative opacity-90">
         <div className="flex gap-6">
+          {/* 👉 CORRECTION : Ajout du bouton Notre Méthode dans le footer */}
+          <button onClick={() => setIsProcessOpen(true)} className="hover:text-white transition-colors">Notre Méthode</button>
           <button onClick={() => setIsFaqOpen(true)} className="hover:text-white transition-colors">FAQ</button>
           <Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
@@ -323,7 +326,6 @@ export default function Home() {
         onClose={() => setIsEligibleOpen(false)} 
       />
 
-      {/* 👉 NOUVEAU : Le composant FAQ Modale */}
       <FaqModal 
         isOpen={isFaqOpen} 
         onClose={() => setIsFaqOpen(false)} 
