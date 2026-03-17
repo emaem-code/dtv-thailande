@@ -10,7 +10,6 @@ interface EligibilityFormModalProps {
 export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFormModalProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   // État pour stocker toutes les réponses
   const [formData, setFormData] = useState({
@@ -25,8 +24,6 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     childrenCount: '',
     softPower: '',
     translations: '',
-    city: '',
-    cityDetails: '',
     serviceLevel: '',
     remarks: ''
   });
@@ -45,11 +42,17 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
   };
 
   const nextStep = () => {
-    // Petite validation basique pour l'étape 1
     if (step === 1 && (!formData.funds || !formData.passport || !formData.job || !formData.email)) {
       alert("Veuillez remplir tous les champs obligatoires pour continuer.");
       return;
     }
+
+    // 🛑 FILTRE STRICT : Si le prospect n'a ni les fonds ni le passeport (et ne prévoit pas de les avoir)
+    if (formData.funds === 'no' || formData.passport === 'no') {
+      setStep(0); // Étape 0 = Non éligible
+      return;
+    }
+
     setStep(2);
   };
 
@@ -60,7 +63,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     setIsSubmitting(true);
     
     try {
-      // 👉 TON LIEN FORMSPREE EST ICI :
+      // Envoi des données à Formspree
       const response = await fetch("https://formspree.io/f/mreyokzj", {
         method: "POST",
         headers: {
@@ -85,7 +88,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
       });
 
       if (response.ok) {
-        setIsSuccess(true);
+        setStep(3); // Étape 3 = Succès et affichage des tarifs
       } else {
         alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
@@ -96,7 +99,6 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     }
   };
 
-  // Composant réutilisable pour les choix (Cartes cliquables)
   const RadioCard = ({ label, field, value }: { label: string, field: string, value: string }) => {
     const isSelected = formData[field as keyof typeof formData] === value;
     return (
@@ -114,6 +116,12 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     );
   };
 
+  // 📊 LOGIQUE D'AFFICHAGE DES TARIFS (Digital Nomad vs Soft Power)
+  const isSoftPower = formData.job === 'softpower';
+  const priceBasic = isSoftPower ? "1 250 €" : "850 €";
+  const pricePremium = isSoftPower ? "1 750 €" : "1 300 €";
+  const priceVIP = isSoftPower ? "2 900 €" : "2 400 €";
+
   return (
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/95 backdrop-blur-md" onClick={onClose} />
@@ -122,17 +130,17 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
         
         {/* Header avec Barre de progression */}
         <div className="flex-none p-6 border-b border-white/10 relative overflow-hidden">
-          {!isSuccess && (
+          {step === 1 || step === 2 ? (
             <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
               <div 
                 className="h-full bg-amber-500 transition-all duration-500"
                 style={{ width: step === 1 ? '50%' : '100%' }}
               />
             </div>
-          )}
+          ) : null}
           <div className="flex justify-between items-center">
             <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
-              {isSuccess ? 'Demande envoyée !' : step === 1 ? '1. Vérification d\'Éligibilité' : '2. Votre Devis Sur-Mesure'}
+              {step === 0 ? 'Critères non remplis' : step === 3 ? 'Demande envoyée !' : step === 1 ? '1. Vérification d\'Éligibilité' : '2. Votre Devis Sur-Mesure'}
             </h2>
             <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -143,23 +151,46 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
         {/* Formulaire Scrollable */}
         <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
           
+          {/* 🔴 ÉTAPE 0 : NON ÉLIGIBLE (Filtre anti-touristes) */}
+          {step === 0 && (
+            <div className="py-10 flex flex-col items-center text-center animate-in zoom-in duration-500">
+              <div className="w-20 h-20 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-4xl mb-6 border border-red-500/20">
+                ✕
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Profil Inéligible au Visa DTV</h3>
+              <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
+                L'administration thaïlandaise est stricte : disposer d'une garantie financière de 500 000 THB et d'un passeport valide sont des obligations légales incompressibles. Sans ces éléments, aucune ambassade n'acceptera votre dossier.
+              </p>
+              <button 
+                onClick={onClose}
+                className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
+              >
+                Fermer
+              </button>
+            </div>
+          )}
+
           {/* 🟢 ÉTAPE 1 : Éligibilité */}
-          {step === 1 && !isSuccess && (
+          {step === 1 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
               
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">1. Disposez-vous de l'équivalent de 500 000 THB (≈ 14 500 €) d'épargne ? <span className="text-amber-500">*</span></label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   <RadioCard label="Oui, sur un compte accessible" field="funds" value="yes" />
-                  <RadioCard label="Non, pas encore" field="funds" value="no" />
+                  <RadioCard label="Pas encore, mais je m'organise pour les avoir bientôt" field="funds" value="soon" />
+                  {/* Option bloquante */}
+                  <RadioCard label="Non, et je ne pourrai pas les réunir" field="funds" value="no" />
                 </div>
               </div>
 
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">2. Votre passeport est-il valable encore au moins 12 mois ? <span className="text-amber-500">*</span></label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <RadioCard label="Oui" field="passport" value="yes" />
-                  <RadioCard label="Non / À refaire" field="passport" value="no" />
+                <div className="grid grid-cols-1 gap-3">
+                  <RadioCard label="Oui, il est à jour" field="passport" value="yes" />
+                  <RadioCard label="Pas encore, mais je vais le refaire rapidement" field="passport" value="soon" />
+                  {/* Option bloquante */}
+                  <RadioCard label="Non, je n'ai pas de passeport" field="passport" value="no" />
                 </div>
               </div>
 
@@ -168,7 +199,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <div className="grid grid-cols-1 gap-3">
                   <RadioCard label="Freelance / Indépendant (Clients hors Thaïlande)" field="job" value="freelance" />
                   <RadioCard label="Salarié en télétravail (Avec autorisation de l'employeur)" field="job" value="remote" />
-                  <RadioCard label="Je n'ai pas de travail à distance / Autre (Programme Soft Power)" field="job" value="softpower" />
+                  <RadioCard label="Je n'ai pas de travail à distance / Je veux passer par une école" field="job" value="softpower" />
                 </div>
               </div>
 
@@ -189,19 +220,19 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   onClick={nextStep}
                   className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
                 >
-                  Continuer vers l'étape 2 →
+                  Vérifier mon profil →
                 </button>
               </div>
             </div>
           )}
 
           {/* 🟢 ÉTAPE 2 : Détails du devis */}
-          {step === 2 && !isSuccess && (
+          {step === 2 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
               
               <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-xl mb-6">
                 <p className="text-amber-400 font-bold mb-1">🎉 Félicitations, votre profil semble éligible !</p>
-                <p className="text-sm text-gray-300">Afin de calculer vos frais consulaires et de vous préparer une proposition sur-mesure, veuillez nous préciser votre projet.</p>
+                <p className="text-sm text-gray-300">Afin de vous présenter immédiatement nos tarifs personnalisés, veuillez préciser votre projet.</p>
               </div>
 
               <div className="space-y-3">
@@ -218,7 +249,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <label className="text-white font-bold text-lg">Où serez-vous pour déposer la demande ?</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <RadioCard label="Europe (France, Suisse, etc.)" field="location" value="europe" />
-                  <RadioCard label="Asie (Thaïlande ou pays frontalier)" field="location" value="asia" />
+                  <RadioCard label="Asie (Thaïlande ou frontalier)" field="location" value="asia" />
                   <RadioCard label="Amérique du Nord" field="location" value="america" />
                   <RadioCard label="Autre" field="location" value="other" />
                 </div>
@@ -231,8 +262,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 />
               </div>
 
-              {/* ⚠️ Question Conditionnelle : Soft Power */}
-              {formData.job === 'softpower' && (
+              {isSoftPower && (
                 <div className="space-y-3 p-5 bg-white/5 rounded-2xl border border-white/10">
                   <label className="text-white font-bold text-lg text-emerald-400">Programme Soft Power souhaité :</label>
                   <div className="grid grid-cols-1 gap-3">
@@ -263,18 +293,10 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
               </div>
 
               <div className="space-y-3">
-                <label className="text-white font-bold text-lg">Vos documents français (Kbis, banque) nécessitent-ils des traductions certifiées ?</label>
+                <label className="text-white font-bold text-lg">Vos documents nécessitent-ils des traductions certifiées ?</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <RadioCard label="Oui, j'aurai besoin de traductions" field="translations" value="yes" />
                   <RadioCard label="Non, tout est déjà en anglais" field="translations" value="no" />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-white font-bold text-lg">🔥 Quel niveau de service recherchez-vous ?</label>
-                <div className="grid grid-cols-1 gap-3">
-                  <RadioCard label="Formule Essentielle (Gestion du Visa et de l'administratif uniquement)" field="serviceLevel" value="basic" />
-                  <RadioCard label="Formules Premium / VIP (Visa + Réservation de mes vols, hôtels et chauffeurs)" field="serviceLevel" value="premium" />
                 </div>
               </div>
 
@@ -302,31 +324,79 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   className="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2"
                 >
                   {isSubmitting ? (
-                    <><span className="animate-spin text-xl">↻</span> Envoi en cours...</>
+                    <><span className="animate-spin text-xl">↻</span> Calcul en cours...</>
                   ) : (
-                    'Recevoir mon devis gratuit'
+                    'Découvrir mes tarifs'
                   )}
                 </button>
               </div>
             </div>
           )}
 
-          {/* 🟢 ÉTAPE 3 : Succès */}
-          {isSuccess && (
-            <div className="py-12 flex flex-col items-center text-center animate-in zoom-in duration-500">
-              <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-4xl mb-6 border border-emerald-500/30">
-                ✓
+          {/* 🟢 ÉTAPE 3 : Succès & Affichage de la Grille Tarifaire */}
+          {step === 3 && (
+            <div className="animate-in fade-in slide-in-from-bottom-8 duration-500">
+              
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mb-4 border border-emerald-500/30 mx-auto">
+                  ✓
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2">Demande transmise avec succès !</h3>
+                <p className="text-gray-400 text-sm">
+                  Notre équipe va analyser votre profil et vous envoyer un devis exact par e-mail. En attendant, voici la base tarifaire pour votre profil <strong className="text-amber-500">{isSoftPower ? 'Soft Power' : 'Digital Nomad'}</strong> :
+                </p>
               </div>
-              <h3 className="text-3xl font-black text-white mb-4">Demande bien reçue !</h3>
-              <p className="text-gray-400 text-lg max-w-md mx-auto mb-8">
-                Merci pour votre confiance. Notre équipe analyse votre profil et vous enverra vos 3 propositions tarifaires par e-mail d'ici 24 heures.
-              </p>
-              <button 
-                onClick={onClose}
-                className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
-              >
-                Retour à l'accueil
-              </button>
+
+              {/* GRILLE TARIFAIRE DYNAMIQUE */}
+              <div className="space-y-4">
+                
+                {/* Carte Basique */}
+                <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/20 transition-colors">
+                  <div>
+                    <h4 className="font-bold text-white text-lg">Formule Essentielle</h4>
+                    <p className="text-xs text-gray-400 mt-1">L'administratif uniquement. Frais consulaires, {isSoftPower && "inscription école, "} traductions et suivi inclus.</p>
+                  </div>
+                  <div className="text-left md:text-right flex-none">
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">À partir de</p>
+                    <p className="text-2xl font-black text-white">{priceBasic}</p>
+                  </div>
+                </div>
+
+                {/* Carte Premium */}
+                <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/20 transition-colors">
+                  <div>
+                    <h4 className="font-bold text-white text-lg">Formule Premium</h4>
+                    <p className="text-xs text-gray-400 mt-1">Formule Essentielle + Vol régional + Hôtel milieu de gamme + Transferts aéroport.</p>
+                  </div>
+                  <div className="text-left md:text-right flex-none">
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">À partir de</p>
+                    <p className="text-2xl font-black text-amber-500">{pricePremium}</p>
+                  </div>
+                </div>
+
+                {/* Carte VIP */}
+                <div className="bg-amber-500/10 border border-amber-500/30 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div>
+                    <h4 className="font-bold text-white text-lg flex items-center gap-2">Formule VIP <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h4>
+                    <p className="text-xs text-gray-400 mt-1">Le tout inclus : Vol long-courrier, hôtels haut de gamme, chauffeurs privés et conciergerie.</p>
+                  </div>
+                  <div className="text-left md:text-right flex-none">
+                    <p className="text-[10px] text-amber-500/70 uppercase tracking-widest font-bold">À partir de</p>
+                    <p className="text-2xl font-black text-amber-500">{priceVIP}</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="mt-8 text-center">
+                <button 
+                  onClick={onClose}
+                  className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
+                >
+                  Fermer
+                </button>
+              </div>
+
             </div>
           )}
 
