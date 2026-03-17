@@ -25,22 +25,27 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
     {
       num: "02",
       title: "Géolocalisation & Arrivée sur place",
-      desc: "Vous voyagez vers le pays convenu pour le dépôt. Note : Si vous passez par un pays tiers en Asie (ex: Laos, Cambodge), prévoyez jusqu'à 50 € pour régler le visa d'entrée local à la frontière. Le tampon de cette immigration est indispensable pour prouver votre géolocalisation à la Thaïlande."
+      desc: "Vous voyagez vers le pays convenu pour le dépôt. Note : Si vous passez par un pays tiers en Asie (ex: Laos, Cambodge), prévoyez jusqu'à 50 € pour régler le visa d'entrée local à la frontière. Le tampon de cette immigration est indispensable pour prouver votre géolocalisation."
     },
     {
       num: "03",
       title: "Soumission & Règlement Consulaire",
-      desc: "Vous vous connectez au portail officiel e-Visa et uploadez notre dossier. Selon l'ambassade choisie, le règlement du Visa DTV se fait soit 100% en ligne, soit sur place en espèces (en Bahts). Au moindre doute ou demande de l'ambassade, notre équipe intervient en urgence absolue pour débloquer la situation."
+      desc: "Vous vous connectez au portail officiel e-Visa et uploadez notre dossier. Selon l'ambassade choisie, le règlement du Visa DTV se fait soit 100% en ligne, soit sur place en espèces (en Bahts). Au moindre doute, notre équipe intervient en urgence absolue pour vous assister."
     },
     {
       num: "04",
       title: "Approbation & Logistique VIP",
-      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour une formule Premium ou VIP, prévenez-nous : nous déclenchons la réservation de votre vol vers la Thaïlande et de votre chauffeur privé."
+      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour une formule Premium ou VIP, prévenez-nous : nous déclenchons immédiatement la réservation de votre vol vers la Thaïlande et de votre chauffeur privé."
     },
     {
       num: "05",
-      title: "Enregistrement & Bienvenue en Thaïlande",
-      desc: "Imprimez le e-Visa reçu par e-mail. C'est ce document qui vous permettra de faire votre check-in à l'aéroport. À votre atterrissage, présentez votre passeport et cette feuille imprimée : l'immigration apposera instantanément votre tampon de 180 jours. Notez qu'il suffira ensuite d'une simple extension sur place, ou d'un week-end hors du territoire tous les 6 mois, pour relancer vos 180 jours. Votre nouvelle vie de liberté commence ici !"
+      title: "Enregistrement & Préparation au départ",
+      desc: "Avant votre vol, effectuez votre check-in en ligne. Il est indispensable d'imprimer le e-Visa que vous avez reçu par e-mail. Préparez également votre DTAC (accessible sur votre mobile ou imprimé sur papier). Ces documents vous seront demandés pour l'embarquement."
+    },
+    {
+      num: "06",
+      title: "Bienvenue en Thaïlande",
+      desc: "À votre atterrissage, présentez à l'officier de l'immigration votre passeport, votre e-Visa imprimé et votre DTAC. Il apposera instantanément votre tampon de 180 jours. Notez que pour profiter des 5 ans du visa, il suffit de sortir du territoire (le temps d'un week-end) ou de faire une extension sur place tous les 180 jours. Votre nouvelle vie de liberté commence ici !"
     }
   ];
 
