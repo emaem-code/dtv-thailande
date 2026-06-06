@@ -7,7 +7,7 @@ import DtvGuideModal from "./components/DtvGuideModal";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
 import ProcessModal from "./components/ProcessModal";
-import FaqModal from "./components/FaqModal";
+
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
@@ -226,7 +226,7 @@ export default function Home() {
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProcessOpen, setIsProcessOpen] = useState(false);
-  const [isFaqOpen, setIsFaqOpen] = useState(false);
+  
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -274,10 +274,10 @@ export default function Home() {
               Le Blog
             </Link>
 
-            <button onClick={() => setIsFaqOpen(true)} className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              FAQ
-            </button>
+            <Link href="/faq" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
+  <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+  FAQ
+</Link>
             <Link href="/contact" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
               <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               Nous contacter
@@ -315,7 +315,7 @@ export default function Home() {
             </button>
             <button onClick={() => { setIsProcessOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">Notre Méthode</button>
             <Link href="/blog/fonds-bancaires-visa-dtv" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Le Blog</Link>
-            <button onClick={() => { setIsFaqOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">FAQ</button>
+            <Link href="/faq" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">FAQ</Link>
             <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Nous contacter</Link>
             <Link href="/mentions-legales" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Mentions légales</Link>
           </div>
@@ -336,7 +336,7 @@ export default function Home() {
         <div className="w-24 h-px bg-white/10 mb-4"></div>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-4 text-center">
           <button onClick={() => setIsProcessOpen(true)} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
-          <button onClick={() => setIsFaqOpen(true)} className="hover:text-gray-300 transition-colors">FAQ</button>
+          <Link href="/faq" className="hover:text-gray-300 transition-colors">FAQ</Link>
           <Link href="/contact" className="hover:text-gray-300 transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-gray-300 transition-colors">Mentions légales</Link>
         </div>
@@ -374,7 +374,6 @@ export default function Home() {
       {/* MODALS */}
       <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
       <EligibilityFormModal isOpen={isEligibleOpen} onClose={() => setIsEligibleOpen(false)} />
-      <FaqModal isOpen={isFaqOpen} onClose={() => setIsFaqOpen(false)} />
       <ProcessModal isOpen={isProcessOpen} onClose={() => setIsProcessOpen(false)} />
 
     </div>
