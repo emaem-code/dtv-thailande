@@ -2,6 +2,21 @@
 
 import React from 'react';
 import Link from 'next/link';
+const blogIndexSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog Visa DTV Thaïlande",
+  "description": "Décryptages, stratégies et conseils d'experts pour sécuriser votre Visa Destination Thailand et réussir votre expatriation.",
+  "url": "https://dtv-thailande.fr/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DTV Thaïlande",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dtv-thailande.fr/logo.png"
+    }
+  }
+};
 
 export default function BlogIndex() {
   // C'est ici que tu ajouteras tes futurs articles
@@ -20,6 +35,12 @@ export default function BlogIndex() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-24 px-4 sm:px-6">
+      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogIndexSchema) }}
+      />
+      
       <div className="max-w-6xl mx-auto">
         
         {/* En-tête de la page */}
