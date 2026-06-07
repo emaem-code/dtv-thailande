@@ -76,16 +76,11 @@ export default function FaqPage() {
   return (
     // Conteneur principal de la page
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
-      return (
-  <main className="min-h-screen bg-[#0a0a0a]..."> {/* Ta balise principale actuelle */}
-    
-    {/* INJECTION DU SCRIPT SEO JSON-LD */}
-    <script
+      <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
     />
-
-    {/* Le reste de ton code avec les titres et les accordéons... */}
+    
       <div className="max-w-4xl mx-auto">
         
         {/* Header de la page */}
