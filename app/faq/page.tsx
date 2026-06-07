@@ -2,7 +2,36 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link'; // Assure-toi d'importer Link si tu es sous Next.js
-
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Faut-il bloquer les 500 000 THB pendant 5 ans pour le Visa DTV ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, il n'est pas nécessaire de bloquer les fonds pendant 5 ans. L'ambassade exige de prouver un solde de 500 000 THB (environ 14 500 €) avec un historique bancaire stable de 3 à 6 mois au moment du dépôt du dossier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels documents doit fournir un freelance ou auto-entrepreneur ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un freelance doit présenter un dossier solide comprenant : son Kbis (ou avis Sirene), ses statuts traduits en anglais, un portfolio professionnel, ainsi que des contrats clients actifs prouvant la pérennité de son activité à distance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le PACS est-il reconnu pour le statut d'accompagnant ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, les ambassades thaïlandaises ne reconnaissent pas le PACS. Seuls les conjoints légalement mariés et les enfants légitimes (de moins de 20 ans) peuvent bénéficier du visa DTV en tant qu'accompagnant (DTV Spouse/Child)."
+      }
+    }
+  ]
+};
 export default function FaqPage() {
   // On ouvre la première question par défaut
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -47,7 +76,16 @@ export default function FaqPage() {
   return (
     // Conteneur principal de la page
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
-      
+      return (
+  <main className="min-h-screen bg-[#0a0a0a]..."> {/* Ta balise principale actuelle */}
+    
+    {/* INJECTION DU SCRIPT SEO JSON-LD */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+    />
+
+    {/* Le reste de ton code avec les titres et les accordéons... */}
       <div className="max-w-4xl mx-auto">
         
         {/* Header de la page */}
