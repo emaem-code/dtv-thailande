@@ -8,7 +8,6 @@ import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
 import ProcessModal from "./components/ProcessModal";
 
-
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
 
@@ -30,14 +29,14 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   return (
     <div className="absolute bottom-[30%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
-        <h3
+        <div
           key={i}
           className={`absolute w-full px-4 text-white font-bold text-base lg:text-xl leading-tight tracking-normal text-center transition-all duration-1000 transform drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] ${
             i === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
           {phrase}
-        </h3>
+        </div>
       ))}
     </div>
   );
@@ -173,9 +172,9 @@ function VideoSequence() {
           })}
         </div>
 
-        {/* À DROITE : La Liste des Chapitres (Sans le texte Étape) */}
+        {/* À DROITE : La Liste des Chapitres */}
         <div className="flex flex-col gap-3 xl:gap-4 w-full max-w-lg">
-          <h3 className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L'accompagnement clé en main</h3>
+          <div className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L'accompagnement clé en main</div>
           
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
@@ -204,9 +203,9 @@ function VideoSequence() {
                 </div>
 
                 <div className="flex flex-col justify-center">
-                  <h4 className={`text-base xl:text-lg font-bold leading-tight mb-1.5 transition-colors ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                  <div className={`text-base xl:text-lg font-bold leading-tight mb-1.5 transition-colors ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
                     {video.title.replace('\n', ' ')}
-                  </h4>
+                  </div>
                   <p className="text-xs xl:text-sm text-gray-400 line-clamp-2 leading-relaxed">
                     {video.phrases[0]}
                   </p>
@@ -247,7 +246,7 @@ export default function Home() {
           
           {/* Logo / Titre Sidebar */}
           <div className="px-2">
-            <h2 className="text-xl font-black text-white leading-tight">VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span></h2>
+            <div className="text-xl font-black text-white leading-tight">VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span></div>
           </div>
 
           {/* Bouton Primaire (Guide) */}
@@ -270,14 +269,14 @@ export default function Home() {
             </button>
             
             <Link href="/blog" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-  <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3m0 0l3-3m-3 3V8" /></svg>
-  Le Blog
-</Link>
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3m0 0l3-3m-3 3V8" /></svg>
+              Le Blog
+            </Link>
 
             <Link href="/faq" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-  <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-  FAQ
-</Link>
+              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              FAQ
+            </Link>
             <Link href="/contact" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
               <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               Nous contacter
@@ -323,13 +322,13 @@ export default function Home() {
       )}
 
       {/* CONTENU PRINCIPAL (Décalé à droite sur Desktop pour laisser la place à la Sidebar) */}
-      <div className="flex-1 flex flex-col items-center justify-start w-full lg:ml-64 lg:w-[calc(100%-16rem)] mx-auto pt-16 lg:pt-10">
+      <main className="flex-1 flex flex-col items-center justify-start w-full lg:ml-64 lg:w-[calc(100%-16rem)] mx-auto pt-16 lg:pt-10">
         <HeroText />
         
         <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 lg:mt-4">
           <VideoSequence />
         </section>
-      </div>
+      </main>
 
       {/* FOOTER MOBILE (Disparaît sur Desktop car les liens sont dans la Sidebar) */}
       <footer className="lg:hidden flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
