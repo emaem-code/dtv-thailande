@@ -13,9 +13,9 @@ const articleSchema = {
   "description": "Exigences officielles des ambassades sur la preuve financière de 500 000 THB pour le Visa DTV.",
   "image": "https://dtv-thailande.fr/poster-budget.jpg",  
   "author": {
-    "@type": "Organization",
-    "name": "Équipe DTV-Thaïlande.fr",
-    "url": "https://dtv-thailande.fr"
+    "@type": "Person",
+    "name": "Matthieu Moretti",
+    "url": "https://dtv-thailande.fr/contact"
   },  
   "publisher": {
     "@type": "Organization",
@@ -172,8 +172,8 @@ export default function BlogArticleDTV() {
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
-          Mis à jour en 2026 · Lecture : 8 min · Par l&apos;équipe{' '}
-          <strong className="text-gray-400">dtv-thailande.fr</strong>
+          Mis à jour en 2026 · Lecture : 8 min · Par{' '}
+          <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
 
@@ -253,8 +253,9 @@ export default function BlogArticleDTV() {
         </h3>
         <p className="mb-5">
           Si vous faites vos démarches depuis la France, attendez-vous au niveau d&apos;exigence le
-          plus élevé. L&apos;ambassade de Paris demande très fréquemment un historique bancaire
-          irréprochable sur les{' '}
+          plus élevé. Comme l'indique {' '}
+          <a href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">le site officiel de l'ambassade de Paris</a>,
+          il est très fréquemment demandé un historique bancaire irréprochable sur les{' '}
           <strong className="text-white">6 derniers mois</strong>. Le solde ne doit à aucun moment
           descendre sous l&apos;équivalent de 500 000 THB sur ce semestre entier.
         </p>
@@ -418,8 +419,8 @@ export default function BlogArticleDTV() {
           {[
             {
               icon: '✈️',
-              title: 'La sortie du territoire',
-              text: "Impossible de demander un Visa DTV depuis l'intérieur de la Thaïlande. Vous devez impérativement déposer votre passeport à une ambassade située à l'étranger.",
+              title: 'La soumission du dossier',
+              text: <>Vous devez impérativement déposer votre demande via une ambassade située à l'étranger, soit physiquement, soit sur <a href="https://www.thaievisa.go.th/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">le portail gouvernemental Thai e-Visa</a> (selon l'ambassade dont vous dépendez).</>,
             },
             {
               icon: '🗓️',
@@ -447,6 +448,47 @@ export default function BlogArticleDTV() {
           ))}
         </div>
       </section>
+
+      {/* ── SECTION 8 ── */}
+      <section className="mb-14">
+        <h2 className="text-2xl font-bold text-white mb-4">
+          8. L&apos;angoisse du dossier refusé : ne laissez pas de place au hasard
+        </h2>
+        <p className="mb-4">
+          Préparer un dossier consulaire est stressant. Entre les calculs de taux de change,
+          la sélection des bonnes lignes comptables, l&apos;inscription officielle à une école locale
+          et la planification des vols vers le Laos, la moindre erreur entraîne la perte des
+          frais d&apos;ambassade <strong className="text-white">(non remboursables)</strong> et retarde
+          votre projet de vie.
+        </p>
+        <ul className="space-y-2 mb-4">
+          {[
+            'Analyse millimétrée de vos relevés bancaires pour s\'assurer de leur conformité.',
+            'Inscription officielle à l\'école de cuisine (pour la voie Soft Power).',
+            'Montage du dossier consulaire parfait pour l\'ambassade de Vientiane.',
+            'Organisation intégrale de votre logistique (vols régionaux, hôtels, transferts) pour un Visa Run sans stress.',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3 text-sm text-gray-400">
+              <span className="text-amber-400 mt-0.5 flex-none">→</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ── ENCART AUTEUR (E-E-A-T) ── */}
+      <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+        </div>
+        <div className="text-center md:text-left">
+          <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
+          <p className="text-amber-500 text-xs font-semibold mb-3 uppercase tracking-wider">Entrepreneur & Expert Expatriation</p>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Entrepreneur digital installé à Phuket, j'accompagne les freelances et porteurs de projet dans leur installation en Thaïlande. Mon objectif : vous éviter les pièges administratifs grâce à une expertise forgée directement sur le terrain, au contact des réalités de l'immigration.
+          </p>
+        </div>
+      </div>
 
       {/* ── FAQ ── */}
       <section className="mb-14">
@@ -477,33 +519,6 @@ export default function BlogArticleDTV() {
             </details>
           ))}
         </div>
-      </section>
-
-      {/* ── SECTION 8 ── */}
-      <section className="mb-14">
-        <h2 className="text-2xl font-bold text-white mb-4">
-          8. L&apos;angoisse du dossier refusé : ne laissez pas de place au hasard
-        </h2>
-        <p className="mb-4">
-          Préparer un dossier consulaire est stressant. Entre les calculs de taux de change,
-          la sélection des bonnes lignes comptables, l&apos;inscription officielle à une école locale
-          et la planification des vols vers le Laos, la moindre erreur entraîne la perte des
-          frais d&apos;ambassade <strong className="text-white">(non remboursables)</strong> et retarde
-          votre projet de vie.
-        </p>
-        <ul className="space-y-2 mb-4">
-          {[
-            'Analyse millimétrée de vos relevés bancaires pour s\'assurer de leur conformité.',
-            'Inscription officielle à l\'école de cuisine (pour la voie Soft Power).',
-            'Montage du dossier consulaire parfait pour l\'ambassade de Vientiane.',
-            'Organisation intégrale de votre logistique (vols régionaux, hôtels, transferts) pour un Visa Run sans stress.',
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-3 text-sm text-gray-400">
-              <span className="text-amber-400 mt-0.5 flex-none">→</span>
-              {item}
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* ── CTA FINAL ── */}
