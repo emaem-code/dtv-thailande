@@ -1,12 +1,12 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-const blogIndexSchema = {
+
+// ─── SCHEMA BLOG JSON-LD ──────────────────────────────────────────────────────
+const blogSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "Blog Visa DTV Thaïlande",
-  "description": "Décryptages, stratégies et conseils d'experts pour sécuriser votre Visa Destination Thailand et réussir votre expatriation.",
+  "name": "Blog DTV Thaïlande",
+  "description": "Guides, stratégies et conseils d'experts pour obtenir le Visa DTV et réussir son expatriation en Thaïlande.",
   "url": "https://dtv-thailande.fr/blog",
   "publisher": {
     "@type": "Organization",
@@ -18,87 +18,105 @@ const blogIndexSchema = {
   }
 };
 
-export default function BlogIndex() {
-  // C'est ici que tu ajouteras tes futurs articles
-  const articles = [
-    {
-      id: 1,
-      title: "Visa DTV Thaïlande : Faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?",
-      excerpt: "La fameuse preuve financière cristallise toutes les angoisses. Faut-il laisser cet argent bloqué ? L'ambassade de Paris est-elle plus stricte ? Voici la réponse officielle.",
-      category: "Finances & Épargne",
-      date: "Juin 2026",
-      readTime: "4 min",
-      slug: "fonds-bancaires-visa-dtv", // Doit correspondre exactement au nom de ton dossier
-    },
-    // Pour ajouter un nouvel article plus tard, il suffira de copier-coller ce bloc au-dessus
-  ];
+// ─── LISTE DES ARTICLES ───────────────────────────────────────────────────────
+const posts = [
+  {
+    slug: 'visa-dtv-soft-power-ecoles',
+    title: 'Visa DTV Soft Power : Éviter les arnaques des écoles (Cuisine & Muay Thaï)',
+    description: 'Le guide définitif pour obtenir le Visa DTV via la voie culturelle. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.',
+    date: '10 Juin 2026',
+    category: 'Soft Power',
+    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
+    hoverBorder: 'hover:border-emerald-500/50',
+  },
+  {
+    slug: 'fonds-bancaires-visa-dtv',
+    title: 'Visa DTV : Faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?',
+    description: 'Exigences officielles des ambassades sur la preuve financière de 500 000 THB pour le Visa DTV. L\'erreur fatale du virement de dernière minute.',
+    date: '01 Juin 2026',
+    category: 'Finances',
+    tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
+    hoverBorder: 'hover:border-amber-500/50',
+  }
+];
 
+export default function BlogIndex() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] py-24 px-4 sm:px-6">
+    <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
       
+      {/* ── INJECTION DU SCRIPT SEO ── */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogIndexSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
-      
-      <div className="max-w-6xl mx-auto">
+
+      <div className="max-w-5xl mx-auto">
         
-        {/* En-tête de la page */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide mb-4">
-            Le Blog <span className="text-amber-500">DTV</span>
+        {/* ── EN-TÊTE ÉDITORIAL (Correction "Thin Content") ── */}
+        <div className="text-center mb-16 mt-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide mb-6">
+            Le Blog <span className="text-amber-500">DTV Thaïlande</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Décryptages, stratégies et conseils d'experts pour sécuriser votre Visa Destination Thailand et réussir votre expatriation.
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+            Décryptage légal, stratégies financières et réalités du terrain. 
+            Découvrez nos guides complets pour monter un dossier consulaire irréfutable 
+            et réussir votre installation en Thaïlande sans mauvaise surprise.
           </p>
         </div>
 
-        {/* Grille des articles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article) => (
+        {/* ── GRILLE DES ARTICLES ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {posts.map((post) => (
             <Link 
-              key={article.id} 
-              href={`/blog/${article.slug}`}
-              className="group flex flex-col bg-[#111111] border border-white/10 rounded-3xl overflow-hidden hover:border-amber-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.1)] hover:-translate-y-1"
+              key={post.slug} 
+              href={`/blog/${post.slug}`}
+              className={`group flex flex-col justify-between p-8 rounded-3xl bg-[#111111] border border-white/10 transition-all duration-300 ${post.hoverBorder} hover:bg-[#161616] hover:-translate-y-1 shadow-lg`}
             >
-              {/* Image / Visuel de la carte */}
-              <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-black relative overflow-hidden flex items-center justify-center border-b border-white/5">
-                <div className="absolute inset-0 bg-[url('/poster-budget.jpg')] bg-cover bg-center opacity-30 group-hover:opacity-40 transition-opacity duration-500 grayscale group-hover:grayscale-0"></div>
-                <div className="absolute inset-0 bg-black/40"></div>
-                {/* Icône décorative */}
-                <svg className="w-12 h-12 text-amber-500/50 group-hover:scale-110 transition-transform duration-500 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3m0 0l3-3m-3 3V8" />
-                </svg>
-              </div>
-
-              {/* Contenu de la carte */}
-              <div className="p-8 flex flex-col flex-1">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full">
-                    {article.category}
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className={`inline-block text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
+                    {post.category}
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">
-                    {article.readTime} de lecture
+                  <span className="text-gray-500 text-sm font-medium">
+                    {post.date}
                   </span>
                 </div>
                 
-                <h2 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-amber-400 transition-colors">
-                  {article.title}
+                <h2 className="text-2xl font-bold text-white mb-4 leading-tight group-hover:text-gray-200 transition-colors">
+                  {post.title}
                 </h2>
                 
-                <p className="text-gray-400 text-sm leading-relaxed flex-1">
-                  {article.excerpt}
+                <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                  {post.description}
                 </p>
+              </div>
 
-                <div className="mt-6 flex items-center text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
-                  Lire l'article
-                  <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
+              <div className="flex items-center text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
+                Lire l'article 
+                <span className="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* ── CTA BAS DE PAGE ── */}
+        <div className="mt-20 p-8 bg-[#111111] border border-gray-800 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500 opacity-5 rounded-full blur-3xl"></div>
+          
+          <h3 className="text-2xl text-white font-bold mb-4 relative z-10">
+            Passez de la théorie à la pratique
+          </h3>
+          <p className="text-gray-400 mb-8 relative z-10 max-w-xl mx-auto">
+            Vous avez lu nos guides mais vous souhaitez déléguer la charge administrative ? 
+            Nous prenons en main l'intégralité de votre dossier DTV.
+          </p>
+          
+          <Link 
+            href="/contact" 
+            className="relative z-10 inline-flex items-center justify-center bg-white text-black font-bold text-lg py-4 px-8 rounded-full hover:bg-gray-200 transition-all duration-300 active:scale-95"
+          >
+            Nous confier votre dossier
+          </Link>
         </div>
 
       </div>
