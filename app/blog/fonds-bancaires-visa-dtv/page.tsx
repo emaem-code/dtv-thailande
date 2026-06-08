@@ -199,9 +199,23 @@ export default function BlogArticleDTV() {
         </p>
       </div>
 
+      {/* ── SOMMAIRE CLIQUABLE ── */}
+      <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
+        <h2 className="text-xl font-bold text-white mb-4">Sommaire de l'article</h2>
+        <ul className="space-y-3">
+          <li><a href="#logique-financiere" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi la Thaïlande exige-t-elle 500 000 THB ?</a></li>
+          <li><a href="#delais-ambassades" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. La règle des 3 mois vs 6 mois : la vérité selon les ambassades</a></li>
+          <li><a href="#erreur-virement" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">3. L'erreur fatale : le virement de dernière minute</a></li>
+          <li><a href="#types-comptes" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">4. Quels types de comptes bancaires sont acceptés ?</a></li>
+          <li><a href="#taux-change" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">5. La règle d'or du taux de change (EUR / THB)</a></li>
+          <li><a href="#soft-power" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">6. Le cas spécifique du DTV &quot;Soft Power&quot;</a></li>
+          <li><a href="#visa-run" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">7. Organiser son Visa Run : le timing parfait</a></li>
+        </ul>
+      </nav>
+
       {/* ── SECTION 1 ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="logique-financiere" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           1. Pourquoi la Thaïlande exige-t-elle 500 000 THB ?
         </h2>
         <p className="mb-4">
@@ -224,7 +238,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 2 + TABLEAU ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="delais-ambassades" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           2. La règle des 3 mois vs 6 mois : la vérité selon les ambassades
         </h2>
         <p className="mb-4">
@@ -294,7 +308,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 3 ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="erreur-virement" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           3. L&apos;erreur fatale : le virement de dernière minute
         </h2>
         <p className="mb-4">
@@ -319,7 +333,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 4 + TABLEAU COMPTES ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="types-comptes" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           4. Quels types de comptes bancaires sont acceptés ?
         </h2>
         <p className="mb-6">
@@ -345,7 +359,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 5 ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="taux-change" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           5. La règle d&apos;or du taux de change (EUR / THB)
         </h2>
         <p className="mb-4">
@@ -373,7 +387,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 6 ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="soft-power" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           6. Le cas spécifique du DTV &quot;Soft Power&quot;
         </h2>
         <p className="mb-4">
@@ -396,7 +410,7 @@ export default function BlogArticleDTV() {
 
       {/* ── SECTION 7 ── */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 id="visa-run" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           7. Organiser son Visa Run : le timing parfait
         </h2>
 
@@ -436,9 +450,12 @@ export default function BlogArticleDTV() {
 
       {/* ── FAQ ── */}
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-white mb-6">
+        <h2 className="text-2xl font-bold text-white mb-3">
           FAQ — Vos questions les plus fréquentes
         </h2>
+        <p className="text-gray-400 mb-6 text-sm">
+          Pour toute autre interrogation concernant les statuts (Freelance, Famille, Soft Power), consultez notre <Link href="/faq" className="text-amber-500 hover:underline font-medium">Foire Aux Questions complète</Link>.
+        </p>
 
         <div className="space-y-4">
           {faqSchema.mainEntity.map((item) => (
