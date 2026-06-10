@@ -33,8 +33,17 @@ const blogSchema = {
   }
 };
 
-// ─── LISTE DES 3 ARTICLES DE BLOG ─────────────────────────────────────────────
+// ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
+  {
+    slug: 'visa-dtv-freelance-auto-entrepreneur',
+    title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie",
+    description: "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier béton.",
+    date: '10 Juin 2026',
+    category: 'Freelance',
+    tagColor: 'text-purple-400 border-purple-500/25 bg-purple-500/10',
+    hoverBorder: 'hover:border-purple-500/50',
+  },
   {
     slug: 'tdac-thailande-carte-arrivee',
     title: "TDAC Thaïlande 2026 : Guide Complet de la Nouvelle Carte d'Arrivée Numérique",
