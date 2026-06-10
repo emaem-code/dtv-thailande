@@ -205,6 +205,7 @@ export default function BlogArticleTdac() {
         </p>
       </section>
 
+      {/* ── SECTION 6 AVEC LIEN OFFICIEL ── */}
       <section className="mb-12">
         <h2 id="pieges-eviter" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           6. Attention aux faux sites payants (Red Flags)
@@ -218,6 +219,23 @@ export default function BlogArticleTdac() {
         <p className="mb-4">
           Si un site vous demande de sortir votre carte bancaire pour payer des &quot;frais administratifs&quot; ou de &quot;traitement rapide&quot; s'élevant à 30, 50 ou 80 €, <strong>quittez immédiatement la page</strong>. Vous êtes sur une plateforme d'arnaque qui se contente de voler vos données personnelles pour remplir le vrai site gratuit à votre place.
         </p>
+        <div className="mt-6 p-5 bg-sky-500/5 border border-sky-500/20 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p className="text-white font-semibold text-sm">Portail Officiel de l'Immigration</p>
+            <p className="text-gray-400 text-xs mt-0.5">Ne remplissez vos informations sur aucun autre site internet.</p>
+          </div>
+          <a 
+            href="https://www.immigration.go.th" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center gap-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold text-xs px-4 py-2.5 rounded-xl border border-sky-500/25 transition-all whitespace-nowrap"
+          >
+            Remplir mon TDAC Gratuitement
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
       </section>
 
       {/* ── ENCART AUTEUR CORRIGÉ (E-E-A-T MAX) ── */}
