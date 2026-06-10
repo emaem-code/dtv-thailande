@@ -1,5 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+// ─── MÉTADONNÉES SEO DE L’ARTICLE ───
+export const metadata: Metadata = {
+  title: 'Preuve bancaire visa DTV : 500 000 THB, 3 ou 6 mois ?',
+  description: "Faut‑il bloquer 15 000 € pour le Visa DTV Thaïlande ? Découvrez les exigences officielles des ambassades sur l'historique de 3 à 6 mois et les erreurs à éviter.",
+  openGraph: {
+    title: 'Preuve bancaire visa DTV : 500 000 THB, 3 ou 6 mois ?',
+    description: "Découvrez les exigences officielles des ambassades sur l'historique bancaire stable pour le Visa DTV.",
+    url: 'https://dtv-thailande.fr/blog/fonds-bancaires-visa-dtv',
+    siteName: 'DTV Thaïlande',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+};
 
 // ─── SCHEMA ARTICLE JSON-LD ───────────────────────────────────────────────────
 const articleSchema = {
