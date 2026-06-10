@@ -264,15 +264,25 @@ export default function BlogArticleDTV() {
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-8 mb-3">
-          L&apos;approche stricte : l&apos;ambassade de Paris
+          L'approche stricte : l'ambassade de Paris
         </h3>
         <p className="mb-5">
-          Si vous faites vos démarches depuis la France, attendez-vous au niveau d&apos;exigence le
-          plus élevé. Comme l'indique {' '}
-          <a href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">le site officiel de l'ambassade de Paris</a>,
-          il est très fréquemment demandé un historique bancaire irréprochable sur les{' '}
+          Si vous faites vos démarches depuis la France, attendez-vous au niveau d'exigence le
+          plus élevé. Comme l'indique{' '}
+          <a 
+            href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-amber-500 hover:underline font-medium inline-flex items-center gap-1"
+          >
+            le site officiel de l'ambassade de Paris
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          , il est très fréquemment demandé un historique bancaire irréprochable sur les{' '}
           <strong className="text-white">6 derniers mois</strong>. Le solde ne doit à aucun moment
-          descendre sous l&apos;équivalent de 500 000 THB sur ce semestre entier.
+          descendre sous l'équivalent de 500 000 THB sur ce semestre entier.
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
