@@ -5,17 +5,28 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// ─── MÉTADONNÉES OPTIMISÉES POUR L'ACCUEIL ───
+// ─── MÉTADONNÉES ULTRA-OPTIMISÉES (RÈGLE TOUT L'AUDIT CODEX) ──────────────────
 export const metadata: Metadata = {
-  title: 'Visa DTV Thaïlande (5 ans) | Agence d\'Accompagnement Premium',
+  metadataBase: new URL('https://dtv-thailande.fr'), // Résout l'absence d'URL canonique de base
+  title: {
+    default: "Visa DTV Thaïlande (5 ans) | Agence d'Accompagnement Premium",
+    template: "%s | DTV Thaïlande" // Permet aux articles de blog d'ajouter leur titre proprement
+  },
   description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles : dossiers, conformité bancaire et Visa Run.',
+  alternates: {
+    canonical: '/', // Génère automatiquement la balise <link rel="canonical"> sur chaque page
+  },
   openGraph: {
-    title: 'Visa DTV Thaïlande | Agence d\'Accompagnement Premium',
-    description: 'Obtenez votre Visa Destination Thailand en toute sécurité.',
+    title: "Visa DTV Thaïlande (5 ans) | Agence d'Accompagnement Premium",
+    description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles.',
     url: 'https://dtv-thailande.fr',
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
+    images: [{ url: '/logo.png' }], // Résout le manque de og:image pour les partages de l'accueil
+  },
+  twitter: {
+    card: 'summary_large_image', // Résout le problème des Twitter Cards tronquées
   },
 };
 
