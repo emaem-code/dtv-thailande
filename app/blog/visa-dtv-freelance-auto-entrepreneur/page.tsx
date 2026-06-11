@@ -43,10 +43,10 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-10",
-  "dateModified": "2026-06-10",
+  "dateModified": "2026-06-11",
 };
 
-/// ─── SCHEMA FAQ ───────────────────────────────────────────────────────────────
+// ─── SCHEMA FAQ ───────────────────────────────────────────────────────────────
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -93,6 +93,7 @@ const faqSchema = {
     }
   ]
 };
+
 export default function ArticleFreelanceDTV() {
   return (
     <article className="max-w-3xl mx-auto px-5 md:px-6 py-14 md:py-20 font-sans text-gray-300 leading-relaxed bg-[#0a0a0a]">
@@ -116,13 +117,10 @@ export default function ArticleFreelanceDTV() {
           le Visa Sans Fiche de Paie en 2026
         </h1>
         <p className="text-gray-400 text-lg mt-4 leading-relaxed">
-          Vous êtes indépendant, micro-entrepreneur ou en portage salarial et
-          vous rêvez de vous installer en Thaïlande ? L’absence de fiche de
-          paie classique n’est pas une fatalité — c’est un dossier à construire
-          différemment.
+          <strong>Obtenir le Visa DTV quand on est freelance ou auto-entrepreneur</strong> nécessite une préparation minutieuse. Vous êtes indépendant, micro-entrepreneur ou en portage salarial et vous rêvez de vous installer en Thaïlande ? L’absence de fiche de paie classique n’est pas une fatalité — c’est un dossier consulaire à construire différemment.
         </p>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 9 min · Mis à jour juin 2026 · Par{" "}
+          Lecture : 11 min · Mis à jour : 11 Juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
@@ -133,7 +131,7 @@ export default function ArticleFreelanceDTV() {
           ⚠️ Le profil le plus refusé à l’ambassade de Paris
         </p>
         <p className="text-gray-400 text-sm leading-relaxed">
-          D’après notre experience terrain, les auto-entrepreneurs et freelances
+          D’après notre expérience terrain, les auto-entrepreneurs et freelances
           français représentent la majorité des dossiers DTV refusés. Non pas
           parce que leur profil est inéligible, mais parce que leur dossier est
           mal construit. Ce guide existe pour corriger ça.
@@ -153,6 +151,7 @@ export default function ArticleFreelanceDTV() {
             ["#cas-portage-salarial", "4. Cas concret : dossier portage salarial et SASU"],
             ["#traductions-assermentees", "5. Traductions assermentées : quand et pourquoi"],
             ["#strategie-ambassade", "6. Quelle ambassade choisir selon votre profil"],
+            ["#delais-preparation", "7. Quel délai pour préparer son dossier freelance avant de partir ?"],
           ].map(([href, label]) => (
             <li key={href}>
               <a
@@ -228,84 +227,83 @@ export default function ArticleFreelanceDTV() {
         </p>
 
         <div className="space-y-4">
-          {[
-            {
-              num: "01",
-              title: "Avis de situation SIRENE ou extrait Kbis",
-              role: "Preuve d'existence légale de votre activité",
-              detail:
-                "L’équivalent de votre ’acte de naissance’ professionnel. Il prouve que vous exercez une activité déclarée, enregistrée et légale en France. Pour une micro-entreprise, l’avis de situation SIRENE (gratuit sur insee.fr) suffit. Pour une société, fournissez un Kbis de moins de 3 mois.",
-              color: "border-amber-500/30 bg-amber-500/5",
-              badge: "text-amber-400",
-            },
-            {
-              num: "02",
-              title: "Attestations de chiffre d'affaires URSSAF",
-              role: "Preuve de revenus réguliers sur 6 mois",
-              detail:
-                "Téléchargeables directement depuis votre espace autoentrepreneur.urssaf.fr. Ces attestations trimestrielles sont officielles, tamponnées et montrent l’évolution de votre CA. Fournissez les deux derniers trimestres pour couvrir 6 mois d’activité.",
-              color: "border-sky-500/30 bg-sky-500/5",
-              badge: "text-sky-400",
-            },
-            {
-              num: "03",
-              title: "Relevés bancaires personnels (3 à 6 mois)",
-              role: "Preuve de la solvabilité des 500 000 THB",
-              detail:
-                "C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (environ 13 500 €) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.",
-              color: "border-emerald-500/30 bg-emerald-500/5",
-              badge: "text-emerald-400",
-            },
-            {
-              num: "04",
-              title: "Portfolio de missions ou contrats clients",
-              role: "Preuve de la nature 'remote' de votre activity",
-              detail:
-                "L’ambassade doit comprendre que vous travaillez pour des clients non-thaïlandais depuis n’importe où dans le monde. Un PDF propre listant vos 3 à 5 derniers projets (nom du client, pays, nature de la mission, montant) suffit. Les contrats ou bons de commande sont un plus.",
-              color: "border-purple-500/30 bg-purple-500/5",
-              badge: "text-purple-400",
-            },
-            {
-              num: "05",
-              title: "Lettre de motivation consulaire personnalisée",
-              role: "La pièce qui donne du sens à tout le reste",
-              detail:
-                "Un document d’une page, rédigé en anglais, qui explique votre statut, votre mode de travail, vos revenus moyens et votre projet en Thaïlande. C’est vous qui parlez à l’officier avant même qu’il ouvre votre dossier. Cette lettre structure son interprétation de toutes les autres pièces.",
-              color: "border-rose-500/30 bg-rose-500/5",
-              badge: "text-rose-400",
-            },
-            {
-              num: "06",
-              title: "Justificatif de domicile fiscal français",
-              role: "Preuve de votre centre de vie actuel",
-              detail:
-                "Votre dernier avis d’imposition ou une quittance de loyer récente. L’ambassade doit savoir d’où vous venez. Ce document complète la cohérence géographique de votre dossier.",
-              color: "border-gray-500/30 bg-gray-500/5",
-              badge: "text-gray-400",
-            },
-          ].map((doc) => (
-            <div
-              key={doc.num}
-              className={`border rounded-2xl p-6 ${doc.color}`}
-            >
+            <div className="border rounded-2xl p-6 border-amber-500/30 bg-amber-500/5">
               <div className="flex items-start gap-4">
-                <span
-                  className={`text-2xl font-black ${doc.badge} flex-shrink-0`}
-                >
-                  {doc.num}
-                </span>
+                <span className="text-2xl font-black text-amber-400 flex-shrink-0">01</span>
                 <div>
-                  <p className="text-white font-bold mb-1">{doc.title}</p>
-                  <p className={`text-xs font-semibold mb-2 ${doc.badge}`}>
-                    → {doc.role}
-                  </p>
+                  <p className="text-white font-bold mb-1">Avis de situation SIRENE ou extrait Kbis</p>
+                  <p className="text-xs font-semibold mb-2 text-amber-400">→ Preuve d'existence légale de votre activité</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    {doc.detail}
+                    L’équivalent de votre ’acte de naissance’ professionnel. Il prouve que vous exercez une activité déclarée, enregistrée et légale en France. Pour une micro-entreprise, l’avis de situation SIRENE (gratuit sur insee.fr) suffit. Pour une société, fournissez un Kbis de moins de 3 mois.
                   </p>
                 </div>
               </div>
             </div>
-          ))}
+
+            <div className="border rounded-2xl p-6 border-sky-500/30 bg-sky-500/5">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl font-black text-sky-400 flex-shrink-0">02</span>
+                <div>
+                  <p className="text-white font-bold mb-1">Attestations de chiffre d'affaires URSSAF</p>
+                  <p className="text-xs font-semibold mb-2 text-sky-400">→ Preuve de revenus réguliers sur 6 mois</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Téléchargeables directement depuis le <a href="https://www.autoentrepreneur.urssaf.fr" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">portail officiel de l'URSSAF</a>. Ces attestations trimestrielles sont officielles, tamponnées et montrent l’évolution de votre CA. Fournissez les deux derniers trimestres pour couvrir 6 mois d’activité.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border rounded-2xl p-6 border-emerald-500/30 bg-emerald-500/5">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl font-black text-emerald-400 flex-shrink-0">03</span>
+                <div>
+                  <p className="text-white font-bold mb-1">Relevés bancaires personnels (3 à 6 mois)</p>
+                  <p className="text-xs font-semibold mb-2 text-emerald-400">→ Preuve de la solvabilité des 500 000 THB</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (environ 13 500 €) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border rounded-2xl p-6 border-purple-500/30 bg-purple-500/5">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl font-black text-purple-400 flex-shrink-0">04</span>
+                <div>
+                  <p className="text-white font-bold mb-1">Portfolio de missions ou contrats clients</p>
+                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve de la nature 'remote' de votre activity</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    L’ambassade doit comprendre que vous travaillez pour des clients non-thaïlandais depuis n’importe où dans le monde. Un PDF propre listant vos 3 à 5 derniers projets (nom du client, pays, nature de la mission, montant) suffit. Les contrats ou bons de commande sont un plus.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border rounded-2xl p-6 border-rose-500/30 bg-rose-500/5">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl font-black text-rose-400 flex-shrink-0">05</span>
+                <div>
+                  <p className="text-white font-bold mb-1">Lettre de motivation consulaire personnalisée</p>
+                  <p className="text-xs font-semibold mb-2 text-rose-400">→ La pièce qui donne du sens à tout le reste</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Un document d’une page, rédigé en anglais, qui explique votre statut, votre mode de travail, vos revenus moyens et votre projet en Thaïlande. C’est vous qui parlez à l’officier avant même qu’il ouvre votre dossier. Cette lettre structure son interprétation de toutes les autres pièces.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border rounded-2xl p-6 border-gray-500/30 bg-gray-500/5">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl font-black text-gray-400 flex-shrink-0">06</span>
+                <div>
+                  <p className="text-white font-bold mb-1">Justificatif de domicile fiscal français</p>
+                  <p className="text-xs font-semibold mb-2 text-gray-400">→ Preuve de votre centre de vie actuel</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Votre dernier avis d’imposition ou une quittance de loyer récente. L’ambassade doit savoir d’où vous venez. Ce document complète la cohérence géographique de votre dossier.
+                  </p>
+                </div>
+              </div>
+            </div>
         </div>
       </section>
 
@@ -324,7 +322,7 @@ export default function ArticleFreelanceDTV() {
           refusé si le dossier est mal monté.
         </p>
 
-        <div className="bg-[#111111] border border-white/5 rounded-2xl overflow-hidden mt-6">
+        <div className="bg-[#111111] border border-white/5 rounded-2xl overflow-hidden mt-6 mb-6">
           <div className="px-6 py-4 border-b border-white/5">
             <p className="text-white font-bold text-sm">
               📁 Composition du dossier Lucas — Micro-entreprise
@@ -349,6 +347,13 @@ export default function ArticleFreelanceDTV() {
             ))}
           </div>
         </div>
+
+        <h3 className="text-lg font-bold text-white mb-3">
+          Que se passe-t-il si l'officier pose des questions supplémentaires ?
+        </h3>
+        <p className="mb-4 text-gray-400 text-sm leading-relaxed">
+          Lors du dépôt, l'officier consulaire peut parfois demander à Lucas : <em>"Pourquoi n'avez-vous pas de fiches de paie ?"</em> ou <em>"Comment pouvez-vous garantir la pérennité de ces contrats de freelance ?"</em>. La règle d'or est de ne jamais paraître sur la défensive. Lucas doit simplement renvoyer l'officier à sa <strong>Lettre Consulaire (Document 05)</strong> et expliquer calmement que sous le régime français de la micro-entreprise, les revenus sont certifiés par l'État (via l'URSSAF) et non par un employeur, et que son portfolio démontre une activité stable avec des clients internationaux récurrents. La transparence et la courtoisie, appuyées par un dossier classé dans l'ordre, font disparaître les doutes en quelques secondes.
+        </p>
 
         <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 mt-5">
           <p className="text-emerald-400 font-semibold text-sm">
@@ -482,6 +487,7 @@ export default function ArticleFreelanceDTV() {
         </h2>
         <p className="mb-6">
           Le choix de l’ambassade est aussi important que le contenu du dossier.
+          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
           Pour un freelance français, voici notre recommandation selon votre
           situation :
         </p>
@@ -505,7 +511,7 @@ export default function ArticleFreelanceDTV() {
               badge: "bg-sky-500/10 text-sky-400",
             },
             {
-              profil: "SASU / EURL with rémunération irrégulière",
+              profil: "SASU / EURL avec rémunération irrégulière",
               reco: "Vientiane uniquement, après restructuration du dossier",
               pourquoi:
                 "Il faut d’abord régulariser vos virements personnels sur 3 mois minimum. Déposer à Paris avec ce profil sans préparation = refus quasi-certain.",
@@ -530,6 +536,42 @@ export default function ArticleFreelanceDTV() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── NOUVELLE SECTION 7 : DÉLAIS DE PRÉPARATION ── */}
+      <section className="mb-14" id="delais-preparation">
+        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
+          7. Quel délai pour préparer son dossier freelance avant de partir ?
+        </h2>
+        <p className="mb-4">
+          L'erreur majeure des freelances est de s'y prendre trop tard, en pensant qu'un simple téléchargement de Kbis la veille du départ suffit. La construction d'une narration financière cohérente exige du temps pour asseoir la légitimité de vos documents. Voici les délais incompressibles selon votre statut :
+        </p>
+        <ul className="space-y-4 mb-4">
+          <li className="flex gap-4 p-4 border border-white/5 rounded-xl bg-[#111111]">
+            <span className="text-xl">⏱️</span>
+            <div>
+              <strong className="text-white block mb-1">Portage Salarial : 1 à 2 mois</strong>
+              <span className="text-sm text-gray-400">C'est le profil le plus rapide. Le temps d'obtenir les derniers bulletins de salaire consolidés et la lettre de votre entreprise de portage confirmant le travail à distance.</span>
+            </div>
+          </li>
+          <li className="flex gap-4 p-4 border border-amber-500/20 rounded-xl bg-amber-500/5">
+            <span className="text-xl">📅</span>
+            <div>
+              <strong className="text-white block mb-1">Micro-entrepreneur (Auto-entrepreneur) : 3 à 4 mois minimum</strong>
+              <span className="text-sm text-gray-400">L'ambassade exige de voir la stabilité de vos revenus. Il faut générer au moins deux déclarations trimestrielles URSSAF ou 3 à 6 mois de déclarations mensuelles pour prouver que l'activité est pérenne et non artificielle.</span>
+            </div>
+          </li>
+          <li className="flex gap-4 p-4 border border-red-500/20 rounded-xl bg-red-500/5">
+            <span className="text-xl">🗓️</span>
+            <div>
+              <strong className="text-white block mb-1">Dirigeant de SASU / EURL : 6 mois (Phase critique)</strong>
+              <span className="text-sm text-gray-400">Si vous ne vous versiez pas de rémunération régulière (ou si tout était laissé sur le compte pro), il faut initier des virements constants vers votre compte personnel pendant un semestre entier pour bâtir l'historique exigé par les consulats avant de soumettre la demande.</span>
+            </div>
+          </li>
+        </ul>
+        <p className="text-gray-400 text-sm">
+          Planifiez votre projet en avance. Les exigences des ambassades ne se plient jamais à l'urgence d'un billet d'avion déjà réservé.
+        </p>
       </section>
 
       {/* ── ENCART AUTEUR ── */}
