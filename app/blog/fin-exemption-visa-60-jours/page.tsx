@@ -4,13 +4,13 @@ import React from 'react';
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours (2026)",
+  title: "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
   description:
-    "Urgent : La Thaïlande réduit l'exemption de visa touristique de 60 à 30 jours. Découvrez les nouvelles règles d'immigration 2026, les extensions possibles et la fin des Visa Runs.",
+    "Analyse terrain Juin 2026 : Pourquoi de plus en plus de voyageurs n'obtiennent que 30 jours d'exemption en Thaïlande. Coûts des Visa Runs et alternatives légales (DTV).",
   openGraph: {
-    title: "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours",
+    title: "Visa Run Thaïlande : Vers la fin de l'exemption à 60 jours",
     description:
-      "La Thaïlande réduit l'exemption de visa touristique à 30 jours. Découvrez les nouvelles règles d'immigration et l'alternative du Visa DTV.",
+      "La répression contre les Visa Runs s'intensifie. Décryptage des contrôles aux frontières, des coûts cachés et de la transition vers le Visa DTV.",
     url: "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
@@ -26,9 +26,9 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
   },
-  "headline": "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours (Juin 2026)",
+  "headline": "Visa Run Thaïlande : Pourquoi certains n'obtiennent plus que 30 jours ? (Juin 2026)",
   "description":
-    "La Thaïlande réduit l'exemption de visa touristique de 60 à 30 jours. Découvrez les nouvelles règles d'immigration 2026.",
+    "La réalité des frontières terrestres en Thaïlande. Durcissement des contrôles, coûts réels des Visa Runs et transition vers les visas longs séjours.",
   "image": "https://dtv-thailande.fr/poster-immigration-thailande.jpg",
   "author": {
     "@type": "Person",
@@ -54,26 +54,26 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "L'exemption de visa pour la Thaïlande est-elle de 30 ou 60 jours en 2026 ?",
+      "name": "L'exemption de 60 jours en Thaïlande est-elle officiellement annulée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Depuis début juin 2026, l'exemption de visa est revenue à 30 jours pour les ressortissants français, belges, suisses et canadiens. La mesure temporaire de 60 jours a été annulée par le gouvernement thaïlandais."
+        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). Techniquement, la loi des 60 jours court encore pour les vrais touristes."
       }
     },
     {
       "@type": "Question",
-      "name": "Puis-je étendre mon exemption de 30 jours sur place ?",
+      "name": "Pourquoi l'immigration m'a-t-elle donné un tampon de 30 jours au Laos ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Vous pouvez vous rendre dans un bureau d'immigration local en Thaïlande pour demander une extension de 30 jours supplémentaires via le formulaire TM.7, moyennant des frais de 1 900 THB."
+        "text": "Les agents de l'immigration ont reçu pour consigne de sévir contre les 'Visa Runs' répétés. Si votre passeport montre des séjours prolongés continus sans véritable statut de résident, l'officier use de son pouvoir discrétionnaire pour réduire l'exemption (30 ou 15 jours) en guise d'avertissement."
       }
     },
     {
       "@type": "Question",
-      "name": "Les Visa Runs terrestres sont-ils toujours autorisés ?",
+      "name": "Quelle est la limite légale des entrées par voie terrestre ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Techniquement oui (limités à 2 par année civile par voie terrestre), mais l'immigration traque désormais les abus. Enchaîner les exemptions de 30 jours via des Visa Runs réguliers expose à un risque élevé de refus d'entrée."
+        "text": "La loi autorise un maximum de deux (2) entrées par voie terrestre par année civile sous le régime de l'exemption de visa. Au-delà, un refus d'entrée est systématique sans présentation d'un visa consulaire."
       }
     }
   ]
@@ -94,13 +94,13 @@ export default function ArticleFinExemption() {
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
         <span className="inline-block bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
-          Urgent · Actualité Immigration
+          Analyse Terrain · Immigration
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Fin de l’exemption Visa 60 jours : La Thaïlande repasse à <span className="text-red-400">30 jours</span>
+          Visa Runs en Thaïlande : Pourquoi l'immigration ne délivre plus que <span className="text-red-400">30 jours</span> ?
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 12 min · Publié le 11 juin 2026 · Par{" "}
+          Lecture : 10 min · Mis à jour : 11 juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
@@ -108,204 +108,184 @@ export default function ArticleFinExemption() {
       {/* ── INTRODUCTION (MOTS-CLÉS OPTIMISÉS DANS LES 100 PREMIERS MOTS) ── */}
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>
-          Bénéficier d’une <strong>exemption de visa en Thaïlande de 30 jours</strong> est à nouveau la règle stricte pour les voyageurs francophones. Si vous avez prévu de voyager ou de vous installer prochainement, attention à ne pas baser votre calendrier d’expatriation sur des publications obsolètes. Les modalités d’accès au territoire viennent de subir un durcissement majeur à application immédiate.
+          Si vous cherchez des informations fiables sur le <strong>Visa DTV, l'exemption touristique, ou les Visa Runs en Thaïlande</strong>, vous avez probablement vu la rumeur circuler sur les réseaux sociaux. De nombreux voyageurs francophones signalent s'être vu octroyer seulement 30 jours à la frontière terrestre au lieu des 60 jours habituels.
         </p>
         <p>
-          La mesure incitative temporaire qui permettait aux touristes d’entrer sans formalités préalables pour une durée de 60 jours a été <strong>officiellement révoquée par le Cabinet thaïlandais</strong>. Le retour sans concession aux contrôles standards est désormais effectif à tous les postes frontières, aériens comme terrestres.
+          Qu'en est-il vraiment ? La loi a-t-elle déjà changé, ou s'agit-il d'un durcissement ciblé de l'immigration ? Notre agence, en contact direct avec les réalités du terrain et les postes frontières, décrypte pour vous la vérité derrière ce changement de paradigme. L'ère du "bricolage" administratif touche à sa fin et l'obtention d'un visa adéquat devient vitale.
         </p>
       </div>
 
       {/* ── SOMMAIRE EN DUR (ACCESSIBLE AUX CRAWLERS) ── */}
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
-        <h2 className="text-xl font-bold text-white mb-4">Au programme de ce point légal :</h2>
+        <h2 className="text-xl font-bold text-white mb-4">Au programme de cette enquête :</h2>
         <ul className="space-y-3">
-          <li><a href="#retour-trente-jours" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. Ce qui change aux frontières : Le retour aux 30 jours</a></li>
-          <li><a href="#raisons-durcissement" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi un tel durcissement de la part de Bangkok ?</a></li>
-          <li><a href="#prolongation-sur-place" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Est-il possible d’étendre ces 30 jours sur place ?</a></li>
-          <li><a href="#fin-visa-runs" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. L’ère des Visa Runs faciles est définitivement révolue</a></li>
-          <li><a href="#justificatifs-douane" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Les contrôles renforcés à la douane : Ce qu’on va vous demander</a></li>
-          <li><a href="#alternative-legale-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">6. La solution long terme pour rester sereinement : Le Visa DTV</a></li>
-          <li><a href="#comparatif-solutions" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">7. Comparatif des options légales selon votre profil</a></li>
+          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain</a></li>
+          <li><a href="#profil-visa-runner" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi l'immigration réduit-elle les tampons à 30 jours ?</a></li>
+          <li><a href="#piege-frontieres-terrestres" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège des entrées terrestres (Laos, Malaisie)</a></li>
+          <li><a href="#cout-cache-visa-run" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Le véritable coût financier d'une vie en Visa Run</a></li>
+          <li><a href="#transition-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Pourquoi le Visa DTV est l'unique solution rentable</a></li>
         </ul>
       </nav>
 
       {/* ── SECTION 1 ── */}
-      <section className="mb-12" id="retour-trente-jours">
+      <section className="mb-12" id="loi-vs-realite">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          1. Ce qui change aux frontières : Le retour aux 30 jours
+          1. La loi des 60 jours vs La réalité du terrain
         </h2>
         <p className="mb-4">
-          La politique d’ouverture touristique massive initiée l’année dernière vient de connaître un coup d’arrêt brutal. L’exemption discrétionnaire de 60 jours, qui avait été introduite pour stimuler la reprise économique, n’est plus appliquée.
+          Clarifions immédiatement le point légal. Le 19 mai 2026, le cabinet thaïlandais a effectivement approuvé l'abrogation de l'exemption touristique de 60 jours (instaurée en 2024) pour acter le retour strict à une exemption de 30 jours pour 54 pays (dont la France). <strong>Cependant, cette mesure n'est pas encore entrée en vigueur à l'heure où nous écrivons ces lignes.</strong>
         </p>
         <p className="mb-4">
-          Aujourd’hui, les ressortissants de 54 pays cibles, parmi lesquels figurent la <strong>France, la Suisse, la Belgique et le Canada</strong>, reçoivent à nouveau un tampon standard restreint à <strong className="text-white">30 jours maximum</strong> lors du franchissement de la douane.
+          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="text-white">Royal Gazette</em>). Tant que cette notification n'est pas publiée, le régime actuel de 60 jours est toujours techniquement en vigueur.
         </p>
-        <div className="mt-6 p-5 bg-white/5 border border-white/10 rounded-2xl">
-          <p className="text-white font-semibold text-sm mb-2">Vérifier les textes officiels mis à jour :</p>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/exemption-de-visa/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline inline-flex items-center gap-1">
-                → Directives de l’Ambassade Royale de Thaïlande à Paris
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.immigration.go.th/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline inline-flex items-center gap-1">
-                → Mises à jour du Bureau National de l’Immigration Thaïlandaise
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </a>
-            </li>
-          </ul>
+        
+        <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mt-4">
+          <p className="text-sky-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>
+          <p className="text-gray-400 text-sm">
+            Un véritable touriste français atterrissant à l'aéroport de Bangkok pour deux semaines de vacances obtiendra bien son tampon de 60 jours. La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne d'ailleurs que les visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
+          </p>
         </div>
       </section>
 
       {/* ── SECTION 2 ── */}
-      <section className="mb-12" id="raisons-durcissement">
+      <section className="mb-12" id="profil-visa-runner">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          2. Pourquoi un tel durcissement de la part de Bangkok ?
+          2. Pourquoi l'immigration réduit-elle les tampons à 30 jours ?
         </h2>
         <p className="mb-4">
-          Ce revirement soudain n’est pas une anomalie administrative, mais une décision mûrement réfléchie par les instances de sécurité du Royaume. Le déploiement prolongé des séjours de 60 jours sans visa a engendré des dérives systémiques que le ministère de l’Intérieur souhaite désormais éradiquer.
+          Depuis fin 2025, l'immigration thaïlandaise a drastiquement renforcé la lutte contre les "visa runs". L'objectif est clair : cibler les étrangers (nomades numériques, indépendants non déclarés) qui vivent à l'année en Thaïlande en enchaînant les exemptions touristiques sans demander de visa long séjour.
+        </p>
+        <p className="mb-4">
+          Les autorités examinent désormais attentivement les schémas de séjour. Les voyages "aller-retour" le jour même sont identifiés comme à haut risque. Les officiers d'immigration ont un <strong>pouvoir discrétionnaire absolu</strong> à la douane. 
         </p>
         <ul className="space-y-4 mb-6">
           <li className="flex gap-3">
-            <span className="text-red-400 flex-shrink-0">❌</span>
-            <span><strong className="text-white">Régulation des profils de travailleurs :</strong> L’exemption prolongée permettait à des milliers de profils indépendants et de consultants de s’établir de fait sur le territoire sans s’acquitter d’aucune taxe locale ni formaliser leur situation professionnelle via des visas dédiés comme le DTV.</span>
+            <span className="text-red-400 flex-shrink-0">⚠️</span>
+            <span><strong className="text-white">La sanction d'avertissement :</strong> S'ils estiment que vous abusez du système (passeport rempli d'exemptions successives), les fonctionnaires peuvent sciemment réduire la durée accordée à 30 jours (voire 15 jours) en guise d'avertissement.</span>
           </li>
           <li className="flex gap-3">
-            <span className="text-red-400 flex-shrink-0">❌</span>
-            <span><strong className="text-white">Contrôle des flux aux frontières :</strong> Les autorités ont constaté une explosion des pratiques de contournement logistique, engorgeant les postes frontaliers périphériques.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="text-red-400 flex-shrink-0">❌</span>
-            <span><strong className="text-white">Sécurité du territoire :</strong> Réduire la fenêtre d’accès gratuite oblige les résidents permanents déguisés à s'enregistrer dans les bases de données consulaires globales, offrant une meilleure traçabilité des flux financiers et des profils.</span>
+            <span className="text-red-400 flex-shrink-0">⚠️</span>
+            <span><strong className="text-white">Le refus d'entrée :</strong> Dans les cas de séjours continus sans retour au pays d'origine, l'agent peut vous refuser l'entrée sur le territoire.</span>
           </li>
         </ul>
+        <p className="text-sm text-gray-400">
+          Pour suivre les annonces officielles, il est prudent de consulter régulièrement les mises à jour de <a href="http://www.thaiembassy.fr" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.
+        </p>
       </section>
 
       {/* ── SECTION 3 ── */}
-      <section className="mb-12" id="prolongation-sur-place">
+      <section className="mb-12" id="piege-frontieres-terrestres">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          3. Est-il possible d’étendre ces 30 jours sur place ?
+          3. Le piège des entrées terrestres (Laos, Malaisie)
         </h2>
         <p className="mb-4">
-          La possibilité de proroger son séjour à l'intérieur des frontières demeure active, mais elle requiert désormais un passage obligatoire par les services locaux de l’immigration avant le terme des 30 premiers jours accordés.
+          Le cas typique de la réduction à 30 jours se produit lors d'un passage de frontière terrestre, comme au Pont de l'Amitié à Nong Khai (frontière avec le Laos) ou à Sadao (Malaisie).
         </p>
         <p className="mb-4">
-          Cette extension unique vous permet d'obtenir un délai supplémentaire non renouvelable, portant la validité totale de votre présence à 60 jours. 
+          La loi thaïlandaise est très stricte à ce sujet : <strong>les entrées par voie terrestre sont limitées à deux par année civile</strong> sous le régime de l'exemption de visa, et elles ne sont généralement plus extensibles sur place. 
         </p>
-        <div className="bg-[#111111] border border-gray-800 rounded-xl p-6 mt-4">
-          <h3 className="text-white font-bold text-sm mb-3">Protocole officiel de demande (Formulaire TM.7) :</h3>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-gray-400">
-            <li>Présentation physique dans un bureau d’immigration (Chaengwattana à Bangkok, Patong/Phuket Town à Phuket, etc.).</li>
-            <li>Remplissage du formulaire de requêtes réglementaires <strong className="text-white">TM.7</strong>.</li>
-            <li>Fourniture d’une photographie d’identité conforme aux normes consulaires et des copies certifiées de votre passeport (page d'identité et tampon d'entrée).</li>
-            <li>Paiement de la taxe administrative fixe de <strong className="text-white">1 900 THB</strong>.</li>
-            <li>Validation du droit de séjour pour <strong className="text-amber-400">30 jours additionnels</strong>.</li>
-          </ul>
-        </div>
+        <p>
+          Le cas de votre contact qui n'a reçu que 30 jours après un visa run au Laos s'explique par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi. Les postes frontières terrestres sont en première ligne de cette répression.
+        </p>
       </section>
 
       {/* ── SECTION 4 ── */}
-      <section className="mb-12" id="fin-visa-runs">
+      <section className="mb-12" id="cout-cache-visa-run">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          4. L’era des Visa Runs faciles est définitivement révolue
+          4. Le véritable coût financier d'une vie en Visa Run
         </h2>
         <p className="mb-4">
-          Pendant de nombreuses années, la stratégie classique des voyageurs au long cours consistait à orchestrer des rotations rapides vers les pays limitrophes (Laos, Malaisie, Cambodge) pour réinitialiser leur compteur d'exemption le jour même.
+          Le constat est amer : les coûts engendrés par toutes ces barrières douanières sont devenus conséquents. Beaucoup d'expatriés non déclarés pensent faire des économies en évitant de payer un vrai visa, mais avec la restriction officieuse à 30 jours et le durcissement imminent au Journal Officiel, la facture réelle est astronomique.
         </p>
-        <p className="mb-4 text-red-400 font-semibold">
-          Mise en garde critique : Les systèmes informatiques des douanes intègrent désormais des alertes automatiques basées sur la récurrence.
-        </p>
-        <p className="mb-4">
-          Désormais, l’accumulation de tampons d’exemption successifs déclenche un signalement lors du contrôle. Les directives transmises aux agents aux frontières imposent un examen minutieux des profils suspects. 
-        </p>
-        <p>
-          Si un officier estime que vos séjours répétés s’apparentent à une résidence permanente sans visa approprié, il est en droit de vous refuser l’accès au territoire, entraînant un refoulement immédiat à vos frais exclusifs.
+        <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mt-6">
+          <p className="text-white font-bold mb-4">💸 Calcul du coût d'une année en Visa Runs (Base 30 Jours) :</p>
+          <ul className="space-y-3 text-sm text-gray-400">
+            <li className="flex justify-between border-b border-gray-800 pb-2">
+              <span>Extension à l'immigration (1900 THB × 6)</span>
+              <span className="text-white">~ 315 €</span>
+            </li>
+            <li className="flex justify-between border-b border-gray-800 pb-2">
+              <span>Vols/Transports frontaliers (Environ 100€ × 6)</span>
+              <span className="text-white">~ 600 €</span>
+            </li>
+            <li className="flex justify-between border-b border-gray-800 pb-2">
+              <span>Nuits d'hôtels forcées aux frontières (40€ × 6)</span>
+              <span className="text-white">~ 240 €</span>
+            </li>
+            <li className="flex justify-between border-b border-gray-800 pb-2">
+              <span>Jours de travail perdus (Stress, trajets)</span>
+              <span className="text-red-400">Inestimable</span>
+            </li>
+            <li className="flex justify-between font-bold pt-2 text-lg">
+              <span className="text-white">Coût total annuel estimé</span>
+              <span className="text-amber-500">~ 1 155 € / An</span>
+            </li>
+          </ul>
+        </div>
+        <p className="mt-4 text-sm text-gray-400">
+          Sans compter le risque majeur de voir votre passeport "grillé" (refus d'entrée). Il est fortement conseillé de faire les visas adéquats en fonction de votre profil et des fonds disponibles.
         </p>
       </section>
 
-      {/* ── SECTION 5 (NOUVELLE SECTION ÉTOFFÉE) ── */}
-      <section className="mb-12" id="justificatifs-douane">
+      {/* ── SECTION 5 ── */}
+      <section className="mb-14" id="transition-dtv">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          5. Les contrôles renforcés à la douane : Ce qu’on va vous demander
+          5. Pourquoi le Visa DTV est l'unique solution rentable
         </h2>
         <p className="mb-4">
-          En parallèle du retour aux 30 jours, les contrôles de l’immigration sont devenus beaucoup plus stricts lors de l’arrivée aux aéroports internationaux de Bangkok Suvarnabhumi, Don Mueang ou Phuket. Pour éviter tout blocage, vous devez impérativement détenir les justificatifs suivants :
+          Le gouvernement thaïlandais ne durcit pas les règles par méchanceté, il le fait pour forcer la transition vers la légalité. La TAT et les services consulaires rappellent constamment que pour des séjours longs ou répétés, il faut demander un visa approprié. 
         </p>
-        <ul className="space-y-3 mb-6 list-disc pl-5 text-sm text-gray-400">
-          <li><strong className="text-white">Preuve de sortie du territoire :</strong> Un billet d’avion de retour ou de continuation validé, dont la date de départ s’inscrit strictement dans la limite des 30 jours accordés par l’exemption. Les billets modifiables ou d'attente sont fréquemment rejetés.</li>
-          <li><strong className="text-white">Justificatif d’hébergement :</strong> Une réservation d'hôtel ferme, un contrat de location ou une lettre d'invitation certifiée avec l'adresse exacte de votre résidence pour les premières nuitées.</li>
-          <li><strong className="text-white">Fonds financiers de subsistance :</strong> Bien que rarement demandé aux touristes classiques, la loi thaïlandaise stipule que chaque voyageur entrant sous le régime de l'exemption doit être capable de présenter l'équivalent de <strong className="text-white">20 000 THB en espèces</strong> (ou devises équivalentes comme l'Euro) par personne pour prouver son autonomie financière.</li>
-        </ul>
-      </section>
-
-      {/* ── SECTION 6 (CTA DTV) ── */}
-      <section className="mb-14" id="alternative-legale-dtv">
-        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          6. La solution long terme pour rester sereinement : Le Visa DTV
-        </h2>
         <p className="mb-4">
-          Pour les professionnels indépendants, les créateurs de contenu et les profils éligibles au volet culturel, la fin de l’exemption de 60 jours marque le moment idéal pour régulariser leur situation. La solution légale et pérenne développée par les autorités est le <Link href="/faq" className="text-amber-500 hover:underline font-bold">Destination Thailand Visa (DTV)</Link>.
+          La solution ultime pour régulariser le profil des "Visa Runners" (freelances, nomades, rentiers) est le <strong className="text-white">Destination Thailand Visa (DTV)</strong> de 5 ans.
         </p>
-        <p className="mb-6">
-          Ce dispositif met un terme définitif à la précarité des statuts touristiques en offrant un cadre d'expatriation d'une stabilité inédite pour le Royaume.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-          <div className="border border-white/10 rounded-2xl p-5 bg-[#111111]">
-            <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Régime d’Exemption</p>
-            <p className="text-white font-bold text-lg mb-2">30 Jours</p>
-            <p className="text-gray-400 text-sm">Insécurité juridique constante, risques de refoulement, frais d’extensions répétitifs et interdiction d’exercer une activité professionnelle.</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="border border-white/5 bg-[#111111] rounded-2xl p-6">
+            <h3 className="text-amber-500 font-bold mb-3 uppercase tracking-wider text-xs">Les Avantages du DTV</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li>✅ <strong className="text-white">Validité :</strong> 5 ans (Entrées multiples).</li>
+              <li>✅ <strong className="text-white">Séjour :</strong> 180 jours consécutifs par entrée.</li>
+              <li>✅ <strong className="text-white">Légalité :</strong> Autorisation de télétravailler légalement.</li>
+              <li>✅ <strong className="text-white">Rentabilité :</strong> Finie l'angoisse des frontières et des extensions mensuelles.</li>
+            </ul>
           </div>
-          <div className="border border-amber-500/30 rounded-2xl p-5 bg-amber-500/5">
-            <p className="text-amber-500 text-xs font-semibold uppercase tracking-wider mb-2">Option Cadre DTV</p>
-            <p className="text-amber-400 font-bold text-lg mb-2">5 Ans</p>
-            <p className="text-gray-300 text-sm">Entrées multiples illimitées, séjours continus de 180 jours extensibles, conformité fiscale totale et sérénité absolue face aux contrôles.</p>
+          <div className="flex flex-col justify-center">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              Pour éviter d'être considéré comme un "visa runner", limitez vos entrées terrestres. Si vous comptez revenir fréquemment, envisagez cette solution de long séjour.
+            </p>
+            <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-400 hover:underline text-sm font-semibold">
+              → Lire le guide : Monter son dossier DTV en tant qu'indépendant
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── SECTION 7 (NOUVELLE SECTION COMPARATIVE) ── */}
-      <section className="mb-14" id="comparatif-solutions">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          7. Comparatif des options légales selon votre profil
-        </h2>
-        <p className="mb-4">
-          Afin de choisir la meilleure stratégie d'expatriation ou de séjour prolongé suite aux modifications légales de juin 2026, voici un récapitulatif des options de visas officiels :
-        </p>
-        <div className="space-y-4">
-          <div className="border rounded-2xl p-6 bg-[#111111] border-white/5">
-            <p className="text-white font-semibold mb-1">Profil : Touriste de courte durée (&lt; 60 jours)</p>
-            <p className="text-sm text-gray-400 mb-2">Option conseillée : Exemption de 30 jours + Extension de 30 jours auprès de l'immigration sur place (Coût : 1 900 THB).</p>
-          </div>
-          <div className="border rounded-2xl p-6 bg-[#111111] border-purple-500/20">
-            <p className="text-white font-semibold mb-1">Profil : Freelance, Digital Nomad, Auto-entrepreneur</p>
-            <p className="text-sm text-gray-400 mb-2">Option conseillée : <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-purple-400 hover:underline font-medium">Le Visa DTV (Voie Workcation)</Link>. Permet de travailler légalement pour des structures hors de Thaïlande avec un historique bancaire de 500 000 THB.</p>
-          </div>
-          <div className="border rounded-2xl p-6 bg-[#111111] border-emerald-500/20">
-            <p className="text-white font-semibold mb-1">Profil : Passionnés de Culture, Muay Thaï ou Cuisine</p>
-            <p className="text-sm text-gray-400 mb-2">Option conseillée : <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-emerald-400 hover:underline font-medium">Le Visa DTV (Voie Soft Power)</Link>. Idéal pour les indépendants ne disposant pas de fiches de paie classiques mais inscrits dans un programme académique ou sportif certifié.</p>
-          </div>
+      {/* ── ENCART AUTEUR ── */}
+      <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-red-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center text-3xl">🛂</div>
         </div>
-      </section>
+        <div className="text-center md:text-left">
+          <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
+          <p className="text-red-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Terrain & Formalités</p>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Basé à Phuket, j'accompagne la communauté francophone dans la sécurisation légale de leur expatriation. Face au durcissement continu de l'immigration, notre agence s'occupe de transformer vos profils atypiques en dossiers DTV irréfutables pour mettre fin à l'angoisse des frontières et aux coûts prohibitifs des Visa Runs.
+          </p>
+        </div>
+      </div>
 
-      {/* ── MAILLAGE INTERNE CONSOLIDÉ ── */}
+      {/* ── MAILLAGE INTERNE ── */}
       <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-12">
-        <p className="text-white font-bold text-sm mb-4">📚 Ressources complémentaires de notre agence :</p>
+        <p className="text-white font-bold text-sm mb-4">📚 Ressources utiles :</p>
         <ul className="space-y-3">
           <li>
-            <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
-              → Guide DTV pour les Indépendants : Valider son dossier sans fiches de paie
+            <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+              → Preuve financière : Comment valider les 500 000 THB du DTV ?
             </Link>
           </li>
           <li>
-            <Link href="/blog/fonds-bancaires-visa-dtv" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
-              → Preuve financière : Comment sécuriser la validation des 500 000 THB ?
-            </Link>
-          </li>
-          <li>
-            <Link href="/blog/tdac-thailande-carte-arrivee" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
-              → Tutoriel d'arrivée : Remplir sans erreur le nouveau formulaire TDAC obligatoire
+            <Link href="/blog/tdac-thailande-carte-arrivee" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+              → TDAC Thaïlande : Ne ratez pas le nouveau formulaire d'arrivée
             </Link>
           </li>
         </ul>
@@ -313,7 +293,7 @@ export default function ArticleFinExemption() {
 
       {/* ── FAQ INTERNE ── */}
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-white mb-6">FAQ : Évolution de la réglementation de l’exemption</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">FAQ : Visa Runs et Immigration</h2>
         <div className="space-y-4">
           {faqSchema.mainEntity.map((item) => (
             <details key={item.name} className="group border border-gray-800 rounded-xl overflow-hidden">
@@ -333,17 +313,17 @@ export default function ArticleFinExemption() {
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500 opacity-5 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
-          Mettez fin aux contraintes de séjour temporaire
+          Arrêtez de jouer avec votre passeport
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          La fin de la tolérance des 60 jours impose une transition vers des solutions stables. Notre cabinet prend en charge l'intégralité du processus d'obtention de votre Visa DTV : audit de solvabilité, traduction juridique des pièces et liaison avec les services consulaires.
+          L'immigration thaïlandaise ferme progressivement toutes les failles. Passez au Visa DTV de 5 ans en nous déléguant la constitution de votre dossier consulaire. Moins de stress, 100% de légalité.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Tester mon éligibilité au Visa DTV
+            Tester mon éligibilité au DTV
           </Link>
           <Link href="/contact" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
-            Prendre rendez-vous avec un conseiller
+            Prendre rendez-vous avec l'agence
           </Link>
         </div>
       </div>
