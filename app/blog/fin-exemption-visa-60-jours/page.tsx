@@ -26,7 +26,7 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
   },
-  "headline": "Visa Run Thaïlande : Pourquoi certains n'obtiennent plus que 30 jours ? (Juin 2026)",
+  "headline": "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
   "description":
     "La réalité des frontières terrestres en Thaïlande. Durcissement des contrôles, coûts réels des Visa Runs et transition vers les visas longs séjours.",
   "image": "https://dtv-thailande.fr/poster-immigration-thailande.jpg",
@@ -57,7 +57,7 @@ const faqSchema = {
       "name": "L'exemption de 60 jours en Thaïlande est-elle officiellement annulée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). Techniquement, la loi des 60 jours court encore pour les vrais touristes."
+        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). À la date du 11 juin 2026, la loi des 60 jours court encore techniquement pour les vrais touristes."
       }
     },
     {
@@ -74,6 +74,22 @@ const faqSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "La loi autorise un maximum de deux (2) entrées par voie terrestre par année civile sous le régime de l'exemption de visa. Au-delà, un refus d'entrée est systématique sans présentation d'un visa consulaire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un Visa Run au Laos en 2026 ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un aller-retour depuis Bangkok ou Phuket vers Vientiane coûte en moyenne entre 150 € et 250 € selon le mode de transport (avion ou bus de nuit), en incluant le visa laotien, une nuit d'hôtel obligatoire et les frais annexes. Répété sur l'année, le coût dépasse largement les 1 100 €."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on encore vivre en Thaïlande sans visa long séjour ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est devenu extrêmement risqué. Le gouvernement thaïlandais ferme progressivement toutes les failles. Enchaîner les exemptions touristiques conduit inévitablement à un blocage informatique du passeport et à un refus d'embarquement ou d'entrée sur le territoire."
       }
     }
   ]
@@ -97,10 +113,10 @@ export default function ArticleFinExemption() {
           Analyse Terrain · Immigration
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Visa Runs en Thaïlande : Pourquoi l'immigration ne délivre plus que <span className="text-red-400">30 jours</span> ?
+          Visa Run Thaïlande (2026) : Fin de l'exemption à <span className="text-red-400">60 jours</span> aux frontières terrestres ?
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 10 min · Mis à jour : 11 juin 2026 · Par{" "}
+          Lecture : 12 min · Mis à jour : 11 juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
@@ -119,30 +135,31 @@ export default function ArticleFinExemption() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de cette enquête :</h2>
         <ul className="space-y-3">
-          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain</a></li>
+          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain (Juin 2026)</a></li>
           <li><a href="#profil-visa-runner" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi l'immigration réduit-elle les tampons à 30 jours ?</a></li>
-          <li><a href="#piege-frontieres-terrestres" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège des entrées terrestres (Laos, Malaisie)</a></li>
-          <li><a href="#cout-cache-visa-run" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Le véritable coût financier d'une vie en Visa Run</a></li>
-          <li><a href="#transition-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Pourquoi le Visa DTV est l'unique solution rentable</a></li>
+          <li><a href="#piege-frontieres-terrestres" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège des frontières terrestres : Classement de sévérité</a></li>
+          <li><a href="#aerien-vs-terrestre" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Aérien vs Terrestre : Un vol depuis Paris donne-t-il toujours 60 jours ?</a></li>
+          <li><a href="#cout-cache-visa-run" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Le véritable coût financier d'une vie en Visa Run</a></li>
+          <li><a href="#transition-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">6. Pourquoi le Visa DTV est l'unique solution rentable</a></li>
         </ul>
       </nav>
 
       {/* ── SECTION 1 ── */}
       <section className="mb-12" id="loi-vs-realite">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          1. La loi des 60 jours vs La réalité du terrain
+          1. La loi des 60 jours vs La réalité du terrain (Juin 2026)
         </h2>
         <p className="mb-4">
-          Clarifions immédiatement le point légal. Le 19 mai 2026, le cabinet thaïlandais a effectivement approuvé l'abrogation de l'exemption touristique de 60 jours (instaurée en 2024) pour acter le retour strict à une exemption de 30 jours pour 54 pays (dont la France). <strong>Cependant, cette mesure n'est pas encore entrée en vigueur à l'heure où nous écrivons ces lignes.</strong>
+          Clarifions immédiatement le point légal. Le 19 mai 2026, le cabinet thaïlandais a effectivement approuvé l'abrogation de l'exemption touristique de 60 jours (instaurée en 2024) pour acter le retour strict à une exemption de 30 jours pour 54 pays (dont la France, la Belgique, la Suisse). <strong>Cependant, cette mesure n'est pas encore entrée en vigueur.</strong>
         </p>
         <p className="mb-4">
-          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="text-white">Royal Gazette</em>). Tant que cette notification n'est pas publiée, le régime actuel de 60 jours est toujours techniquement en vigueur.
+          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="text-white">Royal Gazette</em>). À la date d'écriture de cet article (<strong>11 juin 2026</strong>), cette publication n'a pas encore eu lieu. Tant que cette notification n'est pas publique, le régime des 60 jours est toujours techniquement applicable.
         </p>
         
         <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mt-4">
           <p className="text-sky-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>
           <p className="text-gray-400 text-sm">
-            Un véritable touriste français atterrissant à l'aéroport de Bangkok pour deux semaines de vacances obtiendra bien son tampon de 60 jours. La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne d'ailleurs que les visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
+            La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne que les vrais visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
           </p>
         </div>
       </section>
@@ -173,26 +190,81 @@ export default function ArticleFinExemption() {
         </p>
       </section>
 
-      {/* ── SECTION 3 ── */}
+      {/* ── SECTION 3 (TABLEAU COMPARATIF EXCLUSIF) ── */}
       <section className="mb-12" id="piege-frontieres-terrestres">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          3. Le piège des entrées terrestres (Laos, Malaisie)
+          3. Le piège des frontières terrestres : Classement de sévérité
         </h2>
         <p className="mb-4">
-          Le cas typique de la réduction à 30 jours se produit lors d'un passage de frontière terrestre, comme au Pont de l'Amitié à Nong Khai (frontière avec le Laos) ou à Sadao (Malaisie).
+          Le cas de la réduction à 30 jours se produit majoritairement lors d'un passage de frontière terrestre. La loi thaïlandaise est très stricte : <strong>les entrées par voie terrestre sont limitées à deux par année civile</strong> sous le régime de l'exemption de visa, et elles ne sont généralement plus extensibles sur place.
         </p>
         <p className="mb-4">
-          La loi thaïlandaise est très stricte à ce sujet : <strong>les entrées par voie terrestre sont limitées à deux par année civile</strong> sous le régime de l'exemption de visa, et elles ne sont généralement plus extensibles sur place. 
+          Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici notre cartographie terrain exclusive de la sévérité actuelle (Juin 2026) :
         </p>
-        <p>
-          Le cas de votre contact qui n'a reçu que 30 jours après un visa run au Laos s'explique par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi. Les postes frontières terrestres sont en première ligne de cette répression.
+
+        <div className="overflow-x-auto mt-4 mb-6 border border-white/10 rounded-2xl bg-[#111111]">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 bg-black/50">
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Poste Frontière</th>
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Pays</th>
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Niveau de Sévérité</th>
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Risque de tampon réduit (30j)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Nong Khai (Pont de l'Amitié)</td>
+                <td className="py-4 px-5 text-gray-400">Laos</td>
+                <td className="py-4 px-5 text-amber-500 font-bold">Élevé</td>
+                <td className="py-4 px-5 text-gray-400">Très fréquent pour les profils ayant déjà 1 ou 2 tampons récents. Interrogatoire probable.</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Sadao / Padang Besar</td>
+                <td className="py-4 px-5 text-gray-400">Malaisie</td>
+                <td className="py-4 px-5 text-red-500 font-bold">Critique</td>
+                <td className="py-4 px-5 text-gray-400">Les "same-day visa runs" sont activement chassés. Refus d'entrée récurrents.</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Aranyaprathet / Poipet</td>
+                <td className="py-4 px-5 text-gray-400">Cambodge</td>
+                <td className="py-4 px-5 text-red-500 font-bold">Critique</td>
+                <td className="py-4 px-5 text-gray-400">Zone historiquement complexe. Exige systématiquement de voir 20 000 THB en cash.</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Chiang Khong</td>
+                <td className="py-4 px-5 text-gray-400">Laos (Nord)</td>
+                <td className="py-4 px-5 text-yellow-500 font-bold">Modéré</td>
+                <td className="py-4 px-5 text-gray-400">Tolérance légèrement supérieure si vous pouvez prouver un voyage touristique au Laos de plusieurs jours.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-gray-400">
+          * Le cas de votre contact qui n'a reçu que 30 jours s'explique par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi.
         </p>
       </section>
 
-      {/* ── SECTION 4 ── */}
+      {/* ── SECTION 4 (AERIEN VS TERRESTRE) ── */}
+      <section className="mb-12" id="aerien-vs-terrestre">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          4. Aérien vs Terrestre : Un vol depuis Paris donne-t-il toujours 60 jours ?
+        </h2>
+        <p className="mb-4">
+          L'inquiétude monte pour les vacanciers "classiques" qui lisent les retours angoissés des visa runners. Rassurez-vous : <strong>il y a une différence majeure de traitement entre une arrivée aérienne internationale et un passage de frontière terrestre local.</strong>
+        </p>
+        <p className="mb-4">
+          Si vous arrivez à l'aéroport de Bangkok (Suvarnabhumi) ou de Phuket par un vol long-courrier depuis la France, la Belgique ou la Suisse, et que votre passeport ne contient pas de multiples tampons thaïlandais récents, vous êtes considéré comme un "véritable touriste".
+        </p>
+        <p>
+          Dans ce cas, tant que l'abrogation officielle n'est pas parue dans la Royal Gazette, l'officier de l'immigration aérienne vous délivrera automatiquement votre exemption de <strong>60 jours complets</strong>. La réduction punitive à 30 jours est une arme douanière presque exclusivement déployée aux frontières terrestres et contre les vols courts intra-asiatiques (ex: Penang-Phuket) utilisés pour des Visa Runs.
+        </p>
+      </section>
+
+      {/* ── SECTION 5 ── */}
       <section className="mb-12" id="cout-cache-visa-run">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          4. Le véritable coût financier d'une vie en Visa Run
+          5. Le véritable coût financier d'une vie en Visa Run
         </h2>
         <p className="mb-4">
           Le constat est amer : les coûts engendrés par toutes ces barrières douanières sont devenus conséquents. Beaucoup d'expatriés non déclarés pensent faire des économies en évitant de payer un vrai visa, mais avec la restriction officieuse à 30 jours et le durcissement imminent au Journal Officiel, la facture réelle est astronomique.
@@ -227,10 +299,10 @@ export default function ArticleFinExemption() {
         </p>
       </section>
 
-      {/* ── SECTION 5 ── */}
+      {/* ── SECTION 6 ── */}
       <section className="mb-14" id="transition-dtv">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          5. Pourquoi le Visa DTV est l'unique solution rentable
+          6. Pourquoi le Visa DTV est l'unique solution rentable
         </h2>
         <p className="mb-4">
           Le gouvernement thaïlandais ne durcit pas les règles par méchanceté, il le fait pour forcer la transition vers la légalité. La TAT et les services consulaires rappellent constamment que pour des séjours longs ou répétés, il faut demander un visa approprié. 
@@ -286,6 +358,11 @@ export default function ArticleFinExemption() {
           <li>
             <Link href="/blog/tdac-thailande-carte-arrivee" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
               → TDAC Thaïlande : Ne ratez pas le nouveau formulaire d'arrivée
+            </Link>
+          </li>
+          <li>
+            <Link href="/faq" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+              → FAQ Visa DTV : Toutes vos questions sur les exigences légales
             </Link>
           </li>
         </ul>
