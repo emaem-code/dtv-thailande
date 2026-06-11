@@ -2,33 +2,34 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
 
+// ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
+  title: "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours (2026)",
   description:
-    "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier consulaire béton sans fiche de paie classique.",
+    "Urgent : La Thaïlande réduit l'exemption de visa touristique de 60 à 30 jours. Découvrez les nouvelles règles d'immigration 2026, les extensions possibles et la fin des Visa Runs.",
   openGraph: {
-    title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
+    title: "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours",
     description:
-      "Le guide complet pour les indépendants français : transformer votre Kbis et attestations URSSAF en dossier DTV irréfutable.",
-    url: "https://dtv-thailande.fr/blog/visa-dtv-freelance-auto-entrepreneur",
+      "La Thaïlande réduit l'exemption de visa touristique à 30 jours. Découvrez les nouvelles règles d'immigration et l'alternative du Visa DTV.",
+    url: "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
     type: "article",
   },
 };
 
-// ─── SCHEMA ARTICLE ───────────────────────────────────────────────────────────
+// ─── SCHEMA ARTICLE JSON-LD ───────────────────────────────────────────────────
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://dtv-thailande.fr/blog/visa-dtv-freelance-auto-entrepreneur",
+    "@id": "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
   },
-  "headline": "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
+  "headline": "Fin de l'exemption Visa 60 jours en Thaïlande : Retour aux 30 jours (Juin 2026)",
   "description":
-    "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet.",
-  "image": "https://dtv-thailande.fr/poster-freelance-dtv.jpg",
+    "La Thaïlande réduit l'exemption de visa touristique de 60 à 30 jours. Découvrez les nouvelles règles d'immigration 2026.",
+  "image": "https://dtv-thailande.fr/poster-immigration-thailande.jpg",
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",
@@ -42,59 +43,43 @@ const articleSchema = {
       "url": "https://dtv-thailande.fr/logo.png",
     },
   },
-  "datePublished": "2026-06-10",
+  "datePublished": "2026-06-11",
   "dateModified": "2026-06-11",
 };
 
-// ─── SCHEMA FAQ ───────────────────────────────────────────────────────────────
+// ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Un auto-entrepreneur peut-il obtenir le Visa DTV sans fiche de paie ?",
+      "name": "L'exemption de visa pour la Thaïlande est-elle de 30 ou 60 jours en 2026 ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. L'ambassade thaïlandaise accepte les documents alternatifs aux fiches de paie classiques : extrait Kbis ou avis de situation SIRENE, attestations de chiffre d'affaires URSSAF sur 6 mois, relevés bancaires personnels et portfolio de missions. Le tout doit former un dossier cohérent et chronologiquement irréfutable."
+        "text": "Depuis début juin 2026, l'exemption de visa est revenue à 30 jours pour les ressortissants français, belges, suisses et canadiens. La mesure temporaire de 60 jours a été annulée par le gouvernement thaïlandais."
       }
     },
     {
       "@type": "Question",
-      "name": "Le portage salarial est-il reconnu par l'ambassade de Thaïlande ?",
+      "name": "Puis-je étendre mon exemption de 30 jours sur place ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, c'est même l'un des profils les plus simples à défendre. Votre société de portage émet des bulletins de salaire officiels et peut fournir une attestation employeur. Ces documents sont directement assimilables à ceux d'un salarié classique aux yeux des officiers consulaires."
+        "text": "Oui. Vous pouvez vous rendre dans un bureau d'immigration local en Thaïlande pour demander une extension de 30 jours supplémentaires via le formulaire TM.7, moyennant des frais de 1 900 THB."
       }
     },
     {
       "@type": "Question",
-      "name": "Faut-il faire traduire ses documents URSSAF et Kbis pour l'ambassade ?",
+      "name": "Les Visa Runs terrestres sont-ils toujours autorisés ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Pour un dépôt à l'ambassade de Paris, une traduction assermentée est fortement recommandée. Pour un dépôt en Asie (Vientiane, Kuala Lumpur), les retours terrain montrent que les documents en français sont souvent acceptés, surtout via la voie Soft Power. Notre agence gère ces traductions dans le cadre de son accompagnement."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Mon chiffre d'affaires est irrégulier d'un mois à l'autre. Est-ce rédhibitoire ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Non, à condition que la moyenne sur 6 mois soit cohérente et que votre solde bancaire ne soit jamais descendu sous l'équivalent de 500 000 THB sur la période. L'irrégularité des revenus freelance est connue des consulats. Ce qui compte, c'est la tendance globale et la solidité du solde bancaire personnel."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Une SASU ou une EURL peut-elle servir pour le dossier DTV ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Avec prudence. L'argent dans un compte professionnel de société (SASU, EURL) appartient légalement à la personne morale, pas à vous. L'ambassade peut refuser ces relevés. La stratégie correcte est de vous verser une rémunération régulière et de présenter vos relevés personnels ainsi que les bulletins de salaire de dirigeant."
+        "text": "Techniquement oui (limités à 2 par année civile par voie terrestre), mais l'immigration traque désormais les abus. Enchaîner les exemptions de 30 jours via des Visa Runs réguliers expose à un risque élevé de refus d'entrée."
       }
     }
   ]
 };
 
-export default function ArticleFreelanceDTV() {
+export default function ArticleFinExemption() {
   return (
     <article className="max-w-3xl mx-auto px-5 md:px-6 py-14 md:py-20 font-sans text-gray-300 leading-relaxed bg-[#0a0a0a]">
       <script
@@ -108,582 +93,257 @@ export default function ArticleFreelanceDTV() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
-          Guide Freelance · Dossier Consulaire
+        <span className="inline-block bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+          Urgent · Actualité Immigration
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Visa DTV Freelance &{" "}
-          <span className="text-amber-400">Auto-Entrepreneur</span> : Obtenir
-          le Visa Sans Fiche de Paie en 2026
+          Fin de l’exemption Visa 60 jours : La Thaïlande repasse à <span className="text-red-400">30 jours</span>
         </h1>
-        <p className="text-gray-400 text-lg mt-4 leading-relaxed">
-          <strong>Obtenir le Visa DTV quand on est freelance ou auto-entrepreneur</strong> nécessite une préparation minutieuse. Vous êtes indépendant, micro-entrepreneur ou en portage salarial et vous rêvez de vous installer en Thaïlande ? L’absence de fiche de paie classique n’est pas une fatalité — c’est un dossier consulaire à construire différemment.
-        </p>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 11 min · Mis à jour : 11 Juin 2026 · Par{" "}
+          Lecture : 12 min · Publié le 11 juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
 
-      {/* ── ALERTE INTRO ── */}
-      <div className="bg-red-500/10 border border-red-500/25 rounded-2xl p-6 mb-12">
-        <p className="text-red-400 font-semibold text-sm mb-2">
-          ⚠️ Le profil le plus refusé à l’ambassade de Paris
+      {/* ── INTRODUCTION (MOTS-CLÉS OPTIMISÉS DANS LES 100 PREMIERS MOTS) ── */}
+      <div className="text-lg text-gray-400 mb-12 space-y-5">
+        <p>
+          Bénéficier d’une <strong>exemption de visa en Thaïlande de 30 jours</strong> est à nouveau la règle stricte pour les voyageurs francophones. Si vous avez prévu de voyager ou de vous installer prochainement, attention à ne pas baser votre calendrier d’expatriation sur des publications obsolètes. Les modalités d’accès au territoire viennent de subir un durcissement majeur à application immédiate.
         </p>
-        <p className="text-gray-400 text-sm leading-relaxed">
-          D’après notre expérience terrain, les auto-entrepreneurs et freelances
-          français représentent la majorité des dossiers DTV refusés. Non pas
-          parce que leur profil est inéligible, mais parce que leur dossier est
-          mal construit. Ce guide existe pour corriger ça.
+        <p>
+          La mesure incitative temporaire qui permettait aux touristes d’entrer sans formalités préalables pour une durée de 60 jours a été <strong>officiellement révoquée par le Cabinet thaïlandais</strong>. Le retour sans concession aux contrôles standards est désormais effectif à tous les postes frontières, aériens comme terrestres.
         </p>
       </div>
 
-      {/* ── SOMMAIRE CORRIGÉ ── */}
+      {/* ── SOMMAIRE EN DUR (ACCESSIBLE AUX CRAWLERS) ── */}
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
-        <h2 className="text-xl font-bold text-white mb-4">
-          Ce que vous allez apprendre :
-        </h2>
+        <h2 className="text-xl font-bold text-white mb-4">Au programme de ce point légal :</h2>
         <ul className="space-y-3">
-          {[
-            ["#pourquoi-freelance-refuse", "1. Pourquoi les freelances sont refusés (et comment l'éviter)"],
-            ["#documents-alternatifs", "2. Les 6 documents qui remplacent la fiche de paie"],
-            ["#cas-micro-entreprise", "3. Cas concret : dossier micro-entreprise étape par étape"],
-            ["#cas-portage-salarial", "4. Cas concret : dossier portage salarial et SASU"],
-            ["#traductions-assermentees", "5. Traductions assermentées : quand et pourquoi"],
-            ["#strategie-ambassade", "6. Quelle ambassade choisir selon votre profil"],
-            ["#delais-preparation", "7. Quel délai pour préparer son dossier freelance avant de partir ?"],
-          ].map(([href, label]) => (
-            <li key={href}>
-              <a
-                href={href}
-                className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          <li><a href="#retour-trente-jours" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. Ce qui change aux frontières : Le retour aux 30 jours</a></li>
+          <li><a href="#raisons-durcissement" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi un tel durcissement de la part de Bangkok ?</a></li>
+          <li><a href="#prolongation-sur-place" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Est-il possible d’étendre ces 30 jours sur place ?</a></li>
+          <li><a href="#fin-visa-runs" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. L’ère des Visa Runs faciles est définitivement révolue</a></li>
+          <li><a href="#justificatifs-douane" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Les contrôles renforcés à la douane : Ce qu’on va vous demander</a></li>
+          <li><a href="#alternative-legale-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">6. La solution long terme pour rester sereinement : Le Visa DTV</a></li>
+          <li><a href="#comparatif-solutions" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">7. Comparatif des options légales selon votre profil</a></li>
         </ul>
       </nav>
 
       {/* ── SECTION 1 ── */}
-      <section className="mb-14" id="pourquoi-freelance-refuse">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          1. Pourquoi les freelances français sont refusés — et comment l’éviter
+      <section className="mb-12" id="retour-trente-jours">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          1. Ce qui change aux frontières : Le retour aux 30 jours
         </h2>
         <p className="mb-4">
-          L’officier consulaire thaïlandais a été formé sur un modèle de
-          dossier type : un salarié en CDI avec des fiches de paie mensuelles
-          régulières, une attestation d’employeur et un contrat de travail. Ce
-          modèle représente environ 60% des candidats dans le monde. Le
-          problème, c’est que la France compte plus de{" "}
-          <strong className="text-white">4,2 millions de travailleurs indépendants</strong>{" "}
-          — et la plupart d’entre eux ne rentrent pas dans cette case.
+          La politique d’ouverture touristique massive initiée l’année dernière vient de connaître un coup d’arrêt brutal. L’exemption discrétionnaire de 60 jours, qui avait été introduite pour stimuler la reprise économique, n’est plus appliquée.
         </p>
         <p className="mb-4">
-          Quand un auto-entrepreneur dépose un Kbis et des relevés URSSAF sans
-          explication structurée, l’officier ne sait pas quoi en faire. Il
-          hésite. Et l’hésitation consulaire se traduit presque toujours par un
-          refus.
+          Aujourd’hui, les ressortissants de 54 pays cibles, parmi lesquels figurent la <strong>France, la Suisse, la Belgique et le Canada</strong>, reçoivent à nouveau un tampon standard restreint à <strong className="text-white">30 jours maximum</strong> lors du franchissement de la douane.
         </p>
-        <p className="mb-4">
-          La solution n’est pas de falsifier des documents — c’est de{" "}
-          <strong className="text-white">
-            construire une narration administrative cohérente
-          </strong>{" "}
-          qui traduit votre réalité d’indépendant dans le langage que
-          l’ambassade comprend.
-        </p>
-
-        <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mt-6">
-          <p className="text-white font-bold text-sm mb-3">
-            Les 3 erreurs classiques du dossier freelance mal monté :
-          </p>
-          <ul className="space-y-2 text-sm text-gray-400">
+        <div className="mt-6 p-5 bg-white/5 border border-white/10 rounded-2xl">
+          <p className="text-white font-semibold text-sm mb-2">Vérifier les textes officiels mis à jour :</p>
+          <ul className="space-y-2 text-sm">
             <li>
-              ❌ Présenter uniquement le Kbis sans justificatif de revenus
-              associé
+              <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/exemption-de-visa/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline inline-flex items-center gap-1">
+                → Directives de l’Ambassade Royale de Thaïlande à Paris
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
             </li>
             <li>
-              ❌ Confondre compte professionnel (SASU/EURL) et compte personnel
-              pour la preuve des 500 000 THB
-            </li>
-            <li>
-              ❌ Fournir des relevés de CA sans explication du statut
-              micro-entreprise (l’officier ne connaît pas le régime français)
+              <a href="https://www.immigration.go.th/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline inline-flex items-center gap-1">
+                → Mises à jour du Bureau National de l’Immigration Thaïlandaise
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              </a>
             </li>
           </ul>
         </div>
       </section>
 
       {/* ── SECTION 2 ── */}
-      <section className="mb-14" id="documents-alternatifs">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          2. Les 6 documents qui remplacent la fiche de paie
+      <section className="mb-12" id="raisons-durcissement">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          2. Why un tel durcissement de la part de Bangkok ?
         </h2>
-        <p className="mb-6">
-          Voici la liste des pièces que nous constituons systématiquement pour
-          nos clients freelances. Chaque document joue un rôle précis dans la
-          narration administrative.
+        <p className="mb-4">
+          Ce revirement soudain n’est pas une anomalie administrative, mais une décision mûrement réfléchie par les instances de sécurité du Royaume. Le déploiement prolongé des séjours de 60 jours sans visa a engendré des dérives systémiques que le ministère de l’Intérieur souhaite désormais éradiquer.
         </p>
-
-        <div className="space-y-4">
-            <div className="border rounded-2xl p-6 border-amber-500/30 bg-amber-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-amber-400 flex-shrink-0">01</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Avis de situation SIRENE ou extrait Kbis</p>
-                  <p className="text-xs font-semibold mb-2 text-amber-400">→ Preuve d'existence légale de votre activité</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    L’équivalent de votre ’acte de naissance’ professionnel. Il prouve que vous exercez une activité déclarée, enregistrée et légale en France. Pour une micro-entreprise, l’avis de situation SIRENE (gratuit sur insee.fr) suffit. Pour une société, fournissez un Kbis de moins de 3 mois.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border rounded-2xl p-6 border-sky-500/30 bg-sky-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-sky-400 flex-shrink-0">02</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Attestations de chiffre d'affaires URSSAF</p>
-                  <p className="text-xs font-semibold mb-2 text-sky-400">→ Preuve de revenus réguliers sur 6 mois</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Téléchargeables directement depuis le <a href="https://www.autoentrepreneur.urssaf.fr" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">portail officiel de l'URSSAF</a>. Ces attestations trimestrielles sont officielles, tamponnées et montrent l’évolution de votre CA. Fournissez les deux derniers trimestres pour couvrir 6 mois d’activité.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border rounded-2xl p-6 border-emerald-500/30 bg-emerald-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-emerald-400 flex-shrink-0">03</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Relevés bancaires personnels (3 à 6 mois)</p>
-                  <p className="text-xs font-semibold mb-2 text-emerald-400">→ Preuve de la solvabilité des 500 000 THB</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (environ 13 500 €) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border rounded-2xl p-6 border-purple-500/30 bg-purple-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-purple-400 flex-shrink-0">04</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Portfolio de missions ou contrats clients</p>
-                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve de la nature 'remote' de votre activity</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    L’ambassade doit comprendre que vous travaillez pour des clients non-thaïlandais depuis n’importe où dans le monde. Un PDF propre listant vos 3 à 5 derniers projets (nom du client, pays, nature de la mission, montant) suffit. Les contrats ou bons de commande sont un plus.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border rounded-2xl p-6 border-rose-500/30 bg-rose-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-rose-400 flex-shrink-0">05</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Lettre de motivation consulaire personnalisée</p>
-                  <p className="text-xs font-semibold mb-2 text-rose-400">→ La pièce qui donne du sens à tout le reste</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Un document d’une page, rédigé en anglais, qui explique votre statut, votre mode de travail, vos revenus moyens et votre projet en Thaïlande. C’est vous qui parlez à l’officier avant même qu’il ouvre votre dossier. Cette lettre structure son interprétation de toutes les autres pièces.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border rounded-2xl p-6 border-gray-500/30 bg-gray-500/5">
-              <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-gray-400 flex-shrink-0">06</span>
-                <div>
-                  <p className="text-white font-bold mb-1">Justificatif de domicile fiscal français</p>
-                  <p className="text-xs font-semibold mb-2 text-gray-400">→ Preuve de votre centre de vie actuel</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Votre dernier avis d’imposition ou une quittance de loyer récente. L’ambassade doit savoir d’où vous venez. Ce document complète la cohérence géographique de votre dossier.
-                  </p>
-                </div>
-              </div>
-            </div>
-        </div>
+        <ul className="space-y-4 mb-6">
+          <li className="flex gap-3">
+            <span className="text-red-400 flex-shrink-0">❌</span>
+            <span><strong className="text-white">Régulation des profils de travailleurs :</strong> L’exemption prolongée permettait à des milliers de profils indépendants et de consultants de s’établir de fait sur le territoire sans s’acquitter d’aucune taxe locale ni formaliser leur situation professionnelle via des visas dédiés comme le DTV.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-red-400 flex-shrink-0">❌</span>
+            <span><strong className="text-white">Contrôle des flux aux frontières :</strong> Les autorités ont constaté une explosion des pratiques de contournement logistique, engorgeant les postes frontaliers périphériques.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-red-400 flex-shrink-0">❌</span>
+            <span><strong className="text-white">Sécurité du territoire :</strong> Réduire la fenêtre d’accès gratuite oblige les résidents permanents déguisés à s'enregistrer dans les bases de données consulaires globales, offrant une meilleure traçabilité des flux financiers et des profils.</span>
+          </li>
+        </ul>
       </section>
 
       {/* ── SECTION 3 ── */}
-      <section className="mb-14" id="cas-micro-entreprise">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          3. Cas concret : dossier micro-entreprise étape par étape
+      <section className="mb-12" id="prolongation-sur-place">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          3. Est-il possible d’étendre ces 30 jours sur place ?
         </h2>
         <p className="mb-4">
-          Prenons le cas de{" "}
-          <strong className="text-white">
-            Lucas, développeur web freelance sous micro-entreprise
-          </strong>
-          , basé à Lyon, avec un CA mensuel moyen de 4 500 € et un solde
-          bancaire personnel de 15 000 €. Profil typique, potentiellement
-          refusé si le dossier est mal monté.
+          La possibilité de proroger son séjour à l'intérieur des frontières demeure active, mais elle requiert désormais un passage obligatoire par les services locaux de l’immigration avant le terme des 30 premiers jours accordés.
         </p>
-
-        <div className="bg-[#111111] border border-white/5 rounded-2xl overflow-hidden mt-6 mb-6">
-          <div className="px-6 py-4 border-b border-white/5">
-            <p className="text-white font-bold text-sm">
-              📁 Composition du dossier Lucas — Micro-entreprise
-            </p>
-          </div>
-          <div className="divide-y divide-white/5">
-            {[
-              ["Avis de situation SIRENE", "Téléchargé sur insee.fr le mois du dépôt", "✅"],
-              ["Attestations URSSAF T1 + T2 2026", "CA déclaré : 4 200 € / 4 800 € / 4 500 € / 4 700 €", "✅"],
-              ["Relevés Boursorama 6 mois", "Solde jamais < 14 500 €. Aucun virement suspect.", "✅"],
-              ["Portfolio PDF 5 missions", "Clients FR + BE + CH. Missions 100% remote.", "✅"],
-              ["Lettre consulaire EN", "1 page. Explique le statut micro, le mode remote, le projet Thaïlande.", "✅"],
-              ["Avis d'imposition 2025", "Revenus déclarés cohérents avec les relevés URSSAF.", "✅"],
-            ].map(([doc, detail, status]) => (
-              <div key={doc} className="px-6 py-4 flex items-start gap-4">
-                <span className="text-lg flex-shrink-0">{status}</span>
-                <div>
-                  <p className="text-white text-sm font-semibold">{doc}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          Que se passe-t-il si l'officier pose des questions supplémentaires ?
-        </h3>
-        <p className="mb-4 text-gray-400 text-sm leading-relaxed">
-          Lors du dépôt, l'officier consulaire peut parfois demander à Lucas : <em>"Pourquoi n'avez-vous pas de fiches de paie ?"</em> ou <em>"Comment pouvez-vous garantir la pérennité de ces contrats de freelance ?"</em>. La règle d'or est de ne jamais paraître sur la défensive. Lucas doit simplement renvoyer l'officier à sa <strong>Lettre Consulaire (Document 05)</strong> et expliquer calmement que sous le régime français de la micro-entreprise, les revenus sont certifiés par l'État (via l'URSSAF) et non par un employeur, et que son portfolio démontre une activité stable avec des clients internationaux récurrents. La transparence et la courtoisie, appuyées par un dossier classé dans l'ordre, font disparaître les doutes en quelques secondes.
+        <p className="mb-4">
+          Cette extension unique vous permet d'obtenir un délai supplémentaire non renouvelable, portant la validité totale de votre présence à 60 jours. 
         </p>
-
-        <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 mt-5">
-          <p className="text-emerald-400 font-semibold text-sm">
-            Résultat : dossier accepté à l’ambassade de Vientiane en 3 jours ouvrables.
-          </p>
-          <p className="text-gray-400 text-sm mt-1">
-            La clé : la lettre consulaire a explicitement traduit le statut
-            micro-entreprise en termes compréhensibles pour un officier
-            thaïlandais, et les relevés URSSAF ont servi de substitut aux
-            fiches de paie manquantes.
-          </p>
+        <div className="bg-[#111111] border border-gray-800 rounded-xl p-6 mt-4">
+          <h3 className="text-white font-bold text-sm mb-3">Protocole officiel de demande (Formulaire TM.7) :</h3>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-gray-400">
+            <li>Présentation physique dans un bureau d’immigration (Chaengwattana à Bangkok, Patong/Phuket Town à Phuket, etc.).</li>
+            <li>Remplissage du formulaire de requêtes réglementaires <strong className="text-white">TM.7</strong>.</li>
+            <li>Fourniture d’une photographie d’identité conforme aux normes consulaires et des copies certifiées de votre passeport (page d'identité et tampon d'entrée).</li>
+            <li>Paiement de la taxe administrative fixe de <strong className="text-white">1 900 THB</strong>.</li>
+            <li>Validation du droit de séjour pour <strong className="text-amber-400">30 jours additionnels</strong>.</li>
+          </ul>
         </div>
       </section>
 
       {/* ── SECTION 4 ── */}
-      <section className="mb-14" id="cas-portage-salarial">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          4. Cas concret : portage salarial et SASU
-        </h2>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          Le portage salarial : le profil le plus simple
-        </h3>
-        <p className="mb-4">
-          <strong className="text-white">
-            Camille, graphiste en portage salarial
-          </strong>
-          , a le profil idéal sans le savoir. Sa société de portage lui émet
-          chaque mois un vrai bulletin de salaire et une attestation employeur.
-          Ces documents sont directement lisibles par un officier consulaire
-          thaïlandais. Son dossier ressemble à celui d’un salarié, sans en être
-          un.
-        </p>
-        <p className="mb-6">
-          Point de vigilance : vérifier que l’attestation employeur mentionne
-          explicitement la nature{" "}
-          <em className="text-gray-300">"télétravail international autorisé"</em>{" "}
-          ou <em className="text-gray-300">"activité exercée à distance"</em>.
-          Sans cette mention, l’officier peut douter de la légalité du travail
-          en dehors de France.
-        </p>
-
-        <h3 className="text-lg font-bold text-white mb-3">
-          La SASU et l’EURL : le piège du compte pro
-        </h3>
-        <p className="mb-4">
-          C’est l’erreur la plus fréquente chez les freelances en société.
-          Beaucoup présentent les relevés de leur compte professionnel SASU pour
-          prouver les 500 000 THB. L’ambassade rejette systématiquement ces
-          revelés : l’argent appartient à la société, pas à vous en tant que
-          personne physique.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-          <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-5">
-            <p className="text-red-400 font-bold text-sm mb-2">
-              ❌ Ce que font la plupart
-            </p>
-            <p className="text-gray-400 text-sm">
-              Présenter les relevés du compte SASU avec 25 000 € → Refus.
-              L’argent appartient à la personne morale.
-            </p>
-          </div>
-          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
-            <p className="text-emerald-400 font-bold text-sm mb-2">
-              ✅ La bonne stratégie
-            </p>
-            <p className="text-gray-400 text-sm">
-              Se verser une rémunération régulière depuis 6 mois + présenter
-              les relevés du compte personnel + bulletins de salaire de
-              dirigeant.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── SECTION 5 ── */}
-      <section className="mb-14" id="traductions-assermentees">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          5. Traductions assermentées : quand et pourquoi
+      <section className="mb-12" id="fin-visa-runs">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          4. L’era des Visa Runs faciles est définitivement révolue
         </h2>
         <p className="mb-4">
-          Tous vos documents administratifs français (URSSAF, Kbis, avis
-          d’imposition) sont en français. La question de la traduction est
-          stratégique et dépend directement de l’ambassade choisie.
+          Pendant de nombreuses années, la stratégie classique des voyageurs au long cours consistait à orchestrer des rotations rapides vers les pays limitrophes (Laos, Malaisie, Cambodge) pour réinitialiser leur compteur d'exemption le jour même.
         </p>
-
-        <div className="overflow-x-auto mt-4">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="text-left py-3 px-4 text-gray-500 font-semibold">
-                  Ambassade
-                </th>
-                <th className="text-left py-3 px-4 text-gray-500 font-semibold">
-                  Traduction exigée
-                </th>
-                <th className="text-left py-3 px-4 text-gray-500 font-semibold">
-                  Coût estimé
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5">
-              {[
-                ["Paris 🇫🇷", "Assermentée obligatoire", "150–300 €"],
-                ["Vientiane 🇱🇦 (Soft Power)", "Souvent accepté en FR", "0 €"],
-                ["Vientiane 🇱🇦 (Workcation)", "Recommandée EN", "80–150 €"],
-                ["Kuala Lumpur 🇲🇾", "Recommandée EN", "80–150 €"],
-                ["Phnom Penh 🇰🇭", "Recommandée EN", "80–150 €"],
-              ].map(([amb, trad, cout]) => (
-                <tr key={amb}>
-                  <td className="py-3 px-4 text-white">{amb}</td>
-                  <td className="py-3 px-4 text-gray-400">{trad}</td>
-                  <td className="py-3 px-4 text-amber-400 font-semibold">
-                    {cout}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="text-gray-500 text-xs mt-3">
-          * Données terrain 2025–2026. Les pratiques consulaires évoluent.
+        <p className="mb-4 text-red-400 font-semibold">
+          Mise en garde critique : Les systèmes informatiques des douanes intègrent désormais des alertes automatiques basées sur la récurrence.
+        </p>
+        <p className="mb-4">
+          Désormais, l’accumulation de tampons d’exemption successifs déclenche un signalement lors du contrôle. Les directives transmises aux agents aux frontières imposent un examen minutieux des profils suspects. 
+        </p>
+        <p>
+          Si un officier estime que vos séjours répétés s’apparentent à une résidence permanente sans visa approprié, il est en droit de vous refuser l’accès au territoire, entraînant un refoulement immédiat à vos frais exclusifs.
         </p>
       </section>
 
-      {/* ── SECTION 6 ── */}
-      <section className="mb-14" id="strategie-ambassade">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          6. Quelle ambassade choisir selon votre profil freelance
-        </h2>
-        <p className="mb-6">
-          Le choix de l’ambassade est aussi important que le contenu du dossier.
-          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
-          Pour un freelance français, voici notre recommandation selon votre
-          situation :
-        </p>
-
-        <div className="space-y-4">
-          {[
-            {
-              profil: "Micro-entrepreneur avec CA régulier + 15 000 € en banque",
-              reco: "Vientiane (Laos) via voie Soft Power",
-              pourquoi:
-                "3 mois d'historique suffisent. Documents FR souvent acceptés. Traitement en 3 jours ouvrables. Visa Run organisable en 5 nuits.",
-              color: "border-emerald-500/30",
-              badge: "bg-emerald-500/10 text-emerald-400",
-            },
-            {
-              profil: "Portage salarial avec bulletins de salaire réguliers",
-              reco: "Paris ou Vientiane — les deux fonctionnent",
-              pourquoi:
-                "Vos bulletins de salaire sont directement lisibles. Paris est envisageable si vous ne voulez pas vous déplacer. Vientiane reste plus rapide.",
-              color: "border-sky-500/30",
-              badge: "bg-sky-500/10 text-sky-400",
-            },
-            {
-              profil: "SASU / EURL avec rémunération irrégulière",
-              reco: "Vientiane uniquement, après restructuration du dossier",
-              pourquoi:
-                "Il faut d’abord régulariser vos virements personnels sur 3 mois minimum. Déposer à Paris avec ce profil sans préparation = refus quasi-certain.",
-              color: "border-red-500/30",
-              badge: "bg-red-500/10 text-red-400",
-            },
-          ].map((item) => (
-            <div
-              key={item.profil}
-              className={`border rounded-2xl p-6 bg-[#111111] ${item.color}`}
-            >
-              <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">
-                Votre profil
-              </p>
-              <p className="text-white font-semibold mb-3">{item.profil}</p>
-              <span
-                className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 ${item.badge}`}
-              >
-                → {item.reco}
-              </span>
-              <p className="text-gray-400 text-sm">{item.pourquoi}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── NOUVELLE SECTION 7 : DÉLAIS DE PRÉPARATION ── */}
-      <section className="mb-14" id="delais-preparation">
-        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
-          7. Quel délai pour préparer son dossier freelance avant de partir ?
+      {/* ── SECTION 5 (NOUVELLE SECTION ÉTOFFÉE) ── */}
+      <section className="mb-12" id="justificatifs-douane">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          5. Les contrôles renforcés à la douane : Ce qu’on va vous demander
         </h2>
         <p className="mb-4">
-          L'erreur majeure des freelances est de s'y prendre trop tard, en pensant qu'un simple téléchargement de Kbis la veille du départ suffit. La construction d'une narration financière cohérente exige du temps pour asseoir la légitimité de vos documents. Voici les délais incompressibles selon votre statut :
+          En parallèle du retour aux 30 jours, les contrôles de l’immigration sont devenus beaucoup plus stricts lors de l’arrivée aux aéroports internationaux de Bangkok Suvarnabhumi, Don Mueang ou Phuket. Pour éviter tout blocage, vous devez impérativement détenir les justificatifs suivants :
         </p>
-        <ul className="space-y-4 mb-4">
-          <li className="flex gap-4 p-4 border border-white/5 rounded-xl bg-[#111111]">
-            <span className="text-xl">⏱️</span>
-            <div>
-              <strong className="text-white block mb-1">Portage Salarial : 1 à 2 mois</strong>
-              <span className="text-sm text-gray-400">C'est le profil le plus rapide. Le temps d'obtenir les derniers bulletins de salaire consolidés et la lettre de votre entreprise de portage confirmant le travail à distance.</span>
-            </div>
-          </li>
-          <li className="flex gap-4 p-4 border border-amber-500/20 rounded-xl bg-amber-500/5">
-            <span className="text-xl">📅</span>
-            <div>
-              <strong className="text-white block mb-1">Micro-entrepreneur (Auto-entrepreneur) : 3 à 4 mois minimum</strong>
-              <span className="text-sm text-gray-400">L'ambassade exige de voir la stabilité de vos revenus. Il faut générer au moins deux déclarations trimestrielles URSSAF ou 3 à 6 mois de déclarations mensuelles pour prouver que l'activité est pérenne et non artificielle.</span>
-            </div>
-          </li>
-          <li className="flex gap-4 p-4 border border-red-500/20 rounded-xl bg-red-500/5">
-            <span className="text-xl">🗓️</span>
-            <div>
-              <strong className="text-white block mb-1">Dirigeant de SASU / EURL : 6 mois (Phase critique)</strong>
-              <span className="text-sm text-gray-400">Si vous ne vous versiez pas de rémunération régulière (ou si tout était laissé sur le compte pro), il faut initier des virements constants vers votre compte personnel pendant un semestre entier pour bâtir l'historique exigé par les consulats avant de soumettre la demande.</span>
-            </div>
-          </li>
+        <ul className="space-y-3 mb-6 list-disc pl-5 text-sm text-gray-400">
+          <li><strong className="text-white">Preuve de sortie du territoire :</strong> Un billet d’avion de retour ou de continuation validé, dont la date de départ s’inscrit strictement dans la limite des 30 jours accordés par l’exemption. Les billets modifiables ou d'attente sont fréquemment rejetés.</li>
+          <li><strong className="text-white">Justificatif d’hébergement :</strong> Une réservation d'hôtel ferme, un contrat de location ou une lettre d'invitation certifiée avec l'adresse exacte de votre résidence pour les premières nuitées.</li>
+          <li><strong className="text-white">Fonds financiers de subsistance :</strong> Bien que rarement demandé aux touristes classiques, la loi thaïlandaise stipule que chaque voyageur entrant sous le régime de l'exemption doit être capable de présenter l'équivalent de <strong className="text-white">20 000 THB en espèces</strong> (ou devises équivalentes comme l'Euro) par personne pour prouver son autonomie financière.</li>
         </ul>
-        <p className="text-gray-400 text-sm">
-          Planifiez votre projet en avance. Les exigences des ambassades ne se plient jamais à l'urgence d'un billet d'avion déjà réservé.
-        </p>
       </section>
 
-      {/* ── ENCART AUTEUR ── */}
-      <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center text-3xl">
-            🇹🇭
+      {/* ── SECTION 6 (CTA DTV) ── */}
+      <section className="mb-14" id="alternative-legale-dtv">
+        <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          6. La solution long terme pour rester sereinement : Le Visa DTV
+        </h2>
+        <p className="mb-4">
+          Pour les professionnels indépendants, les créateurs de contenu et les profils éligibles au volet culturel, la fin de l’exemption de 60 jours marque le moment idéal pour régulariser leur situation. La solution légale et pérenne développée par les autorités est le <Link href="/faq" className="text-amber-500 hover:underline font-bold">Destination Thailand Visa (DTV)</Link>.
+        </p>
+        <p className="mb-6">
+          Ce dispositif met un terme définitif à la précarité des statuts touristiques en offrant un cadre d'expatriation d'une stabilité inédite pour le Royaume.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          <div className="border border-white/10 rounded-2xl p-5 bg-[#111111]">
+            <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Régime d’Exemption</p>
+            <p className="text-white font-bold text-lg mb-2">30 Jours</p>
+            <p className="text-gray-400 text-sm">Insécurité juridique constante, risques de refoulement, frais d’extensions répétitifs et interdiction d’exercer une activité professionnelle.</p>
+          </div>
+          <div className="border border-amber-500/30 rounded-2xl p-5 bg-amber-500/5">
+            <p className="text-amber-500 text-xs font-semibold uppercase tracking-wider mb-2">Option Cadre DTV</p>
+            <p className="text-amber-400 font-bold text-lg mb-2">5 Ans</p>
+            <p className="text-gray-300 text-sm">Entrées multiples illimitées, séjours continus de 180 jours extensibles, conformité fiscale totale et sérénité absolue face aux contrôles.</p>
           </div>
         </div>
-        <div className="text-center md:text-left">
-          <h3 className="text-xl font-bold text-white mb-1">
-            Matthieu Moretti
-          </h3>
-          <p className="text-amber-400 text-xs font-semibold mb-3 uppercase tracking-wider">
-            Expert Dossiers Consulaires · Installé à Phuket
-          </p>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Entrepreneur digital basé à Phuket depuis plusieurs années,
-            j’accompagne les freelances et indépendants français dans la
-            constitution de leur dossier DTV. J’ai aidé des dizaines de
-            micro-entrepreneurs, consultants et créatifs à obtenir leur visa
-            sans fiche de paie, en transformant leurs documents URSSAF et Kbis
-            en dossiers consulaires irréfutables.
-          </p>
-        </div>
-      </div>
+      </section>
 
-      {/* ── MAILLAGE INTERNE ── */}
-      <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-12">
-        <p className="text-white font-bold text-sm mb-4">
-          📚 Pour aller plus loin :
+      {/* ── SECTION 7 (NOUVELLE SECTION COMPARATIVE) ── */}
+      <section className="mb-14" id="comparatif-solutions">
+        <h2 className="text-2xl font-bold text-white mb-5 scroll-mt-24">
+          7. Comparatif des options légales selon votre profil
+        </h2>
+        <p className="mb-4">
+          Afin de choisir la meilleure stratégie d'expatriation ou de séjour prolongé suite aux modifications légales de juin 2026, voici un récapitulatif des options de visas officiels :
         </p>
+        <div className="space-y-4">
+          <div className="border rounded-2xl p-6 bg-[#111111] border-white/5">
+            <p className="text-white font-semibold mb-1">Profil : Touriste de courte durée (&lt; 60 jours)</p>
+            <p className="text-sm text-gray-400 mb-2">Option conseillée : Exemption de 30 jours + Extension de 30 jours auprès de l'immigration sur place (Coût : 1 900 THB).</p>
+          </div>
+          <div className="border rounded-2xl p-6 bg-[#111111] border-purple-500/20">
+            <p className="text-white font-semibold mb-1">Profil : Freelance, Digital Nomad, Auto-entrepreneur</p>
+            <p className="text-sm text-gray-400 mb-2">Option conseillée : <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-purple-400 hover:underline font-medium">Le Visa DTV (Voie Workcation)</Link>. Permet de travailler légalement pour des structures hors de Thaïlande avec un historique bancaire de 500 000 THB.</p>
+          </div>
+          <div className="border rounded-2xl p-6 bg-[#111111] border-emerald-500/20">
+            <p className="text-white font-semibold mb-1">Profil : Passionnés de Culture, Muay Thaï ou Cuisine</p>
+            <p className="text-sm text-gray-400 mb-2">Option conseillée : <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-emerald-400 hover:underline font-medium">Le Visa DTV (Voie Soft Power)</Link>. Idéal pour les indépendants ne disposant pas de fiches de paie classiques mais inscrits dans un programme académique ou sportif certifié.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MAILLAGE INTERNE CONSOLIDÉ ── */}
+      <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-12">
+        <p className="text-white font-bold text-sm mb-4">📚 Ressources complémentaires de notre agence :</p>
         <ul className="space-y-3">
           <li>
-            <Link
-              href="/blog/fonds-bancaires-visa-dtv"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
-            >
-              → Visa DTV : Faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?
+            <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
+              → Guide DTV pour les Indépendants : Valider son dossier sans fiches de paie
             </Link>
           </li>
           <li>
-            <Link
-              href="/blog/tdac-thailande-carte-arrivee"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
-            >
-              → TDAC Thaïlande 2026 : Guide de la Carte d'Arrivée Numérique
+            <Link href="/blog/fonds-bancaires-visa-dtv" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
+              → Preuve financière : Comment sécuriser la validation des 500 000 THB ?
             </Link>
           </li>
           <li>
-            <Link
-              href="/faq"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
-            >
-              → FAQ complète : Toutes vos questions sur le Visa DTV
+            <Link href="/blog/tdac-thailande-carte-arrivee" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
+              → Tutoriel d'arrivée : Remplir sans erreur le nouveau formulaire TDAC obligatoire
             </Link>
           </li>
         </ul>
       </div>
 
-      {/* ── FAQ ── */}
+      {/* ── FAQ INTERNE ── */}
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-white mb-6">
-          Questions fréquentes — Freelance & Visa DTV
-        </h2>
+        <h2 className="text-2xl font-bold text-white mb-6">FAQ : Évolution de la réglementation de l’exemption</h2>
         <div className="space-y-4">
           {faqSchema.mainEntity.map((item) => (
-            <details
-              key={item.name}
-              className="group border border-gray-800 rounded-xl overflow-hidden"
-            >
+            <details key={item.name} className="group border border-gray-800 rounded-xl overflow-hidden">
               <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none bg-[#111111] hover:bg-[#161616] transition-colors">
-                <span className="text-white font-semibold text-sm">
-                  {item.name}
-                </span>
-                <span className="text-gray-500 text-lg flex-none transition-transform group-open:rotate-45">
-                  +
-                </span>
+                <span className="text-white font-semibold text-sm">{item.name}</span>
+                <span className="text-gray-500 text-lg flex-none transition-transform group-open:rotate-45">+</span>
               </summary>
               <div className="px-5 py-4 bg-[#0d0d0d] border-t border-gray-800">
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {item.acceptedAnswer.text}
-                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.acceptedAnswer.text}</p>
               </div>
             </details>
           ))}
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ── ZONE DE CONVERSION PRINCIPALE ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500 opacity-5 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
-          Votre dossier freelance, géré par des experts terrain
+          Mettez fin aux contraintes de séjour temporaire
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          Kbis, URSSAF, portfolio, lettre consulaire : nous montons votre
-          dossier complet et le soumettons à l’ambassade de votre choix. Taux
-          d’acceptation de nos dossiers freelance : supérieur à 95%.
+          La fin de la tolérance des 60 jours impose une transition vers des solutions stables. Notre cabinet prend en charge l'intégralité du processus d'obtention de votre Visa DTV : audit de solvabilité, traduction juridique des pièces et liaison avec les services consulaires.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300"
-          >
-            Vérifier mon éligibilité — 2 min
+          <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
+            Tester mon éligibilité au Visa DTV
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
-          >
-            Demander un devis sur-mesure
+          <Link href="/contact" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
+            Prendre rendez-vous avec un conseiller
           </Link>
         </div>
       </div>
