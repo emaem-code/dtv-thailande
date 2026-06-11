@@ -165,6 +165,33 @@ export default function BlogIndex() {
         </div>
 
       </div>
+
+      {/* ─── SECTION RESSOURCES OFFICIELLES ─── */}
+<section className="max-w-4xl mx-auto mt-16 pt-8 border-t border-white/10 text-center">
+  <h2 className="text-xl font-bold text-white mb-4">Ressources Officielles</h2>
+  <p className="text-gray-400 text-sm mb-6">
+    Pour approfondir vos démarches, consultez les plateformes gouvernementales :
+  </p>
+  <div className="flex flex-wrap justify-center gap-6">
+    <a 
+      href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
+    >
+      Ambassade Royale de Thaïlande
+    </a>
+    <a 
+      href="https://www.tatnews.org" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
+    >
+      Tourism Authority of Thailand (TAT)
+    </a>
+  </div>
+</section>
+
     </main>
   );
 }
