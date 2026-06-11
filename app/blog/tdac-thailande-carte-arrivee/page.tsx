@@ -225,7 +225,7 @@ export default function BlogArticleTdac() {
             <p className="text-gray-400 text-xs mt-0.5">Ne remplissez vos informations sur aucun autre site internet.</p>
           </div>
           <a 
-            href="https://www.immigration.go.th" 
+            href="https://tdac.immigration.go.th/arrival-card/#/home" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="inline-flex items-center gap-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold text-xs px-4 py-2.5 rounded-xl border border-sky-500/25 transition-all whitespace-nowrap"
