@@ -162,7 +162,7 @@ export default function ArticleFinExemption() {
       {/* ── SECTION 2 ── */}
       <section className="mb-12" id="raisons-durcissement">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          2. Why un tel durcissement de la part de Bangkok ?
+          2. Pourquoi un tel durcissement de la part de Bangkok ?
         </h2>
         <p className="mb-4">
           Ce revirement soudain n’est pas une anomalie administrative, mais une décision mûrement réfléchie par les instances de sécurité du Royaume. Le déploiement prolongé des séjours de 60 jours sans visa a engendré des dérives systémiques que le ministère de l’Intérieur souhaite désormais éradiquer.
