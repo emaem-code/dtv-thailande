@@ -1,5 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+// ─── MÉTADONNÉES SEO & CANONICAL ─────────────────────────────────────────────
+export const metadata: Metadata = {
+  title: "Visa DTV Soft Power : Éviter les arnaques des écoles (Cuisine & Muay Thaï)",
+  description: "Le guide définitif pour obtenir le Visa DTV via la voie Soft Power. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.",
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles', // <-- LA VOICI !
+  },
+  openGraph: {
+    title: "Visa DTV Soft Power : Éviter les arnaques des écoles",
+    description: "Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter pour sécuriser votre DTV.",
+    url: "https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles",
+    siteName: "DTV Thaïlande",
+    locale: "fr_FR",
+    type: "article",
+  },
+};
 
 // ─── SCHEMA ARTICLE JSON-LD ───────────────────────────────────────────────────
 const articleSchema = {

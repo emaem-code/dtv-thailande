@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
   description:
     "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier consulaire béton sans fiche de paie classique.",
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/blog/visa-dtv-freelance-auto-entrepreneur', // <-- AJOUT DU CANONICAL ICI
+  },
   openGraph: {
     title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
     description:

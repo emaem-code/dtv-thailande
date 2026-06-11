@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
   description:
     "Analyse terrain Juin 2026 : Pourquoi de plus en plus de voyageurs n'obtiennent que 30 jours d'exemption en Thaïlande. Coûts des Visa Runs et alternatives légales (DTV).",
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours', // <-- LE CANONICAL EST ICI
+  },
   openGraph: {
     title: "Visa Run Thaïlande : Vers la fin de l'exemption à 60 jours",
     description:

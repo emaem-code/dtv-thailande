@@ -6,6 +6,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "TDAC Thaïlande 2026 : Guide Complet de la Carte d'Arrivée Numérique",
   description: "Le guide étape par étape pour remplir le formulaire TDAC obligatoire avant d'entrer en Thaïlande. Évitez le refus d'embarquement aux douanes.",
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee', // <-- AJOUT DU CANONICAL ICI
+  },
   openGraph: {
     title: "TDAC Thaïlande 2026 : Guide Complet de la Carte d'Arrivée Numérique",
     description: "Formulaire TDAC obligatoire : tutoriel pas-à-pas pour les détenteurs de visa DTV et touristes.",

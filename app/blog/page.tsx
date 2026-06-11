@@ -6,6 +6,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Le Blog du Visa DTV Thaïlande | Guides et Stratégies d\'Expatriation',
   description: 'Découvrez nos guides exclusifs sur le Visa DTV : conformité des fonds bancaires, sélection des écoles Soft Power et formalités d\'arrivée comme le TDAC.',
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/blog', // <-- AJOUT DU CANONICAL ICI
+  },
   openGraph: {
     title: 'Le Blog du Visa DTV Thaïlande | Guides et Stratégies d\'Expatriation',
     description: 'Tutoriels, décryptages légaux et astuces de terrain pour réussir votre visa de 5 ans.',
