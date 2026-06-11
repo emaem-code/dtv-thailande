@@ -36,7 +36,7 @@ const blogSchema = {
 // ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
   {
-    slug: 'fin-exemption-visa-60-jours',
+    slug: 'fin-exemption-visa-60-jours', // <--- C'EST ICI QU'IL FAUT METTRE LE BON DOSSIER
     title: "Urgent : La Thaïlande met fin à l'exemption de 60 jours (Retour aux 30 jours)",
     description: "Le gouvernement vient d'annuler la mesure phare de l'exemption de visa longue durée. Découvrez les nouvelles règles strictes d'immigration et l'impact sur vos séjours.",
     date: '11 Juin 2026',
@@ -45,7 +45,7 @@ const posts = [
     hoverBorder: 'hover:border-red-500/50',
   },
   {
-    slug: 'visa-dtv-freelance-auto-entrepreneur',
+    slug: 'visa-dtv-freelance-auto-entrepreneur', // <--- CELUI DES FREELANCES
     title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie",
     description: "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier béton.",
     date: '10 Juin 2026',
