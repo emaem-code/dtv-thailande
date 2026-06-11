@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   },
   description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles : dossiers, conformité bancaire et Visa Run.',
  
+  alternates: {
+    canonical: '/', 
+  },
+  
   openGraph: {
     title: "Visa DTV Thaïlande (5 ans) | Agence d'Accompagnement Premium",
     description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles.',

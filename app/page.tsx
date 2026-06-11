@@ -45,8 +45,9 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
 function HeroText() {
   return (
     <div className="pb-4 lg:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
+      {/* Modification n°1 : Le H1 contient maintenant "Visa DTV" */}
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici
+        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici grâce au Visa DTV
       </h1>
       <p className="text-[14px] md:text-lg text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
         Visa DTV 5 ans · Dossier béton · Zéro charge mentale
@@ -220,13 +221,40 @@ function VideoSequence() {
   );
 }
 
+// Nouveau Composant pour les Ressources Officielles
+function FooterRessources() {
+  return (
+    <section className="w-full max-w-4xl mx-auto mt-20 mb-8 py-8 px-4 border-t border-white/10 text-center">
+      <h2 className="text-lg font-bold text-white mb-4">Ressources Officielles</h2>
+      <p className="text-gray-500 text-sm mb-4">Pour des informations vérifiées, consultez les sites gouvernementaux :</p>
+      <div className="flex flex-wrap justify-center gap-6">
+        <a 
+          href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-amber-500 hover:underline text-sm font-medium transition-colors"
+        >
+          Ambassade Royale de Thaïlande
+        </a>
+        <a 
+          href="https://www.tatnews.org" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-amber-500 hover:underline text-sm font-medium transition-colors"
+        >
+          Tourism Authority of Thailand (TAT)
+        </a>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const [isGuideOpen, setIsGuideOpen] = useState(false); 
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProcessOpen, setIsProcessOpen] = useState(false);
   
-
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -328,6 +356,10 @@ export default function Home() {
         <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 lg:mt-4">
           <VideoSequence />
         </section>
+
+        {/* Modification n°2 : Ajout du bloc ressources OFFICIELLES à la fin du main */}
+        <FooterRessources />
+
       </main>
 
       {/* FOOTER MOBILE (Disparaît sur Desktop car les liens sont dans la Sidebar) */}
