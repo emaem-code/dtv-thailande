@@ -273,9 +273,16 @@ export default function Home() {
         <div className="flex flex-col gap-10">
           
           {/* Logo / Titre Sidebar */}
-          <div className="px-2">
-            <div className="text-xl font-black text-white leading-tight">VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span></div>
-          </div>
+<div className="px-2 flex items-center gap-4">
+  <img 
+    src="/logo.png" 
+    alt="Logo DTV Thaïlande" 
+    className="w-12 h-12 object-contain"
+  />
+  <div className="text-xl font-black text-white leading-tight">
+    VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span>
+  </div>
+</div>
 
           {/* Bouton Primaire (Guide) */}
           <button 
