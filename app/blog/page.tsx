@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-// ─── MÉTADONNÉES SEO DE L'ACCUEIL DU BLOG ───
+// ─── MÉTADONNÉES SEO DE L'ACCUEIL DU BLOG (CORRIGÉES) ───
 export const metadata: Metadata = {
   title: 'Le Blog du Visa DTV Thaïlande | Guides et Stratégies d\'Expatriation',
   description: 'Découvrez nos guides exclusifs sur le Visa DTV : conformité des fonds bancaires, sélection des écoles Soft Power et formalités d\'arrivée comme le TDAC.',
   alternates: {
-    canonical: 'https://dtv-thailande.fr/blog', // <-- AJOUT DU CANONICAL ICI
+    canonical: 'https://dtv-thailande.fr/blog',
   },
   openGraph: {
     title: 'Le Blog du Visa DTV Thaïlande | Guides et Stratégies d\'Expatriation',
@@ -16,6 +16,13 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
+    images: [{ url: '/logo.png' }], // <-- RÉSOUT L'ANOMALIE OG:IMAGE
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Le Blog du Visa DTV Thaïlande | Guides et Stratégies d\'Expatriation',
+    description: 'Tutoriels, décryptages légaux et astuces de terrain pour réussir votre visa de 5 ans.',
+    images: ['/logo.png'], // <-- RÉSOUT L'ANOMALIE TWITTER:IMAGE
   },
 };
 
@@ -39,7 +46,7 @@ const blogSchema = {
 // ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
   {
-    slug: 'fin-exemption-visa-60-jours', // <--- C'EST ICI QU'IL FAUT METTRE LE BON DOSSIER
+    slug: 'fin-exemption-visa-60-jours',
     title: "Urgent : La Thaïlande met fin à l'exemption de 60 jours (Retour aux 30 jours)",
     description: "Le gouvernement vient d'annuler la mesure phare de l'exemption de visa longue durée. Découvrez les nouvelles règles strictes d'immigration et l'impact sur vos séjours.",
     date: '11 Juin 2026',
@@ -48,7 +55,7 @@ const posts = [
     hoverBorder: 'hover:border-red-500/50',
   },
   {
-    slug: 'visa-dtv-freelance-auto-entrepreneur', // <--- CELUI DES FREELANCES
+    slug: 'visa-dtv-freelance-auto-entrepreneur',
     title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie",
     description: "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier béton.",
     date: '10 Juin 2026',
@@ -89,7 +96,6 @@ export default function BlogIndex() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
       
-      {/* ── INJECTION DU SCRIPT SEO ── */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
@@ -97,7 +103,6 @@ export default function BlogIndex() {
 
       <div className="max-w-5xl mx-auto">
         
-        {/* ── EN-TÊTE ÉDITORIAL (Correction "Thin Content") ── */}
         <div className="text-center mb-16 mt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide mb-6">
             Le Blog <span className="text-amber-500">DTV Thaïlande</span>
@@ -109,7 +114,6 @@ export default function BlogIndex() {
           </p>
         </div>
 
-        {/* ── GRILLE DES ARTICLES ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {posts.map((post) => (
             <Link 
@@ -144,7 +148,6 @@ export default function BlogIndex() {
           ))}
         </div>
 
-        {/* ── CTA BAS DE PAGE ── */}
         <div className="mt-20 p-8 bg-[#111111] border border-gray-800 rounded-3xl text-center shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500 opacity-5 rounded-full blur-3xl"></div>
           
@@ -166,31 +169,30 @@ export default function BlogIndex() {
 
       </div>
 
-      {/* ─── SECTION RESSOURCES OFFICIELLES ─── */}
-<section className="max-w-4xl mx-auto mt-16 pt-8 border-t border-white/10 text-center">
-  <h2 className="text-xl font-bold text-white mb-4">Ressources Officielles</h2>
-  <p className="text-gray-400 text-sm mb-6">
-    Pour approfondir vos démarches, consultez les plateformes gouvernementales :
-  </p>
-  <div className="flex flex-wrap justify-center gap-6">
-    <a 
-      href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
-    >
-      Ambassade Royale de Thaïlande
-    </a>
-    <a 
-      href="https://www.tatnews.org" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
-    >
-      Tourism Authority of Thailand (TAT)
-    </a>
-  </div>
-</section>
+      <section className="max-w-4xl mx-auto mt-16 pt-8 border-t border-white/10 text-center">
+        <h2 className="text-xl font-bold text-white mb-4">Ressources Officielles</h2>
+        <p className="text-gray-400 text-sm mb-6">
+          Pour approfondir vos démarches, consultez les plateformes gouvernementales :
+        </p>
+        <div className="flex flex-wrap justify-center gap-6">
+          <a 
+            href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
+          >
+            Ambassade Royale de Thaïlande
+          </a>
+          <a 
+            href="https://www.tatnews.org" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"
+          >
+            Tourism Authority of Thailand (TAT)
+          </a>
+        </div>
+      </section>
 
     </main>
   );

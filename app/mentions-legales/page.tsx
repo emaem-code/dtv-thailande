@@ -1,4 +1,29 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+// ─── MÉTADONNÉES SEO DES MENTIONS LÉGALES (Résout l'erreur Codex) ───
+export const metadata: Metadata = {
+  title: 'Mentions Légales | DTV Thaïlande',
+  description: 'Mentions légales, politique de confidentialité et hébergement du site DTV Thaïlande.',
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/mentions-legales',
+  },
+  openGraph: {
+    title: 'Mentions Légales | DTV Thaïlande',
+    description: 'Mentions légales, politique de confidentialité et hébergement.',
+    url: 'https://dtv-thailande.fr/mentions-legales',
+    siteName: 'DTV Thaïlande',
+    locale: 'fr_FR',
+    type: 'website',
+    images: [{ url: '/logo.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mentions Légales | DTV Thaïlande',
+    description: 'Mentions légales, politique de confidentialité et hébergement.',
+    images: ['/logo.png'],
+  },
+};
 
 export default function MentionsLegales() {
   return (

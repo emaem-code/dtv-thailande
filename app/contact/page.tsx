@@ -1,4 +1,29 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+// ─── MÉTADONNÉES SEO DE LA PAGE CONTACT (Résout l'erreur Codex) ───
+export const metadata: Metadata = {
+  title: 'Contactez-nous | DTV Thaïlande',
+  description: 'Une question spécifique sur votre dossier de Visa DTV ? Notre équipe vous répond sous 24h à 48h.',
+  alternates: {
+    canonical: 'https://dtv-thailande.fr/contact',
+  },
+  openGraph: {
+    title: 'Contactez-nous | DTV Thaïlande',
+    description: 'Prenez contact avec notre équipe pour votre dossier de Visa DTV.',
+    url: 'https://dtv-thailande.fr/contact',
+    siteName: 'DTV Thaïlande',
+    locale: 'fr_FR',
+    type: 'website',
+    images: [{ url: '/logo.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contactez-nous | DTV Thaïlande',
+    description: 'Prenez contact avec notre équipe pour votre dossier de Visa DTV.',
+    images: ['/logo.png'],
+  },
+};
 
 export default function Contact() {
   return (
