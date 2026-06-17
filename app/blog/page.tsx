@@ -46,6 +46,15 @@ const blogSchema = {
 // ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
   {
+    slug: 'visa-dtv-couple-famille-pacs',
+    title: "Obtenir le Visa DTV en Famille ou en Couple : PACS, Mariage et Enfants",
+    description: "Le guide légal pour s'expatrier en Thaïlande en famille. Reconnaissance du PACS, concubinage, mariages de même sexe et preuve financière des 500 000 THB.",
+    date: '17 Juin 2026',
+    category: 'Famille & Couple',
+    tagColor: 'text-pink-400 border-pink-500/25 bg-pink-500/10',
+    hoverBorder: 'hover:border-pink-500/50',
+  },
+  {
     slug: 'fin-exemption-visa-60-jours',
     title: "Urgent : La Thaïlande met fin à l'exemption de 60 jours (Retour aux 30 jours)",
     description: "Le gouvernement vient d'annuler la mesure phare de l'exemption de visa longue durée. Découvrez les nouvelles règles strictes d'immigration et l'impact sur vos séjours.",
