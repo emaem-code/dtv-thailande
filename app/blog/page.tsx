@@ -46,6 +46,15 @@ const blogSchema = {
 // ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
   {
+    slug: 'comparatif-visas-thailande',
+    title: "Quel Visa Choisir pour Vivre en Thaïlande ? Comparatif 2026",
+    description: "DTV, LTR, Non-ED, METV... Découvrez quel visa longue durée est le plus adapté à votre profil, votre budget et votre activité professionnelle.",
+    date: '19 Juin 2026',
+    category: 'Stratégie & Expatriation',
+    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
+    hoverBorder: 'hover:border-emerald-500/50',
+  },
+  {
     slug: 'visa-dtv-couple-famille-pacs',
     title: "Obtenir le Visa DTV en Famille ou en Couple : PACS, Mariage et Enfants",
     description: "Le guide légal pour s'expatrier en Thaïlande en famille. Reconnaissance du PACS, concubinage, mariages de même sexe et preuve financière des 500 000 THB.",
