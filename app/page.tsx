@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
+import Image from "next/image";
 import DtvGuideModal from "./components/DtvGuideModal"; 
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
@@ -71,11 +72,16 @@ function VideoSequence() {
   ];
 
   useEffect(() => {
-    setShowVolume(false);
-    const timer = setTimeout(() => {
+    const resetTimer = setTimeout(() => {
+      setShowVolume(false);
+    }, 0);
+    const showTimer = setTimeout(() => {
       setShowVolume(true);
     }, 3000);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(resetTimer);
+      clearTimeout(showTimer);
+    };
   }, [activeIndex]);
 
   useEffect(() => {
@@ -175,7 +181,7 @@ function VideoSequence() {
 
         {/* À DROITE : La Liste des Chapitres */}
         <div className="flex flex-col gap-3 xl:gap-4 w-full max-w-lg">
-          <div className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L'accompagnement clé en main</div>
+          <div className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L&apos;accompagnement clé en main</div>
           
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
@@ -190,7 +196,13 @@ function VideoSequence() {
                 }`}
               >
                 <div className="relative w-16 h-24 xl:w-20 xl:h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-lg">
-                  <img src={video.poster} alt={video.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image
+                    src={video.poster}
+                    alt={`Aperçu vidéo ${video.title} pour l'accompagnement Visa DTV Thaïlande`}
+                    fill
+                    sizes="(min-width: 1280px) 80px, 64px"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
                   
                   {isActive && (
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-[1px]">
@@ -274,9 +286,11 @@ export default function Home() {
           
           {/* Logo / Titre Sidebar */}
 <div className="px-2 flex items-center gap-4">
-  <img 
+  <Image
     src="/logo.png" 
-    alt="Logo DTV Thaïlande" 
+    alt="Logo de l'agence DTV Thaïlande"
+    width={48}
+    height={48}
     className="w-12 h-12 object-contain"
   />
   <div className="text-xl font-black text-white leading-tight">
@@ -390,7 +404,7 @@ export default function Home() {
               Accompagnement clé en main · <span className="text-white font-bold">à partir de 850 €</span>
             </p>
             <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-1">
-              Frais de visa, traductions et honoraires d'agence inclus
+              Frais de visa, traductions et honoraires d&apos;agence inclus
             </p>
           </div>
 

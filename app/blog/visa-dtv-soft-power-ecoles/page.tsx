@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
     type: "article",
+    // TODO: Générer un opengraph-image.tsx ou lier une image spécifique à cet article quand les vraies miniatures seront disponibles.
+    images: [{ url: '/logo.png' }],
   },
 };
 

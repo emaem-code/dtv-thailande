@@ -16,7 +16,8 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/logo.png' }], // <-- RÉSOUT L'ANOMALIE OG:IMAGE
+    // TODO: Générer un opengraph-image.tsx ou lier une image spécifique à cette page quand les vraies miniatures seront disponibles.
+    images: [{ url: '/logo.png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -159,7 +160,7 @@ export default function BlogIndex() {
               </div>
 
               <div className="flex items-center text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
-                Lire l'article 
+                Lire l&apos;article
                 <span className="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
               </div>
             </Link>
@@ -174,7 +175,7 @@ export default function BlogIndex() {
           </h3>
           <p className="text-gray-400 mb-8 relative z-10 max-w-xl mx-auto">
             Vous avez lu nos guides mais vous souhaitez déléguer la charge administrative ? 
-            Nous prenons en main l'intégralité de votre dossier DTV.
+            Nous prenons en main l&apos;intégralité de votre dossier DTV.
           </p>
           
           <Link 
