@@ -1,16 +1,19 @@
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-soft-power-ecoles'));
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
 // ─── MÉTADONNÉES SEO & CANONICAL ─────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV Soft Power : Éviter les arnaques des écoles (Cuisine & Muay Thaï)",
+  title: "Visa DTV Soft Power : éviter les fausses écoles",
   description: "Le guide définitif pour obtenir le Visa DTV via la voie Soft Power. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles', // <-- LA VOICI !
   },
   openGraph: {
-    title: "Visa DTV Soft Power : Éviter les arnaques des écoles",
+    title: "Visa DTV Soft Power : éviter les fausses écoles",
     description: "Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter pour sécuriser votre DTV.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles",
     siteName: "DTV Thaïlande",
@@ -124,7 +127,7 @@ export default function BlogArticleSoftPower() {
       {/* ── INJECTION DES SCRIPTS SEO JSON-LD ── */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"

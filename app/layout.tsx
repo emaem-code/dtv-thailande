@@ -1,17 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-// @ts-ignore: CSS module declarations are not present in this project setup.
 import './globals.css';
 import FloatingCTA from './components/FloatingCTA';
-
-const inter = Inter({ subsets: ['latin'] });
 
 // ─── MÉTADONNÉES ULTRA-OPTIMISÉES (RÈGLE TOUT L'AUDIT CODEX) ──────────────────
 export const metadata: Metadata = {
   metadataBase: new URL('https://dtv-thailande.fr'), // Résout l'absence d'URL canonique de base
   title: {
-    default: "Visa DTV Thaïlande (5 ans) | Agence d'Accompagnement Premium",
-    template: "%s | DTV Thaïlande" // Permet aux articles de blog d'ajouter leur titre proprement
+    default: 'Visa DTV Thaïlande : accompagnement 5 ans',
+    template: '%s',
   },
   description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles : dossiers, conformité bancaire et Visa Run.',
  
@@ -20,7 +16,7 @@ export const metadata: Metadata = {
   },
   
   openGraph: {
-    title: "Visa DTV Thaïlande (5 ans) | Agence d'Accompagnement Premium",
+    title: 'Visa DTV Thaïlande : accompagnement 5 ans',
     description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles.',
     url: 'https://dtv-thailande.fr',
     siteName: 'DTV Thaïlande',
@@ -68,7 +64,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className={`${inter.className} bg-black text-white antialiased`}>
+      <body className="bg-black text-white antialiased font-sans">
         {children}
         {/* LE BOUTON FLOTTANT INJECTÉ SUR TOUTES LES PAGES (Sauf l'accueil grâce à son code interne) */}
         <FloatingCTA />

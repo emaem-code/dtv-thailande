@@ -1,16 +1,19 @@
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('tdac-thailande-carte-arrivee'));
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
 // ─── 1. MÉTADONNÉES SEO OPTIMISÉES (NEXT.JS) ─────────────────────────────────
 export const metadata: Metadata = {
-  title: "TDAC Thaïlande 2026 : Guide Complet de la Carte d'Arrivée Numérique",
+  title: "TDAC Thaïlande : guide de la carte d'arrivée",
   description: "Le guide étape par étape pour remplir le formulaire TDAC obligatoire avant d'entrer en Thaïlande. Évitez le refus d'embarquement aux douanes.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee', // <-- AJOUT DU CANONICAL ICI
   },
   openGraph: {
-    title: "TDAC Thaïlande 2026 : Guide Complet de la Carte d'Arrivée Numérique",
+    title: "TDAC Thaïlande : guide de la carte d'arrivée",
     description: "Formulaire TDAC obligatoire : tutoriel pas-à-pas pour les détenteurs de visa DTV et touristes.",
     url: "https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee",
     siteName: "DTV Thaïlande",
@@ -103,7 +106,7 @@ export default function BlogArticleTdac() {
       
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"

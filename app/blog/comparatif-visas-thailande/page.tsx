@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('comparatif-visas-thailande'));
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Quel Visa pour Vivre en Thaïlande ? Comparatif 2026 (DTV, LTR, ED, METV)",
+  title: "Quel visa choisir pour vivre en Thaïlande ?",
   description:
     "Comparatif complet des visas longue durée en Thaïlande. Coûts, exigences financières et contraintes pour les freelances, retraités et expatriés.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/comparatif-visas-thailande',
   },
   openGraph: {
-    title: "Comparatif des Visas Longue Durée en Thaïlande (2026)",
+    title: "Quel visa choisir pour vivre en Thaïlande ?",
     description:
       "DTV, LTR, Non-ED, METV... Découvrez quel visa est le plus adapté à votre profil et votre budget pour vivre légalement en Thaïlande.",
     url: "https://dtv-thailande.fr/blog/comparatif-visas-thailande",
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Quel Visa pour Vivre en Thaïlande ? Comparatif 2026',
+    title: 'Quel visa choisir pour vivre en Thaïlande ?',
     description: 'DTV, LTR, Non-ED, METV... Découvrez quel visa est le plus adapté à votre profil.',
     images: ['/logo.png'],
   },
@@ -111,7 +114,7 @@ export default function ArticleComparatifVisas() {
       {/* ── INJECTION JSON-LD ── */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"
