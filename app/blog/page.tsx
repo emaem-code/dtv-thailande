@@ -47,6 +47,15 @@ const blogSchema = {
 // ─── LISTE DES ARTICLES DE BLOG ───────────────────────────────────────────────
 const posts = [
   {
+    slug: 'guide-depot-dossier-evisa-dtv',
+    title: "Guide Complet : Comment Déposer son Dossier Visa DTV sur l'e-Visa",
+    description: "Tutoriel étape par étape pour déposer votre demande sur thaievisa.go.th. Évitez les pièges consulaires, maîtrisez les formats de fichiers et les délais de l'ambassade.",
+    date: '25 Juin 2026',
+    category: 'Tutoriel & Procédure',
+    tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
+    hoverBorder: 'hover:border-amber-500/50',
+  },
+  {
     slug: 'comparatif-visas-thailande',
     title: "Quel Visa Choisir pour Vivre en Thaïlande ? Comparatif 2026",
     description: "DTV, LTR, Non-ED, METV... Découvrez quel visa longue durée est le plus adapté à votre profil, votre budget et votre activité professionnelle.",
