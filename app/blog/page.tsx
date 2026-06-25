@@ -75,11 +75,11 @@ export default function BlogIndex() {
               className={`group flex flex-col justify-between p-8 rounded-3xl bg-[#111111] border border-white/10 transition-all duration-300 ${post.hoverBorder} hover:bg-[#161616] hover:-translate-y-1 shadow-lg`}
             >
               <div>
-                <div className="flex items-center justify-between mb-5">
-                  <span className={`inline-block text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
+                <div className="flex items-center justify-between gap-3 mb-5">
+                  <span className={`inline-block whitespace-nowrap text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
                     {post.category}
                   </span>
-                  <span className="text-gray-500 text-sm font-medium">
+                  <span className="text-gray-500 text-sm font-medium shrink-0">
                     {post.date}
                   </span>
                 </div>
