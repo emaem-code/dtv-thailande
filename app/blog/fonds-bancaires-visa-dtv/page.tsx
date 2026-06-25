@@ -1,4 +1,7 @@
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fonds-bancaires-visa-dtv'));
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -172,7 +175,7 @@ export default function BlogArticleDTV() {
       {/* ── INJECTION DES SCRIPTS SEO JSON-LD ── */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"

@@ -375,6 +375,7 @@ export default function Home() {
         <HeroText />
         
         <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 lg:mt-4">
+          <h2 className="sr-only">Pourquoi choisir notre accompagnement pour le Visa DTV ?</h2>
           <VideoSequence />
         </section>
 

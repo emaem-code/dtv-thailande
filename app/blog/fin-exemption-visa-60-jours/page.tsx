@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fin-exemption-visa-60-jours'));
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
+  title: "Visa Run Thaïlande : fin de l'exemption 60 jours",
   description:
     "Analyse terrain Juin 2026 : Pourquoi de plus en plus de voyageurs n'obtiennent que 30 jours d'exemption en Thaïlande. Coûts des Visa Runs et alternatives légales (DTV).",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours', // <-- LE CANONICAL EST ICI
   },
   openGraph: {
-    title: "Visa Run Thaïlande : Vers la fin de l'exemption à 60 jours",
+    title: "Visa Run Thaïlande : fin de l'exemption 60 jours",
     description:
       "La répression contre les Visa Runs s'intensifie. Décryptage des contrôles aux frontières, des coûts cachés et de la transition vers le Visa DTV.",
     url: "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
@@ -105,7 +108,7 @@ export default function ArticleFinExemption() {
     <article className="max-w-3xl mx-auto px-5 md:px-6 py-14 md:py-20 font-sans text-gray-300 leading-relaxed bg-[#0a0a0a]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"

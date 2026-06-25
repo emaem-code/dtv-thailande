@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useModalA11y } from './useModalA11y';
 
 interface FaqModalProps {
   isOpen: boolean;
@@ -9,12 +10,7 @@ interface FaqModalProps {
 
 export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  useEffect(() => {
-    if (isOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
+  const { dialogRef, handleDialogKeyDown } = useModalA11y(isOpen, onClose);
 
   if (!isOpen) return null;
 
@@ -59,14 +55,22 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity duration-300" onClick={onClose} />
 
-      <div className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="faq-modal-title"
+        tabIndex={-1}
+        onKeyDown={handleDialogKeyDown}
+        className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300"
+      >
         
         {/* Header */}
         <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
-          <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
+          <h2 id="faq-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Foire Aux Questions <span className="text-amber-500">(FAQ)</span>
           </h2>
-          <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
+          <button onClick={onClose} aria-label="Fermer la FAQ" className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>

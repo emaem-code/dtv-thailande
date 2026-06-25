@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-freelance-auto-entrepreneur'));
 
 export const metadata: Metadata = {
-  title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
+  title: "Visa DTV Freelance : dossier sans fiche de paie",
   description:
     "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet pour monter un dossier consulaire béton sans fiche de paie classique.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-freelance-auto-entrepreneur', // <-- AJOUT DU CANONICAL ICI
   },
   openGraph: {
-    title: "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
+    title: "Visa DTV Freelance : dossier sans fiche de paie",
     description:
       "Le guide complet pour les indépendants français : transformer votre Kbis et attestations URSSAF en dossier DTV irréfutable.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-freelance-auto-entrepreneur",
@@ -104,7 +107,7 @@ export default function ArticleFreelanceDTV() {
     <article className="max-w-3xl mx-auto px-5 md:px-6 py-14 md:py-20 font-sans text-gray-300 leading-relaxed bg-[#0a0a0a]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"

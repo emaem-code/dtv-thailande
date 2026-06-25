@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { useModalA11y } from './useModalA11y';
 
 interface EligibilityFormModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface EligibilityFormModalProps {
 export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFormModalProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { dialogRef, handleDialogKeyDown } = useModalA11y(isOpen, onClose);
   
   // 👉 NOUVEAU : Référence pour le scroll du conteneur
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -30,12 +32,6 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     serviceLevel: '',
     remarks: ''
   });
-
-  useEffect(() => {
-    if (isOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -105,7 +101,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
       } else {
         alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
       }
-    } catch (error) {
+    } catch {
       alert("Erreur de connexion. Vérifiez votre réseau.");
     } finally {
       setIsSubmitting(false);
@@ -141,7 +137,15 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/95 backdrop-blur-md" onClick={onClose} />
 
-      <div className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col animate-in fade-in zoom-in-95 duration-300">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="eligibility-modal-title"
+        tabIndex={-1}
+        onKeyDown={handleDialogKeyDown}
+        className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col animate-in fade-in zoom-in-95 duration-300"
+      >
         
         {/* Header avec Barre de progression */}
         <div className="flex-none p-6 border-b border-white/10 relative overflow-hidden">
@@ -154,10 +158,10 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
             </div>
           ) : null}
           <div className="flex justify-between items-center">
-            <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
+            <h2 id="eligibility-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
               {step === 0 ? 'Critères non remplis' : step === 3 ? 'Demande envoyée !' : step === 1 ? '1. Vérification d\'Éligibilité' : '2. Votre Devis Sur-Mesure'}
             </h2>
-            <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
+            <button onClick={onClose} aria-label="Fermer le formulaire d'éligibilité" className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>

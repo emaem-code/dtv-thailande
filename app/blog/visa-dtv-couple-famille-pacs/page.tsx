@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import { createBreadcrumbSchema, getBlogPost } from '../posts';
+
+const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-famille-pacs'));
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV Famille & Couple Non Marié (PACS, Concubinage, Mariage)",
+  title: "Visa DTV Famille : PACS, mariage et enfants",
   description:
     "Le guide légal pour s'expatrier en Thaïlande en famille (Visa DTV). Reconnaissance du PACS, concubinage, mariage civil ou homosexuel, et preuve financière des 500 000 THB par personne.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs',
   },
   openGraph: {
-    title: "Visa DTV en Famille ou en Couple : PACS, Mariage et Enfants",
+    title: "Visa DTV Famille : PACS, mariage et enfants",
     description:
       "Le cadre légal de l'immigration thaïlandaise pour les familles et couples non mariés. PACS, concubinage, mariages de même sexe et montage de dossier.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs",
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Visa DTV Famille & Couple Non Marié (PACS, Concubinage, Mariage)',
+    title: 'Visa DTV Famille : PACS, mariage et enfants',
     description: 'Le cadre légal de l\'immigration thaïlandaise pour les familles et couples non mariés.',
     images: ['/logo.png'],
   },
@@ -111,7 +114,7 @@ export default function ArticleDtvFamille() {
       {/* ── INJECTION JSON-LD ── */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       <script
         type="application/ld+json"
