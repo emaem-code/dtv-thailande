@@ -18,20 +18,7 @@ export type BlogPost = {
 };
 
 export const blogPosts = [
-  {
-    slug: 'comparatif-visas-thailande',
-    title: 'Quel Visa Choisir pour Vivre en Thaïlande ? Comparatif 2026',
-    shortTitle: 'Quel visa choisir pour vivre en Thaïlande ?',
-    description: 'Comparatif des visas longue durée en Thaïlande : DTV, LTR, ED et METV selon votre profil, budget et activité.',
-    excerpt: 'DTV, LTR, Non-ED, METV... Découvrez quel visa longue durée est le plus adapté à votre profil, votre budget et votre activité professionnelle.',
-    date: '19 Juin 2026',
-    publishedAt: '2026-06-19',
-    modifiedAt: '2026-06-19',
-    category: 'Stratégie et Expatriation',
-    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
-    hoverBorder: 'hover:border-emerald-500/50',
-    image: '/logo.png',
-  },
+  
   {
     slug: 'guide-depot-dossier-evisa-dtv',
     title: 'Guide e-Visa DTV : déposer son dossier',
@@ -44,6 +31,20 @@ export const blogPosts = [
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
+    image: '/logo.png',
+  },
+  {
+    slug: 'comparatif-visas-thailande',
+    title: 'Quel Visa Choisir pour Vivre en Thaïlande ? Comparatif 2026',
+    shortTitle: 'Quel visa choisir pour vivre en Thaïlande ?',
+    description: 'Comparatif des visas longue durée en Thaïlande : DTV, LTR, ED et METV selon votre profil, budget et activité.',
+    excerpt: 'DTV, LTR, Non-ED, METV... Découvrez quel visa longue durée est le plus adapté à votre profil, votre budget et votre activité professionnelle.',
+    date: '19 Juin 2026',
+    publishedAt: '2026-06-19',
+    modifiedAt: '2026-06-19',
+    category: 'Stratégie et Expatriation',
+    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
+    hoverBorder: 'hover:border-emerald-500/50',
     image: '/logo.png',
   },
   {
