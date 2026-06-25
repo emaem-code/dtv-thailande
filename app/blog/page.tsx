@@ -60,7 +60,7 @@ const posts = [
     title: "Quel Visa Choisir pour Vivre en Thaïlande ? Comparatif 2026",
     description: "DTV, LTR, Non-ED, METV... Découvrez quel visa longue durée est le plus adapté à votre profil, votre budget et votre activité professionnelle.",
     date: '19 Juin 2026',
-    category: 'Stratégie & Expatriation',
+    category: 'Stratégie & Expat',
     tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
     hoverBorder: 'hover:border-emerald-500/50',
   },
