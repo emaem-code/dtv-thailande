@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { baseUrl, blogPosts } from './blog/posts';
+import { baseUrl, getSortedBlogPosts } from './blog/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+  const blogRoutes: MetadataRoute.Sitemap = getSortedBlogPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.modifiedAt),
     changeFrequency: 'monthly',

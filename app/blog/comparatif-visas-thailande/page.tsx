@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('comparatif-visas-thailande'));
@@ -111,6 +112,7 @@ const faqSchema = {
 export default function ArticleComparatifVisas() {
   return (
     <article className="max-w-3xl mx-auto px-5 md:px-6 py-14 md:py-20 font-sans text-gray-300 leading-relaxed bg-[#0a0a0a]">
+      <BlogNavigation variant="article-top" />
       {/* ── INJECTION JSON-LD ── */}
       <script
         type="application/ld+json"
@@ -367,6 +369,7 @@ export default function ArticleComparatifVisas() {
           </Link>
         </div>
       </div>
+      <BlogNavigation variant="article-bottom" />
     </article>
   );
 }

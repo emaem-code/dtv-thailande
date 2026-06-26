@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { blogPosts } from './posts';
+import BlogNavigation from '../components/BlogNavigation';
+import { getSortedBlogPosts } from './posts';
 
 // ─── MÉTADONNÉES SEO DE L'ACCUEIL DU BLOG (CORRIGÉES) ───
 export const metadata: Metadata = {
@@ -46,6 +47,8 @@ const blogSchema = {
 };
 
 export default function BlogIndex() {
+  const sortedPosts = getSortedBlogPosts();
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
       
@@ -55,6 +58,7 @@ export default function BlogIndex() {
       />
 
       <div className="max-w-5xl mx-auto">
+        <BlogNavigation variant="blog-index" />
         
         <div className="text-center mb-16 mt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide mb-6">
@@ -68,7 +72,7 @@ export default function BlogIndex() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogPosts.map((post) => (
+          {sortedPosts.map((post) => (
             <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`}

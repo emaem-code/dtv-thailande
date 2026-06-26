@@ -18,7 +18,6 @@ export type BlogPost = {
 };
 
 export const blogPosts = [
-  
   {
     slug: 'guide-depot-dossier-evisa-dtv',
     title: 'Guide e-Visa DTV : déposer son dossier',
@@ -132,6 +131,12 @@ export const blogPosts = [
     image: '/logo.png',
   },
 ] satisfies BlogPost[];
+
+export function getSortedBlogPosts(): BlogPost[] {
+  return [...blogPosts].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+}
 
 export function getBlogPost(slug: string): BlogPost {
   const post = blogPosts.find((item) => item.slug === slug);
