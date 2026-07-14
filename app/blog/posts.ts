@@ -18,6 +18,20 @@ export type BlogPost = {
 };
 
 export const blogPosts = [
+    {
+    slug: 'arrivee-thailande-aeroport-immigration-taxi-visa-dtv',
+    title: 'Arrivée en Thaïlande 2026 : Aéroport, Taxi et Visa DTV',
+    shortTitle: 'Arrivée aéroport et Visa DTV',
+    description: 'Arriver en Thaïlande en 2026 : TDAC obligatoire, immigration, taxi aéroport, carte SIM et TM30 pour votre visa DTV. Le guide complet étape par étape.',
+    excerpt: "Le guide définitif pour naviguer sans stress dès votre descente de l'avion en 2026 : TDAC, transports, change et l'incontournable TM30.",
+    date: '13 Juillet 2026',
+    publishedAt: '2026-07-13',
+    modifiedAt: '2026-07-13',
+    category: 'Formalités',
+    tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
+    hoverBorder: 'hover:border-sky-500/50',
+    image: '/logo.png',
+  },
   {
     slug: 'guide-depot-dossier-evisa-dtv',
     title: 'Guide e-Visa DTV : déposer son dossier',
