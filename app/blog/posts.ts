@@ -18,6 +18,20 @@ export type BlogPost = {
 };
 
 export const blogPosts = [
+  {
+    slug: 'paiement-thailande-sans-compte-bancaire-visa-dtv',
+    title: 'Paiements en Thaïlande avec un Visa DTV : la vraie stratégie sans compte bancaire (2026)',
+    shortTitle: 'Paiements, Wise et Banques',
+    description: 'Wise, PromptPay, QR codes, cash : le guide terrain complet pour gérer ses paiements en Thaïlande avec un Visa DTV sans compte bancaire local en 2026.',
+    excerpt: "Comment vivre et payer en Thaïlande sans compte bancaire local ? Découvrez la stratégie ultime avec Wise, les QR codes et les astuces terrain pour éviter les frais.",
+    date: '21 Juillet 2026',
+    publishedAt: '2026-07-21',
+    modifiedAt: '2026-07-21',
+    category: 'Finances',
+    tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
+    hoverBorder: 'hover:border-amber-500/50',
+    image: '/logo.png', // Tu pourras changer l'image ici si tu en as une spécifique
+  },
     {
     slug: 'arrivee-thailande-aeroport-immigration-taxi-visa-dtv',
     title: 'Arrivée en Thaïlande 2026 : Aéroport, Taxi et Visa DTV',
