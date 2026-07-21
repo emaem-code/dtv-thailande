@@ -20,7 +20,8 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'article',
-    images: [{ url: '/logo.png' }],
+    // Miniature SEO optimisée (1200x630) pour le partage Facebook/Twitter
+    images: [{ url: '/images/blog/paiement-wise-dtv.jpg' }],
   },
 };
 
@@ -34,7 +35,7 @@ const articleSchema = {
   },
   "headline": "Paiements en Thaïlande avec un Visa DTV : la vraie stratégie sans compte bancaire (2026)",
   "description": "Guide complet pour gérer ses paiements en Thaïlande avec un Visa DTV, utiliser Wise, et éviter les frais de change.",
-  "image": "https://dtv-thailande.fr/logo.png",  
+  "image": "https://dtv-thailande.fr/images/blog/paiement-wise-dtv.jpg",  
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",
@@ -97,6 +98,30 @@ const faqSchema = {
         text: "Si vous vivez en condo, votre facture d'eau est émise par le bureau de gestion avec un code-barres interne non reconnu par le 7-Eleven. Réglez au bureau de gestion en espèces ou via une app locale.",
       },
     },
+    {
+      '@type': 'Question',
+      name: "Y a-t-il une limite au montant des paiements Wise PromptPay ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Oui : 10 000 THB maximum par transaction. Pour les gros paiements (caution, loyer élevé, achat important), il faudra fractionner ou prévoir une alternative.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "Wise remplace-t-il un compte bancaire thaïlandais ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Pour 90-95% du quotidien, oui. Pour les prélèvements automatiques, les paiements supérieurs à 10 000 THB par transaction et les services gouvernementaux, non.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "TAGTHAi peut-il servir pour les dépenses quotidiennes ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Non. TAGTHAi est réservé aux pass touristiques et au VAT Refund. Son rechargement exige un déplacement physique à un guichet KBank et son scanner ne lit pas les QR codes personnels des petits commerçants.",
+      },
+    }
   ],
 };
 
@@ -158,7 +183,8 @@ export default function BlogArticlePaiements() {
           <li><a href="#frais-revolut" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">6. Pourquoi votre carte Revolut vous coûte 3 à 5% de plus</a></li>
           <li><a href="#astuce-alipay" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">7. L&apos;astuce Alipay pour le 7-Eleven</a></li>
           <li><a href="#verite-tagthai" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">8. TAGTHAi — ce que c&apos;est vraiment</a></li>
-          <li><a href="#strategie-recap" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">9. La stratégie complète (Récapitulatif)</a></li>
+          <li><a href="#fiscalite" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">9. Un mot sur la fiscalité</a></li>
+          <li><a href="#strategie-recap" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">10. La stratégie complète (Récapitulatif)</a></li>
         </ul>
       </nav>
 
@@ -207,6 +233,15 @@ export default function BlogArticlePaiements() {
             Utiliser la carte physique ou dématérialisée (Apple/Google Wallet) sur tous les terminaux.
           </li>
         </ul>
+
+        <div className="p-5 bg-white/3 border border-gray-800 rounded-xl my-6">
+          <h3 className="text-white font-bold mb-3">Les limites et le calendrier à connaître :</h3>
+          <ul className="space-y-3 text-sm text-gray-400 list-disc pl-5">
+            <li><strong>Maximum 10 000 THB par transaction</strong> pour les paiements PromptPay depuis le solde Wise — c'est suffisant pour le quotidien, mais bloquant pour une caution d'appartement ou un gros achat.</li>
+            <li>Si vous aviez un compte Wise avant le 21 janvier 2026, les nouvelles règles s'appliquent à partir du <strong>3 août 2026</strong>.</li>
+            <li>Les cartes Wise existantes liées à une adresse thaïlandaise seront <strong>remplacées gratuitement d'ici septembre 2026</strong>.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── SECTION 3 ── */}
@@ -226,6 +261,10 @@ export default function BlogArticlePaiements() {
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-amber-400 mt-0.5 flex-none">→</span>
             <strong>Arrivez avec 1 000 à 2 000 € en espèces</strong> depuis la France.
+          </li>
+          <li className="flex items-start gap-3 text-sm text-gray-400">
+            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <strong>Cadre légal :</strong> Vous pouvez transporter légalement jusqu'à l'équivalent de 20 000 USD (environ 18 000€) sans déclaration douanière. Au-delà, la déclaration est obligatoire.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-amber-400 mt-0.5 flex-none">→</span>
@@ -276,7 +315,7 @@ export default function BlogArticlePaiements() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-400 list-disc pl-5">
               <li><strong>Facture d&apos;électricité :</strong> à régler au 7-Eleven avec le code-barres (en espèces).</li>
-              <li><strong>Facture d&apos;eau (Condo) :</strong> souvent émise par le bureau de gestion de l&apos;immeuble. Le 7-Eleven ne la prend pas. Règlement en espèces au bureau.</li>
+              <li><strong>Facture d&apos;eau (Condo) :</strong> souvent émise par le bureau de gestion de l&apos;immeuble (Juristic Office). Le 7-Eleven ne la prend pas. Règlement en espèces au bureau.</li>
             </ul>
           </div>
 
@@ -344,7 +383,7 @@ export default function BlogArticlePaiements() {
         </ul>
       </section>
 
-{/* ── SECTION 9 (Fiscalité) ── */}
+      {/* ── SECTION 9 ── */}
       <section className="mb-12">
         <h2 id="fiscalite" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
           9. Un mot sur la fiscalité — la contrepartie de la traçabilité
@@ -359,11 +398,11 @@ export default function BlogArticlePaiements() {
           Ce sujet mérite un article dédié. Retenez simplement : la simplicité de paiement s'accompagne d'une transparence totale vis-à-vis de l'administration thaïlandaise.
         </p>
       </section>
-      
+
       {/* ── SECTION 10 ── */}
       <section className="mb-12">
         <h2 id="strategie-recap" className="text-2xl font-bold text-white mb-6 scroll-mt-24">
-          9. La stratégie complète (Récapitulatif)
+          10. La stratégie complète (Récapitulatif)
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -375,12 +414,26 @@ export default function BlogArticlePaiements() {
               <li>• Installez Wise, Grab et Alipay.</li>
             </ul>
           </div>
+          
           <div className="p-6 bg-[#111111] border border-gray-800 rounded-xl shadow-lg">
             <h3 className="text-white font-bold mb-4">🛬 À l&apos;aéroport</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>• Ignorez les kiosques d&apos;arrivée.</li>
               <li>• Descendez au niveau B.</li>
               <li>• Changez au comptoir Superrich.</li>
+            </ul>
+          </div>
+          
+          <div className="p-6 bg-[#111111] border border-gray-800 rounded-xl shadow-lg md:col-span-2">
+            <h3 className="text-white font-bold mb-4">🛍️ Au quotidien</h3>
+            <ul className="space-y-3 text-sm text-gray-400 grid grid-cols-1 md:grid-cols-2 gap-x-6">
+              <li><strong>Paiements courants :</strong> Wise QR PromptPay ou carte dématérialisée</li>
+              <li><strong>Grab :</strong> carte Wise dans l'app</li>
+              <li><strong>7-Eleven :</strong> carte Wise si achat ≥ 200 THB, cash en dessous</li>
+              <li><strong>Facture électricité :</strong> cash au 7-Eleven avec code-barres</li>
+              <li><strong>Facture eau en condo :</strong> espèces au bureau de gestion, ou TrueMoney/mPAY</li>
+              <li><strong>QR non reconnus :</strong> Alipay lié à Wise</li>
+              <li><strong>Gros paiements (&gt;10 000 THB) :</strong> anticiper, la limite PromptPay Wise s'applique par transaction</li>
             </ul>
           </div>
         </div>
