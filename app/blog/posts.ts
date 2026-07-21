@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+    slug: '20000-thb-immigration-thailande-regle-especes',
+    title: "20 000 bahts à l'immigration thaïlandaise : la loi oubliée qui refoule des voyageurs (2026)",
+    shortTitle: 'Règle des 20 000 THB',
+    description: "Des voyageurs refoulés faute de 20 000 THB en espèces à l'immigration thaïlandaise. La loi, les profils ciblés, le tampon de refus : le guide terrain complet 2026.",
+    excerpt: "Pourquoi l'immigration refoule-t-elle certains voyageurs sans 20 000 bahts en espèces ? Découvrez les profils ciblés et comment éviter le tampon de refus.",
+    date: '24 Juillet 2026',
+    publishedAt: '2026-07-24T07:00:00Z',
+    modifiedAt: '2026-07-24T07:00:00Z',
+    category: 'Formalités',
+    tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
+    hoverBorder: 'hover:border-sky-500/50',
+    image: '/logo.png', // Pense à remplacer par ta future miniature
+  },
+  {
     slug: 'paiement-thailande-sans-compte-bancaire-visa-dtv',
     title: 'Paiements en Thaïlande avec un Visa DTV : la vraie stratégie sans compte bancaire (2026)',
     shortTitle: 'Paiements, Wise et Banques',
@@ -161,9 +175,12 @@ export const blogPosts = [
 ] satisfies BlogPost[];
 
 export function getSortedBlogPosts(): BlogPost[] {
-  return [...blogPosts].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-  );
+  const now = new Date();
+  return [...blogPosts]
+    .filter((post) => new Date(post.publishedAt) <= now)
+    .sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
 }
 
 export function getBlogPost(slug: string): BlogPost {
