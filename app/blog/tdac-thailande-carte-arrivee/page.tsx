@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "TDAC Thaïlande : guide de la carte d'arrivée",
   description: "Le guide étape par étape pour remplir le formulaire TDAC obligatoire avant d'entrer en Thaïlande. Évitez le refus d'embarquement aux douanes.",
   alternates: {
-    canonical: 'https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee', // <-- AJOUT DU CANONICAL ICI
+    canonical: 'https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee',
   },
   openGraph: {
     title: "TDAC Thaïlande : guide de la carte d'arrivée",
@@ -50,7 +50,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-06-09",
-  "dateModified": "2026-06-11"
+  "dateModified": "2026-07-23"
 };
 
 // ─── 3. SCHEMA FAQ JSON-LD (BOOSTÉ À 5 QUESTIONS) ───────────────────────────
@@ -84,10 +84,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: "Faut-il remplir un nouveau TDAC à chaque entrée en Thaïlande ?",
+      name: "Mon TDAC reste-t-il valable si je sors quelques jours de Thaïlande ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Oui. Le TDAC est une carte d'arrivée numérique unique liée à un voyage spécifique. Vous devez générer un nouveau QR Code à chaque fois que vous passez la frontière, que ce soit par voie aérienne ou par un poste frontalier terrestre.",
+        text: "Non. Le TDAC est une carte d'arrivée numérique unique liée à un voyage spécifique. La règle est simple : une entrée égale un TDAC. Si vous partez quelques jours dans un pays voisin puis revenez, vous devez générer un nouveau QR Code pour votre vol de retour.",
       },
     },
     {
@@ -126,7 +126,7 @@ export default function BlogArticleTdac() {
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
-          Lecture : 9 min · Mis à jour : 11 Juin 2026 · Par <strong className="text-gray-400">Matthieu Moretti</strong>
+          Lecture : 11 min · Mis à jour : 23 Juillet 2026 · Par <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
 
@@ -148,8 +148,9 @@ export default function BlogArticleTdac() {
           <li><a href="#tutoriel-etape-par-etape" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">2. Tutoriel pas-à-pas : Les champs exacts du formulaire</a></li>
           <li><a href="#liaison-visa-dtv" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">3. Titulaires de Visa DTV : La manipulation obligatoire</a></li>
           <li><a href="#focus-app-thim" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">4. Focus sur l’application THIM : Remplace-t-elle le TDAC ?</a></li>
-          <li><a href="#entrees-terrestres-laos" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">5. Visa Run et frontières terrestres : Le cas du Laos</a></li>
-          <li><a href="#pieges-eviter" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">6. Attention aux faux sites payants (Red Flags)</a></li>
+          <li><a href="#voyages-multiples" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">5. Voyages multi-destinations et excursions : La règle d’or</a></li>
+          <li><a href="#entrees-terrestres-laos" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">6. Visa Run et frontières terrestres : Le cas du Laos</a></li>
+          <li><a href="#pieges-eviter" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">7. Attention aux faux sites payants (Red Flags)</a></li>
         </ul>
       </nav>
 
@@ -199,7 +200,7 @@ export default function BlogArticleTdac() {
           </div>
 
           <div>
-            <p className="text-amber-400 font-bold uppercase tracking-wider text-xs mb-2">Étape 3 : Visa & Purpose of Visit (Motif du Séjour - Point Critique DTV)</p>
+            <p className="text-amber-400 font-bold uppercase tracking-wider text-xs mb-2">Étape 3 : Visa &amp; Purpose of Visit (Motif du Séjour - Point Critique DTV)</p>
             <p className="text-gray-400 mb-3 leading-relaxed">
               C’est le cœur du formulaire qui pose le plus de problèmes aux utilisateurs sur les forums de discussion.
             </p>
@@ -214,7 +215,7 @@ export default function BlogArticleTdac() {
             <p className="text-amber-400 font-bold uppercase tracking-wider text-xs mb-2">Étape 4 : Address in Thailand (Votre adresse locale)</p>
             <ul className="list-disc pl-5 space-y-1.5 text-gray-400">
               <li><strong className="text-white">Accommodation Type :</strong> Sélectionnez le type de logement (Hotel, Condo, Private Residence).</li>
-              <li><strong className="text-white">Full Address & Province :</strong> Indiquez l’adresse complète de votre premier lieu de résidence. Le système utilise un menu déroulant pour la Province et le District : veillez à orthographier correctement le nom de votre hôtel ou résidence pour le retrouver facilement.</li>
+              <li><strong className="text-white">Full Address &amp; Province :</strong> Indiquez l’adresse complète de votre premier lieu de résidence. Le système utilise un menu déroulant pour la Province et le District : veillez à orthographier correctement le nom de votre hôtel ou résidence pour le retrouver facilement.</li>
             </ul>
           </div>
 
@@ -253,13 +254,54 @@ export default function BlogArticleTdac() {
         </p>
       </section>
 
-      {/* ── SECTION 5 ENRICHIE + LIEN VERS L'ARTICLE VISA RUN ── */}
+      {/* ── SECTION 5 ── */}
+      <section className="mb-12">
+        <h2 id="voyages-multiples" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
+          5. Voyages multi-destinations et excursions : La règle d’or
+        </h2>
+
+        <p className="mb-4">
+          Une question revient quotidiennement sur les groupes d’entraide : <strong className="text-white">si je viens en Thaïlande, que je fais un crochet de quelques jours dans un pays voisin, puis que je reviens, mon TDAC initial est-il toujours valable ?</strong>
+        </p>
+
+        <p className="mb-4">
+          La réponse est catégorique : <strong className="text-amber-400">non</strong>. La règle d’or est simple : <strong className="text-white">1 entrée = 1 TDAC</strong>.
+        </p>
+
+        <p className="mb-4">
+          Le système informatique ne considère pas la durée globale de vos vacances, mais uniquement votre passage physique à la frontière avec un numéro de vol précis. À chaque nouvelle entrée, la douane doit trouver un QR Code correspondant à ce jour-là.
+        </p>
+
+        <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-6">
+          <h3 className="text-lg font-bold text-white mb-3">L’exemple concret pour ne pas se tromper</h3>
+          <p className="mb-4">
+            Imaginons que vous atterrissiez à Bangkok le 10 octobre. Le 25 octobre, vous décidez de faire un crochet pour passer le week-end à Singapour, puis vous revenez en Thaïlande le 28 octobre.
+          </p>
+          <ul className="list-disc pl-5 space-y-2 text-gray-400">
+            <li>
+              <strong className="text-white">Avant votre départ de France :</strong> vous remplissez un premier TDAC pour votre arrivée initiale du 10 octobre.
+            </li>
+            <li>
+              <strong className="text-white">Pendant votre week-end à Singapour :</strong> vous ne pouvez pas réutiliser le premier QR Code. Vous devez générer un deuxième TDAC spécifiquement pour votre vol de retour Singapour-Bangkok du 28 octobre.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-sky-500/5 border border-sky-500/20 rounded-2xl p-5">
+          <p className="text-white font-semibold mb-2">L’astuce terrain</p>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Puisque le formulaire ne s’ouvre que dans la fenêtre des 72 heures précédant votre vol, vous devrez obligatoirement le faire depuis l’étranger. Pensez à enregistrer une photo de votre passeport dans les favoris de votre téléphone ou à utiliser un gestionnaire de mots de passe : cela vous permettra de générer votre nouveau TDAC en deux minutes depuis un café, juste avant de filer à l’aéroport.
+          </p>
+        </div>
+      </section>
+
+      {/* ── SECTION 6 ── */}
       <section className="mb-12">
         <h2 id="entrees-terrestres-laos" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          5. Visa Run et frontières terrestres : Le cas du Laos
+          6. Visa Run et frontières terrestres : Le cas du Laos
         </h2>
         <p className="mb-4">
-          Si vous êtes basé à Phuket ou Bangkok et que vous effectuez un <strong>Visa Run à Vientiane (Laos)</strong> pour récupérer ou valider un module de votre dossier, la question du retour par voie terrestre se pose de manière concrète. Le TDAC s’applique-t-il au fameux Pont de l’Amitié à Nong Khai ?
+          Si vous êtes basé à Phuket ou Bangkok et que vous effectuez un <strong>Visa Run à Vientiane (Laos)</strong> pour récupérer ou valider un module de votre dossier, la question du retour par voie terrestre se pose de manière concrète. Le TDAC s’applique-t-il au fameux Pont de l’Amitié à Nong Khai ? Le principe d’une entrée = un TDAC vu plus haut s’applique bien évidemment ici aussi.
         </p>
         <p className="mb-4">
           La réponse est <strong className="text-white">oui</strong>. Les principaux postes frontières terrestres thaïlandais sont désormais équipés de terminaux de contrôle numériques. Lors de votre remplissage en ligne, vous devez simplement sélectionner l’option <em>« Land Border Checking Point »</em> et indiquer le nom exact du poste frontière (ex: Nong Khai Border Post). 
@@ -272,10 +314,10 @@ export default function BlogArticleTdac() {
         </p>
       </section>
 
-      {/* ── SECTION 6 ── */}
+      {/* ── SECTION 7 ── */}
       <section className="mb-12">
         <h2 id="pieges-eviter" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          6. Attention aux faux sites payants (Red Flags)
+          7. Attention aux faux sites payants (Red Flags)
         </h2>
         <p className="mb-4">
           Le déploiement global du TDAC a vu naître une multitude de plateformes frauduleuses imitant à la perfection l’identité visuelle et les logos du gouvernement thaïlandais.
@@ -312,7 +354,7 @@ export default function BlogArticleTdac() {
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-sky-400 text-xs font-semibold mb-3 uppercase tracking-wider">Veille Légale & Formalités</p>
+          <p className="text-sky-400 text-xs font-semibold mb-3 uppercase tracking-wider">Veille Légale &amp; Formalités</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Installé à Phuket, j’accompagne au quotidien les expatriés et les digital nomads francophones dans la sécurisation de leurs statuts légaux. En contact permanent avec les bureaux de l’immigration et les écoles certifiées, je décrypte les infrastructures numériques pour vous garantir une installation en Thaïlande fluide, légale et sans stress.
           </p>
@@ -343,7 +385,7 @@ export default function BlogArticleTdac() {
 
       {/* ── FAQ VISUELLE COMPLÈTE (5 QUESTIONS COMPLÈTES) ── */}
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-white mb-3">Questions Fréquentes — TDAC & Formalités d’Arrivée</h2>
+        <h2 className="text-2xl font-bold text-white mb-3">Questions Fréquentes — TDAC &amp; Formalités d’Arrivée</h2>
         <div className="space-y-4">
           <details className="group border border-gray-800 rounded-xl overflow-hidden">
             <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none bg-[#111111] hover:bg-[#161616] transition-colors">
@@ -377,11 +419,11 @@ export default function BlogArticleTdac() {
 
           <details className="group border border-gray-800 rounded-xl overflow-hidden">
             <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none bg-[#111111] hover:bg-[#161616] transition-colors">
-              <span className="text-white font-semibold text-sm">Faut-il remplir un nouveau TDAC à chaque entrée en Thaïlande ?</span>
+              <span className="text-white font-semibold text-sm">Mon TDAC reste-t-il valable si je sors quelques jours de Thaïlande ?</span>
               <span className="text-gray-500 text-lg flex-none transition-transform group-open:rotate-45">+</span>
             </summary>
             <div className="px-5 py-4 bg-[#0d0d0d] border-t border-gray-800">
-              <p className="text-gray-400 text-sm leading-relaxed">Oui. Le TDAC est une carte d’arrivée numérique unique liée à un voyage spécifique (numéro de vol et date d’arrivée définis). Vous devez générer un nouveau QR Code à chaque fois que vous passez la frontière, quel que soit votre statut ou votre visa.</p>
+              <p className="text-gray-400 text-sm leading-relaxed">Non. Le TDAC est une carte d’arrivée numérique unique liée à un voyage spécifique (numéro de vol et date d’arrivée définis). La règle est simple : une entrée égale un TDAC. Si vous partez quelques jours dans un pays voisin puis revenez, vous devez générer un nouveau QR Code pour votre vol de retour.</p>
             </div>
           </details>
 

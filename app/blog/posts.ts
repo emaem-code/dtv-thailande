@@ -152,7 +152,7 @@ export const blogPosts = [
     excerpt: "Le guide étape par étape pour remplir le nouveau formulaire TDAC obligatoire pour entrer en Thaïlande. Évitez les blocages à l'embarquement.",
     date: '09 Juin 2026',
     publishedAt: '2026-06-09',
-    modifiedAt: '2026-06-11',
+    modifiedAt: '2026-07-23',
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
