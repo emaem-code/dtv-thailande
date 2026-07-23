@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin',
+  title: 'Où vivre en Thaïlande en 2026 : le comparatif terrain',
+  shortTitle: 'Où vivre en Thaïlande',
+  description: "Budgets réels, loyers 2026, ambiance et vécu d'expatriés à Phuket, Pattaya, Bangkok et Hua Hin. Le comparatif honnête pour choisir votre ville.",
+  excerpt: "Combien coûte vraiment la vie à Phuket, Pattaya, Bangkok et Hua Hin ? Deux expatriés racontent leur quotidien et leurs budgets réels.",
+  date: '28 Juillet 2026',
+  publishedAt: '2026-07-28T07:00:00Z',
+  modifiedAt: '2026-07-28T07:00:00Z',
+  category: 'Vie pratique',
+  tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
+  hoverBorder: 'hover:border-amber-500/50',
+  image: '/logo.png',
+},
+  {
     slug: '20000-thb-immigration-thailande-regle-especes',
     title: "20 000 bahts à l'immigration thaïlandaise : la loi oubliée qui refoule des voyageurs (2026)",
     shortTitle: 'Règle des 20 000 THB',
