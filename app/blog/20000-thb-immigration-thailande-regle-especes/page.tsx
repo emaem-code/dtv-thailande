@@ -53,7 +53,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-07-24T07:00:00Z",
-  "dateModified": "2026-07-21T12:00:00Z"
+  "dateModified": "2026-07-24T12:00:00Z"
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
