@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import BlogNavigation from '../components/BlogNavigation';
 import { getSortedBlogPosts } from './posts';
+export const revalidate = 600;
 
 // ─── MÉTADONNÉES SEO DE L'ACCUEIL DU BLOG (CORRIGÉES) ───
 export const metadata: Metadata = {

@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'tm47-rapport-90-jours-thailande',
+  title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
+  shortTitle: 'Rapport des 90 jours',
+  description: "Le rapport des 90 jours (TM47) est obligatoire et méconnu. Qui doit le faire, quand, comment, et les amendes encourues. Le guide complet 2026.",
+  excerpt: "Une obligation légale dont personne ne parle en français. Découvrez qui est vraiment concerné par le TM47 — et pourquoi beaucoup de détenteurs de DTV ne le feront jamais.",
+  date: '4 Août 2026',
+  publishedAt: '2026-08-04T07:00:00Z',
+  modifiedAt: '2026-08-04T07:00:00Z',
+  category: 'Formalités',
+  tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
+  hoverBorder: 'hover:border-sky-500/50',
+  image: '/logo.png',
+},
+  {
   slug: 'ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin',
   title: 'Où vivre en Thaïlande en 2026 : le comparatif terrain',
   shortTitle: 'Où vivre en Thaïlande',
