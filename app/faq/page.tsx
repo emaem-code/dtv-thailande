@@ -52,19 +52,31 @@ export default function FaqPage() {
       id: "investissements",
       category: "Finances & Épargne",
       q: "Mes investissements (Crypto, PEA, Actions) comptent-ils comme garantie ?",
-      a: "Malheureusement, non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Nous vous accompagnons sur la présentation de vos relevés (y compris de néobanques comme Revolut ou Boursorama) pour qu'ils respectent les stricts standards consulaires."
+      a: (
+        <>
+          Malheureusement, non. L&apos;ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d&apos;épargne classique. Notre <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-500 hover:underline font-medium">tableau des comptes acceptés et refusés</Link> détaille chaque support, des néobanques comme Revolut au compte professionnel de SASU.
+        </>
+      )
     },
     {
       id: "freelance",
       category: "Statut Freelance & Télétravail",
       q: "Je suis Auto-entrepreneur / Indépendant et n'ai pas d'employeur. Est-ce un problème ?",
-      a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus si le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Notre agence se charge de 'traduire' la réalité de votre micro-entreprise (Kbis, URSSAF, Sirene, portfolio) en un dossier administratif irréfutable aux yeux des officiers d'immigration thaïlandais."
+      a: (
+        <>
+          C&apos;est le profil le plus courant, mais aussi celui qui subit le plus de refus si le dossier est mal monté. L&apos;ambassade s&apos;attend à des fiches de paie classiques. Notre <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-500 hover:underline font-medium">guide du dossier freelance</Link> détaille les six documents qui remplacent la fiche de paie, et notre <Link href="/blog/guide-depot-dossier-evisa-dtv" className="text-amber-500 hover:underline font-medium">tutoriel du portail e-Visa</Link> vous montre comment les déposer sans erreur.
+        </>
+      )
     },
     {
       id: "softpower",
       category: "Soft Power (Écoles & Immersion)",
       q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-      a: "Le risque d'utiliser une école 'fantôme' ou non agréée est une interdiction de territoire. C'est pourquoi nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l'Éducation). Votre lettre d'acceptation est garantie conforme à 100%."
+      a: (
+        <>
+          Le risque d&apos;utiliser une école &apos;fantôme&apos; ou non agréée est une interdiction de territoire. C&apos;est pourquoi nous ne travaillons qu&apos;avec un réseau fermé d&apos;établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l&apos;Éducation). Notre <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">guide des écoles Soft Power</Link> explique comment reconnaître une école certifiée d&apos;une usine à visas.
+        </>
+      )
     },
     {
       id: "famille",
@@ -73,6 +85,7 @@ export default function FaqPage() {
       a: (
         <>
           Attention, piège majeur : <a href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">selon les directives officielles</a>, le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Si vous n'êtes pas mariés, la demande d'un visa 'accompagnant' sera automatiquement rejetée. Mais rassurez-vous, nous avons des stratégies d'optimisation pour permettre aux couples pacsés de sécuriser leurs départs ensemble via des dossiers individuels synchronisés.
+       {' '}Le détail des unions reconnues et de la double légalisation est dans notre <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-amber-500 hover:underline font-medium">guide du DTV en famille</Link>.
         </>
       )
     },
@@ -83,6 +96,7 @@ export default function FaqPage() {
       a: (
         <>
           Le visa DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année ET que vous y rapatriez des revenus. Dans le cadre de nos offres, nous vous fournissons les recommandations de base pour comprendre <a href="https://www.impots.gouv.fr/international-particulier/les-conventions-internationales" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">la convention fiscale franco-thaïlandaise</a> et optimiser votre calendrier de voyage.
+        {' '}Notez que le seuil des 180 jours conditionne aussi vos <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-500 hover:underline font-medium">obligations déclaratives sur place</Link>.
         </>
       )
     }
