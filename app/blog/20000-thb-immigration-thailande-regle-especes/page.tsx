@@ -335,7 +335,7 @@ export default function BlogArticleImmigration20000THB() {
         <ul className="space-y-4 mb-6 list-none pl-0">
           <li className="flex items-start gap-3 text-gray-300">
             <span className="text-amber-500 mt-1 flex-none">⚠️</span>
-            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos.</div>
+            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos. Nous détaillons ce durcissement dans notre <Link href="/blog/fin-exemption-visa-60-jours" className="text-amber-400 hover:underline font-medium">enquête sur les frontières terrestres</Link>.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
             <span className="text-amber-500 mt-1 flex-none">⚠️</span>

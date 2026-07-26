@@ -175,7 +175,7 @@ export default function ArticleComparatifVisas() {
           <li><strong className="text-white">Coût :</strong> 5 000 THB (environ 135 €). Prévoyez 1 900 THB par extension, plus le coût des billets d'avion pour les sorties obligatoires.</li>
           <li><strong className="text-white">Durée :</strong> Valable 6 mois. Séjour de 60 jours par entrée (extensible à 90 jours).</li>
           <li><strong className="text-white">Finances :</strong> Preuve d'un solde global d'environ 700 € sur les 3 derniers mois (varie selon les ambassades).</li>
-          <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires et chronophages.</li>
+          <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires, chronophages, et <Link href="/blog/fin-exemption-visa-60-jours" className="text-emerald-400 hover:underline font-medium">de plus en plus mal vus à la frontière</Link>.</li>
         </ul>
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-4">
           <p className="text-red-400 font-semibold mb-2">⚠️ Mise à jour avril 2026 :</p>
