@@ -124,8 +124,11 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
             <h3 className="text-xl font-bold text-white mb-2">Aéroport international de Phuket - HKT</h3>
             <p>
               Plus petit, mais souvent congestionné. Ici, pas de train : vous dépendez entièrement du
-              réseau routier pour rejoindre Patong, Rawai, Kathu ou Phuket Town. Le choix entre taxi,
-              Grab, Bolt ou InDrive devient donc beaucoup plus stratégique.
+              réseau routier pour rejoindre{' '}
+              <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-sky-400 hover:underline font-medium">
+                Patong, Rawai, Kathu ou Phuket Town
+              </Link>
+              . Le choix entre taxi, Grab, Bolt ou InDrive devient donc beaucoup plus stratégique.
             </p>
           </div>
         </div>
@@ -340,7 +343,11 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           </li>
           <li>
             <strong className="text-white">Impact sur le DTV :</strong> sans reçu TM30, l&apos;immigration
-            peut refuser votre rapport de 90 jours ou votre extension de 180 jours.
+            peut refuser votre{' '}
+            <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+              rapport de 90 jours (TM47)
+            </Link>{' '}
+            ou votre extension de 180 jours.
           </li>
           <li>
             <strong className="text-white">Stratégie :</strong> exigez ce justificatif avant toute

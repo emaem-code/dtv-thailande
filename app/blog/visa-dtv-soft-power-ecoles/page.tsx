@@ -153,7 +153,7 @@ export default function BlogArticleSoftPower() {
         </p>
       </header>
 
-      {/* ── INTRODUCTION ── */}
+     {/* ── INTRODUCTION ── */}
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>
           Pour obtenir le très convoité Visa DTV (5 ans d'expatriation), tout le monde n'a pas le profil
@@ -171,6 +171,13 @@ export default function BlogArticleSoftPower() {
             prouver vos 500 000 THB d'épargne
           </Link>
           .
+        </p>
+        <p>
+          Si vous hésitez encore entre les différents statuts,{' '}
+          <Link href="/blog/comparatif-visas-thailande" className="text-emerald-500 hover:underline font-medium">
+            notre comparatif des visas longue durée
+          </Link>{' '}
+          situe le DTV face au LTR, au Non-ED et au METV.
         </p>
         <p className="text-white font-medium border-l-4 border-emerald-500 pl-5 py-1">
           Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. En 2025,

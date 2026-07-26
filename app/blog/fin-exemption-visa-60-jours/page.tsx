@@ -340,6 +340,13 @@ export default function ArticleFinExemption() {
             </Link>
           </div>
         </div>
+        <p className="mt-4">
+          Le DTV n&apos;est pas la seule option longue durée —{' '}
+          <Link href="/blog/comparatif-visas-thailande" className="text-amber-400 hover:underline font-medium">
+            comparez-le au LTR, au Non-ED et au Non-O
+          </Link>{' '}
+          avant de vous décider.
+        </p>
       </section>
 
       {/* ── ENCART AUTEUR ── */}

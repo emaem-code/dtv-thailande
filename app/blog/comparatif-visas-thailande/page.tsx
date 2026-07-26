@@ -294,6 +294,13 @@ export default function ArticleComparatifVisas() {
               </div>
             </li>
           </ul>
+          <p className="mt-6 text-sm text-gray-400">
+            Une fois le visa choisi, reste la vraie question : où poser ses valises ?{' '}
+            <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-emerald-400 hover:underline font-medium">
+              Notre comparatif terrain de Phuket, Pattaya, Bangkok et Hua Hin
+            </Link>{' '}
+            détaille les budgets réels et les loyers 2026 ville par ville.
+          </p>
         </div>
       </section>
 

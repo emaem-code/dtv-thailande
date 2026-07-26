@@ -355,7 +355,11 @@ export default function BlogArticleImmigration20000THB() {
           </li>
         </ul>
         <p>
-          À l&apos;inverse, un DTV avec un billet de retour ou de continuation, une adresse en Thaïlande déclarée (TM30 en règle) et quelques centaines d&apos;euros en poche coche toutes les cases du voyageur sans histoire.
+          À l&apos;inverse, un DTV avec un billet de retour ou de continuation, une adresse en Thaïlande déclarée (TM30 en règle),{' '}
+          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-400 hover:underline font-medium">
+            ses rapports de 90 jours à jour
+          </Link>{' '}
+          et quelques centaines d&apos;euros en poche coche toutes les cases du voyageur sans histoire.
         </p>
       </section>
 
