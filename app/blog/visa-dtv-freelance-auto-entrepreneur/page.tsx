@@ -281,7 +281,7 @@ export default function ArticleFreelanceDTV() {
                 <span className="text-2xl font-black text-purple-400 flex-shrink-0">04</span>
                 <div>
                   <p className="text-white font-bold mb-1">Portfolio de missions ou contrats clients</p>
-                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve de la nature 'remote' de votre activity</p>
+                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve de la nature 'remote' de votre activité</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     L’ambassade doit comprendre que vous travaillez pour des clients non-thaïlandais depuis n’importe où dans le monde. Un PDF propre listant vos 3 à 5 derniers projets (nom du client, pays, nature de la mission, montant) suffit. Les contrats ou bons de commande sont un plus.
                   </p>
@@ -413,7 +413,7 @@ export default function ArticleFreelanceDTV() {
           C’est l’erreur la plus fréquente chez les freelances en société.
           Beaucoup présentent les relevés de leur compte professionnel SASU pour
           prouver les 500 000 THB. L’ambassade rejette systématiquement ces
-          revelés : l’argent appartient à la société, pas à vous en tant que
+          relevés : l’argent appartient à la société, pas à vous en tant que
           personne physique.
         </p>
 

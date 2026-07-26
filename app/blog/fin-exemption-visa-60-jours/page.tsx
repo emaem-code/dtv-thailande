@@ -53,7 +53,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-11",
-  "dateModified": "2026-06-11",
+  "dateModified": "2026-07-26",
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ const faqSchema = {
       "name": "L'exemption de 60 jours en Thaïlande est-elle officiellement annulée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). À la date du 11 juin 2026, la loi des 60 jours court encore techniquement pour les vrais touristes."
+        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). À la date du 26 juillet 2026, la loi des 60 jours court encore techniquement pour les vrais touristes."
       }
     },
     {
@@ -126,7 +126,7 @@ export default function ArticleFinExemption() {
           Visa Run Thaïlande (2026) : Fin de l'exemption à <span className="text-red-400">60 jours</span> aux frontières terrestres ?
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 12 min · Mis à jour : 11 juin 2026 · Par{" "}
+          Lecture : 12 min · Mis à jour : 26 juillet 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
@@ -157,14 +157,20 @@ export default function ArticleFinExemption() {
       {/* ── SECTION 1 ── */}
       <section className="mb-12" id="loi-vs-realite">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          1. La loi des 60 jours vs La réalité du terrain (Juin 2026)
+          1. La loi des 60 jours vs La réalité du terrain (Juillet 2026)
         </h2>
         <p className="mb-4">
           Clarifions immédiatement le point légal. Le 19 mai 2026, le cabinet thaïlandais a effectivement approuvé l'abrogation de l'exemption touristique de 60 jours (instaurée en 2024) pour acter le retour strict à une exemption de 30 jours pour 54 pays (dont la France, la Belgique, la Suisse). <strong>Cependant, cette mesure n'est pas encore entrée en vigueur.</strong>
         </p>
         <p className="mb-4">
-          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="text-white">Royal Gazette</em>). À la date d'écriture de cet article (<strong>11 juin 2026</strong>), cette publication n'a pas encore eu lieu. Tant que cette notification n'est pas publique, le régime des 60 jours est toujours techniquement applicable.
+          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="...">Royal Gazette</em>). Tant que cette notification n'est pas publique, le régime des 60 jours reste techniquement applicable.
         </p>
+        <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-xl p-5 my-6">
+          <p className="text-white font-semibold mb-2">🔎 Veille active — vérifié le 26 juillet 2026</p>
+          <p className="text-sm text-gray-300">
+            À ce jour, <strong className="text-white">aucune publication à la Royal Gazette n'a été annoncée</strong>. L'exemption de 60 jours reste donc en vigueur pour les ressortissants français, belges et suisses. Nous vérifions cette page chaque semaine et la datons à chaque contrôle.
+          </p>
+        </div>
         
         <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mt-4">
           <p className="text-sky-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>

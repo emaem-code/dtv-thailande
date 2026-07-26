@@ -291,8 +291,8 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
         <p className="mb-4">
           Deux raisons à cela. Les distributeurs sont situés <strong className="text-white">après</strong>{' '}
           le contrôle d&apos;immigration, et depuis 2026 les retraits Wise sont bloqués aux ATM
-          thaïlandais. Prévoyez <strong className="text-white">1 000 à 2 000 € en billets</strong> dans
-          votre bagage cabine.
+          thaïlandais. Comptez <strong className="text-white">600 € minimum en billets</strong> pour couvrir
+          les 20 000 THB exigibles à l'entrée et vos frais consulaires — davantage si vous vous installez.
         </p>
         <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5">
           <p className="text-sm text-gray-300">
