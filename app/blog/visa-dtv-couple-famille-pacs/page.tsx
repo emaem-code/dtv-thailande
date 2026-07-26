@@ -234,7 +234,7 @@ export default function ArticleDtvFamille() {
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">
             <h4 className="text-amber-500 font-bold mb-2">Option A : La double demande de DTV</h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              De nombreux couples choisissent de demander deux visas DTV distincts. Le premier partenaire postule au titre de la catégorie <em>Workcation / Freelance</em>. Le second, s'il ne dispose pas d'une activité éligible au télétravail, explore la voie du <em>Soft Power</em> en s'inscrivant dans un programme culturel vérifié (cours de Muay Thaï intensifs, académie de cuisine agréée par le Ministère de l'Éducation).
+              De nombreux couples choisissent de demander deux visas DTV distincts. Le premier partenaire postule au titre de la catégorie <em>Workcation / Freelance</em>. Le second, s'il ne dispose pas d'une activité éligible au télétravail, explore la <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">voie du Soft Power</Link> en s'inscrivant dans un programme culturel vérifié (cours de Muay Thaï intensifs, académie de cuisine agréée par le Ministère de l'Éducation).
             </p>
           </div>
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">

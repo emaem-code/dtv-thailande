@@ -546,6 +546,19 @@ export default function ArticleFreelanceDTV() {
             </div>
           ))}
         </div>
+        <p className="mt-6">
+          Vous remarquerez que la voie Soft Power revient dans deux profils sur trois. C’est
+          logique : en passant par une école certifiée, vous n’avez plus à défendre votre statut
+          professionnel devant l’officier consulaire, qui se concentre alors uniquement sur votre
+          relevé bancaire. Encore faut-il choisir un établissement réellement homologué —{' '}
+          <Link
+            href="/blog/visa-dtv-soft-power-ecoles"
+            className="text-amber-400 hover:underline font-medium"
+          >
+            notre guide des écoles Soft Power
+          </Link>{' '}
+          détaille comment repérer les écoles fantômes qui font annuler les visas.
+        </p>
       </section>
 
       {/* ── NOUVELLE SECTION 7 : DÉLAIS DE PRÉPARATION ── */}

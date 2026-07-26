@@ -427,7 +427,7 @@ export default function BlogArticleDTV() {
           6. Le cas spécifique du DTV &quot;Soft Power&quot;
         </h2>
         <p className="mb-4">
-          Si l&apos;exigence des 500 000 THB reste immuable pour tous les profils, le DTV Soft Power
+          Si l&apos;exigence des 500 000 THB reste immuable pour tous les profils, le <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">DTV Soft Power</Link>
           offre un{' '}
           <strong className="text-white">avantage colossal sur le reste de la documentation</strong>.
         </p>

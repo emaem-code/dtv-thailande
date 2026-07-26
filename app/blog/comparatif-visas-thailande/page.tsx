@@ -242,7 +242,7 @@ export default function ArticleComparatifVisas() {
           5. Le Visa DTV : La révolution des Indépendants
         </h2>
         <p className="mb-4">
-          Conçu pour les <em>digital nomads</em>, freelances et profils culturels, il élimine les frictions des anciens statuts.
+          Conçu pour les <em>digital nomads</em>, freelances et <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">profils culturels via la voie Soft Power</Link>, il élimine les frictions des anciens statuts.
         </p>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-emerald-500/50 text-gray-300 text-sm bg-emerald-500/5 p-4 rounded-r-xl">
           <li>✅ <strong className="text-white">Coût :</strong> Seulement 10 000 THB (frais consulaires).</li>
