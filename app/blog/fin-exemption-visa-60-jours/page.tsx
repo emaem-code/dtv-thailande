@@ -145,7 +145,7 @@ export default function ArticleFinExemption() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de cette enquête :</h2>
         <ul className="space-y-3">
-          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain (Juin 2026)</a></li>
+          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain (Juillet 2026)</a></li>
           <li><a href="#profil-visa-runner" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi l'immigration réduit-elle les tampons à 30 jours ?</a></li>
           <li><a href="#piege-frontieres-terrestres" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège des frontières terrestres : Classement de sévérité</a></li>
           <li><a href="#aerien-vs-terrestre" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Aérien vs Terrestre : Un vol depuis Paris donne-t-il toujours 60 jours ?</a></li>
