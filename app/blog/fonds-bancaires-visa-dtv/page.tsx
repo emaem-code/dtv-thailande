@@ -9,7 +9,7 @@ import type { Metadata } from 'next';
 // ─── MÉTADONNÉES SEO DE L’ARTICLE ───
 export const metadata: Metadata = {
   title: 'Preuve bancaire visa DTV : 500 000 THB, 3 ou 6 mois ?',
-  description: "Faut‑il bloquer 15 000 € pour le Visa DTV Thaïlande ? Découvrez les exigences officielles des ambassades sur l'historique de 3 à 6 mois et les erreurs à éviter.",
+  description: "Faut-il bloquer 15 000 € pour le Visa DTV Thaïlande ? La vérité sur l'historique bancaire de 3 mois, les comptes acceptés et l'erreur qui fait refuser les dossiers.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/fonds-bancaires-visa-dtv', // <-- AJOUT DU CANONICAL ICI
   },
@@ -95,7 +95,7 @@ const faqSchema = {
       name: 'Faut-il 3 ou 6 mois d\'historique bancaire pour le visa DTV ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Cela dépend de l'ambassade. L'ambassade de Paris exige généralement 6 mois d'historique. Les ambassades en Asie (Vientiane, Kuala Lumpur, Phnom Penh) acceptent souvent 3 mois. C'est pourquoi beaucoup de candidats optent pour un Visa Run en Asie du Sud-Est.",
+        text: "L'exigence officielle est de 3 mois d'historique, y compris à l'ambassade de Paris qui le publie explicitement. La rumeur des 6 mois vient de dossiers où l'officier a demandé des relevés complémentaires face à des mouvements suspects. Ce qui change réellement d'une ambassade à l'autre, ce n'est pas la durée mais l'exigence de traduction assermentée.",
       },
     },
     {
@@ -114,9 +114,9 @@ const ambassades = [
   {
     ville: 'Paris',
     pays: '🇫🇷 France',
-    delai: '6 mois',
+    delai: '3 mois',
     traduction: 'Assermentée obligatoire',
-    traitement: '5–10 jours',
+    traitement: '3–4 semaines',
     difficulte: 'Élevée',
     difficulteColor: 'text-red-400',
   },
@@ -125,7 +125,7 @@ const ambassades = [
     pays: '🇱🇦 Laos',
     delai: '3 mois',
     traduction: 'Souvent acceptée en français',
-    traitement: '3 jours ouvrables',
+    traitement: '3–4 jours ouvrables',
     difficulte: 'Faible',
     difficulteColor: 'text-emerald-400',
   },
@@ -134,7 +134,7 @@ const ambassades = [
     pays: '🇲🇾 Malaisie',
     delai: '3 mois',
     traduction: 'Souvent acceptée',
-    traitement: '3–5 jours',
+    traitement: '3–4 jours ouvrables',
     difficulte: 'Faible',
     difficulteColor: 'text-emerald-400',
   },
@@ -150,9 +150,9 @@ const ambassades = [
   {
     ville: 'Genève',
     pays: '🇨🇭 Suisse',
-    delai: '6 mois',
+    delai: '3 mois',
     traduction: 'Assermentée souvent exigée',
-    traitement: '7–12 jours',
+    traitement: '3–4 semaines',
     difficulte: 'Élevée',
     difficulteColor: 'text-red-400',
   },
@@ -213,9 +213,10 @@ export default function BlogArticleDTV() {
         <p>
           Cependant, un critère précis cristallise toutes les angoisses et sature les groupes
           d&apos;entraide : la fameuse preuve financière des{' '}
-          <strong className="text-white">500 000 Bahts (environ 13 000 €)</strong>. Faut-il laisser
-          cet argent bloqué pendant 6 mois ? Un virement de dernière minute est-il accepté ?
-          L&apos;ambassade de Paris est-elle plus stricte que celle de Vientiane ?
+          <strong className="text-white">500 000 Bahts (environ 13 000 €)</strong>. Pourquoi tant
+          de candidats sont-ils convaincus qu&apos;il faut six mois d&apos;historique ? Un virement
+          de dernière minute passe-t-il ? L&apos;ambassade de Paris est-elle vraiment plus stricte
+          que celle de Vientiane ?
         </p>
         <p className="text-white font-medium border-l-4 border-[#F59E0B] pl-5 py-1">
           Face à l&apos;avalanche de rumeurs et de témoignages contradictoires, voici la réponse
@@ -229,7 +230,7 @@ export default function BlogArticleDTV() {
         <h2 className="text-xl font-bold text-white mb-4">Sommaire de l'article</h2>
         <ul className="space-y-3">
           <li><a href="#logique-financiere" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi la Thaïlande exige-t-elle 500 000 THB ?</a></li>
-          <li><a href="#delais-ambassades" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. La règle des 3 mois vs 6 mois : la vérité selon les ambassades</a></li>
+          <li><a href="#delais-ambassades" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. Trois mois partout : d'où vient la rumeur des six mois ?</a></li>
           <li><a href="#erreur-virement" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">3. L'erreur fatale : le virement de dernière minute</a></li>
           <li><a href="#types-comptes" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">4. Quels types de comptes bancaires sont acceptés ?</a></li>
           <li><a href="#taux-change" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">5. La règle d'or du taux de change (EUR / THB)</a></li>
@@ -264,7 +265,7 @@ export default function BlogArticleDTV() {
       {/* ── SECTION 2 + TABLEAU ── */}
       <section className="mb-12">
         <h2 id="delais-ambassades" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          2. La règle des 3 mois vs 6 mois : la vérité selon les ambassades
+          2. Trois mois partout : d'où vient la rumeur des six mois ?
         </h2>
         <p className="mb-4">
           C&apos;est ici que la confusion règne en maître. La réponse est en réalité :{' '}
@@ -291,8 +292,9 @@ export default function BlogArticleDTV() {
             </svg>
           </a>
           , il est très fréquemment demandé un historique bancaire irréprochable sur les{' '}
-          <strong className="text-white">6 derniers mois</strong>. Le solde ne doit à aucun moment
-          descendre sous l'équivalent de 500 000 THB sur ce semestre entier.
+          <strong className="text-white">3 derniers mois</strong>. Le solde ne doit à aucun moment
+          descendre sous 15 000 € sur ce trimestre — notez que Paris raisonne en euros et non en
+          bahts, ce qui vous met à l&apos;abri des variations de change.
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
@@ -494,6 +496,41 @@ export default function BlogArticleDTV() {
             </div>
           ))}
         </div>
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-white/10 bg-[#111111]">
+          <table className="w-full min-w-[560px] text-left text-sm">
+            <thead className="border-b border-white/10 text-xs uppercase tracking-widest text-amber-500">
+              <tr>
+                <th className="px-5 py-4">Ambassade</th>
+                <th className="px-5 py-4">Frais consulaires</th>
+                <th className="px-5 py-4">Source</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/10 text-gray-400">
+              <tr>
+                <td className="px-5 py-4 font-semibold text-white">Paris 🇫🇷</td>
+                <td className="px-5 py-4">350 €</td>
+                <td className="px-5 py-4">Tarif publié par l&apos;ambassade</td>
+              </tr>
+              <tr>
+                <td className="px-5 py-4 font-semibold text-white">Vientiane 🇱🇦</td>
+                <td className="px-5 py-4">10 000 THB (~265 €)</td>
+                <td className="px-5 py-4">Réglé en espèces au guichet</td>
+              </tr>
+              <tr>
+                <td className="px-5 py-4 font-semibold text-white">Kuala Lumpur 🇲🇾</td>
+                <td className="px-5 py-4">1 600 MYR — <strong className="text-white">347,20 €</strong></td>
+                <td className="px-5 py-4">Relevé bancaire personnel, 15 février 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-sm text-gray-400">
+          Le montant de Kuala Lumpur est celui débité sur mon propre compte le 15 février 2026.
+          Il révèle un fait contre-intuitif : à 347 €, la Malaisie coûte quasiment aussi cher que
+          Paris. L&apos;économie réelle d&apos;un dépôt en Asie ne se joue pas sur les frais
+          consulaires, mais sur la traduction assermentée évitée et sur trois semaines de délai
+          gagnées.
+        </p>
       </section>
 
       {/* ── SECTION 8 ── */}

@@ -230,7 +230,9 @@ export default function ArticleComparatifVisas() {
           </div>
           <div className="bg-[#111111] p-6 rounded-2xl border border-white/5">
             <h3 className="text-white font-bold mb-2">Le Visa Non-O (Conjoint)</h3>
-            <p className="text-gray-400 text-sm mb-2">Pour les conjoints de Thaïlandais(es). Exige 400 000 THB bloqués en banque ou 40 000 THB de revenus mensuels.</p>
+            <p className="text-gray-400 text-sm mb-2">Pour les conjoints de Thaïlandais(es), mais aussi pour les personnes à charge
+d'un titulaire de Non-B. Exige 400 000 THB bloqués en banque ou 40 000 THB de
+revenus mensuels.</p>
             <p className="text-red-400 text-sm">Attention : ce visa n'autorise pas à travailler de base.</p>
           </div>
         </div>
