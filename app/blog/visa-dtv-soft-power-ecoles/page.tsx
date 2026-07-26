@@ -157,13 +157,20 @@ export default function BlogArticleSoftPower() {
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>
           Pour obtenir le très convoité Visa DTV (5 ans d'expatriation), tout le monde n'a pas le profil
-          d'un freelance capable de produire des liasses fiscales, des contrats clients et des bilans de
-          société irréprochables.
+          d'un{' '}
+          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-emerald-500 hover:underline font-medium">
+            freelance capable de produire des liasses fiscales
+          </Link>
+          , des contrats clients et des bilans de société irréprochables.
         </p>
         <p>
           C'est là qu'intervient la voie royale : <strong className="text-white">la catégorie Soft Power</strong>.
           En vous inscrivant à une formation culturelle en Thaïlande, vous contournez l'intégralité des
-          exigences professionnelles. Votre seule préoccupation devient alors de prouver vos 500 000 THB d'épargne.
+          exigences professionnelles. Votre seule préoccupation devient alors de{' '}
+          <Link href="/blog/fonds-bancaires-visa-dtv" className="text-emerald-500 hover:underline font-medium">
+            prouver vos 500 000 THB d'épargne
+          </Link>
+          .
         </p>
         <p className="text-white font-medium border-l-4 border-emerald-500 pl-5 py-1">
           Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. En 2025,
@@ -296,7 +303,11 @@ export default function BlogArticleSoftPower() {
         <p>
           Lorsque vous terminerez votre cursus de cuisine (après vos 6 mois), l'école vous délivrera un{' '}
           <strong>diplôme officiel</strong>. Lors de votre première sortie et réentrée en Thaïlande, l'officier
-          d'immigration à la douane est en droit de vous demander des comptes. Présenter votre diplôme et
+          d'immigration{' '}
+          <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-emerald-500 hover:underline font-medium">
+            à la douane est en droit de vous demander des comptes
+          </Link>
+          . Présenter votre diplôme et
           vos registres de présence validés est votre meilleur bouclier pour justifier de la légitimité de
           votre statut Soft Power.
         </p>
