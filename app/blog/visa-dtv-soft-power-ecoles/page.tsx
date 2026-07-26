@@ -63,7 +63,7 @@ const faqSchema = {
       name: "Combien d'heures de cours sont obligatoires pour le DTV ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Il n'y a pas de volume horaire légal strict, mais la norme acceptée par l'immigration est un cursus de 8 à 10 cours répartis sur une période maximale de 6 mois, pour un budget d'environ 20 000 THB.",
+        text: "Il n'y a pas de volume horaire légal strict, mais le format aujourd'hui attendu par les ambassades est un cursus de 9 mois, soit une trentaine de séances à répartir librement sur la période. Comptez environ 37 500 THB pour un programme de cuisine certifié incluant les documents consulaires.",
       },
     },
     {
@@ -180,9 +180,11 @@ export default function BlogArticleSoftPower() {
           situe le DTV face au LTR, au Non-ED et au METV.
         </p>
         <p className="text-white font-medium border-l-4 border-emerald-500 pl-5 py-1">
-          Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. En 2025,
-          plus de 10 000 visas ont été annulés par le gouvernement. Voici la vérité du terrain pour choisir
-          la bonne activité, sécuriser votre dossier, et éviter l'interdiction de territoire.
+          Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. Le grand
+          ménage mené par l'immigration en 2025 a d'abord visé les fausses écoles de langues sous statut
+          étudiant (visa ED) — pas le DTV lui-même — mais il a durci les contrôles sur toute la catégorie
+          Soft Power. Voici la vérité du terrain pour choisir la bonne activité, sécuriser votre dossier,
+          et éviter l'interdiction de territoire.
         </p>
       </div>
 
@@ -195,7 +197,7 @@ export default function BlogArticleSoftPower() {
           <li><a href="#arnaques-ecoles" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
           <li><a href="#passage-douane" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
           <li><a href="#visa-run-asie" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">5. Dépôt du dossier : pourquoi l'Asie (Visa Run) écrase Paris</a></li>
-          <li><a href="#transparence-prix" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : décryptage du tarif à 1 250 €</a></li>
+          <li><a href="#transparence-prix" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : décryptage du tarif à 1 750 €</a></li>
         </ul>
       </nav>
 
@@ -215,8 +217,9 @@ export default function BlogArticleSoftPower() {
         </p>
         <p className="mb-6">
           <strong className="text-white">C'est pourquoi nous recommandons systématiquement les écoles de cuisine.</strong>{' '}
-          La gestion du temps y est infiniment plus souple. La plupart de nos écoles partenaires offrent un cursus d'environ
-          8 à 10 cours (pour un budget d'environ 20 000 THB), que vous avez 6 mois pour valider.
+          La gestion du temps y est infiniment plus souple : vous groupez vos séances, vous les
+          espacez, vous les calez entre deux missions. Les cursus vont aujourd'hui de six à douze
+          mois selon l'école et le volume de cours retenu.
         </p>
 
         {/* TABLEAU COMPARATIF */}
@@ -242,6 +245,75 @@ export default function BlogArticleSoftPower() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <h3 className="text-xl font-bold text-white mt-10 mb-3">Ce que coûte réellement chaque voie</h3>
+        <p className="mb-4">
+          Les tarifs circulent peu, et beaucoup de candidats découvrent le budget réel une fois engagés.
+          Voici les grilles publiées par les écoles elles-mêmes, relevées en juillet 2026.
+        </p>
+
+        <div className="overflow-x-auto rounded-2xl border border-gray-800 mb-4">
+          <table className="w-full min-w-[520px] text-sm">
+            <thead>
+              <tr className="bg-[#111111] border-b border-gray-800">
+                <th className="text-left px-4 py-3 text-gray-400 font-semibold">Formule</th>
+                <th className="text-left px-4 py-3 text-gray-400 font-semibold">Volume</th>
+                <th className="text-left px-4 py-3 text-gray-400 font-semibold">Tarif public</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-400">
+              <tr className="border-b border-gray-800/60 bg-[#0d0d0d]">
+                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 6 mois</td>
+                <td className="px-4 py-4">10 cours</td>
+                <td className="px-4 py-4 text-white font-semibold">20 000 THB <span className="text-xs font-normal text-gray-500">(février 2026)</span></td>
+              </tr>
+              <tr className="border-b border-gray-800/60">
+                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 9 mois</td>
+                <td className="px-4 py-4">30 demi-journées</td>
+                <td className="px-4 py-4">37 500 THB</td>
+              </tr>
+              <tr className="border-b border-gray-800/60 bg-[#0d0d0d]">
+                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 12 mois</td>
+                <td className="px-4 py-4">40 demi-journées</td>
+                <td className="px-4 py-4">52 000 THB</td>
+              </tr>
+              <tr className="border-b border-gray-800/60">
+                <td className="px-4 py-4 font-semibold text-amber-400">Muay Thaï — 6 mois</td>
+                <td className="px-4 py-4">240 heures</td>
+                <td className="px-4 py-4">28 000 THB</td>
+              </tr>
+              <tr className="border-b border-gray-800/60 bg-[#0d0d0d]">
+                <td className="px-4 py-4 font-semibold text-amber-400">Muay Thaï — 9 mois</td>
+                <td className="px-4 py-4">360 heures</td>
+                <td className="px-4 py-4">38 000 THB</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-4 font-semibold text-amber-400">Muay Thaï — 12 mois</td>
+                <td className="px-4 py-4">480 heures</td>
+                <td className="px-4 py-4">50 000 THB</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-gray-500 mb-6">
+          Tarifs relevés sur les grilles publiques d'écoles thaïlandaises accréditées en juillet 2026.
+          Les 20 000 THB de la première ligne correspondent au tarif que j'ai personnellement réglé en
+          février 2026, à raison de 2 000 THB par cours — les formats courts se raréfient depuis, j'y
+          reviens plus bas. Côté Muay Thaï, certains camps affichent des packages « DTV » à partir de
+          26 900 THB, d'autres montent à 38 990 THB lorsqu'ils incluent l'assistance au dossier.
+        </p>
+
+        <div className="bg-emerald-500/5 border border-emerald-500/25 rounded-2xl p-6">
+          <p className="text-white font-semibold mb-2">💡 L'écart de budget est le vrai arbitre</p>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            À volume d'engagement comparable, la cuisine revient à environ 20 000 THB là où le Muay
+            Thaï démarre à 28 000 THB et grimpe à 50 000 THB sur douze mois. Pour un digital nomad
+            qui cherche un statut légal et non une carrière sportive, la différence de 8 000 à
+            30 000 THB s'ajoute à une contrainte physique quotidienne que la plupart abandonnent en
+            quelques semaines. C'est la raison, très prosaïque, pour laquelle nous orientons
+            systématiquement vers la cuisine.
+          </p>
         </div>
       </section>
 
@@ -269,6 +341,31 @@ export default function BlogArticleSoftPower() {
             de payer sans assister physiquement au cours.
           </p>
         </div>
+
+        <div className="bg-[#111111] border-l-4 border-emerald-500 rounded-r-2xl p-6 md:p-7">
+          <p className="text-white font-bold mb-3">Ce que j'ai vécu en suivant le cursus moi-même</p>
+          <div className="text-gray-300 text-sm leading-relaxed space-y-3">
+            <p>
+              Je n'écris pas cette section depuis un bureau. J'ai suivi le cursus de cuisine
+              moi-même, pour mon propre Visa DTV, dans une école de Phuket où je me suis rendu
+              physiquement à chaque séance.
+            </p>
+            <p>
+              Le déroulé est simple et rassurant. À la fin de chaque cours, on vous présente le
+              registre : vous inscrivez la date, votre nom, et vous signez. Ce n'est pas une
+              formalité décorative — c'est la trace administrative qui prouvera votre assiduité si
+              l'immigration vous interroge. Les professeurs connaissent les recettes sur le bout des
+              doigts et savent encadrer des débutants complets ; il n'y a aucun prérequis, aucun
+              niveau à avoir.
+            </p>
+            <p>
+              À l'issue du cursus, l'école délivre un <strong className="text-white">diplôme
+              officiel</strong>. Prenez-en une photo dès la remise et gardez-la sur votre téléphone :
+              c'est ce que vous présenterez au guichet en cas de question, sans avoir à transporter
+              le document original à chaque passage de frontière.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ── SECTION 3 ── */}
@@ -287,11 +384,80 @@ export default function BlogArticleSoftPower() {
           n'a aucune valeur si l'établissement n'est pas accrédité par le <strong>Ministère de l'Éducation</strong>{' '}
           et le <strong>Department of Business Development (DBD)</strong>.
         </p>
-        <p>
+        <p className="mb-6">
           Si vous soumettez une lettre provenant d'une organisation non reconnue, le refus est immédiat.
           Pire, si le pot aux roses est découvert après coup, votre visa est révoqué et vous vous exposez à
           une interdiction de territoire de plusieurs années.
         </p>
+
+        <h3 className="text-xl font-bold text-white mt-8 mb-3">Les deux documents à réclamer avant de payer</h3>
+        <p className="mb-4">
+          La vérification ne se fait pas sur l'apparence du site, mais sur deux pièces que toute
+          école légitime vous transmettra sans discuter :
+        </p>
+        <ul className="space-y-3 mb-5 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
+          <li>
+            <strong className="text-white">La licence DBD</strong> — l'enregistrement au Department
+            of Business Development, qui prouve l'existence légale de la structure en Thaïlande.
+          </li>
+          <li>
+            <strong className="text-white">L'accréditation du Ministère de l'Éducation</strong> —
+            celle qui donne valeur consulaire à la lettre d'acceptation.
+          </li>
+        </ul>
+        <p className="mb-6">
+          Une précision utile, car la confusion circule : l'extension{' '}
+          <code className="text-emerald-400">.ac.th</code> est bien réservée aux établissements
+          d'enseignement accrédités en Thaïlande, et sa présence est un signal positif. Mais son
+          absence ne prouve strictement rien. Beaucoup d'écoles parfaitement en règle — y compris
+          celles de notre réseau — opèrent sous un domaine en{' '}
+          <code className="text-amber-400">.com</code>, tout simplement parce qu'elles s'adressent à
+          une clientèle internationale. Ne rejetez jamais une école sur ce seul critère, et ne lui
+          faites jamais confiance sur ce seul critère non plus.
+        </p>
+
+        <div className="bg-amber-500/5 border border-amber-500/25 rounded-2xl p-6 mb-6">
+          <p className="text-white font-semibold mb-2">Le seul critère vraiment binaire</p>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Vous n'avez pas besoin d'être expert pour repérer une usine à visas. Posez une seule
+            question : <strong className="text-white">« Dois-je assister aux cours ? »</strong> Si
+            la réponse est non, ou si on vous laisse entendre que la présence est facultative, vous
+            êtes en face d'un intermédiaire qui vend du papier. Une école légitime vous répondra que
+            oui, et vous parlera du registre de présence.
+          </p>
+        </div>
+
+        <h3 className="text-xl font-bold text-white mt-8 mb-3">« Un cursus à 20 000 THB fait refuser le dossier » : ce que disent nos dépôts</h3>
+        <p className="mb-4">
+          Certaines agences affirment qu'un programme à moins de 30 000 THB éveille les soupçons du
+          consulat, au motif qu'un tel montant ne justifierait pas un visa de cinq ans. L'argument
+          mérite d'être entendu — mais notez que ceux qui le portent commercialisent en général des
+          packages à 38 000 THB et plus.
+        </p>
+        <p className="mb-4">
+          Notre expérience de terrain raconte autre chose. <strong className="text-white">En février,
+          en mai et en juin 2026</strong>, des dossiers déposés avec des écoles de cuisine certifiées
+          facturant environ 20 000 THB pour 8 à 10 cours ont été acceptés sans difficulté.
+        </p>
+        <p className="mb-4">
+          Ce qui déclenche un refus n'est pas le prix en soi, c'est l'accréditation manquante ou la
+          lettre d'acceptation fabriquée. Une école certifiée passe ; une école fantôme fait révoquer
+          le visa, quel que soit le montant facturé.
+        </p>
+        <div className="bg-amber-500/5 border border-amber-500/25 rounded-2xl p-6">
+          <p className="text-white font-semibold mb-2">⚠️ Mais la tendance se durcit, et il faut le dire</p>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Entre février et juin 2026, l'école où j'ai suivi mon propre cursus a refondu son offre :
+            les formats courts ont disparu de sa page DTV, remplacés par des programmes de 9 et 12
+            mois. Elle écrit elle-même que{' '}
+            <em className="text-white">« certaines ambassades privilégient ou réclament désormais
+            des programmes d'au moins 12 mois »</em>. Ce n'est pas un argument commercial : cette
+            école n'a aucun intérêt à compliquer la vie de ses élèves. C'est un signal.
+            Concrètement : un cursus de 6 mois reste défendable aujourd'hui, mais si vous déposez
+            dans les mois qui viennent, partez sur 9 ou 12 mois. Le surcoût est réel, le refus coûte
+            plus cher.
+          </p>
+        </div>
       </section>
 
       {/* ── SECTION 4 ── */}
@@ -308,7 +474,7 @@ export default function BlogArticleSoftPower() {
           devient invalide si les cours ne sont pas réalisés dans le temps imparti.</strong>
         </p>
         <p>
-          Lorsque vous terminerez votre cursus de cuisine (après vos 6 mois), l'école vous délivrera un{' '}
+          Lorsque vous terminerez votre cursus de cuisine (après vos 9 mois), l'école vous délivrera un{' '}
           <strong>diplôme officiel</strong>. Lors de votre première sortie et réentrée en Thaïlande, l'officier
           d'immigration{' '}
           <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-emerald-500 hover:underline font-medium">
@@ -345,24 +511,25 @@ export default function BlogArticleSoftPower() {
       {/* ── SECTION 6 ── */}
       <section className="mb-12">
         <h2 id="transparence-prix" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          6. Transparence : décryptage du tarif à 1 250 €
+          6. Transparence : décryptage du tarif à 1 750 €
         </h2>
         <p className="mb-4">
           La transparence est au cœur de notre méthode. Pour les profils freelances qui ont déjà tous leurs
           documents, notre prestation d'accompagnement est à <strong>850 €</strong>.
         </p>
         <p className="mb-4">
-          Mais pour la voie Soft Power, nous proposons un <strong>package global à 1 250 €</strong>. Voici
-          exactement ce que comprend cette différence tarifaire :
+          Mais pour la voie Soft Power, nous proposons un <strong>package global à 1 750 €</strong> sur
+          la base d'un cursus de 9 mois — le format aujourd'hui recommandé. Voici exactement ce que
+          comprend cette différence tarifaire :
         </p>
         <div className="bg-white/5 border border-white/10 rounded-xl p-5">
           <ul className="space-y-3">
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">
-              <span className="text-gray-300">Frais d'inscription à l'école certifiée (env. 20 000 THB)</span>
+              <span className="text-gray-300">Frais d'inscription à l'école certifiée (cursus 9 mois)</span>
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">
-              <span className="text-gray-300">Frais consulaires officiels de l'ambassade (10 000 THB)</span>
+              <span className="text-gray-300">Frais consulaires officiels de l'ambassade (10 000 à 13 000 THB selon le poste)</span>
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">

@@ -268,18 +268,23 @@ export default function BlogArticleDTV() {
           2. Trois mois partout : d'où vient la rumeur des six mois ?
         </h2>
         <p className="mb-4">
-          C&apos;est ici que la confusion règne en maître. La réponse est en réalité :{' '}
-          <strong className="text-white">cela dépend d&apos;où vous déposez votre dossier.</strong>{' '}
-          Chaque ambassade et consulat royal de Thaïlande possède un pouvoir discrétionnaire sur
-          l&apos;application des directives d&apos;immigration.
+          C&apos;est ici que la confusion règne en maître, et la réponse va sans doute vous
+          surprendre : <strong className="text-white">c&apos;est 3 mois partout, Paris comprise.</strong>{' '}
+          L&apos;ambassade de Thaïlande en France le publie noir sur blanc sur son propre site.
+        </p>
+        <p className="mb-4">
+          Alors d&apos;où vient la rumeur des six mois ? De la marge de manœuvre des officiers
+          consulaires. Face à un compte au solde irrégulier, ou fraîchement alimenté par un
+          virement inexpliqué, l&apos;agent réclame des relevés complémentaires pour remonter plus
+          loin. Ce n&apos;est pas une règle : c&apos;est une réaction. Et elle se déclenche sur la
+          qualité de votre dossier, pas sur le choix de votre ambassade.
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-8 mb-3">
-          L'approche stricte : l'ambassade de Paris
+          Paris : même durée, mais deux frictions coûteuses
         </h3>
         <p className="mb-5">
-          Si vous faites vos démarches depuis la France, attendez-vous au niveau d'exigence le
-          plus élevé. Comme l'indique{' '}
+          Si vous faites vos démarches depuis la France, comme l&apos;indique{' '}
           <a 
             href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
             target="_blank" 
@@ -291,20 +296,32 @@ export default function BlogArticleDTV() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
-          , il est très fréquemment demandé un historique bancaire irréprochable sur les{' '}
+          , il vous faudra un historique bancaire irréprochable sur les{' '}
           <strong className="text-white">3 derniers mois</strong>. Le solde ne doit à aucun moment
           descendre sous 15 000 € sur ce trimestre — notez que Paris raisonne en euros et non en
           bahts, ce qui vous met à l&apos;abri des variations de change.
         </p>
+        <p className="mb-5">
+          La difficulté parisienne est donc ailleurs, et elle se chiffre. D&apos;abord la{' '}
+          <strong className="text-white">traduction assermentée</strong>, obligatoire pour vos
+          documents français : comptez 150 à 300 € et plusieurs jours d&apos;attente. Ensuite le{' '}
+          <strong className="text-white">délai d&apos;instruction</strong> : l&apos;ambassade
+          annonce elle-même environ quatre semaines, quand Vientiane rend une décision en trois à
+          quatre jours ouvrables. C&apos;est là, et nulle part ailleurs, que se joue vraiment le
+          choix de votre ambassade.
+        </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
-          La voie de la souplesse : les ambassades en Asie
+          L&apos;Asie : la même exigence, sans les frictions
         </h3>
         <p className="mb-6">
-          C&apos;est la stratégie que nous recommandons massivement à nos clients. En optant pour un
-          dépôt dans les pays limitrophes (Laos, Cambodge, Malaisie), la norme s&apos;assouplit à{' '}
-          <strong className="text-white">3 mois d&apos;historique</strong> — un gain de temps
-          inestimable pour préparer votre départ.
+          C&apos;est la stratégie que nous recommandons massivement à nos clients — mais pas pour
+          la raison qu&apos;on lit partout. En déposant dans les pays limitrophes (Laos, Cambodge,
+          Malaisie), l&apos;exigence bancaire reste identique :{' '}
+          <strong className="text-white">3 mois d&apos;historique</strong>. Ce que vous gagnez, ce
+          sont les relevés acceptés en français sans traduction certifiée, et un dossier instruit
+          en quelques jours au lieu d&apos;un mois. Sur un projet d&apos;expatriation, trois
+          semaines de délai en moins valent souvent plus que quelques centaines d&apos;euros.
         </p>
 
         {/* TABLEAU COMPARATIF */}
@@ -484,7 +501,7 @@ export default function BlogArticleDTV() {
             {
               icon: '💵',
               title: 'Le règlement',
-              text: <>Les frais consulaires (10 000 THB) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">réserve de liquide</Link>.</>,
+              text: <>Les frais consulaires (10 000 à 13 000 THB selon le poste) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">réserve de liquide</Link>.</>,
             },
           ].map((item) => (
             <div key={item.title} className="flex gap-4 p-4 bg-white/3 border border-gray-800 rounded-xl">

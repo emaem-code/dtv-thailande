@@ -244,7 +244,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                   <h5 className="font-bold text-white text-lg">Basique</h5>
-                  <p className="text-2xl font-black text-emerald-500 my-2">~1 250 €</p>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~1 750 €</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ Inscription école incluse</li>
                     <li>✓ Préparation & suivi dossier</li>
@@ -254,7 +254,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                 </div>
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                   <h5 className="font-bold text-white text-lg">Premium</h5>
-                  <p className="text-2xl font-black text-emerald-500 my-2">~1 750 €</p>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~2 450 €</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
                     <li>✓ Vol régional (intra-Asie)</li>
@@ -264,7 +264,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                 </div>
                 <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/30">
                   <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-emerald-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
-                  <p className="text-2xl font-black text-emerald-500 my-2">~2 900 €</p>
+                  <p className="text-2xl font-black text-emerald-500 my-2">~4 060 €</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
                     <li>✓ Vol long-courrier (Europe-Asie)</li>

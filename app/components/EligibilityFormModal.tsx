@@ -126,9 +126,9 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
   };
 
   const isSoftPower = formData.job === 'softpower';
-  const priceBasic = isSoftPower ? "1 250 €" : "850 €";
-  const pricePremium = isSoftPower ? "1 750 €" : "1 300 €";
-  const priceVIP = isSoftPower ? "2 900 €" : "2 400 €";
+  const priceBasic = isSoftPower ? "1 750 €" : "850 €";
+  const pricePremium = isSoftPower ? "2 450 €" : "1 300 €";
+  const priceVIP = isSoftPower ? "4 060 €" : "2 400 €";
 
   // Condition pour afficher l'alerte famille à l'étape 3
   const isGroupTravel = formData.family === 'married' || formData.family === 'concubinage' || formData.family === 'family';
@@ -276,8 +276,8 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <div className="space-y-3 p-5 bg-white/5 rounded-2xl border border-white/10">
                   <label className="text-white font-bold text-lg text-emerald-400">Programme Soft Power souhaité :</label>
                   <div className="grid grid-cols-1 gap-3">
-                    <RadioCard label="Cuisine Thaïlandaise traditionnelle (6 mois)" field="softPower" value="cuisine" />
-                    <RadioCard label="Entraînement Muay Thaï certifié (6 mois)" field="softPower" value="muaythai" />
+                    <RadioCard label="Cuisine Thaïlandaise traditionnelle (9 mois)" field="softPower" value="cuisine" />
+                    <RadioCard label="Entraînement Muay Thaï certifié (9 mois)" field="softPower" value="muaythai" />
                     <RadioCard label="Je ne sais pas encore, j'ai besoin de conseils" field="softPower" value="unsure" />
                   </div>
                 </div>

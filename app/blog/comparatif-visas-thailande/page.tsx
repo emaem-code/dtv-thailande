@@ -103,7 +103,7 @@ const faqSchema = {
       "name": "Quel est le meilleur visa pour un digital nomad en 2026 ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Le Visa DTV est incontestablement la meilleure option. Pour 10 000 THB de frais consulaires et une preuve de fonds de 500 000 THB, il offre 5 ans de validité, autorise le télétravail et permet des séjours jusqu'à 360 jours consécutifs."
+        "text": "Le Visa DTV est incontestablement la meilleure option. Pour 10 000 à 13 000 THB de frais consulaires selon le poste (350 € à Paris) et une preuve de fonds de 500 000 THB, il offre 5 ans de validité, autorise le télétravail et permet des séjours jusqu'à 360 jours consécutifs."
       }
     }
   ]
@@ -247,7 +247,7 @@ revenus mensuels.</p>
           Conçu pour les <em>digital nomads</em>, freelances et <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">profils culturels via la voie Soft Power</Link>, il élimine les frictions des anciens statuts.
         </p>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-emerald-500/50 text-gray-300 text-sm bg-emerald-500/5 p-4 rounded-r-xl">
-          <li>✅ <strong className="text-white">Coût :</strong> Seulement 10 000 THB (frais consulaires).</li>
+          <li>✅ <strong className="text-white">Coût :</strong> 10 000 à 13 000 THB de frais consulaires en Asie, 350 € à l'ambassade de Paris.</li>
           <li>✅ <strong className="text-white">Durée :</strong> 5 ans (entrées multiples). Séjours de 180 jours, prolongeables à 360 jours sans quitter le pays.</li>
           <li>✅ <strong className="text-white">Finances :</strong> Preuve de 500 000 THB (≈ 13 500 €) sur un compte (qui peut rester en France). Pas d'investissement requis.</li>
           <li>✅ <strong className="text-white">Légalité :</strong> Autorise expressément le télétravail pour des clients hors Thaïlande sans permis de travail.</li>
