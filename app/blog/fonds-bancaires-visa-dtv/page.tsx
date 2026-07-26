@@ -391,6 +391,18 @@ export default function BlogArticleDTV() {
             </div>
           ))}
         </div>
+        <p className="mt-6">
+          Deux cas méritent une attention particulière. Le{' '}
+          <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-amber-500 hover:underline font-medium">
+            compte joint des couples mariés
+          </Link>{' '}
+          est accepté mais impose de fournir l&apos;acte de mariage légalisé. Et si vos fonds
+          dorment sur un compte de société,{' '}
+          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-500 hover:underline font-medium">
+            notre guide pour les indépendants
+          </Link>{' '}
+          explique comment restructurer vos virements avant de déposer.
+        </p>
       </section>
 
       {/* ── SECTION 5 ── */}
@@ -470,7 +482,7 @@ export default function BlogArticleDTV() {
             {
               icon: '💵',
               title: 'Le règlement',
-              text: "Les frais consulaires (10 000 THB) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée.",
+              text: <>Les frais consulaires (10 000 THB) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">réserve de liquide</Link>.</>,
             },
           ].map((item) => (
             <div key={item.title} className="flex gap-4 p-4 bg-white/3 border border-gray-800 rounded-xl">

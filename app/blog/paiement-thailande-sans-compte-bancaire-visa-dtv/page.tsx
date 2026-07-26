@@ -264,11 +264,15 @@ export default function BlogArticlePaiements() {
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-amber-400 mt-0.5 flex-none">→</span>
-            <strong>Cadre légal :</strong> Vous pouvez transporter légalement jusqu'à l'équivalent de 20 000 USD (environ 18 000€) sans déclaration douanière. Au-delà, la déclaration est obligatoire.
+            <strong>Cadre légal :</strong> Vous pouvez transporter légalement jusqu'à l'équivalent de 20 000 USD (environ 18 000€) sans déclaration douanière. Au-delà, la déclaration est obligatoire. À l'inverse, l'immigration peut exiger un <Link href="/blog/20000-thb-immigration-thailande-regle-especes" className="text-amber-400 hover:underline font-medium">minimum de 20 000 THB en espèces à l'entrée</Link>.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-amber-400 mt-0.5 flex-none">→</span>
-            Changez votre cash au comptoir Superrich (Niveau B de l&apos;aéroport).
+            Changez votre cash au comptoir Superrich (Niveau B de l&apos;aéroport) — voir notre{' '}
+            <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-amber-400 hover:underline font-medium">
+              guide de l&apos;arrivée à l&apos;aéroport
+            </Link>
+            .
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-amber-400 mt-0.5 flex-none">→</span>
@@ -395,7 +399,11 @@ export default function BlogArticlePaiements() {
           Pour rappel : après 180 jours passés en Thaïlande sur une année civile, vous devenez résident fiscal thaïlandais. Et depuis janvier 2024, les revenus étrangers rapatriés en Thaïlande par un résident fiscal sont imposables. Avec Wise local, vos flux sont documentés et traçables — ce qui est une bonne chose pour votre conformité, à condition d'anticiper votre situation fiscale.
         </p>
         <p>
-          Ce sujet mérite un article dédié. Retenez simplement : la simplicité de paiement s'accompagne d'une transparence totale vis-à-vis de l'administration thaïlandaise.
+          Retenez simplement : la simplicité de paiement s'accompagne d'une transparence totale vis-à-vis de l'administration thaïlandaise. Le seuil des 180 jours est d'ailleurs le même que celui qui conditionne{' '}
+          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-400 hover:underline font-medium">
+            vos obligations déclaratives sur place
+          </Link>
+          .
         </p>
       </section>
 
