@@ -49,14 +49,6 @@ const faqSchema = {
         text: "Oui. Sans reçu TM30, l'immigration peut refuser le rapport des 90 jours ou l'extension de 180 jours liée au Visa DTV.",
       },
     },
-    {
-      '@type': 'Question',
-      name: 'Peut-on vraiment vivre sans cash en Thaïlande avec une carte Wise ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Presque. Wise, Grab et les QR codes ThaiQR couvrent la majorité du quotidien. Il reste recommandé de prévoir du cash pour les 20 000 THB demandés à l'entrée et certains frais consulaires.",
-      },
-    },
   ],
 };
 
@@ -79,7 +71,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
         </h1>
 
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 14 min · Mis à jour : {post.date} · Par{' '}
+          Lecture : 11 min · Mis à jour : {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
       </header>
@@ -107,7 +99,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           <li><a href="#interrogatoire-dtv" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">3. Que faire si l&apos;immigration questionne votre DTV ?</a></li>
           <li><a href="#connectivite" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">4. Internet dès l&apos;atterrissage</a></li>
           <li><a href="#transports" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">5. Taxis, VTC et train</a></li>
-          <li><a href="#argent" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">6. Argent, retraits et carte Wise</a></li>
+          <li><a href="#argent" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">6. Argent : ce qu&apos;il faut prévoir</a></li>
           <li><a href="#erreurs" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">7. Les erreurs fatales à éviter</a></li>
           <li><a href="#tm30" className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base">8. TM30 : l&apos;étape indispensable du Visa DTV</a></li>
         </ul>
@@ -287,45 +279,25 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
       </section>
 
       <section id="argent" className="mb-12 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">6. Argent : retraits, change et carte Wise</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">6. Argent : ce qu&apos;il faut prévoir avant d&apos;atterrir</h2>
         <p className="mb-4">
-          La Thaïlande facture cher l&apos;accès à votre argent. Voici comment optimiser vos premiers
-          bahts sans multiplier les frais inutiles.
+          Une carte Wise couvre aujourd&apos;hui l&apos;essentiel de vos dépenses en Thaïlande : paiement
+          au taux interbancaire réel, scan des QR codes PromptPay, règlement de vos courses Grab. Mais
+          elle ne dispense pas d&apos;arriver avec des espèces.
         </p>
-        <p className="mb-4 text-white font-semibold">
-          Pour ceux qui préfèrent opérer en cash ou qui n&apos;ont pas encore de carte Wise, voici comment minimiser les frais :
+        <p className="mb-4">
+          Deux raisons à cela. Les distributeurs sont situés <strong className="text-white">après</strong>{' '}
+          le contrôle d&apos;immigration, et depuis 2026 les retraits Wise sont bloqués aux ATM
+          thaïlandais. Prévoyez <strong className="text-white">1 000 à 2 000 € en billets</strong> dans
+          votre bagage cabine.
         </p>
-        <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
-          <li>
-            <strong className="text-white">Taxe ATM de 220 THB :</strong> chaque retrait avec une
-            carte étrangère vous sera facturé environ 6 €. La stratégie consiste à faire de gros retraits d&apos;un coup (jusqu&apos;à 30 000 THB) pour diluer ces frais fixes.
-          </li>
-          <li>
-            <strong className="text-white">Superrich à Suvarnabhumi :</strong> ignorez les kiosques du hall d&apos;arrivée et descendez au Niveau B (sous-sol). Les guichets Superrich y offrent d&apos;excellents taux.
-          </li>
-        </ul>
-
-        <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-4">
-          <h3 className="text-xl font-bold text-white mb-2">La carte Wise : le game changer de l&apos;expatrié en 2026</h3>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            En pratique, une carte Wise suffit à couvrir l&apos;essentiel de votre quotidien en
-            Thaïlande dès le premier jour. Paiement en THB au taux interbancaire réel sur tous vos achats,
-            scan de QR codes ThaiQR/PromptPay directement depuis l&apos;application, et règlement de vos
-            courses Grab par carte — vous vous déplacez et payez comme un local sans jamais sortir un billet
-            de votre poche. C&apos;est une expérience testée et validée sur le terrain à Phuket en 2026.
-          </p>
-        </div>
-
-        <div className="border border-amber-500/30 bg-amber-500/5 rounded-xl p-5">
-          <h3 className="text-xl font-bold text-white mb-2">Quel est le vrai besoin en cash ?</h3>
-          <p className="mb-3 text-sm text-gray-300">
-            Avec Wise, le besoin d&apos;espèces se réduit à deux situations très précises : les
-            <strong className="text-white"> 20 000 THB exigés à l&apos;entrée</strong> par
-            l&apos;immigration thaïlandaise (à préparer depuis la France), et les frais consulaires lors d&apos;un Visa Run.
-          </p>
+        <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5">
           <p className="text-sm text-gray-300">
-            Prévoyez environ <strong className="text-white">600 € en liquide</strong> pour couvrir ces
-            deux cas incompressibles. Pour tout le reste, Wise s&apos;en charge.
+            Frais de retrait, bureaux de change, plafonds, factures que Wise ne couvre pas :{' '}
+            <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-sky-400 hover:underline font-medium">
+              notre guide complet des paiements en Thaïlande avec un Visa DTV
+            </Link>{' '}
+            détaille la stratégie testée sur le terrain.
           </p>
         </div>
       </section>
@@ -334,7 +306,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
         <h2 className="text-2xl font-bold text-white mb-4">7. Les 5 erreurs fatales à ne jamais faire à l&apos;aéroport</h2>
         <ol className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
-            <strong className="text-white">Arriver sans espèces ni carte Wise :</strong> l&apos;exigence des 20 000 THB à la douane et les frais consulaires des visa runs rendent environ 600 € en liquide indispensables. Pour tout le reste, une carte Wise élimine le besoin de cash au quotidien. L&apos;erreur fatale est d&apos;arriver sans l&apos;un ni l&apos;autre.
+            <strong className="text-white">Arriver sans espèces ni carte Wise :</strong> les ATM sont après la douane et les retraits Wise y sont bloqués. Sans l&apos;un ni l&apos;autre, vous êtes coincé dès le hall d&apos;arrivée.
           </li>
           <li>
             <strong className="text-white">Ne pas imprimer son e-Visa :</strong> votre téléphone peut
