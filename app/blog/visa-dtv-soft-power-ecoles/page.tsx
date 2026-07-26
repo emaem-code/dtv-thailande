@@ -35,7 +35,7 @@ const articleSchema = {
   },
   "headline": "Visa DTV Soft Power : Éviter les arnaques des écoles (Cuisine & Muay Thaï)",
   "description": "Le guide définitif pour obtenir le Visa DTV via la voie Soft Power. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.",
-  "image": "https://dtv-thailande.fr/poster-softpower.jpg",  
+  "image": "https://dtv-thailande.fr/images/blog/visa-dtv-soft-power-ecoles.jpg", 
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

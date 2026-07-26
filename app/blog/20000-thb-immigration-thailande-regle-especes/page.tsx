@@ -38,7 +38,7 @@ const articleSchema = {
   },
   "headline": "20 000 bahts à l'immigration thaïlandaise : la loi oubliée qui refoule des voyageurs en 2026",
   "description": "Des voyageurs refoulés faute de 20 000 THB en espèces à l'immigration thaïlandaise. La loi, les profils ciblés, le tampon de refus : le guide terrain complet 2026.",
-  "image": "https://dtv-thailande.fr/images/blog/20000-thb-immigration.jpg",  
+  "image": "https://dtv-thailande.fr/images/blog/20000-thb-immigration-thailande-regle-especes.jpg",  
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

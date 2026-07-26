@@ -35,7 +35,7 @@ const articleSchema = {
   },
   "headline": "TDAC Thaïlande 2026 : Guide Complet de la Carte d'Arrivée Numérique",
   "description": "Le guide étape par étape pour remplir le nouveau formulaire TDAC obligatoire pour entrer en Thaïlande. Évitez les blocages à l'embarquement.",
-  "image": "https://dtv-thailande.fr/poster-tdac.jpg",  
+  "image": "https://dtv-thailande.fr/images/blog/tdac-thailande-carte-arrivee.jpg",  
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

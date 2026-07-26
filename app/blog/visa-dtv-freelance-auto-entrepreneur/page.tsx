@@ -37,7 +37,7 @@ const articleSchema = {
   "headline": "Visa DTV Freelance & Auto-Entrepreneur : Dossier Sans Fiche de Paie (2026)",
   "description":
     "Comment obtenir le Visa DTV Thaïlande quand on est auto-entrepreneur ou freelance ? Kbis, URSSAF, portfolio : le guide complet.",
-  "image": "https://dtv-thailande.fr/poster-freelance-dtv.jpg",
+  "image": "https://dtv-thailande.fr/images/blog/visa-dtv-freelance-auto-entrepreneur.jpg",
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

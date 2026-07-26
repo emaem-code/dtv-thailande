@@ -43,7 +43,7 @@ const articleSchema = {
   "headline": "Obtenir le Visa DTV en Famille ou en Couple : PACS, Mariage et Enfants",
   "description":
     "Le guide légal pour s'expatrier en Thaïlande en famille avec le Visa DTV. Reconnaissance du PACS, concubinage, mariage, enfants et procédure de légalisation.",
-  "image": "https://dtv-thailande.fr/logo.png",
+  "image": "https://dtv-thailande.fr/images/blog/visa-dtv-couple-famille-pacs.jpg",
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

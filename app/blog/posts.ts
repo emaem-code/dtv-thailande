@@ -30,7 +30,7 @@ export const blogPosts = [
   category: 'Formalités',
   tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
   hoverBorder: 'hover:border-sky-500/50',
-  image: '/logo.png',
+  image: '/images/blog/tm47-rapport-90-jours-thailande.jpg',
 },
   {
   slug: 'ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin',
@@ -44,7 +44,7 @@ export const blogPosts = [
   category: 'Vie pratique',
   tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
   hoverBorder: 'hover:border-amber-500/50',
-  image: '/logo.png',
+  image: '/images/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin.jpg',
 },
   {
     slug: '20000-thb-immigration-thailande-regle-especes',
@@ -58,7 +58,7 @@ export const blogPosts = [
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
-    image: '/logo.png', // Pense à remplacer par ta future miniature
+    image: '/images/blog/20000-thb-immigration-thailande-regle-especes.jpg', // Pense à remplacer par ta future miniature
   },
   {
     slug: 'paiement-thailande-sans-compte-bancaire-visa-dtv',
@@ -72,7 +72,7 @@ export const blogPosts = [
     category: 'Finances',
     tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
     hoverBorder: 'hover:border-amber-500/50',
-    image: '/logo.png', // Tu pourras changer l'image ici si tu en as une spécifique
+    image: '/images/blog/paiement-thailande-sans-compte-bancaire-visa-dtv.jpg', // Tu pourras changer l'image ici si tu en as une spécifique
   },
     {
     slug: 'arrivee-thailande-aeroport-immigration-taxi-visa-dtv',
@@ -86,7 +86,7 @@ export const blogPosts = [
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
-    image: '/logo.png',
+    image: '/images/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv.jpg',
   },
   {
     slug: 'guide-depot-dossier-evisa-dtv',
@@ -100,7 +100,7 @@ export const blogPosts = [
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
-    image: '/logo.png',
+    image: '/images/blog/guide-depot-dossier-evisa-dtv.jpg',
   },
   {
     slug: 'comparatif-visas-thailande',
@@ -114,7 +114,7 @@ export const blogPosts = [
     category: 'Stratégie et Expatriation',
     tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
     hoverBorder: 'hover:border-emerald-500/50',
-    image: '/logo.png',
+    image: '/images/blog/comparatif-visas-thailande.jpg',
   },
   {
     slug: 'visa-dtv-couple-famille-pacs',
@@ -128,7 +128,7 @@ export const blogPosts = [
     category: 'Famille & Couple',
     tagColor: 'text-pink-400 border-pink-500/25 bg-pink-500/10',
     hoverBorder: 'hover:border-pink-500/50',
-    image: '/logo.png',
+    image: '/images/blog/visa-dtv-couple-famille-pacs.jpg',
   },
   {
     slug: 'fin-exemption-visa-60-jours',
@@ -142,7 +142,7 @@ export const blogPosts = [
     category: 'Actualité',
     tagColor: 'text-red-400 border-red-500/25 bg-red-500/10',
     hoverBorder: 'hover:border-red-500/50',
-    image: '/logo.png',
+    image: '/images/blog/fin-exemption-visa-60-jours.jpg',
   },
   {
     slug: 'visa-dtv-freelance-auto-entrepreneur',
@@ -156,7 +156,7 @@ export const blogPosts = [
     category: 'Freelance',
     tagColor: 'text-purple-400 border-purple-500/25 bg-purple-500/10',
     hoverBorder: 'hover:border-purple-500/50',
-    image: '/logo.png',
+    image: '/images/blog/visa-dtv-freelance-auto-entrepreneur.jpg',
   },
   {
     slug: 'tdac-thailande-carte-arrivee',
@@ -170,7 +170,7 @@ export const blogPosts = [
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',
-    image: '/logo.png',
+    image: '/images/blog/tdac-thailande-carte-arrivee.jpg',
   },
   {
     slug: 'visa-dtv-soft-power-ecoles',
@@ -184,7 +184,7 @@ export const blogPosts = [
     category: 'Soft Power',
     tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
     hoverBorder: 'hover:border-emerald-500/50',
-    image: '/logo.png',
+    image: '/images/blog/visa-dtv-soft-power-ecoles.jpg',
   },
   {
     slug: 'fonds-bancaires-visa-dtv',
@@ -198,7 +198,7 @@ export const blogPosts = [
     category: 'Finances',
     tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
     hoverBorder: 'hover:border-amber-500/50',
-    image: '/logo.png',
+    image: '/images/blog/fonds-bancaires-visa-dtv.jpg',
   },
 ] satisfies BlogPost[];
 

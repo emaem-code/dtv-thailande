@@ -35,7 +35,7 @@ const articleSchema = {
   },
   "headline": "Visa DTV : Faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?",
   "description": "Exigences officielles des ambassades sur la preuve financière de 500 000 THB pour le Visa DTV.",
-  "image": "https://dtv-thailande.fr/poster-budget.jpg",  
+  "image": "https://dtv-thailande.fr/images/blog/fonds-bancaires-visa-dtv.jpg",  
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

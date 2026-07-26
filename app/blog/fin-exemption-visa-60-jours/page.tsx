@@ -38,7 +38,7 @@ const articleSchema = {
   "headline": "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
   "description":
     "La réalité des frontières terrestres en Thaïlande. Durcissement des contrôles, coûts réels des Visa Runs et transition vers les visas longs séjours.",
-  "image": "https://dtv-thailande.fr/poster-immigration-thailande.jpg",
+  "image": "https://dtv-thailande.fr/images/blog/fin-exemption-visa-60-jours.jpg",
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

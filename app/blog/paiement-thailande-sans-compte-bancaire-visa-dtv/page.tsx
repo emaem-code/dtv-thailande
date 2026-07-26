@@ -35,7 +35,7 @@ const articleSchema = {
   },
   "headline": "Paiements en Thaïlande avec un Visa DTV : la vraie stratégie sans compte bancaire (2026)",
   "description": "Guide complet pour gérer ses paiements en Thaïlande avec un Visa DTV, utiliser Wise, et éviter les frais de change.",
-  "image": "https://dtv-thailande.fr/images/blog/paiement-wise-dtv.jpg",  
+  "image": "https://dtv-thailande.fr/images/blog/paiement-thailande-sans-compte-bancaire-visa-dtv.jpg",  
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",

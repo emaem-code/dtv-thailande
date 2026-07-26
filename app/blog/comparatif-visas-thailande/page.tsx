@@ -43,7 +43,7 @@ const articleSchema = {
   "headline": "Quel Visa Choisir pour Vivre en Thaïlande ? Le Comparatif Complet",
   "description":
     "Comparatif complet des visas longue durée en Thaïlande. Coûts, exigences financières et contraintes pour les freelances, retraités et expatriés.",
-  "image": "https://dtv-thailande.fr/logo.png",
+  "image": "https://dtv-thailande.fr/images/blog/comparatif-visas-thailande.jpg",
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",
