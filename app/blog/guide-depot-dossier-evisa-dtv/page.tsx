@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'article',
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/images/blog/guide-depot-dossier-evisa-dtv.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Guide e-Visa DTV : déposer son dossier',
     description:
       "Tutoriel étape par étape pour déposer votre demande de Visa DTV sur thaievisa.go.th.",
-    images: ['/logo.png'],
+    images: ['/images/blog/guide-depot-dossier-evisa-dtv.jpg'],
   },
 };
 

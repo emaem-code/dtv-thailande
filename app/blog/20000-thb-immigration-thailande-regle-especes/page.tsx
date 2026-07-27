@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'article',
-    images: [{ url: '/images/blog/20000-thb-immigration.jpg' }], 
+    images: [{ url: '/images/blog/20000-thb-immigration-thailande-regle-especes.jpg' }],
   },
 };
 

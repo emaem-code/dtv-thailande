@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'article',
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/images/blog/tm47-rapport-90-jours-thailande.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
     description:
       "L'obligation légale que personne ne vous annonce. Le guide complet pour détenteurs de visa long séjour.",
-    images: ['/logo.png'],
+    images: ['/images/blog/tm47-rapport-90-jours-thailande.jpg'],
   },
 };
 

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'article',
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/images/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       'Phuket, Pattaya, Bangkok ou Hua Hin : où vivre en Thaïlande en 2026 ?',
     description:
       "Budgets réels, loyers 2026 et vécu d'expatriés. Le comparatif terrain pour choisir votre ville.",
-    images: ['/logo.png'],
+    images: ['/images/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin.jpg'],
   },
 };
 

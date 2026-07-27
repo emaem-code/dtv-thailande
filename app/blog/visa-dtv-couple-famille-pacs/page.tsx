@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
     type: "article",
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/images/blog/visa-dtv-couple-famille-pacs.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Visa DTV Famille : PACS, mariage et enfants',
     description: 'Le cadre légal de l\'immigration thaïlandaise pour les familles et couples non mariés.',
-    images: ['/logo.png'],
+    images: ['/images/blog/visa-dtv-couple-famille-pacs.jpg'],
   },
 };
 

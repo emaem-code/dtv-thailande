@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     type: 'article',
     // Miniature SEO optimisée (1200x630) pour le partage Facebook/Twitter
-    images: [{ url: '/images/blog/paiement-wise-dtv.jpg' }],
+    images: [{ url: '/images/blog/paiement-thailande-sans-compte-bancaire-visa-dtv.jpg' }],
   },
 };
 

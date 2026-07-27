@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
     type: "article",
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/images/blog/comparatif-visas-thailande.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Quel visa choisir pour vivre en Thaïlande ?',
     description: 'DTV, LTR, Non-ED, METV... Découvrez quel visa est le plus adapté à votre profil.',
-    images: ['/logo.png'],
+    images: ['/images/blog/comparatif-visas-thailande.jpg'],
   },
 };
 
