@@ -2,6 +2,7 @@ import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -218,6 +219,20 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-4">
           Soyons précis, car c&apos;est là que les fantasmes circulent. Le contrôle des 20 000 bahts n&apos;est pas systématique. Il est aléatoire, à la discrétion de l&apos;agent, et déclenché par le profil du voyageur.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/20000-thb-guichet-immigration.jpg"
+            alt="Guichet d'immigration dans un aéroport thaïlandais, passeport posé sur le comptoir lors d'un contrôle de ressources"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le contrôle n&apos;est pas systématique. Il est aléatoire, et
+            l&apos;agent n&apos;a pas à se justifier.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           <strong className="text-white">Concrètement, quand un agent décide de vérifier :</strong> il vous demande de présenter vos moyens de subsistance. Vous sortez les billets, il les compte — ou vous demande de les compter devant lui. Si la somme y est, vous passez. Si elle n&apos;y est pas, il peut vous laisser passer quand même... ou appliquer la section 12(2) et refuser l&apos;entrée. C&apos;est son pouvoir discrétionnaire, et il n&apos;a pas à se justifier.
         </p>
@@ -237,6 +252,20 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-4">
           Quand l&apos;entrée est refusée, l&apos;agent appose un tampon dans le passeport. Le voyageur refoulé cette semaine a publié le sien en demandant sa signification — le tampon est entièrement en thaï. Voici la traduction.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/20000-thb-tampon-passeport.jpg"
+            alt="Page de passeport couverte de tampons d'immigration — un refus d'entrée y laisse une trace permanente"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le tampon reste dans le passeport. Chaque agent qui feuillettera vos
+            pages le verra.
+          </figcaption>
+        </figure>
         
         <div className="bg-[#111111] border border-gray-800 p-6 rounded-xl my-6 font-mono text-sm">
           <p className="text-amber-400 mb-2">Le tampon indique :</p>
@@ -291,6 +320,20 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-4">
           Voici l&apos;ironie cruelle de la situation : dans les aéroports thaïlandais, les distributeurs automatiques sont situés après le contrôle d&apos;immigration, dans la zone des arrivées. Impossible donc de retirer sur place les espèces qu&apos;on vous demande de présenter avant de passer.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/20000-thb-atm-apres-douane.jpg"
+            alt="Rangée de distributeurs automatiques dans le hall d'arrivée d'un aéroport thaïlandais, situés après le contrôle d'immigration"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Les distributeurs sont après la douane. Impossible de retirer
+            l&apos;argent qu&apos;on vous demande avant de passer.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Et depuis 2026, le problème s&apos;aggrave pour les utilisateurs de Wise : les comptes enregistrés avec une adresse thaïlandaise ne peuvent plus retirer aux ATM en Thaïlande du tout — une restriction réglementaire de la Banque de Thaïlande que nous détaillons dans notre{' '}
           <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">
@@ -371,6 +414,21 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-6">
           Pour ne jamais vivre ce que ce voyageur vit en ce moment au Laos :
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/20000-thb-checklist-depart.jpg"
+            alt="Passeport français, billets en euros, carte d'embarquement Paris-Phuket et QR code TDAC préparés avant le départ pour la Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Passeport, TDAC sur le téléphone, billet de continuation et 520 € en
+            billets : trente secondes de préparation contre plusieurs jours
+            bloqués dans un pays voisin.
+          </figcaption>
+        </figure>
         
         <div className="bg-[#111111] border border-gray-800 rounded-xl p-6 mb-6">
           <ul className="space-y-3 text-sm text-gray-300">
