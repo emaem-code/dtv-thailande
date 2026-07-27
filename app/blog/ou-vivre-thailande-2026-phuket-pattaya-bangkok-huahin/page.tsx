@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
@@ -278,6 +279,20 @@ export default function BlogArticleOuVivreThailande() {
           nuancée — et même surprenante.
         </p>
 
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-phuket-kathu-condo.jpg"
+            alt="Balcon d'un condo à Kathu, Phuket, avec vue sur le lac et la montagne — logement type d'un expatrié sous visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Kathu, à quinze minutes de Patong : la vue montagne et lac pour le
+            prix d&apos;un studio sans fenêtre en Europe.
+          </figcaption>
+        </figure>
+
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           Mon logement, mon budget réel
         </h3>
@@ -381,6 +396,20 @@ export default function BlogArticleOuVivreThailande() {
           Pour Pattaya, je laisse la parole à mon ami, qui y vit et connaît la
           ville de l&apos;intérieur.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-pattaya-front-de-mer.jpg"
+            alt="Front de mer de Pattaya au crépuscule, avec les tours de condos le long de la baie"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Pattaya concentre le meilleur rapport surface-prix du pays, à deux
+            heures de Bangkok.
+          </figcaption>
+        </figure>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           Son logement, ses prix
@@ -513,6 +542,20 @@ export default function BlogArticleOuVivreThailande() {
           infrastructure de niveau mondial.
         </p>
 
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-bangkok-skyline.jpg"
+            alt="Vue sur les gratte-ciels de Bangkok depuis un condo, avec le BTS Skytrain — la ville la plus chère du comparatif"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Bangkok est la seule ville du pays avec une infrastructure de niveau
+            mondial. Ça se paie.
+          </figcaption>
+        </figure>
+
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           Le budget réel en 2026
         </h3>
@@ -610,6 +653,20 @@ export default function BlogArticleOuVivreThailande() {
           cultive une élégance tranquille qui séduit durablement ceux qui
           s&apos;y installent.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-huahin-plage.jpg"
+            alt="Plage et jetée de Hua Hin au lever du soleil — la station balnéaire historique de la famille royale thaïlandaise"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            À trois heures au sud de Bangkok, Hua Hin cultive une élégance
+            tranquille qu&apos;on sous-estime.
+          </figcaption>
+        </figure>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           Mon impression de séjour
@@ -807,6 +864,20 @@ export default function BlogArticleOuVivreThailande() {
           Il n&apos;y a pas de meilleure ville — il y a la ville qui vous
           correspond.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-choisir-sa-ville.jpg"
+            alt="Valise et passeport sur un balcon face à une ville thaïlandaise — choisir où s'installer avec un visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Il n&apos;y a pas de meilleure ville. Il y a celle qui correspond à
+            votre rythme et à votre budget.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 list-none pl-0">
           <li className="flex items-start gap-3">
             <span className="text-amber-500 mt-1 flex-none">→</span>
