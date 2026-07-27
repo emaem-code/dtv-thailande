@@ -183,7 +183,10 @@ const sommaire = [
 ];
 
 export default function BlogArticleOuVivreThailande() {
-  if (!post || new Date(post.publishedAt) > new Date()) {
+  // En production, un article programmé reste invisible jusqu'à sa date.
+  // En développement (npm run dev), il s'affiche pour permettre la relecture.
+  const estProgramme = new Date(post?.publishedAt) > new Date();
+  if (!post || (estProgramme && process.env.NODE_ENV === 'production')) {
     notFound();
   }
 
@@ -282,14 +285,15 @@ export default function BlogArticleOuVivreThailande() {
         <figure className="my-8">
           <Image
             src="/images/blog/ou-vivre-phuket-kathu-condo.jpg"
-            alt="Balcon d'un condo à Kathu, Phuket, avec vue sur le lac et la montagne — logement type d'un expatrié sous visa DTV"
+            alt="Vue depuis mon condo à Kathu, Phuket : le lac, la jungle et les collines vertes — logement à 300 € par mois sous visa DTV"
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Kathu, à quinze minutes de Patong : la vue montagne et lac pour le
-            prix d&apos;un studio sans fenêtre en Europe.
+            La vue depuis chez moi, à Kathu. Une résidence récente et bien
+            entretenue, sans être haut de gamme — c&apos;est exactement le
+            segment où Phuket devient intéressante en 2026.
           </figcaption>
         </figure>
 
@@ -305,6 +309,21 @@ export default function BlogArticleOuVivreThailande() {
           </strong>
           .
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/ou-vivre-phuket-kathu-chambre.jpg"
+            alt="Chambre de mon condo de 30 m² à Kathu, Phuket — ce que loue un expatrié sous visa DTV pour 300 € par mois"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            L&apos;intérieur : 30 m², meublé, bien équipé et récent. Rien
+            d&apos;extraordinaire, mais rien à redire non plus — et c&apos;est
+            précisément ce qu&apos;on trouve à 300 € par mois à Kathu.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Et voici le détail que personne ne documente :{' '}
           <strong className="text-white">les prix ont baissé sur un an.</strong>

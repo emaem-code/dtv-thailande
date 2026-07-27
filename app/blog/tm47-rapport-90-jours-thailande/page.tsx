@@ -136,7 +136,10 @@ const sommaire = [
 ];
 
 export default function BlogArticleTm47() {
-  if (!post || new Date(post.publishedAt) > new Date()) {
+  // En production, un article programmé reste invisible jusqu'à sa date.
+  // En développement (npm run dev), il s'affiche pour permettre la relecture.
+  const estProgramme = new Date(post?.publishedAt) > new Date();
+  if (!post || (estProgramme && process.env.NODE_ENV === 'production')) {
     notFound();
   }
 
