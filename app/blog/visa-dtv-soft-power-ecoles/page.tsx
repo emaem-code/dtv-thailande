@@ -4,6 +4,7 @@ import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-soft-power-ecoles'));
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 // ─── MÉTADONNÉES SEO & CANONICAL ─────────────────────────────────────────────
@@ -215,6 +216,21 @@ export default function BlogArticleSoftPower() {
           travail sur ordinateur. S'engager sur plusieurs mois demande une résilience que la majorité des
           expatriés finissent par abandonner au bout de quelques semaines.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-soft-power-cours-cuisine.jpg"
+            alt="Poste de travail dans une école de cuisine thaïlandaise certifiée — pâte de curry, wok et ingrédients frais"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Les séances se groupent ou s&apos;espacent comme vous voulez sur la
+            durée du cursus. C&apos;est ce qui rend la cuisine bien plus
+            compatible avec le télétravail que le Muay Thaï.
+          </figcaption>
+        </figure>
         <p className="mb-6">
           <strong className="text-white">C'est pourquoi nous recommandons systématiquement les écoles de cuisine.</strong>{' '}
           La gestion du temps y est infiniment plus souple : vous groupez vos séances, vous les
@@ -331,6 +347,21 @@ export default function BlogArticleSoftPower() {
           même journée, en utilisant tous les créneaux proposés (matin, après-midi, soir), tandis que
           d'autres exigent un rythme plus espacé.
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-soft-power-registre-presence.jpg"
+            alt="Signature du registre de présence dans une école de cuisine thaïlandaise — la preuve d'assiduité exigée pour le visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            À chaque séance, vous inscrivez la date et vous signez. C&apos;est ce
+            registre, et non la lettre d&apos;acceptation, qui fait foi si
+            l&apos;immigration vous interroge.
+          </figcaption>
+        </figure>
         <div className="bg-emerald-500/8 border border-emerald-500/20 rounded-2xl p-5 mb-4">
           <p className="text-emerald-300 font-semibold text-sm">
             🛡️ La feuille de présence (Sign-in sheet)
@@ -500,6 +531,21 @@ export default function BlogArticleSoftPower() {
           La réalité du terrain nous pousse à organiser des <strong>Visa Runs</strong> dans les pays
           limitrophes (Vientiane au Laos, Kuala Lumpur en Malaisie). Pourquoi ?
         </p>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-soft-power-ambassade-vientiane.jpg"
+            alt="File d'attente devant une ambassade de Thaïlande en Asie du Sud-Est lors d'un visa run pour le DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            À Vientiane, les documents de l&apos;école sont déjà en thaï : aucune
+            traduction assermentée, et une décision en trois à quatre jours
+            ouvrables.
+          </figcaption>
+        </figure>
         <ul className="list-disc pl-5 space-y-2 text-gray-400">
           <li>Les documents administratifs de l'école (certificats DBD, licences) sont <strong>déjà en thaï</strong>.
           Les ambassades de la région les lisent et les valident instantanément.</li>
