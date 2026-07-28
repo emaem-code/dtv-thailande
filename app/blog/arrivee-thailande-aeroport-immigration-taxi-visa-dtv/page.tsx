@@ -352,6 +352,14 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
             <strong className="text-white">Ne pas avoir l&apos;adresse exacte :</strong> le TDAC, le
             chauffeur et parfois l&apos;immigration peuvent vous la demander.
           </li>
+          <li>
+            <strong className="text-white">Arriver sans assurance santé :</strong> le DTV n&apos;en
+            exige aucune, mais une fracture soignée dans le privé coûte plusieurs milliers d&apos;euros.{' '}
+            <Link href="/blog/assurance-sante-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+              Notre guide de l&apos;assurance santé
+            </Link>{' '}
+            détaille les coûts réels et l&apos;exclusion deux-roues.
+          </li>
         </ol>
       </section>
 

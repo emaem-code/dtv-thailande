@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'assurance-sante-visa-dtv-thailande',
+  title: 'Assurance santé et Visa DTV : pourquoi ne pas venir sans (2026)',
+  shortTitle: 'Assurance santé et Visa DTV',
+  description: "Le Visa DTV n'exige aucune assurance santé — contrairement au visa retraite. Coûts réels d'une hospitalisation à Phuket, exclusions scooter et tarifs constatés en 2026.",
+  excerpt: "Aucune assurance n'est exigée pour obtenir le DTV. C'est précisément ce qui en fait un piège — et l'exclusion deux-roues que presque personne ne vérifie.",
+  date: '11 Août 2026',
+  publishedAt: '2026-08-11T07:00:00Z',
+  modifiedAt: '2026-08-11T07:00:00Z',
+  category: 'Santé',
+  tagColor: 'text-red-400 border-red-500/25 bg-red-500/10',
+  hoverBorder: 'hover:border-red-500/50',
+  image: '/images/blog/assurance-sante-visa-dtv-thailande.jpg',
+},
+  {
   slug: 'fiscalite-thailande-expatries-residence-fiscale',
   title: 'Fiscalité en Thaïlande : impôts, 180 jours et résidence fiscale (2026)',
   shortTitle: 'Fiscalité et résidence fiscale',

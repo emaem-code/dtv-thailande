@@ -975,7 +975,15 @@ export default function BlogArticleOuVivreThailande() {
           >
             notre guide complet de l&apos;arrivée à l&apos;aéroport
           </Link>
-          .
+          . Et quelle que soit la ville retenue, prévoyez la ligne budgétaire que personne
+          n&apos;anticipe :{' '}
+          <Link
+            href="/blog/assurance-sante-visa-dtv-thailande"
+            className="text-amber-500 hover:underline"
+          >
+            l&apos;assurance santé
+          </Link>
+          , environ 1 200 € par an — sans commune mesure avec le coût d&apos;une hospitalisation.
         </p>
       </section>
 
