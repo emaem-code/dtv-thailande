@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -210,6 +211,18 @@ export default function ArticleComparatifVisas() {
         <p className="mb-4">
           C'est le programme d'élite réservé aux profils à (très) haute valeur ajoutée.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/comparatif-visas-ltr.jpg"
+            alt="Le visa LTR thaïlandais, réservé aux très hauts revenus et aux investisseurs"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Magnifique cage dorée : 80 000 USD de revenus annuels ou un million de patrimoine. Elle élimine 95 % des freelances.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li><strong className="text-white">Avantages :</strong> 10 ans de validité (5+5), rapport annuel (fini le rapport de 90 jours), possibilité d'inclure la famille.</li>
           <li><strong className="text-white">Barrière financière :</strong> Revenus &gt; 80 000 USD/an, ou patrimoine &gt; 1 million USD, ou investissement de 250k à 500k USD en Thaïlande.</li>
@@ -246,6 +259,18 @@ revenus mensuels.</p>
         <p className="mb-4">
           Conçu pour les <em>digital nomads</em>, freelances et <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">profils culturels via la voie Soft Power</Link>, il élimine les frictions des anciens statuts.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/comparatif-visas-dtv.jpg"
+            alt="Le visa DTV de 5 ans, conçu pour les freelances et les travailleurs à distance"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            5 ans, entrées multiples, 180 jours par séjour, télétravail autorisé. Le seul statut vraiment pensé pour les indépendants.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-emerald-500/50 text-gray-300 text-sm bg-emerald-500/5 p-4 rounded-r-xl">
           <li>✅ <strong className="text-white">Coût :</strong> 10 000 à 13 000 THB de frais consulaires en Asie, 350 € à l'ambassade de Paris.</li>
           <li>✅ <strong className="text-white">Durée :</strong> 5 ans (entrées multiples). Séjours de 180 jours, prolongeables à 360 jours sans quitter le pays.</li>

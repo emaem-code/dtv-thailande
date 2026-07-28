@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -214,6 +215,18 @@ export default function ArticleFinExemption() {
         <p className="mb-4">
           Le cas de la réduction à 30 jours se produit majoritairement lors d'un passage de frontière terrestre. La loi thaïlandaise est très stricte : <strong>les entrées par voie terrestre sont limitées à deux par année civile</strong> sous le régime de l'exemption de visa, et elles ne sont généralement plus extensibles sur place.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/fin-exemption-poste-frontiere.jpg"
+            alt="Poste frontière terrestre entre la Thaïlande et le Laos, où les tampons réduits à 30 jours se multiplient"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Nong Khai, Sadao, Aranyaprathet : la sévérité varie fortement d&apos;un poste à l&apos;autre.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici notre cartographie terrain exclusive de la sévérité actuelle (Juin 2026) :
         </p>
@@ -285,6 +298,18 @@ export default function ArticleFinExemption() {
         <p className="mb-4">
           Le constat est amer : les coûts engendrés par toutes ces barrières douanières sont devenus conséquents. Beaucoup d'expatriés non déclarés pensent faire des économies en évitant de payer un vrai visa, mais avec la restriction officieuse à 30 jours et le durcissement imminent au Journal Officiel, la facture réelle est astronomique.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/fin-exemption-cout-visa-run.jpg"
+            alt="Le coût réel d&apos;une année de visa runs en Thaïlande : vols, extensions et nuits d&apos;hôtel"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            1 155 € par an en moyenne — sans compter le risque de voir son passeport « grillé » à la frontière.
+          </figcaption>
+        </figure>
         <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 mt-6">
           <p className="text-white font-bold mb-4">💸 Calcul du coût d'une année en Visa Runs (Base 30 Jours) :</p>
           <ul className="space-y-3 text-sm text-gray-400">

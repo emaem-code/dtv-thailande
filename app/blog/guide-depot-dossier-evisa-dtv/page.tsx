@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -179,6 +180,18 @@ export default function EVisaGuidePage() {
           </a>{' '}
           pour créer votre profil candidat.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/guide-evisa-creation-compte.jpg"
+            alt="Création du compte sur le portail officiel Thai e-Visa pour déposer sa demande de DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le portail officiel est gratuit. Tout site qui vous facture des « frais de dossier » avant l&apos;ambassade est un intermédiaire.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
             <strong className="text-white">La procédure :</strong> cliquez sur Create an Account,
@@ -251,6 +264,18 @@ export default function EVisaGuidePage() {
           C'est l'étape qui génère la grande majorité des refus de visa DTV. L'interface vous demande
           de téléverser vos preuves professionnelles, financières et d'identité.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/guide-evisa-televersement.jpg"
+            alt="Téléversement des justificatifs sur la plateforme e-Visa pour une demande de visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Un fichier par champ, format et poids imposés. C&apos;est l&apos;étape où les dossiers se bloquent le plus souvent.
+          </figcaption>
+        </figure>
         <div className="grid gap-4">
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">
             <h3 className="text-xl font-bold text-white mb-2">La contrainte technique</h3>

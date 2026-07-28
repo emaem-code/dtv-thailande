@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -189,6 +190,18 @@ export default function ArticleFreelanceDTV() {
           <strong className="text-white">4,2 millions de travailleurs indépendants</strong>{" "}
           — et la plupart d’entre eux ne rentrent pas dans cette case.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-freelance-dossier-refuse.jpg"
+            alt="Bureau d&apos;un freelance français couvert de documents administratifs pour une demande de visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le motif de refus n°1 des freelances n&apos;est pas le manque de revenus, c&apos;est un dossier qui ne raconte pas d&apos;histoire cohérente.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Quand un auto-entrepreneur dépose un Kbis et des relevés URSSAF sans
           explication structurée, l’officier ne sait pas quoi en faire. Il
@@ -235,6 +248,18 @@ export default function ArticleFreelanceDTV() {
           nos clients freelances. Chaque document joue un rôle précis dans la
           narration administrative.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-freelance-six-documents.jpg"
+            alt="Les documents d&apos;un dossier freelance pour le visa DTV : justificatifs d&apos;activité, relevés bancaires et attestations"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Six pièces remplacent la fiche de paie. Prises isolément elles ne prouvent rien — c&apos;est leur cohérence d&apos;ensemble que l&apos;officier consulaire évalue.
+          </figcaption>
+        </figure>
 
         <div className="space-y-4">
             <div className="border rounded-2xl p-6 border-amber-500/30 bg-amber-500/5">
@@ -450,6 +475,18 @@ export default function ArticleFreelanceDTV() {
           d’imposition) sont en français. La question de la traduction est
           stratégique et dépend directement de l’ambassade choisie.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-freelance-traduction-assermentee.jpg"
+            alt="Traduction assermentée d&apos;un dossier freelance pour l&apos;ambassade de Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Paris exige la traduction assermentée : 150 à 300 € et plusieurs jours. C&apos;est là que se joue le choix de l&apos;ambassade.
+          </figcaption>
+        </figure>
 
         <div className="overflow-x-auto mt-4">
           <table className="w-full text-sm border-collapse">

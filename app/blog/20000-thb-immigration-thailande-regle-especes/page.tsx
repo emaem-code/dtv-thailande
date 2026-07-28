@@ -67,7 +67,7 @@ const faqSchema = {
       name: "Combien faut-il avoir sur soi en entrant en Thaïlande ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "La référence appliquée par l'immigration est de 20 000 THB par personne (environ 520 €) et 40 000 THB par famille, en espèces ou devises équivalentes. Des euros en billets sont acceptés — l'agent évalue la contre-valeur.",
+        text: "La référence appliquée par l'immigration est de 20 000 THB par personne (environ 520 €) et 40 000 THB par famille — un forfait, pas une multiplication : une famille de quatre reste à 40 000 THB, et les enfants de moins de 12 ans ne sont pas comptés. En espèces ou devises équivalentes. Des euros en billets sont acceptés — l'agent évalue la contre-valeur.",
       },
     },
     {
@@ -200,6 +200,43 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-4">
           Les montants de référence appliqués par l&apos;immigration : <strong className="text-white">20 000 THB par personne (environ 520 €)</strong> et 40 000 THB par famille, en espèces ou équivalent.
         </p>
+
+        <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-2xl p-6 mb-6">
+          <p className="text-white font-semibold mb-3">
+            👨‍👩‍👧 Le plafond familial : la bonne nouvelle que personne ne connaît
+          </p>
+          <div className="text-sm text-gray-300 leading-relaxed space-y-3">
+            <p>
+              Le montant familial est un <strong className="text-white">forfait, pas
+              une multiplication</strong>. Une famille de quatre personnes ne doit pas
+              présenter 80 000 THB : le plafond reste à{' '}
+              <strong className="text-white">40 000 THB (environ 1 040 €)</strong> pour
+              l&apos;ensemble du foyer. À partir de deux voyageurs, le forfait familial
+              devient donc plus avantageux que le calcul individuel.
+            </p>
+            <p>
+              Second point que les guides omettent :{' '}
+              <strong className="text-white">les enfants de moins de 12 ans ne sont pas
+              comptabilisés</strong>. Un couple avec deux jeunes enfants relève du forfait
+              à 40 000 THB, sans supplément.
+            </p>
+            <p>
+              Attention en revanche au type d&apos;entrée : sous visa on arrival ou en
+              transit, les montants tombent à 10 000 THB par personne et 20 000 THB par
+              famille. Les seuils de 20 000 et 40 000 THB concernent l&apos;exemption
+              touristique et les visas classiques.
+            </p>
+            <p className="pt-1">
+              Si vous partez en famille,{' '}
+              <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-emerald-400 hover:underline font-medium">
+                notre guide du Visa DTV en couple et en famille
+              </Link>{' '}
+              détaille l&apos;autre règle financière, celle-là bien plus lourde : les
+              500 000 THB de preuve bancaire, qui s&apos;appliquent eux{' '}
+              <em>par demandeur</em> et non par foyer.
+            </p>
+          </div>
+        </div>
         <p className="mb-4">
           Pendant des années, cette règle a dormi dans les textes. Les agents ne la vérifiaient quasiment jamais. Des millions de voyageurs sont entrés en Thaïlande sans que personne ne leur demande de montrer le moindre billet.
         </p>

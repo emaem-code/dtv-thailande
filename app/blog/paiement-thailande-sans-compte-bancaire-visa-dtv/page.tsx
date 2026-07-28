@@ -2,6 +2,7 @@ import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('paiement-thailande-sans-compte-bancaire-visa-dtv'));
@@ -251,6 +252,18 @@ export default function BlogArticlePaiements() {
         </h2>
         <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-5 my-6">
           <p className="text-red-400 font-bold text-sm">⚠️ Attention : Restriction ATM</p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/paiement-atm-bloque.jpg"
+            alt="Distributeur automatique en Thaïlande — les retraits Wise y sont bloqués depuis 2026"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Compte Wise enregistré à une adresse thaïlandaise : retraits ATM impossibles. C&apos;est la raison pour laquelle il faut arriver avec du liquide.
+          </figcaption>
+        </figure>
           <p className="text-gray-300 text-sm mt-2">
             Avec le passage sous licence thaïlandaise, si votre compte Wise est enregistré avec une adresse en Thaïlande, <strong>les retraits aux distributeurs automatiques thaïlandais sont bloqués</strong>. La loi réserve la distribution d&apos;espèces aux banques traditionnelles locales.
           </p>
@@ -289,6 +302,18 @@ export default function BlogArticlePaiements() {
         <p className="mb-4">
           Quand vous cherchez &quot;EUR/THB&quot; sur Google, vous voyez le taux interbancaire (le vrai taux). Mais dans les bureaux de change physiques, vous obtiendrez toujours un taux inférieur. Sur 1 000 € échangés, vous pouvez perdre jusqu&apos;à 40 € juste à cause de la marge du bureau.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/paiement-bureau-change.jpg"
+            alt="Comptoir de change Superrich au niveau B de l&apos;aéroport de Suvarnabhumi"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Évitez les kiosques du hall d&apos;arrivée. Sur 1 000 € changés, l&apos;écart de taux atteint facilement 40 €.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           <strong className="text-white">Comment minimiser cette perte :</strong> Évitez absolument les kiosques du hall d&apos;arrivée à Suvarnabhumi. Descendez au niveau B (près du train) au comptoir Superrich. Pour vos dépenses courantes, privilégiez Wise QR PromptPay : il utilise le vrai taux interbancaire avec zéro marge.
         </p>
@@ -344,6 +369,18 @@ export default function BlogArticlePaiements() {
         <p className="mb-4">
           C&apos;est une question fréquente. Des voyageurs constatent que leur carte étrangère est surtaxée de 3 à 5% par les commerçants. Ce n&apos;est pas un bug : c&apos;est le commerçant qui répercute les frais d&apos;interchange des réseaux Visa ou Mastercard sur le client.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/paiement-qr-promptpay.jpg"
+            alt="Paiement par QR code PromptPay dans une échoppe de rue en Thaïlande avec une carte Wise"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            90 % du quotidien passe par le QR code. C&apos;est le vrai substitut au compte bancaire local.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           <strong className="text-white">Pourquoi Wise QR évite ce problème :</strong> En scannant un QR PromptPay avec Wise, le paiement transite par le commutateur national thaïlandais. Le commerçant reçoit ses bahts instantanément, sans frais de réseau international. Il n&apos;a donc aucune raison de vous surtaxer.
         </p>

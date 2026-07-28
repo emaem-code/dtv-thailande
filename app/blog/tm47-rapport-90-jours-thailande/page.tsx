@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
@@ -245,6 +246,18 @@ export default function BlogArticleTm47() {
           l&apos;obligation de dire à l&apos;immigration thaïlandaise : « je vis
           toujours ici, à cette adresse ».
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tm47-bureau-immigration.jpg"
+            alt="Salle d&apos;attente d&apos;un bureau d&apos;immigration thaïlandais pour le dépôt du rapport de 90 jours TM47"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le TM47 n&apos;est pas un renouvellement de visa. C&apos;est une simple déclaration de présence, mais l&apos;oublier coûte cher.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           L&apos;obligation repose sur la{' '}
           <strong className="text-white">
@@ -352,6 +365,18 @@ export default function BlogArticleTm47() {
           continu. Ensuite, le cycle se répète tous les 90 jours tant que vous
           ne sortez pas du pays.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tm47-calendrier-90-jours.jpg"
+            alt="Calendrier marquant l&apos;échéance du rapport de 90 jours en Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            La fenêtre de dépôt s&apos;ouvre 15 jours avant l&apos;échéance et se ferme 7 jours après. Programmez l&apos;alerte au 80e jour.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           L&apos;immigration laisse une fenêtre confortable :
         </p>
@@ -449,6 +474,18 @@ export default function BlogArticleTm47() {
           Contrairement à ce qu&apos;on lit souvent, il n&apos;y a pas deux mais{' '}
           <strong className="text-white">quatre méthodes</strong>.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tm47-en-ligne.jpg"
+            alt="Dépôt en ligne du rapport de 90 jours TM47 depuis chez soi"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            En ligne, par courrier, par un agent ou sur place : quatre voies, avec des taux de réussite très inégaux.
+          </figcaption>
+        </figure>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           En personne — obligatoire la première fois
@@ -581,6 +618,18 @@ export default function BlogArticleTm47() {
         <p className="mb-4">
           Deux niveaux de sanction, et l&apos;écart est significatif.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tm47-amende.jpg"
+            alt="Amende payée au comptoir de l&apos;immigration thaïlandaise pour un rapport de 90 jours en retard"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            L&apos;amende tombe dès le premier jour de retard, et elle se règle en espèces au guichet.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
             <strong className="text-white">

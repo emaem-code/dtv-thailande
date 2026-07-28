@@ -285,15 +285,15 @@ export default function BlogArticleOuVivreThailande() {
         <figure className="my-8">
           <Image
             src="/images/blog/ou-vivre-phuket-kathu-condo.jpg"
-            alt="Vue depuis mon condo à Kathu, Phuket : le lac, la jungle et les collines vertes — logement à 300 € par mois sous visa DTV"
+            alt="Vue depuis ma résidence à Kathu, Phuket : le lac, la jungle et les collines vertes, à quinze minutes de Patong"
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            La vue depuis chez moi, à Kathu. Une résidence récente et bien
-            entretenue, sans être haut de gamme — c&apos;est exactement le
-            segment où Phuket devient intéressante en 2026.
+            Kathu, à quinze minutes de Patong. Un immeuble ordinaire — façade
+            terracotta, garde-corps noirs — mais une vue sur le lac et les
+            collines que beaucoup paient trois fois ce prix en bord de mer.
           </figcaption>
         </figure>
 
@@ -301,13 +301,29 @@ export default function BlogArticleOuVivreThailande() {
           Mon logement, mon budget réel
         </h3>
         <p className="mb-4">
-          J&apos;habite un condo de 30 m² à Kathu : cuisine équipée, balcon avec
-          vue sur la montagne et le lac, piscine à débordement, petite salle de
-          sport, internet inclus. Le tout pour{' '}
+          J&apos;habite un condo de 30 m² à Kathu, à quinze minutes de Patong et
+          vingt de Phuket Town. Cuisine équipée, balcon avec vue sur la montagne
+          et le lac, piscine à débordement, petite salle de sport, internet
+          inclus. Le tout pour{' '}
           <strong className="text-white">
             11 150 THB par mois, soit environ 300 €
           </strong>
           .
+        </p>
+        <p className="mb-4">
+          Soyons précis sur ce que ce montant recouvre, parce que c&apos;est là
+          que les comparaisons deviennent trompeuses. Ce n&apos;est pas une
+          résidence de standing avec conciergerie et vue mer : c&apos;est un
+          immeuble récent, propre et bien tenu, dans un quartier résidentiel
+          thaïlandais. Le mobilier est fourni, l&apos;électroménager fonctionne,
+          la piscine est entretenue. Rien de luxueux, rien à redire non plus.
+        </p>
+        <p className="mb-4">
+          C&apos;est exactement le segment que les blogs ignorent. On vous montre
+          soit des villas à 2 000 € pour vendre du rêve, soit des chambres à
+          150 € pour prouver qu&apos;on peut vivre de rien. La réalité de
+          l&apos;expatrié qui travaille, c&apos;est ce milieu de gamme-là — et à
+          Phuket, en 2026, il est redevenu accessible.
         </p>
 
         <figure className="my-8">
@@ -319,9 +335,10 @@ export default function BlogArticleOuVivreThailande() {
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            L&apos;intérieur : 30 m², meublé, bien équipé et récent. Rien
-            d&apos;extraordinaire, mais rien à redire non plus — et c&apos;est
-            précisément ce qu&apos;on trouve à 300 € par mois à Kathu.
+            Mes 30 m² à Kathu : meublé, climatisé, internet et accès piscine
+            compris, pour 11 150 THB par mois. C&apos;est le vrai visage du
+            milieu de gamme à Phuket en 2026 — ni villa de rêve, ni chambre
+            spartiate.
           </figcaption>
         </figure>
         <p className="mb-4">

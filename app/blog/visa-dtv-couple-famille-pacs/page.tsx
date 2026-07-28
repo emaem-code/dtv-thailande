@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -171,6 +172,18 @@ export default function ArticleDtvFamille() {
         <p className="mb-4">
           La majorité des plateformes d'information font une erreur d'interprétation majeure concernant les dépendants. Bien que les textes officiels du gouvernement thaïlandais mentionnent l'éligibilité pour les « conjoints et enfants de moins de 20 ans », <strong>il n'existe pas de sous-catégorie de visa de dépendance automatique liée au DTV.</strong>
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-famille-couple-plage.jpg"
+            alt="Famille française installée en Thaïlande avec des visas DTV individuels"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Il n&apos;existe pas de visa DTV « conjoint accompagnant ». Chaque membre du foyer dépose son propre dossier.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Qu'est-ce que cela implique concrètement pour l'organisation de votre dossier ?
         </p>
@@ -200,6 +213,18 @@ export default function ArticleDtvFamille() {
         <p className="mb-4">
           Pour pouvoir lier administrativement deux dossiers de visa sur la base d'une union, celle-ci doit être formellement reconnue par la législation de l'Immigration thaïlandaise.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-famille-seuil-financier.jpg"
+            alt="Le seuil de 500 000 THB s&apos;applique par demandeur : 2 millions pour une famille de quatre personnes"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Deux parents et deux enfants : 2 000 000 THB à justifier, soit environ 52 000 €. C&apos;est la règle qui surprend le plus.
+          </figcaption>
+        </figure>
 
         <h3 className="text-xl font-bold text-white mb-3 mt-6">Le Mariage Civil : La norme de référence</h3>
         <p className="mb-4">
@@ -302,6 +327,18 @@ export default function ArticleDtvFamille() {
         <p className="mb-4">
           Le principal motif de ralentissement ou de refus des dossiers familiaux réside dans la non-conformité des actes d'état civil (actes de mariage ou actes de naissance des enfants).
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/visa-dtv-famille-legalisation.jpg"
+            alt="Double légalisation des actes d&apos;état civil français pour un dossier DTV familial"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            La Thaïlande n&apos;est pas signataire de La Haye : l&apos;apostille ne suffit pas. Il faut le MEAE, puis la traduction, puis l&apos;ambassade.
+          </figcaption>
+        </figure>
         
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-6">
           <p className="text-red-400 font-semibold mb-2">⚠️ Note juridique importante :</p>

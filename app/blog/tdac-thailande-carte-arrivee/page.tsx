@@ -4,6 +4,7 @@ import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('tdac-thailande-carte-arrivee'));
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 // ─── 1. MÉTADONNÉES SEO OPTIMISÉES (NEXT.JS) ─────────────────────────────────
@@ -178,6 +179,18 @@ export default function BlogArticleTdac() {
         <p className="mb-4">
           Le formulaire doit idéalement être complété entre <strong>72 heures et 24 heures avant votre départ</strong>. L’accès se fait via le portail officiel de l’immigration. Pour vous éviter toute confusion lors de la saisie, voici la description textuelle exhaustive, champ par champ, des intitulés officiels en anglais :
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tdac-formulaire-en-ligne.jpg"
+            alt="Remplissage du formulaire TDAC en ligne avant un départ pour la Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            À remplir entre 72 et 24 heures avant le vol. Le champ « Purpose of Visit » est celui qui fait dérailler les dossiers DTV.
+          </figcaption>
+        </figure>
         
         <div className="space-y-6 bg-[#111111] p-6 rounded-2xl border border-white/5 text-sm">
           <div>
@@ -236,6 +249,18 @@ export default function BlogArticleTdac() {
         <p className="mb-4">
           C’est le point critique qui cause le plus de sueurs froides aux douanes de Phuket et de Suvarnabhumi. Si vous possédez un <Link href="/blog/fonds-bancaires-visa-dtv" className="text-emerald-400 hover:underline font-medium">Visa DTV (Destination Thailand Visa)</Link>, vous devez impérativement lier vos documents dans la section dédiée.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tdac-qr-code-aeroport.jpg"
+            alt="QR code TDAC présenté au contrôle d&apos;immigration à l&apos;arrivée en Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Sans le numéro de votre e-Visa DTV dans le formulaire, le système vous enregistre comme simple touriste — et le tampon suit.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Si vous omettez de renseigner votre numéro de e-Visa DTV dans le formulaire numérique, le système de l’immigration vous enregistrera par défaut comme un simple touriste en exemption de visa. À l’arrivée, le douanier se basera sur la fiche informatique générée par le TDAC et risquera de vous tamponner pour une durée réduite au lieu des 180 jours légaux dus à votre précieux statut de résident longue durée.
         </p>
@@ -303,6 +328,18 @@ export default function BlogArticleTdac() {
         <p className="mb-4">
           Si vous êtes basé à Phuket ou Bangkok et que vous effectuez un <strong>Visa Run à Vientiane (Laos)</strong> pour récupérer ou valider un module de votre dossier, la question du retour par voie terrestre se pose de manière concrète. Le TDAC s’applique-t-il au fameux Pont de l’Amitié à Nong Khai ? Le principe d’une entrée = un TDAC vu plus haut s’applique bien évidemment ici aussi.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/tdac-frontiere-terrestre.jpg"
+            alt="Poste frontière terrestre entre la Thaïlande et le Laos, où le TDAC est également obligatoire"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le TDAC s&apos;applique aussi aux frontières terrestres. Imprimez votre QR code : le réseau y est capricieux.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           La réponse est <strong className="text-white">oui</strong>. Les principaux postes frontières terrestres thaïlandais sont désormais équipés de terminaux de contrôle numériques. Lors de votre remplissage en ligne, vous devez simplement sélectionner l’option <em>« Land Border Checking Point »</em> et indiquer le nom exact du poste frontière (ex: Nong Khai Border Post). 
         </p>

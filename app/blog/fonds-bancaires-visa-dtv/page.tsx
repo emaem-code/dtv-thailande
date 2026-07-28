@@ -4,6 +4,7 @@ import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fonds-bancaires-visa-dtv'));
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 // ─── MÉTADONNÉES SEO DE L’ARTICLE ───
@@ -371,6 +372,18 @@ export default function BlogArticleDTV() {
           apprêtez à déposer votre dossier et vous demandez à un proche de vous virer 13 000 €
           la veille de l&apos;impression de vos relevés. C&apos;est une très mauvaise idée.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/fonds-bancaires-money-parking.jpg"
+            alt="Relevé bancaire analysé ligne par ligne — le virement de dernière minute est le premier motif de refus du visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Les officiers consulaires sont formés à détecter le « money parking ». Un solde qui bondit le mois précédant le dépôt fait tomber le dossier.
+          </figcaption>
+        </figure>
         <p className="mb-4">
           Les officiers consulaires sont formés pour détecter le{' '}
           <strong className="text-white">&quot;money parking&quot;</strong> — le fait de stationner
@@ -395,6 +408,18 @@ export default function BlogArticleDTV() {
           Avoir 13 000 € est une chose, mais la manière dont ils sont stockés en est une autre.
           Tous les supports ne sont pas égaux aux yeux de l&apos;immigration thaïlandaise :
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/fonds-bancaires-types-comptes.jpg"
+            alt="Comptes courants, livrets et néobanques acceptés pour justifier les 500 000 THB du visa DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Compte courant, livret, néobanque : acceptés. PEA, assurance-vie, compte professionnel, crypto : refusés ou risqués.
+          </figcaption>
+        </figure>
 
         <div className="space-y-3">
           {comptes.map((c) => (
@@ -508,6 +533,18 @@ export default function BlogArticleDTV() {
               <span className="text-2xl leading-none mt-0.5">{item.icon}</span>
               <div>
                 <p className="text-white font-semibold text-sm mb-1">{item.title}</p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/fonds-bancaires-visa-run-vientiane.jpg"
+            alt="Départ pour un visa run à Vientiane afin de déposer son dossier DTV"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Cinq nuits sur place, dépôt en début de semaine, retrait le vendredi. Attention aux jours fériés laotiens et thaïlandais, qui ferment l&apos;ambassade.
+          </figcaption>
+        </figure>
                 <p className="text-gray-400 text-sm">{item.text}</p>
               </div>
             </div>

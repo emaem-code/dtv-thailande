@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import BlogNavigation from '../../components/BlogNavigation';
 import {
   createArticleMetadata,
@@ -168,6 +169,18 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           Le passage de l&apos;immigration s&apos;est métamorphosé. L&apos;ancien formulaire papier
           TM6 a disparu au profit d&apos;un écosystème numérique beaucoup plus strict.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/arrivee-file-immigration.jpg"
+            alt="File d&apos;attente à l&apos;immigration de l&apos;aéroport de Suvarnabhumi à l&apos;arrivée en Thaïlande"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            20 à 45 minutes en heures creuses, jusqu&apos;à deux heures en haute saison. Passez aux toilettes avant de vous engager.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
             <strong className="text-white">Temps de passage :</strong> prévoyez 20 à 45 minutes aux
@@ -262,6 +275,18 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           S&apos;extraire de l&apos;aéroport demande de choisir la bonne option pour éviter les tarifs
           abusifs et les mauvaises surprises.
         </p>
+        <figure className="my-8">
+          <Image
+            src="/images/blog/arrivee-taxi-grab.jpg"
+            alt="Trajet en VTC depuis l&apos;aéroport de Phuket vers Kathu avec paiement par carte"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Aéroport de Phuket vers Kathu : 570 à 680 THB avec Bolt, payables par carte, sans négociation.
+          </figcaption>
+        </figure>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
             <strong className="text-white">Airport Rail Link (À Bangkok uniquement) :</strong> c&apos;est
