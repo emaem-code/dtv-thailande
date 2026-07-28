@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'fiscalite-thailande-expatries-residence-fiscale',
+  title: 'Fiscalité en Thaïlande : impôts, 180 jours et résidence fiscale (2026)',
+  shortTitle: 'Fiscalité et résidence fiscale',
+  description: "Devenez-vous imposable en Thaïlande après 180 jours ? Retraités, freelances, propriétaires : ce que dit vraiment la réforme de 2024 et la convention franco-thaïlandaise.",
+  excerpt: "Le sujet que les agences de visas évitent. Ce que change réellement la réforme de 2024, et pourquoi les retraités français sont protégés là où les freelances ne le sont pas.",
+  date: '7 Août 2026',
+  publishedAt: '2026-08-07T07:00:00Z',
+  modifiedAt: '2026-08-07T07:00:00Z',
+  category: 'Fiscalité',
+  tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
+  hoverBorder: 'hover:border-emerald-500/50',
+  image: '/images/blog/fiscalite-thailande-expatries-residence-fiscale.jpg',
+},
+  {
   slug: 'tm47-rapport-90-jours-thailande',
   title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
   shortTitle: 'Rapport des 90 jours',

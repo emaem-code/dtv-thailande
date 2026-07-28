@@ -134,7 +134,7 @@ export default function BlogIndex() {
         </p>
         <div className="flex flex-wrap justify-center gap-6">
           <a 
-            href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
+            href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm font-medium"

@@ -827,6 +827,14 @@ export default function BlogArticleTm47() {
         <ul className="space-y-3 list-none pl-0">
           <li>
             <Link
+              href="/blog/fiscalite-thailande-expatries-residence-fiscale"
+              className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors"
+            >
+              → Fiscalité : ce qui se passe vraiment après 180 jours de présence
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv"
               className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors"
             >

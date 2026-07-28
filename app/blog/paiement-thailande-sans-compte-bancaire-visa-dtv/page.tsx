@@ -440,6 +440,10 @@ export default function BlogArticlePaiements() {
           <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-400 hover:underline font-medium">
             vos obligations déclaratives sur place
           </Link>
+          . Nous détaillons l&apos;ensemble du sujet dans notre{' '}
+          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-amber-400 hover:underline font-medium">
+            guide de la fiscalité en Thaïlande après 180 jours
+          </Link>
           .
         </p>
       </section>

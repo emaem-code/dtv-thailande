@@ -44,7 +44,7 @@ export default function FaqPage() {
       q: "Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?",
       a: (
         <>
-          Non. <a href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">L'administration thaïlandaise</a> exige de prouver la liquidité de 500 000 THB (env. 14 500 €) uniquement lors de la demande initiale (et lors d'éventuelles extensions). L'argent n'est pas bloqué. Pour comprendre les subtilités d'historique de 3 ou 6 mois, consultez notre <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-500 hover:underline font-medium">décryptage complet sur les fonds bancaires</Link>.
+          Non. <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">L'administration thaïlandaise</a> exige de prouver la liquidité de 500 000 THB (env. 14 500 €) uniquement lors de la demande initiale (et lors d'éventuelles extensions). L'argent n'est pas bloqué. Pour comprendre les subtilités d'historique de 3 ou 6 mois, consultez notre <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-500 hover:underline font-medium">décryptage complet sur les fonds bancaires</Link>.
         </>
       )
     },
@@ -84,7 +84,7 @@ export default function FaqPage() {
       q: "Mon partenaire et moi sommes pacsés. Le visa s'étend-il à mon conjoint ?",
       a: (
         <>
-          Attention, piège majeur : <a href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">selon les directives officielles</a>, le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Si vous n'êtes pas mariés, la demande d'un visa 'accompagnant' sera automatiquement rejetée. Mais rassurez-vous, nous avons des stratégies d'optimisation pour permettre aux couples pacsés de sécuriser leurs départs ensemble via des dossiers individuels synchronisés.
+          Attention, piège majeur : <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">selon les directives officielles</a>, le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Si vous n'êtes pas mariés, la demande d'un visa 'accompagnant' sera automatiquement rejetée. Mais rassurez-vous, nous avons des stratégies d'optimisation pour permettre aux couples pacsés de sécuriser leurs départs ensemble via des dossiers individuels synchronisés.
        {' '}Le détail des unions reconnues et de la double légalisation est dans notre <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-amber-500 hover:underline font-medium">guide du DTV en famille</Link>.
         </>
       )
@@ -96,7 +96,7 @@ export default function FaqPage() {
       a: (
         <>
           Le visa DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année ET que vous y rapatriez des revenus. Dans le cadre de nos offres, nous vous fournissons les recommandations de base pour comprendre <a href="https://www.impots.gouv.fr/international-particulier/les-conventions-internationales" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline font-medium">la convention fiscale franco-thaïlandaise</a> et optimiser votre calendrier de voyage.
-        {' '}Notez que le seuil des 180 jours conditionne aussi vos <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-500 hover:underline font-medium">obligations déclaratives sur place</Link>.
+        {' '}Notre <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-amber-500 hover:underline font-medium">guide complet de la fiscalité en Thaïlande</Link> distingue le cas des retraités, des freelances et des propriétaires. Notez que le seuil des 180 jours conditionne aussi vos <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-500 hover:underline font-medium">obligations déclaratives sur place</Link>.
         </>
       )
     }

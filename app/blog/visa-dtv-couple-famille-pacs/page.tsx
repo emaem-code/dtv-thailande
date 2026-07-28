@@ -353,7 +353,7 @@ export default function ArticleDtvFamille() {
         <ol className="list-decimal pl-5 space-y-2 mb-6 text-gray-400 marker:text-white marker:font-bold">
           <li><strong>En France :</strong> Obtention de l'acte original certifié, suivi d'une première légalisation par le Ministère de l'Europe et des Affaires Étrangères (MEAE).</li>
           <li><strong>Traduction :</strong> Traduction intégrale du document vers l'anglais ou le thaï par un traducteur assermenté.</li>
-          <li><strong>Au Consulat :</strong> Seconde légalisation du document et de sa traduction par <a href="https://paris.thaiembassy.org/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.</li>
+          <li><strong>Au Consulat :</strong> Seconde légalisation du document et de sa traduction par <a href="http://www.thaiembassy.fr/fr/service-consulaire/legalisation/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.</li>
         </ol>
 
         <p>

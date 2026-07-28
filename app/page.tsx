@@ -241,7 +241,7 @@ function FooterRessources() {
       <p className="text-gray-500 text-sm mb-4">Pour des informations vérifiées, consultez les sites gouvernementaux :</p>
       <div className="flex flex-wrap justify-center gap-6">
         <a 
-          href="https://paris.thaiembassy.org/fr/publicservice/destination-thailand-visa-dtv" 
+          href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="text-amber-500 hover:underline text-sm font-medium transition-colors"
@@ -389,6 +389,7 @@ export default function Home() {
         <div className="w-24 h-px bg-white/10 mb-4"></div>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-4 text-center">
           <button onClick={() => setIsProcessOpen(true)} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
+          <Link href="/blog" className="hover:text-gray-300 transition-colors">Le Blog</Link>
           <Link href="/faq" className="hover:text-gray-300 transition-colors">FAQ</Link>
           <Link href="/contact" className="hover:text-gray-300 transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-gray-300 transition-colors">Mentions légales</Link>
