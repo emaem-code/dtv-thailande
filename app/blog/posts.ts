@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'cas-client-visa-dtv-soft-power-vientiane',
+  title: 'Visa runs : 5 000 € en 21 mois, puis un DTV de 5 ans en 3 jours',
+  shortTitle: 'Cas client : 21 mois de visa runs',
+  description: "Il a dépensé près de 5 000 € en visa runs sur 21 mois. Un Visa DTV de 5 ans lui aurait coûté moins de 4 000 € tout compris. Le cas d'un expatrié qui se croyait inéligible.",
+  excerpt: "Sans revenus réguliers ni statut professionnel, il enchaînait les frontières depuis août 2024. Il était éligible depuis le début — il ne le savait pas.",
+  date: '16 Août 2026',
+  publishedAt: '2026-08-16T07:00:00Z',
+  modifiedAt: '2026-08-16T07:00:00Z',
+  category: 'Cas client',
+  tagColor: 'text-violet-400 border-violet-500/25 bg-violet-500/10',
+  hoverBorder: 'hover:border-violet-500/50',
+  image: '/images/blog/cas-client-visa-dtv-soft-power-vientiane.jpg',
+},
+  {
   slug: 'assurance-sante-visa-dtv-thailande',
   title: 'Assurance santé et Visa DTV : pourquoi ne pas venir sans (2026)',
   shortTitle: 'Assurance santé et Visa DTV',

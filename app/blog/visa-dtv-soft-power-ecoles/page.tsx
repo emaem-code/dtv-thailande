@@ -178,7 +178,12 @@ export default function BlogArticleSoftPower() {
           <Link href="/blog/comparatif-visas-thailande" className="text-emerald-500 hover:underline font-medium">
             notre comparatif des visas longue durée
           </Link>{' '}
-          situe le DTV face au LTR, au Non-ED et au METV.
+          situe le DTV face au LTR, au Non-ED et au METV. Et pour voir ce que donne cette voie sur un
+          cas réel, lisez{' '}
+          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-emerald-500 hover:underline font-medium">
+            le parcours d&apos;un client sans revenus réguliers
+          </Link>{' '}
+          qui a obtenu son visa en trois jours à Vientiane.
         </p>
         <p className="text-white font-medium border-l-4 border-emerald-500 pl-5 py-1">
           Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. Le grand
@@ -279,10 +284,10 @@ export default function BlogArticleSoftPower() {
               </tr>
             </thead>
             <tbody className="text-gray-400">
-              <tr className="border-b border-gray-800/60 bg-[#0d0d0d]">
-                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 6 mois</td>
+              <tr className="border-b border-gray-800/60 bg-[#0d0d0d] opacity-60">
+                <td className="px-4 py-4 font-semibold text-gray-400">Cuisine — 6 mois <span className="text-xs font-normal text-red-400">· retiré de l&apos;offre</span></td>
                 <td className="px-4 py-4">10 cours</td>
-                <td className="px-4 py-4 text-white font-semibold">20 000 THB <span className="text-xs font-normal text-gray-500">(février 2026)</span></td>
+                <td className="px-4 py-4">20 000 THB <span className="text-xs font-normal text-gray-500">(tarif de février 2026)</span></td>
               </tr>
               <tr className="border-b border-gray-800/60">
                 <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 9 mois</td>
@@ -475,19 +480,32 @@ export default function BlogArticleSoftPower() {
           lettre d'acceptation fabriquée. Une école certifiée passe ; une école fantôme fait révoquer
           le visa, quel que soit le montant facturé.
         </p>
-        <div className="bg-amber-500/5 border border-amber-500/25 rounded-2xl p-6">
-          <p className="text-white font-semibold mb-2">⚠️ Mais la tendance se durcit, et il faut le dire</p>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            Entre février et juin 2026, l'école où j'ai suivi mon propre cursus a refondu son offre :
-            les formats courts ont disparu de sa page DTV, remplacés par des programmes de 9 et 12
-            mois. Elle écrit elle-même que{' '}
-            <em className="text-white">« certaines ambassades privilégient ou réclament désormais
-            des programmes d'au moins 12 mois »</em>. Ce n'est pas un argument commercial : cette
-            école n'a aucun intérêt à compliquer la vie de ses élèves. C'est un signal.
-            Concrètement : un cursus de 6 mois reste défendable aujourd'hui, mais si vous déposez
-            dans les mois qui viennent, partez sur 9 ou 12 mois. Le surcoût est réel, le refus coûte
-            plus cher.
+        <div className="bg-red-500/5 border border-red-500/30 rounded-2xl p-6">
+          <p className="text-white font-semibold mb-3">
+            ⚠️ Mise à jour : le format 6 mois n&apos;existe plus
           </p>
+          <div className="text-sm text-gray-300 leading-relaxed space-y-3">
+            <p>
+              Cette question est désormais tranchée. Interrogée directement, l&apos;école où j&apos;ai
+              suivi mon propre cursus nous a confirmé par écrit avoir{' '}
+              <strong className="text-white">retiré le programme de 6 mois de son offre</strong> :
+              <em className="text-white"> « nous ne proposons actuellement que le programme de
+              9 mois »</em>. Les inscriptions déjà réglées sous l&apos;ancien format restent honorées,
+              mais il n&apos;est plus commercialisé.
+            </p>
+            <p>
+              Le motif est le même que celui qu&apos;elle affichait déjà publiquement : certaines
+              ambassades privilégient ou réclament désormais des programmes plus longs. Ce n&apos;est
+              pas un argument commercial — une école n&apos;a aucun intérêt à compliquer la vie de ses
+              élèves.
+            </p>
+            <p>
+              <strong className="text-white">Concrètement : si vous déposez aujourd&apos;hui, le
+              format de référence est le cursus de 9 mois.</strong> Les dépôts à 20 000 THB évoqués
+              plus haut restent des faits — ils datent du premier semestre 2026, quand ce format
+              existait encore. Ils ne constituent plus une option disponible.
+            </p>
+          </div>
         </div>
       </section>
 

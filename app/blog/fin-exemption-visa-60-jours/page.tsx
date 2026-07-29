@@ -378,6 +378,13 @@ export default function ArticleFinExemption() {
           </Link>{' '}
           avant de vous décider.
         </p>
+        <p className="mt-4">
+          Et si vous doutez encore de la rentabilité de l&apos;opération, lisez{' '}
+          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-amber-400 hover:underline font-medium">
+            le cas de ce client qui a dépensé 5 000 € en 21 mois de visa runs
+          </Link>{' '}
+          avant d&apos;obtenir son DTV en trois jours.
+        </p>
       </section>
 
       {/* ── ENCART AUTEUR ── */}
