@@ -505,6 +505,16 @@ export default function BlogArticleImmigration20000THB() {
         <p className="text-sky-400 font-semibold text-lg mt-8">
           Trente secondes de préparation contre plusieurs jours bloqué dans un pays voisin avec un tampon indélébile dans le passeport. Le calcul est vite fait.
         </p>
+        <p className="mt-6">
+          Les fonds insuffisants ne sont d&apos;ailleurs qu&apos;un des trois motifs de refoulement
+          invoqués par le Bureau de l&apos;Immigration — les deux autres étant l&apos;absence
+          d&apos;itinéraire détaillé et l&apos;historique de visa runs. Si votre passeport porte déjà
+          un dépassement de séjour, même ancien, lisez{' '}
+          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-500 hover:underline font-medium">
+            ce qu&apos;il vaut réellement dans votre dossier
+          </Link>{' '}
+          avant votre prochaine entrée.
+        </p>
       </section>
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}

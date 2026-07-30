@@ -282,6 +282,17 @@ export default function BlogArticleTm47() {
             d&apos;extension.
           </p>
         </div>
+        <p className="mt-6">
+          C&apos;est d&apos;ailleurs la confusion la plus fréquente sur ce sujet : un TM47 en retard
+          n&apos;est <strong className="text-white">pas</strong> un dépassement de séjour. Le premier
+          est un rapport de présence oublié, le second un séjour devenu irrégulier — et les deux
+          n&apos;ont ni la même amende ni les mêmes conséquences.{' '}
+          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-400 hover:underline font-medium">
+            Le barème de l&apos;overstay, lui, va jusqu&apos;à dix ans d&apos;interdiction du
+            territoire
+          </Link>
+          .
+        </p>
       </section>
 
       {/* ── SECTION 2 ── */}

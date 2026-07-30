@@ -130,7 +130,7 @@ export default function ArticleDtvFamille() {
           Stratégie Légale · Expatriation
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Obtenir le Visa DTV en Famille ou en Couple : <span className="text-fuchsia-500">PACS, Mariage et Enfants</span>
+          Obtenir le Visa DTV en Famille ou en Couple : <span className="text-fuchsia-400">PACS, Mariage et Enfants</span>
         </h1>
         <p className="text-base text-gray-500 mt-6">
           Lecture : 15 min · Mis à jour : 17 juin 2026 · Par{" "}

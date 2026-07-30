@@ -379,6 +379,15 @@ export default function ArticleFinExemption() {
           avant de vous décider.
         </p>
         <p className="mt-4">
+          Et si la tentation de « laisser filer » quelques jours au-delà du tampon vous a déjà
+          traversé l&apos;esprit, sachez que la sanction ne dépend pas de la durée du dépassement mais
+          de la manière dont il se termine :{' '}
+          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-amber-400 hover:underline font-medium">
+            le barème officiel de l&apos;overstay, amendes et interdictions
+          </Link>
+          .
+        </p>
+        <p className="mt-4">
           Et si vous doutez encore de la rentabilité de l&apos;opération, lisez{' '}
           <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-amber-400 hover:underline font-medium">
             le cas de ce client qui a dépensé 5 000 € en 21 mois de visa runs

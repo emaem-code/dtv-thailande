@@ -107,8 +107,9 @@ export default function ArticleCasClient() {
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>
           Il est arrivé en Thaïlande en août 2024. Jusqu&apos;en mai 2026, il n&apos;a connu
-          qu&apos;une seule méthode pour rester : le visa run. En moto, en bus, tous les deux mois,
-          direction la frontière la plus proche.
+          qu&apos;une seule méthode pour rester : le visa run. Tous les deux mois, sans exception —
+          tantôt par la route vers la frontière la plus proche, en moto ou en bus, tantôt en avion
+          vers un pays voisin quand la voie terrestre devenait trop risquée ou trop encombrée.
         </p>
         <p>
           En vingt et un mois de ce régime, il a dépensé{' '}
@@ -157,8 +158,8 @@ export default function ArticleCasClient() {
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Vingt et un mois de frontières, tous les deux mois. Le mode de vie que le DTV rend
-            inutile.
+            Vingt et un mois de frontières, tous les deux mois, par la route comme par les airs. Le
+            mode de vie que le DTV rend inutile.
           </figcaption>
         </figure>
 
@@ -221,12 +222,26 @@ export default function ArticleCasClient() {
         </p>
         <p className="mb-6">
           Un visa run ne se résume pas au prix du transport. Il faut additionner l&apos;aller-retour
-          vers la frontière, les nuits sur place, les repas et déplacements pendant le trajet,{' '}
+          vers la frontière — par la route ou{' '}
+          <strong className="text-white">par avion, ce qui change complètement l&apos;addition</strong>{' '}
+          —, les nuits sur place, les repas et déplacements pendant le trajet,{' '}
           <Link href="/blog/fin-exemption-visa-60-jours" className="text-violet-400 hover:underline font-medium">
             les extensions payées à l&apos;immigration
           </Link>
-          , et — comme beaucoup — les agences auxquelles il faisait appel pour fluidifier le passage.
+          , et — comme beaucoup — les agences auxquelles il faisait appel pour organiser ses sorties.
           Sur vingt et un mois, en additionnant tout, il en avait pour près de 5 000 €.
+        </p>
+        <p className="mb-6">
+          C&apos;est d&apos;ailleurs l&apos;alternance des deux modes qui explique une partie du
+          montant. Les sorties aériennes coûtent trois à quatre fois une sortie terrestre, mais elles
+          sont mieux perçues au retour : depuis le plafonnement des entrées terrestres en exemption à
+          deux par année civile, le passage par la route est devenu le signal le plus visible du
+          profil « visa runner ». Beaucoup basculent alors sur l&apos;avion, et voient leur budget
+          annuel doubler sans pour autant gagner un statut.{' '}
+          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-violet-400 hover:underline font-medium">
+            C&apos;est précisément la trajectoire que l&apos;immigration lit dans un passeport
+          </Link>
+          .
         </p>
 
         <div className="overflow-x-auto rounded-2xl border border-gray-800 mb-6">

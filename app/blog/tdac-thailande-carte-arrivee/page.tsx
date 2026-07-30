@@ -123,7 +123,7 @@ export default function BlogArticleTdac() {
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          TDAC Thaïlande 2026 : Guide Complet de la Carte d’Arrivée Numérique
+          TDAC Thaïlande 2026 : <span className="text-sky-400">Guide Complet de la Carte d’Arrivée Numérique</span>
         </h1>
 
         <p className="text-base text-gray-500 mt-4">

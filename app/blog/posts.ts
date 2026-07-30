@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'overstay-thailande-amende-blacklist-visa-dtv',
+  title: "Overstay en Thaïlande : 500 THB par jour, et l'erreur qui coûte 5 ans",
+  shortTitle: 'Overstay en Thaïlande : amendes et blacklist',
+  description: "500 THB par jour, plafond à 20 000 THB, et le seuil des 90 jours qui déclenche l'interdiction de retour. Le barème officiel de l'overstay en Thaïlande, source à l'appui.",
+  excerpt: "Se présenter de soi-même ou être contrôlé : le même dépassement de 30 jours coûte une amende dans un cas, cinq ans d'interdiction dans l'autre.",
+  date: '20 Août 2026',
+  publishedAt: '2026-08-20T07:00:00Z',
+  modifiedAt: '2026-08-20T07:00:00Z',
+  category: 'Formalités',
+  tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
+  hoverBorder: 'hover:border-sky-500/50',
+  image: '/images/blog/overstay-thailande-amende-blacklist-visa-dtv.jpg',
+},
+  {
   slug: 'cas-client-visa-dtv-soft-power-vientiane',
   title: 'Visa runs : 5 000 € en 21 mois, puis un DTV de 5 ans en 3 jours',
   shortTitle: 'Cas client : 21 mois de visa runs',
