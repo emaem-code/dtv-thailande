@@ -181,7 +181,7 @@ export default function ArticleComparatifVisas() {
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-4">
           <p className="text-red-400 font-semibold mb-2">⚠️ Mise à jour avril 2026 :</p>
           <p className="text-gray-400 text-sm">
-            Le Cabinet thaïlandais a officiellement réduit l'exemption touristique standard de 60 à 30 jours pour les Français. Le METV gagne en attractivité pour les visiteurs fréquents, mais reste inadapté à une expatriation stable.
+            Le Cabinet thaïlandais a approuvé en mai 2026 la réduction de l&apos;exemption touristique standard de 60 à 30 jours pour les Français — mesure qui n&apos;entrera en vigueur que 15 jours après sa publication au Journal Officiel thaïlandais (<Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">suivi à jour</Link>). Le METV gagne en attractivité pour les visiteurs fréquents, mais reste inadapté à une expatriation stable.
           </p>
         </div>
         <p className="text-amber-400 font-medium">💡 Verdict de l'expert : Parfait pour un séjour sabbatique, inadapté pour un professionnel.</p>

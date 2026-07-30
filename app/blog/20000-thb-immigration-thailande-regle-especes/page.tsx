@@ -497,7 +497,7 @@ export default function BlogArticleImmigration20000THB() {
         </div>
 
         <p className="mb-4">
-          <strong className="text-white">Voyageurs en vacances (sans visa) :</strong> les Français bénéficient de l&apos;exemption de visa automatique de 30 jours — aucune démarche préalable, le tampon est apposé gratuitement à l&apos;arrivée. Mais attention : c&apos;est précisément ce profil que la règle des 20 000 THB cible en priorité, surtout en cas d&apos;entrées répétées dans l&apos;année. L&apos;exemption de visa n&apos;exempte pas des moyens de subsistance.
+          <strong className="text-white">Voyageurs en vacances (sans visa) :</strong> les Français bénéficient de l&apos;exemption de visa automatique — aucune démarche préalable, le tampon est apposé gratuitement à l&apos;arrivée. Sa durée est en cours de réduction de 60 à 30 jours : la mesure a été approuvée en mai 2026 mais n&apos;entrera en vigueur que 15 jours après sa publication au Journal Officiel thaïlandais (<Link href="/blog/fin-exemption-visa-60-jours" className="text-sky-500 hover:underline font-medium">état des lieux à jour ici</Link>). Mais attention : c&apos;est précisément ce profil que la règle des 20 000 THB cible en priorité, surtout en cas d&apos;entrées répétées dans l&apos;année. L&apos;exemption de visa n&apos;exempte pas des moyens de subsistance.
         </p>
         <p className="mb-4">
           <strong>Ne jamais compter sur les ATM de l&apos;aéroport :</strong> ils sont après la douane, et Wise ne fonctionne plus aux distributeurs thaïlandais.

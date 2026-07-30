@@ -413,7 +413,7 @@ export default function ArticleDtvFamille() {
         <ul className="space-y-3">
           <li>
             <Link href="/blog/fonds-bancaires-visa-dtv" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline text-sm transition-colors">
-              → Fonds bancaires Visa DTV : Faut-il bloquer les 500 000 THB pendant 6 mois ?
+              → Fonds bancaires Visa DTV : faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?
             </Link>
           </li>
           <li>
