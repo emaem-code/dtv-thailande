@@ -283,6 +283,14 @@ export default function BlogArticleTm47() {
           </p>
         </div>
         <p className="mt-6">
+          Et ne le confondez pas non plus avec{' '}
+          <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+            l&apos;extension de 180 jours
+          </Link>
+          , qui est la seule des trois démarches à modifier réellement la durée de votre séjour
+          autorisé.
+        </p>
+        <p className="mt-4">
           C&apos;est d&apos;ailleurs la confusion la plus fréquente sur ce sujet : un TM47 en retard
           n&apos;est <strong className="text-white">pas</strong> un dépassement de séjour. Le premier
           est un rapport de présence oublié, le second un séjour devenu irrégulier — et les deux
@@ -464,7 +472,11 @@ export default function BlogArticleTm47() {
         <p>
           Conséquence pratique : exigez le reçu du TM30 de votre propriétaire
           dès la signature du bail. Sans ce document, vous serez bloqué non
-          seulement pour le TM47, mais aussi pour votre extension de 180 jours.
+          seulement pour le TM47, mais aussi pour votre{' '}
+          <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+            extension de 180 jours
+          </Link>
+          .
         </p>
       </section>
 

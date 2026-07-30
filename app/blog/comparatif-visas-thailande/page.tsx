@@ -173,7 +173,7 @@ export default function ArticleComparatifVisas() {
           Le <em>Multiple Entry Tourist Visa</em> (METV) est souvent la première option envisagée par ceux qui souhaitent tester la vie en Thaïlande. L'ancien programme STV a officiellement pris fin, faisant du METV la seule option touristique à entrées multiples.
         </p>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
-          <li><strong className="text-white">Coût :</strong> 5 000 THB (environ 135 €). Prévoyez 1 900 THB par extension, plus le coût des billets d'avion pour les sorties obligatoires.</li>
+          <li><strong className="text-white">Coût :</strong> 5 000 THB (environ 135 €). Prévoyez 1 900 THB par <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-indigo-400 hover:underline font-medium">extension</Link>, plus le coût des billets d&apos;avion pour les sorties obligatoires.</li>
           <li><strong className="text-white">Durée :</strong> Valable 6 mois. Séjour de 60 jours par entrée (extensible à 90 jours).</li>
           <li><strong className="text-white">Finances :</strong> Preuve d'un solde global d'environ 700 € sur les 3 derniers mois (varie selon les ambassades).</li>
           <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires, chronophages, et <Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">de plus en plus mal vus à la frontière</Link>.</li>

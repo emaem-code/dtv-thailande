@@ -759,9 +759,11 @@ export default function ArticleOverstay() {
         <div className="bg-emerald-500/5 border border-emerald-500/25 rounded-2xl p-6 mb-6">
           <p className="text-white font-semibold mb-3">Ce que le DTV supprime</p>
           <p className="text-sm text-gray-300 leading-relaxed">
-            Le comptage. Vous entrez, vous obtenez 180 jours, vous vivez. Vous pouvez demander une
-            extension de 180 jours supplémentaires sur place. Vous sortez quand vous voulez et vous
-            rentrez sur le même visa pendant cinq ans. Le calendrier et le passeport côte à côte sur
+            Le comptage. Vous entrez, vous obtenez 180 jours, vous vivez. Vous pouvez demander une{' '}
+            <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+              extension de 180 jours supplémentaires
+            </Link>{' '}
+            sur place. Vous sortez quand vous voulez et vous rentrez sur le même visa pendant cinq ans. Le calendrier et le passeport côte à côte sur
             la table, c&apos;est terminé. C&apos;est le bénéfice dont je parlais en introduction, et
             je maintiens que c&apos;est le plus sous-estimé de tous.
           </p>

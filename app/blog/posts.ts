@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'extension-180-jours-visa-dtv-thailande',
+  title: "Extension du Visa DTV : 180 + 180 jours, et pourquoi vous n'en aurez peut-être jamais besoin",
+  shortTitle: 'Extension de 180 jours du DTV',
+  description: "TM7, 1 900 THB, une seule extension par entrée : la procédure réelle de l'extension du Visa DTV, et le calcul qui montre qu'une sortie du pays est souvent préférable.",
+  excerpt: "Sortir de Thaïlande annule votre séjour en cours mais vous rend 180 jours neufs. Si vous rentrez en Europe une fois par an, l'extension ne vous servira jamais.",
+  date: '24 Août 2026',
+  publishedAt: '2026-08-24T07:00:00Z',
+  modifiedAt: '2026-08-24T07:00:00Z',
+  category: 'Formalités',
+  tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
+  hoverBorder: 'hover:border-sky-500/50',
+  image: '/images/blog/extension-180-jours-visa-dtv-thailande.jpg',
+},
+  {
   slug: 'overstay-thailande-amende-blacklist-visa-dtv',
   title: "Overstay en Thaïlande : 500 THB par jour, et l'erreur qui coûte 5 ans",
   shortTitle: 'Overstay en Thaïlande : amendes et blacklist',
