@@ -8,18 +8,11 @@ import DtvGuideModal from "./components/DtvGuideModal";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
 import ProcessModal from "./components/ProcessModal";
-import HomeContent, { homeFaqs } from "./components/HomeContent";
+import HomeContent from "./components/HomeContent";
+import { getSortedBlogPosts } from "./blog/posts";
 
-// ─── FAQ EN DONNÉES STRUCTURÉES (éligibilité aux résultats enrichis) ───
-const homeFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: homeFaqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+// NOTE : pas de balisage FAQPage ici — il appartient à la page /faq, qui porte
+// les mêmes questions. Deux FAQPage identiques sur un même site se concurrencent.
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
@@ -55,16 +48,69 @@ function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   );
 }
 
-function HeroText() {
+function HeroText({
+  nbGuides,
+  onEligibilite,
+  onGuide,
+}: {
+  nbGuides: number;
+  onEligibilite: () => void;
+  onGuide: () => void;
+}) {
   return (
-    <div className="pb-4 lg:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
-      {/* Modification n°1 : Le H1 contient maintenant "Visa DTV" */}
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        Visa DTV Thaïlande : <br className="block md:hidden" /> votre nouvelle vie commence ici
+    <div className="w-full text-center lg:text-left animate-in fade-in duration-1000">
+      <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-500 mb-5">
+        Agence basée à Phuket
+      </span>
+
+      <h1 className="text-4xl md:text-5xl xl:text-[3.4rem] font-extrabold tracking-tighter leading-[1.08] text-white">
+        Visa DTV Thaïlande :{' '}
+        <span className="bg-clip-text text-transparent bg-gradient-to-br from-amber-400 to-amber-600">
+          5 ans, sans mauvaise surprise
+        </span>
       </h1>
-      <p className="text-[14px] md:text-lg text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
-        Visa DTV 5 ans · Dossier béton · Zéro charge mentale
+
+      <p className="text-sm md:text-base text-gray-400 mt-4 leading-relaxed max-w-lg mx-auto lg:mx-0">
+        Nous montons votre dossier consulaire de bout en bout. Trois voies d&apos;accès, un tarif
+        public, et un accompagnement par quelqu&apos;un qui a fait la démarche lui-même.
       </p>
+
+      <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+        <button
+          onClick={onEligibilite}
+          className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-3.5 px-7 rounded-full hover:bg-gray-200 transition-all active:scale-95"
+        >
+          Vérifier mon éligibilité
+        </button>
+        <button
+          onClick={onGuide}
+          className="inline-flex items-center justify-center gap-2 border border-amber-500/50 text-amber-500 font-bold text-sm py-3.5 px-7 rounded-full hover:bg-amber-500/10 transition-all active:scale-95"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+          </span>
+          Le guide gratuit
+        </button>
+      </div>
+
+      <dl className="mt-8 pt-6 border-t border-white/10 flex gap-8 justify-center lg:justify-start">
+        <div>
+          <dt className="sr-only">Guides publiés</dt>
+          <dd className="text-xl font-extrabold text-white">{nbGuides}</dd>
+          <p className="text-[11px] text-gray-500 mt-0.5">guides en ligne</p>
+        </div>
+        <div>
+          <dt className="sr-only">Durée du visa</dt>
+          <dd className="text-xl font-extrabold text-white">5 ans</dd>
+          <p className="text-[11px] text-gray-500 mt-0.5">de séjour obtenu</p>
+        </div>
+        <div>
+          <dt className="sr-only">Tarif de départ</dt>
+          <dd className="text-xl font-extrabold text-white">850 €</dd>
+          <p className="text-[11px] text-gray-500 mt-0.5">à partir de</p>
+        </div>
+      </dl>
     </div>
   );
 }
@@ -99,6 +145,10 @@ function VideoSequence() {
   useEffect(() => {
     videoRefs.current.forEach((vid, index) => {
       if (!vid) return;
+      // Le navigateur n'autorise la lecture automatique que si la vidéo est
+      // réellement muette au moment de l'appel. La prop React `muted` n'étant
+      // pas fiable sur <video>, on la force ici sur l'élément lui-même.
+      vid.muted = volume === 0;
       vid.volume = volume;
       if (index === activeIndex) {
         const playPromise = vid.play();
@@ -135,11 +185,11 @@ function VideoSequence() {
         <MobileVideoCarousel />
       </div>
 
-      {/* 💻 DESKTOP VIEW : ASYMÉTRIE PREMIUM */}
-      <div className="hidden lg:flex flex-row items-center justify-center w-full max-w-6xl px-4 gap-12 xl:gap-20 py-2">
-        
-        {/* À GAUCHE : Le Lecteur Vidéo "Focus" */}
-        <div className="relative w-[340px] xl:w-[380px] aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 shrink-0 bg-[#0a0a0a]">
+      {/* 💻 DESKTOP VIEW : lecteur vertical à gauche, chapitres cliquables à droite */}
+      <div className="hidden lg:flex flex-row items-stretch w-full gap-6 xl:gap-8">
+
+        {/* À GAUCHE : Le Lecteur Vidéo "Focus" (format portrait) */}
+        <div className="relative w-[228px] xl:w-[264px] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 shrink-0 bg-[#0a0a0a]">
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
             return (
@@ -152,8 +202,9 @@ function VideoSequence() {
                   src={video.src}
                   poster={video.poster}
                   playsInline
-                  preload={isActive ? "metadata" : "none"}
-                  muted={volume === 0}
+                  preload={isActive ? "auto" : "none"}
+                  muted
+                  autoPlay={isActive}
                   onEnded={handleVideoEnd}
                   className="w-full h-full object-cover"
                 />
@@ -191,32 +242,38 @@ function VideoSequence() {
           })}
         </div>
 
-        {/* À DROITE : La Liste des Chapitres */}
-        <div className="flex flex-col gap-3 xl:gap-4 w-full max-w-lg">
-          <div className="text-gray-500 text-xs xl:text-sm font-bold uppercase tracking-widest mb-2 px-2">L&apos;accompagnement clé en main</div>
-          
+        {/* À DROITE : La Liste des Chapitres, cliquables — hauteur alignée sur le lecteur */}
+        <div className="flex flex-col gap-2 xl:gap-2.5 flex-1 min-w-0">
+          <div className="flex-none text-gray-500 text-[10px] xl:text-xs font-bold uppercase tracking-widest px-1 flex items-center gap-2">
+            <svg className="w-3 h-3 text-amber-500 flex-none" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1zm6 4.5v7l6-3.5-6-3.5z" />
+            </svg>
+            Tout comprendre en 5 vidéos
+          </div>
+
           {videos.map((video, index) => {
             const isActive = index === activeIndex;
             return (
               <div 
                 key={video.id}
                 onClick={() => handleVideoClick(index)}
-                className={`group relative flex items-center gap-5 p-3 xl:p-4 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden ${
+                className={`group relative flex-1 min-h-0 flex items-center gap-3 xl:gap-4 p-2 xl:p-2.5 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden ${
                   isActive 
                     ? 'bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.05)]' 
                     : 'bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 grayscale-[50%] hover:grayscale-0'
                 }`}
               >
-                <div className="relative w-16 h-24 xl:w-20 xl:h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-lg">
+                <div className="relative h-full aspect-[3/4] rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-lg">
                   <Image
                     src={video.poster}
                     alt={`Aperçu vidéo ${video.title} pour l'accompagnement Visa DTV Thaïlande`}
                     fill
-                    sizes="(min-width: 1280px) 80px, 64px"
+                    sizes="(min-width: 1280px) 64px, 52px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  
-                  {isActive && (
+
+                  {isActive ? (
+                    /* Vidéo en cours : égaliseur animé */
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-[1px]">
                       <div className="flex gap-1 items-end h-4">
                         <div className="w-1 bg-amber-500 rounded-full animate-bounce h-2" style={{ animationDelay: '0ms' }}></div>
@@ -224,14 +281,23 @@ function VideoSequence() {
                         <div className="w-1 bg-amber-500 rounded-full animate-bounce h-3" style={{ animationDelay: '300ms' }}></div>
                       </div>
                     </div>
+                  ) : (
+                    /* Vidéo en attente : symbole lecture, pour qu'on comprenne que c'est cliquable */
+                    <div className="absolute inset-0 bg-black/35 flex items-center justify-center transition-all duration-300 group-hover:bg-black/15">
+                      <span className="flex items-center justify-center w-6 h-6 xl:w-7 xl:h-7 rounded-full bg-black/55 border border-white/40 backdrop-blur-[2px] transition-transform duration-300 group-hover:scale-110 group-hover:border-amber-400">
+                        <svg className="w-2.5 h-2.5 xl:w-3 xl:h-3 text-white ml-[1px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    </div>
                   )}
                 </div>
 
                 <div className="flex flex-col justify-center">
-                  <div className={`text-base xl:text-lg font-bold leading-tight mb-1.5 transition-colors ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                  <div className={`text-sm xl:text-base font-bold leading-tight mb-0.5 transition-colors ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
                     {video.title.replace('\n', ' ')}
                   </div>
-                  <p className="text-xs xl:text-sm text-gray-400 line-clamp-2 leading-relaxed">
+                  <p className="text-[11px] xl:text-xs text-gray-400 line-clamp-2 leading-relaxed">
                     {video.phrases[0]}
                   </p>
                 </div>
@@ -274,7 +340,12 @@ function FooterRessources() {
 }
 
 export default function Home() {
-  const [isGuideOpen, setIsGuideOpen] = useState(false); 
+  // Compteur d'articles réellement publiés — se met à jour seul à chaque publication
+  const nbGuides = getSortedBlogPosts().filter(
+    (p) => new Date(p.publishedAt) <= new Date()
+  ).length;
+
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isEligibleOpen, setIsEligibleOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProcessOpen, setIsProcessOpen] = useState(false);
@@ -290,85 +361,63 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-56">
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
-      />
 
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* 💻 NOUVEAU : SIDEBAR LATÉRALE (Uniquement Desktop) */}
-      <aside className="hidden lg:flex flex-col fixed top-0 left-0 w-64 h-screen border-r border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl z-[60] py-10 px-6 justify-between shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
-        <div className="flex flex-col gap-10">
-          
-          {/* Logo / Titre Sidebar */}
-<div className="px-2 flex items-center gap-4">
-  <Image
-    src="/logo.svg"
-    alt="Logo de l'agence DTV Thaïlande"
-    width={48}
-    height={48}
-    priority
-    unoptimized
-    className="w-12 h-12 object-contain"
-  />
-  <div className="leading-none">
-    <div className="text-2xl font-black text-white tracking-tight">DTV</div>
-    <div className="text-[10px] font-bold text-amber-500 tracking-[0.18em] uppercase mt-1">
-      Destination Thaïlande
-    </div>
-  </div>
-</div>
+      {/* ── BARRE DE NAVIGATION HORIZONTALE (desktop + mobile) ── */}
+      <header className="sticky top-0 z-[60] w-full border-b border-white/[0.06] bg-[#0a0a0a]/85 backdrop-blur-xl">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
 
-          {/* Bouton Primaire (Guide) */}
-          <button 
-            onClick={() => setIsGuideOpen(true)}
-            className="relative flex items-center justify-center gap-3 px-4 py-3.5 bg-gradient-to-b from-amber-500/20 to-amber-500/10 hover:from-amber-500/30 hover:to-amber-500/20 border border-amber-500/50 rounded-2xl transition-all duration-300 text-amber-500 font-bold shadow-[0_0_15px_rgba(245,158,11,0.2)] active:scale-95"
-          >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+          <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil DTV Destination Thaïlande">
+            <Image
+              src="/logo.svg"
+              alt="Logo de l'agence DTV Thaïlande"
+              width={36}
+              height={36}
+              priority
+              unoptimized
+              className="w-9 h-9 object-contain"
+            />
+            <span className="leading-none">
+              <span className="block text-lg font-black text-white tracking-tight">DTV</span>
+              <span className="block text-[8px] font-bold text-amber-500 tracking-[0.18em] uppercase mt-0.5">
+                Destination Thaïlande
+              </span>
             </span>
-            Le guide gratuit
-          </button>
+          </Link>
 
-          {/* Menu de Navigation unifié */}
-          <nav className="flex flex-col gap-1.5">
-            <button onClick={() => setIsProcessOpen(true)} className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
-              Notre Méthode
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-400">
+            <button onClick={() => setIsProcessOpen(true)} className="hover:text-white transition-colors">
+              Notre méthode
             </button>
-            
-            <Link href="/blog" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3m0 0l3-3m-3 3V8" /></svg>
-              Le Blog
-            </Link>
-
-            <Link href="/faq" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              FAQ
-            </Link>
-            <Link href="/contact" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-              Nous contacter
-            </Link>
-            <Link href="/mentions-legales" className="text-left px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-300 text-sm font-medium text-gray-400 flex items-center gap-3">
-              <svg className="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-              Mentions légales
-            </Link>
+            <a href="#tarifs" className="hover:text-white transition-colors">Tarifs</a>
+            <Link href="/blog" className="hover:text-white transition-colors">Le blog</Link>
+            <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
           </nav>
-        </div>
 
-        <div className="text-[10px] text-gray-600 px-2 leading-relaxed">
-          © {new Date().getFullYear()} Visa DTV Thaïlande.<br/>Expertise & Expatriation.
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => setIsGuideOpen(true)}
+              className="hidden sm:inline-flex items-center gap-2 border border-amber-500/40 text-amber-500 font-bold text-xs py-2 px-4 rounded-full hover:bg-amber-500/10 transition-all"
+            >
+              Guide gratuit
+            </button>
+            <button
+              onClick={() => setIsEligibleOpen(true)}
+              className="hidden sm:inline-flex bg-white text-black font-bold text-xs py-2.5 px-4 rounded-full hover:bg-gray-200 transition-all active:scale-95"
+            >
+              Test d&apos;éligibilité
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden p-2 -mr-2 text-white hover:text-amber-400 transition-colors"
+              aria-label="Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+          </div>
         </div>
-      </aside>
-
-      {/* 📱 HEADER MOBILE (Inchangé) */}
-      <header className="lg:hidden w-full p-4 md:p-6 flex justify-between items-center text-sm font-medium text-gray-400 z-[60] absolute top-0 left-0">
-        <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 -ml-2 text-white hover:text-amber-400 transition-colors focus:outline-none" aria-label="Menu">
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-        </button>
       </header>
 
       {/* 📱 MENU MOBILE PLEIN ÉCRAN */}
@@ -392,12 +441,17 @@ export default function Home() {
         </div>
       )}
 
-      {/* CONTENU PRINCIPAL (Décalé à droite sur Desktop pour laisser la place à la Sidebar) */}
-      <main className="flex-1 flex flex-col items-center justify-start w-full lg:ml-64 lg:w-[calc(100%-16rem)] mx-auto pt-16 lg:pt-10">
-        <HeroText />
-        
-        <section className="w-full max-w-7xl px-4 flex items-center justify-center mt-2 lg:mt-4">
+      {/* CONTENU PRINCIPAL */}
+      <main className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-8 lg:pt-12">
+
+        {/* HERO : texte à gauche, bloc vidéo à droite (lecteur portrait + chapitres) */}
+        <section className="w-full max-w-6xl px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-10 lg:gap-12 items-center">
           <h2 className="sr-only">Pourquoi choisir notre accompagnement pour le Visa DTV ?</h2>
+          <HeroText
+            nbGuides={nbGuides}
+            onEligibilite={() => setIsEligibleOpen(true)}
+            onGuide={() => setIsGuideOpen(true)}
+          />
           <VideoSequence />
         </section>
 
@@ -409,8 +463,8 @@ export default function Home() {
 
       </main>
 
-      {/* FOOTER MOBILE (Disparaît sur Desktop car les liens sont dans la Sidebar) */}
-      <footer className="lg:hidden flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
+      {/* PIED DE PAGE (tous écrans depuis la refonte : la sidebar ne porte plus les liens) */}
+      <footer className="flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
         <div className="w-24 h-px bg-white/10 mb-4"></div>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-4 text-center">
           <button onClick={() => setIsProcessOpen(true)} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
@@ -423,7 +477,7 @@ export default function Home() {
       </footer>
 
       {/* DOCK FLOTTANT DU PRIX (Centré par rapport au contenu sur Desktop) */}
-      <div className="fixed bottom-3 md:bottom-8 left-0 lg:left-64 w-full lg:w-[calc(100%-16rem)] flex justify-center z-50 px-3 pointer-events-none">
+      <div className="fixed bottom-3 md:bottom-8 left-0 w-full flex justify-center z-50 px-3 pointer-events-none">
         <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-8 md:pt-5 md:pb-5 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
 
           <div className="text-center pointer-events-none">

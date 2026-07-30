@@ -235,7 +235,7 @@ export default function HomeContent() {
       </section>
 
       {/* ── TARIFS ── */}
-      <section>
+      <section id="tarifs" className="scroll-mt-24">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
           Nos formules et nos tarifs
         </h2>
@@ -280,7 +280,7 @@ export default function HomeContent() {
       </section>
 
       {/* ── FAQ ── */}
-      <section>
+      <section id="faq" className="scroll-mt-24">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
           Questions fréquentes sur le Visa DTV
         </h2>
@@ -314,6 +314,15 @@ export default function HomeContent() {
               </div>
             </details>
           ))}
+        </div>
+
+        <div className="mt-6 text-center">
+          <Link
+            href="/faq"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-3 px-7 rounded-full hover:bg-white/5 transition-all"
+          >
+            Toutes les questions
+          </Link>
         </div>
       </section>
 
