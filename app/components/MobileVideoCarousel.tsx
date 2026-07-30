@@ -71,7 +71,30 @@ export default function MobileVideoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [showVolume, setShowVolume] = useState(false);
+  // La lecture ne démarre que lorsque le carrousel entre réellement dans l'écran
+  const [estVisible, setEstVisible] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const conteneurRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const cible = conteneurRef.current;
+    if (!cible) return;
+
+    // Navigateur trop ancien : on retombe sur le comportement d'origine
+    if (typeof IntersectionObserver === 'undefined') {
+      setEstVisible(true);
+      return;
+    }
+
+    const observateur = new IntersectionObserver(
+      ([entree]) => setEstVisible(entree.isIntersecting),
+      // 55 % du bloc visible : la vidéo démarre quand elle occupe vraiment l'écran
+      { threshold: 0.55 }
+    );
+
+    observateur.observe(cible);
+    return () => observateur.disconnect();
+  }, []);
 
   useEffect(() => {
     setShowVolume(false);
@@ -83,17 +106,20 @@ export default function MobileVideoCarousel() {
     videoRefs.current.forEach((video, index) => {
       if (!video) return;
       video.muted = isMuted;
-      if (index === currentIndex) {
+      if (index === currentIndex && estVisible) {
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => console.log("Autoplay en attente"));
         }
+      } else if (index === currentIndex) {
+        // Hors écran : on met en pause sans perdre la progression
+        video.pause();
       } else {
         video.pause();
         video.currentTime = 0;
       }
     });
-  }, [currentIndex, isMuted]);
+  }, [currentIndex, isMuted, estVisible]);
 
   const handleNext = () => setCurrentIndex((prev) => (prev + 1) % videos.length);
   const handleVideoClick = (index: number) => {
@@ -112,7 +138,7 @@ export default function MobileVideoCarousel() {
   };
 
   return (
-    <div className="relative w-full py-2 flex flex-col items-center justify-center">
+    <div ref={conteneurRef} className="relative w-full py-2 flex flex-col items-center justify-center">
       <div className="relative w-[82%] max-w-[300px] aspect-[9/16] mx-auto">
         {videos.map((video, index) => {
           const isActive = index === currentIndex;
@@ -133,7 +159,7 @@ export default function MobileVideoCarousel() {
                 poster={video.poster}
                 className="w-full h-full object-cover"
                 playsInline
-                preload={isActive ? 'metadata' : 'none'}
+                preload={isActive && estVisible ? 'auto' : 'none'}
                 loop={false}
                 onEnded={handleNext}
               />
