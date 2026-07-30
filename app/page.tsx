@@ -370,13 +370,13 @@ export default function Home() {
 
           <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil DTV Destination Thaïlande">
             <Image
-              src="/logo.svg"
-              alt="Logo de l'agence DTV Thaïlande"
-              width={36}
-              height={36}
+              src="/logo.svg?v=2"
+              alt="DTV Destination Thaïlande"
+              width={38}
+              height={38}
               priority
               unoptimized
-              className="w-9 h-9 object-contain"
+              className="w-9 h-9 sm:w-10 sm:h-10 object-contain"
             />
             <span className="leading-none">
               <span className="block text-lg font-black text-white tracking-tight">DTV</span>

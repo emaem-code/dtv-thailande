@@ -16,14 +16,10 @@ export const metadata: Metadata = {
   },
 
   // ─── ICÔNES : onglet navigateur, écran d'accueil iOS/Android ───
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
-      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
-  },
+  // Pas de bloc `icons` ici : Next détecte automatiquement app/favicon.ico,
+  // app/icon.png et app/apple-icon.png, et ajoute lui-même une empreinte
+  // dans l'URL à chaque modification du fichier — ce qui casse le cache.
+  // Déclarer les icônes manuellement écrasait ce mécanisme.
 
   openGraph: {
     title: 'Visa DTV Thaïlande : accompagnement 5 ans',
