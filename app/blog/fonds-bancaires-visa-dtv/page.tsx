@@ -146,7 +146,7 @@ const ambassades = [
     traduction: 'Variable',
     traitement: '3–5 jours',
     difficulte: 'Modérée',
-    difficulteColor: 'text-amber-400',
+    difficulteColor: 'text-teal-400',
   },
   {
     ville: 'Genève',
@@ -165,7 +165,7 @@ const comptes = [
   { type: 'Livret A / LDD / Épargne', verdict: '✅ Accepté', note: 'Liquide par définition. Relevés exigés.', color: 'border-emerald-500/30 bg-emerald-500/5' },
   { type: 'Compte joint (mariés)', verdict: '✅ Accepté', note: 'Acte de mariage requis. PACS : zone grise.', color: 'border-emerald-500/30 bg-emerald-500/5' },
   { type: 'Néobanque (Revolut, N26)', verdict: '✅ Accepté', note: 'Relevés PDF officiels avec IBAN obligatoires.', color: 'border-emerald-500/30 bg-emerald-500/5' },
-  { type: 'PEA / Compte-titres / Assurance Vie', verdict: '⚠️ Risqué', note: 'Fonds non liquides. Souvent refusé.', color: 'border-amber-500/30 bg-amber-500/5' },
+  { type: 'PEA / Compte-titres / Assurance Vie', verdict: '⚠️ Risqué', note: 'Fonds non liquides. Souvent refusé.', color: 'border-teal-500/30 bg-teal-500/5' },
   { type: 'Compte professionnel (SASU, SARL)', verdict: '❌ Refusé', note: "L'argent appartient à la personne morale, pas à vous.", color: 'border-red-500/30 bg-red-500/5' },
   { type: 'Crypto-monnaies (BTC, ETH…)', verdict: '❌ Refusé', note: 'Aucun portefeuille crypto accepté. Convertir en fiat.', color: 'border-red-500/30 bg-red-500/5' },
 ];
@@ -187,13 +187,13 @@ export default function BlogArticleDTV() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-teal-500/10 border border-teal-500/25 text-teal-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Guide Visa · 2026
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Visa DTV : 500 000 THB —{' '}
-          <span className="text-[#F59E0B]">3 ou 6 mois ?</span>{' '}
+          <span className="text-teal-400">3 ou 6 mois ?</span>{' '}
           La réponse définitive (2026)
         </h1>
 
@@ -230,13 +230,13 @@ export default function BlogArticleDTV() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Sommaire de l'article</h2>
         <ul className="space-y-3">
-          <li><a href="#logique-financiere" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi la Thaïlande exige-t-elle 500 000 THB ?</a></li>
-          <li><a href="#delais-ambassades" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. Trois mois partout : d'où vient la rumeur des six mois ?</a></li>
-          <li><a href="#erreur-virement" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">3. L'erreur fatale : le virement de dernière minute</a></li>
-          <li><a href="#types-comptes" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">4. Quels types de comptes bancaires sont acceptés ?</a></li>
-          <li><a href="#taux-change" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">5. La règle d'or du taux de change (EUR / THB)</a></li>
-          <li><a href="#soft-power" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">6. Le cas spécifique du DTV &quot;Soft Power&quot;</a></li>
-          <li><a href="#visa-run" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">7. Organiser son Visa Run : le timing parfait</a></li>
+          <li><a href="#logique-financiere" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi la Thaïlande exige-t-elle 500 000 THB ?</a></li>
+          <li><a href="#delais-ambassades" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">2. Trois mois partout : d'où vient la rumeur des six mois ?</a></li>
+          <li><a href="#erreur-virement" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">3. L'erreur fatale : le virement de dernière minute</a></li>
+          <li><a href="#types-comptes" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">4. Quels types de comptes bancaires sont acceptés ?</a></li>
+          <li><a href="#taux-change" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">5. La règle d'or du taux de change (EUR / THB)</a></li>
+          <li><a href="#soft-power" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">6. Le cas spécifique du DTV &quot;Soft Power&quot;</a></li>
+          <li><a href="#visa-run" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">7. Organiser son Visa Run : le timing parfait</a></li>
         </ul>
       </nav>
 
@@ -290,7 +290,7 @@ export default function BlogArticleDTV() {
             href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-amber-500 hover:underline font-medium inline-flex items-center gap-1"
+            className="text-teal-500 hover:underline font-medium inline-flex items-center gap-1"
           >
             le site officiel de l'ambassade de Paris
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,12 +437,12 @@ export default function BlogArticleDTV() {
         </div>
         <p className="mt-6">
           Deux cas méritent une attention particulière. Le{' '}
-          <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-amber-500 hover:underline font-medium">
+          <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-teal-500 hover:underline font-medium">
             compte joint des couples mariés
           </Link>{' '}
           est accepté mais impose de fournir l&apos;acte de mariage légalisé. Et si vos fonds
           dorment sur un compte de société,{' '}
-          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-500 hover:underline font-medium">
+          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-teal-500 hover:underline font-medium">
             notre guide pour les indépendants
           </Link>{' '}
           explique comment restructurer vos virements avant de déposer.
@@ -465,8 +465,8 @@ export default function BlogArticleDTV() {
           l&apos;ambassade calcule ce jour-là que vos 12 850 € ne valent plus que 495 000 THB, le
           visa est refusé pour manque de fonds.
         </p>
-        <div className="bg-amber-500/8 border border-amber-500/20 rounded-2xl p-5">
-          <p className="text-amber-300 font-semibold text-sm">
+        <div className="bg-teal-500/8 border border-teal-500/20 rounded-2xl p-5">
+          <p className="text-teal-300 font-semibold text-sm">
             💡 Notre conseil : prévoyez toujours une marge de 10 à 15 %.
           </p>
           <p className="text-gray-400 text-sm mt-1">
@@ -483,7 +483,7 @@ export default function BlogArticleDTV() {
           6. Le cas spécifique du DTV &quot;Soft Power&quot;
         </h2>
         <p className="mb-4">
-          Si l&apos;exigence des 500 000 THB reste immuable pour tous les profils, le <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">DTV Soft Power</Link>
+          Si l&apos;exigence des 500 000 THB reste immuable pour tous les profils, le <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-teal-500 hover:underline font-medium">DTV Soft Power</Link>
           offre un{' '}
           <strong className="text-white">avantage colossal sur le reste de la documentation</strong>.
         </p>
@@ -511,7 +511,7 @@ export default function BlogArticleDTV() {
             {
               icon: '✈️',
               title: 'La soumission du dossier',
-              text: <>Vous devez impérativement déposer votre demande via une ambassade située à l'étranger, soit physiquement, soit sur <a href="https://www.thaievisa.go.th/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">le portail gouvernemental Thai e-Visa</a> (selon l'ambassade dont vous dépendez).</>,
+              text: <>Vous devez impérativement déposer votre demande via une ambassade située à l'étranger, soit physiquement, soit sur <a href="https://www.thaievisa.go.th/" target="_blank" rel="noopener noreferrer" className="text-teal-500 hover:underline">le portail gouvernemental Thai e-Visa</a> (selon l'ambassade dont vous dépendez).</>,
             },
             {
               icon: '🗓️',
@@ -526,7 +526,7 @@ export default function BlogArticleDTV() {
             {
               icon: '💵',
               title: 'Le règlement',
-              text: <>Les frais consulaires (10 000 à 13 000 THB selon le poste) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">réserve de liquide</Link>.</>,
+              text: <>Les frais consulaires (10 000 à 13 000 THB selon le poste) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-teal-500 hover:underline">réserve de liquide</Link>.</>,
             },
           ].map((item) => (
             <div key={item.title} className="flex gap-4 p-4 bg-white/3 border border-gray-800 rounded-xl">
@@ -552,7 +552,7 @@ export default function BlogArticleDTV() {
         </div>
         <div className="mt-8 overflow-x-auto rounded-2xl border border-white/10 bg-[#111111]">
           <table className="w-full min-w-[560px] text-left text-sm">
-            <thead className="border-b border-white/10 text-xs uppercase tracking-widest text-amber-500">
+            <thead className="border-b border-white/10 text-xs uppercase tracking-widest text-teal-500">
               <tr>
                 <th className="px-5 py-4">Ambassade</th>
                 <th className="px-5 py-4">Frais consulaires</th>
@@ -607,7 +607,7 @@ export default function BlogArticleDTV() {
             'Organisation intégrale de votre logistique (vols régionaux, hôtels, transferts) pour un Visa Run sans stress.',
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-sm text-gray-400">
-              <span className="text-amber-400 mt-0.5 flex-none">→</span>
+              <span className="text-teal-400 mt-0.5 flex-none">→</span>
               {item}
             </li>
           ))}
@@ -616,12 +616,12 @@ export default function BlogArticleDTV() {
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-teal-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-amber-500 text-xs font-semibold mb-3 uppercase tracking-wider">Entrepreneur & Expert Expatriation</p>
+          <p className="text-teal-500 text-xs font-semibold mb-3 uppercase tracking-wider">Entrepreneur & Expert Expatriation</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Entrepreneur digital installé à Phuket, j'accompagne les freelances et porteurs de projet dans leur installation en Thaïlande. Mon objectif : vous éviter les pièges administratifs grâce à une expertise forgée directement sur le terrain, au contact des réalités de l'immigration.
           </p>
@@ -634,7 +634,7 @@ export default function BlogArticleDTV() {
           FAQ — Vos questions les plus fréquentes
         </h2>
         <p className="text-gray-400 mb-6 text-sm">
-          Pour toute autre interrogation concernant les statuts (Freelance, Famille, Soft Power), consultez notre <Link href="/faq" className="text-amber-500 hover:underline font-medium">Foire Aux Questions complète</Link>.
+          Pour toute autre interrogation concernant les statuts (Freelance, Famille, Soft Power), consultez notre <Link href="/faq" className="text-teal-500 hover:underline font-medium">Foire Aux Questions complète</Link>.
         </p>
 
         <div className="space-y-4">

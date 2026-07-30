@@ -126,11 +126,11 @@ export default function ArticleComparatifVisas() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Guide Stratégique · Comparatif
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Quel Visa Choisir pour Vivre en Thaïlande ? <span className="text-emerald-400">Le Comparatif Complet</span>
+          Quel Visa Choisir pour Vivre en Thaïlande ? <span className="text-indigo-400">Le Comparatif Complet</span>
         </h1>
         <p className="text-base text-gray-500 mt-6">
           Lecture : 12 min · Mis à jour : 19 juin 2026 · Par{" "}
@@ -155,12 +155,12 @@ export default function ArticleComparatifVisas() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Les options au crible :</h2>
         <ul className="space-y-3">
-          <li><a href="#visa-metv" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">1. Le Visa Touriste (METV) : L'option "Test" temporaire</a></li>
-          <li><a href="#visa-ed" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">2. Le Visa Éducation (Non-ED) : Le statut étudiant</a></li>
-          <li><a href="#visa-ltr" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">3. Le Visa LTR : La cage dorée des hauts revenus</a></li>
-          <li><a href="#visa-non-b-o" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">4. Visas Non-B et Non-O : La voie corporate ou familiale</a></li>
-          <li><a href="#visa-dtv" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">5. Le Visa DTV : La révolution pour les indépendants</a></li>
-          <li><a href="#synthese" className="text-emerald-400 hover:text-emerald-300 hover:underline transition-colors text-sm md:text-base">Synthèse : Quel choix selon votre profil ?</a></li>
+          <li><a href="#visa-metv" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">1. Le Visa Touriste (METV) : L'option "Test" temporaire</a></li>
+          <li><a href="#visa-ed" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">2. Le Visa Éducation (Non-ED) : Le statut étudiant</a></li>
+          <li><a href="#visa-ltr" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">3. Le Visa LTR : La cage dorée des hauts revenus</a></li>
+          <li><a href="#visa-non-b-o" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">4. Visas Non-B et Non-O : La voie corporate ou familiale</a></li>
+          <li><a href="#visa-dtv" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">5. Le Visa DTV : La révolution pour les indépendants</a></li>
+          <li><a href="#synthese" className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors text-sm md:text-base">Synthèse : Quel choix selon votre profil ?</a></li>
         </ul>
       </nav>
 
@@ -176,7 +176,7 @@ export default function ArticleComparatifVisas() {
           <li><strong className="text-white">Coût :</strong> 5 000 THB (environ 135 €). Prévoyez 1 900 THB par extension, plus le coût des billets d'avion pour les sorties obligatoires.</li>
           <li><strong className="text-white">Durée :</strong> Valable 6 mois. Séjour de 60 jours par entrée (extensible à 90 jours).</li>
           <li><strong className="text-white">Finances :</strong> Preuve d'un solde global d'environ 700 € sur les 3 derniers mois (varie selon les ambassades).</li>
-          <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires, chronophages, et <Link href="/blog/fin-exemption-visa-60-jours" className="text-emerald-400 hover:underline font-medium">de plus en plus mal vus à la frontière</Link>.</li>
+          <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires, chronophages, et <Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">de plus en plus mal vus à la frontière</Link>.</li>
         </ul>
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-4">
           <p className="text-red-400 font-semibold mb-2">⚠️ Mise à jour avril 2026 :</p>
@@ -271,7 +271,7 @@ revenus mensuels.</p>
             5 ans, entrées multiples, 180 jours par séjour, télétravail autorisé. Le seul statut vraiment pensé pour les indépendants.
           </figcaption>
         </figure>
-        <ul className="space-y-3 mb-6 pl-4 border-l-2 border-emerald-500/50 text-gray-300 text-sm bg-emerald-500/5 p-4 rounded-r-xl">
+        <ul className="space-y-3 mb-6 pl-4 border-l-2 border-indigo-500/50 text-gray-300 text-sm bg-indigo-500/5 p-4 rounded-r-xl">
           <li>✅ <strong className="text-white">Coût :</strong> 10 000 à 13 000 THB de frais consulaires en Asie, 350 € à l'ambassade de Paris.</li>
           <li>✅ <strong className="text-white">Durée :</strong> 5 ans (entrées multiples). Séjours de 180 jours, prolongeables à 360 jours sans quitter le pays.</li>
           <li>✅ <strong className="text-white">Finances :</strong> Preuve de 500 000 THB (≈ 13 500 €) sur un compte (qui peut rester en France). Pas d'investissement requis.</li>
@@ -313,17 +313,17 @@ revenus mensuels.</p>
                 <span className="text-gray-400 text-sm">Le Visa Non-B est obligatoire.</span>
               </div>
             </li>
-            <li className="flex items-start gap-4 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl mt-2">
+            <li className="flex items-start gap-4 p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-xl mt-2">
               <span className="text-2xl">💻</span>
               <div>
-                <strong className="text-emerald-400 block">Freelance, nomade ou télétravailleur ?</strong>
+                <strong className="text-indigo-400 block">Freelance, nomade ou télétravailleur ?</strong>
                 <span className="text-white text-sm font-medium">Le Visa DTV est l'option la plus libre et sécurisée du marché.</span>
               </div>
             </li>
           </ul>
           <p className="mt-6 text-sm text-gray-400">
             Une fois le visa choisi, reste la vraie question : où poser ses valises ?{' '}
-            <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-emerald-400 hover:underline font-medium">
+            <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-indigo-400 hover:underline font-medium">
               Notre comparatif terrain de Phuket, Pattaya, Bangkok et Hua Hin
             </Link>{' '}
             détaille les budgets réels et les loyers 2026 ville par ville.
@@ -333,12 +333,12 @@ revenus mensuels.</p>
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-emerald-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center text-3xl">⚖️</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-indigo-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-indigo-500/20 to-indigo-500/20 flex items-center justify-center text-3xl">⚖️</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-emerald-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Stratégie</p>
+          <p className="text-indigo-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Stratégie</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Basé en Thaïlande, j'accompagne les professionnels indépendants dans le choix et la structuration de leur visa. Face à la complexité des exigences consulaires, notre agence audite votre profil et monte votre dossier DTV de A à Z pour une expatriation en toute sérénité.
           </p>
@@ -387,7 +387,7 @@ revenus mensuels.</p>
 
       {/* ── ZONE DE CONVERSION PRINCIPALE ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500 opacity-10 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500 opacity-10 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
           Sécurisez votre visa DTV
         </h3>

@@ -143,13 +143,13 @@ export default function BlogArticlePaiements() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-teal-500/10 border border-teal-500/25 text-teal-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Finances · Vie Pratique
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Paiements en Thaïlande avec un Visa DTV :{' '}
-          <span className="text-[#F59E0B]">la vraie stratégie</span>{' '}
+          <span className="text-teal-400">la vraie stratégie</span>{' '}
           sans compte bancaire (2026)
         </h1>
 
@@ -176,16 +176,16 @@ export default function BlogArticlePaiements() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Sommaire de l&apos;article</h2>
         <ul className="space-y-3">
-          <li><a href="#banques-thailandaises" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi les banques thaïlandaises refusent le Visa DTV</a></li>
-          <li><a href="#revolution-wise" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. La révolution Wise de mai 2026</a></li>
-          <li><a href="#piege-atm" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">3. Le piège critique : les retraits ATM Wise bloqués</a></li>
-          <li><a href="#taux-de-change" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">4. La vérité sur les taux de change</a></li>
-          <li><a href="#3-niveaux-paiement" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">5. Les 3 niveaux de paiement en Thaïlande</a></li>
-          <li><a href="#frais-revolut" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">6. Pourquoi votre carte Revolut vous coûte 3 à 5% de plus</a></li>
-          <li><a href="#astuce-alipay" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">7. L&apos;astuce Alipay pour le 7-Eleven</a></li>
-          <li><a href="#verite-tagthai" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">8. TAGTHAi — ce que c&apos;est vraiment</a></li>
-          <li><a href="#fiscalite" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">9. Un mot sur la fiscalité</a></li>
-          <li><a href="#strategie-recap" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">10. La stratégie complète (Récapitulatif)</a></li>
+          <li><a href="#banques-thailandaises" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">1. Pourquoi les banques thaïlandaises refusent le Visa DTV</a></li>
+          <li><a href="#revolution-wise" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">2. La révolution Wise de mai 2026</a></li>
+          <li><a href="#piege-atm" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">3. Le piège critique : les retraits ATM Wise bloqués</a></li>
+          <li><a href="#taux-de-change" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">4. La vérité sur les taux de change</a></li>
+          <li><a href="#3-niveaux-paiement" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">5. Les 3 niveaux de paiement en Thaïlande</a></li>
+          <li><a href="#frais-revolut" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">6. Pourquoi votre carte Revolut vous coûte 3 à 5% de plus</a></li>
+          <li><a href="#astuce-alipay" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">7. L&apos;astuce Alipay pour le 7-Eleven</a></li>
+          <li><a href="#verite-tagthai" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">8. TAGTHAi — ce que c&apos;est vraiment</a></li>
+          <li><a href="#fiscalite" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">9. Un mot sur la fiscalité</a></li>
+          <li><a href="#strategie-recap" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">10. La stratégie complète (Récapitulatif)</a></li>
         </ul>
       </nav>
 
@@ -197,8 +197,8 @@ export default function BlogArticlePaiements() {
         <p className="mb-4">
           Le DTV est techniquement classé comme un visa touristique de longue durée. Depuis le durcissement des règles de conformité bancaire en 2025, les banques thaïlandaises exigent un visa de type Non-Immigrant (travail, retraite, mariage, études) ou un visa LTR pour ouvrir un compte. Le DTV, malgré ses 5 ans de validité, ne confère pas de statut de résident.
         </p>
-        <div className="bg-amber-500/8 border border-amber-500/20 rounded-2xl p-5 my-6">
-          <p className="text-amber-300 font-semibold text-sm">
+        <div className="bg-teal-500/8 border border-teal-500/20 rounded-2xl p-5 my-6">
+          <p className="text-teal-300 font-semibold text-sm">
             💡 Testé personnellement sur le terrain :
           </p>
           <p className="text-gray-400 text-sm mt-1">
@@ -222,15 +222,15 @@ export default function BlogArticlePaiements() {
         <h3 className="text-xl font-semibold text-gray-200 mt-8 mb-3">Ce que Wise permet désormais :</h3>
         <ul className="space-y-2 mb-6">
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             Scanner et payer n&apos;importe quel QR code PromptPay ou ThaiQR directement depuis l&apos;application.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             Payer au taux interbancaire réel, sans marge de change cachée.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             Utiliser la carte physique ou dématérialisée (Apple/Google Wallet) sur tous les terminaux.
           </li>
         </ul>
@@ -272,23 +272,23 @@ export default function BlogArticlePaiements() {
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">Ce que ça implique concrètement :</h3>
         <ul className="space-y-2 mb-6">
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             <strong>Arrivez avec 1 000 à 2 000 € en espèces</strong> depuis la France.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
-            <strong>Cadre légal :</strong> Vous pouvez transporter légalement jusqu'à l'équivalent de 20 000 USD (environ 18 000€) sans déclaration douanière. Au-delà, la déclaration est obligatoire. À l'inverse, l'immigration peut exiger un <Link href="/blog/20000-thb-immigration-thailande-regle-especes" className="text-amber-400 hover:underline font-medium">minimum de 20 000 THB en espèces à l'entrée</Link>.
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
+            <strong>Cadre légal :</strong> Vous pouvez transporter légalement jusqu'à l'équivalent de 20 000 USD (environ 18 000€) sans déclaration douanière. Au-delà, la déclaration est obligatoire. À l'inverse, l'immigration peut exiger un <Link href="/blog/20000-thb-immigration-thailande-regle-especes" className="text-teal-400 hover:underline font-medium">minimum de 20 000 THB en espèces à l'entrée</Link>.
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             Changez votre cash au comptoir Superrich (Niveau B de l&apos;aéroport) — voir notre{' '}
-            <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-amber-400 hover:underline font-medium">
+            <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-teal-400 hover:underline font-medium">
               guide de l&apos;arrivée à l&apos;aéroport
             </Link>
             .
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             Au quotidien, payez un maximum par carte Wise et QR code pour préserver votre réserve d&apos;espèces.
           </li>
         </ul>
@@ -339,7 +339,7 @@ export default function BlogArticlePaiements() {
           </div>
 
           <div className="p-5 bg-white/3 border border-gray-800 rounded-xl">
-            <h3 className="text-amber-500 font-bold mb-3 flex items-center gap-2">
+            <h3 className="text-teal-500 font-bold mb-3 flex items-center gap-2">
               <span className="text-xl">⚠️</span> Niveau 2 : Ce que Wise ne couvre pas (Cash requis)
             </h3>
             <ul className="space-y-2 text-sm text-gray-400 list-disc pl-5">
@@ -414,11 +414,11 @@ export default function BlogArticlePaiements() {
         </p>
         <ul className="space-y-2 mb-6">
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             <strong className="text-white">Ce que c&apos;est :</strong> Une application pour les pass touristiques (musées) et le remboursement de TVA (VAT Refund).
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
-            <span className="text-amber-400 mt-0.5 flex-none">→</span>
+            <span className="text-teal-400 mt-0.5 flex-none">→</span>
             <strong className="text-white">Ce que ça n&apos;est pas :</strong> Un substitut de compte bancaire. Son scanner ne lit pas les QR codes personnels des petits commerçants.
           </li>
         </ul>
@@ -437,11 +437,11 @@ export default function BlogArticlePaiements() {
         </p>
         <p>
           Retenez simplement : la simplicité de paiement s'accompagne d'une transparence totale vis-à-vis de l'administration thaïlandaise. Le seuil des 180 jours est d'ailleurs le même que celui qui conditionne{' '}
-          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-400 hover:underline font-medium">
+          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-teal-400 hover:underline font-medium">
             vos obligations déclaratives sur place
           </Link>
           . Nous détaillons l&apos;ensemble du sujet dans notre{' '}
-          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-amber-400 hover:underline font-medium">
+          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-teal-400 hover:underline font-medium">
             guide de la fiscalité en Thaïlande après 180 jours
           </Link>
           .
@@ -490,12 +490,12 @@ export default function BlogArticlePaiements() {
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-teal-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-amber-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visa DTV & Terrain</p>
+          <p className="text-teal-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visa DTV & Terrain</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Basé à Phuket, je teste et documente personnellement toutes les procédures pour les expatriés en Thaïlande. L&apos;objectif de ce guide : vous éviter de vous retrouver bloqué à la caisse d&apos;un supermarché grâce à des retours d&apos;expérience 100% terrain.
           </p>

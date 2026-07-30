@@ -126,11 +126,11 @@ export default function ArticleDtvFamille() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-fuchsia-500/10 border border-fuchsia-500/25 text-fuchsia-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Stratégie Légale · Expatriation
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Obtenir le Visa DTV en Famille ou en Couple : <span className="text-amber-500">PACS, Mariage et Enfants</span>
+          Obtenir le Visa DTV en Famille ou en Couple : <span className="text-fuchsia-500">PACS, Mariage et Enfants</span>
         </h1>
         <p className="text-base text-gray-500 mt-6">
           Lecture : 15 min · Mis à jour : 17 juin 2026 · Par{" "}
@@ -155,12 +155,12 @@ export default function ArticleDtvFamille() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de ce guide :</h2>
         <ul className="space-y-3">
-          <li><a href="#mythe-visa-conjoint" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">1. Le mythe du Visa DTV "Conjoint Accompagnant"</a></li>
-          <li><a href="#reconnaissance-unions" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">2. Reconnaissance des unions : Votre couple est-il éligible ?</a></li>
-          <li><a href="#options-non-maries" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">3. Options et stratégies pour les couples non mariés</a></li>
-          <li><a href="#dtv-vs-ltr-nono" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">4. DTV, LTR, Non-O : Quel visa choisir en famille ?</a></li>
-          <li><a href="#parcours-administratif" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">5. Le parcours administratif : Traduction et double légalisation</a></li>
-          <li><a href="#accompagnement-specialise" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base">6. L'importance d'un accompagnement spécialisé</a></li>
+          <li><a href="#mythe-visa-conjoint" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">1. Le mythe du Visa DTV "Conjoint Accompagnant"</a></li>
+          <li><a href="#reconnaissance-unions" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">2. Reconnaissance des unions : Votre couple est-il éligible ?</a></li>
+          <li><a href="#options-non-maries" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">3. Options et stratégies pour les couples non mariés</a></li>
+          <li><a href="#dtv-vs-ltr-nono" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">4. DTV, LTR, Non-O : Quel visa choisir en famille ?</a></li>
+          <li><a href="#parcours-administratif" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">5. Le parcours administratif : Traduction et double légalisation</a></li>
+          <li><a href="#accompagnement-specialise" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">6. L'importance d'un accompagnement spécialisé</a></li>
         </ul>
       </nav>
 
@@ -189,16 +189,16 @@ export default function ArticleDtvFamille() {
         </p>
         <ul className="space-y-4 mb-6">
           <li className="flex gap-3">
-            <span className="text-amber-500 flex-shrink-0">📌</span>
+            <span className="text-fuchsia-500 flex-shrink-0">📌</span>
             <span><strong className="text-white">Des procédures individuelles :</strong> Chaque membre de la famille (conjoint et enfants inclus) doit formuler sa propre demande de visa sur la plateforme officielle de l'e-Visa thaïlandais, s'acquitter des frais consulaires distincts et présenter un dossier complet et indépendant.</span>
           </li>
           <li className="flex gap-3">
-            <span className="text-amber-500 flex-shrink-0">📌</span>
+            <span className="text-fuchsia-500 flex-shrink-0">📌</span>
             <span><strong className="text-white">L'application stricte du seuil financier :</strong> C'est la règle d'or qui surprend de nombreux candidats. Le titulaire principal ne peut pas couvrir l'ensemble de son foyer avec un seul compte bancaire affichant 500 000 THB. Les exigences financières s'appliquent par demandeur.</span>
           </li>
         </ul>
-        <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mt-4">
-          <p className="text-sky-400 font-semibold mb-2">💡 Exemple de calcul familial :</p>
+        <div className="border border-fuchsia-500/30 bg-fuchsia-500/5 rounded-xl p-5 mt-4">
+          <p className="text-fuchsia-400 font-semibold mb-2">💡 Exemple de calcul familial :</p>
           <p className="text-gray-400 text-sm">
             Une famille de quatre personnes (deux parents et deux enfants de moins de 20 ans) devra justifier d'une surface financière globale d'au moins <strong>2 000 000 THB (soit environ 52 000 €)</strong>, que les fonds soient répartis sur des comptes individuels ou centralisés sur un compte joint, sous réserve de prouver légalement les liens de filiation.
           </p>
@@ -231,7 +231,7 @@ export default function ArticleDtvFamille() {
           Le Code civil et commercial thaïlandais reconnaît la validité des mariages célébrés à l'étranger, à la condition stricte qu'ils aient fait l'objet d'un enregistrement civil officiel dans le pays d'origine.
         </p>
         <p className="mb-4">
-          <strong>Égalité matrimoniale :</strong> Il est important de noter une avancée historique majeure. Depuis l'entrée en vigueur de la <a href="https://www.ratchakitcha.soc.go.th/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">Marriage Equality Act</a> le 23 janvier 2025, la Thaïlande reconnaît pleinement le mariage sans distinction de genre. Les couples de même sexe légalement mariés bénéficient donc exactement des mêmes droits migratoires et consulaires que les couples hétérosexuels.
+          <strong>Égalité matrimoniale :</strong> Il est important de noter une avancée historique majeure. Depuis l'entrée en vigueur de la <a href="https://www.ratchakitcha.soc.go.th/" target="_blank" rel="noopener noreferrer" className="text-fuchsia-400 hover:underline">Marriage Equality Act</a> le 23 janvier 2025, la Thaïlande reconnaît pleinement le mariage sans distinction de genre. Les couples de même sexe légalement mariés bénéficient donc exactement des mêmes droits migratoires et consulaires que les couples hétérosexuels.
         </p>
         <p className="mb-4">
           <strong>Les justificatifs requis :</strong> Un simple livret de famille ne suffit pas lors de l'examen consulaire. L'administration exige la présentation d'un extrait d'acte de mariage officiel, traduit et ayant fait l'objet d'une procédure de double légalisation.
@@ -257,19 +257,19 @@ export default function ArticleDtvFamille() {
 
         <div className="space-y-6 mt-6">
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">
-            <h4 className="text-amber-500 font-bold mb-2">Option A : La double demande de DTV</h4>
+            <h4 className="text-fuchsia-500 font-bold mb-2">Option A : La double demande de DTV</h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              De nombreux couples choisissent de demander deux visas DTV distincts. Le premier partenaire postule au titre de la catégorie <em>Workcation / Freelance</em>. Le second, s'il ne dispose pas d'une activité éligible au télétravail, explore la <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-amber-500 hover:underline font-medium">voie du Soft Power</Link> en s'inscrivant dans un programme culturel vérifié (cours de Muay Thaï intensifs, académie de cuisine agréée par le Ministère de l'Éducation).
+              De nombreux couples choisissent de demander deux visas DTV distincts. Le premier partenaire postule au titre de la catégorie <em>Workcation / Freelance</em>. Le second, s'il ne dispose pas d'une activité éligible au télétravail, explore la <Link href="/blog/visa-dtv-soft-power-ecoles" className="text-fuchsia-500 hover:underline font-medium">voie du Soft Power</Link> en s'inscrivant dans un programme culturel vérifié (cours de Muay Thaï intensifs, académie de cuisine agréée par le Ministère de l'Éducation).
             </p>
           </div>
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">
-            <h4 className="text-amber-500 font-bold mb-2">Option B : Le mix de visas long séjour</h4>
+            <h4 className="text-fuchsia-500 font-bold mb-2">Option B : Le mix de visas long séjour</h4>
             <p className="text-gray-400 text-sm leading-relaxed">
               Si un seul des deux partenaires est éligible au DTV et dispose des fonds requis, le couple peut envisager une combinaison de statuts : le partenaire éligible obtient son Visa DTV (5 ans), tandis que le second opte pour un Visa Éducation (Non-ED) en s'inscrivant dans un établissement d'apprentissage linguistique, permettant ainsi de résider légalement.
             </p>
           </div>
           <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl">
-            <h4 className="text-amber-500 font-bold mb-2">Option C : L'enregistrement d'un mariage civil</h4>
+            <h4 className="text-fuchsia-500 font-bold mb-2">Option C : L'enregistrement d'un mariage civil</h4>
             <p className="text-gray-400 text-sm leading-relaxed">
               Pour les couples qui envisageaient une union à moyen terme, anticiper l'enregistrement d'un mariage civil en France (ou via les services consulaires) avant le dépôt de la demande de visa simplifie grandement la constitution du dossier et la reconnaissance de la cellule familiale par les autorités.
             </p>
@@ -353,7 +353,7 @@ export default function ArticleDtvFamille() {
         <ol className="list-decimal pl-5 space-y-2 mb-6 text-gray-400 marker:text-white marker:font-bold">
           <li><strong>En France :</strong> Obtention de l'acte original certifié, suivi d'une première légalisation par le Ministère de l'Europe et des Affaires Étrangères (MEAE).</li>
           <li><strong>Traduction :</strong> Traduction intégrale du document vers l'anglais ou le thaï par un traducteur assermenté.</li>
-          <li><strong>Au Consulat :</strong> Seconde légalisation du document et de sa traduction par <a href="http://www.thaiembassy.fr/fr/service-consulaire/legalisation/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.</li>
+          <li><strong>Au Consulat :</strong> Seconde légalisation du document et de sa traduction par <a href="http://www.thaiembassy.fr/fr/service-consulaire/legalisation/" target="_blank" rel="noopener noreferrer" className="text-fuchsia-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.</li>
         </ol>
 
         <p>
@@ -375,7 +375,7 @@ export default function ArticleDtvFamille() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div className="border border-white/5 bg-[#111111] rounded-2xl p-6">
-            <h3 className="text-amber-500 font-bold mb-3 uppercase tracking-wider text-xs">Notre Expertise</h3>
+            <h3 className="text-fuchsia-500 font-bold mb-3 uppercase tracking-wider text-xs">Notre Expertise</h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li>🛡️ <strong className="text-white">Audit de conformité :</strong> Analyse de votre situation familiale et validation des pièces justificatives.</li>
               <li>🛡️ <strong className="text-white">Précision technique :</strong> Respect strict des exigences financières et des déclarations (TDAC).</li>
@@ -386,7 +386,7 @@ export default function ArticleDtvFamille() {
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               L'expatriation familiale est un projet de vie majeur. Ne laissez pas un flou administratif en compromettre la réussite. Confiez-nous l'ingénierie de vos visas.
             </p>
-            <Link href="/contact" className="text-amber-400 hover:underline text-sm font-semibold">
+            <Link href="/contact" className="text-fuchsia-400 hover:underline text-sm font-semibold">
               → Discuter de mon dossier familial avec un expert
             </Link>
           </div>
@@ -395,12 +395,12 @@ export default function ArticleDtvFamille() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-yellow-500/20 flex items-center justify-center text-3xl">👨‍💻</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-fuchsia-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-fuchsia-500/20 to-fuchsia-500/20 flex items-center justify-center text-3xl">👨‍💻</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-amber-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Mobilité</p>
+          <p className="text-fuchsia-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Mobilité</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Entrepreneur et consultant basé à Phuket, j'accompagne les familles et les professionnels indépendants dans la structuration légale de leur départ. En contact direct avec la réalité administrative, notre équipe garantit un montage de dossier irréprochable pour sécuriser votre arrivée sur le territoire thaïlandais.
           </p>
@@ -412,17 +412,17 @@ export default function ArticleDtvFamille() {
         <p className="text-white font-bold text-sm mb-4">📚 À lire pour compléter votre dossier :</p>
         <ul className="space-y-3">
           <li>
-            <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+            <Link href="/blog/fonds-bancaires-visa-dtv" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline text-sm transition-colors">
               → Fonds bancaires Visa DTV : Faut-il bloquer les 500 000 THB pendant 6 mois ?
             </Link>
           </li>
           <li>
-            <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+            <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline text-sm transition-colors">
               → Indépendants & Télétravail : Comment valider son activité pour le DTV
             </Link>
           </li>
           <li>
-            <Link href="/blog/tdac-thailande-carte-arrivee" className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors">
+            <Link href="/blog/tdac-thailande-carte-arrivee" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline text-sm transition-colors">
               → TDAC Thaïlande 2026 : Le formulaire d'arrivée numérique obligatoire
             </Link>
           </li>
@@ -449,7 +449,7 @@ export default function ArticleDtvFamille() {
 
       {/* ── ZONE DE CONVERSION PRINCIPALE ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500 opacity-5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-fuchsia-500 opacity-5 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
           Sécurisez votre expatriation familiale
         </h3>

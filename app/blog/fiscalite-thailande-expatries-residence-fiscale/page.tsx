@@ -206,13 +206,13 @@ export default function ArticleFiscaliteThailande() {
           </li>
         </ul>
 
-        <div className="border border-sky-500/30 bg-sky-500/5 rounded-2xl p-5">
+        <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-2xl p-5">
           <p className="text-sm text-gray-300 leading-relaxed">
             <strong className="text-white">À retenir :</strong> le compteur se remet à zéro chaque
             1er janvier. Un séjour d&apos;octobre à mars ne représente que trois mois sur chaque
             année civile — et peut donc, selon les dates, ne déclencher la résidence fiscale sur
             aucune des deux. Attention toutefois à ne pas confondre ce décompte avec vos{' '}
-            <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+            <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-emerald-400 hover:underline font-medium">
               obligations déclaratives de présence
             </Link>
             , qui suivent un calendrier totalement différent.
@@ -620,7 +620,7 @@ export default function ArticleFiscaliteThailande() {
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
         <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-emerald-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-emerald-500/20 to-sky-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+          <div className="w-full h-full bg-gradient-to-br from-emerald-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import BlogNavigation from '../components/BlogNavigation';
 import { getSortedBlogPosts } from './posts';
@@ -74,31 +75,44 @@ export default function BlogIndex() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {sortedPosts.map((post) => (
-            <Link 
-              key={post.slug} 
+            <Link
+              key={post.slug}
               href={`/blog/${post.slug}`}
-              className={`group flex flex-col justify-between p-8 rounded-3xl bg-[#111111] border border-white/10 transition-all duration-300 ${post.hoverBorder} hover:bg-[#161616] hover:-translate-y-1 shadow-lg`}
+              className={`group flex flex-col justify-between overflow-hidden rounded-3xl bg-[#111111] border border-white/10 transition-all duration-300 ${post.hoverBorder} hover:bg-[#161616] hover:-translate-y-1 shadow-lg`}
             >
               <div>
-                <div className="flex items-center justify-between gap-3 mb-5">
-                  <span className={`inline-block whitespace-nowrap text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
-                    {post.category}
-                  </span>
-                  <span className="text-gray-500 text-sm font-medium shrink-0">
-                    {post.date}
-                  </span>
+                <div className="relative aspect-[1200/630] w-full overflow-hidden bg-[#0d0d0d]">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />
                 </div>
-                
-                <h2 className="text-2xl font-bold text-white mb-4 leading-tight group-hover:text-gray-200 transition-colors">
-                  {post.title}
-                </h2>
-                
-                <p className="text-gray-400 text-sm leading-relaxed mb-8">
-                  {post.excerpt}
-                </p>
+
+                <div className="p-8 pb-0">
+                  <div className="flex items-center justify-between gap-3 mb-5">
+                    <span className={`inline-block whitespace-nowrap text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
+                      {post.category}
+                    </span>
+                    <span className="text-gray-500 text-sm font-medium shrink-0">
+                      {post.date}
+                    </span>
+                  </div>
+
+                  <h2 className="text-2xl font-bold text-white mb-4 leading-tight group-hover:text-gray-200 transition-colors">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                    {post.excerpt}
+                  </p>
+                </div>
               </div>
 
-              <div className="flex items-center text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
+              <div className="flex items-center px-8 pb-8 text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
                 Lire l&apos;article
                 <span className="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
               </div>

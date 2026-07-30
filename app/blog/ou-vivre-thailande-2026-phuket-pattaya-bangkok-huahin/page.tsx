@@ -54,7 +54,7 @@ const articleSchema = {
     'Phuket, Pattaya, Bangkok ou Hua Hin : où vivre en Thaïlande en 2026 ? Le comparatif terrain',
   description:
     "Budgets réels, loyers 2026, ambiance et vécu d'expatriés à Phuket, Pattaya, Bangkok et Hua Hin. Le comparatif honnête pour choisir votre ville.",
-  image: 'https://dtv-thailande.fr/logo.png',
+  image: 'https://dtv-thailande.fr/images/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin.jpg',
   author: {
     '@type': 'Person',
     name: 'Matthieu Moretti',
@@ -214,7 +214,7 @@ export default function BlogArticleOuVivreThailande() {
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Phuket, Pattaya, Bangkok ou Hua Hin :{' '}
-          <span className="text-sky-400">où vivre en Thaïlande en 2026 ?</span>
+          <span className="text-amber-400">où vivre en Thaïlande en 2026 ?</span>
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
@@ -242,30 +242,27 @@ export default function BlogArticleOuVivreThailande() {
           quotidien sans filtre. Pour Bangkok et Hua Hin, je m&apos;appuie sur
           les données 2026 et mes propres impressions de séjour.
         </p>
-        <p className="text-white font-medium border-l-4 border-sky-400 pl-5 py-1">
+        <p className="text-white font-medium border-l-4 border-amber-400 pl-5 py-1">
           On vous dit ce que ça coûte vraiment, quelle est l&apos;ambiance au
           quotidien, et surtout : pour qui chaque ville est faite.
         </p>
       </div>
 
       {/* ── SOMMAIRE ── */}
-      <nav className="mb-14 bg-[#111111] border border-gray-800 rounded-2xl p-6">
-        <p className="text-white font-bold text-sm uppercase tracking-widest mb-4">
-          Sommaire
-        </p>
-        <ol className="space-y-2 list-none pl-0">
+      <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
+        <h2 className="text-xl font-bold text-white mb-4">Au programme de ce comparatif :</h2>
+        <ul className="space-y-3">
           {sommaire.map((item, i) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className="text-gray-400 hover:text-sky-400 transition-colors text-sm"
+                className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base"
               >
-                <span className="text-sky-400 font-semibold mr-2">{i + 1}.</span>
-                {item.label}
+                {i + 1}. {item.label}
               </a>
             </li>
           ))}
-        </ol>
+        </ul>
       </nav>
 
       {/* ── SECTION 1 : PHUKET ── */}
@@ -497,8 +494,8 @@ export default function BlogArticleOuVivreThailande() {
           loin des bars.
         </p>
 
-        <div className="border-l-4 border-sky-400 bg-sky-500/5 rounded-r-xl p-5 mb-6">
-          <p className="text-sky-400 font-semibold text-sm mb-2">
+        <div className="border-l-4 border-amber-400 bg-amber-500/5 rounded-r-xl p-5 mb-6">
+          <p className="text-amber-400 font-semibold text-sm mb-2">
             Témoignage — Une journée type à Pattaya
           </p>
           <p className="text-gray-300 text-sm italic">

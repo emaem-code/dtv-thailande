@@ -209,25 +209,20 @@ export default function BlogArticleTm47() {
       </div>
 
       {/* ── SOMMAIRE ── */}
-      <nav className="mb-14 bg-[#111111] border border-gray-800 rounded-2xl p-6">
-        <p className="text-white font-bold text-sm uppercase tracking-widest mb-4">
-          Sommaire
-        </p>
-        <ol className="space-y-2 list-none pl-0">
+      <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
+        <h2 className="text-xl font-bold text-white mb-4">Au programme de ce guide :</h2>
+        <ul className="space-y-3">
           {sommaire.map((item, i) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className="text-gray-400 hover:text-sky-400 transition-colors text-sm"
+                className="text-sky-400 hover:text-sky-300 hover:underline transition-colors text-sm md:text-base"
               >
-                <span className="text-sky-400 font-semibold mr-2">
-                  {i + 1}.
-                </span>
-                {item.label}
+                {i + 1}. {item.label}
               </a>
             </li>
           ))}
-        </ol>
+        </ul>
       </nav>
 
       {/* ── SECTION 1 ── */}

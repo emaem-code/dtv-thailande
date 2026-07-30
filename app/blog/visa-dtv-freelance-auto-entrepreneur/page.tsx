@@ -119,12 +119,12 @@ export default function ArticleFreelanceDTV() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-purple-500/10 border border-purple-500/25 text-purple-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Guide Freelance · Dossier Consulaire
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Visa DTV Freelance &{" "}
-          <span className="text-amber-400">Auto-Entrepreneur</span> : Obtenir
+          <span className="text-purple-400">Auto-Entrepreneur</span> : Obtenir
           le Visa Sans Fiche de Paie en 2026
         </h1>
         <p className="text-gray-400 text-lg mt-4 leading-relaxed">
@@ -167,7 +167,7 @@ export default function ArticleFreelanceDTV() {
             <li key={href}>
               <a
                 href={href}
-                className="text-amber-400 hover:text-amber-300 hover:underline transition-colors text-sm md:text-base"
+                className="text-purple-400 hover:text-purple-300 hover:underline transition-colors text-sm md:text-base"
               >
                 {label}
               </a>
@@ -262,12 +262,12 @@ export default function ArticleFreelanceDTV() {
         </figure>
 
         <div className="space-y-4">
-            <div className="border rounded-2xl p-6 border-amber-500/30 bg-amber-500/5">
+            <div className="border rounded-2xl p-6 border-purple-500/30 bg-purple-500/5">
               <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-amber-400 flex-shrink-0">01</span>
+                <span className="text-2xl font-black text-purple-400 flex-shrink-0">01</span>
                 <div>
                   <p className="text-white font-bold mb-1">Avis de situation SIRENE ou extrait Kbis</p>
-                  <p className="text-xs font-semibold mb-2 text-amber-400">→ Preuve d'existence légale de votre activité</p>
+                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve d'existence légale de votre activité</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     L’équivalent de votre ’acte de naissance’ professionnel. Il prouve que vous exercez une activité déclarée, enregistrée et légale en France. Pour une micro-entreprise, l’avis de situation SIRENE (gratuit sur insee.fr) suffit. Pour une société, fournissez un Kbis de moins de 3 mois.
                   </p>
@@ -275,14 +275,14 @@ export default function ArticleFreelanceDTV() {
               </div>
             </div>
 
-            <div className="border rounded-2xl p-6 border-sky-500/30 bg-sky-500/5">
+            <div className="border rounded-2xl p-6 border-purple-500/30 bg-purple-500/5">
               <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-sky-400 flex-shrink-0">02</span>
+                <span className="text-2xl font-black text-purple-400 flex-shrink-0">02</span>
                 <div>
                   <p className="text-white font-bold mb-1">Attestations de chiffre d'affaires URSSAF</p>
-                  <p className="text-xs font-semibold mb-2 text-sky-400">→ Preuve de revenus réguliers sur 6 mois</p>
+                  <p className="text-xs font-semibold mb-2 text-purple-400">→ Preuve de revenus réguliers sur 6 mois</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    Téléchargeables directement depuis le <a href="https://www.autoentrepreneur.urssaf.fr" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">portail officiel de l'URSSAF</a>. Ces attestations trimestrielles sont officielles, tamponnées et montrent l’évolution de votre CA. Fournissez les deux derniers trimestres pour couvrir 6 mois d’activité.
+                    Téléchargeables directement depuis le <a href="https://www.autoentrepreneur.urssaf.fr" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:underline font-medium">portail officiel de l'URSSAF</a>. Ces attestations trimestrielles sont officielles, tamponnées et montrent l’évolution de votre CA. Fournissez les deux derniers trimestres pour couvrir 6 mois d’activité.
                   </p>
                 </div>
               </div>
@@ -314,12 +314,12 @@ export default function ArticleFreelanceDTV() {
               </div>
             </div>
 
-            <div className="border rounded-2xl p-6 border-rose-500/30 bg-rose-500/5">
+            <div className="border rounded-2xl p-6 border-purple-500/30 bg-purple-500/5">
               <div className="flex items-start gap-4">
-                <span className="text-2xl font-black text-rose-400 flex-shrink-0">05</span>
+                <span className="text-2xl font-black text-purple-400 flex-shrink-0">05</span>
                 <div>
                   <p className="text-white font-bold mb-1">Lettre de motivation consulaire personnalisée</p>
-                  <p className="text-xs font-semibold mb-2 text-rose-400">→ La pièce qui donne du sens à tout le reste</p>
+                  <p className="text-xs font-semibold mb-2 text-purple-400">→ La pièce qui donne du sens à tout le reste</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     Un document d’une page, rédigé en anglais, qui explique votre statut, votre mode de travail, vos revenus moyens et votre projet en Thaïlande. C’est vous qui parlez à l’officier avant même qu’il ouvre votre dossier. Cette lettre structure son interprétation de toutes les autres pièces.
                   </p>
@@ -514,7 +514,7 @@ export default function ArticleFreelanceDTV() {
                 <tr key={amb}>
                   <td className="py-3 px-4 text-white">{amb}</td>
                   <td className="py-3 px-4 text-gray-400">{trad}</td>
-                  <td className="py-3 px-4 text-amber-400 font-semibold">
+                  <td className="py-3 px-4 text-purple-400 font-semibold">
                     {cout}
                   </td>
                 </tr>
@@ -534,7 +534,7 @@ export default function ArticleFreelanceDTV() {
         </h2>
         <p className="mb-6">
           Le choix de l’ambassade est aussi important que le contenu du dossier.
-          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
+          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
           Pour un freelance français, voici notre recommandation selon votre
           situation :
         </p>
@@ -554,8 +554,8 @@ export default function ArticleFreelanceDTV() {
               reco: "Paris ou Vientiane — les deux fonctionnent",
               pourquoi:
                 "Vos bulletins de salaire sont directement lisibles. Paris est envisageable si vous ne voulez pas vous déplacer. Vientiane reste plus rapide.",
-              color: "border-sky-500/30",
-              badge: "bg-sky-500/10 text-sky-400",
+              color: "border-purple-500/30",
+              badge: "bg-purple-500/10 text-purple-400",
             },
             {
               profil: "SASU / EURL avec rémunération irrégulière",
@@ -590,7 +590,7 @@ export default function ArticleFreelanceDTV() {
           relevé bancaire. Encore faut-il choisir un établissement réellement homologué —{' '}
           <Link
             href="/blog/visa-dtv-soft-power-ecoles"
-            className="text-amber-400 hover:underline font-medium"
+            className="text-purple-400 hover:underline font-medium"
           >
             notre guide des écoles Soft Power
           </Link>{' '}
@@ -614,7 +614,7 @@ export default function ArticleFreelanceDTV() {
               <span className="text-sm text-gray-400">C'est le profil le plus rapide. Le temps d'obtenir les derniers bulletins de salaire consolidés et la lettre de votre entreprise de portage confirmant le travail à distance.</span>
             </div>
           </li>
-          <li className="flex gap-4 p-4 border border-amber-500/20 rounded-xl bg-amber-500/5">
+          <li className="flex gap-4 p-4 border border-purple-500/20 rounded-xl bg-purple-500/5">
             <span className="text-xl">📅</span>
             <div>
               <strong className="text-white block mb-1">Micro-entrepreneur (Auto-entrepreneur) : 3 à 4 mois minimum</strong>
@@ -636,8 +636,8 @@ export default function ArticleFreelanceDTV() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center text-3xl">
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-purple-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-purple-500/20 flex items-center justify-center text-3xl">
             🇹🇭
           </div>
         </div>
@@ -645,7 +645,7 @@ export default function ArticleFreelanceDTV() {
           <h3 className="text-xl font-bold text-white mb-1">
             Matthieu Moretti
           </h3>
-          <p className="text-amber-400 text-xs font-semibold mb-3 uppercase tracking-wider">
+          <p className="text-purple-400 text-xs font-semibold mb-3 uppercase tracking-wider">
             Expert Dossiers Consulaires · Installé à Phuket
           </p>
           <p className="text-gray-400 text-sm leading-relaxed">
@@ -668,7 +668,7 @@ export default function ArticleFreelanceDTV() {
           <li>
             <Link
               href="/blog/fonds-bancaires-visa-dtv"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
+              className="text-purple-400 hover:text-purple-300 hover:underline text-sm transition-colors"
             >
               → Visa DTV : Faut-il bloquer les 500 000 THB pendant 3 ou 6 mois ?
             </Link>
@@ -676,7 +676,7 @@ export default function ArticleFreelanceDTV() {
           <li>
             <Link
               href="/blog/tdac-thailande-carte-arrivee"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
+              className="text-purple-400 hover:text-purple-300 hover:underline text-sm transition-colors"
             >
               → TDAC Thaïlande 2026 : Guide de la Carte d'Arrivée Numérique
             </Link>
@@ -684,7 +684,7 @@ export default function ArticleFreelanceDTV() {
           <li>
             <Link
               href="/faq"
-              className="text-amber-400 hover:text-amber-300 hover:underline text-sm transition-colors"
+              className="text-purple-400 hover:text-purple-300 hover:underline text-sm transition-colors"
             >
               → FAQ complète : Toutes vos questions sur le Visa DTV
             </Link>
@@ -723,7 +723,7 @@ export default function ArticleFreelanceDTV() {
 
       {/* ── CTA ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500 opacity-5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500 opacity-5 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
           Votre dossier freelance, géré par des experts terrain
         </h3>

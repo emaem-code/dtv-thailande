@@ -173,10 +173,10 @@ export default function ArticleFinExemption() {
           </p>
         </div>
         
-        <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mt-4">
-          <p className="text-sky-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>
+        <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mt-4">
+          <p className="text-red-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>
           <p className="text-gray-400 text-sm">
-            La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-sky-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne que les vrais visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
+            La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-red-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne que les vrais visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
           </p>
         </div>
       </section>
@@ -263,14 +263,14 @@ export default function ArticleFinExemption() {
               <tr>
                 <td className="py-4 px-5 text-white font-medium">Chiang Khong</td>
                 <td className="py-4 px-5 text-gray-400">Laos (Nord)</td>
-                <td className="py-4 px-5 text-yellow-500 font-bold">Modéré</td>
+                <td className="py-4 px-5 text-red-500 font-bold">Modéré</td>
                 <td className="py-4 px-5 text-gray-400">Tolérance légèrement supérieure si vous pouvez prouver un voyage touristique au Laos de plusieurs jours.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="text-sm text-gray-400">
-          * Le cas de votre contact qui n'a reçu que 30 jours s'explique par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi.
+          * Les tampons réduits à 30 jours signalés par des voyageurs s'expliquent par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi.
         </p>
       </section>
 
@@ -390,7 +390,7 @@ export default function ArticleFinExemption() {
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
         <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-red-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center text-3xl">🛂</div>
+          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-red-500/20 flex items-center justify-center text-3xl">🛂</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>

@@ -145,13 +145,13 @@ export default function BlogArticleImmigration20000THB() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Formalités · Immigration
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           20 000 bahts à l&apos;immigration thaïlandaise :{' '}
-          <span className="text-[#F59E0B]">la loi oubliée</span>{' '}
+          <span className="text-sky-400">la loi oubliée</span>{' '}
           qui refoule des voyageurs en 2026
         </h1>
 
@@ -178,14 +178,14 @@ export default function BlogArticleImmigration20000THB() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Sommaire de l&apos;article</h2>
         <ul className="space-y-3">
-          <li><a href="#loi-1979" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">1. Une loi de 1979 que personne n&apos;appliquait</a></li>
-          <li><a href="#au-guichet" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">2. Ce qui se passe vraiment au guichet</a></li>
-          <li><a href="#tampon-refus" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">3. Le tampon de refus : ce qu&apos;il signifie vraiment</a></li>
-          <li><a href="#especes-obligatoires" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">4. Espèces obligatoires — la carte bancaire ne compte pas</a></li>
-          <li><a href="#piege-atm" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">5. Le piège des ATM : ils sont après la douane</a></li>
-          <li><a href="#visa-dtv" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">6. Le Visa DTV est-il concerné ?</a></li>
-          <li><a href="#profils-cibles" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">7. Les profils que l&apos;immigration cible en priorité</a></li>
-          <li><a href="#checklist" className="text-amber-500 hover:text-amber-400 hover:underline transition-colors text-sm md:text-base">8. La checklist avant de prendre l&apos;avion</a></li>
+          <li><a href="#loi-1979" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">1. Une loi de 1979 que personne n&apos;appliquait</a></li>
+          <li><a href="#au-guichet" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">2. Ce qui se passe vraiment au guichet</a></li>
+          <li><a href="#tampon-refus" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">3. Le tampon de refus : ce qu&apos;il signifie vraiment</a></li>
+          <li><a href="#especes-obligatoires" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">4. Espèces obligatoires — la carte bancaire ne compte pas</a></li>
+          <li><a href="#piege-atm" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">5. Le piège des ATM : ils sont après la douane</a></li>
+          <li><a href="#visa-dtv" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">6. Le Visa DTV est-il concerné ?</a></li>
+          <li><a href="#profils-cibles" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">7. Les profils que l&apos;immigration cible en priorité</a></li>
+          <li><a href="#checklist" className="text-sky-500 hover:text-sky-400 hover:underline transition-colors text-sm md:text-base">8. La checklist avant de prendre l&apos;avion</a></li>
         </ul>
       </nav>
 
@@ -305,7 +305,7 @@ export default function BlogArticleImmigration20000THB() {
         </figure>
         
         <div className="bg-[#111111] border border-gray-800 p-6 rounded-xl my-6 font-mono text-sm">
-          <p className="text-amber-400 mb-2">Le tampon indique :</p>
+          <p className="text-sky-400 mb-2">Le tampon indique :</p>
           <p className="text-white mb-2 text-lg">« ไม่มีปัจจัยยังชีพตามควรแก่กรณี »</p>
           <p className="text-gray-400 mb-4">— « ne dispose pas de moyens de subsistance appropriés » — et cite la section 12(2) de l&apos;Immigration Act B.E. 2522.</p>
           <p className="text-gray-400">Suivi de la mention : « entrée dans le Royaume non autorisée », avec la signature de l&apos;agent et la date.</p>
@@ -326,7 +326,7 @@ export default function BlogArticleImmigration20000THB() {
         </div>
 
         <p className="mb-4">
-          <strong className="text-amber-400">La leçon terrain :</strong> ne cochez rien, ne signez rien dans la précipitation. Vous avez le droit de demander ce que contient le document, de demander un interprète, et de proposer des solutions à l&apos;agent — aller retirer de l&apos;argent, faire venir quelqu&apos;un, montrer d&apos;autres garanties. Tant que rien n&apos;est signé, la discussion reste ouverte. Une fois le papier signé, elle est close et le tampon tombe.
+          <strong className="text-sky-400">La leçon terrain :</strong> ne cochez rien, ne signez rien dans la précipitation. Vous avez le droit de demander ce que contient le document, de demander un interprète, et de proposer des solutions à l&apos;agent — aller retirer de l&apos;argent, faire venir quelqu&apos;un, montrer d&apos;autres garanties. Tant que rien n&apos;est signé, la discussion reste ouverte. Une fois le papier signé, elle est close et le tampon tombe.
         </p>
         <p className="mb-4">
           Restez calme et courtois — l&apos;agent a le pouvoir discrétionnaire, et l&apos;agressivité ferme toutes les portes. Mais ne confondez pas courtoisie et précipitation à signer un document que vous ne comprenez pas.
@@ -373,7 +373,7 @@ export default function BlogArticleImmigration20000THB() {
         </figure>
         <p className="mb-4">
           Et depuis 2026, le problème s&apos;aggrave pour les utilisateurs de Wise : les comptes enregistrés avec une adresse thaïlandaise ne peuvent plus retirer aux ATM en Thaïlande du tout — une restriction réglementaire de la Banque de Thaïlande que nous détaillons dans notre{' '}
-          <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-amber-500 hover:underline">
+          <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-sky-500 hover:underline">
             guide des paiements en Thaïlande avec un visa DTV
           </Link>.
         </p>
@@ -414,29 +414,29 @@ export default function BlogArticleImmigration20000THB() {
         </p>
         <ul className="space-y-4 mb-6 list-none pl-0">
           <li className="flex items-start gap-3 text-gray-300">
-            <span className="text-amber-500 mt-1 flex-none">⚠️</span>
-            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos. Nous détaillons ce durcissement dans notre <Link href="/blog/fin-exemption-visa-60-jours" className="text-amber-400 hover:underline font-medium">enquête sur les frontières terrestres</Link>.</div>
+            <span className="text-sky-500 mt-1 flex-none">⚠️</span>
+            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos. Nous détaillons ce durcissement dans notre <Link href="/blog/fin-exemption-visa-60-jours" className="text-sky-400 hover:underline font-medium">enquête sur les frontières terrestres</Link>.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
-            <span className="text-amber-500 mt-1 flex-none">⚠️</span>
+            <span className="text-sky-500 mt-1 flex-none">⚠️</span>
             <div><strong className="text-white">Les billets aller simple.</strong> Pas de preuve de sortie du territoire = suspicion de séjour illégal prolongé.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
-            <span className="text-amber-500 mt-1 flex-none">⚠️</span>
+            <span className="text-sky-500 mt-1 flex-none">⚠️</span>
             <div><strong className="text-white">Les passeports chargés.</strong> Multiples tampons thaïlandais récents, exemptions de visa répétées.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
-            <span className="text-amber-500 mt-1 flex-none">⚠️</span>
+            <span className="text-sky-500 mt-1 flex-none">⚠️</span>
             <div><strong className="text-white">Les profils « backpacker fauché ».</strong> C&apos;est injuste et subjectif, mais l&apos;apparence compte dans une décision discrétionnaire : jeune, sac léger, pas de réservation d&apos;hôtel présentable.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
-            <span className="text-amber-500 mt-1 flex-none">⚠️</span>
+            <span className="text-sky-500 mt-1 flex-none">⚠️</span>
             <div><strong className="text-white">Les postes frontières terrestres et Don Mueang.</strong> Les témoignages de contrôles y sont plus fréquents qu&apos;à Suvarnabhumi ou dans les aéroports du sud — Don Mueang concentre les vols low-cost régionaux, donc les profils visa run.</div>
           </li>
         </ul>
         <p>
           À l&apos;inverse, un DTV avec un billet de retour ou de continuation, une adresse en Thaïlande déclarée (TM30 en règle),{' '}
-          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-amber-400 hover:underline font-medium">
+          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
             ses rapports de 90 jours à jour
           </Link>{' '}
           et quelques centaines d&apos;euros en poche coche toutes les cases du voyageur sans histoire.
@@ -487,7 +487,7 @@ export default function BlogArticleImmigration20000THB() {
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
-              <span>TDAC rempli dans les 72 heures avant l&apos;arrivée (voir notre <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-amber-500 hover:underline">guide complet de l&apos;arrivée à l&apos;aéroport</Link>).</span>
+              <span>TDAC rempli dans les 72 heures avant l&apos;arrivée (voir notre <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-sky-500 hover:underline">guide complet de l&apos;arrivée à l&apos;aéroport</Link>).</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
@@ -502,19 +502,19 @@ export default function BlogArticleImmigration20000THB() {
         <p className="mb-4">
           <strong>Ne jamais compter sur les ATM de l&apos;aéroport :</strong> ils sont après la douane, et Wise ne fonctionne plus aux distributeurs thaïlandais.
         </p>
-        <p className="text-amber-400 font-semibold text-lg mt-8">
+        <p className="text-sky-400 font-semibold text-lg mt-8">
           Trente secondes de préparation contre plusieurs jours bloqué dans un pays voisin avec un tampon indélébile dans le passeport. Le calcul est vite fait.
         </p>
       </section>
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-amber-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-sky-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-sky-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-amber-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visa DTV & Terrain</p>
+          <p className="text-sky-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visa DTV & Terrain</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Entrepreneur digital installé à Phuket, j&apos;accompagne les freelances et porteurs de projet dans leur installation en Thaïlande. Mon objectif : vous éviter les pièges administratifs grâce à une expertise forgée directement sur le terrain, au contact des réalités de l&apos;immigration.
           </p>

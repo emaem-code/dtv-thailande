@@ -139,13 +139,13 @@ export default function BlogArticleSoftPower() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        <span className="inline-block bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
           Stratégie Soft Power · 2026
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Visa DTV Soft Power : Le choix stratégique entre{' '}
-          <span className="text-[#F59E0B]">Cuisine et Muay Thaï</span>
+          <span className="text-orange-400">Cuisine et Muay Thaï</span>
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
@@ -159,7 +159,7 @@ export default function BlogArticleSoftPower() {
         <p>
           Pour obtenir le très convoité Visa DTV (5 ans d'expatriation), tout le monde n'a pas le profil
           d'un{' '}
-          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-emerald-500 hover:underline font-medium">
+          <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-orange-500 hover:underline font-medium">
             freelance capable de produire des liasses fiscales
           </Link>
           , des contrats clients et des bilans de société irréprochables.
@@ -168,24 +168,24 @@ export default function BlogArticleSoftPower() {
           C'est là qu'intervient la voie royale : <strong className="text-white">la catégorie Soft Power</strong>.
           En vous inscrivant à une formation culturelle en Thaïlande, vous contournez l'intégralité des
           exigences professionnelles. Votre seule préoccupation devient alors de{' '}
-          <Link href="/blog/fonds-bancaires-visa-dtv" className="text-emerald-500 hover:underline font-medium">
+          <Link href="/blog/fonds-bancaires-visa-dtv" className="text-orange-500 hover:underline font-medium">
             prouver vos 500 000 THB d'épargne
           </Link>
           .
         </p>
         <p>
           Si vous hésitez encore entre les différents statuts,{' '}
-          <Link href="/blog/comparatif-visas-thailande" className="text-emerald-500 hover:underline font-medium">
+          <Link href="/blog/comparatif-visas-thailande" className="text-orange-500 hover:underline font-medium">
             notre comparatif des visas longue durée
           </Link>{' '}
           situe le DTV face au LTR, au Non-ED et au METV. Et pour voir ce que donne cette voie sur un
           cas réel, lisez{' '}
-          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-emerald-500 hover:underline font-medium">
+          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-orange-500 hover:underline font-medium">
             le parcours d&apos;un client sans revenus réguliers
           </Link>{' '}
           qui a obtenu son visa en trois jours à Vientiane.
         </p>
-        <p className="text-white font-medium border-l-4 border-emerald-500 pl-5 py-1">
+        <p className="text-white font-medium border-l-4 border-orange-500 pl-5 py-1">
           Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. Le grand
           ménage mené par l'immigration en 2025 a d'abord visé les fausses écoles de langues sous statut
           étudiant (visa ED) — pas le DTV lui-même — mais il a durci les contrôles sur toute la catégorie
@@ -198,12 +198,12 @@ export default function BlogArticleSoftPower() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Sommaire de l'article</h2>
         <ul className="space-y-3">
-          <li><a href="#cuisine-vs-muay-thai" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">1. Muay Thaï ou École de Cuisine : la vérité du terrain</a></li>
-          <li><a href="#gestion-presences" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">2. Assiduité et contrôles : comment prouver sa présence ?</a></li>
-          <li><a href="#arnaques-ecoles" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
-          <li><a href="#passage-douane" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
-          <li><a href="#visa-run-asie" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">5. Dépôt du dossier : pourquoi l'Asie (Visa Run) écrase Paris</a></li>
-          <li><a href="#transparence-prix" className="text-emerald-500 hover:text-emerald-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : décryptage du tarif à 1 750 €</a></li>
+          <li><a href="#cuisine-vs-muay-thai" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">1. Muay Thaï ou École de Cuisine : la vérité du terrain</a></li>
+          <li><a href="#gestion-presences" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">2. Assiduité et contrôles : comment prouver sa présence ?</a></li>
+          <li><a href="#arnaques-ecoles" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
+          <li><a href="#passage-douane" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
+          <li><a href="#visa-run-asie" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">5. Dépôt du dossier : pourquoi l'Asie (Visa Run) écrase Paris</a></li>
+          <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : décryptage du tarif à 1 750 €</a></li>
         </ul>
       </nav>
 
@@ -249,7 +249,7 @@ export default function BlogArticleSoftPower() {
             <thead>
               <tr className="bg-[#111111] border-b border-gray-800">
                 <th className="text-left px-4 py-3 text-gray-400 font-semibold">Critère</th>
-                <th className="text-left px-4 py-3 text-emerald-400 font-semibold">École de Cuisine</th>
+                <th className="text-left px-4 py-3 text-orange-400 font-semibold">École de Cuisine</th>
                 <th className="text-left px-4 py-3 text-amber-400 font-semibold">Camp Muay Thaï</th>
               </tr>
             </thead>
@@ -290,12 +290,12 @@ export default function BlogArticleSoftPower() {
                 <td className="px-4 py-4">20 000 THB <span className="text-xs font-normal text-gray-500">(tarif de février 2026)</span></td>
               </tr>
               <tr className="border-b border-gray-800/60">
-                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 9 mois</td>
+                <td className="px-4 py-4 font-semibold text-orange-400">Cuisine — 9 mois</td>
                 <td className="px-4 py-4">30 demi-journées</td>
                 <td className="px-4 py-4">37 500 THB</td>
               </tr>
               <tr className="border-b border-gray-800/60 bg-[#0d0d0d]">
-                <td className="px-4 py-4 font-semibold text-emerald-400">Cuisine — 12 mois</td>
+                <td className="px-4 py-4 font-semibold text-orange-400">Cuisine — 12 mois</td>
                 <td className="px-4 py-4">40 demi-journées</td>
                 <td className="px-4 py-4">52 000 THB</td>
               </tr>
@@ -325,7 +325,7 @@ export default function BlogArticleSoftPower() {
           26 900 THB, d'autres montent à 38 990 THB lorsqu'ils incluent l'assistance au dossier.
         </p>
 
-        <div className="bg-emerald-500/5 border border-emerald-500/25 rounded-2xl p-6">
+        <div className="bg-orange-500/5 border border-orange-500/25 rounded-2xl p-6">
           <p className="text-white font-semibold mb-2">💡 L'écart de budget est le vrai arbitre</p>
           <p className="text-sm text-gray-300 leading-relaxed">
             À volume d'engagement comparable, la cuisine revient à environ 20 000 THB là où le Muay
@@ -367,8 +367,8 @@ export default function BlogArticleSoftPower() {
             l&apos;immigration vous interroge.
           </figcaption>
         </figure>
-        <div className="bg-emerald-500/8 border border-emerald-500/20 rounded-2xl p-5 mb-4">
-          <p className="text-emerald-300 font-semibold text-sm">
+        <div className="bg-orange-500/8 border border-orange-500/20 rounded-2xl p-5 mb-4">
+          <p className="text-orange-300 font-semibold text-sm">
             🛡️ La feuille de présence (Sign-in sheet)
           </p>
           <p className="text-gray-400 text-sm mt-1">
@@ -378,7 +378,7 @@ export default function BlogArticleSoftPower() {
           </p>
         </div>
 
-        <div className="bg-[#111111] border-l-4 border-emerald-500 rounded-r-2xl p-6 md:p-7">
+        <div className="bg-[#111111] border-l-4 border-orange-500 rounded-r-2xl p-6 md:p-7">
           <p className="text-white font-bold mb-3">Ce que j'ai vécu en suivant le cursus moi-même</p>
           <div className="text-gray-300 text-sm leading-relaxed space-y-3">
             <p>
@@ -415,7 +415,7 @@ export default function BlogArticleSoftPower() {
           C'est le <strong className="text-white">Red Flag absolu</strong>.
         </p>
         <p className="mb-4">
-          Comme l'a rappelé le <a href="https://www.thaigov.go.th/" target="_blank" rel="noopener noreferrer" className="text-emerald-500 hover:underline">gouvernement thaïlandais</a>,
+          Comme l'a rappelé le <a href="https://www.thaigov.go.th/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">gouvernement thaïlandais</a>,
           les ambassades croisent désormais les données avec une base officielle. Une lettre d'acceptation
           n'a aucune valeur si l'établissement n'est pas accrédité par le <strong>Ministère de l'Éducation</strong>{' '}
           et le <strong>Department of Business Development (DBD)</strong>.
@@ -443,7 +443,7 @@ export default function BlogArticleSoftPower() {
         </ul>
         <p className="mb-6">
           Une précision utile, car la confusion circule : l'extension{' '}
-          <code className="text-emerald-400">.ac.th</code> est bien réservée aux établissements
+          <code className="text-orange-400">.ac.th</code> est bien réservée aux établissements
           d'enseignement accrédités en Thaïlande, et sa présence est un signal positif. Mais son
           absence ne prouve strictement rien. Beaucoup d'écoles parfaitement en règle — y compris
           celles de notre réseau — opèrent sous un domaine en{' '}
@@ -526,7 +526,7 @@ export default function BlogArticleSoftPower() {
           Lorsque vous terminerez votre cursus de cuisine (après vos 9 mois), l'école vous délivrera un{' '}
           <strong>diplôme officiel</strong>. Lors de votre première sortie et réentrée en Thaïlande, l'officier
           d'immigration{' '}
-          <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-emerald-500 hover:underline font-medium">
+          <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-orange-500 hover:underline font-medium">
             à la douane est en droit de vous demander des comptes
           </Link>
           . Présenter votre diplôme et
@@ -601,7 +601,7 @@ export default function BlogArticleSoftPower() {
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
             <li className="flex justify-between items-center text-sm md:text-base pt-1">
-              <span className="text-emerald-400 font-semibold">Montage, audit et intermédiation DTV-Thaïlande</span>
+              <span className="text-orange-400 font-semibold">Montage, audit et intermédiation DTV-Thaïlande</span>
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
           </ul>
@@ -613,12 +613,12 @@ export default function BlogArticleSoftPower() {
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-emerald-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-emerald-500/20 to-amber-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-orange-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-emerald-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Terrain & Expatriation</p>
+          <p className="text-orange-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Terrain & Expatriation</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Installé à Phuket, mon quotidien consiste à confronter les règles théoriques de l'immigration à
             la réalité du terrain asiatique. Avec DTV-Thaïlande, je sélectionne personnellement les écoles
@@ -660,7 +660,7 @@ export default function BlogArticleSoftPower() {
 
       {/* ── CTA FINAL ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500 opacity-10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500 opacity-10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#F59E0B] opacity-5 rounded-full blur-3xl pointer-events-none" />
 
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">

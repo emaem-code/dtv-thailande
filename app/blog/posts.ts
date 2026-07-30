@@ -42,8 +42,8 @@ export const blogPosts = [
   publishedAt: '2026-08-11T07:00:00Z',
   modifiedAt: '2026-08-11T07:00:00Z',
   category: 'Santé',
-  tagColor: 'text-red-400 border-red-500/25 bg-red-500/10',
-  hoverBorder: 'hover:border-red-500/50',
+  tagColor: 'text-rose-400 border-rose-500/25 bg-rose-500/10',
+  hoverBorder: 'hover:border-rose-500/50',
   image: '/images/blog/assurance-sante-visa-dtv-thailande.jpg',
 },
   {
@@ -112,8 +112,8 @@ export const blogPosts = [
     publishedAt: '2026-07-21',
     modifiedAt: '2026-07-26',
     category: 'Finances',
-    tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
-    hoverBorder: 'hover:border-amber-500/50',
+    tagColor: 'text-teal-400 border-teal-500/25 bg-teal-500/10',
+    hoverBorder: 'hover:border-teal-500/50',
     image: '/images/blog/paiement-thailande-sans-compte-bancaire-visa-dtv.jpg', // Tu pourras changer l'image ici si tu en as une spécifique
   },
     {
@@ -154,8 +154,8 @@ export const blogPosts = [
     publishedAt: '2026-06-19',
     modifiedAt: '2026-07-26',
     category: 'Stratégie et Expatriation',
-    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
-    hoverBorder: 'hover:border-emerald-500/50',
+    tagColor: 'text-indigo-400 border-indigo-500/25 bg-indigo-500/10',
+    hoverBorder: 'hover:border-indigo-500/50',
     image: '/images/blog/comparatif-visas-thailande.jpg',
   },
   {
@@ -168,8 +168,8 @@ export const blogPosts = [
     publishedAt: '2026-06-17',
     modifiedAt: '2026-07-26',
     category: 'Famille & Couple',
-    tagColor: 'text-pink-400 border-pink-500/25 bg-pink-500/10',
-    hoverBorder: 'hover:border-pink-500/50',
+    tagColor: 'text-fuchsia-400 border-fuchsia-500/25 bg-fuchsia-500/10',
+    hoverBorder: 'hover:border-fuchsia-500/50',
     image: '/images/blog/visa-dtv-couple-famille-pacs.jpg',
   },
   {
@@ -224,8 +224,8 @@ export const blogPosts = [
     publishedAt: '2026-06-10',
     modifiedAt: '2026-07-26',
     category: 'Soft Power',
-    tagColor: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/10',
-    hoverBorder: 'hover:border-emerald-500/50',
+    tagColor: 'text-orange-400 border-orange-500/25 bg-orange-500/10',
+    hoverBorder: 'hover:border-orange-500/50',
     image: '/images/blog/visa-dtv-soft-power-ecoles.jpg',
   },
   {
@@ -238,8 +238,8 @@ export const blogPosts = [
     publishedAt: '2026-06-01',
     modifiedAt: '2026-07-26',
     category: 'Finances',
-    tagColor: 'text-amber-400 border-amber-500/25 bg-amber-500/10',
-    hoverBorder: 'hover:border-amber-500/50',
+    tagColor: 'text-teal-400 border-teal-500/25 bg-teal-500/10',
+    hoverBorder: 'hover:border-teal-500/50',
     image: '/images/blog/fonds-bancaires-visa-dtv.jpg',
   },
 ] satisfies BlogPost[];

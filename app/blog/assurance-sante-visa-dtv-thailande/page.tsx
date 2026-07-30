@@ -96,13 +96,13 @@ export default function ArticleAssuranceSante() {
 
       {/* ── EN-TÊTE ── */}
       <header className="mb-12 border-b border-gray-800 pb-10">
-        <span className="inline-block rounded-full border border-red-500/25 bg-red-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-red-400 mb-5">
+        <span className="inline-block rounded-full border border-rose-500/25 bg-rose-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-rose-400 mb-5">
           Santé · Vie pratique
         </span>
 
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
           Santé et Visa DTV :{' '}
-          <span className="text-red-400">pourquoi vous ne devez surtout pas venir sans assurance</span>
+          <span className="text-rose-400">pourquoi vous ne devez surtout pas venir sans assurance</span>
         </h1>
 
         <p className="text-base text-gray-500 mt-6">
@@ -120,14 +120,14 @@ export default function ArticleAssuranceSante() {
         </p>
         <p>
           Le dossier consulaire ne comporte aucune ligne à ce sujet. Contrairement au{' '}
-          <Link href="/blog/comparatif-visas-thailande" className="text-red-400 hover:underline font-medium">
+          <Link href="/blog/comparatif-visas-thailande" className="text-rose-400 hover:underline font-medium">
             visa retraite O-A
           </Link>
           , qui impose une couverture minimale et un justificatif à fournir, le DTV n&apos;en demande
           rien. Vous pouvez déposer votre demande, obtenir vos cinq ans, atterrir à Phuket et vivre
           votre vie sans qu&apos;aucune administration ne vous pose la question.
         </p>
-        <p className="text-white font-medium border-l-4 border-red-500 pl-5 py-1">
+        <p className="text-white font-medium border-l-4 border-rose-500 pl-5 py-1">
           C&apos;est précisément ce qui en fait un piège. Parce que l&apos;absence d&apos;obligation
           administrative est interprétée par beaucoup comme une absence de nécessité — et parce que
           le raisonnement qui suit, « je suis jeune, en bonne santé, j&apos;économise 1 000 € par
@@ -139,13 +139,13 @@ export default function ArticleAssuranceSante() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de ce guide :</h2>
         <ul className="space-y-3">
-          <li><a href="#cout-reel" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. Ce qu&apos;une hospitalisation coûte réellement</a></li>
-          <li><a href="#prive-public" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Phuket : le privé, le public, et qui décide</a></li>
-          <li><a href="#piege-scooter" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège du scooter, celui que personne ne vérifie</a></li>
-          <li><a href="#familles-contrats" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Les quatre familles de contrats</a></li>
-          <li><a href="#ce-que-je-paie" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Ce que je paie, concrètement</a></li>
-          <li><a href="#points-verifier" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">6. Les six points à vérifier avant de signer</a></li>
-          <li><a href="#quand-souscrire" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">7. Quand souscrire</a></li>
+          <li><a href="#cout-reel" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">1. Ce qu&apos;une hospitalisation coûte réellement</a></li>
+          <li><a href="#prive-public" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">2. Phuket : le privé, le public, et qui décide</a></li>
+          <li><a href="#piege-scooter" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">3. Le piège du scooter, celui que personne ne vérifie</a></li>
+          <li><a href="#familles-contrats" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">4. Les quatre familles de contrats</a></li>
+          <li><a href="#ce-que-je-paie" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">5. Ce que je paie, concrètement</a></li>
+          <li><a href="#points-verifier" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">6. Les six points à vérifier avant de signer</a></li>
+          <li><a href="#quand-souscrire" className="text-rose-400 hover:text-rose-300 hover:underline transition-colors text-sm md:text-base">7. Quand souscrire</a></li>
         </ul>
       </nav>
 
@@ -203,7 +203,7 @@ export default function ArticleAssuranceSante() {
           l&apos;île.
         </p>
 
-        <div className="bg-red-500/5 border border-red-500/25 rounded-2xl p-6">
+        <div className="bg-rose-500/5 border border-rose-500/25 rounded-2xl p-6">
           <p className="text-white font-semibold mb-2">Le pari asymétrique</p>
           <p className="text-sm text-gray-300 leading-relaxed">
             Une assurance correcte coûte, selon l&apos;âge et la formule, entre 450 et 2 500 € par
@@ -254,7 +254,7 @@ export default function ArticleAssuranceSante() {
         </p>
         <p className="mb-4">
           Si vous êtes inconscient sur le bord d&apos;une route de{' '}
-          <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-red-400 hover:underline font-medium">
+          <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-rose-400 hover:underline font-medium">
             Kathu ou de Chalong
           </Link>
           , l&apos;ambulance vous conduit à l&apos;établissement le plus proche et le mieux équipé. À
@@ -523,7 +523,7 @@ export default function ArticleAssuranceSante() {
             </tbody>
           </table>
         </div>
-        <div className="border border-red-500/30 bg-red-500/5 rounded-2xl p-5 mb-6">
+        <div className="border border-rose-500/30 bg-rose-500/5 rounded-2xl p-5 mb-6">
           <p className="text-sm text-gray-300 leading-relaxed">
             Prenez la ligne du bas. Vous économisez 425 € par an, et vous acceptez de payer
             81 875 THB — environ 2 230 € — à chaque sinistre.{' '}
@@ -625,7 +625,7 @@ export default function ArticleAssuranceSante() {
         <p className="mb-4">
           Le <strong className="text-white">délai de carence</strong> court à partir de la
           souscription. Souscrire trois mois avant votre installation, c&apos;est{' '}
-          <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-red-400 hover:underline font-medium">
+          <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-rose-400 hover:underline font-medium">
             arriver couvert
           </Link>
           .
@@ -645,7 +645,7 @@ export default function ArticleAssuranceSante() {
       {/* ── À RETENIR ── */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-white mb-4">Ce qu&apos;il faut retenir</h2>
-        <ul className="space-y-3 mb-6 pl-4 border-l-2 border-red-500/40 text-gray-400 text-sm">
+        <ul className="space-y-3 mb-6 pl-4 border-l-2 border-rose-500/40 text-gray-400 text-sm">
           <li><strong className="text-white">Le DTV n&apos;exige aucune assurance.</strong> C&apos;est un vide administratif, pas une autorisation de s&apos;en passer.</li>
           <li><strong className="text-white">Une fracture coûte 9 000 €, une fracture ouverte 42 000 €.</strong> Une assurance coûte 450 à 2 500 € par an.</li>
           <li><strong className="text-white">En urgence, vous n&apos;aurez pas le choix de l&apos;hôpital.</strong> L&apos;ambulance décide, et à Phuket elle vous conduit au privé.</li>
@@ -655,7 +655,7 @@ export default function ArticleAssuranceSante() {
         <p>
           Et si votre installation se prolonge au-delà de six mois, pensez à anticiper l&apos;autre
           sujet que personne n&apos;aborde :{' '}
-          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-red-400 hover:underline font-medium">
+          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-rose-400 hover:underline font-medium">
             la résidence fiscale au-delà de 180 jours
           </Link>
           .
@@ -664,12 +664,12 @@ export default function ArticleAssuranceSante() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-red-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-amber-500/20 flex items-center justify-center text-3xl">🏍️</div>
+        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-rose-500/50">
+          <div className="w-full h-full bg-gradient-to-br from-rose-500/20 to-amber-500/20 flex items-center justify-center text-3xl">🏍️</div>
         </div>
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
-          <p className="text-red-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise terrain · Phuket</p>
+          <p className="text-rose-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise terrain · Phuket</p>
           <p className="text-gray-400 text-sm leading-relaxed">
             Installé à Kathu, je roule quotidiennement sur les routes de l&apos;île. Les chiffres de
             cet article sont ceux de mes propres contrats, devis à l&apos;appui. Je ne vends pas
@@ -685,17 +685,17 @@ export default function ArticleAssuranceSante() {
         <p className="text-white font-bold text-sm mb-4">📚 Sources et ressources</p>
         <ul className="space-y-3">
           <li>
-            <a href="https://th.diplomatie.gouv.fr/fr/social" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 hover:underline text-sm transition-colors">
+            <a href="https://th.diplomatie.gouv.fr/fr/social" target="_blank" rel="noopener noreferrer" className="text-rose-400 hover:text-rose-300 hover:underline text-sm transition-colors">
               → Ambassade de France en Thaïlande — rubrique Social et Santé
             </a>
           </li>
           <li>
-            <a href="https://www.cfe.fr" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 hover:underline text-sm transition-colors">
+            <a href="https://www.cfe.fr" target="_blank" rel="noopener noreferrer" className="text-rose-400 hover:text-rose-300 hover:underline text-sm transition-colors">
               → Caisse des Français de l&apos;Étranger
             </a>
           </li>
           <li>
-            <a href="https://www.moph.go.th/eng/" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 hover:underline text-sm transition-colors">
+            <a href="https://www.moph.go.th/eng/" target="_blank" rel="noopener noreferrer" className="text-rose-400 hover:text-rose-300 hover:underline text-sm transition-colors">
               → Ministère de la Santé publique thaïlandais
             </a>
           </li>
@@ -722,7 +722,7 @@ export default function ArticleAssuranceSante() {
 
       {/* ── CTA ── */}
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-red-500 opacity-10 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-rose-500 opacity-10 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
           Préparez votre installation, pas seulement votre visa
         </h3>
