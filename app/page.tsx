@@ -4,10 +4,22 @@ import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
-import DtvGuideModal from "./components/DtvGuideModal"; 
+import DtvGuideModal from "./components/DtvGuideModal";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import EligibilityFormModal from "./components/EligibilityFormModal";
 import ProcessModal from "./components/ProcessModal";
+import HomeContent, { homeFaqs } from "./components/HomeContent";
+
+// ─── FAQ EN DONNÉES STRUCTURÉES (éligibilité aux résultats enrichis) ───
+const homeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
 function AnimatedTextOverlay({ phrases }: { phrases: string[] }) {
   const [index, setIndex] = useState(-1);
@@ -48,7 +60,7 @@ function HeroText() {
     <div className="pb-4 lg:pb-6 flex flex-col items-center justify-center text-center px-4 w-full animate-in fade-in zoom-in duration-1000">
       {/* Modification n°1 : Le H1 contient maintenant "Visa DTV" */}
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-        Votre vie en Thaïlande <br className="block md:hidden" /> commence ici grâce au Visa DTV
+        Visa DTV Thaïlande : <br className="block md:hidden" /> votre nouvelle vie commence ici
       </h1>
       <p className="text-[14px] md:text-lg text-gray-400 mt-2 font-medium max-w-xl mx-auto leading-relaxed">
         Visa DTV 5 ans · Dossier béton · Zéro charge mentale
@@ -277,7 +289,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-56">
-      
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+      />
+
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
       {/* 💻 NOUVEAU : SIDEBAR LATÉRALE (Uniquement Desktop) */}
@@ -383,6 +400,9 @@ export default function Home() {
           <h2 className="sr-only">Pourquoi choisir notre accompagnement pour le Visa DTV ?</h2>
           <VideoSequence />
         </section>
+
+        {/* CONTENU DE FOND : rendu dans le HTML, sous la ligne de flottaison */}
+        <HomeContent />
 
         {/* Modification n°2 : Ajout du bloc ressources OFFICIELLES à la fin du main */}
         <FooterRessources />

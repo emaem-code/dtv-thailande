@@ -9,14 +9,14 @@ import type { Metadata } from 'next';
 
 // ─── MÉTADONNÉES SEO & CANONICAL ─────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV Soft Power : éviter les fausses écoles",
-  description: "Le guide définitif pour obtenir le Visa DTV via la voie Soft Power. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.",
+  title: "Visa DTV Soft Power : écoles, tarifs réels et pièges 2026",
+  description: "Comment obtenir le Visa DTV par la voie Soft Power : cuisine ou Muay Thaï, prix publics constatés, durée des cursus, et les deux documents à exiger pour repérer une fausse école.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles', // <-- LA VOICI !
   },
   openGraph: {
-    title: "Visa DTV Soft Power : éviter les fausses écoles",
-    description: "Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter pour sécuriser votre DTV.",
+    title: "Visa DTV Soft Power : écoles, tarifs réels et pièges 2026",
+    description: "Cuisine ou Muay Thaï, prix publics constatés, gestion des présences et les deux documents à exiger avant de payer.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles",
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
@@ -34,8 +34,8 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": "https://dtv-thailande.fr/blog/visa-dtv-soft-power-ecoles"
   },
-  "headline": "Visa DTV Soft Power : Éviter les arnaques des écoles (Cuisine & Muay Thaï)",
-  "description": "Le guide définitif pour obtenir le Visa DTV via la voie Soft Power. Comparatif Cuisine vs Muay Thaï, gestion des présences et pièges à éviter.",
+  "headline": "Visa DTV Soft Power : écoles, tarifs réels et pièges 2026",
+  "description": "Comment obtenir le Visa DTV par la voie Soft Power : cuisine ou Muay Thaï, prix publics constatés, durée des cursus, et les deux documents à exiger pour repérer une fausse école.",
   "image": "https://dtv-thailande.fr/images/blog/visa-dtv-soft-power-ecoles.jpg", 
   "author": {
     "@type": "Person",
