@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="DTV Thaïlande">
+  <title>DTV Thaïlande</title>
+  <defs>
+    <linearGradient id="or" x1="0.08" y1="0.05" x2="0.92" y2="0.95">
+      <stop offset="0" stop-color="#f5c04a"/>
+      <stop offset="0.42" stop-color="#f0a621"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+    <clipPath id="disque">
+      <circle cx="256" cy="256" r="224"/>
+    </clipPath>
+  </defs>
+
+  <!-- Portions de l'orbite débordant du disque (pointes) -->
+  <path d="M 30 348 Q 260 210 498 178 Q 480 214 466 226 Q 250 268 44 376 Z" fill="url(#or)"/>
+
+  <!-- Le disque -->
+  <circle cx="256" cy="256" r="224" fill="url(#or)"/>
+
+  <!-- L'orbite évidée à l'intérieur du disque -->
+  <g clip-path="url(#disque)">
+    <path d="M 30 348 Q 260 210 498 178 Q 480 214 466 226 Q 250 268 44 376 Z" fill="#0a0a0a"/>
+  </g>
+</svg>

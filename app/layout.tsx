@@ -12,9 +12,19 @@ export const metadata: Metadata = {
   description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles : dossiers, conformité bancaire et Visa Run.',
  
   alternates: {
-    canonical: '/', 
+    canonical: '/',
   },
-  
+
+  // ─── ICÔNES : onglet navigateur, écran d'accueil iOS/Android ───
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+
   openGraph: {
     title: 'Visa DTV Thaïlande : accompagnement 5 ans',
     description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles.',

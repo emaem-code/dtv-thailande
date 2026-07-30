@@ -59,10 +59,10 @@ export default function BlogIndex() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <BlogNavigation variant="blog-index" />
-        
-        <div className="text-center mb-16 mt-8">
+
+        <div className="text-center mb-12 mt-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wide mb-6">
             Le Blog <span className="text-amber-500">DTV Thaïlande</span>
           </h1>
@@ -73,7 +73,7 @@ export default function BlogIndex() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {sortedPosts.map((post) => (
             <Link
               key={post.slug}
@@ -81,7 +81,7 @@ export default function BlogIndex() {
               className={`group flex flex-col justify-between overflow-hidden rounded-3xl bg-[#111111] border border-white/10 transition-all duration-300 ${post.hoverBorder} hover:bg-[#161616] hover:-translate-y-1 shadow-lg`}
             >
               <div>
-                <div className="relative aspect-[1200/630] w-full overflow-hidden bg-[#0d0d0d]">
+                <div className="relative aspect-[2/1] w-full overflow-hidden bg-[#0d0d0d]">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -92,27 +92,27 @@ export default function BlogIndex() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />
                 </div>
 
-                <div className="p-8 pb-0">
-                  <div className="flex items-center justify-between gap-3 mb-5">
-                    <span className={`inline-block whitespace-nowrap text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${post.tagColor}`}>
+                <div className="p-5 md:p-6 pb-0">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <span className={`inline-block whitespace-nowrap text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-full border ${post.tagColor}`}>
                       {post.category}
                     </span>
-                    <span className="text-gray-500 text-sm font-medium shrink-0">
+                    <span className="text-gray-500 text-xs font-medium shrink-0">
                       {post.date}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl font-bold text-white mb-4 leading-tight group-hover:text-gray-200 transition-colors">
+                  <h2 className="text-lg md:text-xl font-bold text-white mb-2 leading-snug group-hover:text-gray-200 transition-colors">
                     {post.title}
                   </h2>
 
-                  <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
                     {post.excerpt}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center px-8 pb-8 text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
+              <div className="flex items-center px-5 md:px-6 pb-5 md:pb-6 text-sm font-bold text-white group-hover:text-amber-500 transition-colors">
                 Lire l&apos;article
                 <span className="ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
               </div>

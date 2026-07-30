@@ -287,14 +287,19 @@ export default function Home() {
           {/* Logo / Titre Sidebar */}
 <div className="px-2 flex items-center gap-4">
   <Image
-    src="/logo.png" 
+    src="/logo.svg"
     alt="Logo de l'agence DTV Thaïlande"
     width={48}
     height={48}
+    priority
+    unoptimized
     className="w-12 h-12 object-contain"
   />
-  <div className="text-xl font-black text-white leading-tight">
-    VISA DTV <br/><span className="text-amber-500">THAÏLANDE</span>
+  <div className="leading-none">
+    <div className="text-2xl font-black text-white tracking-tight">DTV</div>
+    <div className="text-[10px] font-bold text-amber-500 tracking-[0.18em] uppercase mt-1">
+      Destination Thaïlande
+    </div>
   </div>
 </div>
 

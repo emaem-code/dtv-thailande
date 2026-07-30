@@ -44,7 +44,7 @@ const articleSchema = {
   headline: 'Guide complet : comment déposer son dossier Visa DTV sur le portail e-Visa thaïlandais',
   description:
     'Tutoriel étape par étape pour déposer votre demande de Visa DTV sur thaievisa.go.th et éviter les pièges consulaires.',
-  image: 'https://dtv-thailande.fr/logo.png',
+  image: 'https://dtv-thailande.fr/images/blog/guide-depot-dossier-evisa-dtv.jpg',
   author: {
     '@type': 'Person',
     name: 'Matthieu Moretti',

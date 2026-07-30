@@ -50,7 +50,7 @@ const articleSchema = {
     "TM47 : le rapport des 90 jours en Thaïlande, l'obligation que personne ne vous annonce (2026)",
   description:
     "Le rapport des 90 jours (TM47) est obligatoire et méconnu. Qui doit le faire, quand, comment, et les amendes encourues. Le guide complet 2026.",
-  image: 'https://dtv-thailande.fr/logo.png',
+  image: 'https://dtv-thailande.fr/images/blog/tm47-rapport-90-jours-thailande.jpg',
   author: {
     '@type': 'Person',
     name: 'Matthieu Moretti',
