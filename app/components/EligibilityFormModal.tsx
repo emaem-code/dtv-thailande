@@ -29,12 +29,20 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     family: '',
     childrenCount: '',
     softPower: '',
+    softPowerInteret: '', // un freelance peut aussi vouloir passer par une école
     translations: '',
     serviceLevel: '',
-    remarks: ''
+    remarks: '',
+    consentement: '',
   });
 
+  // Messages d'erreur affichés sous les champs concernés, plutôt qu'en alerte système
+  const [erreurs, setErreurs] = useState<Record<string, string>>({});
+
   if (!isOpen) return null;
+
+  const AUJOURDHUI = new Date().toISOString().slice(0, 10);
+  const emailValide = (v: string) => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim());
 
   // 👉 NOUVEAU : Fonction pour remonter en haut de page en douceur
   const scrollToTop = () => {
@@ -45,22 +53,56 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // L'erreur s'efface dès que le visiteur corrige le champ concerné
+    setErreurs(prev => (prev[field] ? { ...prev, [field]: '' } : prev));
+  };
+
+  /**
+   * Transmet le contact dès l'étape 1, sans attendre la fin du parcours.
+   * Sans cela, toute personne qui abandonne à l'étape 2 disparaît alors même
+   * qu'elle a déjà fourni son e-mail, ses fonds, son passeport et son statut.
+   */
+  const envoyerLeadPartiel = async (typeDeLead: string) => {
+    try {
+      await fetch('https://formspree.io/f/mreyokzj', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          'Type de demande': typeDeLead,
+          'Email du prospect': formData.email,
+          'Statut Pro': formData.job,
+          'Épargne 500k THB': formData.funds,
+          'Passeport OK': formData.passport,
+        }),
+      });
+    } catch {
+      /* silencieux : ne doit jamais bloquer le parcours du visiteur */
+    }
   };
 
   const nextStep = () => {
-    if (step === 1 && (!formData.funds || !formData.passport || !formData.job || !formData.email)) {
-      alert("Veuillez remplir tous les champs obligatoires pour continuer.");
-      return;
-    }
+    const e: Record<string, string> = {};
+    if (!formData.funds) e.funds = 'Merci de répondre à cette question.';
+    if (!formData.passport) e.passport = 'Merci de répondre à cette question.';
+    if (!formData.job) e.job = 'Merci de sélectionner votre situation.';
+    if (!formData.email.trim()) e.email = 'Merci d’indiquer votre adresse e-mail.';
+    else if (!emailValide(formData.email)) e.email = 'Cette adresse ne semble pas valide.';
 
-    if (formData.funds === 'no' || formData.passport === 'no') {
+    setErreurs(e);
+    if (Object.keys(e).length > 0) return;
+
+    // Seule l'absence définitive de fonds est disqualifiante. Ne pas avoir
+    // encore de passeport n'en est pas une : c'est quelques semaines de délai.
+    if (formData.funds === 'no') {
+      envoyerLeadPartiel('Profil non éligible (fonds insuffisants) — à recontacter');
       setStep(0);
-      scrollToTop(); // Remonte au clic
+      scrollToTop();
       return;
     }
 
+    envoyerLeadPartiel('Lead qualifié — étape 1 franchie');
     setStep(2);
-    scrollToTop(); // Remonte au clic
+    scrollToTop();
   };
 
   const prevStep = () => {
@@ -70,6 +112,28 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const err: Record<string, string> = {};
+    if (!formData.dateStart || !formData.dateEnd) {
+      err.dates = 'Merci d’indiquer une fourchette de départ.';
+    } else if (formData.dateEnd < formData.dateStart) {
+      err.dates = 'La date de fin doit être postérieure à la date de début.';
+    }
+    if (!formData.location) err.location = 'Merci d’indiquer où vous déposerez la demande.';
+    if (formData.job !== 'softpower' && !formData.softPowerInteret) {
+      err.softPowerInteret = 'Merci de répondre à cette question.';
+    }
+    if (!formData.family) err.family = 'Merci de préciser votre situation.';
+    if (formData.consentement !== 'yes') {
+      err.consentement = 'Merci d’accepter l’utilisation de vos données pour établir le devis.';
+    }
+
+    setErreurs(err);
+    if (Object.keys(err).length > 0) {
+      scrollToTop();
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -89,10 +153,14 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
           "Détails localisation": formData.locationDetails,
           "Expatriation": formData.family,
           "Nombre d'enfants": formData.childrenCount,
+          "Voie Soft Power souhaitée": formData.job === 'softpower' ? 'oui (sans revenus)' : formData.softPowerInteret,
           "Soft Power": formData.softPower,
           "Traductions requises": formData.translations,
           "Niveau de service": formData.serviceLevel,
-          "Remarques": formData.remarks
+          "Remarques": formData.remarks,
+          "Consentement RGPD": formData.consentement === 'yes' ? 'accordé' : 'refusé',
+          "Type de demande": 'Demande de devis complète'
+
         }),
       });
 
@@ -100,14 +168,19 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
         setStep(3);
         scrollToTop(); // Remonte au clic
       } else {
-        alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+        setErreurs({ envoi: "L'envoi a échoué. Merci de réessayer dans un instant." });
       }
     } catch {
-      alert("Erreur de connexion. Vérifiez votre réseau.");
+      setErreurs({ envoi: 'Connexion impossible. Vérifiez votre réseau et réessayez.' });
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const Erreur = ({ champ }: { champ: string }) =>
+    erreurs[champ] ? (
+      <p className="text-red-400 text-xs font-medium mt-1 ml-1">{erreurs[champ]}</p>
+    ) : null;
 
   const RadioCard = ({ label, field, value }: { label: string, field: string, value: string }) => {
     const isSelected = formData[field as keyof typeof formData] === value;
@@ -126,7 +199,9 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
     );
   };
 
-  const isSoftPower = formData.job === 'softpower';
+  // La voie Soft Power ne dépend plus du seul statut professionnel : un
+  // freelance peut parfaitement choisir de passer par une école certifiée.
+  const isSoftPower = formData.job === 'softpower' || formData.softPowerInteret === 'yes';
   const priceBasic = isSoftPower ? "1 750 €" : "850 €";
   const pricePremium = isSoftPower ? "2 450 €" : "1 300 €";
   const priceVIP = isSoftPower ? "4 060 €" : "2 400 €";
@@ -175,12 +250,43 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
           {step === 0 && (
             <div className="py-10 flex flex-col items-center text-center animate-in zoom-in duration-500">
               <div className="w-20 h-20 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-4xl mb-6 border border-red-500/20">✕</div>
-              <h3 className="text-2xl font-black text-white mb-4">Profil Inéligible au Visa DTV</h3>
-              <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
-                L'administration thaïlandaise est stricte : disposer d'une garantie financière de 500 000 THB et d'un passeport valide sont des obligations légales incompressibles.
+              <h3 className="text-2xl font-black text-white mb-4">
+                Le critère financier n&apos;est pas encore rempli
+              </h3>
+              <p className="text-gray-400 text-base max-w-lg mx-auto mb-4">
+                L&apos;ambassade exige de prouver une épargne disponible de 500 000 THB, soit
+                environ <MontantFonds prefixe="" />. C&apos;est une condition légale sur laquelle
+                aucune agence ne peut passer outre — et se le faire dire franchement vaut mieux que
+                de payer des frais consulaires non remboursables pour un refus.
               </p>
-              <button onClick={onClose} className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95">
-                Fermer
+              <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
+                Mais rien n&apos;est définitif. Beaucoup de nos clients ont constitué cette épargne
+                en quelques mois avant de déposer. Gardez votre projet au chaud : téléchargez le
+                guide gratuit, et revenez nous voir le moment venu.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+                <a
+                  href="/guide-dtv-2025.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-black px-6 py-3.5 rounded-full font-bold transition-all active:scale-95"
+                >
+                  ↓ Recevoir le guide gratuit
+                </a>
+                <a
+                  href="/blog/fonds-bancaires-visa-dtv"
+                  className="inline-flex items-center justify-center border border-white/20 text-white px-6 py-3.5 rounded-full font-bold transition-all hover:bg-white/5"
+                >
+                  Comprendre la règle des fonds
+                </a>
+              </div>
+
+              <button
+                onClick={onClose}
+                className="mt-6 text-sm text-gray-500 hover:text-gray-300 transition-colors underline"
+              >
+                Fermer la fenêtre
               </button>
             </div>
           )}
@@ -195,6 +301,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="Pas encore, mais je m'organise pour les avoir bientôt" field="funds" value="soon" />
                   <RadioCard label="Non, et je ne pourrai pas les réunir" field="funds" value="no" />
                 </div>
+                <Erreur champ="funds" />
               </div>
 
               <div className="space-y-3">
@@ -204,6 +311,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="Pas encore, mais je vais le refaire rapidement" field="passport" value="soon" />
                   <RadioCard label="Non, je n'ai pas de passeport" field="passport" value="no" />
                 </div>
+                <Erreur champ="passport" />
               </div>
 
               <div className="space-y-3">
@@ -213,11 +321,13 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="Salarié en télétravail (Avec autorisation de l'employeur)" field="job" value="remote" />
                   <RadioCard label="Je n'ai pas de travail à distance / Je veux passer par une école" field="job" value="softpower" />
                 </div>
+                <Erreur champ="job" />
               </div>
 
               <div className="space-y-3">
                 <label className="text-white font-bold text-lg">4. À quelle adresse e-mail souhaitez-vous recevoir votre devis ? <span className="text-amber-500">*</span></label>
-                <input type="email" required placeholder="votre@email.com" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"/>
+                <input type="email" required placeholder="votre@email.com" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} className={`w-full bg-white/5 border rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-1 transition-colors ${erreurs.email ? 'border-red-500/60 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-amber-500 focus:ring-amber-500'}`}/>
+                <Erreur champ="email" />
               </div>
 
               <div className="pt-4">
@@ -245,6 +355,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                     <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tôt</label>
                     <input 
                       type="date" 
+                      min={AUJOURDHUI}
                       value={formData.dateStart}
                       onChange={(e) => handleChange('dateStart', e.target.value)}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
@@ -254,12 +365,14 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                     <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tard</label>
                     <input 
                       type="date" 
+                      min={formData.dateStart || AUJOURDHUI}
                       value={formData.dateEnd}
                       onChange={(e) => handleChange('dateEnd', e.target.value)}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
                     />
                   </div>
                 </div>
+                <Erreur champ="dates" />
               </div>
 
               <div className="space-y-3">
@@ -270,8 +383,26 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="Amérique du Nord" field="location" value="america" />
                   <RadioCard label="Autre" field="location" value="other" />
                 </div>
+                <Erreur champ="location" />
                 <input type="text" placeholder="Précisez le pays et la ville..." value={formData.locationDetails} onChange={(e) => handleChange('locationDetails', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"/>
               </div>
+
+              {formData.job !== 'softpower' && (
+                <div className="space-y-3">
+                  <label className="text-white font-bold text-lg">
+                    Souhaitez-vous passer par la voie Soft Power (école certifiée) ?
+                  </label>
+                  <p className="text-xs text-gray-500 -mt-1 ml-1">
+                    Cette voie n&apos;exige aucun justificatif de revenus, mais suppose
+                    l&apos;inscription à un cursus de cuisine ou de Muay Thaï.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioCard label="Oui, cela m'intéresse" field="softPowerInteret" value="yes" />
+                    <RadioCard label="Non, je passe par mon activité" field="softPowerInteret" value="no" />
+                  </div>
+                  <Erreur champ="softPowerInteret" />
+                </div>
+              )}
 
               {isSoftPower && (
                 <div className="space-y-3 p-5 bg-white/5 rounded-2xl border border-white/10">
@@ -292,8 +423,9 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                   <RadioCard label="En couple (Non mariés)" field="family" value="concubinage" />
                   <RadioCard label="En famille (Avec enfants)" field="family" value="family" />
                 </div>
+                <Erreur champ="family" />
                 {formData.family === 'family' && (
-                  <input type="number" placeholder="Combien d'enfants à charge vous accompagnent ?" value={formData.childrenCount} onChange={(e) => handleChange('childrenCount', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"/>
+                  <input type="number" min={1} max={12} placeholder="Combien d'enfants à charge vous accompagnent ?" value={formData.childrenCount} onChange={(e) => handleChange('childrenCount', e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white focus:outline-none focus:border-amber-500 text-sm"/>
                 )}
               </div>
 
@@ -309,6 +441,28 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
                 <label className="text-white font-bold text-lg">Des remarques ou besoins spécifiques ? (Optionnel)</label>
                 <textarea rows={3} value={formData.remarks} onChange={(e) => handleChange('remarks', e.target.value)} placeholder="Dites-nous en plus sur votre projet..." className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-amber-500"/>
               </div>
+
+              {/* ── CONSENTEMENT RGPD ── */}
+              <label className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.consentement === 'yes'}
+                  onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
+                  className="mt-0.5 w-4 h-4 flex-none accent-amber-500"
+                />
+                <span className="text-xs text-gray-400 leading-relaxed">
+                  J&apos;accepte que ces informations soient utilisées uniquement pour établir mon
+                  devis et me recontacter à ce sujet. Elles ne sont ni revendues ni transmises à des
+                  tiers, et sont conservées trois ans maximum. Je peux demander leur suppression à
+                  tout moment par simple e-mail.{' '}
+                  <a href="/mentions-legales" target="_blank" className="text-amber-500 hover:underline">
+                    Mentions légales
+                  </a>
+                </span>
+              </label>
+              <Erreur champ="consentement" />
+
+              <Erreur champ="envoi" />
 
               <div className="pt-4 flex gap-4">
                 <button onClick={prevStep} className="px-6 py-4 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white transition-colors">← Retour</button>
