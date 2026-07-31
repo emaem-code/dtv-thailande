@@ -26,9 +26,9 @@ function VideoTitle({ title }: { title: string }) {
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <h3 className="text-white font-bold text-center text-xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
+      <p className="text-white font-bold text-center text-xl tracking-wide drop-shadow-lg whitespace-pre-line leading-tight">
         {title}
-      </h3>
+      </p>
     </div>
   );
 }
@@ -54,14 +54,14 @@ function MobileTextOverlay({ phrases }: { phrases: string[] }) {
   return (
     <div className="absolute bottom-[30%] left-0 w-full flex justify-center z-20 pointer-events-none px-4">
       {phrases.map((phrase, i) => (
-        <h3
+        <p
           key={i}
           className={`absolute w-full px-5 text-white font-bold text-base md:text-lg leading-tight tracking-normal text-center transition-all duration-700 transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${
             i === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
           {phrase}
-        </h3>
+        </p>
       ))}
     </div>
   );

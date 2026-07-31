@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -238,9 +240,9 @@ export default function ArticleCasClient() {
           deux par année civile, le passage par la route est devenu le signal le plus visible du
           profil « visa runner ». Beaucoup basculent alors sur l&apos;avion, et voient leur budget
           annuel doubler sans pour autant gagner un statut.{' '}
-          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-violet-400 hover:underline font-medium">
+          <LienArticle slug="overstay-thailande-amende-blacklist-visa-dtv" className="text-violet-400 hover:underline font-medium">
             C&apos;est précisément la trajectoire que l&apos;immigration lit dans un passeport
-          </Link>
+          </LienArticle>
           .
         </p>
 
@@ -593,11 +595,14 @@ export default function ArticleCasClient() {
           le profil.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Vérifier mon éligibilité
-          </Link>
-          <Link href="/contact" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
-            Discuter de mon cas
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
+          >
+            Nous contacter
           </Link>
         </div>
       </div>

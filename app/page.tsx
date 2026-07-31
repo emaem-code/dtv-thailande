@@ -4,11 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
-import DtvGuideModal from "./components/DtvGuideModal";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
-import EligibilityFormModal from "./components/EligibilityFormModal";
-import ProcessModal from "./components/ProcessModal";
 import HomeContent from "./components/HomeContent";
+import SiteHeader from "./components/SiteHeader";
+import { useModales } from "./components/ModalesProvider";
 import { getSortedBlogPosts } from "./blog/posts";
 
 // NOTE : pas de balisage FAQPage ici — il appartient à la page /faq, qui porte
@@ -345,18 +344,8 @@ export default function Home() {
     (p) => new Date(p.publishedAt) <= new Date()
   ).length;
 
-  const [isGuideOpen, setIsGuideOpen] = useState(false);
-  const [isEligibleOpen, setIsEligibleOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProcessOpen, setIsProcessOpen] = useState(false);
-  
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isMobileMenuOpen]);
+  // Fenêtres et menu mobile : gérés à la racine du site (ModalesProvider).
+  const { ouvrirGuide, ouvrirEligibilite, ouvrirMethode } = useModales();
 
   return (
     <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-56">
@@ -364,82 +353,8 @@ export default function Home() {
 
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      {/* ── BARRE DE NAVIGATION HORIZONTALE (desktop + mobile) ── */}
-      <header className="sticky top-0 z-[60] w-full border-b border-white/[0.06] bg-[#0a0a0a]/85 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-
-          <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil DTV Destination Thaïlande">
-            <Image
-              src="/logo.svg?v=2"
-              alt="DTV Destination Thaïlande"
-              width={38}
-              height={38}
-              priority
-              unoptimized
-              className="w-9 h-9 sm:w-10 sm:h-10 object-contain"
-            />
-            <span className="leading-none">
-              <span className="block text-lg font-black text-white tracking-tight">DTV</span>
-              <span className="block text-[8px] font-bold text-amber-500 tracking-[0.18em] uppercase mt-0.5">
-                Destination Thaïlande
-              </span>
-            </span>
-          </Link>
-
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-400">
-            <button onClick={() => setIsProcessOpen(true)} className="hover:text-white transition-colors">
-              Notre méthode
-            </button>
-            <a href="#tarifs" className="hover:text-white transition-colors">Tarifs</a>
-            <Link href="/blog" className="hover:text-white transition-colors">Le blog</Link>
-            <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-          </nav>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => setIsGuideOpen(true)}
-              className="hidden sm:inline-flex items-center gap-2 border border-amber-500/40 text-amber-500 font-bold text-xs py-2 px-4 rounded-full hover:bg-amber-500/10 transition-all"
-            >
-              Guide gratuit
-            </button>
-            <button
-              onClick={() => setIsEligibleOpen(true)}
-              className="hidden sm:inline-flex bg-white text-black font-bold text-xs py-2.5 px-4 rounded-full hover:bg-gray-200 transition-all active:scale-95"
-            >
-              Test d&apos;éligibilité
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 -mr-2 text-white hover:text-amber-400 transition-colors"
-              aria-label="Menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* 📱 MENU MOBILE PLEIN ÉCRAN */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center animate-in fade-in duration-300 lg:hidden">
-          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-          
-          <div className="flex flex-col items-center gap-8 text-lg font-medium">
-            <button onClick={() => { setIsGuideOpen(true); setIsMobileMenuOpen(false); }} className="flex items-center gap-3 text-amber-500 hover:text-amber-400 text-xl font-bold transition-colors">
-              <span className="relative flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span></span>
-              Le guide gratuit
-            </button>
-            <button onClick={() => { setIsProcessOpen(true); setIsMobileMenuOpen(false); }} className="text-white hover:text-gray-300 transition-colors">Notre Méthode</button>
-            <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Le Blog</Link>
-            <Link href="/faq" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">FAQ</Link>
-            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Nous contacter</Link>
-            <Link href="/mentions-legales" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-gray-300 transition-colors">Mentions légales</Link>
-          </div>
-        </div>
-      )}
+      {/* ── EN-TÊTE COMMUN À TOUT LE SITE ── */}
+      <SiteHeader />
 
       {/* CONTENU PRINCIPAL */}
       <main className="flex-1 flex flex-col items-center justify-start w-full mx-auto pt-8 lg:pt-12">
@@ -449,8 +364,8 @@ export default function Home() {
           <h2 className="sr-only">Pourquoi choisir notre accompagnement pour le Visa DTV ?</h2>
           <HeroText
             nbGuides={nbGuides}
-            onEligibilite={() => setIsEligibleOpen(true)}
-            onGuide={() => setIsGuideOpen(true)}
+            onEligibilite={ouvrirEligibilite}
+            onGuide={ouvrirGuide}
           />
           <VideoSequence />
         </section>
@@ -467,7 +382,7 @@ export default function Home() {
       <footer className="flex w-full flex-col items-center justify-center gap-4 pt-16 pb-8 text-sm font-medium text-gray-600 relative opacity-90">
         <div className="w-24 h-px bg-white/10 mb-4"></div>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-4 text-center">
-          <button onClick={() => setIsProcessOpen(true)} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
+          <button onClick={ouvrirMethode} className="hover:text-gray-300 transition-colors">Notre Méthode</button>
           <Link href="/blog" className="hover:text-gray-300 transition-colors">Le Blog</Link>
           <Link href="/faq" className="hover:text-gray-300 transition-colors">FAQ</Link>
           <Link href="/contact" className="hover:text-gray-300 transition-colors">Nous contacter</Link>
@@ -493,7 +408,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
             <div className="relative bg-black/40 backdrop-blur-xl p-1 md:p-1.5 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
               <button
-                onClick={() => setIsEligibleOpen(true)}
+                onClick={ouvrirEligibilite}
                 className="w-full bg-white text-black px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-[13px] md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] whitespace-nowrap"
               >
                 Vérifier mon éligibilité — 2 min
@@ -503,11 +418,6 @@ export default function Home() {
 
         </div>
       </div>
-
-      {/* MODALS */}
-      <DtvGuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
-      <EligibilityFormModal isOpen={isEligibleOpen} onClose={() => setIsEligibleOpen(false)} />
-      <ProcessModal isOpen={isProcessOpen} onClose={() => setIsProcessOpen(false)} />
 
     </div>
   );

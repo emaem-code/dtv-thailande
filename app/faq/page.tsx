@@ -1,5 +1,8 @@
 import React from 'react';
+import BoutonEligibilite from '../components/BoutonEligibilite';
 import Link from 'next/link';
+import { estPublie } from '../blog/posts';
+import { getTauxThb, eurosArrondis, formateEuros, MARGE_CONSEILLEE } from '../lib/taux';
 
 type Faq = {
   q: string;
@@ -84,7 +87,7 @@ const groupes: Groupe[] = [
     questions: [
       {
         q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-        a: "Non. L'administration exige de prouver la liquidité de 500 000 THB, soit environ 14 500 €, uniquement au moment de la demande, et lors d'une éventuelle extension sur place. L'argent n'est jamais bloqué ni consigné. En revanche, l'historique du compte est examiné avec attention.",
+        a: "Non. L'administration exige de prouver la liquidité de 500 000 THB, soit environ {EUROS} au cours du jour, uniquement au moment de la demande, et lors d'une éventuelle extension sur place. L'argent n'est jamais bloqué ni consigné. En revanche, l'historique du compte est examiné avec attention. Nous conseillons de prévoir plutôt {MARGE} : le seuil qui fait foi est celui en bahts, et le taux de change bouge en permanence.",
         lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Le décryptage complet des fonds bancaires' },
       },
       {
@@ -287,17 +290,39 @@ const groupes: Groupe[] = [
 
 const toutes = groupes.flatMap((g) => g.questions);
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: toutes.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+/**
+ * Les montants en euros sont recalculés au cours du jour, à la fois dans le
+ * texte affiché et dans le balisage structuré — les deux restent donc toujours
+ * identiques, condition pour que Google accepte le balisage FAQ.
+ */
+function avecMontants(texte: string, euros: string): string {
+  return texte.replace('{EUROS}', euros).replace('{MARGE}', MARGE_CONSEILLEE);
+}
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const taux = await getTauxThb();
+  const euros = formateEuros(eurosArrondis(taux));
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: toutes.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: avecMontants(f.a, euros) },
+    })),
+  };
+
+  return <FaqContenu faqSchema={faqSchema} euros={euros} />;
+}
+
+function FaqContenu({
+  faqSchema,
+  euros,
+}: {
+  faqSchema: Record<string, unknown>;
+  euros: string;
+}) {
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-4 sm:px-6">
       <script
@@ -379,8 +404,12 @@ export default function FaqPage() {
                       </span>
                     </summary>
                     <div className={`px-5 py-4 border-t border-white/5 bg-[#0a0a0a] ${g.fond}`}>
-                      <p className="text-gray-300 text-sm md:text-base leading-relaxed">{f.a}</p>
-                      {f.lien && (
+                      <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                        {avecMontants(f.a, euros)}
+                      </p>
+                      {/* Le lien n'apparaît qu'une fois l'article réellement en ligne :
+                          un article programmé renvoie un 404 avant sa date. */}
+                      {f.lien && estPublie(f.lien.href.replace('/blog/', '')) && (
                         <Link
                           href={f.lien.href}
                           className={`inline-block mt-3.5 text-sm font-semibold ${g.texte} hover:underline transition-colors`}
@@ -430,12 +459,9 @@ export default function FaqPage() {
             Faites analyser votre profil avant de déposer.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-10">
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-8 rounded-full hover:bg-gray-200 transition-all active:scale-95"
-            >
+            <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-8 rounded-full hover:bg-gray-200 transition-all active:scale-95">
               Faire mon test d&apos;éligibilité
-            </Link>
+            </BoutonEligibilite>
             <Link
               href="/contact"
               className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-8 rounded-full hover:bg-white/5 transition-all"

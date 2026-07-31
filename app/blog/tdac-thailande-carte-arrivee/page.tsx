@@ -1,4 +1,5 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
@@ -482,9 +483,15 @@ export default function BlogArticleTdac() {
         <p className="text-gray-400 mb-8 text-sm md:text-base">
           Ne laissez pas un formulaire mal rempli ou une mauvaise synchronisation douanière gâcher votre projet d’expatriation. Nos équipes gèrent la conformité globale de votre dossier pour le Visa DTV et vous guident pas-à-pas à travers toutes les formalités d’arrivée obligatoires.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Vérifier mon éligibilité au DTV
+        <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
+          >
+            Nous contacter
           </Link>
         </div>
       </div>

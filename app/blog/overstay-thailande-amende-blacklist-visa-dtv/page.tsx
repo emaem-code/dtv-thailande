@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -655,9 +657,9 @@ export default function ArticleOverstay() {
           Un DTV coûte moins que cela sur la même durée, et il vous donne 180 jours par entrée,
           renouvelables, pendant cinq ans. J&apos;ai documenté ce calcul en détail à partir d&apos;un
           cas réel, chiffres à l&apos;appui :{' '}
-          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="cas-client-visa-dtv-soft-power-vientiane" className="text-sky-400 hover:underline font-medium">
             un client qui avait dépensé près de 5 000 € en 21 mois de visa runs
-          </Link>{' '}
+          </LienArticle>{' '}
           avant de découvrir qu&apos;il était éligible depuis le début.
         </p>
         <p className="mb-6">
@@ -760,9 +762,9 @@ export default function ArticleOverstay() {
           <p className="text-white font-semibold mb-3">Ce que le DTV supprime</p>
           <p className="text-sm text-gray-300 leading-relaxed">
             Le comptage. Vous entrez, vous obtenez 180 jours, vous vivez. Vous pouvez demander une{' '}
-            <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+            <LienArticle slug="extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
               extension de 180 jours supplémentaires
-            </Link>{' '}
+            </LienArticle>{' '}
             sur place. Vous sortez quand vous voulez et vous rentrez sur le même visa pendant cinq ans. Le calendrier et le passeport côte à côte sur
             la table, c&apos;est terminé. C&apos;est le bénéfice dont je parlais en introduction, et
             je maintiens que c&apos;est le plus sous-estimé de tous.
@@ -774,9 +776,9 @@ export default function ArticleOverstay() {
           <ul className="space-y-2 text-sm text-gray-300 leading-relaxed">
             <li>
               → Il ne vous dispense pas du{' '}
-              <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+              <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
                 rapport de 90 jours (TM47)
-              </Link>{' '}
+              </LienArticle>{' '}
               si vous restez sans sortir du pays.
             </li>
             <li>
@@ -791,9 +793,9 @@ export default function ArticleOverstay() {
             </li>
             <li>
               → Il ne vous exonère pas des{' '}
-              <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-sky-400 hover:underline font-medium">
+              <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-sky-400 hover:underline font-medium">
                 règles de résidence fiscale
-              </Link>{' '}
+              </LienArticle>{' '}
               une fois les 180 jours de présence franchis dans l&apos;année civile.
             </li>
           </ul>
@@ -1018,12 +1020,9 @@ export default function ArticleOverstay() {
           a une histoire.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300"
-          >
-            Vérifier mon éligibilité au DTV
-          </Link>
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"

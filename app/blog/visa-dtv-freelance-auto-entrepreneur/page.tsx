@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
@@ -733,17 +734,14 @@ export default function ArticleFreelanceDTV() {
           d’acceptation de nos dossiers freelance : supérieur à 95%.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300"
-          >
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
             Vérifier mon éligibilité — 2 min
-          </Link>
+          </BoutonEligibilite>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Demander un devis sur-mesure
+            Nous contacter
           </Link>
         </div>
       </div>

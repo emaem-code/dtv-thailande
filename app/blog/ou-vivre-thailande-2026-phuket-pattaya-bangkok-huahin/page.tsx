@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -974,12 +976,9 @@ export default function BlogArticleOuVivreThailande() {
           </Link>
           . Et quelle que soit la ville retenue, prévoyez la ligne budgétaire que personne
           n&apos;anticipe :{' '}
-          <Link
-            href="/blog/assurance-sante-visa-dtv-thailande"
-            className="text-amber-500 hover:underline"
-          >
+          <LienArticle slug="assurance-sante-visa-dtv-thailande" className="text-amber-500 hover:underline">
             l&apos;assurance santé
-          </Link>
+          </LienArticle>
           , environ 1 200 € par an — sans commune mesure avec le coût d&apos;une hospitalisation.
         </p>
       </section>
@@ -1053,17 +1052,14 @@ export default function BlogArticleOuVivreThailande() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Vérifier mon éligibilité — 2 min
-          </Link>
-          <Link
-            href="/blog"
-            className="inline-flex items-center justify-center bg-transparent text-white font-semibold text-sm py-4 px-7 rounded-full border border-gray-700 hover:border-gray-500 hover:bg-white/5 transition-all duration-300"
-          >
-            Voir tous nos guides
+            Nous contacter
           </Link>
         </div>
       </div>

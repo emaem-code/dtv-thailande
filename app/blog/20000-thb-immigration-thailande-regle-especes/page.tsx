@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
@@ -436,9 +438,9 @@ export default function BlogArticleImmigration20000THB() {
         </ul>
         <p>
           À l&apos;inverse, un DTV avec un billet de retour ou de continuation, une adresse en Thaïlande déclarée (TM30 en règle),{' '}
-          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
             ses rapports de 90 jours à jour
-          </Link>{' '}
+          </LienArticle>{' '}
           et quelques centaines d&apos;euros en poche coche toutes les cases du voyageur sans histoire.
         </p>
       </section>
@@ -510,9 +512,9 @@ export default function BlogArticleImmigration20000THB() {
           invoqués par le Bureau de l&apos;Immigration — les deux autres étant l&apos;absence
           d&apos;itinéraire détaillé et l&apos;historique de visa runs. Si votre passeport porte déjà
           un dépassement de séjour, même ancien, lisez{' '}
-          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-500 hover:underline font-medium">
+          <LienArticle slug="overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-500 hover:underline font-medium">
             ce qu&apos;il vaut réellement dans votre dossier
-          </Link>{' '}
+          </LienArticle>{' '}
           avant votre prochaine entrée.
         </p>
       </section>
@@ -572,11 +574,14 @@ export default function BlogArticleImmigration20000THB() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Contactez-moi
+            Nous contacter
           </Link>
         </div>
       </div>

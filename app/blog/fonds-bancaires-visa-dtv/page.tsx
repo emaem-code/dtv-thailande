@@ -1,4 +1,5 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
@@ -470,9 +471,12 @@ export default function BlogArticleDTV() {
             💡 Notre conseil : prévoyez toujours une marge de 10 à 15 %.
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            Nous conseillons à nos clients de présenter un solde minimum de{' '}
-            <strong className="text-white">14 500 € à 15 000 €</strong> pour être totalement à
-            l&apos;abri des variations monétaires.
+            Nous conseillons à nos clients de présenter un solde de{' '}
+            <strong className="text-white">15 000 à 16 000 €</strong> plutôt que la stricte
+            contre-valeur des 500 000 THB. Le seuil qui fait foi est celui en bahts, et le taux de
+            change bouge en permanence : un solde nettement au-dessus du minimum vous met à
+            l&apos;abri des variations, et il est bien mieux perçu qu&apos;un montant calculé au
+            plus juste.
           </p>
         </div>
       </section>
@@ -675,17 +679,14 @@ export default function BlogArticleDTV() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
-          >
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
             Vérifier mon éligibilité — 2 min
-          </Link>
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-transparent text-white font-semibold text-sm py-4 px-7 rounded-full border border-gray-700 hover:border-gray-500 hover:bg-white/5 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Demander un devis sur-mesure
+            Nous contacter
           </Link>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -242,9 +244,9 @@ export default function ArticleExtension180Jours() {
         <p className="mb-6">
           <strong className="text-white">Le rapport d&apos;adresse : tous les 90 jours.</strong>{' '}
           C&apos;est le{' '}
-          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
             TM47
-          </Link>
+          </LienArticle>
           , et il n&apos;a strictement aucun effet sur la durée de votre séjour. C&apos;est une
           déclaration de domicile, rien d&apos;autre.
         </p>
@@ -762,9 +764,9 @@ export default function ArticleExtension180Jours() {
             Un officier peut demander une preuve de motif ou de ressources{' '}
             <strong className="text-white">à l&apos;entrée</strong> aussi, et 2026 n&apos;est pas
             l&apos;année pour parier là-dessus :{' '}
-            <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-400 hover:underline font-medium">
+            <LienArticle slug="overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-400 hover:underline font-medium">
               29 490 personnes ont été refoulées entre janvier et mai
-            </Link>
+            </LienArticle>
             . C&apos;est rare pour un détenteur de DTV, et beaucoup plus rare qu&apos;au guichet
             d&apos;une extension, mais ce n&apos;est pas nul. Gardez sur votre téléphone votre diplôme
             ou attestation d&apos;école, et un relevé montrant vos fonds disponibles. Cela ne coûte
@@ -829,9 +831,9 @@ export default function ArticleExtension180Jours() {
         <p>
           Notez tout de même ceci : rester plus de 180 jours en Thaïlande sur une année civile a une
           autre conséquence, qui n&apos;a rien à voir avec l&apos;immigration —{' '}
-          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-sky-400 hover:underline font-medium">
             la résidence fiscale
-          </Link>
+          </LienArticle>
           .
         </p>
       </section>
@@ -973,12 +975,9 @@ export default function ArticleExtension180Jours() {
           votre dossier DTV et vous orientons sur tout ce qui vient après.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300"
-          >
-            Vérifier mon éligibilité au DTV
-          </Link>
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"

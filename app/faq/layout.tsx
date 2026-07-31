@@ -1,4 +1,6 @@
+import React from 'react';
 import { Metadata } from 'next';
+import SiteHeader from '../components/SiteHeader';
 
 // ─── MÉTADONNÉES DE LA FAQ (GÉRÉES ICI CAR LA PAGE EST UN COMPOSANT CLIENT) ───
 export const metadata: Metadata = {
@@ -24,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <SiteHeader />
+      {children}
+    </>
+  );
 }

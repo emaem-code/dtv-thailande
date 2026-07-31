@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
@@ -382,16 +384,16 @@ export default function ArticleFinExemption() {
           Et si la tentation de « laisser filer » quelques jours au-delà du tampon vous a déjà
           traversé l&apos;esprit, sachez que la sanction ne dépend pas de la durée du dépassement mais
           de la manière dont il se termine :{' '}
-          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-amber-400 hover:underline font-medium">
+          <LienArticle slug="overstay-thailande-amende-blacklist-visa-dtv" className="text-amber-400 hover:underline font-medium">
             le barème officiel de l&apos;overstay, amendes et interdictions
-          </Link>
+          </LienArticle>
           .
         </p>
         <p className="mt-4">
           Et si vous doutez encore de la rentabilité de l&apos;opération, lisez{' '}
-          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-amber-400 hover:underline font-medium">
+          <LienArticle slug="cas-client-visa-dtv-soft-power-vientiane" className="text-amber-400 hover:underline font-medium">
             le cas de ce client qui a dépensé 5 000 € en 21 mois de visa runs
-          </Link>{' '}
+          </LienArticle>{' '}
           avant d&apos;obtenir son DTV en trois jours.
         </p>
       </section>
@@ -460,11 +462,14 @@ export default function ArticleFinExemption() {
           L'immigration thaïlandaise ferme progressivement toutes les failles. Passez au Visa DTV de 5 ans en nous déléguant la constitution de votre dossier consulaire. Moins de stress, 100% de légalité.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Tester mon éligibilité au DTV
-          </Link>
-          <Link href="/contact" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
-            Prendre rendez-vous avec l'agence
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
+          >
+            Nous contacter
           </Link>
         </div>
       </div>

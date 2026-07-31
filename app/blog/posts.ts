@@ -291,6 +291,17 @@ export function getBlogPost(slug: string): BlogPost {
   return post;
 }
 
+/**
+ * Un article programmé renvoie un 404 tant que sa date n'est pas atteinte.
+ * Cette fonction permet de n'afficher un lien vers lui qu'une fois publié :
+ * le lien apparaît alors tout seul, sans intervention.
+ */
+export function estPublie(slug: string): boolean {
+  const post = blogPosts.find((item) => item.slug === slug);
+  if (!post) return false;
+  return new Date(post.publishedAt) <= new Date();
+}
+
 export function absoluteUrl(path: string): string {
   return new URL(path, baseUrl).toString();
 }

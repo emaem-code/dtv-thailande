@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { getSortedBlogPosts } from '../blog/posts';
+import MontantFonds from './MontantFonds';
+import { MARGE_CONSEILLEE } from '../lib/taux';
 
 // ─── FAQ : source unique, sert à l'affichage ET au balisage JSON-LD ───
 export const homeFaqs = [
   {
     category: 'Finances & Épargne',
     q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-    a: "Non. L'administration exige de prouver la liquidité de 500 000 THB (env. 14 500 €) uniquement lors de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est pas bloqué, mais votre historique des 3 à 6 derniers mois sera scruté à la loupe avant le dépôt pour éviter tout refus lié à des fluctuations.",
+    a: "Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est pas bloqué, mais votre historique des 3 à 6 derniers mois sera scruté à la loupe avant le dépôt pour éviter tout refus lié à des fluctuations. Prévoyez 15 000 à 16 000 € plutôt que le strict minimum : le taux de change fluctue, et un solde confortable est mieux perçu.",
   },
   {
     category: 'Finances & Épargne',
@@ -152,14 +154,22 @@ export default function HomeContent() {
           {[
             { chiffre: '5 ans', label: 'de validité, entrées multiples' },
             { chiffre: '180 jours', label: 'de séjour par entrée, extensibles' },
-            { chiffre: '500 000 THB', label: 'd’épargne à justifier (≈ 14 500 €)' },
+            { chiffre: '500 000 THB', label: 'd’épargne à justifier', euros: true },
           ].map((item) => (
             <div
               key={item.chiffre}
               className="bg-[#111111] border border-white/10 rounded-2xl p-5 text-center"
             >
               <p className="text-2xl font-black text-amber-500 mb-1">{item.chiffre}</p>
-              <p className="text-xs text-gray-500 leading-snug">{item.label}</p>
+              <p className="text-xs text-gray-500 leading-snug">
+                {item.label}
+                {item.euros && (
+                  <>
+                    {' '}
+                    (<MontantFonds />)
+                  </>
+                )}
+              </p>
             </div>
           ))}
         </div>
@@ -194,16 +204,26 @@ export default function HomeContent() {
           ))}
         </div>
 
-        <p className="mt-6 text-sm">
-          Dans les trois cas, vous devrez justifier l&apos;équivalent de{' '}
-          <Link
-            href="/blog/fonds-bancaires-visa-dtv"
-            className="text-amber-500 hover:underline font-medium"
-          >
-            500 000 THB d&apos;épargne disponible
-          </Link>{' '}
-          — une somme qui n&apos;est jamais bloquée, mais dont l&apos;historique est examiné.
-        </p>
+        <div className="mt-6 bg-[#111111] border border-white/10 rounded-2xl p-5">
+          <p className="text-sm mb-3">
+            Dans les trois cas, vous devrez justifier{' '}
+            <Link
+              href="/blog/fonds-bancaires-visa-dtv"
+              className="text-amber-500 hover:underline font-medium"
+            >
+              500 000 THB d&apos;épargne disponible
+            </Link>{' '}
+            — soit <MontantFonds prefixe="environ " /> au cours du jour. Une somme qui n&apos;est
+            jamais bloquée, mais dont l&apos;historique est examiné.
+          </p>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            <strong className="text-gray-300">Notre conseil :</strong> prévoyez plutôt{' '}
+            <strong className="text-white">{MARGE_CONSEILLEE}</strong>. Le seuil qui fait foi est
+            celui en bahts, et le taux de change bouge en permanence — présenter un solde
+            nettement au-dessus du minimum est aussi bien mieux perçu par l&apos;officier
+            consulaire qu&apos;un montant calculé au plus juste.
+          </p>
+        </div>
       </section>
 
       {/* ── MÉTHODE ── */}
@@ -240,17 +260,54 @@ export default function HomeContent() {
           Nos formules et nos tarifs
         </h2>
         <p className="mb-8">
-          Nos prix sont publics. La colonne Soft Power inclut les frais d&apos;inscription à
-          l&apos;école certifiée, ce qui explique l&apos;écart.
+          Nos prix sont publics et dépendent uniquement de la{' '}
+          <strong className="text-white">voie d&apos;éligibilité</strong> par laquelle vous obtenez
+          le visa. La colonne Soft Power inclut les frais d&apos;inscription à l&apos;école
+          certifiée, ce qui explique l&apos;écart.
         </p>
 
-        <div className="overflow-x-auto rounded-2xl border border-white/10">
-          <table className="w-full min-w-[460px] text-sm">
+        {/* ── MOBILE : une carte par formule, les deux prix côte à côte ── */}
+        <div className="md:hidden space-y-3">
+          {formules.map((f) => (
+            <div
+              key={f.nom}
+              className={`rounded-2xl border p-5 ${
+                f.vedette ? 'border-amber-500/30 bg-amber-500/5' : 'border-white/10 bg-[#111111]'
+              }`}
+            >
+              <p className={`font-bold text-base ${f.vedette ? 'text-amber-500' : 'text-white'}`}>
+                {f.nom}
+              </p>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">{f.desc}</p>
+
+              <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/10">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">
+                    Télétravail
+                  </p>
+                  <p className="text-lg font-black text-white">{f.standard}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-amber-500/70 font-bold mb-1">
+                    Soft Power
+                  </p>
+                  <p className="text-lg font-black text-amber-500">{f.softPower}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── ORDINATEUR : tableau comparatif ── */}
+        <div className="hidden md:block rounded-2xl border border-white/10 overflow-hidden">
+          <table className="w-full text-sm">
             <thead>
               <tr className="bg-[#111111] border-b border-white/10">
                 <th className="text-left px-5 py-4 text-gray-400 font-semibold">Formule</th>
-                <th className="text-left px-5 py-4 text-gray-400 font-semibold">Télétravail / Famille</th>
-                <th className="text-left px-5 py-4 text-amber-500 font-semibold">Soft Power</th>
+                <th className="text-left px-5 py-4 text-gray-400 font-semibold">
+                  Voie télétravail ou freelance
+                </th>
+                <th className="text-left px-5 py-4 text-amber-500 font-semibold">Voie Soft Power</th>
               </tr>
             </thead>
             <tbody>
@@ -274,6 +331,19 @@ export default function HomeContent() {
             </tbody>
           </table>
         </div>
+
+        <div className="mt-5 bg-[#111111] border border-white/10 rounded-2xl p-5">
+          <p className="text-white font-semibold text-sm mb-2">Et si vous partez en famille ?</p>
+          <p className="text-sm leading-relaxed">
+            Le fait de partir seul, en couple ou avec des enfants{' '}
+            <strong className="text-white">ne change pas le tarif</strong>. Chaque personne dépose
+            son propre dossier et relève de sa propre voie d&apos;éligibilité : un conjoint qui suit
+            un cursus Soft Power sera au tarif Soft Power, un conjoint télétravailleur au tarif
+            correspondant. Nous établissons un devis global quand plusieurs dossiers sont montés
+            ensemble.
+          </p>
+        </div>
+
         <p className="mt-4 text-xs text-gray-500">
           Tarifs à partir de, hors frais de visa d&apos;entrée du pays de dépôt le cas échéant.
         </p>

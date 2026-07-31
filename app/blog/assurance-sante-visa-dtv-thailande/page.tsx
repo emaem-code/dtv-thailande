@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -655,9 +657,9 @@ export default function ArticleAssuranceSante() {
         <p>
           Et si votre installation se prolonge au-delà de six mois, pensez à anticiper l&apos;autre
           sujet que personne n&apos;aborde :{' '}
-          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-rose-400 hover:underline font-medium">
+          <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-rose-400 hover:underline font-medium">
             la résidence fiscale au-delà de 180 jours
-          </Link>
+          </LienArticle>
           .
         </p>
       </section>
@@ -731,10 +733,13 @@ export default function ArticleAssuranceSante() {
           étape. Nous montons votre dossier DTV et vous orientons sur tout ce qui vient après.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link href="/" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Vérifier mon éligibilité au DTV
-          </Link>
-          <Link href="/contact" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
+          >
             Nous contacter
           </Link>
         </div>

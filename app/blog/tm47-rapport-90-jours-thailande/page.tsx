@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -284,9 +286,9 @@ export default function BlogArticleTm47() {
         </div>
         <p className="mt-6">
           Et ne le confondez pas non plus avec{' '}
-          <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
             l&apos;extension de 180 jours
-          </Link>
+          </LienArticle>
           , qui est la seule des trois démarches à modifier réellement la durée de votre séjour
           autorisé.
         </p>
@@ -295,10 +297,10 @@ export default function BlogArticleTm47() {
           n&apos;est <strong className="text-white">pas</strong> un dépassement de séjour. Le premier
           est un rapport de présence oublié, le second un séjour devenu irrégulier — et les deux
           n&apos;ont ni la même amende ni les mêmes conséquences.{' '}
-          <Link href="/blog/overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="overstay-thailande-amende-blacklist-visa-dtv" className="text-sky-400 hover:underline font-medium">
             Le barème de l&apos;overstay, lui, va jusqu&apos;à dix ans d&apos;interdiction du
             territoire
-          </Link>
+          </LienArticle>
           .
         </p>
       </section>
@@ -473,9 +475,9 @@ export default function BlogArticleTm47() {
           Conséquence pratique : exigez le reçu du TM30 de votre propriétaire
           dès la signature du bail. Sans ce document, vous serez bloqué non
           seulement pour le TM47, mais aussi pour votre{' '}
-          <Link href="/blog/extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+          <LienArticle slug="extension-180-jours-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
             extension de 180 jours
-          </Link>
+          </LienArticle>
           .
         </p>
       </section>
@@ -844,12 +846,9 @@ export default function BlogArticleTm47() {
         </p>
         <ul className="space-y-3 list-none pl-0">
           <li>
-            <Link
-              href="/blog/fiscalite-thailande-expatries-residence-fiscale"
-              className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors"
-            >
+            <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors">
               → Fiscalité : ce qui se passe vraiment après 180 jours de présence
-            </Link>
+            </LienArticle>
           </li>
           <li>
             <Link
@@ -923,17 +922,14 @@ export default function BlogArticleTm47() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Vérifier mon éligibilité — 2 min
-          </Link>
-          <Link
-            href="/blog"
-            className="inline-flex items-center justify-center bg-transparent text-white font-semibold text-sm py-4 px-7 rounded-full border border-gray-700 hover:border-gray-500 hover:bg-white/5 transition-all duration-300"
-          >
-            Voir tous nos guides
+            Nous contacter
           </Link>
         </div>
       </div>

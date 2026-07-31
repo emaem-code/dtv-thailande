@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
@@ -180,9 +182,9 @@ export default function BlogArticleSoftPower() {
           </Link>{' '}
           situe le DTV face au LTR, au Non-ED et au METV. Et pour voir ce que donne cette voie sur un
           cas réel, lisez{' '}
-          <Link href="/blog/cas-client-visa-dtv-soft-power-vientiane" className="text-orange-500 hover:underline font-medium">
+          <LienArticle slug="cas-client-visa-dtv-soft-power-vientiane" className="text-orange-500 hover:underline font-medium">
             le parcours d&apos;un client sans revenus réguliers
-          </Link>{' '}
+          </LienArticle>{' '}
           qui a obtenu son visa en trois jours à Vientiane.
         </p>
         <p className="text-white font-medium border-l-4 border-orange-500 pl-5 py-1">
@@ -672,17 +674,14 @@ export default function BlogArticleSoftPower() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
-          >
-            Faire mon test d'éligibilité
-          </Link>
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-transparent text-white font-semibold text-sm py-4 px-7 rounded-full border border-gray-700 hover:border-gray-500 hover:bg-white/5 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Réserver mon accompagnement Soft Power
+            Nous contacter
           </Link>
         </div>
       </div>

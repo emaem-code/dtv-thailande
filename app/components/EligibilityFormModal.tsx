@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useModalA11y } from './useModalA11y';
+import MontantFonds from './MontantFonds';
 
 interface EligibilityFormModalProps {
   isOpen: boolean;
@@ -188,7 +189,7 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
           {step === 1 && (
             <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
               <div className="space-y-3">
-                <label className="text-white font-bold text-lg">1. Disposez-vous de l'équivalent de 500 000 THB (≈ 14 500 €) d'épargne ? <span className="text-amber-500">*</span></label>
+                <label className="text-white font-bold text-lg">1. Disposez-vous de l&apos;équivalent de 500 000 THB (<MontantFonds prefixe="" />) d&apos;épargne ? <span className="text-amber-500">*</span></label>
                 <div className="grid grid-cols-1 gap-3">
                   <RadioCard label="Oui, sur un compte accessible" field="funds" value="yes" />
                   <RadioCard label="Pas encore, mais je m'organise pour les avoir bientôt" field="funds" value="soon" />

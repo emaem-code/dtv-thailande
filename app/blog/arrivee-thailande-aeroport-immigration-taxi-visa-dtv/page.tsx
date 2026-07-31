@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import Image from 'next/image';
 import BlogNavigation from '../../components/BlogNavigation';
 import {
@@ -355,9 +357,9 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           <li>
             <strong className="text-white">Arriver sans assurance santé :</strong> le DTV n&apos;en
             exige aucune, mais une fracture soignée dans le privé coûte plusieurs milliers d&apos;euros.{' '}
-            <Link href="/blog/assurance-sante-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
+            <LienArticle slug="assurance-sante-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
               Notre guide de l&apos;assurance santé
-            </Link>{' '}
+            </LienArticle>{' '}
             détaille les coûts réels et l&apos;exclusion deux-roues.
           </li>
         </ol>
@@ -377,9 +379,9 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           <li>
             <strong className="text-white">Impact sur le DTV :</strong> sans reçu TM30, l&apos;immigration
             peut refuser votre{' '}
-            <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
+            <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-sky-400 hover:underline font-medium">
               rapport de 90 jours (TM47)
-            </Link>{' '}
+            </LienArticle>{' '}
             ou votre extension de 180 jours.
           </li>
           <li>
@@ -456,11 +458,14 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           vérifier votre dossier avant le départ et sécuriser vos premières démarches en Thaïlande.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
-          <Link href="/contact" className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 transition-all duration-300">
-            Faire auditer mon arrivée
-          </Link>
-          <Link href="/" className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300">
-            Découvrir notre accompagnement
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
+          >
+            Nous contacter
           </Link>
         </div>
       </div>

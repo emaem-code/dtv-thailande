@@ -1,4 +1,6 @@
 import React from 'react';
+import BoutonEligibilite from '../../components/BoutonEligibilite';
+import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
@@ -437,13 +439,13 @@ export default function BlogArticlePaiements() {
         </p>
         <p>
           Retenez simplement : la simplicité de paiement s'accompagne d'une transparence totale vis-à-vis de l'administration thaïlandaise. Le seuil des 180 jours est d'ailleurs le même que celui qui conditionne{' '}
-          <Link href="/blog/tm47-rapport-90-jours-thailande" className="text-teal-400 hover:underline font-medium">
+          <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-teal-400 hover:underline font-medium">
             vos obligations déclaratives sur place
-          </Link>
+          </LienArticle>
           . Nous détaillons l&apos;ensemble du sujet dans notre{' '}
-          <Link href="/blog/fiscalite-thailande-expatries-residence-fiscale" className="text-teal-400 hover:underline font-medium">
+          <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-teal-400 hover:underline font-medium">
             guide de la fiscalité en Thaïlande après 180 jours
-          </Link>
+          </LienArticle>
           .
         </p>
       </section>
@@ -543,11 +545,14 @@ export default function BlogArticlePaiements() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+          <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
+            Vérifier mon éligibilité — 2 min
+          </BoutonEligibilite>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300"
+            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Contactez-moi
+            Nous contacter
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import FloatingCTA from './components/FloatingCTA';
+import ModalesProvider from './components/ModalesProvider';
 
 // ─── MÉTADONNÉES ULTRA-OPTIMISÉES (RÈGLE TOUT L'AUDIT CODEX) ──────────────────
 export const metadata: Metadata = {
@@ -71,9 +72,14 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-black text-white antialiased font-sans">
-        {children}
-        {/* LE BOUTON FLOTTANT INJECTÉ SUR TOUTES LES PAGES (Sauf l'accueil grâce à son code interne) */}
-        <FloatingCTA />
+        {/* Les fenêtres du site sont montées ici : toutes les pages y ont accès.
+            Le bouton flottant doit être À L'INTÉRIEUR du fournisseur, sinon il
+            ne peut pas ouvrir le test d'éligibilité. */}
+        <ModalesProvider>
+          {children}
+          {/* Bouton flottant présent sur toutes les pages sauf l'accueil */}
+          <FloatingCTA />
+        </ModalesProvider>
       </body>
     </html>
   );
