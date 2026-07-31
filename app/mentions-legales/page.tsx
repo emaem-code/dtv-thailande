@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/og-image.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Mentions Légales | DTV Thaïlande',
     description: 'Mentions légales, politique de confidentialité et hébergement.',
-    images: ['/logo.png'],
+    images: ['/og-image.jpg'],
   },
 };
 

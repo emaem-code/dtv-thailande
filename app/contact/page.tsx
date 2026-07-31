@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/og-image.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contactez-nous | DTV Thaïlande',
     description: 'Prenez contact avec notre équipe pour votre dossier de Visa DTV.',
-    images: ['/logo.png'],
+    images: ['/og-image.jpg'],
   },
 };
 

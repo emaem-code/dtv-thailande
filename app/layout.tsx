@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
     type: 'website',
-    images: [{ url: '/logo.png' }], // Résout le manque de og:image pour les partages de l'accueil
+    images: [{ url: '/og-image.jpg' }], // Résout le manque de og:image pour les partages de l'accueil
   },
   twitter: {
     card: 'summary_large_image', // Résout le problème des Twitter Cards tronquées

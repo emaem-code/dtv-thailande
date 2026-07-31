@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     type: 'website',
     // TODO: Générer un opengraph-image.tsx ou lier une image spécifique à cette page quand les vraies miniatures seront disponibles.
-    images: [{ url: '/logo.png' }],
+    images: [{ url: '/og-image.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Blog Visa DTV Thaïlande : guides pratiques',
     description: 'Tutoriels, décryptages légaux et astuces de terrain pour réussir votre visa de 5 ans.',
-    images: ['/logo.png'], // <-- RÉSOUT L'ANOMALIE TWITTER:IMAGE
+    images: ['/og-image.jpg'], // <-- RÉSOUT L'ANOMALIE TWITTER:IMAGE
   },
 };
 
