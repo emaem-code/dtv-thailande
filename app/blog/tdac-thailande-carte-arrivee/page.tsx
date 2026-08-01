@@ -1,6 +1,7 @@
 import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('tdac-thailande-carte-arrivee'));
@@ -130,6 +131,7 @@ export default function BlogArticleTdac() {
         <p className="text-base text-gray-500 mt-4">
           Lecture : 11 min · Mis à jour : 23 Juillet 2026 · Par <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="tdac-thailande-carte-arrivee" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION CONFORME (MOTS-CLÉS DANS LES 100 PREMIERS MOTS) ── */}
@@ -495,6 +497,8 @@ export default function BlogArticleTdac() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="tdac-thailande-carte-arrivee" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

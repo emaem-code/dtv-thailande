@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import {
   createArticleMetadata,
   createArticleSchema,
@@ -111,6 +112,7 @@ export default function ArticleAssuranceSante() {
           Lecture : 12 min · Mis à jour : {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="assurance-sante-visa-dtv-thailande" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -744,6 +746,8 @@ export default function ArticleAssuranceSante() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="assurance-sante-visa-dtv-thailande" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

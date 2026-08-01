@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 export const revalidate = 600;
@@ -179,6 +180,7 @@ export default function BlogArticleTm47() {
           Publié le 4 août 2026 · Lecture : 10 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="tm47-rapport-90-jours-thailande" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -933,6 +935,8 @@ export default function BlogArticleTm47() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="tm47-rapport-90-jours-thailande" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

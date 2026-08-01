@@ -2,6 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -161,6 +162,7 @@ export default function BlogArticleImmigration20000THB() {
           Mis à jour en 2026 · Lecture : 8 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="20000-thb-immigration-thailande-regle-especes" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -585,6 +587,8 @@ export default function BlogArticleImmigration20000THB() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="20000-thb-immigration-thailande-regle-especes" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

@@ -1,6 +1,7 @@
 import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fonds-bancaires-visa-dtv'));
@@ -202,6 +203,7 @@ export default function BlogArticleDTV() {
           Mis à jour en 2026 · Lecture : 8 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="fonds-bancaires-visa-dtv" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -690,6 +692,8 @@ export default function BlogArticleDTV() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="fonds-bancaires-visa-dtv" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

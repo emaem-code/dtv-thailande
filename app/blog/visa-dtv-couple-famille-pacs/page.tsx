@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-famille-pacs'));
@@ -137,6 +138,7 @@ export default function ArticleDtvFamille() {
           Lecture : 15 min · Mis à jour : 17 juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="visa-dtv-couple-famille-pacs" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -469,6 +471,8 @@ export default function ArticleDtvFamille() {
           </Link>
         </div>
       </div>
+      <PartageArticle slug="visa-dtv-couple-famille-pacs" variant="fin" />
+
       <BlogNavigation variant="article-bottom" />
     </article>
   );

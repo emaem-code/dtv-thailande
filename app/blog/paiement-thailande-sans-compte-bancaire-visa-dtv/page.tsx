@@ -2,6 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -159,6 +160,7 @@ export default function BlogArticlePaiements() {
           Mis à jour en 2026 · Lecture : 10 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="paiement-thailande-sans-compte-bancaire-visa-dtv" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -556,6 +558,8 @@ export default function BlogArticlePaiements() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="paiement-thailande-sans-compte-bancaire-visa-dtv" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

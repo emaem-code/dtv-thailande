@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import {
   createArticleMetadata,
   createArticleSchema,
@@ -103,6 +104,7 @@ export default function ArticleCasClient() {
           Lecture : 9 min · Publié le {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="cas-client-visa-dtv-soft-power-vientiane" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -606,6 +608,8 @@ export default function ArticleCasClient() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="cas-client-visa-dtv-soft-power-vientiane" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

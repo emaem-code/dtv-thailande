@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-freelance-auto-entrepreneur'));
@@ -135,6 +136,7 @@ export default function ArticleFreelanceDTV() {
           Lecture : 11 min · Mis à jour : 11 Juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="visa-dtv-freelance-auto-entrepreneur" variant="entete" />
       </header>
 
       {/* ── ALERTE INTRO ── */}
@@ -745,6 +747,8 @@ export default function ArticleFreelanceDTV() {
           </Link>
         </div>
       </div>
+      <PartageArticle slug="visa-dtv-freelance-auto-entrepreneur" variant="fin" />
+
       <BlogNavigation variant="article-bottom" />
     </article>
   );

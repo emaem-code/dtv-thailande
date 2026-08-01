@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('comparatif-visas-thailande'));
@@ -138,6 +139,7 @@ export default function ArticleComparatifVisas() {
           Lecture : 12 min · Mis à jour : 19 juin 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="comparatif-visas-thailande" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -408,6 +410,8 @@ revenus mensuels.</p>
           </Link>
         </div>
       </div>
+      <PartageArticle slug="comparatif-visas-thailande" variant="fin" />
+
       <BlogNavigation variant="article-bottom" />
     </article>
   );

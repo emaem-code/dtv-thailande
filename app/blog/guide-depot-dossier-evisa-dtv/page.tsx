@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const post = getBlogPost('guide-depot-dossier-evisa-dtv');
@@ -136,6 +137,7 @@ export default function EVisaGuidePage() {
           Lecture : 10 min · Mis à jour : {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="guide-depot-dossier-evisa-dtv" variant="entete" />
       </header>
 
       <section className="mb-12 space-y-5 text-lg text-gray-400">
@@ -438,6 +440,8 @@ export default function EVisaGuidePage() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="guide-depot-dossier-evisa-dtv" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

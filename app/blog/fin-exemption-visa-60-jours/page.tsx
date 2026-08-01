@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fin-exemption-visa-60-jours'));
@@ -132,6 +133,7 @@ export default function ArticleFinExemption() {
           Lecture : 12 min · Mis à jour : 26 juillet 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="fin-exemption-visa-60-jours" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION (MOTS-CLÉS OPTIMISÉS DANS LES 100 PREMIERS MOTS) ── */}
@@ -473,6 +475,8 @@ export default function ArticleFinExemption() {
           </Link>
         </div>
       </div>
+      <PartageArticle slug="fin-exemption-visa-60-jours" variant="fin" />
+
       <BlogNavigation variant="article-bottom" />
     </article>
   );

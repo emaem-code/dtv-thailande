@@ -6,6 +6,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 export const revalidate = 600;
@@ -223,6 +224,7 @@ export default function BlogArticleOuVivreThailande() {
           Publié le 28 juillet 2026 · Lecture : 12 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -1063,6 +1065,8 @@ export default function BlogArticleOuVivreThailande() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

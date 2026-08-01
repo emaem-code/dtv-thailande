@@ -2,6 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-soft-power-ecoles'));
@@ -154,6 +155,7 @@ export default function BlogArticleSoftPower() {
           Lecture : 9 min · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="visa-dtv-soft-power-ecoles" variant="entete" />
       </header>
 
      {/* ── INTRODUCTION ── */}
@@ -685,6 +687,8 @@ export default function BlogArticleSoftPower() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="visa-dtv-soft-power-ecoles" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

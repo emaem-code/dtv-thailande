@@ -3,6 +3,7 @@ import BoutonEligibilite from '../../components/BoutonEligibilite';
 import LienArticle from '../../components/LienArticle';
 import Image from 'next/image';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import {
   createArticleMetadata,
   createArticleSchema,
@@ -77,6 +78,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           Lecture : 11 min · Mis à jour : {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="arrivee-thailande-aeroport-immigration-taxi-visa-dtv" variant="entete" />
       </header>
 
       <div className="text-lg text-gray-400 mb-12 space-y-5">
@@ -469,6 +471,8 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="arrivee-thailande-aeroport-immigration-taxi-visa-dtv" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>

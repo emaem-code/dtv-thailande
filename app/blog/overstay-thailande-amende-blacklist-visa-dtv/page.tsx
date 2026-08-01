@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
+import PartageArticle from '../../components/PartageArticle';
 import {
   createArticleMetadata,
   createArticleSchema,
@@ -130,6 +131,7 @@ export default function ArticleOverstay() {
           Lecture : 13 min · Mis à jour : {post.date} · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
+        <PartageArticle slug="overstay-thailande-amende-blacklist-visa-dtv" variant="entete" />
       </header>
 
       {/* ── INTRODUCTION ── */}
@@ -1031,6 +1033,8 @@ export default function ArticleOverstay() {
           </Link>
         </div>
       </div>
+
+      <PartageArticle slug="overstay-thailande-amende-blacklist-visa-dtv" variant="fin" />
 
       <BlogNavigation variant="article-bottom" />
     </article>
