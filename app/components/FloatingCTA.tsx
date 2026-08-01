@@ -1,42 +1,47 @@
 "use client";
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { useModales } from './ModalesProvider';
+import { useApparitionAuScroll } from './useApparitionAuScroll';
 
+/**
+ * Bouton flottant d'accès au test d'éligibilité.
+ *
+ * Il n'apparaît qu'au défilement, et à des moments différents selon l'écran :
+ *
+ * — sur mobile, les boutons de l'en-tête sont repliés dans le menu, donc ce
+ *   bouton devient le seul appel à l'action permanent : il sort tôt (300 px) ;
+ * — sur ordinateur, l'en-tête est collant et son bouton reste visible en
+ *   permanence : ce bouton ferait doublon, on le retient donc bien plus
+ *   longtemps (1 200 px), le temps que le lecteur soit vraiment engagé.
+ */
 export default function FloatingCTA() {
   const pathname = usePathname();
   const { ouvrirEligibilite } = useModales();
-  const [isMounted, setIsMounted] = useState(false);
+  const passeSeuilMobile = useApparitionAuScroll(300);
+  const passeSeuilDesktop = useApparitionAuScroll(1200);
 
-  // Évite les erreurs d'hydratation entre le serveur et le client
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // On ne l'affiche pas si la page n'est pas chargée OU si on est sur l'accueil
-  if (!isMounted || pathname === '/') return null;
+  // L'accueil a son propre bandeau de prix, on n'en ajoute pas un second
+  if (pathname === '/') return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[90] animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div
+      className={`fixed bottom-5 right-5 z-[60] transition-all duration-500 ${
+        passeSeuilMobile
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-4 pointer-events-none'
+      } ${passeSeuilDesktop ? 'lg:opacity-100 lg:translate-y-0' : 'lg:opacity-0 lg:translate-y-4 lg:pointer-events-none'}`}
+    >
       <button
         onClick={ouvrirEligibilite}
-        className="group relative flex items-center gap-3 bg-black/80 backdrop-blur-xl border border-amber-500/30 p-1.5 pr-5 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.6)] hover:border-amber-500/60 transition-all duration-300 hover:scale-105 active:scale-95"
+        className="group flex items-center gap-2.5 bg-white text-black pl-3.5 pr-5 py-3 rounded-full font-bold text-sm shadow-[0_10px_35px_rgba(0,0,0,0.6)] ring-1 ring-black/10 hover:bg-amber-400 active:scale-95 transition-all duration-300"
       >
-        <div className="flex items-center justify-center w-10 h-10 bg-amber-500 text-black rounded-full shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-          {/* Icône de validation : on ouvre le test, on ne renvoie plus à l'accueil */}
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <div className="flex flex-col justify-center text-left">
-          <span className="text-white text-sm font-bold tracking-wide group-hover:text-amber-400 transition-colors leading-tight">
-            Vérifier mon éligibilité
-          </span>
-          <span className="text-gray-400 text-[10px] uppercase tracking-wider font-semibold">
-            2 minutes, sans engagement
-          </span>
-        </div>
+        <svg className="w-4 h-4 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span className="whitespace-nowrap">
+          Tester mon éligibilité
+        </span>
       </button>
     </div>
   );

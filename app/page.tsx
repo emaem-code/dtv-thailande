@@ -7,6 +7,7 @@ import Image from "next/image";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import HomeContent from "./components/HomeContent";
 import SiteHeader from "./components/SiteHeader";
+import { useApparitionAuScroll } from "./components/useApparitionAuScroll";
 import { useModales } from "./components/ModalesProvider";
 import { getSortedBlogPosts } from "./blog/posts";
 
@@ -346,9 +347,11 @@ export default function Home() {
 
   // Fenêtres et menu mobile : gérés à la racine du site (ModalesProvider).
   const { ouvrirGuide, ouvrirEligibilite, ouvrirMethode } = useModales();
+  // Le bandeau de prix ne sort qu'une fois le hero dépassé
+  const bandeauVisible = useApparitionAuScroll(520);
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-48 md:pb-56">
+    <div className="min-h-screen w-full bg-[#0a0a0a] text-white flex flex-col font-sans selection:bg-amber-500/30 relative overflow-x-hidden pb-24 md:pb-28">
 
 
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
@@ -391,31 +394,25 @@ export default function Home() {
         <span className="text-xs text-gray-700 mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande.</span>
       </footer>
 
-      {/* DOCK FLOTTANT DU PRIX (Centré par rapport au contenu sur Desktop) */}
-      <div className="fixed bottom-3 md:bottom-8 left-0 w-full flex justify-center z-50 px-3 pointer-events-none">
-        <div className="relative flex flex-col items-center gap-1.5 md:gap-3 pointer-events-auto bg-black/70 backdrop-blur-2xl rounded-[2rem] px-5 pt-3 pb-3 md:px-8 md:pt-5 md:pb-5 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
-
-          <div className="text-center pointer-events-none">
-            <p className="text-gray-200 text-xs md:text-sm font-medium tracking-wide">
-              Accompagnement clé en main · <span className="text-white font-bold">à partir de 850 €</span>
-            </p>
-            <p className="text-gray-400 text-[10px] md:text-xs tracking-wide mt-1">
-              Frais de visa, traductions et honoraires d&apos;agence inclus
-            </p>
-          </div>
-
-          <div className="relative group w-full mt-2">
-            <div className="absolute inset-0 bg-white/20 rounded-full blur-lg animate-pulse" />
-            <div className="relative bg-black/40 backdrop-blur-xl p-1 md:p-1.5 rounded-full border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 hover:scale-105">
-              <button
-                onClick={ouvrirEligibilite}
-                className="w-full bg-white text-black px-6 py-3 md:px-8 md:py-3.5 rounded-full font-bold text-[13px] md:text-base hover:bg-gray-200 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] whitespace-nowrap"
-              >
-                Vérifier mon éligibilité — 2 min
-              </button>
-            </div>
-          </div>
-
+      {/* ── BANDEAU DE PRIX FLOTTANT ──
+          Masqué en haut de page : le hero porte déjà le même bouton, et
+          l'en-tête collant en porte un troisième. Il n'apparaît qu'une fois
+          le hero dépassé, sur une seule ligne. */}
+      <div
+        className={`fixed bottom-4 md:bottom-6 left-0 w-full flex justify-center z-[60] px-3 pointer-events-none transition-all duration-500 ${
+          bandeauVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <div className="pointer-events-auto flex items-center gap-3 md:gap-5 bg-black/80 backdrop-blur-2xl rounded-full pl-5 pr-2 py-2 border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <p className="hidden sm:block text-gray-300 text-xs md:text-sm font-medium whitespace-nowrap">
+            Clé en main · <span className="text-white font-bold">dès 850 €</span>
+          </p>
+          <button
+            onClick={ouvrirEligibilite}
+            className="bg-white text-black px-5 py-2.5 md:px-6 md:py-3 rounded-full font-bold text-[13px] md:text-sm hover:bg-amber-400 active:scale-95 transition-all duration-300 whitespace-nowrap"
+          >
+            Vérifier mon éligibilité — 2 min
+          </button>
         </div>
       </div>
 
