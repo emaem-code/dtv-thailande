@@ -22,6 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // Page de conversion : c'est la destination que l'on partage par e-mail
+      // aux prospects, et la cible des requêtes « suis-je éligible au DTV ».
+      url: `${baseUrl}/eligibilite`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'yearly',

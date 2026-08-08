@@ -1,9 +1,10 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import DtvGuideModal from './DtvGuideModal';
 import EligibilityFormModal from './EligibilityFormModal';
 import ProcessModal from './ProcessModal';
+import { capterAttribution } from '../lib/attribution';
 
 /**
  * Les trois fenêtres du site — guide, test d'éligibilité, méthode — sont
@@ -31,6 +32,12 @@ export default function ModalesProvider({ children }: { children: React.ReactNod
   const [guide, setGuide] = useState(false);
   const [eligibilite, setEligibilite] = useState(false);
   const [methode, setMethode] = useState(false);
+
+  // Ce fournisseur est monté à la racine, donc sur la toute première page vue :
+  // c'est le seul endroit d'où l'on voit le référent d'origine du visiteur.
+  useEffect(() => {
+    capterAttribution();
+  }, []);
 
   return (
     <Contexte.Provider
