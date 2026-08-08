@@ -94,7 +94,7 @@ const voies = [
     bord: 'border-fuchsia-500/25',
     desc: "Vous partez à deux, ou avec vos enfants. La règle est stricte et mal connue : seul le mariage civil ouvre le statut d'accompagnant. Le PACS et le concubinage imposent une autre stratégie, parfaitement légale mais qui se prépare en amont.",
     lien: '/blog/visa-dtv-couple-famille-pacs',
-    ancre: 'PACS, mariage et enfants',
+    ancre: 'Conjoint et enfants accompagnants',
   },
 ];
 

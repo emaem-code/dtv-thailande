@@ -11,16 +11,16 @@ const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-fam
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV Famille : PACS, mariage et enfants",
+  title: "Visa DTV famille : conjoint et enfants accompagnants",
   description:
-    "Le guide légal pour s'expatrier en Thaïlande en famille (Visa DTV). Reconnaissance du PACS, concubinage, mariage civil ou homosexuel, et preuve financière des 500 000 THB par personne.",
+    "La catégorie « conjoint et enfants accompagnants » du Visa DTV : un seul compte de 500 000 THB pour toute la famille mariée. Le PACS, lui, n'ouvre aucun droit.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs',
   },
   openGraph: {
-    title: "Visa DTV Famille : PACS, mariage et enfants",
+    title: "Visa DTV famille : conjoint et enfants accompagnants",
     description:
-      "Le cadre légal de l'immigration thaïlandaise pour les familles et couples non mariés. PACS, concubinage, mariages de même sexe et montage de dossier.",
+      "Faire venir son conjoint et ses enfants avec le Visa DTV : la catégorie accompagnants, la lettre de sponsoring, et pourquoi le PACS bloque tout.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs",
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Visa DTV Famille : PACS, mariage et enfants',
-    description: 'Le cadre légal de l\'immigration thaïlandaise pour les familles et couples non mariés.',
+    title: 'Visa DTV famille : conjoint et enfants accompagnants',
+    description: 'Un seul compte de 500 000 THB suffit pour une famille mariée. Le PACS, lui, n\'ouvre aucun droit.',
     images: ['/images/blog/visa-dtv-couple-famille-pacs.jpg'],
   },
 };
@@ -43,9 +43,9 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": "https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs",
   },
-  "headline": "Obtenir le Visa DTV en Famille ou en Couple : PACS, Mariage et Enfants",
+  "headline": "Visa DTV en famille : faire venir son conjoint et ses enfants accompagnants",
   "description":
-    "Le guide légal pour s'expatrier en Thaïlande en famille avec le Visa DTV. Reconnaissance du PACS, concubinage, mariage, enfants et procédure de légalisation.",
+    "La catégorie « conjoint et enfants accompagnants » du Visa DTV, la lettre de sponsoring, le compte unique de 500 000 THB, et le blocage du PACS.",
   "image": "https://dtv-thailande.fr/images/blog/visa-dtv-couple-famille-pacs.jpg",
   "author": {
     "@type": "Person",
@@ -61,7 +61,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-06-17",
+  "dateModified": "2026-08-08",
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -71,10 +71,10 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Existe-t-il un Visa DTV 'Conjoint Accompagnant' ?",
+      "name": "Existe-t-il un Visa DTV pour le conjoint accompagnant ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non. Bien que la loi autorise les conjoints et les enfants, il n'y a pas de sous-catégorie 'dépendant' automatique. Chaque membre de la famille doit formuler sa propre demande de visa DTV, payer ses frais et justifier de l'exigence financière."
+        "text": "Oui. Sur le portail de l'e-Visa thaïlandais, le motif de séjour « Spouse and Children under 20 years of age of DTV visa holder » est prévu pour le conjoint marié et les enfants de moins de 20 ans. Chacun dépose sa propre demande et paie ses propres frais, mais l'accompagnant n'a pas à justifier de 500 000 THB ni d'une activité éligible : il s'appuie sur le dossier du titulaire principal."
       }
     },
     {
@@ -98,7 +98,7 @@ const faqSchema = {
       "name": "Quelle est l'exigence financière pour une famille avec le DTV ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'exigence des 500 000 THB s'applique par demandeur, et non par foyer. Pour une famille de 4 personnes (2 adultes, 2 enfants), il faut donc prouver l'équivalent de 2 millions de THB sur un compte familial ou des comptes séparés."
+        "text": "Pour une famille mariée, un seul compte de 500 000 THB suffit : celui du titulaire principal. Le conjoint et les enfants de moins de 20 ans s'appuient dessus en tant qu'accompagnants. En revanche, un couple pacsé ou en concubinage n'entre pas dans cette catégorie : chaque adulte doit alors justifier de ses propres 500 000 THB, soit un million pour deux."
       }
     },
     {
@@ -132,10 +132,10 @@ export default function ArticleDtvFamille() {
           Stratégie Légale · Expatriation
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Obtenir le Visa DTV en Famille ou en Couple : <span className="text-fuchsia-400">PACS, Mariage et Enfants</span>
+          Visa DTV en famille : faire venir son <span className="text-fuchsia-400">conjoint et ses enfants accompagnants</span>
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 15 min · Mis à jour : 17 juin 2026 · Par{" "}
+          Lecture : 15 min · Mis à jour : 8 août 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="visa-dtv-couple-famille-pacs" variant="entete" />
@@ -147,7 +147,7 @@ export default function ArticleDtvFamille() {
           S’expatrier en Thaïlande avec le nouveau <strong>Destination Thailand Visa (DTV)</strong> représente une opportunité exceptionnelle pour les freelances, les télétravailleurs et les passionnés de culture. Cependant, lorsqu'il s'agit de partir à deux ou avec des enfants, les informations disponibles en ligne deviennent floues, voire contradictoires.
         </p>
         <p>
-          Existe-t-il vraiment un visa DTV spécifiquement conçu pour un conjoint accompagnant ? Le <strong>PACS français</strong> ou le concubinage sont-ils reconnus par l'immigration thaïlandaise ? Comment s'assurer de la conformité de son dossier familial avant le grand départ ? 
+          La bonne nouvelle d&apos;abord : la catégorie « conjoint et enfants accompagnants » existe bel et bien, et un seul compte de 500 000 THB suffit pour toute une famille mariée. La mauvaise : le <strong>PACS français</strong> n&apos;y donne aucun droit, et c&apos;est le mur contre lequel butent la plupart des couples français.
         </p>
         <p>
           Dans ce guide exhaustif, nous décryptons le cadre légal thaïlandais et vous livrons les réalités du terrain pour vous aider à préparer sereinement votre projet d'expatriation familiale en totale conformité avec la loi.
@@ -158,7 +158,7 @@ export default function ArticleDtvFamille() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de ce guide :</h2>
         <ul className="space-y-3">
-          <li><a href="#mythe-visa-conjoint" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">1. Le mythe du Visa DTV "Conjoint Accompagnant"</a></li>
+          <li><a href="#conjoint-accompagnant" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">1. La catégorie « conjoint et enfants accompagnants »</a></li>
           <li><a href="#reconnaissance-unions" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">2. Reconnaissance des unions : Votre couple est-il éligible ?</a></li>
           <li><a href="#options-non-maries" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">3. Options et stratégies pour les couples non mariés</a></li>
           <li><a href="#dtv-vs-ltr-nono" className="text-fuchsia-400 hover:text-fuchsia-300 hover:underline transition-colors text-sm md:text-base">4. DTV, LTR, Non-O : Quel visa choisir en famille ?</a></li>
@@ -168,42 +168,69 @@ export default function ArticleDtvFamille() {
       </nav>
 
       {/* ── SECTION 1 ── */}
-      <section className="mb-12" id="mythe-visa-conjoint">
+      <section className="mb-12" id="conjoint-accompagnant">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          1. Le mythe du Visa DTV "Conjoint Accompagnant"
+          1. La catégorie « conjoint et enfants accompagnants »
         </h2>
         <p className="mb-4">
-          La majorité des plateformes d'information font une erreur d'interprétation majeure concernant les dépendants. Bien que les textes officiels du gouvernement thaïlandais mentionnent l'éligibilité pour les « conjoints et enfants de moins de 20 ans », <strong>il n'existe pas de sous-catégorie de visa de dépendance automatique liée au DTV.</strong>
+          Commençons par corriger l&apos;idée la plus répandue et la plus coûteuse : non, chaque membre du foyer n&apos;a pas à justifier de ses propres 500 000 THB. <strong>Pour une famille mariée, un seul compte suffit</strong> — celui du titulaire principal.
+        </p>
+        <p className="mb-4">
+          Sur le portail officiel de l&apos;e-Visa thaïlandais, une fois le <strong>Destination Thailand Visa</strong> sélectionné, un menu déroulant demande le motif du séjour. Trois options s&apos;affichent : <em>Workcation</em>, <em>Thai Soft Power</em>, et <strong>« Spouse and Children under 20 years of age of DTV visa holder »</strong>. C&apos;est cette troisième option que coche le conjoint, et chacun des enfants de moins de 20 ans.
         </p>
         <figure className="my-8">
           <Image
             src="/images/blog/visa-dtv-famille-couple-plage.jpg"
-            alt="Famille française installée en Thaïlande avec des visas DTV individuels"
+            alt="Famille française installée en Thaïlande : le conjoint et les enfants s&apos;appuient sur le dossier du titulaire principal"
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Il n&apos;existe pas de visa DTV « conjoint accompagnant ». Chaque membre du foyer dépose son propre dossier.
+            Le conjoint et les enfants déposent chacun leur demande, mais s&apos;appuient sur le dossier financier du titulaire principal.
           </figcaption>
         </figure>
+
+        <h3 className="text-xl font-bold text-white mb-3 mt-8">Des dossiers séparés, mais un seul dossier financier</h3>
         <p className="mb-4">
-          Qu'est-ce que cela implique concrètement pour l'organisation de votre dossier ?
+          C&apos;est la nuance que tout le monde confond. Il n&apos;existe pas de formulaire « couple » ni de case « ajouter une personne à charge » : chaque membre de la famille crée sa propre demande, avec son propre passeport, et paie ses propres frais consulaires — environ 350 € par tête, sans exception pour les enfants.
         </p>
+        <p className="mb-4">
+          Mais l&apos;accompagnant, lui, <strong>n&apos;a rien à prouver de son côté</strong> : ni activité éligible, ni contrat de télétravail, ni inscription dans une école, ni épargne personnelle. Son dossier s&apos;adosse à celui du titulaire principal.
+        </p>
+
+        <h3 className="text-xl font-bold text-white mb-3 mt-8">L&apos;ordre de dépôt, qui n&apos;est pas facultatif</h3>
+        <p className="mb-4">
+          Le dossier de l&apos;accompagnant se réfère à celui du titulaire. Il faut donc déposer d&apos;abord la demande principale, récupérer son numéro de suivi — ou mieux, attendre son approbation — puis seulement créer les dossiers du conjoint et des enfants.
+        </p>
+        <p className="mb-4">
+          Déposer les deux en même temps est possible dans certains cas, mais expose à un refus pour pièce manquante si le dossier principal n&apos;est pas encore référencé. C&apos;est l&apos;erreur d&apos;enchaînement la plus fréquente, et elle coûte les frais consulaires, qui ne sont pas remboursés.
+        </p>
+
+        <h3 className="text-xl font-bold text-white mb-3 mt-8">Ce que fournit l&apos;accompagnant</h3>
         <ul className="space-y-4 mb-6">
           <li className="flex gap-3">
             <span className="text-fuchsia-500 flex-shrink-0">📌</span>
-            <span><strong className="text-white">Des procédures individuelles :</strong> Chaque membre de la famille (conjoint et enfants inclus) doit formuler sa propre demande de visa sur la plateforme officielle de l'e-Visa thaïlandais, s'acquitter des frais consulaires distincts et présenter un dossier complet et indépendant.</span>
+            <span><strong className="text-white">L&apos;acte de mariage</strong> — ou l&apos;acte de naissance pour un enfant. C&apos;est la pièce maîtresse, celle qui établit le lien. Sans elle, rien n&apos;est possible.</span>
           </li>
           <li className="flex gap-3">
             <span className="text-fuchsia-500 flex-shrink-0">📌</span>
-            <span><strong className="text-white">L'application stricte du seuil financier :</strong> C'est la règle d'or qui surprend de nombreux candidats. Le titulaire principal ne peut pas couvrir l'ensemble de son foyer avec un seul compte bancaire affichant 500 000 THB. Les exigences financières s'appliquent par demandeur.</span>
+            <span><strong className="text-white">Le relevé bancaire du titulaire principal</strong>, celui qui affiche les 500 000 THB. C&apos;est le même document, versé une seconde fois.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-fuchsia-500 flex-shrink-0">📌</span>
+            <span><strong className="text-white">Une lettre de prise en charge</strong> signée du titulaire principal, attestant qu&apos;il assume financièrement son conjoint et ses enfants pendant le séjour.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-fuchsia-500 flex-shrink-0">📌</span>
+            <span><strong className="text-white">Une copie du visa principal</strong>, ou son numéro de dossier si les demandes sont déposées de façon rapprochée.</span>
           </li>
         </ul>
+
         <div className="border border-fuchsia-500/30 bg-fuchsia-500/5 rounded-xl p-5 mt-4">
-          <p className="text-fuchsia-400 font-semibold mb-2">💡 Exemple de calcul familial :</p>
+          <p className="text-fuchsia-400 font-semibold mb-2">💡 Ce que ça change concrètement</p>
           <p className="text-gray-400 text-sm">
-            Une famille de quatre personnes (deux parents et deux enfants de moins de 20 ans) devra justifier d'une surface financière globale d'au moins <strong>2 000 000 THB (soit environ 52 000 €)</strong>, que les fonds soient répartis sur des comptes individuels ou centralisés sur un compte joint, sous réserve de prouver légalement les liens de filiation.
+            Une famille mariée de quatre personnes justifie de <strong>500 000 THB au total</strong>, soit environ 13 000 €, et non de deux millions comme on le lit souvent. En revanche, un couple pacsé devra présenter <strong>deux fois 500 000 THB</strong> — non pas parce qu&apos;il est plus nombreux, mais parce qu&apos;aux yeux de l&apos;immigration thaïlandaise il s&apos;agit de deux célibataires. C&apos;est tout l&apos;objet de la section suivante.
           </p>
         </div>
       </section>
@@ -219,13 +246,13 @@ export default function ArticleDtvFamille() {
         <figure className="my-8">
           <Image
             src="/images/blog/visa-dtv-famille-seuil-financier.jpg"
-            alt="Le seuil de 500 000 THB s&apos;applique par demandeur : 2 millions pour une famille de quatre personnes"
+            alt="Mariage reconnu : un seul compte de 500 000 THB pour toute la famille. PACS non reconnu : deux comptes exigés."
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Deux parents et deux enfants : 2 000 000 THB à justifier, soit environ 52 000 €. C&apos;est la règle qui surprend le plus.
+            Mariés : 500 000 THB pour toute la famille. Pacsés : deux fois 500 000 THB. C&apos;est le document d&apos;état civil qui fait toute la différence.
           </figcaption>
         </figure>
 
@@ -305,7 +332,7 @@ export default function ArticleDtvFamille() {
               <tr>
                 <td className="py-4 px-5 text-white font-medium">DTV (Destination Thailand Visa)</td>
                 <td className="py-4 px-5 text-gray-400">Valable 5 ans, entrées multiples, accessible aux indépendants et profils culturels.</td>
-                <td className="py-4 px-5 text-gray-400">Demande individuelle obligatoire, justification de 500 000 THB par personne.</td>
+                <td className="py-4 px-5 text-gray-400">Une demande par personne. Les 500 000 THB ne sont exigés que du titulaire principal, à condition d&apos;être marié.</td>
               </tr>
               <tr>
                 <td className="py-4 px-5 text-white font-medium">Non-O (Conjoint de résident)</td>

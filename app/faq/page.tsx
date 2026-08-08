@@ -183,7 +183,7 @@ const groupes: Groupe[] = [
       },
       {
         q: 'Faut-il justifier 500 000 THB par personne ?',
-        a: "La règle applicable au foyer prévoit un plafond global plutôt qu'une multiplication stricte par tête. Le montant exact et les conditions dépendent de la composition de la famille et du poste consulaire. C'est un point qu'il vaut mieux faire vérifier avant de constituer les dossiers, car une erreur d'appréciation entraîne un refus collectif.",
+        a: "Non, pas si vous êtes mariés. Le conjoint et les enfants de moins de 20 ans déposent en tant qu'accompagnants et s'appuient sur le compte du titulaire principal : un seul montant de 500 000 THB couvre alors tout le foyer. En revanche, un couple pacsé ou en concubinage n'entre pas dans cette catégorie, et chaque adulte doit justifier de ses propres 500 000 THB. C'est le document d'état civil qui fait toute la différence, et cela se prépare bien avant le dépôt.",
       },
     ],
   },
