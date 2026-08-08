@@ -184,9 +184,9 @@ export default function ArticleComparatifVisas() {
           <li><strong className="text-white">Contraintes :</strong> <strong>L'interdiction de travailler est absolue.</strong> Les "Visa Runs" réguliers sont obligatoires, chronophages, et <Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">de plus en plus mal vus à la frontière</Link>.</li>
         </ul>
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-4">
-          <p className="text-red-400 font-semibold mb-2">⚠️ Mise à jour avril 2026 :</p>
+          <p className="text-red-400 font-semibold mb-2">⚠️ Mise à jour août 2026 :</p>
           <p className="text-gray-400 text-sm">
-            Le Cabinet thaïlandais a approuvé en mai 2026 la réduction de l&apos;exemption touristique standard de 60 à 30 jours pour les Français — mesure qui n&apos;entrera en vigueur que 15 jours après sa publication au Journal Officiel thaïlandais (<Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">suivi à jour</Link>). Le METV gagne en attractivité pour les visiteurs fréquents, mais reste inadapté à une expatriation stable.
+            Le Cabinet thaïlandais a approuvé en mai 2026 la réduction de l&apos;exemption touristique standard de 60 à 30 jours pour les Français. <strong className="text-white">À ce jour, la mesure n&apos;a pas encore été publiée au Journal officiel thaïlandais : elle n&apos;est donc pas applicable, et l&apos;exemption de 60 jours reste en vigueur.</strong> Elle entrera en application 15 jours après cette publication (<Link href="/blog/fin-exemption-visa-60-jours" className="text-indigo-400 hover:underline font-medium">suivi à jour</Link>). Le METV gagne en attractivité pour les visiteurs fréquents, mais reste inadapté à une expatriation stable.
           </p>
         </div>
         <p className="text-amber-400 font-medium">💡 Verdict de l'expert : Parfait pour un séjour sabbatique, inadapté pour un professionnel.</p>

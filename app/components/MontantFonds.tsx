@@ -11,7 +11,19 @@ import { FONDS_THB, TAUX_SECOURS, eurosArrondis, formateEuros } from '../lib/tau
  * de repli — elle est présente dans le HTML, donc visible par Google et sans
  * décalage de mise en page — puis on l'ajuste discrètement au cours réel.
  */
-export default function MontantFonds({ prefixe = '≈ ' }: { prefixe?: string }) {
+export default function MontantFonds({
+  prefixe = '≈ ',
+  ajout = 0,
+}: {
+  prefixe?: string;
+  /**
+   * Somme ajoutée à la contre-valeur affichée, en euros.
+   * Sert aux exemples pédagogiques du type « un relevé à 50 € au-dessus du
+   * seuil » : les deux montants restent ainsi calés sur le cours du jour, au
+   * lieu de vieillir séparément dans le texte.
+   */
+  ajout?: number;
+}) {
   const [euros, setEuros] = useState(() => eurosArrondis(TAUX_SECOURS));
 
   useEffect(() => {
@@ -35,7 +47,7 @@ export default function MontantFonds({ prefixe = '≈ ' }: { prefixe?: string })
   return (
     <span title={`${FONDS_THB.toLocaleString('fr-FR')} THB au cours du jour`}>
       {prefixe}
-      {formateEuros(euros)}
+      {formateEuros(euros + ajout)}
     </span>
   );
 }

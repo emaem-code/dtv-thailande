@@ -124,7 +124,7 @@ export const blogPosts = [
     excerpt: "Pourquoi l'immigration refoule-t-elle certains voyageurs sans 20 000 bahts en espèces ? Découvrez les profils ciblés et comment éviter le tampon de refus.",
     date: '24 Juillet 2026',
     publishedAt: '2026-07-24T07:00:00Z',
-    modifiedAt: '2026-07-26T07:00:00Z',
+    modifiedAt: '2026-08-08',
     category: 'Formalités',
     tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
     hoverBorder: 'hover:border-sky-500/50',

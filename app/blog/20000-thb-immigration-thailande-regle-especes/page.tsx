@@ -57,7 +57,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-07-24T07:00:00Z",
-  "dateModified": "2026-07-24T12:00:00Z"
+  "dateModified": "2026-08-08"
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -159,7 +159,7 @@ export default function BlogArticleImmigration20000THB() {
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
-          Mis à jour en 2026 · Lecture : 8 min · Par{' '}
+          Lecture : 8 min · Mis à jour : 8 août 2026 · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="20000-thb-immigration-thailande-regle-especes" variant="entete" />
@@ -384,7 +384,7 @@ export default function BlogArticleImmigration20000THB() {
         <div className="bg-emerald-500/10 border border-emerald-500/20 p-5 rounded-xl my-6">
           <p className="text-emerald-400 font-bold mb-2">La seule stratégie fiable :</p>
           <p className="text-gray-300 text-sm">
-            Partir de France avec les espèces sur soi. Vous pouvez transporter légalement jusqu&apos;à l&apos;équivalent de 20 000 USD sans déclaration douanière. Ma recommandation terrain : 1 000 à 2 000 € en billets, dans le bagage cabine, jamais en soute.
+            Partir de France avec les espèces sur soi. Deux seuils s&apos;appliquent, et ils ne sont pas au même niveau : côté thaïlandais, vous pouvez entrer avec jusqu&apos;à l&apos;équivalent de 20 000 USD sans déclaration ; côté européen en revanche, <strong className="text-white">tout montant égal ou supérieur à 10 000 € doit être déclaré en douane au départ de l&apos;Union</strong>. Ma recommandation terrain — 1 000 à 2 000 € en billets, dans le bagage cabine, jamais en soute — reste très en dessous de l&apos;un comme de l&apos;autre.
           </p>
         </div>
       </section>

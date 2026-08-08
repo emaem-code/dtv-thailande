@@ -202,7 +202,7 @@ export default function BlogArticleDTV() {
         </h1>
 
         <p className="text-base text-gray-500 mt-4">
-          Mis à jour en 2026 · Lecture : 8 min · Par{' '}
+          Lecture : 8 min · Mis à jour : 8 août 2026 · Par{' '}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="fonds-bancaires-visa-dtv" variant="entete" />
@@ -466,14 +466,14 @@ export default function BlogArticleDTV() {
         </h2>
         <p className="mb-4">
           Une erreur fréquente consiste à viser le strict minimum. Si le taux du jour indique
-          que 500 000 THB équivalent à 12 800 €, et que vous présentez un relevé à 12 850 €,
-          vous jouez avec le feu.
+          que 500 000 THB équivalent à <MontantFonds prefixe="" />, et que vous présentez un relevé
+          à <MontantFonds prefixe="" ajout={50} />, vous jouez avec le feu.
         </p>
         <p className="mb-4">
           Le taux fluctue constamment. Entre le moment où vous imprimez votre relevé et le jour
           où l&apos;officier traite votre dossier, l&apos;euro peut baisser par rapport au baht. Si
-          l&apos;ambassade calcule ce jour-là que vos 12 850 € ne valent plus que 495 000 THB, le
-          visa est refusé pour manque de fonds.
+          l&apos;ambassade calcule ce jour-là que vos <MontantFonds prefixe="" ajout={50} /> ne
+          valent plus que 495 000 THB, le visa est refusé pour manque de fonds.
         </p>
         <div className="bg-teal-500/8 border border-teal-500/20 rounded-2xl p-5">
           <p className="text-teal-300 font-semibold text-sm">
