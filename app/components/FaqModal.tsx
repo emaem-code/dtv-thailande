@@ -18,7 +18,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     {
       category: "Finances & Épargne",
       q: "Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?",
-      a: "Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale (et lors d'éventuelles extensions locales). L'argent n'est pas bloqué, mais votre historique des 3 à 6 derniers mois sera scruté à la loupe par nos experts avant le dépôt pour éviter tout refus lié à des fluctuations."
+      a: "Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale (et lors d'éventuelles extensions locales). L'argent n'est jamais bloqué, mais votre historique des 3 derniers mois sera scruté à la loupe par nos experts avant le dépôt pour éviter tout refus lié à des fluctuations."
     },
     {
       category: "Finances & Épargne",

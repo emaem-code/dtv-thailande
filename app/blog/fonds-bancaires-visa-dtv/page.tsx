@@ -2,6 +2,8 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import MontantFonds from '../../components/MontantFonds';
+import { MARGE_CONSEILLEE } from '../../lib/taux';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fonds-bancaires-visa-dtv'));
@@ -53,7 +55,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-06-01",
-  "dateModified": "2026-06-07"
+  "dateModified": "2026-08-08"
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -217,7 +219,10 @@ export default function BlogArticleDTV() {
         <p>
           Cependant, un critère précis cristallise toutes les angoisses et sature les groupes
           d&apos;entraide : la fameuse preuve financière des{' '}
-          <strong className="text-white">500 000 Bahts (environ 13 000 €)</strong>. Pourquoi tant
+          <strong className="text-white">
+            500 000 Bahts (<MontantFonds prefixe="environ " />)
+          </strong>
+          . Pourquoi tant
           de candidats sont-ils convaincus qu&apos;il faut six mois d&apos;historique ? Un virement
           de dernière minute passe-t-il ? L&apos;ambassade de Paris est-elle vraiment plus stricte
           que celle de Vientiane ?
@@ -301,9 +306,11 @@ export default function BlogArticleDTV() {
             </svg>
           </a>
           , il vous faudra un historique bancaire irréprochable sur les{' '}
-          <strong className="text-white">3 derniers mois</strong>. Le solde ne doit à aucun moment
-          descendre sous 15 000 € sur ce trimestre — notez que Paris raisonne en euros et non en
-          bahts, ce qui vous met à l&apos;abri des variations de change.
+          <strong className="text-white">3 derniers mois</strong>, et le solde ne doit à aucun
+          moment passer sous le seuil pendant ce trimestre. Attention : ce seuil reste exprimé en
+          bahts, jamais en euros. Un compte calibré au plus juste peut donc repasser sous la barre
+          sans que vous ayez touché à votre épargne, simplement parce que le cours a bougé — c&apos;est
+          la raison pour laquelle nous recommandons une marge, détaillée en fin d&apos;article.
         </p>
         <p className="mb-5">
           La difficulté parisienne est donc ailleurs, et elle se chiffre. D&apos;abord la{' '}
@@ -372,8 +379,8 @@ export default function BlogArticleDTV() {
         </h2>
         <p className="mb-4">
           C&apos;est le <strong className="text-white">motif de refus numéro un</strong>. Vous vous
-          apprêtez à déposer votre dossier et vous demandez à un proche de vous virer 13 000 €
-          la veille de l&apos;impression de vos relevés. C&apos;est une très mauvaise idée.
+          apprêtez à déposer votre dossier et vous demandez à un proche de vous virer la somme
+          manquante la veille de l&apos;impression de vos relevés. C&apos;est une très mauvaise idée.
         </p>
         <figure className="my-8">
           <Image
@@ -408,7 +415,7 @@ export default function BlogArticleDTV() {
           4. Quels types de comptes bancaires sont acceptés ?
         </h2>
         <p className="mb-6">
-          Avoir 13 000 € est une chose, mais la manière dont ils sont stockés en est une autre.
+          Réunir la somme est une chose, mais la manière dont elle est stockée en est une autre.
           Tous les supports ne sont pas égaux aux yeux de l&apos;immigration thaïlandaise :
         </p>
         <figure className="my-8">
@@ -474,11 +481,12 @@ export default function BlogArticleDTV() {
           </p>
           <p className="text-gray-400 text-sm mt-1">
             Nous conseillons à nos clients de présenter un solde de{' '}
-            <strong className="text-white">15 000 à 16 000 €</strong> plutôt que la stricte
-            contre-valeur des 500 000 THB. Le seuil qui fait foi est celui en bahts, et le taux de
-            change bouge en permanence : un solde nettement au-dessus du minimum vous met à
-            l&apos;abri des variations, et il est bien mieux perçu qu&apos;un montant calculé au
-            plus juste.
+            <strong className="text-white">{MARGE_CONSEILLEE}</strong> plutôt que la stricte
+            contre-valeur des 500 000 THB, aujourd&apos;hui de <MontantFonds prefixe="" />. Le seuil
+            qui fait foi est celui en bahts, et le taux de change bouge en permanence : si le baht
+            se renforce, un compte à <MontantFonds prefixe="" /> repasse sous la barre sans que vous
+            ayez rien dépensé. Une marge vous met à l&apos;abri de ce basculement, et un solde
+            confortable est toujours mieux perçu qu&apos;un montant calculé au plus juste.
           </p>
         </div>
       </section>

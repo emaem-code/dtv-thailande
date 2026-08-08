@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import MontantFonds from '../../components/MontantFonds';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-freelance-auto-entrepreneur'));
@@ -55,7 +56,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-10",
-  "dateModified": "2026-06-11",
+  "dateModified": "2026-08-08",
 };
 
 // ─── SCHEMA FAQ ───────────────────────────────────────────────────────────────
@@ -133,7 +134,7 @@ export default function ArticleFreelanceDTV() {
           <strong>Obtenir le Visa DTV quand on est freelance ou auto-entrepreneur</strong> nécessite une préparation minutieuse. Vous êtes indépendant, micro-entrepreneur ou en portage salarial et vous rêvez de vous installer en Thaïlande ? L’absence de fiche de paie classique n’est pas une fatalité — c’est un dossier consulaire à construire différemment.
         </p>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 11 min · Mis à jour : 11 Juin 2026 · Par{" "}
+          Lecture : 11 min · Mis à jour : 8 août 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="visa-dtv-freelance-auto-entrepreneur" variant="entete" />
@@ -298,7 +299,7 @@ export default function ArticleFreelanceDTV() {
                   <p className="text-white font-bold mb-1">Relevés bancaires personnels (3 à 6 mois)</p>
                   <p className="text-xs font-semibold mb-2 text-emerald-400">→ Preuve de la solvabilité des 500 000 THB</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (environ 13 500 €) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
+                    C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (<MontantFonds />) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
                   </p>
                 </div>
               </div>

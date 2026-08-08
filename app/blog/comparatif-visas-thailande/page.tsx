@@ -6,6 +6,7 @@ import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import MontantFonds from '../../components/MontantFonds';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('comparatif-visas-thailande'));
@@ -62,7 +63,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-19",
-  "dateModified": "2026-06-19",
+  "dateModified": "2026-08-08",
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -136,7 +137,7 @@ export default function ArticleComparatifVisas() {
           Quel Visa Choisir pour Vivre en Thaïlande ? <span className="text-indigo-400">Le Comparatif Complet</span>
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 12 min · Mis à jour : 19 juin 2026 · Par{" "}
+          Lecture : 12 min · Mis à jour : 8 août 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="comparatif-visas-thailande" variant="entete" />
@@ -278,7 +279,7 @@ revenus mensuels.</p>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-indigo-500/50 text-gray-300 text-sm bg-indigo-500/5 p-4 rounded-r-xl">
           <li>✅ <strong className="text-white">Coût :</strong> 10 000 à 13 000 THB de frais consulaires en Asie, 350 € à l'ambassade de Paris.</li>
           <li>✅ <strong className="text-white">Durée :</strong> 5 ans (entrées multiples). Séjours de 180 jours, prolongeables à 360 jours sans quitter le pays.</li>
-          <li>✅ <strong className="text-white">Finances :</strong> Preuve de 500 000 THB (≈ 13 500 €) sur un compte (qui peut rester en France). Pas d'investissement requis.</li>
+          <li>✅ <strong className="text-white">Finances :</strong> Preuve de 500 000 THB (<MontantFonds />) sur un compte (qui peut rester en France). Pas d'investissement requis.</li>
           <li>✅ <strong className="text-white">Légalité :</strong> Autorise expressément le télétravail pour des clients hors Thaïlande sans permis de travail.</li>
         </ul>
         <p className="text-amber-400 font-medium">💡 Verdict de l'expert : La solution absolue pour les entrepreneurs du web, offrant la liberté du LTR pour le coût d'un visa classique.</p>

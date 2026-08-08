@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import MontantFonds from '../../components/MontantFonds';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-famille-pacs'));
@@ -230,7 +231,7 @@ export default function ArticleDtvFamille() {
         <div className="border border-fuchsia-500/30 bg-fuchsia-500/5 rounded-xl p-5 mt-4">
           <p className="text-fuchsia-400 font-semibold mb-2">💡 Ce que ça change concrètement</p>
           <p className="text-gray-400 text-sm">
-            Une famille mariée de quatre personnes justifie de <strong>500 000 THB au total</strong>, soit environ 13 000 €, et non de deux millions comme on le lit souvent. En revanche, un couple pacsé devra présenter <strong>deux fois 500 000 THB</strong> — non pas parce qu&apos;il est plus nombreux, mais parce qu&apos;aux yeux de l&apos;immigration thaïlandaise il s&apos;agit de deux célibataires. C&apos;est tout l&apos;objet de la section suivante.
+            Une famille mariée de quatre personnes justifie de <strong>500 000 THB au total</strong>, soit <MontantFonds prefixe="environ " />, et non de deux millions comme on le lit souvent. En revanche, un couple pacsé devra présenter <strong>deux fois 500 000 THB</strong> — non pas parce qu&apos;il est plus nombreux, mais parce qu&apos;aux yeux de l&apos;immigration thaïlandaise il s&apos;agit de deux célibataires. C&apos;est tout l&apos;objet de la section suivante.
           </p>
         </div>
       </section>
