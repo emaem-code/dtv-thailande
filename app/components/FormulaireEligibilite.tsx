@@ -76,6 +76,16 @@ const LIBELLES: Record<string, Record<string, string>> = {
     muaythai: 'Muay Thaï (9 mois)',
     unsure: 'À déterminer ensemble',
   },
+  enfantsMoins20: {
+    oui: 'Oui, tous mineurs de 20 ans',
+    non: '⚠️ Non, au moins un enfant de 20 ans ou plus',
+  },
+  formule: {
+    essentielle: 'Essentielle',
+    premium: 'Premium',
+    vip: 'VIP',
+    conseil: '❓ Ne sait pas encore — envoyer les trois formules',
+  },
   source: {
     google: 'Recherche Google',
     reseaux: 'Réseaux sociaux',
@@ -103,6 +113,11 @@ export default function FormulaireEligibilite({
 }: Props) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Choix de formule : recueilli APRÈS l'affichage des tarifs, quand le visiteur
+  // a converti et vient de découvrir les montants. C'est l'information la plus
+  // utile au chiffrage, et le moment où elle coûte le moins d'abandons.
+  const [envoiFormule, setEnvoiFormule] = useState(false);
+  const [formuleEnvoyee, setFormuleEnvoyee] = useState(false);
   const racineRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState({
@@ -122,7 +137,11 @@ export default function FormulaireEligibilite({
     villeThailande: '',
     dejaDepose: '',
     family: '',
+    adultesCount: '',
     childrenCount: '',
+    enfantsMoins20: '',
+    formule: '',
+    villeDepart: '',
     softPower: '',
     softPowerInteret: '', // un freelance peut aussi vouloir passer par une école
     translations: '',
@@ -184,7 +203,10 @@ export default function FormulaireEligibilite({
           nettoyer({
             'Type de demande': typeDeLead,
             Prénom: formData.prenom,
-            'Email du prospect': formData.email,
+            // La clé doit s'appeler exactement « email » : c'est ainsi que
+            // Formspree identifie l'adresse du prospect et renseigne l'en-tête
+            // Reply-To. Un libellé plus élégant casserait cette détection.
+            email: formData.email,
             Nationalité: nationaliteLisible(),
             'Statut Pro': lisible('job', formData.job),
             'Épargne 500 000 THB': lisible('funds', formData.funds),
@@ -247,6 +269,13 @@ export default function FormulaireEligibilite({
       err.softPowerInteret = 'Merci de répondre à cette question.';
     }
     if (!formData.family) err.family = 'Merci de préciser votre situation.';
+    else if (formData.family !== 'solo' && !formData.adultesCount) {
+      err.adultesCount = 'Merci d’indiquer le nombre d’adultes.';
+    }
+    if (formData.family === 'family') {
+      if (!formData.childrenCount) err.childrenCount = 'Merci d’indiquer le nombre d’enfants.';
+      if (!formData.enfantsMoins20) err.enfantsMoins20 = 'Merci de répondre à cette question.';
+    }
     if (formData.consentement !== 'yes') {
       err.consentement = 'Merci d’accepter l’utilisation de vos données pour établir le devis.';
     }
@@ -271,7 +300,10 @@ export default function FormulaireEligibilite({
           nettoyer({
             'Type de demande': 'Demande de devis complète',
             Prénom: formData.prenom,
-            'Email du prospect': formData.email,
+            // La clé doit s'appeler exactement « email » : c'est ainsi que
+            // Formspree identifie l'adresse du prospect et renseigne l'en-tête
+            // Reply-To. Un libellé plus élégant casserait cette détection.
+            email: formData.email,
             Téléphone: formData.telephone
               ? `${formData.telephone}${formData.whatsapp === 'yes' ? ' — joignable sur WhatsApp' : ''}`
               : '',
@@ -285,7 +317,9 @@ export default function FormulaireEligibilite({
             'Destination en Thaïlande': formData.villeThailande,
             'Antécédent de demande': lisible('dejaDepose', formData.dejaDepose),
             Expatriation: lisible('family', formData.family),
+            "Nombre d'adultes": formData.family === 'solo' ? '1' : formData.adultesCount,
             "Nombre d'enfants": formData.childrenCount,
+            'Enfants de moins de 20 ans': lisible('enfantsMoins20', formData.enfantsMoins20),
             'Voie Soft Power': formData.job === 'softpower'
               ? 'Oui (aucun revenu à distance)'
               : lisible('softPowerInteret', formData.softPowerInteret),
@@ -302,6 +336,21 @@ export default function FormulaireEligibilite({
       });
 
       if (response.ok) {
+        // Accusé de réception au prospect. Volontairement détaché du parcours :
+        // s'il échoue, le lead est déjà chez Formspree et l'écran de tarifs
+        // s'affiche quand même.
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prenom: formData.prenom,
+            email: formData.email,
+            softPower: isSoftPower,
+          }),
+        }).catch(() => {
+          /* silencieux : ne doit jamais gêner le visiteur */
+        });
+
         setStep(3);
         remonter();
       } else {
@@ -311,6 +360,49 @@ export default function FormulaireEligibilite({
       setErreurs({ envoi: 'Connexion impossible. Vérifiez votre réseau et réessayez.' });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  /**
+   * Second envoi, indépendant du premier. Si le visiteur ferme la fenêtre avant
+   * d'avoir choisi, la demande de devis reste intacte : on ne perd rien.
+   */
+  const envoyerFormule = async () => {
+    const err: Record<string, string> = {};
+    if (!formData.formule) {
+      err.formule = 'Merci de sélectionner une formule.';
+    } else if (
+      (formData.formule === 'premium' || formData.formule === 'vip') &&
+      !formData.villeDepart.trim()
+    ) {
+      err.villeDepart = 'Merci d’indiquer votre ville de départ.';
+    }
+
+    setErreurs(err);
+    if (Object.keys(err).length > 0) return;
+
+    setEnvoiFormule(true);
+    try {
+      const reponse = await fetch('https://formspree.io/f/mreyokzj', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(
+          nettoyer({
+            'Type de demande': '➕ Formule retenue — complément au dossier',
+            Prénom: formData.prenom,
+            email: formData.email,
+            'Formule retenue': lisible('formule', formData.formule),
+            'Ville de départ': formData.villeDepart,
+            'Rappel du profil': `${lisible('job', formData.job)} · ${lisible('family', formData.family)}`,
+          }),
+        ),
+      });
+      if (!reponse.ok) throw new Error('envoi refusé');
+      setFormuleEnvoyee(true);
+    } catch {
+      setErreurs({ formule: 'L’envoi a échoué. Merci de réessayer dans un instant.' });
+    } finally {
+      setEnvoiFormule(false);
     }
   };
 
@@ -728,16 +820,54 @@ export default function FormulaireEligibilite({
                 <RadioCard label="En famille (Avec enfants)" field="family" value="family" />
               </div>
               <Erreur champ="family" />
+
+              {formData.family !== '' && formData.family !== 'solo' && (
+                <div className="space-y-3 pt-2">
+                  <p className="text-xs text-gray-500 ml-1">
+                    Chaque personne dépose son propre dossier et règle ses propres frais
+                    consulaires : ces nombres nous permettent de chiffrer précisément.
+                  </p>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    placeholder="Nombre d'adultes concernés, vous compris"
+                    value={formData.adultesCount}
+                    onChange={(e) => handleChange('adultesCount', e.target.value)}
+                    className={`w-full bg-white/5 border rounded-xl px-5 py-3 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.adultesCount ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                  />
+                  <Erreur champ="adultesCount" />
+                </div>
+              )}
+
               {formData.family === 'family' && (
-                <input
-                  type="number"
-                  min={1}
-                  max={12}
-                  placeholder="Combien d'enfants à charge vous accompagnent ?"
-                  value={formData.childrenCount}
-                  onChange={(e) => handleChange('childrenCount', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 text-sm"
-                />
+                <div className="space-y-3 pt-1">
+                  <input
+                    type="number"
+                    min={1}
+                    max={12}
+                    placeholder="Combien d'enfants vous accompagnent ?"
+                    value={formData.childrenCount}
+                    onChange={(e) => handleChange('childrenCount', e.target.value)}
+                    className={`w-full bg-white/5 border rounded-xl px-5 py-3 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.childrenCount ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                  />
+                  <Erreur champ="childrenCount" />
+
+                  <p className="text-sm text-gray-400 ml-1">
+                    Ont-ils tous moins de 20 ans ?
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioCard label="Oui, tous" field="enfantsMoins20" value="oui" />
+                    <RadioCard label="Non, l'un d'eux a 20 ans ou plus" field="enfantsMoins20" value="non" />
+                  </div>
+                  {formData.enfantsMoins20 === 'non' && (
+                    <p className="text-xs text-amber-400/90 ml-1">
+                      Au-delà de 20 ans, un enfant ne relève plus de la catégorie
+                      « accompagnant » : son dossier devient autonome, avec ses propres
+                      conditions. Nous vous expliquerons ce que cela implique.
+                    </p>
+                  )}
+                </div>
               )}
             </div>
 
@@ -952,6 +1082,70 @@ export default function FormulaireEligibilite({
                 </div>
               </div>
             </div>
+
+            {/* ── CHOIX DE LA FORMULE ── */}
+            {!formuleEnvoyee ? (
+              <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
+                <div>
+                  <label className="text-white font-bold text-lg">
+                    Laquelle correspond le mieux à votre projet ?
+                  </label>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Cette réponse nous permet de vous adresser une estimation chiffrée dès notre
+                    premier message, au lieu d&apos;une simple prise de contact.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-3">
+                  <RadioCard label={`Formule Essentielle — à partir de ${priceBasic}`} field="formule" value="essentielle" />
+                  <RadioCard label={`Formule Premium — à partir de ${pricePremium}`} field="formule" value="premium" />
+                  <RadioCard label={`Formule VIP — à partir de ${priceVIP}`} field="formule" value="vip" />
+                  <RadioCard label="Je ne sais pas encore, conseillez-moi" field="formule" value="conseil" />
+                </div>
+                <Erreur champ="formule" />
+
+                {(formData.formule === 'premium' || formData.formule === 'vip') && (
+                  <div className="space-y-2 pt-1">
+                    <label className="text-sm text-gray-300 ml-1">
+                      Ces formules incluent les vols : d&apos;où partiriez-vous ?
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Paris, Lyon, Genève, Bangkok..."
+                      value={formData.villeDepart}
+                      onChange={(e) => handleChange('villeDepart', e.target.value)}
+                      className={`w-full bg-white/5 border rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.villeDepart ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                    />
+                    <Erreur champ="villeDepart" />
+                  </div>
+                )}
+
+                <button
+                  onClick={envoyerFormule}
+                  disabled={envoiFormule}
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-4 rounded-xl transition-all active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2"
+                >
+                  {envoiFormule ? (
+                    <>
+                      <span className="animate-spin text-xl">↻</span> Envoi...
+                    </>
+                  ) : (
+                    'Transmettre mon choix'
+                  )}
+                </button>
+              </div>
+            ) : (
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 text-center">
+                  <p className="text-emerald-400 font-bold text-sm mb-1">✓ C&apos;est noté</p>
+                  <p className="text-sm text-gray-300">
+                    {formData.formule === 'conseil'
+                      ? 'Nous vous adresserons les trois formules chiffrées pour votre situation, avec nos recommandations.'
+                      : 'Votre estimation chiffrée arrivera avec notre premier message.'}
+                  </p>
+                </div>
+              </div>
+            )}
 
             <div className="mt-8 text-center">
               {onClose ? (
