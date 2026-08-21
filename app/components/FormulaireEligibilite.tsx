@@ -63,6 +63,12 @@ const LIBELLES: Record<string, Record<string, string>> = {
     concubinage: 'En couple (non mariés)',
     family: 'En famille, avec enfants',
   },
+  situationConjugale: {
+    marie: 'Marié(e)',
+    pacs: '⚠️ PACS — pas de rattachement possible',
+    'union-libre': '⚠️ Union libre / concubinage — pas de rattachement possible',
+    'mariage-en-cours': 'En cours de mariage',
+  },
   translations: {
     yes: 'Oui, traductions à prévoir',
     no: 'Non, documents déjà en anglais',
@@ -140,6 +146,7 @@ export default function FormulaireEligibilite({
     adultesCount: '',
     childrenCount: '',
     enfantsMoins20: '',
+    situationConjugale: '',
     formule: '',
     villeDepart: '',
     softPower: '',
@@ -275,6 +282,9 @@ export default function FormulaireEligibilite({
     if (formData.family === 'family') {
       if (!formData.childrenCount) err.childrenCount = 'Merci d’indiquer le nombre d’enfants.';
       if (!formData.enfantsMoins20) err.enfantsMoins20 = 'Merci de répondre à cette question.';
+      if (!formData.situationConjugale) {
+        err.situationConjugale = 'Merci de préciser votre situation conjugale.';
+      }
     }
     if (formData.consentement !== 'yes') {
       err.consentement = 'Merci d’accepter l’utilisation de vos données pour établir le devis.';
@@ -317,6 +327,7 @@ export default function FormulaireEligibilite({
             'Destination en Thaïlande': formData.villeThailande,
             'Antécédent de demande': lisible('dejaDepose', formData.dejaDepose),
             Expatriation: lisible('family', formData.family),
+            'Situation conjugale': lisible('situationConjugale', formData.situationConjugale),
             "Nombre d'adultes": formData.family === 'solo' ? '1' : formData.adultesCount,
             "Nombre d'enfants": formData.childrenCount,
             'Enfants de moins de 20 ans': lisible('enfantsMoins20', formData.enfantsMoins20),
@@ -867,6 +878,38 @@ export default function FormulaireEligibilite({
                       conditions. Nous vous expliquerons ce que cela implique.
                     </p>
                   )}
+                </div>
+              )}
+
+              {/* Le rattachement d'un conjoint dépend du seul statut marital légal :
+                  la question n'a de sens que pour un départ en famille. */}
+              {formData.family === 'family' && (
+                <div className="space-y-3 pt-1">
+                  <p className="text-sm text-gray-400 ml-1">
+                    Quelle est votre situation conjugale ?{' '}
+                    <span className="text-amber-500">*</span>
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioCard label="Marié(e)" field="situationConjugale" value="marie" />
+                    <RadioCard label="PACS" field="situationConjugale" value="pacs" />
+                    <RadioCard
+                      label="Union libre / concubinage"
+                      field="situationConjugale"
+                      value="union-libre"
+                    />
+                    <RadioCard
+                      label="En cours de mariage"
+                      field="situationConjugale"
+                      value="mariage-en-cours"
+                    />
+                  </div>
+                  <Erreur champ="situationConjugale" />
+                  <p className="text-xs text-gray-500 ml-1">
+                    Le DTV ne rattache comme dépendant que le conjoint légalement marié. Le PACS
+                    et l&apos;union libre ne sont pas reconnus pour le rattachement — dans ce cas,
+                    chaque adulte fait sa propre demande. Cette information nous permet de vous
+                    orienter vers la bonne voie.
+                  </p>
                 </div>
               )}
             </div>
