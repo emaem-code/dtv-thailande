@@ -62,7 +62,7 @@ const faqSchema = {
       name: 'Le cursus à 20 000 THB est-il toujours proposé ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Non. Ce dépôt date de mai 2026, sous un format de six cours que l'école a depuis retiré de son offre. Le format de référence est désormais le cursus de neuf mois. Les inscriptions antérieures restent honorées.",
+        text:"Non. Ce dépôt date de mai 2026, sous un format de huit cours répartis sur six mois, que l'école a depuis retiré de son offre. Le format de référence est désormais le cursus de neuf mois. Les inscriptions antérieures restent honorées.",
       },
     },
   ],
