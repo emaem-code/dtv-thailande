@@ -52,14 +52,17 @@ export default function SiteHeader() {
             className="flex items-center gap-3 shrink-0 group"
             aria-label="Retour à l'accueil"
           >
+            {/* Le logo vectoriel est cadré au plus près du dessin : son format
+                est paysage (1024×806), d'où une largeur libre et une hauteur
+                fixe, plutôt qu'un carré qui l'aurait réduit d'un tiers. */}
             <Image
-              src="/logo.svg?v=2"
+              src="/logo.svg?v=3"
               alt="DTV Destination Thaïlande"
-              width={38}
+              width={48}
               height={38}
               priority
               unoptimized
-              className="w-9 h-9 sm:w-10 sm:h-10 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-9 w-auto sm:h-10 object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <span className="leading-none">
               <span className="block text-lg font-black text-white tracking-tight">DTV</span>
