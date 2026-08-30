@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import PhotoAuteur from '../../components/PhotoAuteur';
 
 export const revalidate = 600; // Revalidation ISR toutes les 10 minutes
 
@@ -46,7 +47,8 @@ const articleSchema = {
   "author": {
     "@type": "Person",
     "name": "Matthieu Moretti",
-    "url": "https://dtv-thailande.fr/contact"
+    "url": "https://dtv-thailande.fr/contact",
+    "image": "https://dtv-thailande.fr/images/matthieu-moretti.jpg"
   },  
   "publisher": {
     "@type": "Organization",
@@ -523,9 +525,7 @@ export default function BlogArticleImmigration20000THB() {
 
       {/* ── ENCART AUTEUR (E-E-A-T) ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-sky-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-sky-500/20 to-emerald-500/20 flex items-center justify-center text-3xl">🇹🇭</div>
-        </div>
+        <PhotoAuteur accent="sky" />
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-sky-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visa DTV & Terrain</p>

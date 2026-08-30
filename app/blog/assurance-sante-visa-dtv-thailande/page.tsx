@@ -12,6 +12,7 @@ import {
   createBreadcrumbSchema,
   getBlogPost,
 } from '../posts';
+import PhotoAuteur from '../../components/PhotoAuteur';
 
 export const revalidate = 600;
 
@@ -668,9 +669,7 @@ export default function ArticleAssuranceSante() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-rose-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-rose-500/20 to-amber-500/20 flex items-center justify-center text-3xl">🏍️</div>
-        </div>
+        <PhotoAuteur accent="rose" />
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-rose-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise terrain · Phuket</p>

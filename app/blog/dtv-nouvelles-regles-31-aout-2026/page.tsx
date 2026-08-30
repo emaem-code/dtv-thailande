@@ -2,6 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import LienArticle from '../../components/LienArticle';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
@@ -11,6 +12,7 @@ import {
   createBreadcrumbSchema,
   getBlogPost,
 } from '../posts';
+import PhotoAuteur from '../../components/PhotoAuteur';
 
 export const revalidate = 600;
 
@@ -258,6 +260,20 @@ export default function ArticleNouvellesReglesDTV() {
           </p>
         </div>
 
+        <figure className="my-8">
+          <Image
+            src="/images/blog/dtv-31-aout-guichet-consulaire.jpg"
+            alt="Rangée de guichets consulaires vides, stores baissés, en fin de journée"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            La question n&apos;est plus « quel poste va le plus vite », mais « de quel poste je
+            relève ».
+          </figcaption>
+        </figure>
+
         <h3 className="text-xl font-semibold text-gray-200 mt-8 mb-3">
           Le casier judiciaire devient obligatoire
         </h3>
@@ -461,6 +477,20 @@ export default function ArticleNouvellesReglesDTV() {
           aller chercher un papier à Paris et revenir est, disons-le franchement, faible.
         </p>
 
+        <figure className="my-8">
+          <Image
+            src="/images/blog/dtv-31-aout-camp-muay-thai.jpg"
+            alt="Camp de Muay Thaï au petit matin, ring vide et sacs de frappe immobiles"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le modèle « j&apos;arrive, j&apos;essaie, je régularise ensuite au Laos » s&apos;arrête
+            ici.
+          </figcaption>
+        </figure>
+
         <h3 className="text-xl font-semibold text-gray-200 mt-8 mb-3">
           Ce que ça change pour les écoles et les commerces locaux
         </h3>
@@ -539,6 +569,19 @@ export default function ArticleNouvellesReglesDTV() {
             délais. Écrivez à l&apos;ambassade avant de lancer quoi que ce soit.
           </li>
         </ul>
+
+        <figure className="my-8">
+          <Image
+            src="/images/blog/dtv-31-aout-preparation-dossier.jpg"
+            alt="Table de travail avec un passeport, des documents administratifs et un ordinateur portable"
+            width={1200}
+            height={800}
+            className="rounded-2xl border border-white/10"
+          />
+          <figcaption className="mt-3 text-sm text-gray-500">
+            Le bon ordre : je confirme mon poste, je demande mon casier, je constitue le reste.
+          </figcaption>
+        </figure>
 
         <div className="overflow-x-auto rounded-2xl border border-gray-800 mb-6">
           <table className="w-full min-w-[560px] text-sm">
@@ -872,11 +915,7 @@ export default function ArticleNouvellesReglesDTV() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-red-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-amber-500/20 flex items-center justify-center text-3xl">
-            🛂
-          </div>
-        </div>
+        <PhotoAuteur accent="red" />
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-red-400 text-xs font-semibold mb-3 uppercase tracking-wider">

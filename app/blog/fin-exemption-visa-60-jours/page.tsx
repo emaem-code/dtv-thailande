@@ -7,6 +7,7 @@ import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
+import PhotoAuteur from '../../components/PhotoAuteur';
 
 const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fin-exemption-visa-60-jours'));
 
@@ -47,6 +48,7 @@ const articleSchema = {
     "@type": "Person",
     "name": "Matthieu Moretti",
     "url": "https://dtv-thailande.fr/contact",
+    "image": "https://dtv-thailande.fr/images/matthieu-moretti.jpg",
   },
   "publisher": {
     "@type": "Organization",
@@ -402,9 +404,7 @@ export default function ArticleFinExemption() {
 
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-        <div className="w-24 h-24 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden border-2 border-red-500/50">
-          <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-red-500/20 flex items-center justify-center text-3xl">🛂</div>
-        </div>
+        <PhotoAuteur accent="red" />
         <div className="text-center md:text-left">
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-red-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Terrain & Formalités</p>

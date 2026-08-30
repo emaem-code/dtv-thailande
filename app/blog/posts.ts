@@ -365,6 +365,11 @@ export function createArticleSchema(post: BlogPost) {
       '@type': 'Person',
       name: 'Matthieu Moretti',
       url: absoluteUrl('/contact'),
+      // Un auteur identifiable compte davantage sur un sujet où le lecteur
+      // engage de l'argent et un projet de vie : Google demande explicitement
+      // qu'on sache qui a écrit, et que la signature mène à des informations
+      // sur son parcours.
+      image: absoluteUrl('/images/matthieu-moretti.jpg'),
     },
     publisher: {
       '@type': 'Organization',
