@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import LienArticle from '../../components/LienArticle';
 import MontantFonds from '../../components/MontantFonds';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
 
@@ -139,6 +140,33 @@ export default function ArticleFreelanceDTV() {
         </p>
         <PartageArticle slug="visa-dtv-freelance-auto-entrepreneur" variant="entete" />
       </header>
+
+      {/* ── MISE À JOUR RÉGLEMENTAIRE ──
+          Les recommandations de dépôt à Vientiane ou Kuala Lumpur de cet article ne sont
+          plus praticables pour un non-résident depuis le 31 août 2026. */}
+      <div className="bg-red-500/5 border border-red-500/30 rounded-2xl p-6 mb-10">
+        <p className="text-white font-semibold mb-2">
+          Mise à jour du 30 août 2026 — Vientiane et Kuala Lumpur ne sont plus des options
+        </p>
+        <p className="text-sm text-gray-300 leading-relaxed">
+          Cet article recommande par endroits un dépôt à Vientiane ou Kuala Lumpur. Depuis le{' '}
+          <strong className="text-white">31 août 2026</strong>, ces postes n&apos;acceptent plus que
+          leurs ressortissants et leurs résidents légaux, et un extrait de casier judiciaire de moins
+          de six mois est désormais exigé partout. Un auto-entrepreneur français sans titre de séjour
+          à l&apos;étranger dépose donc à Paris.{' '}
+          <strong className="text-white">
+            Les exigences de fond sur le dossier freelance — factures, contrats, régularité des
+            revenus — sont inchangées.
+          </strong>{' '}
+          <LienArticle
+            slug="dtv-nouvelles-regles-31-aout-2026"
+            className="text-red-400 hover:underline font-medium"
+          >
+            Lire les nouvelles règles du 31 août 2026
+          </LienArticle>
+          .
+        </p>
+      </div>
 
       {/* ── ALERTE INTRO ── */}
       <div className="bg-red-500/10 border border-red-500/25 rounded-2xl p-6 mb-12">

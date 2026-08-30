@@ -19,6 +19,20 @@ export type BlogPost = {
 
 export const blogPosts = [
   {
+  slug: 'dtv-nouvelles-regles-31-aout-2026',
+  title: "Visa DTV : les nouvelles règles du 31 août 2026, et qui passe entre les gouttes",
+  shortTitle: 'Nouvelles règles du DTV au 31 août 2026',
+  description: "Dépôt obligatoire dans son pays de nationalité ou de résidence, casier judiciaire de moins de six mois : ce qui change au 31 août 2026, ce qui ne change pas, et la clause qui protège les dossiers déjà payés.",
+  excerpt: "Le dépôt à Vientiane ou Savannakhet est fermé à ceux qui n'y résident pas. Mais les dossiers déjà payés et les DTV déjà délivrés ne sont pas touchés.",
+  date: '30 Août 2026',
+  publishedAt: '2026-08-30T09:00:00Z',
+  modifiedAt: '2026-08-30T09:00:00Z',
+  category: 'Actualité',
+  tagColor: 'text-red-400 border-red-500/25 bg-red-500/10',
+  hoverBorder: 'hover:border-red-500/50',
+  image: '/images/blog/dtv-nouvelles-regles-31-aout-2026.jpg',
+},
+  {
   slug: 'extension-180-jours-visa-dtv-thailande',
   title: "Extension du Visa DTV : 180 + 180 jours, et pourquoi vous n'en aurez peut-être jamais besoin",
   shortTitle: 'Extension de 180 jours du DTV',

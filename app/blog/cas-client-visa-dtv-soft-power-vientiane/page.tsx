@@ -107,6 +107,31 @@ export default function ArticleCasClient() {
         <PartageArticle slug="cas-client-visa-dtv-soft-power-vientiane" variant="entete" />
       </header>
 
+      {/* ── MISE À JOUR RÉGLEMENTAIRE ──
+          Ce cas client repose sur un dépôt à Vientiane par un non-résident du Laos, voie
+          fermée depuis le 31 août 2026. Le récit reste instructif, mais le lecteur doit
+          savoir dès la première ligne que la méthode n'est plus reproductible. */}
+      <div className="bg-red-500/5 border border-red-500/30 rounded-2xl p-6 mb-10">
+        <p className="text-white font-semibold mb-2">
+          Mise à jour du 30 août 2026 — cette voie de dépôt est fermée
+        </p>
+        <p className="text-sm text-gray-300 leading-relaxed">
+          Ce cas client raconte un dépôt effectué à Vientiane par un Français qui ne résidait pas au
+          Laos. Depuis le <strong className="text-white">31 août 2026</strong>, ce n&apos;est plus
+          possible : la demande de DTV doit être déposée auprès du poste dont on relève par sa
+          nationalité ou par sa résidence légale, et un extrait de casier judiciaire est désormais
+          exigé. Le raisonnement financier de cet article reste entièrement valable — la logistique,
+          non.{' '}
+          <LienArticle
+            slug="dtv-nouvelles-regles-31-aout-2026"
+            className="text-red-400 hover:underline font-medium"
+          >
+            Lire les nouvelles règles du 31 août 2026
+          </LienArticle>
+          .
+        </p>
+      </div>
+
       {/* ── INTRODUCTION ── */}
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>

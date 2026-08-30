@@ -2,6 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
+import LienArticle from '../../components/LienArticle';
 import MontantFonds from '../../components/MontantFonds';
 import { MARGE_CONSEILLEE } from '../../lib/taux';
 import { createBreadcrumbSchema, getBlogPost } from '../posts';
@@ -207,6 +208,32 @@ export default function BlogArticleDTV() {
         </p>
         <PartageArticle slug="fonds-bancaires-visa-dtv" variant="entete" />
       </header>
+
+      {/* ── MISE À JOUR RÉGLEMENTAIRE ──
+          Les comparaisons de postes de dépôt de cet article (Vientiane, Kuala Lumpur)
+          ne sont plus praticables pour un non-résident depuis le 31 août 2026. */}
+      <div className="bg-red-500/5 border border-red-500/30 rounded-2xl p-6 mb-10">
+        <p className="text-white font-semibold mb-2">
+          Mise à jour du 30 août 2026 — le choix du poste de dépôt n&apos;est plus libre
+        </p>
+        <p className="text-sm text-gray-300 leading-relaxed">
+          Cet article compare plusieurs postes consulaires, dont Vientiane et Kuala Lumpur. Depuis le{' '}
+          <strong className="text-white">31 août 2026</strong>, la demande doit être déposée auprès du
+          poste dont vous relevez par votre nationalité ou votre résidence légale, et un extrait de
+          casier judiciaire de moins de six mois est exigé. Pour un Français sans titre de séjour à
+          l&apos;étranger, cela signifie Paris.{' '}
+          <strong className="text-white">
+            Le montant de 500 000 THB et les règles d&apos;ancienneté du solde, eux, ne changent pas.
+          </strong>{' '}
+          <LienArticle
+            slug="dtv-nouvelles-regles-31-aout-2026"
+            className="text-red-400 hover:underline font-medium"
+          >
+            Lire les nouvelles règles du 31 août 2026
+          </LienArticle>
+          .
+        </p>
+      </div>
 
       {/* ── INTRODUCTION ── */}
       <div className="text-lg text-gray-400 mb-12 space-y-5">
