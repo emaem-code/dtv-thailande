@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useModales } from './ModalesProvider';
+import BandeauAnnonce from './BandeauAnnonce';
 
 /**
  * En-tête unique du site, présent sur toutes les pages.
@@ -117,6 +118,11 @@ export default function SiteHeader() {
           </div>
         </div>
       </header>
+
+      {/* Annonce réglementaire, sous l'en-tête et dans le flux : elle défile
+          avec la page plutôt que de recouvrir le contenu. Le composant décide
+          seul de s'afficher ou non (page exclue, refus mémorisé, date passée). */}
+      <BandeauAnnonce />
 
       {/* ── PANNEAU MOBILE : glisse depuis la droite ── */}
       {ouvert && (
