@@ -329,6 +329,10 @@ export default function FormulaireEligibilite({
             'Antécédent de demande': lisible('dejaDepose', formData.dejaDepose),
             Expatriation: lisible('family', formData.family),
             'Situation conjugale': lisible('situationConjugale', formData.situationConjugale),
+            'Épargne exigée pour le foyer':
+              nbPersonnesFoyer > 1
+                ? `${(500000 * nbPersonnesFoyer).toLocaleString('fr-FR')} THB (${nbPersonnesFoyer} demandeurs)`
+                : '',
             "Nombre d'adultes": formData.family === 'solo' ? '1' : formData.adultesCount,
             "Nombre d'enfants": formData.childrenCount,
             'Enfants de moins de 20 ans': lisible('enfantsMoins20', formData.enfantsMoins20),
@@ -453,6 +457,20 @@ export default function FormulaireEligibilite({
     formData.family === 'married' ||
     formData.family === 'concubinage' ||
     formData.family === 'family';
+
+  /**
+   * Taille du foyer au sens du seuil bancaire.
+   *
+   * Le seuil s'applique à chaque demandeur, accompagnants compris : c'est ce
+   * calcul qui permet d'annoncer au visiteur le montant réellement exigé, au
+   * lieu du seuil individuel qui sous-estime d'un facteur trois ou quatre les
+   * projets familiaux. Le nombre d'adultes saisi inclut déjà le demandeur.
+   */
+  const nbPersonnesFoyer =
+    formData.family === 'solo'
+      ? 1
+      : (parseInt(formData.adultesCount, 10) || 1) +
+        (formData.family === 'family' ? parseInt(formData.childrenCount, 10) || 0 : 0);
 
   const enModale = variante === 'modal';
 
@@ -910,6 +928,25 @@ export default function FormulaireEligibilite({
                     et l&apos;union libre ne sont pas reconnus pour le rattachement — dans ce cas,
                     chaque adulte fait sa propre demande. Cette information nous permet de vous
                     orienter vers la bonne voie.
+                  </p>
+                </div>
+              )}
+
+              {/* Le seuil bancaire s'applique à chaque demandeur : dès que la
+                  composition du foyer est connue, on annonce le montant réel
+                  plutôt que de laisser croire au seuil individuel. */}
+              {isGroupTravel && nbPersonnesFoyer > 1 && (
+                <div className="mt-4 p-5 rounded-2xl bg-amber-500/5 border border-amber-500/30">
+                  <p className="text-white font-semibold text-sm mb-2">
+                    Pour {nbPersonnesFoyer} personnes, l&apos;épargne à justifier est de{' '}
+                    {(500000 * nbPersonnesFoyer).toLocaleString('fr-FR').replace(/ | /g, ' ')} THB
+                  </p>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    Soit <MontantFonds prefixe="environ " personnes={nbPersonnesFoyer} />. Le seuil
+                    de 500 000 THB s&apos;applique à{' '}
+                    <strong className="text-white">chaque demandeur</strong>, accompagnants compris
+                    — conjoint et enfants inclus. Un compte joint permet de ne produire qu&apos;un
+                    seul justificatif pour vous deux, mais le montant reste cumulé.
                   </p>
                 </div>
               )}

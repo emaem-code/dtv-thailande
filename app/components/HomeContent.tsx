@@ -9,8 +9,13 @@ import { MARGE_CONSEILLEE } from '../lib/taux';
 export const homeFaqs = [
   {
     category: 'Finances & Épargne',
+    q: 'Les 500 000 THB valent-ils pour tout le foyer, ou par personne ?',
+    a: `Par personne. Chaque demandeur doit justifier individuellement du seuil, accompagnants compris : un couple marié avec deux enfants doit donc présenter 2 000 000 THB, et non 500 000. Seule simplification admise, un compte joint permet au titulaire et à son conjoint de produire le même justificatif — le montant reste cumulé, c'est la pièce qui est unique. Comptez ${MARGE_CONSEILLEE} par personne pour absorber les variations de change.`,
+  },
+  {
+    category: 'Finances & Épargne',
     q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-    a: `Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est jamais bloqué, mais l'historique des 3 derniers mois est examiné avec attention. Prévoyez plutôt ${MARGE_CONSEILLEE} que le strict minimum : le seuil qui fait foi est celui en bahts, le taux de change bouge en permanence, et un solde confortable est mieux perçu.`,
+    a: `Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est jamais bloqué, mais l'historique des 3 derniers mois est examiné avec attention. Prévoyez plutôt ${MARGE_CONSEILLEE} PAR PERSONNE que le strict minimum : le seuil qui fait foi est celui en bahts, le taux de change bouge en permanence, et un solde confortable est mieux perçu.`,
   },
   {
     category: 'Finances & Épargne',
@@ -319,11 +324,20 @@ export default function HomeContent() {
           <p className="text-white font-semibold text-sm mb-2">Et si vous partez en famille ?</p>
           <p className="text-sm leading-relaxed">
             Le fait de partir seul, en couple ou avec des enfants{' '}
-            <strong className="text-white">ne change pas le tarif</strong>. Chaque personne dépose
-            son propre dossier et relève de sa propre voie d&apos;éligibilité : un conjoint qui suit
-            un cursus Soft Power sera au tarif Soft Power, un conjoint télétravailleur au tarif
-            correspondant. Nous établissons un devis global quand plusieurs dossiers sont montés
-            ensemble.
+            <strong className="text-white">ne change pas le tarif unitaire</strong>. Chaque personne
+            dépose son propre dossier et relève de sa propre voie d&apos;éligibilité : un conjoint
+            qui suit un cursus Soft Power sera au tarif Soft Power, un conjoint télétravailleur au
+            tarif correspondant. Nous établissons un devis global quand plusieurs dossiers sont
+            montés ensemble.
+          </p>
+          <p className="text-sm leading-relaxed mt-3 pt-3 border-t border-white/10">
+            <strong className="text-amber-400">En revanche, l&apos;épargne à justifier, elle, se
+            multiplie.</strong>{' '}
+            Le seuil de 500 000 THB s&apos;applique à chaque demandeur, accompagnants compris. Une
+            famille de quatre doit donc présenter{' '}
+            <strong className="text-white">2 000 000 THB</strong>, soit{' '}
+            <MontantFonds prefixe="environ " personnes={4} /> — c&apos;est le point le plus souvent
+            découvert trop tard.
           </p>
         </div>
 

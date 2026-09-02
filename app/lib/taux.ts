@@ -16,8 +16,34 @@ export const FONDS_THB = 500_000;
  */
 export const TAUX_SECOURS = 38.4;
 
-/** Marge conseillée, en euros, pour absorber les variations de change. */
+/** Marge conseillée, en euros et PAR PERSONNE, pour absorber les variations de change. */
 export const MARGE_CONSEILLEE = '15 000 à 16 000 €';
+
+/**
+ * Le seuil s'applique à CHAQUE personne du foyer, accompagnants compris.
+ *
+ * C'est le point sur lequel le site s'est longtemps trompé, et l'erreur était
+ * coûteuse : une famille de quatre lisait 500 000 THB quand l'ambassade en
+ * exige deux millions. Chaque demandeur, y compris le conjoint et les enfants
+ * rattachés, doit justifier individuellement du seuil.
+ *
+ * Une seule simplification est admise : lorsque le compte est joint, le
+ * titulaire et son conjoint produisent le même justificatif. Le montant reste
+ * cumulé — c'est la pièce qui est unique, pas la somme exigée.
+ */
+export function fondsFoyerThb(nbPersonnes: number): number {
+  return FONDS_THB * Math.max(1, Math.floor(nbPersonnes) || 1);
+}
+
+/** Contre-valeur en euros du seuil applicable à un foyer, arrondie à la centaine supérieure. */
+export function eurosFoyer(tauxThbParEuro: number, nbPersonnes: number): number {
+  return Math.ceil(fondsFoyerThb(nbPersonnes) / tauxThbParEuro / 100) * 100;
+}
+
+/** Format thaï : 2 000 000 THB */
+export function formateThb(montant: number): string {
+  return `${montant.toLocaleString('fr-FR').replace(/ | | /g, ' ')} THB`;
+}
 
 /** Contre-valeur en euros, arrondie à la centaine supérieure. */
 export function eurosArrondis(tauxThbParEuro: number): number {
