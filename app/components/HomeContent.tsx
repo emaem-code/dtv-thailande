@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { FORMULES as formules, prix, MENTION_TRADUCTIONS } from '../lib/tarifs';
 import { getSortedBlogPosts } from '../blog/posts';
 import MontantFonds from './MontantFonds';
 import { MARGE_CONSEILLEE } from '../lib/taux';
@@ -98,29 +99,6 @@ const voies = [
   },
 ];
 
-const formules = [
-  {
-    nom: 'Essentielle',
-    desc: "L'administratif complet : frais consulaires, traductions, école si applicable, et suivi du dossier.",
-    standard: '850 €',
-    softPower: '1 750 €',
-    vedette: false,
-  },
-  {
-    nom: 'Premium',
-    desc: 'Essentielle, plus le vol régional, l’hôtel et les transferts aéroport.',
-    standard: '1 300 €',
-    softPower: '2 450 €',
-    vedette: false,
-  },
-  {
-    nom: 'VIP',
-    desc: 'Tout inclus : vol depuis l’Europe, hôtels haut de gamme et chauffeurs privés.',
-    standard: '2 400 €',
-    softPower: '4 060 €',
-    vedette: true,
-  },
-];
 
 export default function HomeContent() {
   const guides = getSortedBlogPosts()
@@ -265,6 +243,11 @@ export default function HomeContent() {
           le visa. La colonne Soft Power inclut les frais d&apos;inscription à l&apos;école
           certifiée, ce qui explique l&apos;écart.
         </p>
+        <p className="mb-8 text-sm text-gray-500 border-l-2 border-amber-500/40 pl-4">
+          Grille révisée le 2 septembre 2026. Depuis le 31 août, un demandeur français relève
+          obligatoirement de l&apos;ambassade de Paris, où les frais consulaires sont plus élevés
+          qu&apos;en Asie et où la traduction assermentée est exigée. {MENTION_TRADUCTIONS}
+        </p>
 
         {/* ── MOBILE : une carte par formule, les deux prix côte à côte ── */}
         <div className="md:hidden space-y-3">
@@ -278,20 +261,20 @@ export default function HomeContent() {
               <p className={`font-bold text-base ${f.vedette ? 'text-amber-500' : 'text-white'}`}>
                 {f.nom}
               </p>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">{f.desc}</p>
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">{f.description}</p>
 
               <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/10">
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">
                     Télétravail
                   </p>
-                  <p className="text-lg font-black text-white">{f.standard}</p>
+                  <p className="text-lg font-black text-white">{prix(f.standard)}</p>
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-amber-500/70 font-bold mb-1">
                     Soft Power
                   </p>
-                  <p className="text-lg font-black text-amber-500">{f.softPower}</p>
+                  <p className="text-lg font-black text-amber-500">{prix(f.softPower)}</p>
                 </div>
               </div>
             </div>
@@ -320,11 +303,11 @@ export default function HomeContent() {
                 >
                   <td className="px-5 py-4">
                     <span className="text-white font-bold">{f.nom}</span>
-                    <span className="block text-xs text-gray-500 mt-1 max-w-xs">{f.desc}</span>
+                    <span className="block text-xs text-gray-500 mt-1 max-w-xs">{f.description}</span>
                   </td>
-                  <td className="px-5 py-4 text-white font-bold whitespace-nowrap">{f.standard}</td>
+                  <td className="px-5 py-4 text-white font-bold whitespace-nowrap">{prix(f.standard)}</td>
                   <td className="px-5 py-4 text-amber-500 font-bold whitespace-nowrap">
-                    {f.softPower}
+                    {prix(f.softPower)}
                   </td>
                 </tr>
               ))}

@@ -7,6 +7,7 @@ import Image from "next/image";
 import MobileVideoCarousel from './components/MobileVideoCarousel';
 import HomeContent from "./components/HomeContent";
 import SiteHeader from "./components/SiteHeader";
+import { PRIX_APPEL, prix } from "./lib/tarifs";
 import { useApparitionAuScroll } from "./components/useApparitionAuScroll";
 import { useModales } from "./components/ModalesProvider";
 import { getSortedBlogPosts } from "./blog/posts";
@@ -107,7 +108,7 @@ function HeroText({
         </div>
         <div>
           <dt className="sr-only">Tarif de départ</dt>
-          <dd className="text-xl font-extrabold text-white">850 €</dd>
+          <dd className="text-xl font-extrabold text-white">{prix(PRIX_APPEL)}</dd>
           <p className="text-[11px] text-gray-500 mt-0.5">à partir de</p>
         </div>
       </dl>
@@ -126,7 +127,7 @@ function VideoSequence() {
     { id: 1, src: "/video-erreur.mp4", poster: "/poster-erreur.jpg", title: "Un refus et tout s'effondre", hasText: true, phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
     { id: 2, src: "/video-temoignage.mp4", poster: "/poster-temoignage.jpg", title: "Acceptés du premier coup", hasText: true, phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
     { id: 3, src: "/video-accompagnement.mp4", poster: "/poster-accompagnement.jpg", title: "On prend tout en charge", hasText: true, phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
-    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: ["À partir de 850 €. Tout inclus", "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
+    { id: 4, src: "/video-budget.mp4", poster: "/poster-budget.jpg", title: "Votre investissement", hasText: true, phrases: [`À partir de ${prix(PRIX_APPEL)}. Tout inclus`, "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] }
   ];
 
   useEffect(() => {
@@ -405,7 +406,7 @@ export default function Home() {
       >
         <div className="pointer-events-auto flex items-center gap-3 md:gap-5 bg-black/80 backdrop-blur-2xl rounded-full pl-5 pr-2 py-2 border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <p className="hidden sm:block text-gray-300 text-xs md:text-sm font-medium whitespace-nowrap">
-            Clé en main · <span className="text-white font-bold">dès 850 €</span>
+            Clé en main · <span className="text-white font-bold">dès {prix(PRIX_APPEL)}</span>
           </p>
           <button
             onClick={ouvrirEligibilite}

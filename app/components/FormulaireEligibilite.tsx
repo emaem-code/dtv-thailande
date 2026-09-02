@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import MontantFonds from './MontantFonds';
 import { lireAttribution } from '../lib/attribution';
+import { prix, tarif } from '../lib/tarifs';
 
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
@@ -444,9 +445,9 @@ export default function FormulaireEligibilite({
   // La voie Soft Power ne dépend plus du seul statut professionnel : un
   // freelance peut parfaitement choisir de passer par une école certifiée.
   const isSoftPower = formData.job === 'softpower' || formData.softPowerInteret === 'yes';
-  const priceBasic = isSoftPower ? '1 750 €' : '850 €';
-  const pricePremium = isSoftPower ? '2 450 €' : '1 300 €';
-  const priceVIP = isSoftPower ? '4 060 €' : '2 400 €';
+  const priceBasic = prix(tarif('essentielle', isSoftPower));
+  const pricePremium = prix(tarif('premium', isSoftPower));
+  const priceVIP = prix(tarif('vip', isSoftPower));
 
   const isGroupTravel =
     formData.family === 'married' ||

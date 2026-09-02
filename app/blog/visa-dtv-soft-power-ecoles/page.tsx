@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import PhotoAuteur from '../../components/PhotoAuteur';
+import { prix, tarif } from '../../lib/tarifs';
 
 // ─── MÉTADONNÉES SEO & CANONICAL ─────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -209,7 +210,7 @@ export default function BlogArticleSoftPower() {
           <li><a href="#arnaques-ecoles" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
           <li><a href="#passage-douane" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
           <li><a href="#visa-run-asie" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">5. Dépôt du dossier : pourquoi l'Asie (Visa Run) écrase Paris</a></li>
-          <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : décryptage du tarif à 1 750 €</a></li>
+          <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : le décryptage de notre tarif Soft Power</a></li>
         </ul>
       </nav>
 
@@ -581,17 +582,33 @@ export default function BlogArticleSoftPower() {
       {/* ── SECTION 6 ── */}
       <section className="mb-12">
         <h2 id="transparence-prix" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          6. Transparence : décryptage du tarif à 1 750 €
+          6. Transparence : le décryptage de notre tarif Soft Power
         </h2>
         <p className="mb-4">
           La transparence est au cœur de notre méthode. Pour les profils freelances qui ont déjà tous leurs
-          documents, notre prestation d'accompagnement est à <strong>850 €</strong>.
+          documents, notre prestation d&apos;accompagnement est à{' '}
+          <strong>{prix(tarif('essentielle', false))}</strong>.
         </p>
         <p className="mb-4">
-          Mais pour la voie Soft Power, nous proposons un <strong>package global à 1 750 €</strong> sur
-          la base d'un cursus de 9 mois — le format aujourd'hui recommandé. Voici exactement ce que
-          comprend cette différence tarifaire :
+          Pour la voie Soft Power, nous proposons un{' '}
+          <strong>package global à {prix(tarif('essentielle', true))}</strong> sur la base d&apos;un
+          cursus de 9 mois — le format aujourd&apos;hui recommandé. Voici exactement ce que comprend
+          cette différence tarifaire :
         </p>
+        <div className="bg-amber-500/5 border border-amber-500/30 rounded-xl p-5 mb-5">
+          <p className="text-white font-semibold text-sm mb-2">
+            Grille révisée le 2 septembre 2026
+          </p>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Depuis le 31 août, un demandeur français dépose obligatoirement à Paris, où les frais
+            consulaires sont plus élevés qu&apos;en Asie et où la traduction assermentée est exigée.
+            La hausse est plus contenue sur la voie Soft Power que sur la voie freelance :{' '}
+            <strong className="text-white">
+              un dossier école ne comporte aucune preuve de revenus à faire traduire
+            </strong>
+            , et la lettre de l&apos;établissement arrive déjà en anglais.
+          </p>
+        </div>
         <div className="bg-white/5 border border-white/10 rounded-xl p-5">
           <ul className="space-y-3">
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">
@@ -599,7 +616,7 @@ export default function BlogArticleSoftPower() {
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">
-              <span className="text-gray-300">Frais consulaires officiels de l'ambassade (10 000 à 13 000 THB selon le poste)</span>
+              <span className="text-gray-300">Frais consulaires officiels de l&apos;ambassade de Paris (environ 350 €)</span>
               <span className="text-white font-bold whitespace-nowrap">Inclus</span>
             </li>
             <li className="flex justify-between items-center text-sm md:text-base border-b border-white/5 pb-2">
