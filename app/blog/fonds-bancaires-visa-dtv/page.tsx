@@ -58,7 +58,7 @@ const articleSchema = {
     }
   },
   "datePublished": "2026-06-01",
-  "dateModified": "2026-08-08"
+  "dateModified": "2026-09-02"
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ const faqSchema = {
       name: 'Dois-je faire traduire mes relevés de compte bancaire ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Pour un dépôt en Asie via la méthode Soft Power, nos retours de terrain montrent que les relevés en français sont généralement acceptés sans traduction. Pour un dépôt à Paris avec un profil Freelance, une traduction assermentée est souvent exigée.",
+        text: "La question ne se pose plus vraiment depuis le 31 août 2026 : un demandeur français dépose à Paris, où la traduction assermentée est exigée. Les postes asiatiques, où les relevés en français passaient souvent, ne sont désormais ouverts qu'aux résidents légaux de ces pays. Prévoyez donc la traduction dans votre budget et votre calendrier.",
       },
     },
     {
@@ -103,7 +103,7 @@ const faqSchema = {
       name: 'Faut-il 3 ou 6 mois d\'historique bancaire pour le visa DTV ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "L'exigence officielle est de 3 mois d'historique, y compris à l'ambassade de Paris qui le publie explicitement. La rumeur des 6 mois vient de dossiers où l'officier a demandé des relevés complémentaires face à des mouvements suspects. Ce qui change réellement d'une ambassade à l'autre, ce n'est pas la durée mais l'exigence de traduction assermentée.",
+        text: "L'exigence officielle est de 3 mois d'historique, y compris à l'ambassade de Paris qui le publie explicitement. La rumeur des 6 mois vient de dossiers où l'officier a demandé des relevés complémentaires face à des mouvements suspects. Ce qui changeait réellement d'une ambassade à l'autre, ce n'était pas la durée mais l'exigence de traduction assermentée — un arbitrage devenu sans objet depuis que le poste de dépôt est imposé par la résidence.",
       },
     },
     {
@@ -118,6 +118,11 @@ const faqSchema = {
 };
 
 // ─── TABLEAU COMPARATIF DES AMBASSADES ───────────────────────────────────────
+/**
+ * Depuis le 31 août 2026, la colonne qui compte n'est plus la difficulté du
+ * poste mais son accessibilité : on ne dépose plus là où c'est le plus simple,
+ * mais là où l'on relève par sa nationalité ou sa résidence légale.
+ */
 const ambassades = [
   {
     ville: 'Paris',
@@ -125,35 +130,8 @@ const ambassades = [
     delai: '3 mois',
     traduction: 'Assermentée obligatoire',
     traitement: '3–4 semaines',
-    difficulte: 'Élevée',
-    difficulteColor: 'text-red-400',
-  },
-  {
-    ville: 'Vientiane',
-    pays: '🇱🇦 Laos',
-    delai: '3 mois',
-    traduction: 'Souvent acceptée en français',
-    traitement: '3–4 jours ouvrables',
-    difficulte: 'Faible',
-    difficulteColor: 'text-emerald-400',
-  },
-  {
-    ville: 'Kuala Lumpur',
-    pays: '🇲🇾 Malaisie',
-    delai: '3 mois',
-    traduction: 'Souvent acceptée',
-    traitement: '3–4 jours ouvrables',
-    difficulte: 'Faible',
-    difficulteColor: 'text-emerald-400',
-  },
-  {
-    ville: 'Phnom Penh',
-    pays: '🇰🇭 Cambodge',
-    delai: '3 mois',
-    traduction: 'Variable',
-    traitement: '3–5 jours',
-    difficulte: 'Modérée',
-    difficulteColor: 'text-teal-400',
+    acces: 'Français et résidents en France',
+    accesColor: 'text-emerald-400',
   },
   {
     ville: 'Genève',
@@ -161,8 +139,35 @@ const ambassades = [
     delai: '3 mois',
     traduction: 'Assermentée souvent exigée',
     traitement: '3–4 semaines',
-    difficulte: 'Élevée',
-    difficulteColor: 'text-red-400',
+    acces: 'Résidents légaux en Suisse',
+    accesColor: 'text-emerald-400',
+  },
+  {
+    ville: 'Vientiane',
+    pays: '🇱🇦 Laos',
+    delai: '3 mois',
+    traduction: 'Souvent acceptée en français',
+    traitement: '3–4 jours ouvrables',
+    acces: 'Fermée — sauf résidents du Laos',
+    accesColor: 'text-red-400',
+  },
+  {
+    ville: 'Kuala Lumpur',
+    pays: '🇲🇾 Malaisie',
+    delai: '3 mois',
+    traduction: 'Souvent acceptée',
+    traitement: '3–4 jours ouvrables',
+    acces: 'Fermée — sauf résidents de Malaisie',
+    accesColor: 'text-red-400',
+  },
+  {
+    ville: 'Phnom Penh',
+    pays: '🇰🇭 Cambodge',
+    delai: '3 mois',
+    traduction: 'Variable',
+    traitement: '3–5 jours',
+    acces: 'Fermée — sauf résidents du Cambodge',
+    accesColor: 'text-red-400',
   },
 ];
 
@@ -273,7 +278,7 @@ export default function BlogArticleDTV() {
           <li><a href="#types-comptes" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">4. Quels types de comptes bancaires sont acceptés ?</a></li>
           <li><a href="#taux-change" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">5. La règle d'or du taux de change (EUR / THB)</a></li>
           <li><a href="#soft-power" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">6. Le cas spécifique du DTV &quot;Soft Power&quot;</a></li>
-          <li><a href="#visa-run" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">7. Organiser son Visa Run : le timing parfait</a></li>
+          <li><a href="#visa-run" className="text-teal-500 hover:text-teal-400 hover:underline transition-colors text-sm md:text-base">7. Déposer à Paris : le calendrier à tenir</a></li>
         </ul>
       </nav>
 
@@ -346,22 +351,29 @@ export default function BlogArticleDTV() {
           <strong className="text-white">traduction assermentée</strong>, obligatoire pour vos
           documents français : comptez 150 à 300 € et plusieurs jours d&apos;attente. Ensuite le{' '}
           <strong className="text-white">délai d&apos;instruction</strong> : l&apos;ambassade
-          annonce elle-même environ quatre semaines, quand Vientiane rend une décision en trois à
-          quatre jours ouvrables. C&apos;est là, et nulle part ailleurs, que se joue vraiment le
-          choix de votre ambassade.
+          annonce elle-même environ quatre semaines. Ces deux frictions étaient autrefois la
+          raison de déposer ailleurs. Elles ne sont plus arbitrables — elles sont à intégrer au
+          calendrier.
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
-          L&apos;Asie : la même exigence, sans les frictions
+          L&apos;Asie : fermée depuis le 31 août 2026
         </h3>
+        <p className="mb-4">
+          C&apos;était la stratégie que nous recommandions massivement, et elle était bonne : à
+          exigence bancaire identique, déposer au Laos, au Cambodge ou en Malaisie faisait gagner
+          la traduction assermentée et trois semaines d&apos;instruction.{' '}
+          <strong className="text-white">Cette voie n&apos;existe plus.</strong> Depuis le 31 août
+          2026, ces postes n&apos;acceptent que leurs propres ressortissants et les titulaires
+          d&apos;une résidence légale dans le pays. Un séjour touristique au Laos ne vous y rattache
+          pas.
+        </p>
         <p className="mb-6">
-          C&apos;est la stratégie que nous recommandons massivement à nos clients — mais pas pour
-          la raison qu&apos;on lit partout. En déposant dans les pays limitrophes (Laos, Cambodge,
-          Malaisie), l&apos;exigence bancaire reste identique :{' '}
-          <strong className="text-white">3 mois d&apos;historique</strong>. Ce que vous gagnez, ce
-          sont les relevés acceptés en français sans traduction certifiée, et un dossier instruit
-          en quelques jours au lieu d&apos;un mois. Sur un projet d&apos;expatriation, trois
-          semaines de délai en moins valent souvent plus que quelques centaines d&apos;euros.
+          Elle reste ouverte à une seule catégorie de lecteurs : ceux qui{' '}
+          <strong className="text-white">résident légalement</strong> dans l&apos;un de ces pays —
+          permis de travail, titre de séjour, visa étudiant en cours de validité. Pour tous les
+          autres, la question du choix de l&apos;ambassade ne se pose plus : c&apos;est Paris, et le
+          tableau ci-dessous ne sert donc qu&apos;à situer votre propre cas.
         </p>
 
         {/* TABLEAU COMPARATIF */}
@@ -373,7 +385,7 @@ export default function BlogArticleDTV() {
                 <th className="text-left px-4 py-3 text-gray-400 font-semibold">Délai exigé</th>
                 <th className="text-left px-4 py-3 text-gray-400 font-semibold hidden md:table-cell">Traduction FR</th>
                 <th className="text-left px-4 py-3 text-gray-400 font-semibold hidden md:table-cell">Traitement</th>
-                <th className="text-left px-4 py-3 text-gray-400 font-semibold">Difficulté</th>
+                <th className="text-left px-4 py-3 text-gray-400 font-semibold">Qui peut y déposer</th>
               </tr>
             </thead>
             <tbody>
@@ -390,7 +402,7 @@ export default function BlogArticleDTV() {
                   <td className="px-4 py-3 font-bold text-white">{a.delai}</td>
                   <td className="px-4 py-3 text-gray-400 hidden md:table-cell">{a.traduction}</td>
                   <td className="px-4 py-3 text-gray-400 hidden md:table-cell">{a.traitement}</td>
-                  <td className={`px-4 py-3 font-semibold ${a.difficulteColor}`}>{a.difficulte}</td>
+                  <td className={`px-4 py-3 font-semibold ${a.accesColor}`}>{a.acces}</td>
                 </tr>
               ))}
             </tbody>
@@ -546,7 +558,7 @@ export default function BlogArticleDTV() {
       {/* ── SECTION 7 ── */}
       <section className="mb-12">
         <h2 id="visa-run" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          7. Organiser son Visa Run : le timing parfait
+          7. Déposer à Paris : le calendrier à tenir
         </h2>
 
         <div className="space-y-4">
@@ -559,17 +571,17 @@ export default function BlogArticleDTV() {
             {
               icon: '🗓️',
               title: 'La durée du séjour',
-              text: "Prévoyez un voyage de 5 nuits (ex : lundi au samedi). Dépôt en début de semaine, traitement sous 3 jours ouvrables à Vientiane, récupération le vendredi.",
+              text: "Comptez environ quatre semaines d'instruction à Paris, contre trois à quatre jours ouvrables dans les anciens postes asiatiques. Ce délai commande tout le reste : remontez-le depuis votre date de départ souhaitée, et non l'inverse.",
             },
             {
               icon: '⚠️',
               title: 'Les pièges du calendrier',
-              text: "Attention aux jours fériés — l'ambassade de Vientiane ferme lors des jours fériés laotiens ET thaïlandais. Un mauvais calcul peut vous bloquer une semaine de plus.",
+              text: "Attention aux jours fériés : l'ambassade de Paris ferme lors des jours fériés français ET thaïlandais, dont plusieurs ne figurent sur aucun calendrier français. Un mauvais calcul peut vous coûter une semaine.",
             },
             {
               icon: '💵',
               title: 'Le règlement',
-              text: <>Les frais consulaires (10 000 à 13 000 THB selon le poste) se règlent exclusivement en espèces au guichet de l'ambassade. Aucune carte bancaire n'est acceptée — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-teal-500 hover:underline">réserve de liquide</Link>.</>,
+              text: <>Les frais consulaires s'élèvent à environ 350 € à Paris. Dans les anciens postes asiatiques, ils se réglaient exclusivement en espèces au guichet, sans carte bancaire — anticipez votre <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-teal-500 hover:underline">réserve de liquide</Link>.</>,
             },
           ].map((item) => (
             <div key={item.title} className="flex gap-4 p-4 bg-white/3 border border-gray-800 rounded-xl">
@@ -579,13 +591,13 @@ export default function BlogArticleDTV() {
         <figure className="my-8">
           <Image
             src="/images/blog/fonds-bancaires-visa-run-vientiane.jpg"
-            alt="Départ pour un visa run à Vientiane afin de déposer son dossier DTV"
+            alt="Départ pour un dépôt de dossier DTV à l'étranger, pratique fermée aux non-résidents depuis le 31 août 2026"
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Cinq nuits sur place, dépôt en début de semaine, retrait le vendredi. Attention aux jours fériés laotiens et thaïlandais, qui ferment l&apos;ambassade.
+            Le dépôt à l&apos;étranger était la norme jusqu&apos;au 31 août 2026. Il n&apos;est désormais ouvert qu&apos;aux résidents légaux du pays du poste.
           </figcaption>
         </figure>
                 <p className="text-gray-400 text-sm">{item.text}</p>
@@ -623,10 +635,11 @@ export default function BlogArticleDTV() {
         </div>
         <p className="mt-4 text-sm text-gray-400">
           Le montant de Kuala Lumpur est celui débité sur mon propre compte le 15 février 2026.
-          Il révèle un fait contre-intuitif : à 347 €, la Malaisie coûte quasiment aussi cher que
-          Paris. L&apos;économie réelle d&apos;un dépôt en Asie ne se joue pas sur les frais
-          consulaires, mais sur la traduction assermentée évitée et sur trois semaines de délai
-          gagnées.
+          Il révélait déjà un fait contre-intuitif : à 347 €, la Malaisie coûtait quasiment aussi
+          cher que Paris. L&apos;économie d&apos;un dépôt en Asie ne s&apos;est jamais jouée sur les
+          frais consulaires, mais sur la traduction assermentée évitée et sur trois semaines de
+          délai gagnées. Ces deux avantages ont disparu avec l&apos;accès au poste ; les tarifs
+          ci-dessus sont conservés à titre de repère pour les résidents de ces pays.
         </p>
       </section>
 
@@ -638,7 +651,7 @@ export default function BlogArticleDTV() {
         <p className="mb-4">
           Préparer un dossier consulaire est stressant. Entre les calculs de taux de change,
           la sélection des bonnes lignes comptables, l&apos;inscription officielle à une école locale
-          et la planification des vols vers le Laos, la moindre erreur entraîne la perte des
+          et le respect du calendrier d&apos;instruction parisien, la moindre erreur entraîne la perte des
           frais d&apos;ambassade <strong className="text-white">(non remboursables)</strong> et retarde
           votre projet de vie.
         </p>
@@ -646,7 +659,7 @@ export default function BlogArticleDTV() {
           {[
             'Analyse millimétrée de vos relevés bancaires pour s\'assurer de leur conformité.',
             'Inscription officielle à l\'école de cuisine (pour la voie Soft Power).',
-            'Montage du dossier consulaire parfait pour l\'ambassade de Vientiane.',
+            'Montage du dossier consulaire parfait pour l\'ambassade dont vous relevez, Paris dans la plupart des cas.',
             'Organisation intégrale de votre logistique (vols régionaux, hôtels, transferts) pour un Visa Run sans stress.',
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-sm text-gray-400">

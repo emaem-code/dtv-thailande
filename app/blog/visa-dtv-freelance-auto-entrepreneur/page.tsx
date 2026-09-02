@@ -59,7 +59,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-10",
-  "dateModified": "2026-08-08",
+  "dateModified": "2026-09-02",
 };
 
 // ─── SCHEMA FAQ ───────────────────────────────────────────────────────────────
@@ -88,7 +88,7 @@ const faqSchema = {
       "name": "Faut-il faire traduire ses documents URSSAF et Kbis pour l'ambassade ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Pour un dépôt à l'ambassade de Paris, une traduction assermentée est fortement recommandée. Pour un dépôt en Asie (Vientiane, Kuala Lumpur), les retours terrain montrent que les documents en français sont souvent acceptés, surtout via la voie Soft Power. Notre agence gère ces traductions dans le cadre de son accompagnement."
+        "text": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Notre agence gère ces traductions dans le cadre de son accompagnement."
       }
     },
     {
@@ -426,7 +426,7 @@ export default function ArticleFreelanceDTV() {
 
         <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 mt-5">
           <p className="text-emerald-400 font-semibold text-sm">
-            Résultat : dossier accepté à l’ambassade de Vientiane en 3 jours ouvrables.
+            Résultat : dossier accepté à l’ambassade de Vientiane en 3 jours ouvrables — un dépôt effectué avant la fermeture de cette voie aux non-résidents.
           </p>
           <p className="text-gray-400 text-sm mt-1">
             La clé : la lettre consulaire a explicitement traduit le statut
@@ -506,8 +506,11 @@ export default function ArticleFreelanceDTV() {
         </h2>
         <p className="mb-4">
           Tous vos documents administratifs français (URSSAF, Kbis, avis
-          d’imposition) sont en français. La question de la traduction est
-          stratégique et dépend directement de l’ambassade choisie.
+          d’imposition) sont en français. La traduction dépendait autrefois de
+          l’ambassade choisie — depuis le 31 août 2026, ce choix n’existe plus
+          pour un freelance français : c’est Paris, et Paris exige la traduction
+          assermentée. Le tableau ci-dessous n’a donc plus valeur d’arbitrage,
+          seulement de repère pour les résidents des pays concernés.
         </p>
         <figure className="my-8">
           <Image
@@ -518,7 +521,7 @@ export default function ArticleFreelanceDTV() {
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            Paris exige la traduction assermentée : 150 à 300 € et plusieurs jours. C&apos;est là que se joue le choix de l&apos;ambassade.
+            Paris exige la traduction assermentée : 150 à 300 € et plusieurs jours. Ce coût, autrefois évitable en déposant en Asie, est devenu incontournable.
           </figcaption>
         </figure>
 
@@ -540,10 +543,9 @@ export default function ArticleFreelanceDTV() {
             <tbody className="divide-y divide-white/5">
               {[
                 ["Paris 🇫🇷", "Assermentée obligatoire", "150–300 €"],
-                ["Vientiane 🇱🇦 (Soft Power)", "Souvent accepté en FR", "0 €"],
-                ["Vientiane 🇱🇦 (Workcation)", "Recommandée EN", "80–150 €"],
-                ["Kuala Lumpur 🇲🇾", "Recommandée EN", "80–150 €"],
-                ["Phnom Penh 🇰🇭", "Recommandée EN", "80–150 €"],
+                ["Vientiane 🇱🇦 — résidents du Laos", "Souvent accepté en FR", "0 €"],
+                ["Kuala Lumpur 🇲🇾 — résidents de Malaisie", "Recommandée EN", "80–150 €"],
+                ["Phnom Penh 🇰🇭 — résidents du Cambodge", "Recommandée EN", "80–150 €"],
               ].map(([amb, trad, cout]) => (
                 <tr key={amb}>
                   <td className="py-3 px-4 text-white">{amb}</td>
@@ -567,7 +569,7 @@ export default function ArticleFreelanceDTV() {
           6. Quelle ambassade choisir selon votre profil freelance
         </h2>
         <p className="mb-6">
-          Le choix de l’ambassade est aussi important que le contenu du dossier.
+          Le poste de dépôt n’est plus un choix depuis le 31 août 2026 : il découle de votre nationalité ou de votre résidence légale.
           Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
           Pour un freelance français, voici notre recommandation selon votre
           situation :
@@ -576,26 +578,26 @@ export default function ArticleFreelanceDTV() {
         <div className="space-y-4">
           {[
             {
-              profil: "Micro-entrepreneur avec CA régulier + 15 000 € en banque",
-              reco: "Vientiane (Laos) via voie Soft Power",
+              profil: "Micro-entrepreneur avec CA régulier + 15 000 € en banque par personne",
+              reco: "Paris — le profil le plus simple à défendre",
               pourquoi:
-                "3 mois d'historique suffisent. Documents FR souvent acceptés. Traitement en 3 jours ouvrables. Visa Run organisable en 5 nuits.",
+                "3 mois d'historique suffisent et votre régularité de chiffre d'affaires parle d'elle-même. Prévoyez la traduction assermentée et quatre semaines d'instruction, et déposez sans inquiétude.",
               color: "border-emerald-500/30",
               badge: "bg-emerald-500/10 text-emerald-400",
             },
             {
               profil: "Portage salarial avec bulletins de salaire réguliers",
-              reco: "Paris ou Vientiane — les deux fonctionnent",
+              reco: "Paris — le dossier le plus lisible pour un officier",
               pourquoi:
-                "Vos bulletins de salaire sont directement lisibles. Paris est envisageable si vous ne voulez pas vous déplacer. Vientiane reste plus rapide.",
+                "Vos bulletins de salaire ressemblent exactement à ce que l'ambassade attend d'un salarié. C'est le profil qui souffre le moins du passage obligatoire par Paris.",
               color: "border-purple-500/30",
               badge: "bg-purple-500/10 text-purple-400",
             },
             {
               profil: "SASU / EURL avec rémunération irrégulière",
-              reco: "Vientiane uniquement, après restructuration du dossier",
+              reco: "Paris, mais seulement après restructuration du dossier",
               pourquoi:
-                "Il faut d’abord régulariser vos virements personnels sur 3 mois minimum. Déposer à Paris avec ce profil sans préparation = refus quasi-certain.",
+                "Il faut d’abord régulariser vos virements personnels sur 3 mois minimum. C'est le profil qui perd le plus au passage obligatoire par Paris : la souplesse des postes asiatiques ne rattrape plus rien, et déposer sans préparation = refus quasi-certain.",
               color: "border-red-500/30",
               badge: "bg-red-500/10 text-red-400",
             },
