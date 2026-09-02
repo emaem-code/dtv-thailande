@@ -13,16 +13,16 @@ const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('fin-exemption-visa-
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa Run Thaïlande : fin de l'exemption 60 jours",
+  title: "Exemption Thaïlande : 60 → 30 jours au 15 septembre 2026",
   description:
-    "Analyse terrain Juin 2026 : Pourquoi de plus en plus de voyageurs n'obtiennent que 30 jours d'exemption en Thaïlande. Coûts des Visa Runs et alternatives légales (DTV).",
+    "Publiée au Journal Royal le 31 août 2026, la réduction de l'exemption touristique de 60 à 30 jours s'applique aux entrées à partir du 15 septembre 2026. Ce qui change pour les Français, Belges et Suisses.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours', // <-- LE CANONICAL EST ICI
   },
   openGraph: {
-    title: "Visa Run Thaïlande : fin de l'exemption 60 jours",
+    title: "Exemption Thaïlande : 60 → 30 jours au 15 septembre 2026",
     description:
-      "La répression contre les Visa Runs s'intensifie. Décryptage des contrôles aux frontières, des coûts cachés et de la transition vers le Visa DTV.",
+      "La liste des pays exemptés passe de 93 à 60, la durée tombe à 30 jours et les entrées terrestres restent plafonnées à deux par an. Ce qui change, et à partir de quand.",
     url: "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
     siteName: "DTV Thaïlande",
     locale: "fr_FR",
@@ -40,9 +40,9 @@ const articleSchema = {
     "@type": "WebPage",
     "@id": "https://dtv-thailande.fr/blog/fin-exemption-visa-60-jours",
   },
-  "headline": "Visa Run Thaïlande (2026) : Fin de l'exemption à 60 jours aux frontières terrestres ?",
+  "headline": "Thaïlande : fin de l'exemption de 60 jours, 30 jours à partir du 15 septembre 2026",
   "description":
-    "La réalité des frontières terrestres en Thaïlande. Durcissement des contrôles, coûts réels des Visa Runs et transition vers les visas longs séjours.",
+    "Le texte publié au Journal Royal le 31 août 2026 ramène l'exemption touristique à 30 jours pour les entrées à partir du 15 septembre. Portée, régime transitoire, frontières terrestres et alternatives longue durée.",
   "image": "https://dtv-thailande.fr/images/blog/fin-exemption-visa-60-jours.jpg",
   "author": {
     "@type": "Person",
@@ -59,7 +59,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-11",
-  "dateModified": "2026-07-26",
+  "dateModified": "2026-09-02",
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -72,7 +72,23 @@ const faqSchema = {
       "name": "L'exemption de 60 jours en Thaïlande est-elle officiellement annulée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'abrogation des 60 jours a été approuvée par le gouvernement en mai 2026 pour un retour aux 30 jours, mais elle n'entrera en vigueur que 15 jours après sa publication au Journal Officiel (Royal Gazette). À la date du 26 juillet 2026, la loi des 60 jours court encore techniquement pour les vrais touristes."
+        "text": "Oui. La révision a été publiée au Journal Royal le 31 août 2026 et s'applique aux entrées à partir du 15 septembre 2026. À cette date, l'exemption tombe à 30 jours pour la France, la Belgique, la Suisse et l'essentiel des pays concernés, et la liste des pays exemptés se réduit de 93 à 60."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il si j'entre en Thaïlande avant le 15 septembre 2026 ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous conservez la durée portée sur votre tampon d'entrée. Une arrivée jusqu'au 14 septembre 2026 inclus ouvre encore droit à 60 jours, et ces 60 jours courent jusqu'à leur terme même s'il tombe après le 15 septembre. Le nouveau régime ne s'applique qu'aux entrées postérieures à sa date d'effet : il n'y a ni raccourcissement rétroactif, ni obligation de sortir plus tôt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on encore prolonger son exemption sur place après le 15 septembre 2026 ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. L'extension de 30 jours auprès de l'immigration, au tarif de 1 900 THB, reste disponible sous le nouveau régime, de même que la prorogation courte de 7 jours introduite fin 2025. Ces extensions sont toutefois limitées à deux par année civile : le séjour maximal sous exemption devient donc nettement plus court qu'auparavant, et ne permet plus d'organiser une présence continue à l'année."
       }
     },
     {
@@ -129,10 +145,10 @@ export default function ArticleFinExemption() {
           Analyse Terrain · Immigration
         </span>
         <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-          Visa Run Thaïlande (2026) : Fin de l'exemption à <span className="text-red-400">60 jours</span> aux frontières terrestres ?
+          Fin de l&apos;exemption à <span className="text-red-400">60 jours</span> en Thaïlande : 30 jours à partir du 15 septembre 2026
         </h1>
         <p className="text-base text-gray-500 mt-6">
-          Lecture : 12 min · Mis à jour : 26 juillet 2026 · Par{" "}
+          Lecture : 12 min · Mis à jour : 2 septembre 2026 · Par{" "}
           <strong className="text-gray-400">Matthieu Moretti</strong>
         </p>
         <PartageArticle slug="fin-exemption-visa-60-jours" variant="entete" />
@@ -141,10 +157,16 @@ export default function ArticleFinExemption() {
       {/* ── INTRODUCTION (MOTS-CLÉS OPTIMISÉS DANS LES 100 PREMIERS MOTS) ── */}
       <div className="text-lg text-gray-400 mb-12 space-y-5">
         <p>
-          Si vous cherchez des informations fiables sur le <strong>Visa DTV, l'exemption touristique, ou les Visa Runs en Thaïlande</strong>, vous avez probablement vu la rumeur circuler sur les réseaux sociaux. De nombreux voyageurs francophones signalent s'être vu octroyer seulement 30 jours à la frontière terrestre au lieu des 60 jours habituels.
+          Ce n&apos;est plus une rumeur : la réduction de l&apos;<strong>exemption touristique thaïlandaise de 60 à 30 jours</strong> a été
+          publiée au Journal Royal le <strong className="text-white">31 août 2026</strong> et s&apos;applique à toutes les entrées
+          effectuées à partir du <strong className="text-white">15 septembre 2026</strong>. La France, la Belgique et la Suisse
+          sont concernées.
         </p>
         <p>
-          Qu'en est-il vraiment ? La loi a-t-elle déjà changé, ou s'agit-il d'un durcissement ciblé de l'immigration ? Notre agence, en contact direct avec les réalités du terrain et les postes frontières, décrypte pour vous la vérité derrière ce changement de paradigme. L'ère du "bricolage" administratif touche à sa fin et l'obtention d'un visa adéquat devient vitale.
+          Pendant des mois, la mesure a été annoncée sans jamais paraître, et les voyageurs qui ne recevaient que 30 jours au poste
+          frontière en concluaient que la loi avait déjà changé. Ce n&apos;était pas le cas : ils se heurtaient au durcissement
+          discrétionnaire de l&apos;immigration contre les profils de <em>visa runners</em>. Les deux phénomènes se rejoignent
+          désormais. Voici ce qui change exactement, pour qui, à partir de quand — et ce qui reste inchangé.
         </p>
       </div>
 
@@ -152,10 +174,10 @@ export default function ArticleFinExemption() {
       <nav className="bg-[#111111] border border-white/10 rounded-2xl p-6 md:p-8 mb-12 shadow-lg">
         <h2 className="text-xl font-bold text-white mb-4">Au programme de cette enquête :</h2>
         <ul className="space-y-3">
-          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. La loi des 60 jours vs La réalité du terrain (Juillet 2026)</a></li>
+          <li><a href="#loi-vs-realite" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">1. Ce qui change au 15 septembre 2026 (texte publié)</a></li>
           <li><a href="#profil-visa-runner" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">2. Pourquoi l'immigration réduit-elle les tampons à 30 jours ?</a></li>
           <li><a href="#piege-frontieres-terrestres" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">3. Le piège des frontières terrestres : Classement de sévérité</a></li>
-          <li><a href="#aerien-vs-terrestre" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Aérien vs Terrestre : Un vol depuis Paris donne-t-il toujours 60 jours ?</a></li>
+          <li><a href="#aerien-vs-terrestre" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">4. Aérien vs terrestre : quelle durée obtient-on depuis Paris ?</a></li>
           <li><a href="#cout-cache-visa-run" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">5. Le véritable coût financier d'une vie en Visa Run</a></li>
           <li><a href="#transition-dtv" className="text-red-400 hover:text-red-300 hover:underline transition-colors text-sm md:text-base">6. Pourquoi le Visa DTV est l'unique solution rentable</a></li>
         </ul>
@@ -164,25 +186,87 @@ export default function ArticleFinExemption() {
       {/* ── SECTION 1 ── */}
       <section className="mb-12" id="loi-vs-realite">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          1. La loi des 60 jours vs La réalité du terrain (Juillet 2026)
+          1. Ce qui change au 15 septembre 2026 (texte publié)
         </h2>
         <p className="mb-4">
-          Clarifions immédiatement le point légal. Le 19 mai 2026, le cabinet thaïlandais a effectivement approuvé l'abrogation de l'exemption touristique de 60 jours (instaurée en 2024) pour acter le retour strict à une exemption de 30 jours pour 54 pays (dont la France, la Belgique, la Suisse). <strong>Cependant, cette mesure n'est pas encore entrée en vigueur.</strong>
+          Le point légal est désormais tranché. Après une approbation en conseil des ministres au printemps 2026, la révision du
+          régime d&apos;exemption de visa a été <strong className="text-white">publiée au Journal Royal le 31 août 2026</strong>.
+          Conformément au délai de quinze jours prévu par le texte, elle{' '}
+          <strong className="text-white">s&apos;applique aux entrées effectuées à partir du 15 septembre 2026</strong>.
         </p>
         <p className="mb-4">
-          Les nouvelles règles n'entreront en application que 15 jours après leur publication au Journal officiel (<em className="...">Royal Gazette</em>). Tant que cette notification n'est pas publique, le régime des 60 jours reste techniquement applicable.
+          Le dispositif ne se résume pas à un passage uniforme de 60 à 30 jours. Il resserre d&apos;abord le périmètre :
+          la liste des pays admis à l&apos;exemption, ouverte à 93 nationalités depuis juillet 2024, est ramenée à{' '}
+          <strong className="text-white">60 pays et territoires</strong>. Ceux qui y figurent encore — dont la France, la
+          Belgique, la Suisse, le Royaume-Uni, les États-Unis, le Canada et l&apos;Australie — passent à 30 jours. Deux
+          pays, Maurice et les Seychelles, sont ramenés à 15 jours, et trois autres basculent vers le visa à l&apos;arrivée
+          (<em className="not-italic text-gray-300">visa on arrival</em>), payant et délivré au guichet.
         </p>
+
+        <div className="overflow-x-auto my-6 border border-white/10 rounded-2xl bg-[#111111]">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 bg-black/50">
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Régime</th>
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">Jusqu&apos;au 14 sept. 2026</th>
+                <th className="text-left py-4 px-5 text-gray-400 font-semibold uppercase tracking-wider text-xs">À partir du 15 sept. 2026</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Durée accordée (France, Belgique, Suisse)</td>
+                <td className="py-4 px-5 text-gray-400">60 jours</td>
+                <td className="py-4 px-5 text-red-400 font-semibold">30 jours</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Pays admis à l&apos;exemption</td>
+                <td className="py-4 px-5 text-gray-400">93</td>
+                <td className="py-4 px-5 text-red-400 font-semibold">60</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Extension sur place à l&apos;immigration</td>
+                <td className="py-4 px-5 text-gray-400">+ 30 jours (1 900 THB)</td>
+                <td className="py-4 px-5 text-gray-300">+ 30 jours (1 900 THB) — maintenue</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-5 text-white font-medium">Entrées terrestres sous exemption</td>
+                <td className="py-4 px-5 text-gray-400">2 par année civile</td>
+                <td className="py-4 px-5 text-gray-300">2 par année civile — inchangé</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-xl p-5 my-6">
-          <p className="text-white font-semibold mb-2">🔎 Veille active — vérifié le 26 juillet 2026</p>
+          <p className="text-white font-semibold mb-2">✅ Régime transitoire : ce que vous gardez</p>
           <p className="text-sm text-gray-300">
-            À ce jour, <strong className="text-white">aucune publication à la Royal Gazette n'a été annoncée</strong>. L'exemption de 60 jours reste donc en vigueur pour les ressortissants français, belges et suisses. Nous vérifions cette page chaque semaine et la datons à chaque contrôle.
+            Le texte n&apos;a <strong className="text-white">aucun effet rétroactif</strong>. Si vous entrez en Thaïlande
+            jusqu&apos;au <strong className="text-white">14 septembre 2026 inclus</strong>, vous recevez encore 60 jours et
+            vous les conservez jusqu&apos;à leur terme, même s&apos;il tombe en octobre ou en novembre. Personne ne sera
+            invité à écourter un séjour déjà commencé. Seules les entrées à partir du 15 septembre relèvent du nouveau
+            barème.
           </p>
         </div>
-        
+
+        <p className="mb-4">
+          Ce qui subsiste compte autant que ce qui disparaît. L&apos;<strong>extension de 30 jours</strong> demandée sur
+          place à l&apos;immigration reste ouverte au tarif habituel de 1 900 THB, tout comme la prorogation courte de sept
+          jours introduite fin 2025. Mais ces extensions sont{' '}
+          <strong className="text-white">plafonnées à deux par année civile</strong>. Concrètement, le montage qui
+          permettait à un résident de fait d&apos;empiler exemption, extension et sortie de frontière pour tenir douze mois
+          n&apos;existe plus arithmétiquement : le plafond annuel se referme avant l&apos;été.
+        </p>
+
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mt-4">
-          <p className="text-red-400 font-semibold mb-2">💡 Le paradoxe actuel :</p>
+          <p className="text-red-400 font-semibold mb-2">💡 Le vrai message derrière la mesure</p>
           <p className="text-gray-400 text-sm">
-            La <a href="https://www.tatnews.org/" target="_blank" rel="noopener noreferrer" className="text-red-300 hover:underline font-medium">Tourism Authority of Thailand (TAT)</a> souligne que les vrais visiteurs entrant avant la publication officielle pourront rester jusqu'à la fin de leur période autorisée. Alors, pourquoi des voyageurs revenant d'un "Visa Run" au Laos n'obtiennent-ils que 30 jours ? La réponse tient au <strong>profilage douanier</strong>.
+            Les chiffres du ministère du Tourisme expliquent le calcul : près de{' '}
+            <strong className="text-white">90 % des visiteurs restent 30 jours ou moins</strong>, et la durée moyenne de
+            séjour dépasse à peine neuf jours — une moyenne tirée vers le bas par les 4,5 millions d&apos;excursionnistes
+            malaisiens à la journée. Les 60 jours ne servaient donc quasiment qu&apos;à une population : celle qui vit sur
+            place sans titre de séjour. La Thaïlande reste plus stricte que la Malaisie (90 jours) et que le Vietnam
+            (45 jours) : le pari assumé est que le vrai touriste ne verra pas la différence, et que le résident de fait
+            devra prendre un visa.
           </p>
         </div>
       </section>
@@ -219,7 +303,10 @@ export default function ArticleFinExemption() {
           3. Le piège des frontières terrestres : Classement de sévérité
         </h2>
         <p className="mb-4">
-          Le cas de la réduction à 30 jours se produit majoritairement lors d'un passage de frontière terrestre. La loi thaïlandaise est très stricte : <strong>les entrées par voie terrestre sont limitées à deux par année civile</strong> sous le régime de l'exemption de visa, et elles ne sont généralement plus extensibles sur place.
+          Le durcissement le plus brutal se joue aux frontières terrestres. La règle est explicite, et le texte publié le
+          31 août 2026 la reconduit sans l&apos;assouplir : <strong>les entrées par voie terrestre sont limitées à deux par
+          année civile</strong> sous le régime de l&apos;exemption de visa. Passé ce quota, le refus d&apos;entrée est la
+          règle sans visa consulaire en poche.
         </p>
         <figure className="my-8">
           <Image
@@ -234,7 +321,8 @@ export default function ArticleFinExemption() {
           </figcaption>
         </figure>
         <p className="mb-4">
-          Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici notre cartographie terrain exclusive de la sévérité actuelle (Juin 2026) :
+          Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici notre cartographie
+          terrain de la sévérité constatée, relevée avant l&apos;entrée en vigueur du nouveau barème :
         </p>
 
         <div className="overflow-x-auto mt-4 mb-6 border border-white/10 rounded-2xl bg-[#111111]">
@@ -276,23 +364,38 @@ export default function ArticleFinExemption() {
           </table>
         </div>
         <p className="text-sm text-gray-400">
-          * Les tampons réduits à 30 jours signalés par des voyageurs s'expliquent par cette fermeté accrue envers les profils de "visa runners", et non par l'entrée en vigueur de la nouvelle loi.
+          * Avant le 15 septembre 2026, les tampons réduits à 30 jours relevaient de cette fermeté envers les profils de
+          « visa runners », et non de la loi. Depuis cette date, 30 jours est simplement la durée normale : la marge
+          discrétionnaire de l&apos;officier joue désormais <em>en dessous</em> — 15 jours, ou refus d&apos;entrée pur et
+          simple.
         </p>
       </section>
 
       {/* ── SECTION 4 (AERIEN VS TERRESTRE) ── */}
       <section className="mb-12" id="aerien-vs-terrestre">
         <h2 className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          4. Aérien vs Terrestre : Un vol depuis Paris donne-t-il toujours 60 jours ?
+          4. Aérien vs terrestre : quelle durée obtient-on depuis Paris ?
         </h2>
         <p className="mb-4">
-          L'inquiétude monte pour les vacanciers "classiques" qui lisent les retours angoissés des visa runners. Rassurez-vous : <strong>il y a une différence majeure de traitement entre une arrivée aérienne internationale et un passage de frontière terrestre local.</strong>
+          L&apos;inquiétude monte chez les vacanciers « classiques » qui lisent les retours angoissés des visa runners.
+          Rassurez-vous : <strong>la différence de traitement entre une arrivée aérienne internationale et un passage de
+          frontière terrestre local reste entière</strong>, même après le 15 septembre.
         </p>
         <p className="mb-4">
           Si vous arrivez à l'aéroport de Bangkok (Suvarnabhumi) ou de Phuket par un vol long-courrier depuis la France, la Belgique ou la Suisse, et que votre passeport ne contient pas de multiples tampons thaïlandais récents, vous êtes considéré comme un "véritable touriste".
         </p>
+        <p className="mb-4">
+          Pour une arrivée jusqu&apos;au <strong>14 septembre 2026 inclus</strong>, l&apos;officier vous délivre encore
+          automatiquement <strong>60 jours complets</strong>, que vous conservez jusqu&apos;à leur terme. Pour une arrivée à
+          compter du <strong>15 septembre</strong>, ce sera <strong className="text-white">30 jours</strong>, extensibles
+          une fois de 30 jours à l&apos;immigration contre 1 900 THB.
+        </p>
         <p>
-          Dans ce cas, tant que l'abrogation officielle n'est pas parue dans la Royal Gazette, l'officier de l'immigration aérienne vous délivrera automatiquement votre exemption de <strong>60 jours complets</strong>. La réduction punitive à 30 jours est une arme douanière presque exclusivement déployée aux frontières terrestres et contre les vols courts intra-asiatiques (ex: Penang-Phuket) utilisés pour des Visa Runs.
+          La réduction <em>punitive</em> — celle qui descend en dessous de la durée normale, à 15 jours, ou qui débouche sur
+          un refus d&apos;entrée — reste une arme douanière déployée presque exclusivement aux frontières terrestres et
+          contre les vols courts intra-asiatiques (Penang – Phuket, par exemple) utilisés comme visa runs. Un vol
+          long-courrier depuis Paris, Bruxelles ou Genève, avec un passeport sans accumulation de tampons thaïlandais
+          récents, n&apos;est pas concerné par ce profilage.
         </p>
       </section>
 
@@ -302,7 +405,11 @@ export default function ArticleFinExemption() {
           5. Le véritable coût financier d'une vie en Visa Run
         </h2>
         <p className="mb-4">
-          Le constat est amer : les coûts engendrés par toutes ces barrières douanières sont devenus conséquents. Beaucoup d'expatriés non déclarés pensent faire des économies en évitant de payer un vrai visa, mais avec la restriction officieuse à 30 jours et le durcissement imminent au Journal Officiel, la facture réelle est astronomique.
+          Le constat est amer : les coûts engendrés par toutes ces barrières douanières sont devenus conséquents. Beaucoup
+          d&apos;expatriés non déclarés pensent faire des économies en évitant de payer un vrai visa. Le calcul ci-dessous
+          était hier le scénario pessimiste, réservé aux passeports « repérés » ; depuis le passage officiel à 30 jours au
+          15 septembre 2026, <strong className="text-white">c&apos;est devenu la situation par défaut de tout le
+          monde</strong> — et le nombre d&apos;allers-retours annuels double mécaniquement.
         </p>
         <figure className="my-8">
           <Image
@@ -342,7 +449,11 @@ export default function ArticleFinExemption() {
           </ul>
         </div>
         <p className="mt-4 text-sm text-gray-400">
-          Sans compter le risque majeur de voir votre passeport "grillé" (refus d'entrée). Il est fortement conseillé de faire les visas adéquats en fonction de votre profil et des fonds disponibles.
+          Et encore ce chiffre suppose-t-il que la manœuvre reste possible toute l&apos;année. Avec deux entrées terrestres
+          et deux extensions par année civile, elle ne l&apos;est plus : le plafond est atteint avant l&apos;été, et la
+          seule issue restante est un vol international à chaque cycle. Sans compter le risque majeur de voir votre
+          passeport « grillé » (refus d&apos;entrée). Il est fortement conseillé de prendre le visa adéquat en fonction de
+          votre profil et des fonds disponibles.
         </p>
       </section>
 
@@ -352,7 +463,10 @@ export default function ArticleFinExemption() {
           6. Pourquoi le Visa DTV est l'unique solution rentable
         </h2>
         <p className="mb-4">
-          Le gouvernement thaïlandais ne durcit pas les règles par méchanceté, il le fait pour forcer la transition vers la légalité. La TAT et les services consulaires rappellent constamment que pour des séjours longs ou répétés, il faut demander un visa approprié. 
+          Le gouvernement thaïlandais ne durcit pas les règles par méchanceté : il ferme une porte de service pour en
+          ouvrir une officielle. Le message du 31 août 2026 est cohérent avec la création du DTV deux ans plus tôt — pour
+          un séjour long ou répété, il faut un visa, et il en existe désormais un taillé pour les profils qui abusaient de
+          l&apos;exemption. 
         </p>
         <p className="mb-4">
           La solution ultime pour régulariser le profil des "Visa Runners" (freelances, nomades, rentiers) est le <strong className="text-white">Destination Thailand Visa (DTV)</strong> de 5 ans.

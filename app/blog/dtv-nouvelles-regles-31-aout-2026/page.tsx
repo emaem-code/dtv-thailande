@@ -103,7 +103,7 @@ const faqSchema = {
       name: "L'exemption de visa de 60 jours est-elle déjà passée à 30 jours ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Pas à la date de publication de cet article. La révision a été approuvée en conseil des ministres, mais les arrêtés du ministère de l'Intérieur attendent leur publication au Journal Royal et ne prendront effet que quinze jours après celle-ci. Le dispositif prévu est à trois paliers, avec 30 jours pour 59 pays et territoires dont l'ensemble des États membres de l'Union européenne.",
+        text: "Oui, le texte est paru. La révision a été publiée au Journal Royal le 31 août 2026 et s'applique aux entrées effectuées à partir du 15 septembre 2026. La liste des pays exemptés passe de 93 à 60, avec 30 jours pour l'essentiel d'entre eux dont l'ensemble des États membres de l'Union européenne, 15 jours pour Maurice et les Seychelles, et un basculement vers le visa à l'arrivée pour trois autres. Les voyageurs entrés avant le 15 septembre conservent les 60 jours portés sur leur tampon.",
       },
     },
   ],
@@ -749,24 +749,31 @@ export default function ArticleNouvellesReglesDTV() {
           « L&apos;exemption de visa est passée de 60 à 30 jours »
         </h3>
         <p className="mb-4">
-          <strong className="text-white">Non — pas encore.</strong> Le conseil des ministres a approuvé
-          la révision, mais les arrêtés du ministère de l&apos;Intérieur{' '}
           <strong className="text-white">
-            n&apos;étaient toujours pas publiés au Journal Royal
+            Mise à jour du 2 septembre 2026 : c&apos;est désormais exact, mais pas encore applicable.
           </strong>{' '}
-          aux dernières informations disponibles. Or le texte ne prend effet que{' '}
-          <strong className="text-white">quinze jours après cette publication</strong>. D&apos;ici là,
-          les conditions actuelles restent en vigueur.
+          Au moment où j&apos;ai publié cet article, les arrêtés du ministère de l&apos;Intérieur
+          n&apos;étaient pas parus. Ils ont été{' '}
+          <strong className="text-white">publiés au Journal Royal le 31 août 2026</strong> et prennent
+          effet, conformément au délai de quinze jours, pour les entrées effectuées{' '}
+          <strong className="text-white">à partir du 15 septembre 2026</strong>.
         </p>
         <p className="mb-6">
-          Et ce n&apos;est pas un simple passage de 60 à 30 jours pour tout le monde. Le dispositif
-          approuvé est à trois paliers :{' '}
-          <strong className="text-white">59 pays et territoires à 30 jours</strong> — dont
-          l&apos;ensemble des 27 États membres de l&apos;Union européenne —, un palier à 15 jours pour
-          une poignée de pays, et un basculement vers le visa à l&apos;arrivée pour trois autres. Pour
-          un Français : l&apos;exemption est encore de 60 jours à l&apos;heure où j&apos;écris, et
-          passera à 30 jours quinze jours après une publication qui n&apos;a pas encore eu lieu.
-          Surveillez, mais ne réorganisez pas votre vie sur une rumeur.
+          Ce n&apos;est pas pour autant un simple passage de 60 à 30 jours pour tout le monde. Le
+          dispositif resserre d&apos;abord la liste des pays exemptés, qui passe de 93 à{' '}
+          <strong className="text-white">60 pays et territoires</strong>. Ceux qui y restent — dont
+          l&apos;ensemble des 27 États membres de l&apos;Union européenne — basculent à 30 jours ;
+          Maurice et les Seychelles tombent à 15 jours ; trois autres passent au visa à
+          l&apos;arrivée. Point capital : le texte n&apos;est pas rétroactif. Si vous entrez
+          jusqu&apos;au 14 septembre inclus, vous gardez les 60 jours portés sur votre tampon,
+          jusqu&apos;à leur terme.{' '}
+          <LienArticle
+            slug="fin-exemption-visa-60-jours"
+            className="text-red-400 hover:underline font-medium"
+          >
+            Le détail du nouveau barème, entrée par entrée
+          </LienArticle>
+          .
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mb-3">
@@ -907,8 +914,11 @@ export default function ArticleNouvellesReglesDTV() {
             document lui-même.
           </li>
           <li>
-            <strong className="text-white">L&apos;exemption de 60 jours n&apos;est pas encore tombée à 30.</strong>{' '}
-            Le texte attend sa publication au Journal Royal.
+            <strong className="text-white">
+              L&apos;exemption tombe à 30 jours pour les entrées à partir du 15 septembre 2026.
+            </strong>{' '}
+            Texte publié au Journal Royal le 31 août 2026, sans effet rétroactif : une entrée
+            jusqu&apos;au 14 septembre conserve ses 60 jours.
           </li>
         </ul>
       </section>
@@ -973,8 +983,8 @@ export default function ArticleNouvellesReglesDTV() {
               rel="noopener noreferrer"
               className="text-red-400 hover:text-red-300 hover:underline text-sm transition-colors"
             >
-              → TAT Newsroom — révision de l&apos;exemption de visa, en attente de publication au
-              Journal Royal
+              → TAT Newsroom — révision de l&apos;exemption de visa approuvée en conseil des
+              ministres
             </a>
           </li>
           <li>
