@@ -65,12 +65,17 @@ const groupes: Groupe[] = [
       },
       {
         q: 'Quel est le délai pour obtenir le Visa DTV ?',
-        a: "Le traitement consulaire varie fortement selon le poste choisi. Comptez 3 à 4 jours ouvrables à Vientiane ou Kuala Lumpur, contre 3 à 4 semaines à Paris ou Genève. Ce délai ne comprend pas la préparation du dossier, qui reste l'étape la plus longue et la plus déterminante.",
+        a: "Comptez 3 à 4 semaines de traitement à l'ambassade de Paris, qui est le poste de dépôt des résidents français depuis le 31 août 2026. Les délais courts que l'on lit encore — 3 à 4 jours ouvrables à Vientiane ou à Kuala Lumpur — ne sont plus accessibles qu'aux personnes résidant effectivement dans ces pays. Ce délai consulaire ne comprend pas la préparation du dossier, qui reste l'étape la plus longue et la plus déterminante.",
         lien: { href: '/blog/guide-depot-dossier-evisa-dtv', label: 'Le guide du dépôt sur le portail e-Visa' },
       },
       {
         q: 'Combien coûtent les frais consulaires ?',
-        a: "Environ 350 € à l'ambassade de Paris, 10 000 THB à Vientiane, et l'équivalent d'environ 347 € à Kuala Lumpur. Ces montants sont indépendants des honoraires d'une agence et se règlent directement auprès du poste consulaire, en ligne ou sur place selon l'ambassade.",
+        a: "Environ 350 € à l'ambassade de Paris, le poste qui concerne l'immense majorité des demandeurs francophones depuis le 31 août 2026. Les tarifs plus bas pratiqués à Vientiane (10 000 THB) ou à Kuala Lumpur sont désormais réservés aux résidents de ces pays. Ces frais sont indépendants des honoraires d'une agence et se règlent directement auprès du poste consulaire. À Paris, il faut leur ajouter le coût des traductions assermentées, devenu le deuxième poste de dépense d'un dossier.",
+      },
+      {
+        q: "L'exemption touristique de 60 jours existe-t-elle toujours ?",
+        a: "Non, plus pour les entrées effectuées à partir du 15 septembre 2026. Le texte publié au Journal Royal le 31 août 2026 ramène l'exemption à 30 jours et réduit la liste des pays concernés de 93 à 60 — la France, la Belgique et la Suisse y figurent toujours. La mesure n'est pas rétroactive : une entrée jusqu'au 14 septembre inclus conserve les 60 jours portés sur le tampon, jusqu'à leur terme. L'extension de 30 jours sur place reste possible contre 1 900 THB, mais extensions et entrées terrestres sont plafonnées à deux par année civile.",
+        lien: { href: '/blog/fin-exemption-visa-60-jours', label: 'Le détail du nouveau barème' },
       },
     ],
   },
@@ -87,7 +92,7 @@ const groupes: Groupe[] = [
     questions: [
       {
         q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-        a: "Non. L'administration exige de prouver la liquidité de 500 000 THB, soit environ {EUROS} au cours du jour, uniquement au moment de la demande, et lors d'une éventuelle extension sur place. L'argent n'est jamais bloqué ni consigné. En revanche, l'historique du compte est examiné avec attention. Nous conseillons de prévoir plutôt {MARGE} : le seuil qui fait foi est celui en bahts, et le taux de change bouge en permanence.",
+        a: "Non. L'administration exige de prouver la liquidité de 500 000 THB par demandeur, soit environ {EUROS} au cours du jour, uniquement au moment de la demande et lors d'une éventuelle extension sur place. L'argent n'est jamais bloqué ni consigné. En revanche, l'historique du compte est examiné avec attention. Nous conseillons de prévoir plutôt {MARGE} par personne : le seuil qui fait foi est celui en bahts, et le taux de change bouge en permanence.",
         lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Le décryptage complet des fonds bancaires' },
       },
       {
@@ -128,7 +133,7 @@ const groupes: Groupe[] = [
       },
       {
         q: 'Faut-il faire traduire mes documents en anglais ?',
-        a: "Cela dépend du poste consulaire, et c'est la vraie différence entre les ambassades. Certaines acceptent des documents français accompagnés d'une traduction libre, d'autres exigent une traduction assermentée. C'est un point à vérifier avant de choisir le lieu de dépôt, car une traduction assermentée représente un coût et un délai supplémentaires.",
+        a: "Oui, et c'est devenu un poste de dépense à part entière. L'ambassade de Paris, où déposent désormais les résidents français, exige des traductions assermentées : ce n'est plus un critère d'arbitrage entre ambassades, puisque le choix n'existe plus. Le seul levier restant est de réduire le volume à traduire. Demander à votre banque une attestation de solde rédigée en anglais, ou télécharger vos relevés directement en anglais chez Revolut, N26 ou Wise, évite de faire traduire trois mois de relevés ligne à ligne.",
       },
     ],
   },
@@ -183,7 +188,8 @@ const groupes: Groupe[] = [
       },
       {
         q: 'Faut-il justifier 500 000 THB par personne ?',
-        a: "Non, pas si vous êtes mariés. Le conjoint et les enfants de moins de 20 ans déposent en tant qu'accompagnants et s'appuient sur le compte du titulaire principal : un seul montant de 500 000 THB couvre alors tout le foyer. En revanche, un couple pacsé ou en concubinage n'entre pas dans cette catégorie, et chaque adulte doit justifier de ses propres 500 000 THB. C'est le document d'état civil qui fait toute la différence, et cela se prépare bien avant le dépôt.",
+        a: "Oui, et c'est la confusion la plus répandue comme la plus coûteuse. Le seuil de 500 000 THB s'apprécie par personne rattachée à la demande : un couple marié avec deux enfants doit justifier de 2 000 000 THB, pas de 500 000. L'ambassade de Paris applique cette règle strictement. Les fonds peuvent être réunis sur le compte du demandeur principal, mais leur montant doit couvrir tout le foyer. Ce que le mariage change n'est donc pas la somme, mais la nature du dossier : le conjoint et les enfants de moins de 20 ans déposent comme personnes à charge et n'ont pas à justifier de leur propre activité éligible. Un couple pacsé ou en concubinage n'a pas accès à ce rattachement, et chaque adulte doit monter un dossier complet, activité comprise.",
+        lien: { href: '/blog/visa-dtv-couple-famille-pacs', label: 'Le calcul des fonds, foyer par foyer' },
       },
     ],
   },
@@ -200,13 +206,13 @@ const groupes: Groupe[] = [
     questions: [
       {
         q: 'Peut-on demander le Visa DTV depuis la Thaïlande ?',
-        a: "Non. Le DTV se dépose exclusivement auprès d'une ambassade ou d'un consulat de Thaïlande à l'étranger, via le système e-Visa. Il n'existe aucune conversion sur place depuis un autre statut. Une personne se trouvant en Thaïlande doit donc sortir du territoire pour déposer sa demande.",
+        a: "Non. Le DTV se dépose exclusivement auprès d'une ambassade ou d'un consulat de Thaïlande à l'étranger, via le système e-Visa — et, depuis le 31 août 2026, auprès du poste de votre pays de nationalité ou de résidence légale. Il n'existe aucune conversion sur place depuis un autre statut. Une personne installée en Thaïlande sous exemption doit donc rentrer en France pour déposer : un aller-retour dans un pays voisin ne suffit plus.",
         lien: { href: '/blog/guide-depot-dossier-evisa-dtv', label: 'Le fonctionnement du portail e-Visa' },
       },
       {
         q: 'Quelle ambassade choisir pour déposer ma demande ?',
-        a: "Le choix se fait en arbitrant entre trois critères : le délai de traitement, les frais consulaires, et les exigences de traduction. Un dépôt asiatique est nettement plus rapide et souvent moins cher, mais suppose un déplacement. Un dépôt européen évite le voyage mais impose des délais plus longs.",
-        lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Le tableau comparatif des ambassades' },
+        a: "La question ne se pose pratiquement plus. Depuis le 31 août 2026, la demande doit être déposée dans votre pays de nationalité ou de résidence légale : l'ambassade de Paris pour un Français résidant en France, Berne pour un Suisse, Bruxelles pour un Belge. Les postes de Vientiane, Kuala Lumpur ou Phnom Penh restent ouverts, mais uniquement aux personnes qui résident effectivement dans ces pays et peuvent le prouver. L'arbitrage entre délai, frais consulaires et exigences de traduction appartient au passé.",
+        lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Qui peut déposer où, poste par poste' },
       },
       {
         q: 'Un refus antérieur ou un dépassement de séjour bloque-t-il ma demande ?',
