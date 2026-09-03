@@ -3,7 +3,8 @@
 import React, { useState, useRef } from 'react';
 import MontantFonds from './MontantFonds';
 import { lireAttribution } from '../lib/attribution';
-import { prix, tarif } from '../lib/tarifs';
+import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
+import { TAUX_SECOURS } from '../lib/taux';
 
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
@@ -1097,16 +1098,38 @@ export default function FormulaireEligibilite({
                 :
               </p>
 
-              {isGroupTravel && (
+              {isGroupTravel && nbPersonnesFoyer > 1 && (
                 <div className="mt-5 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-left">
                   <p className="text-sm text-amber-500 font-bold mb-1">
-                    Accompagnants supplémentaires
+                    {nbPersonnesFoyer > PALIER_MAX
+                      ? 'Foyer de plus de quatre personnes'
+                      : 'Tarif dégressif pour votre foyer'}
                   </p>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    Puisque vous voyagez à plusieurs, notez qu&apos;une demande de visa distincte
-                    devra être soumise pour vos accompagnants. Des frais supplémentaires seront
-                    calculés en toute transparence dans votre devis.
-                  </p>
+                  {nbPersonnesFoyer > PALIER_MAX ? (
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      Chaque personne dépose une demande distincte. Au-delà de quatre dossiers,
+                      le budget est établi au cas par cas : nous le chiffrons dans votre devis,
+                      poste par poste et sans forfait imposé.
+                    </p>
+                  ) : (
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      Chaque personne dépose une demande distincte, mais le budget n&apos;est pas
+                      multiplié pour autant. Pour {nbPersonnesFoyer} personnes, comptez environ{' '}
+                      <strong className="text-white">
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS).total)}
+                      </strong>{' '}
+                      au total, soit{' '}
+                      <strong className="text-white">
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS).parPersonne)}
+                      </strong>{' '}
+                      par personne —{' '}
+                      <strong className="text-amber-500">
+                        {remiseFoyer(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS)} % de moins
+                      </strong>{' '}
+                      que {nbPersonnesFoyer} dossiers isolés. Le détail vous est remis ligne par
+                      ligne dans votre devis.
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -1117,7 +1140,7 @@ export default function FormulaireEligibilite({
                   <h4 className="font-bold text-white text-lg">Formule Essentielle</h4>
                   <p className="text-xs text-gray-400 mt-1">
                     L&apos;administratif. Frais consulaires, {isSoftPower && 'école, '}traductions et
-                    suivi inclus.
+                    suivi compris dans ce budget.
                   </p>
                 </div>
                 <div className="text-left md:text-right flex-none">
@@ -1132,7 +1155,8 @@ export default function FormulaireEligibilite({
                 <div>
                   <h4 className="font-bold text-white text-lg">Formule Premium</h4>
                   <p className="text-xs text-gray-400 mt-1">
-                    Essentielle + Vol régional + Hôtel + Transferts aéroport.
+                    Essentielle + traductions pilotées, attestation bancaire en anglais et
+                    préparation de votre arrivée.
                   </p>
                 </div>
                 <div className="text-left md:text-right flex-none">
@@ -1152,7 +1176,8 @@ export default function FormulaireEligibilite({
                     </span>
                   </h4>
                   <p className="text-xs text-gray-400 mt-1">
-                    Tout inclus : Vol Europe, Hôtels haut de gamme, Chauffeurs privés.
+                    Premium + installation sur place : accueil, logement, banque, école et
+                    assurance santé.
                   </p>
                 </div>
                 <div className="text-left md:text-right flex-none">

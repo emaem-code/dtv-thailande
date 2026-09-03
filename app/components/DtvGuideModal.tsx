@@ -200,7 +200,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
               Nos Formules d'Accompagnement
             </h3>
             <p className="leading-relaxed text-gray-400 mb-8">
-              Nous gérons votre dossier de A à Z. Les tarifs sont transparents et incluent les frais consulaires (≈350 €) et les traductions certifiées.
+              Nous gérons votre dossier de A à Z. Les montants affichés sont des <strong className="text-gray-300">budgets complets par personne</strong> : ils intègrent les frais consulaires (≈350 €) et les traductions, détaillés ligne par ligne dans votre devis. Le tarif est dégressif dès la deuxième personne.
             </p>
 
             {/* Grille Digital Nomad */}
@@ -212,8 +212,8 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                   <p className="text-2xl font-black text-amber-500 my-2">{prix(tarif('essentielle', false))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ Préparation & suivi dossier</li>
-                    <li>✓ Frais consulaires inclus</li>
-                    <li>✓ Traductions certifiées incluses</li>
+                    <li>✓ Frais consulaires compris</li>
+                    <li>✓ Traductions comprises</li>
                   </ul>
                 </div>
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
@@ -221,19 +221,19 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                   <p className="text-2xl font-black text-amber-500 my-2">{prix(tarif('premium', false))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
-                    <li>✓ Vol régional (intra-Asie)</li>
-                    <li>✓ Taxi A/R aéroport</li>
-                    <li>✓ Hôtel milieu de gamme (3-5 nuits)</li>
+                    <li>✓ Traductions pilotées de bout en bout</li>
+                    <li>✓ Attestation bancaire en anglais</li>
+                    <li>✓ Préparation de l&apos;arrivée (TDAC, TM30, 90 jours)</li>
                   </ul>
                 </div>
                 <div className="bg-amber-500/10 p-5 rounded-2xl border border-amber-500/30">
                   <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
                   <p className="text-2xl font-black text-amber-500 my-2">{prix(tarif('vip', false))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
-                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
-                    <li>✓ Vol long-courrier (Europe-Asie)</li>
-                    <li>✓ Vols régionaux & Taxis</li>
-                    <li>✓ Hôtel Haut de gamme (7-10 nuits)</li>
+                    <li>✓ <strong className="text-gray-300">Tout le pack Premium</strong></li>
+                    <li>✓ Accueil à votre arrivée en Thaïlande</li>
+                    <li>✓ Recherche de logement et ouverture de compte</li>
+                    <li>✓ École des enfants, assurance santé, démarches locales</li>
                   </ul>
                 </div>
               </div>
@@ -247,10 +247,10 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                   <h5 className="font-bold text-white text-lg">Basique</h5>
                   <p className="text-2xl font-black text-emerald-500 my-2">~{prix(tarif('essentielle', true))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
-                    <li>✓ Inscription école incluse</li>
+                    <li>✓ École certifiée comprise</li>
                     <li>✓ Préparation & suivi dossier</li>
-                    <li>✓ Frais consulaires inclus</li>
-                    <li>✓ Traductions certifiées incluses</li>
+                    <li>✓ Frais consulaires compris</li>
+                    <li>✓ Traductions comprises</li>
                   </ul>
                 </div>
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
@@ -258,23 +258,23 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                   <p className="text-2xl font-black text-emerald-500 my-2">~{prix(tarif('premium', true))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
                     <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
-                    <li>✓ Vol régional (intra-Asie)</li>
-                    <li>✓ Taxi A/R aéroport</li>
-                    <li>✓ Hôtel milieu de gamme (3-5 nuits)</li>
+                    <li>✓ Traductions pilotées de bout en bout</li>
+                    <li>✓ Attestation bancaire en anglais</li>
+                    <li>✓ Préparation de l&apos;arrivée (TDAC, TM30, 90 jours)</li>
                   </ul>
                 </div>
                 <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/30">
                   <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-emerald-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
                   <p className="text-2xl font-black text-emerald-500 my-2">~{prix(tarif('vip', true))}</p>
                   <ul className="text-sm text-gray-400 space-y-2">
-                    <li>✓ <strong className="text-gray-300">Tout le pack Basique</strong></li>
-                    <li>✓ Vol long-courrier (Europe-Asie)</li>
-                    <li>✓ Vols régionaux & Taxis</li>
-                    <li>✓ Hôtel Haut de gamme (7-10 nuits)</li>
+                    <li>✓ <strong className="text-gray-300">Tout le pack Premium</strong></li>
+                    <li>✓ Accueil à votre arrivée en Thaïlande</li>
+                    <li>✓ Recherche de logement et ouverture de compte</li>
+                    <li>✓ École des enfants, assurance santé, démarches locales</li>
                   </ul>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 mt-4 italic">* Les tarifs Soft Power sont donnés à titre indicatif et s'ajustent précisément selon l'école choisie (Cuisine ou Muay Thaï).</p>
+              <p className="text-xs text-gray-500 mt-4 italic">* Budgets indicatifs pour une personne. Ils s&apos;ajustent selon l&apos;école choisie (Cuisine ou Muay Thaï) et deviennent dégressifs dès la deuxième personne du foyer.</p>
             </div>
           </section>
 

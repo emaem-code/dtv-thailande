@@ -190,7 +190,8 @@ export default function BlogArticleSoftPower() {
           <LienArticle slug="cas-client-visa-dtv-soft-power-vientiane" className="text-orange-500 hover:underline font-medium">
             le parcours d&apos;un client sans revenus réguliers
           </LienArticle>{' '}
-          qui a obtenu son visa en trois jours à Vientiane.
+          qui a obtenu son visa en trois jours à Vientiane — une voie fermée depuis le 31 août 2026,
+          mais dont le montage de dossier reste instructif.
         </p>
         <p className="text-white font-medium border-l-4 border-orange-500 pl-5 py-1">
           Mais attention, le marché a rapidement été inondé d'écoles "fantômes" et d'arnaques. Le grand
@@ -209,7 +210,7 @@ export default function BlogArticleSoftPower() {
           <li><a href="#gestion-presences" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">2. Assiduité et contrôles : comment prouver sa présence ?</a></li>
           <li><a href="#arnaques-ecoles" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
           <li><a href="#passage-douane" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
-          <li><a href="#visa-run-asie" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">5. Dépôt du dossier : pourquoi l'Asie (Visa Run) écrase Paris</a></li>
+          <li><a href="#visa-run-asie" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">5. Déposer à Paris : l'avantage caché du dossier Soft Power</a></li>
           <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : le décryptage de notre tarif Soft Power</a></li>
         </ul>
       </nav>
@@ -545,37 +546,68 @@ export default function BlogArticleSoftPower() {
       {/* ── SECTION 5 ── */}
       <section className="mb-12">
         <h2 id="visa-run-asie" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          5. Dépôt du dossier : pourquoi l'Asie écrase Paris
+          5. Déposer à Paris : l&apos;avantage caché du dossier Soft Power
         </h2>
+
+        <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-5 mb-6">
+          <p className="text-red-400 font-semibold mb-2">
+            Mise à jour du 2 septembre 2026 — le dépôt en Asie est fermé
+          </p>
+          <p className="text-sm text-gray-300">
+            Cet article recommandait auparavant d&apos;organiser un <em>visa run</em> vers Vientiane
+            ou Kuala Lumpur. Depuis le <strong className="text-white">31 août 2026</strong>, la
+            demande doit être déposée dans le pays de nationalité ou de résidence légale : pour un
+            Français résidant en France, c&apos;est <strong className="text-white">l&apos;ambassade
+            de Paris</strong>, sans alternative.{' '}
+            <LienArticle
+              slug="dtv-nouvelles-regles-31-aout-2026"
+              className="text-orange-500 hover:underline font-medium"
+            >
+              Lire les nouvelles règles
+            </LienArticle>
+            .
+          </p>
+        </div>
+
         <p className="mb-4">
-          Si vous passez par la voie Soft Power, déposer votre dossier à l'Ambassade de Paris est une perte
-          de temps et d'argent. Paris est pointilleuse, exige de multiples traductions assermentées et
-          applique des délais parfois très longs.
+          La bonne nouvelle, c&apos;est que <strong>la voie Soft Power est celle qui souffre le moins
+          de ce changement</strong>. Ce qui rendait Paris coûteux, c&apos;était le volume à faire
+          traduire ; or un dossier Soft Power est précisément celui qui en a le moins.
         </p>
         <p className="mb-4">
-          La réalité du terrain nous pousse à organiser des <strong>Visa Runs</strong> dans les pays
-          limitrophes (Vientiane au Laos, Kuala Lumpur en Malaisie). Pourquoi ?
+          Un dossier télétravail doit produire tout le bloc revenus — avis SIRENE, attestations
+          URSSAF, avis d&apos;imposition, lettre d&apos;activité — soit une douzaine de pages à
+          traduire. Le dossier Soft Power, lui, n&apos;exige aucune preuve de revenus : la lettre de
+          l&apos;école arrive déjà rédigée en anglais, et il ne reste que le casier judiciaire et un
+          acte d&apos;état civil. Trois à quatre pages.
+
         </p>
 
         <figure className="my-8">
           <Image
             src="/images/blog/visa-dtv-soft-power-ambassade-vientiane.jpg"
-            alt="File d'attente devant une ambassade de Thaïlande en Asie du Sud-Est lors d'un visa run pour le DTV"
+            alt="File d'attente devant une ambassade de Thaïlande, à l'époque où le dépôt en Asie était encore ouvert aux non-résidents"
             width={1200}
             height={800}
             className="rounded-2xl border border-white/10"
           />
           <figcaption className="mt-3 text-sm text-gray-500">
-            À Vientiane, les documents de l&apos;école sont déjà en thaï : aucune
-            traduction assermentée, et une décision en trois à quatre jours
-            ouvrables.
+            Les files d&apos;attente de Vientiane appartiennent au passé pour les francophones :
+            seuls les résidents du Laos peuvent encore y déposer.
           </figcaption>
         </figure>
+
+        <p className="mb-4">Ce qu&apos;il faut retenir du dépôt parisien :</p>
         <ul className="list-disc pl-5 space-y-2 text-gray-400">
-          <li>Les documents administratifs de l'école (certificats DBD, licences) sont <strong>déjà en thaï</strong>.
-          Les ambassades de la région les lisent et les valident instantanément.</li>
-          <li>Aucune traduction assermentée coûteuse n'est nécessaire.</li>
-          <li>Le délai de traitement sur place est souvent réduit à <strong>3 jours ouvrables</strong>.</li>
+          <li>Les frais consulaires sont d&apos;environ <strong>350 € par personne</strong>, enfants
+          rattachés compris — il n&apos;y a plus de tarif asiatique à 10 000 THB.</li>
+          <li>Le délai de traitement est de <strong>trois à quatre semaines</strong>, contre trois
+          jours ouvrables autrefois à Vientiane. C&apos;est le vrai coût du changement, et il se gère
+          par l&apos;anticipation, pas par le contournement.</li>
+          <li>Le dépôt se fait entièrement <strong>en ligne, par le portail e-Visa</strong> : aucun
+          déplacement à Paris n&apos;est nécessaire, où que vous viviez en France.</li>
+          <li>La traduction est exigée, mais sur un volume réduit — c&apos;est l&apos;avantage
+          structurel de cette voie sur le dossier freelance.</li>
         </ul>
       </section>
 
@@ -601,7 +633,8 @@ export default function BlogArticleSoftPower() {
           </p>
           <p className="text-sm text-gray-300 leading-relaxed">
             Depuis le 31 août, un demandeur français dépose obligatoirement à Paris, où les frais
-            consulaires sont plus élevés qu&apos;en Asie et où la traduction assermentée est exigée.
+            consulaires sont plus élevés qu&apos;ils ne l&apos;étaient en Asie et où la traduction est
+          exigée.
             La hausse est plus contenue sur la voie Soft Power que sur la voie freelance :{' '}
             <strong className="text-white">
               un dossier école ne comporte aucune preuve de revenus à faire traduire
@@ -688,8 +721,8 @@ export default function BlogArticleSoftPower() {
           Sécurisez votre DTV sans fournir de fiches de paie
         </h3>
         <p className="text-gray-400 mb-8 relative z-10 text-sm md:text-base">
-          Profitez de notre réseau d'écoles certifiées par le gouvernement. De l'inscription officielle 
-          à l'obtention de votre visa au Laos ou en Malaisie, nous gérons votre dossier de A à Z.
+          Profitez de notre réseau d'écoles certifiées par le gouvernement. De l'inscription officielle
+          au dépôt sur le portail e-Visa de l'ambassade de Paris, nous gérons votre dossier de A à Z.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">

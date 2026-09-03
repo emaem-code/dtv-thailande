@@ -9,7 +9,7 @@ const videos = [
   { id: 1, src: '/video-erreur.mp4', poster: '/poster-erreur.jpg', title: "Un refus\net tout s'effondre", phrases: ["Un simple détail peut valoir un refus", "Une case mal remplie suffit", "Ne laissez rien au hasard"] },
   { id: 2, src: '/video-temoignage.mp4', poster: '/poster-temoignage.jpg', title: "Acceptés\ndu premier coup", phrases: ["Dossier géré à 100%", "Zéro aller-retour ambassade", "Ils sont déjà en Thaïlande"] },
   { id: 3, src: '/video-accompagnement.mp4', poster: '/poster-accompagnement.jpg', title: "On prend tout\nen charge", phrases: ["Audit, traductions, dépôt", "Vous faites vos valises", "Nous faisons le reste"] },
-  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "Votre\ninvestissement", phrases: [`À partir de ${prix(PRIX_APPEL)}. Tout inclus`, "Frais de visa et agence inclus", "Vérifiez votre éligibilité"] },
+  { id: 4, src: '/video-budget.mp4', poster: '/poster-budget.jpg', title: "Votre\ninvestissement", phrases: [`Budget complet dès ${prix(PRIX_APPEL)} par personne`, "Frais consulaires et traductions compris", "Dégressif dès la deuxième personne"] },
 ];
 
 function VideoTitle({ title }: { title: string }) {
