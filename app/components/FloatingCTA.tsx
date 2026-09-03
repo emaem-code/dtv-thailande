@@ -23,6 +23,10 @@ export default function FloatingCTA() {
 
   // L'accueil a son propre bandeau de prix, on n'en ajoute pas un second
   if (pathname === '/') return null;
+  // L'espace d'administration et les devis remis aux clients ne sont pas des
+  // pages de vente : un bouton « Vérifier mon éligibilité » y serait déplacé,
+  // et il se retrouverait imprimé en travers du devis.
+  if (pathname.startsWith('/admin') || pathname.startsWith('/devis/')) return null;
 
   return (
     <div

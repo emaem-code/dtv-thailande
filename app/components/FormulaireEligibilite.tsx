@@ -302,14 +302,10 @@ export default function FormulaireEligibilite({
     const attribution = lireAttribution();
 
     try {
-      const response = await fetch('https://formspree.io/f/mreyokzj', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(
-          nettoyer({
+      // La même charge sert à Formspree et à l'enregistrement en base : une
+      // seule source, donc aucun risque que l'admin affiche autre chose que ce
+      // qui est arrivé par courriel.
+      const demande = nettoyer({
             'Type de demande': 'Demande de devis complète',
             Prénom: formData.prenom,
             // La clé doit s'appeler exactement « email » : c'est ainsi que
@@ -348,8 +344,15 @@ export default function FormulaireEligibilite({
             'Canal déclaré': lisible('source', formData.source),
             Remarques: formData.remarks,
             'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
-          }),
-        ),
+      });
+
+      const response = await fetch('https://formspree.io/f/mreyokzj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(demande),
       });
 
       if (response.ok) {
@@ -363,6 +366,8 @@ export default function FormulaireEligibilite({
             prenom: formData.prenom,
             email: formData.email,
             softPower: isSoftPower,
+            personnes: nbPersonnesFoyer,
+            demande,
           }),
         }).catch(() => {
           /* silencieux : ne doit jamais gêner le visiteur */

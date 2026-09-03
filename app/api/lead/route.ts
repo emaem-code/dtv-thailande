@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server';
+import { enregistrerLead } from '../../lib/leads';
 
 /**
- * Accusé de réception envoyé au prospect après une demande de devis.
+ * Accusé de réception au prospect, et enregistrement de la demande.
  *
- * Ce point d'entrée ne sert QU'À l'e-mail de confirmation. La notification
- * qui prévient Matthieu continue de passer par Formspree : si l'envoi ci-dessous
- * échoue — clé absente, quota atteint, panne du prestataire — aucun lead n'est
- * perdu, le prospect n'a simplement pas son accusé de réception.
+ * Deux effets, volontairement indépendants l'un de l'autre : l'e-mail de
+ * confirmation, et l'écriture en base qui alimente l'espace d'administration.
+ * Chacun est encadré par son propre try/catch, et aucun n'est bloquant.
  *
- * L'appel se fait sans dépendance npm : l'API de Resend est un simple POST JSON.
+ * La notification qui prévient Matthieu continue de passer par Formspree, et
+ * c'est délibéré : si la base est indisponible ou la clé Resend absente, le
+ * lead arrive quand même par courriel. L'admin est un confort de travail, pas
+ * un point de défaillance sur le chemin d'un prospect.
  */
 
 export const runtime = 'nodejs';
@@ -26,6 +29,9 @@ type Corps = {
   prenom?: unknown;
   email?: unknown;
   softPower?: unknown;
+  /** Demande complète, telle qu'envoyée à Formspree. Sert à alimenter l'admin. */
+  demande?: unknown;
+  personnes?: unknown;
 };
 
 /** Neutralise le HTML : le prénom vient d'un champ libre, il ne doit rien injecter. */
@@ -126,12 +132,6 @@ function corpsHtml(prenom: string, softPower: boolean): string {
 export async function POST(requete: Request) {
   const cle = process.env.RESEND_API_KEY;
 
-  // Sans clé configurée, on ne bloque rien : le lead est déjà parti chez Formspree.
-  if (!cle) {
-    console.warn('[lead] RESEND_API_KEY absente — accusé de réception non envoyé.');
-    return NextResponse.json({ envoye: false, raison: 'non configuré' }, { status: 200 });
-  }
-
   let corps: Corps;
   try {
     corps = (await requete.json()) as Corps;
@@ -145,6 +145,39 @@ export async function POST(requete: Request) {
 
   if (!EMAIL_VALIDE.test(email)) {
     return NextResponse.json({ envoye: false, raison: 'adresse invalide' }, { status: 400 });
+  }
+
+  // Enregistrement pour l'espace d'administration. Toute erreur est absorbée :
+  // le prospect ne doit jamais pâtir d'une base indisponible.
+  try {
+    const demande =
+      corps.demande && typeof corps.demande === 'object'
+        ? (corps.demande as Record<string, string>)
+        : {};
+    const personnes = Number(corps.personnes);
+
+    await enregistrerLead({
+      prenom,
+      email,
+      telephone: demande['Téléphone'] ?? '',
+      nationalite: demande['Nationalité'] ?? '',
+      statutPro: demande['Statut Pro'] ?? '',
+      foyer: demande['Expatriation'] ?? '',
+      personnes: Number.isFinite(personnes) ? personnes : 1,
+      softPower,
+      formule: demande['Formule choisie'] ?? '',
+      donnees: demande,
+    });
+  } catch (erreur) {
+    console.error('[lead] Enregistrement en base impossible :', erreur);
+  }
+
+  // L'accusé de réception vient APRÈS l'enregistrement, et jamais avant : une
+  // clé Resend absente ne doit pas faire perdre la demande. Rien n'est bloqué
+  // pour autant, le lead est déjà parti chez Formspree.
+  if (!cle) {
+    console.warn('[lead] RESEND_API_KEY absente — accusé de réception non envoyé.');
+    return NextResponse.json({ envoye: false, raison: 'non configuré' }, { status: 200 });
   }
 
   try {
