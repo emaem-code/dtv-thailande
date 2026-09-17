@@ -84,6 +84,30 @@ export const ACOMPTE_POURCENT = 40;
 /** Durée de validité du devis, en jours. */
 export const VALIDITE_JOURS = 30;
 
+/**
+ * Premier numéro de devis attribué.
+ *
+ * La numérotation ne démarre pas à 1. Un premier client qui reçoit le devis
+ * n° 1 sait qu'il est le premier, et cela pèse sur une décision qui engage
+ * plusieurs milliers d'euros. Rien n'oblige une séquence à commencer à l'unité :
+ * la loi exige qu'elle soit continue et sans trou, pas qu'elle parte de zéro.
+ */
+export const PREMIER_NUMERO = 380;
+
+/**
+ * Délai de rétractation d'un contrat conclu à distance avec un particulier,
+ * en jours. Article L221-18 du code de la consommation.
+ */
+export const RETRACTATION_JOURS = 14;
+
+export const CLAUSE_RETRACTATION =
+  `Ce devis étant conclu à distance, vous disposez d'un délai de ` +
+  `${RETRACTATION_JOURS} jours à compter de son acceptation pour vous rétracter, ` +
+  'sans avoir à vous justifier ni à supporter de pénalité. Si vous souhaitez que ' +
+  "je commence le travail avant la fin de ce délai, demandez-le moi expressément : " +
+  'vous renoncez alors à ce droit pour la part déjà exécutée, et me réglez ' +
+  'celle-ci au prorata en cas de rétractation ultérieure.';
+
 export const CLAUSE_REFUS =
   "En cas de refus consulaire, je reprends le dossier et le redépose une fois, " +
   "sans honoraires supplémentaires. Les frais consulaires, non remboursables par " +

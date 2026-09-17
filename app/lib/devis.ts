@@ -1,5 +1,6 @@
 import { randomBytes } from 'crypto';
 import { requete, transaction, assurerSchema } from './db';
+import { PREMIER_NUMERO } from './agence';
 import type { Client, Dossier, Debours, Devis } from './devis-modele';
 
 /**
@@ -47,22 +48,38 @@ function versDevis(l: LigneDevis): Devis {
 }
 
 /**
- * Réserve le prochain numéro de l'année, sans trou.
+ * Réserve le prochain numéro, sans trou.
  *
  * Le verrou de ligne sérialise les demandes concurrentes : deux devis créés
  * dans la même seconde ne peuvent pas recevoir le même numéro, et aucun numéro
  * n'est consommé sans être attribué.
+ *
+ * Deux garanties s'ajoutent à la continuité :
+ *
+ * — le compteur ne descend jamais en dessous de PREMIER_NUMERO, y compris si
+ *   la ligne existait déjà avec une valeur plus basse ;
+ * — une nouvelle année reprend là où la précédente s'est arrêtée, plutôt que
+ *   de repartir à zéro. L'année figure dans le numéro à titre indicatif ; la
+ *   séquence, elle, reste unique sur toute la vie de l'entreprise.
  */
 async function prochainNumero(
   q: <R extends Record<string, unknown>>(t: string, v?: unknown[]) => Promise<R[]>,
 ): Promise<string> {
   const annee = new Date().getFullYear();
-  await q(`INSERT INTO compteurs (annee) VALUES ($1) ON CONFLICT (annee) DO NOTHING`, [annee]);
-  const [ligne] = await q<{ dernier: number }>(
-    `UPDATE compteurs SET dernier = dernier + 1 WHERE annee = $1 RETURNING dernier`,
-    [annee],
+  const plancher = PREMIER_NUMERO - 1;
+
+  await q(
+    `INSERT INTO compteurs (annee, dernier)
+     VALUES ($1, GREATEST($2, COALESCE((SELECT MAX(dernier) FROM compteurs), 0)))
+     ON CONFLICT (annee) DO NOTHING`,
+    [annee, plancher],
   );
-  return `DTV-${annee}-${String(ligne.dernier).padStart(3, '0')}`;
+  const [ligne] = await q<{ dernier: number }>(
+    `UPDATE compteurs SET dernier = GREATEST(dernier, $2) + 1 WHERE annee = $1 RETURNING dernier`,
+    [annee, plancher],
+  );
+
+  return `${annee}${String(ligne.dernier).padStart(6, '0')}`;
 }
 
 export async function creerDevis(base: {

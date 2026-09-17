@@ -8,6 +8,7 @@ import {
   ACOMPTE_POURCENT,
   VALIDITE_JOURS,
   CLAUSE_REFUS,
+  CLAUSE_RETRACTATION,
   CLAUSE_DEBOURS,
   CLAUSE_PAIEMENT,
 } from '../lib/agence';
@@ -183,8 +184,10 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
                 Accompagnement complet du dossier
               </p>
               <p className="text-xs text-gray-500 print:text-gray-600 mt-1">
-                Montage des {devis.dossier.personnes} dossier
-                {devis.dossier.personnes > 1 ? 's' : ''}, vérification des justificatifs financiers,
+                {devis.dossier.personnes > 1
+                  ? `Montage des ${devis.dossier.personnes} dossiers`
+                  : 'Montage du dossier'}
+                , vérification des justificatifs financiers,
                 {devis.dossier.softPower ? ' choix et mise en relation avec l’école certifiée,' : ''}{' '}
                 dépôt sur le portail e-Visa, relectures et suivi jusqu&apos;à la délivrance.
               </p>
@@ -276,6 +279,10 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
         <section className="pt-8 text-xs text-gray-400 print:text-gray-700 leading-relaxed space-y-3">
           <p>
             <strong className="text-white print:text-black">En cas de refus.</strong> {CLAUSE_REFUS}
+          </p>
+          <p>
+            <strong className="text-white print:text-black">Droit de rétractation.</strong>{' '}
+            {CLAUSE_RETRACTATION}
           </p>
           <p>
             <strong className="text-white print:text-black">Ce que ce devis n&apos;est pas.</strong>{' '}
