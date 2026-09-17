@@ -3,39 +3,77 @@
  *
  * Un devis français doit porter l'identité et l'adresse du prestataire, son
  * numéro SIRET, et — pour une micro-entreprise non assujettie — la mention de
- * l'article 293 B du CGI. Tant que la structure n'est pas immatriculée, ces
- * champs restent vides : l'admin affiche alors un avertissement et le document
- * porte un filigrane, plutôt que de laisser partir une pièce non conforme.
+ * l'article 293 B du CGI.
  *
- * Le jour de l'immatriculation, il n'y a que ce fichier à modifier.
+ * Entre le dépôt de la formalité et le retour du numéro par l'INSEE, la
+ * mention « SIRET en cours d'attribution » est admise sur les devis et les
+ * factures. C'est ce que couvre `immatriculationEnCours` : le document reste
+ * opposable, il indique simplement que le numéro n'est pas encore revenu.
+ * L'adresse, elle, n'a pas d'équivalent transitoire — sans elle, rien ne part.
+ *
+ * Le jour où le numéro arrive, il n'y a que ce fichier à modifier : renseigner
+ * `siret` et repasser `immatriculationEnCours` à false.
  */
 
 export const AGENCE = {
   nom: 'Matthieu Moretti',
   enseigne: 'DTV Thaïlande',
   activite: 'Accompagnement administratif — Visa DTV',
+
+  // ── Siège social : l'adresse de domiciliation déclarée au guichet unique.
+  // C'est celle-ci qui figure sur le devis, et non le lieu depuis lequel
+  // l'activité est exercée au quotidien.
   adresse: '',
   codePostal: '',
-  ville: 'Kathu, Phuket',
-  pays: 'Thaïlande',
+  ville: '',
+  pays: 'France',
+
   siret: '',
+  /** Passer à false dès que l'INSEE a renvoyé le numéro. */
+  immatriculationEnCours: true,
+
+  /**
+   * Lieu depuis lequel l'activité est exercée, pour la signature des courriels.
+   * Distinct du siège : le premier dit d'où l'on répond, le second est la
+   * mention légale. Les confondre sur un devis serait une erreur.
+   */
+  lieu: 'Kathu, Phuket',
+
   email: 'contact@dtv-thailande.fr',
   site: 'dtv-thailande.fr',
   /** Micro-entreprise en franchise en base : la TVA n'est ni facturée ni déductible. */
   mentionTva: 'TVA non applicable, article 293 B du CGI',
 } as const;
 
+/**
+ * Ce qui s'affiche à la place du numéro tant qu'il n'est pas revenu.
+ * Mention admise pendant l'instruction de la formalité.
+ */
+export function mentionSiret(): string {
+  if (AGENCE.siret) return `SIRET ${AGENCE.siret}`;
+  return AGENCE.immatriculationEnCours ? 'SIRET en cours d’attribution' : '';
+}
+
 /** Vrai tant qu'il manque une mention obligatoire : le devis n'est pas opposable. */
 export function agenceIncomplete(): boolean {
-  return !AGENCE.siret || !AGENCE.adresse;
+  const adresseManquante = !AGENCE.adresse || !AGENCE.codePostal || !AGENCE.ville;
+  const siretManquant = !AGENCE.siret && !AGENCE.immatriculationEnCours;
+  return adresseManquante || siretManquant;
 }
 
 /** Ce qui manque, pour l'afficher tel quel dans l'admin. */
 export function mentionsManquantes(): string[] {
   const manque: string[] = [];
-  if (!AGENCE.siret) manque.push('numéro SIRET');
-  if (!AGENCE.adresse) manque.push('adresse de l’entreprise');
+  if (!AGENCE.adresse || !AGENCE.codePostal || !AGENCE.ville) {
+    manque.push('adresse du siège');
+  }
+  if (!AGENCE.siret && !AGENCE.immatriculationEnCours) manque.push('numéro SIRET');
   return manque;
+}
+
+/** Vrai quand le devis part avec la mention transitoire plutôt qu'un numéro. */
+export function siretEnAttente(): boolean {
+  return !AGENCE.siret && AGENCE.immatriculationEnCours;
 }
 
 // ─── CONDITIONS COMMERCIALES ─────────────────────────────────────────────────

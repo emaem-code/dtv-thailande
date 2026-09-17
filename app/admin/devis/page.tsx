@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { listerDevis, totaliser, type Devis } from '../../lib/devis';
-import { agenceIncomplete, mentionsManquantes } from '../../lib/agence';
+import { agenceIncomplete, mentionsManquantes, siretEnAttente } from '../../lib/agence';
 import BoutonNouveauDevis from './BoutonNouveauDevis';
 
 export const dynamic = 'force-dynamic';
@@ -39,7 +39,7 @@ export default async function PageDevis() {
         <BoutonNouveauDevis />
       </div>
 
-      {agenceIncomplete() && (
+      {agenceIncomplete() ? (
         <div className="border border-amber-500/30 bg-amber-500/5 rounded-xl p-4 mb-6">
           <p className="text-amber-400 font-semibold text-sm mb-1">
             Mentions légales incomplètes
@@ -47,11 +47,22 @@ export default async function PageDevis() {
           <p className="text-xs text-gray-400 leading-relaxed">
             Il manque {mentionsManquantes().join(' et ')}. Vous pouvez préparer des devis, mais
             l&apos;envoi au client est bloqué : un devis sans ces mentions n&apos;est pas opposable.
-            Le jour de l&apos;immatriculation, tout se débloque en complétant{' '}
+            Tout se débloque en complétant{' '}
             <code className="text-gray-300">app/lib/agence.ts</code>.
           </p>
         </div>
-      )}
+      ) : siretEnAttente() ? (
+        <div className="border border-sky-500/25 bg-sky-500/5 rounded-xl p-4 mb-6">
+          <p className="text-sky-400 font-semibold text-sm mb-1">Immatriculation en cours</p>
+          <p className="text-xs text-gray-400 leading-relaxed">
+            Les devis partent avec la mention « SIRET en cours d&apos;attribution », admise pendant
+            l&apos;instruction de la formalité. Dès que l&apos;INSEE renvoie le numéro, renseignez-le
+            dans <code className="text-gray-300">app/lib/agence.ts</code> et repassez{' '}
+            <code className="text-gray-300">immatriculationEnCours</code> à{' '}
+            <code className="text-gray-300">false</code>.
+          </p>
+        </div>
+      ) : null}
 
       {erreur && (
         <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-4 mb-6">

@@ -30,7 +30,8 @@ export async function POST(requete: Request, { params }: Contexte) {
       {
         erreur:
           `Envoi bloqué : il manque ${mentionsManquantes().join(' et ')}. ` +
-          'Complétez app/lib/agence.ts avant d’envoyer un devis à un client.',
+          'Complétez app/lib/agence.ts avant d’envoyer un devis à un client. ' +
+          'Un SIRET non encore attribué ne bloque pas l’envoi ; une adresse de siège manquante, si.',
       },
       { status: 409 },
     );
@@ -83,7 +84,7 @@ répondez simplement à ce message.
 Bien à vous,
 
 ${AGENCE.nom}
-${AGENCE.enseigne} — ${AGENCE.ville}
+${AGENCE.enseigne} — ${AGENCE.lieu}
 ${AGENCE.email}
 https://${AGENCE.site}
 `;
@@ -119,7 +120,7 @@ https://${AGENCE.site}
           <p style="margin:0 0 24px 0;font-size:14px;color:#57534e;">Ce devis est valable ${VALIDITE_JOURS} jours. Si un point mérite d’être ajusté, répondez simplement à ce message.</p>
           <p style="margin:0 0 4px 0;">Bien à vous,</p>
           <p style="margin:0 0 32px 0;font-size:14px;color:#57534e;">
-            ${echapper(AGENCE.nom)}<br>${echapper(AGENCE.enseigne)} — ${echapper(AGENCE.ville)}<br>
+            ${echapper(AGENCE.nom)}<br>${echapper(AGENCE.enseigne)} — ${echapper(AGENCE.lieu)}<br>
             <a href="mailto:${AGENCE.email}" style="color:#b45309;">${AGENCE.email}</a>
           </p>
         </td></tr>

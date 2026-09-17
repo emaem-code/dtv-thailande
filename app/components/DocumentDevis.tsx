@@ -3,6 +3,8 @@ import { totaliser, type Devis } from '../lib/devis-modele';
 import {
   AGENCE,
   agenceIncomplete,
+  mentionSiret,
+  siretEnAttente,
   ACOMPTE_POURCENT,
   VALIDITE_JOURS,
   CLAUSE_REFUS,
@@ -55,9 +57,9 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
   return (
     <article className="bg-[#0d0d0d] print:bg-white text-gray-300 print:text-black rounded-2xl print:rounded-none border border-white/10 print:border-0 overflow-hidden">
       {incomplet && (
-        <p className="bg-red-500/15 border-b border-red-500/30 text-red-300 print:bg-white print:text-red-700 text-xs px-6 py-3">
-          Document non conforme : il manque le numéro SIRET et l&apos;adresse de
-          l&apos;entreprise. À compléter dans app/lib/agence.ts avant tout envoi.
+        <p className="bg-red-500/15 border-b border-red-500/30 text-red-300 print:hidden text-xs px-6 py-3">
+          Document non conforme : il manque l&apos;adresse du siège. À compléter dans
+          app/lib/agence.ts avant tout envoi.
         </p>
       )}
 
@@ -103,7 +105,9 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               )}
               {AGENCE.codePostal} {AGENCE.ville}, {AGENCE.pays}
               <br />
-              {AGENCE.siret ? `SIRET ${AGENCE.siret}` : <span className="text-red-400">SIRET à renseigner</span>}
+              {mentionSiret() || (
+                <span className="text-red-400 print:text-red-700">SIRET à renseigner</span>
+              )}
               <br />
               {AGENCE.email}
             </p>
@@ -279,6 +283,14 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             appartient au seul poste consulaire. Le présent document ne constitue pas un contrat de
             voyage.
           </p>
+          {siretEnAttente() && (
+            <p>
+              <strong className="text-white print:text-black">Immatriculation en cours.</strong>{' '}
+              La formalité de création a été déposée et le numéro SIRET est en cours
+              d&apos;attribution par l&apos;INSEE. Il vous sera communiqué dès réception et figurera
+              sur la facture.
+            </p>
+          )}
           <p>{AGENCE.mentionTva}</p>
         </section>
 
