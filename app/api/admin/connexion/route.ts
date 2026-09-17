@@ -13,8 +13,19 @@ export const runtime = 'nodejs';
 const DELAI_ECHEC_MS = 800;
 
 export async function POST(requete: Request) {
-  const secret = process.env.ADMIN_SECRET;
-  const attendu = process.env.ADMIN_MOT_DE_PASSE;
+  const secret = process.env.ADMIN_SECRET?.trim();
+
+  /**
+   * Les espaces en bordure sont retirés de part et d'autre.
+   *
+   * Un mot de passe collé dans l'interface d'un hébergeur y entraîne très
+   * souvent une espace ou un retour à la ligne invisible. La comparaison étant
+   * stricte au caractère près, aucune saisie ne correspondrait plus jamais, et
+   * le symptôme — « le mot de passe est pourtant le bon » — est indéchiffrable
+   * pour qui le subit. Un mot de passe dont les espaces de bordure sont
+   * signifiants n'existe pas en pratique : le compromis est sans coût.
+   */
+  const attendu = process.env.ADMIN_MOT_DE_PASSE?.trim();
 
   if (!secret || !attendu) {
     return NextResponse.json(
@@ -36,7 +47,7 @@ export async function POST(requete: Request) {
     /* corps illisible : traité comme un échec */
   }
 
-  if (!egalConstant(motDePasse, attendu)) {
+  if (!egalConstant(motDePasse.trim(), attendu)) {
     await new Promise((resoudre) => setTimeout(resoudre, DELAI_ECHEC_MS));
     return NextResponse.json({ erreur: 'Mot de passe incorrect.' }, { status: 401 });
   }

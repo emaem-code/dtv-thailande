@@ -22,7 +22,11 @@ export default async function proxy(requete: NextRequest) {
     return NextResponse.next();
   }
 
-  const secret = process.env.ADMIN_SECRET;
+  // Le `.trim()` doit être identique à celui de la route de connexion : si les
+  // deux lisaient la variable différemment, le cookie signé à l'ouverture de
+  // session ne serait pas reconnu ici, et l'on tournerait indéfiniment entre
+  // l'écran de connexion et la redirection.
+  const secret = process.env.ADMIN_SECRET?.trim();
   const valide = secret
     ? await verifierSession(secret, requete.cookies.get(NOM_COOKIE)?.value)
     : false;
