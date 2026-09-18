@@ -13,6 +13,7 @@ import {
   CLAUSE_PAIEMENT,
 } from '../lib/agence';
 import { MENTION_TRADUCTIONS } from '../lib/tarifs';
+import { empreinteLisible } from '../lib/signature';
 
 /**
  * Le devis tel que le client le voit — à l'écran comme à l'impression.
@@ -36,6 +37,14 @@ function eurosPrecis(montant: number): string {
 
 function dateFr(iso: string): string {
   return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function dateHeureFr(iso: string): string {
+  return new Date(iso).toLocaleString('fr-FR', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+    timeZone: 'Europe/Paris',
+  });
 }
 
 function dateEcheance(iso: string): string {
@@ -302,6 +311,11 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
         </section>
 
         {/* ── SIGNATURE ── */}
+        {/* Le cadre de signature et la mention légale qui l'explique forment un
+            tout : `break-inside-avoid` les fait basculer ensemble sur la page
+            suivante plutôt que de laisser la mention orpheline, ou pire, de
+            couper la signature elle-même en deux. */}
+        <div className="print:break-inside-avoid">
         <section className="mt-10 pt-8 border-t border-white/10 print:border-gray-300 flex flex-col sm:flex-row justify-between gap-8">
           <div className="text-sm">
             <p className="text-white print:text-black font-semibold">{AGENCE.nom}</p>
@@ -309,13 +323,53 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               {AGENCE.enseigne} · {AGENCE.site}
             </p>
           </div>
-          <div className="sm:text-right">
-            <div className="border-b border-gray-600 print:border-gray-400 w-56 mb-2 h-12" />
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">
-              Bon pour accord — date et signature
-            </p>
-          </div>
+
+          {/* Signé, le cadre porte le nom et l'horodatage ; en attente, il
+              laisse la place d'une signature manuscrite — certains clients
+              préfèrent encore imprimer, et rien n'interdit les deux voies. */}
+          {devis.signature ? (
+            <div className="sm:text-right text-sm sm:max-w-sm">
+              <p className="text-[10px] uppercase tracking-widest text-emerald-500 print:text-emerald-700 font-bold mb-2">
+                Bon pour accord — signé électroniquement
+              </p>
+              <p className="text-white print:text-black font-semibold">
+                {devis.signature.prenom} {devis.signature.nom}
+              </p>
+              <p className="text-gray-400 print:text-gray-700 text-xs mt-1 whitespace-pre-line leading-relaxed">
+                {devis.signature.adresse}
+              </p>
+              <p className="text-gray-500 print:text-gray-600 text-xs mt-2">
+                Le {dateHeureFr(devis.signature.signeLe)}
+              </p>
+              {/* Pas de `break-all` : les groupes de huit sont séparés par des
+                  espaces, le retour à la ligne s'y fait proprement. Une coupure
+                  au caractère laisserait une lettre orpheline en fin de bloc. */}
+              <p className="text-gray-600 print:text-gray-600 text-[9px] mt-2 font-mono leading-relaxed">
+                {empreinteLisible(devis.signature.empreinte)}
+              </p>
+            </div>
+          ) : (
+            <div className="sm:text-right">
+              <div className="border-b border-gray-600 print:border-gray-400 w-56 mb-2 h-12" />
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">
+                Bon pour accord — date et signature
+              </p>
+            </div>
+          )}
         </section>
+
+        {devis.signature && (
+          <p className="mt-6 pt-4 border-t border-white/5 print:border-gray-200 text-[10px] text-gray-500 print:text-gray-600 leading-relaxed print:break-inside-avoid">
+            Document accepté par signature électronique au sens de l&apos;article 1367 du code
+            civil. L&apos;identité du signataire a été vérifiée par un code à usage unique envoyé
+            à {devis.signature.email}, depuis l&apos;adresse {devis.signature.ip}. L&apos;empreinte
+            SHA-256 ci-dessus scelle le contenu : toute modification ultérieure du document la
+            rendrait différente.
+            {devis.signature.renonciationRetractation &&
+              ' Le client a expressément demandé le commencement de l’exécution avant l’expiration du délai de rétractation.'}
+          </p>
+        )}
+        </div>
       </div>
     </article>
   );

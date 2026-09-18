@@ -10,6 +10,8 @@ import {
   type Devis,
   type Debours,
 } from '../../../lib/devis-modele';
+import { empreinteLisible } from '../../../lib/signature';
+import { ETAPES } from '../../../lib/parcours';
 
 /**
  * Édition d'un devis, avec aperçu en direct.
@@ -35,6 +37,20 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
   const totaux = useMemo(() => totaliser(devis), [devis]);
   const modifiable = devis.statut === 'brouillon';
+
+  /**
+   * Un devis signé se verrouille.
+   *
+   * L'empreinte conservée au moment de la signature porte sur le texte d'alors.
+   * Modifier un montant après coup ne produirait pas une correction mais une
+   * preuve fausse : le document affiché ne serait plus celui que le client a
+   * accepté. Un changement se fait par un nouveau devis, pas par-dessus.
+   */
+  const signe = Boolean(devis.signature);
+
+  const [etapeSuivi, setEtapeSuivi] = useState(devis.suivi.etape);
+  const [noteSuivi, setNoteSuivi] = useState(devis.suivi.note);
+  const [etatSuivi, setEtatSuivi] = useState<'repos' | 'envoi' | 'ok' | 'erreur'>('repos');
 
   const changer = (partiel: Partial<Devis>) => {
     setDevis((d) => ({ ...d, ...partiel }));
@@ -124,6 +140,27 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     }
   };
 
+  const enregistrerSuivi = async (champs: { etape?: number; note?: string }) => {
+    setEtatSuivi('envoi');
+    try {
+      const reponse = await fetch(`/api/admin/devis/${devis.id}/suivi`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(champs),
+      });
+      const corps = (await reponse.json()) as { devis?: Devis };
+      if (reponse.ok && corps.devis) {
+        setDevis(corps.devis);
+        setEtatSuivi('ok');
+        router.refresh();
+        return;
+      }
+      setEtatSuivi('erreur');
+    } catch {
+      setEtatSuivi('erreur');
+    }
+  };
+
   const changerStatut = async (statut: Devis['statut']) => {
     await fetch(`/api/admin/devis/${devis.id}`, {
       method: 'PATCH',
@@ -141,12 +178,144 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
         <div>
           <h1 className="text-xl font-bold text-white">{devis.numero}</h1>
           <p className="text-xs text-gray-500 mt-1">
-            {devis.statut === 'brouillon'
-              ? 'Brouillon — modifiable'
-              : `Envoyé le ${devis.envoyeLe ? new Date(devis.envoyeLe).toLocaleDateString('fr-FR') : '—'}`}
+            {signe
+              ? `Signé le ${new Date(devis.signature!.signeLe).toLocaleDateString('fr-FR')} — verrouillé`
+              : devis.statut === 'brouillon'
+                ? 'Brouillon — modifiable'
+                : `Envoyé le ${devis.envoyeLe ? new Date(devis.envoyeLe).toLocaleDateString('fr-FR') : '—'}`}
           </p>
         </div>
 
+        {signe && devis.signature && (
+          <section className="border border-emerald-500/30 bg-emerald-500/[0.05] rounded-xl p-4 space-y-2">
+            <h2 className="text-sm font-bold text-emerald-400">Signé électroniquement</h2>
+            <dl className="text-xs text-gray-400 space-y-1 leading-relaxed">
+              <div>
+                <dt className="inline text-gray-600">Signataire </dt>
+                <dd className="inline text-white">
+                  {devis.signature.prenom} {devis.signature.nom}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-600">Adresse déclarée</dt>
+                <dd className="text-gray-300 whitespace-pre-line">{devis.signature.adresse}</dd>
+              </div>
+              <div>
+                <dt className="inline text-gray-600">Code envoyé à </dt>
+                <dd className="inline text-gray-300">{devis.signature.email}</dd>
+              </div>
+              <div>
+                <dt className="inline text-gray-600">Date et heure </dt>
+                <dd className="inline text-gray-300">
+                  {new Date(devis.signature.signeLe).toLocaleString('fr-FR', {
+                    dateStyle: 'long',
+                    timeStyle: 'short',
+                    timeZone: 'Europe/Paris',
+                  })}
+                </dd>
+              </div>
+              <div>
+                <dt className="inline text-gray-600">Adresse IP </dt>
+                <dd className="inline text-gray-300">{devis.signature.ip}</dd>
+              </div>
+              <div>
+                <dt className="inline text-gray-600">Rétractation </dt>
+                <dd className="inline text-gray-300">
+                  {devis.signature.renonciationRetractation
+                    ? 'renonciation demandée — exécution immédiate'
+                    : 'délai de 14 jours en cours'}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-600">Empreinte SHA-256 du contrat</dt>
+                <dd className="font-mono text-[10px] text-gray-500 break-all leading-relaxed">
+                  {empreinteLisible(devis.signature.empreinte)}
+                </dd>
+              </div>
+            </dl>
+            <p className="text-[11px] text-gray-500 leading-relaxed pt-1">
+              Le document est figé : le modifier invaliderait l&apos;empreinte, et avec elle la
+              preuve. Une évolution des conditions passe par un nouveau devis.
+            </p>
+            <details>
+              <summary className="text-[11px] text-gray-500 hover:text-gray-300 cursor-pointer">
+                Voir le texte exact qui a été signé
+              </summary>
+              <pre className="mt-2 max-h-72 overflow-auto bg-black/40 border border-white/5 rounded-lg p-3 text-[10px] text-gray-400 whitespace-pre-wrap leading-relaxed">
+                {devis.signature.contrat}
+              </pre>
+            </details>
+          </section>
+        )}
+
+        {signe && (
+          <section className="border border-white/10 rounded-xl p-4 space-y-3">
+            <h2 className="text-sm font-bold text-white">Avancement du dossier</h2>
+            <p className="text-[11px] text-gray-500 leading-relaxed">
+              Visible par le client sur sa page. C&apos;est ce qui remplace les courriels
+              « où en êtes-vous ? ».
+            </p>
+            <div>
+              <label className={ETIQUETTE} htmlFor="etape">
+                Étape franchie
+              </label>
+              <select
+                id="etape"
+                className={CHAMP}
+                value={etapeSuivi}
+                onChange={(e) => {
+                  const etape = Number(e.target.value);
+                  setEtapeSuivi(etape);
+                  void enregistrerSuivi({ etape });
+                }}
+              >
+                <option value={-1}>Aucune</option>
+                {ETAPES.map((etape, i) => (
+                  <option key={etape.cle} value={i}>
+                    {i + 1}. {etape.titre}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={ETIQUETTE} htmlFor="note">
+                Mot au client (facultatif)
+              </label>
+              <textarea
+                id="note"
+                rows={3}
+                className={CHAMP}
+                value={noteSuivi}
+                onChange={(e) => setNoteSuivi(e.target.value)}
+                onBlur={() => {
+                  if (noteSuivi !== devis.suivi.note) void enregistrerSuivi({ note: noteSuivi });
+                }}
+              />
+            </div>
+            <p className="text-[11px] text-gray-600">
+              {etatSuivi === 'envoi'
+                ? 'Enregistrement…'
+                : etatSuivi === 'ok'
+                  ? 'Enregistré — le client le voit.'
+                  : etatSuivi === 'erreur'
+                    ? 'Enregistrement impossible.'
+                    : 'Enregistré automatiquement.'}
+            </p>
+            {Object.keys(devis.suivi.pieces).length > 0 && (
+              <p className="text-[11px] text-gray-500 leading-relaxed border-t border-white/5 pt-3">
+                Pièces cochées par le client :{' '}
+                <strong className="text-gray-300">
+                  {Object.values(devis.suivi.pieces).filter(Boolean).length}
+                </strong>
+              </p>
+            )}
+          </section>
+        )}
+
+        {/* Les champs contractuels sont désactivés en bloc par le `fieldset` :
+            une propriété à un seul endroit vaut mieux qu'un `disabled` recopié
+            sur quinze champs, dont un finirait par être oublié. */}
+        <fieldset disabled={signe} className="space-y-6 disabled:opacity-50">
         {/* Client */}
         <section className="border border-white/10 rounded-xl p-4 space-y-3">
           <h2 className="text-sm font-bold text-white">Client</h2>
@@ -280,7 +449,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           </p>
         </section>
 
-        {/* Actions */}
+        {/* Actions qui touchent au contenu contractuel */}
         <section className="space-y-3">
           <div className="flex gap-2">
             <button onClick={enregistrer} disabled={etat === 'envoi'}
@@ -292,7 +461,11 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
               Envoyer au client
             </button>
           </div>
+        </section>
+        </fieldset>
 
+        {/* Actions toujours disponibles, signé ou non */}
+        <section className="space-y-3">
           <div className="flex gap-2">
             <button onClick={() => window.print()}
               className="flex-1 text-xs text-gray-400 hover:text-white border border-white/10 py-2 rounded-lg transition-colors">

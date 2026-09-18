@@ -118,6 +118,32 @@ export function assurerSchema(): Promise<void> {
     `);
     await requete(`CREATE INDEX IF NOT EXISTS devis_cree_le_idx ON devis (cree_le DESC)`);
 
+    // Colonnes ajoutées après coup : `ADD COLUMN IF NOT EXISTS` fait office de
+    // migration pour les bases où la table existe déjà, sans rien casser.
+    await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS signature JSONB`);
+    await requete(
+      `ALTER TABLE devis ADD COLUMN IF NOT EXISTS suivi JSONB NOT NULL DEFAULT '{}'::jsonb`,
+    );
+
+    /**
+     * Codes à usage unique de la signature électronique.
+     *
+     * Un seul code vivant par devis : le jeton est la clé primaire, un nouvel
+     * envoi écrase le précédent. Le code lui-même n'est jamais stocké, seule
+     * son empreinte l'est — une fuite de la base ne permet de signer à la
+     * place de personne.
+     */
+    await requete(`
+      CREATE TABLE IF NOT EXISTS codes_signature (
+        jeton      TEXT PRIMARY KEY,
+        empreinte  TEXT NOT NULL,
+        email      TEXT NOT NULL,
+        envoye_le  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        expire_le  TIMESTAMPTZ NOT NULL,
+        tentatives INTEGER NOT NULL DEFAULT 0
+      )
+    `);
+
     // Compteur de numérotation : la loi veut une séquence continue et sans
     // trou. Une colonne SERIAL ne suffirait pas — elle saute un numéro dès
     // qu'une transaction échoue.

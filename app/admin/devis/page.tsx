@@ -119,8 +119,14 @@ export default async function PageDevis() {
                     <td className="px-5 py-4 text-right text-gray-400">{euros(t.total)}</td>
                     <td className="px-5 py-4">
                       <span className={`inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${et.classe}`}>
-                        {et.texte}
+                        {d.signature ? 'Signé' : et.texte}
                       </span>
+                      {d.signature && (
+                        <p className="text-[11px] text-gray-600 mt-1">
+                          {new Date(d.signature.signeLe).toLocaleDateString('fr-FR')} ·{' '}
+                          {d.signature.prenom} {d.signature.nom}
+                        </p>
+                      )}
                     </td>
                   </tr>
                 );

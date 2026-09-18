@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto';
 import { requete, transaction, assurerSchema } from './db';
 import { PREMIER_NUMERO } from './agence';
-import type { Client, Dossier, Debours, Devis } from './devis-modele';
+import { suiviVide, type Client, type Dossier, type Debours, type Devis, type Signature, type Suivi } from './devis-modele';
 
 /**
  * Lecture et écriture des devis.
@@ -28,6 +28,8 @@ type LigneDevis = {
   dossier: Dossier;
   honoraires: number;
   debours: Debours[];
+  signature: Signature | null;
+  suivi: Partial<Suivi> | null;
 };
 
 function versDevis(l: LigneDevis): Devis {
@@ -44,6 +46,11 @@ function versDevis(l: LigneDevis): Devis {
     dossier: l.dossier,
     honoraires: l.honoraires,
     debours: l.debours,
+    signature: l.signature ?? null,
+    // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
+    // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
+    // remonter jusqu'aux composants.
+    suivi: { ...suiviVide(), ...(l.suivi ?? {}) },
   };
 }
 
@@ -110,11 +117,35 @@ export async function creerDevis(base: {
   });
 }
 
+/**
+ * Erreur levée lorsqu'on tente de modifier un devis déjà signé.
+ *
+ * Distinguée d'une erreur quelconque pour que la route la traduise en 409
+ * plutôt qu'en 500 : ce n'est pas une panne, c'est un refus.
+ */
+export class DevisSigneError extends Error {
+  constructor() {
+    super(
+      'Ce devis a été accepté et signé électroniquement : son contenu ne peut plus ' +
+        'être modifié. L’empreinte conservée ne correspondrait plus au document signé, ' +
+        'et la preuve perdrait toute valeur. Créez un avenant sous forme de nouveau devis.',
+    );
+    this.name = 'DevisSigneError';
+  }
+}
+
 export async function majDevis(
   id: number,
   champs: Partial<Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut'>>,
 ): Promise<Devis | null> {
   await assurerSchema();
+
+  // Le verrouillage se fait ici, et non dans l'interface : une route appelée
+  // directement doit se heurter à la même règle qu'un bouton grisé.
+  const actuel = await lireDevis(id);
+  if (!actuel) return null;
+  if (actuel.signature) throw new DevisSigneError();
+
   const [ligne] = await requete<LigneDevis>(
     `UPDATE devis SET
        client     = COALESCE($2, client),
@@ -169,4 +200,148 @@ export async function lireDevisParJeton(jeton: string): Promise<Devis | null> {
 export async function supprimerDevis(id: number): Promise<void> {
   await assurerSchema();
   await requete(`DELETE FROM devis WHERE id = $1 AND statut = 'brouillon'`, [id]);
+}
+
+// ─── SIGNATURE ────────────────────────────────────────────────────────────────
+
+/**
+ * Scelle le devis.
+ *
+ * La condition `signature IS NULL` est ce qui rend l'opération sûre face à un
+ * double envoi : le second n'écrase rien et ne renvoie aucune ligne. Sans
+ * elle, un client impatient qui clique deux fois remplacerait l'horodatage et
+ * l'adresse IP de sa propre preuve.
+ *
+ * Le statut passe à « accepté » et la date d'envoi est renseignée si elle ne
+ * l'était pas : un devis transmis à la main, sans passer par le bouton
+ * d'envoi, a tout de même été porté à la connaissance du client — sa
+ * signature le prouve.
+ */
+export async function enregistrerSignature(
+  jeton: string,
+  signature: Signature,
+): Promise<Devis | null> {
+  await assurerSchema();
+  const [ligne] = await requete<LigneDevis>(
+    `UPDATE devis SET
+       signature = $2,
+       statut    = 'accepte',
+       envoye_le = COALESCE(envoye_le, now()),
+       suivi     = COALESCE(suivi, '{}'::jsonb) || $3::jsonb,
+       maj_le    = now()
+     WHERE jeton = $1 AND signature IS NULL
+     RETURNING *`,
+    [
+      jeton,
+      JSON.stringify(signature),
+      JSON.stringify({ etape: 0, majLe: signature.signeLe }),
+    ],
+  );
+  return ligne ? versDevis(ligne) : null;
+}
+
+/** Avancement du dossier, tenu par Matthieu. Reste ouvert après la signature. */
+export async function majSuivi(
+  id: number,
+  champs: { etape?: number; note?: string },
+): Promise<Devis | null> {
+  await assurerSchema();
+  const fusion: Record<string, unknown> = { majLe: new Date().toISOString() };
+  if (champs.etape !== undefined) fusion.etape = champs.etape;
+  if (champs.note !== undefined) fusion.note = champs.note;
+
+  const [ligne] = await requete<LigneDevis>(
+    `UPDATE devis SET suivi = COALESCE(suivi, '{}'::jsonb) || $2::jsonb, maj_le = now()
+     WHERE id = $1 RETURNING *`,
+    [id, JSON.stringify(fusion)],
+  );
+  return ligne ? versDevis(ligne) : null;
+}
+
+/**
+ * Coche ou décoche une pièce, depuis l'espace client.
+ *
+ * Lecture puis écriture de l'objet entier plutôt qu'un `jsonb_set` : le
+ * chemin comporte deux niveaux, et Postgres ne crée que le dernier. Au volume
+ * d'un dossier, la simplicité vaut mieux que l'astuce.
+ */
+export async function basculerPiece(
+  jeton: string,
+  piece: string,
+  coche: boolean,
+): Promise<Devis | null> {
+  await assurerSchema();
+  const devis = await lireDevisParJeton(jeton);
+  if (!devis || !devis.signature) return null;
+
+  const pieces = { ...devis.suivi.pieces, [piece]: coche };
+  const [ligne] = await requete<LigneDevis>(
+    `UPDATE devis SET suivi = COALESCE(suivi, '{}'::jsonb) || $2::jsonb, maj_le = now()
+     WHERE jeton = $1 RETURNING *`,
+    [jeton, JSON.stringify({ pieces })],
+  );
+  return ligne ? versDevis(ligne) : null;
+}
+
+// ─── CODES À USAGE UNIQUE ─────────────────────────────────────────────────────
+
+export type CodeEnAttente = {
+  empreinte: string;
+  email: string;
+  envoyeLe: Date;
+  expireLe: Date;
+  tentatives: number;
+};
+
+/** Un seul code vivant par devis : le nouvel envoi remplace le précédent. */
+export async function enregistrerCode(
+  jeton: string,
+  empreinte: string,
+  email: string,
+  expireLe: Date,
+): Promise<void> {
+  await assurerSchema();
+  await requete(
+    `INSERT INTO codes_signature (jeton, empreinte, email, envoye_le, expire_le, tentatives)
+     VALUES ($1, $2, $3, now(), $4, 0)
+     ON CONFLICT (jeton) DO UPDATE
+       SET empreinte = EXCLUDED.empreinte,
+           email     = EXCLUDED.email,
+           envoye_le = now(),
+           expire_le = EXCLUDED.expire_le,
+           tentatives = 0`,
+    [jeton, empreinte, email, expireLe],
+  );
+}
+
+export async function lireCode(jeton: string): Promise<CodeEnAttente | null> {
+  await assurerSchema();
+  const [l] = await requete<{
+    empreinte: string;
+    email: string;
+    envoye_le: Date;
+    expire_le: Date;
+    tentatives: number;
+  }>(`SELECT * FROM codes_signature WHERE jeton = $1`, [jeton]);
+  if (!l) return null;
+  return {
+    empreinte: l.empreinte,
+    email: l.email,
+    envoyeLe: l.envoye_le,
+    expireLe: l.expire_le,
+    tentatives: l.tentatives,
+  };
+}
+
+/** Compte une saisie fausse et renvoie le nouveau total. */
+export async function compterTentative(jeton: string): Promise<number> {
+  const [l] = await requete<{ tentatives: number }>(
+    `UPDATE codes_signature SET tentatives = tentatives + 1 WHERE jeton = $1 RETURNING tentatives`,
+    [jeton],
+  );
+  return l?.tentatives ?? 0;
+}
+
+export async function supprimerCode(jeton: string): Promise<void> {
+  await requete(`DELETE FROM codes_signature WHERE jeton = $1`, [jeton]);
 }

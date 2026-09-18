@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { lireDevis, majDevis, supprimerDevis, type Devis } from '../../../../lib/devis';
+import { lireDevis, majDevis, supprimerDevis, DevisSigneError, type Devis } from '../../../../lib/devis';
 
 export const runtime = 'nodejs';
 
@@ -37,6 +37,11 @@ export async function PATCH(requete: Request, { params }: Contexte) {
     if (!devis) return NextResponse.json({ erreur: 'Devis introuvable.' }, { status: 404 });
     return NextResponse.json({ devis });
   } catch (erreur) {
+    // Un devis signé qui refuse d'être modifié n'est pas une panne : c'est la
+    // règle qui s'applique. Le code doit le dire.
+    if (erreur instanceof DevisSigneError) {
+      return NextResponse.json({ erreur: erreur.message }, { status: 409 });
+    }
     return NextResponse.json({ erreur: (erreur as Error).message }, { status: 500 });
   }
 }

@@ -54,6 +54,46 @@ export type Dossier = {
   remarques: string;
 };
 
+/**
+ * Le faisceau de preuves attaché à une acceptation.
+ *
+ * `contrat` conserve le texte exact accepté et `empreinte` son condensat. Les
+ * deux sont redondants à dessein : l'un se relit, l'autre se vérifie. Sans le
+ * texte, une empreinte ne prouve rien de lisible ; sans l'empreinte, un texte
+ * conservé par le prestataire ne prouve rien d'opposable.
+ */
+export type Signature = {
+  nom: string;
+  prenom: string;
+  adresse: string;
+  /** Boîte où le code à usage unique a été reçu — la preuve d'identité. */
+  email: string;
+  signeLe: string;
+  ip: string;
+  navigateur: string;
+  empreinte: string;
+  contrat: string;
+  /** Demande expresse d'exécution avant la fin du délai de rétractation. */
+  renonciationRetractation: boolean;
+  /** Montants au moment de l'acceptation, pour les retrouver sans recalcul. */
+  honoraires: number;
+  total: number;
+};
+
+/** Étapes franchies et pièces réunies, tenus à jour après la signature. */
+export type Suivi = {
+  /** Index dans ETAPES : -1 tant que rien n'est franchi. */
+  etape: number;
+  note: string;
+  majLe: string | null;
+  /** Pièces cochées par le client, par identifiant. */
+  pieces: Record<string, boolean>;
+};
+
+export function suiviVide(): Suivi {
+  return { etape: -1, note: '', majLe: null, pieces: {} };
+}
+
 export type Devis = {
   id: number;
   numero: string;
@@ -67,6 +107,8 @@ export type Devis = {
   dossier: Dossier;
   honoraires: number;
   debours: Debours[];
+  signature: Signature | null;
+  suivi: Suivi;
 };
 
 export type Totaux = {
