@@ -63,7 +63,7 @@ const etapes = [
   {
     num: '04',
     titre: 'Approbation',
-    desc: "Sous 3 à 5 jours, l'e-mail « Visa Approved » arrive. En formule Premium ou VIP, nous déclenchons alors la réservation de votre vol et de votre chauffeur.",
+    desc: "Sous 3 à 5 jours, l'e-mail « Visa Approved » arrive. En formule Premium, nous vous aidons alors à choisir votre vol et nous organisons votre transfert depuis l'aéroport.",
   },
   {
     num: '05',

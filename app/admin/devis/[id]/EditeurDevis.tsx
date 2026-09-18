@@ -12,7 +12,7 @@ import {
   type Devis,
   type Debours,
 } from '../../../lib/devis-modele';
-import { FORMULES } from '../../../lib/tarifs';
+import { FORMULES_VENDUES } from '../../../lib/tarifs';
 import { empreinteLisible } from '../../../lib/signature';
 import { ETAPES } from '../../../lib/parcours';
 
@@ -75,7 +75,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
   /** Ordre stable, du moins cher au plus cher, quel que soit l'ordre des clics. */
   const ordonner = (liste: Devis['dossier']['formule'][]) =>
-    (['essentielle', 'premium', 'vip'] as const).filter((f) => liste.includes(f));
+    FORMULES_VENDUES.map((f) => f.id).filter((f) => liste.includes(f));
 
   const basculerFormule = (formule: Devis['dossier']['formule'], cochee: boolean) => {
     const liste = ordonner(
@@ -477,7 +477,6 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
                 onChange={(e) => changerDossier({ formule: e.target.value as Devis['dossier']['formule'] })}>
                 <option value="essentielle">Essentielle</option>
                 <option value="premium">Premium</option>
-                <option value="vip">VIP</option>
               </select>
             </div>
           </div>
@@ -503,7 +502,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
             classique, sur la seule formule du dossier ci-dessus.
           </p>
           <div className="space-y-2">
-            {FORMULES.map((f) => {
+            {FORMULES_VENDUES.map((f) => {
               const cochee = formulesProposees.includes(f.id);
               return (
                 <label key={f.id} className="flex gap-2.5 items-center cursor-pointer">

@@ -206,7 +206,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
             {/* Grille Digital Nomad */}
             <div className="mb-10">
               <h4 className="text-lg font-bold text-amber-500 mb-4 border-b border-white/10 pb-2">💻 Profil Digital Nomad (Visa Remote)</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                   <h5 className="font-bold text-white text-lg">Basique</h5>
                   <p className="text-2xl font-black text-amber-500 my-2">{prix(tarif('essentielle', false))}</p>
@@ -226,23 +226,13 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                     <li>✓ Préparation de l&apos;arrivée (TDAC, TM30, 90 jours)</li>
                   </ul>
                 </div>
-                <div className="bg-amber-500/10 p-5 rounded-2xl border border-amber-500/30">
-                  <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
-                  <p className="text-2xl font-black text-amber-500 my-2">{prix(tarif('vip', false))}</p>
-                  <ul className="text-sm text-gray-400 space-y-2">
-                    <li>✓ <strong className="text-gray-300">Tout le pack Premium</strong></li>
-                    <li>✓ Accueil à votre arrivée en Thaïlande</li>
-                    <li>✓ Recherche de logement et ouverture de compte</li>
-                    <li>✓ École des enfants, assurance santé, démarches locales</li>
-                  </ul>
-                </div>
               </div>
             </div>
 
             {/* Grille Soft Power */}
             <div>
               <h4 className="text-lg font-bold text-emerald-500 mb-4 border-b border-white/10 pb-2">🥊 Profil Soft Power (Cuisine ou Muay Thaï)</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                   <h5 className="font-bold text-white text-lg">Basique</h5>
                   <p className="text-2xl font-black text-emerald-500 my-2">~{prix(tarif('essentielle', true))}</p>
@@ -261,16 +251,6 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                     <li>✓ Traductions pilotées de bout en bout</li>
                     <li>✓ Attestation bancaire en anglais</li>
                     <li>✓ Préparation de l&apos;arrivée (TDAC, TM30, 90 jours)</li>
-                  </ul>
-                </div>
-                <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/30">
-                  <h5 className="font-bold text-white text-lg flex items-center gap-2">VIP <span className="bg-emerald-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">Exclusif</span></h5>
-                  <p className="text-2xl font-black text-emerald-500 my-2">~{prix(tarif('vip', true))}</p>
-                  <ul className="text-sm text-gray-400 space-y-2">
-                    <li>✓ <strong className="text-gray-300">Tout le pack Premium</strong></li>
-                    <li>✓ Accueil à votre arrivée en Thaïlande</li>
-                    <li>✓ Recherche de logement et ouverture de compte</li>
-                    <li>✓ École des enfants, assurance santé, démarches locales</li>
                   </ul>
                 </div>
               </div>

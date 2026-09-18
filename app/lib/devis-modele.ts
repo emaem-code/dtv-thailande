@@ -6,6 +6,7 @@ import {
   TRADUCTION_THB_PAR_PAGE,
   PAGES,
   SUPPLEMENT_FORMULE,
+  FORMULES_VENDUES,
 } from './tarifs';
 import { fondsFoyerThb, eurosFoyer, formateThb, TAUX_SECOURS } from './taux';
 import { ACOMPTE_POURCENT } from './agence';
@@ -271,7 +272,7 @@ export function construireOptions(
   dossier: Dossier,
   formules: Dossier['formule'][],
 ): Option[] {
-  const ordre: Dossier['formule'][] = ['essentielle', 'premium', 'vip'];
+  const ordre = FORMULES_VENDUES.map((f) => f.id);
   return ordre
     .filter((f) => formules.includes(f))
     .map((formule) => ({

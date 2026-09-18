@@ -38,6 +38,8 @@ export type Formule = {
   /** Voie Soft Power : le budget intègre la scolarité de l'école certifiée. */
   softPower: number;
   vedette: boolean;
+  /** Formule retirée de la vente, conservée pour les devis déjà établis. */
+  retiree?: true;
 };
 
 /**
@@ -73,11 +75,12 @@ export const FORMULES: Formule[] = [
     description:
       "Essentielle, plus le pilotage des traductions, l'attestation bancaire en anglais et la préparation de l'arrivée (TDAC, TM30, 90 jours).",
     standard: 1700,
+    // Mise en avant depuis le retrait du VIP : c'est désormais le haut de gamme.
     // Recalé le 18 septembre 2026 : 2 650 € supposait un supplément Premium de
     // 700 € en Soft Power contre 450 € en télétravail, pour le même service.
     // Le supplément est désormais unique (voir SUPPLEMENT_FORMULE).
     softPower: 2400,
-    vedette: false,
+    vedette: true,
   },
   {
     id: 'vip',
@@ -85,12 +88,31 @@ export const FORMULES: Formule[] = [
     description:
       "Premium, plus l'installation sur place : accueil à l'arrivée, recherche de logement, banque, école et assurance santé.",
     standard: 2800,
-    // Même recalage : 4 250 € portait un supplément VIP de 2 300 € en Soft
-    // Power contre 1 550 € en télétravail. Le supplément est désormais unique.
     softPower: 3500,
-    vedette: true,
+    vedette: false,
+    retiree: true,
   },
 ];
+
+/**
+ * Les formules réellement proposées.
+ *
+ * ── Retrait du VIP, 18 septembre 2026 ─────────────────────────────────────
+ * Le VIP promettait l'ouverture d'un compte bancaire thaïlandais, la
+ * recherche de logement, l'école et l'assurance santé. Deux problèmes, et le
+ * premier est rédhibitoire : avec un DTV, les banques classent le titulaire
+ * en touriste et refusent dans quatre cas sur cinq — Bangkok Bank réussit
+ * dans environ 20 % des cas, Kasikorn 15 %, les autres presque jamais.
+ * Promettre cela dans un devis signé, c'était s'engager sur ce qui ne dépend
+ * pas de soi. Le reste — logement, école, assurance — n'est pas un métier que
+ * Matthieu veut exercer.
+ *
+ * Une formule qu'on ne peut pas tenir vaut moins que pas de formule du tout.
+ * L'entrée reste dans FORMULES pour que les devis déjà établis continuent de
+ * s'afficher avec leur libellé et leurs prestations d'origine ; elle n'est
+ * simplement plus proposée nulle part.
+ */
+export const FORMULES_VENDUES: Formule[] = FORMULES.filter((f) => !f.retiree);
 
 // ─── HONORAIRES ───────────────────────────────────────────────────────────────
 
@@ -144,14 +166,26 @@ export const SUPPLEMENT_FORMULE: Record<Formule['id'], number> = {
 export const PRESTATIONS: Record<Formule['id'], string[]> = {
   essentielle: [
     'Montage du dossier et vérification de chaque justificatif',
-    'Contrôle des justificatifs financiers et de leur antériorité de trois mois',
-    'Dépôt sur le portail e-Visa, relectures et suivi jusqu’à la délivrance',
-    'Reprise et nouveau dépôt sans honoraires en cas de refus consulaire',
+    'Contrôle de vos justificatifs financiers et de leur antériorité de trois mois',
+    // Le portail e-Visa fait certifier ses déclarations par le demandeur
+    // lui-même. Déposer à sa place reviendrait à signer une attestation sur
+    // l'honneur en son nom : le dossier est préparé de bout en bout, mais
+    // c'est lui qui valide, accompagné écran par écran.
+    'Préparation complète de la demande e-Visa et accompagnement au dépôt, écran par écran',
+    'Relectures et suivi du dossier jusqu’à la délivrance',
+    'Reprise du dossier et nouvelle demande sans honoraires en cas de refus consulaire',
   ],
   premium: [
     'Traductions pilotées de bout en bout avec le traducteur assermenté',
-    'Attestation bancaire obtenue en anglais auprès de votre banque',
-    'Préparation de l’arrivée : carte TDAC, déclaration TM30, rapport des 90 jours',
+    // Seule la banque du client délivre cette attestation, et à lui seul. Ce
+    // qui se vend, c'est la formulation exacte attendue par l'ambassade et la
+    // relecture du document reçu — c'est là que la plupart des dossiers
+    // trébuchent.
+    'Modèle de demande à adresser à votre banque pour l’attestation de solde en anglais, et vérification du document reçu',
+    // TDAC : le voyageur déclare. TM30 : c'est le bailleur ou l'hôtel qui
+    // déclare, pas le locataire. TM47 : obligation personnelle de l'étranger.
+    // Dans les trois cas, on prépare et on vérifie ; on ne déclare pas.
+    'Préparation de vos formalités d’arrivée : carte TDAC, vérification de la déclaration TM30 par votre bailleur, rapport des 90 jours',
     'Sélection de votre vol et de vos premières nuits d’hôtel, transfert depuis l’aéroport organisé',
   ] as string[],
   vip: [

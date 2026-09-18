@@ -31,8 +31,8 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
     },
     {
       num: "04",
-      title: "Approbation & Logistique VIP",
-      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour une formule Premium ou VIP, prévenez-nous : nous déclenchons immédiatement la réservation de votre vol vers la Thaïlande et de votre chauffeur privé."
+      title: "Approbation & préparation de l'arrivée",
+      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour la formule Premium, prévenez-nous : nous vous aidons à choisir votre vol vers la Thaïlande et nous organisons votre transfert depuis l'aéroport."
     },
     {
       num: "05",

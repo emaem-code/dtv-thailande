@@ -91,7 +91,6 @@ const LIBELLES: Record<string, Record<string, string>> = {
   formule: {
     essentielle: 'Essentielle',
     premium: 'Premium',
-    vip: 'VIP',
     conseil: '❓ Ne sait pas encore — envoyer les trois formules',
   },
   source: {
@@ -394,7 +393,7 @@ export default function FormulaireEligibilite({
     if (!formData.formule) {
       err.formule = 'Merci de sélectionner une formule.';
     } else if (
-      (formData.formule === 'premium' || formData.formule === 'vip') &&
+      formData.formule === 'premium' &&
       !formData.villeDepart.trim()
     ) {
       err.villeDepart = 'Merci d’indiquer votre ville de départ.';
@@ -457,7 +456,6 @@ export default function FormulaireEligibilite({
   const isSoftPower = formData.job === 'softpower' || formData.softPowerInteret === 'yes';
   const priceBasic = prix(tarif('essentielle', isSoftPower));
   const pricePremium = prix(tarif('premium', isSoftPower));
-  const priceVIP = prix(tarif('vip', isSoftPower));
 
   const isGroupTravel =
     formData.family === 'married' ||
@@ -1172,26 +1170,6 @@ export default function FormulaireEligibilite({
                 </div>
               </div>
 
-              <div className="bg-amber-500/10 border border-amber-500/30 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                  <h4 className="font-bold text-white text-lg flex items-center gap-2">
-                    Formule VIP{' '}
-                    <span className="bg-amber-500 text-black text-[10px] uppercase px-2 py-0.5 rounded-full">
-                      Exclusif
-                    </span>
-                  </h4>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Premium + installation sur place : accueil, logement, banque, école et
-                    assurance santé.
-                  </p>
-                </div>
-                <div className="text-left md:text-right flex-none">
-                  <p className="text-[10px] text-amber-500/70 uppercase tracking-widest font-bold">
-                    À partir de
-                  </p>
-                  <p className="text-2xl font-black text-amber-500">{priceVIP}</p>
-                </div>
-              </div>
             </div>
 
             {/* ── CHOIX DE LA FORMULE ── */}
@@ -1210,15 +1188,14 @@ export default function FormulaireEligibilite({
                 <div className="grid grid-cols-1 gap-3">
                   <RadioCard label={`Formule Essentielle — à partir de ${priceBasic}`} field="formule" value="essentielle" />
                   <RadioCard label={`Formule Premium — à partir de ${pricePremium}`} field="formule" value="premium" />
-                  <RadioCard label={`Formule VIP — à partir de ${priceVIP}`} field="formule" value="vip" />
                   <RadioCard label="Je ne sais pas encore, conseillez-moi" field="formule" value="conseil" />
                 </div>
                 <Erreur champ="formule" />
 
-                {(formData.formule === 'premium' || formData.formule === 'vip') && (
+                {formData.formule === 'premium' && (
                   <div className="space-y-2 pt-1">
                     <label className="text-sm text-gray-300 ml-1">
-                      Ces formules incluent les vols : d&apos;où partiriez-vous ?
+                      Cette formule organise votre vol : d&apos;où partiriez-vous ?
                     </label>
                     <input
                       type="text"
