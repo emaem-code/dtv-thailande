@@ -73,7 +73,10 @@ export const FORMULES: Formule[] = [
     description:
       "Essentielle, plus le pilotage des traductions, l'attestation bancaire en anglais et la préparation de l'arrivée (TDAC, TM30, 90 jours).",
     standard: 1700,
-    softPower: 2650,
+    // Recalé le 18 septembre 2026 : 2 650 € supposait un supplément Premium de
+    // 700 € en Soft Power contre 450 € en télétravail, pour le même service.
+    // Le supplément est désormais unique (voir SUPPLEMENT_FORMULE).
+    softPower: 2400,
     vedette: false,
   },
   {
@@ -82,7 +85,9 @@ export const FORMULES: Formule[] = [
     description:
       "Premium, plus l'installation sur place : accueil à l'arrivée, recherche de logement, banque, école et assurance santé.",
     standard: 2800,
-    softPower: 4250,
+    // Même recalage : 4 250 € portait un supplément VIP de 2 300 € en Soft
+    // Power contre 1 550 € en télétravail. Le supplément est désormais unique.
+    softPower: 3500,
     vedette: true,
   },
 ];
@@ -108,6 +113,69 @@ export const HONORAIRES: Record<number, number> = {
 
 /** Au-delà, le dossier sort du cadre standard et se chiffre au cas par cas. */
 export const PALIER_MAX = 4;
+
+/**
+ * Supplément d'honoraires par formule, en euros.
+ *
+ * Forfaitaire et par dossier, jamais par personne : l'accueil à l'arrivée, la
+ * recherche de logement ou l'ouverture de compte se font une fois pour le
+ * foyer. Les multiplier par quatre reviendrait à facturer quatre fois une
+ * prestation rendue une seule.
+ *
+ * Identique sur les deux voies. La grille précédente demandait 450 € de plus
+ * en télétravail et 700 € en Soft Power pour exactement le même supplément de
+ * service — un écart qu'on ne pouvait plus tenir dès lors que le devis
+ * détaille chaque ligne et qu'un client peut comparer les deux voies.
+ */
+export const SUPPLEMENT_FORMULE: Record<Formule['id'], number> = {
+  essentielle: 0,
+  premium: 450,
+  vip: 1550,
+};
+
+/**
+ * Ce que chaque formule ajoute, tel que le devis doit l'énoncer.
+ *
+ * Les listes sont cumulatives : Premium contient Essentielle, VIP contient
+ * Premium. Un document qui encaisse 1 550 € de plus sans dire ce qu'ils
+ * achètent n'est pas un devis — et c'est exactement ce que le devis faisait
+ * avant, en décrivant l'Essentielle quelle que soit la formule retenue.
+ */
+export const PRESTATIONS: Record<Formule['id'], string[]> = {
+  essentielle: [
+    'Montage du dossier et vérification de chaque justificatif',
+    'Contrôle des justificatifs financiers et de leur antériorité de trois mois',
+    'Dépôt sur le portail e-Visa, relectures et suivi jusqu’à la délivrance',
+    'Reprise et nouveau dépôt sans honoraires en cas de refus consulaire',
+  ],
+  premium: [
+    'Traductions pilotées de bout en bout avec le traducteur assermenté',
+    'Attestation bancaire obtenue en anglais auprès de votre banque',
+    'Préparation de l’arrivée : carte TDAC, déclaration TM30, rapport des 90 jours',
+  ],
+  vip: [
+    'Accueil à votre arrivée en Thaïlande',
+    'Recherche de logement et ouverture de compte bancaire',
+    'École des enfants, assurance santé et démarches locales',
+  ],
+};
+
+/** La mise en relation avec l'école n'existe que sur la voie Soft Power. */
+const PRESTATION_ECOLE = 'Choix de l’école certifiée et mise en relation';
+
+/**
+ * Les prestations cumulées d'une formule, dans l'ordre de lecture.
+ *
+ * L'ordre n'est pas neutre : le client lit d'abord ce qu'il aurait eu en
+ * Essentielle, puis ce que son supplément lui apporte en plus.
+ */
+export function prestationsFormule(formule: Formule['id'], estSoftPower: boolean): string[] {
+  const base = [...PRESTATIONS.essentielle];
+  if (estSoftPower) base.splice(1, 0, PRESTATION_ECOLE);
+  if (formule === 'premium') return [...base, ...PRESTATIONS.premium];
+  if (formule === 'vip') return [...base, ...PRESTATIONS.premium, ...PRESTATIONS.vip];
+  return base;
+}
 
 // ─── DÉBOURS ──────────────────────────────────────────────────────────────────
 
@@ -193,10 +261,11 @@ export function budgetDossier(
   personnes: number,
   estSoftPower: boolean,
   tauxThbParEuro: number,
+  formule: Formule['id'] = 'essentielle',
 ): Budget {
   const n = Math.max(1, Math.floor(personnes) || 1);
   const surDevis = n > PALIER_MAX;
-  const honoraires = HONORAIRES[Math.min(n, PALIER_MAX)];
+  const honoraires = HONORAIRES[Math.min(n, PALIER_MAX)] + SUPPLEMENT_FORMULE[formule];
 
   // Volume réel estimé, sans plafond : le budget annoncé doit refléter ce que
   // le client va effectivement payer, pas une borne qui l'arrangerait.

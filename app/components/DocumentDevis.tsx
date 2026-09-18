@@ -12,7 +12,14 @@ import {
   CLAUSE_DEBOURS,
   CLAUSE_PAIEMENT,
 } from '../lib/agence';
-import { MENTION_TRADUCTIONS } from '../lib/tarifs';
+import {
+  MENTION_TRADUCTIONS,
+  FORMULES,
+  SUPPLEMENT_FORMULE,
+  HONORAIRES,
+  PALIER_MAX,
+  prestationsFormule,
+} from '../lib/tarifs';
 import { empreinteLisible } from '../lib/signature';
 
 /**
@@ -60,9 +67,30 @@ function libelleFoyer(d: Devis['dossier']): string {
   return `${d.personnes} personnes · ${morceaux.join(' + ')}`;
 }
 
+function nomFormule(id: Devis['dossier']['formule']): string {
+  return FORMULES.find((f) => f.id === id)?.nom ?? id;
+}
+
+/**
+ * Décompose les honoraires entre l'accompagnement et le supplément de formule,
+ * et seulement si les deux tombent juste sur le total facturé.
+ *
+ * Un montant ajusté à la main afficherait sinon une addition fausse sur un
+ * document contractuel, ce qui est pire que pas d'addition du tout.
+ */
+function decomposerHonoraires(
+  devis: Devis,
+): { base: number; supplement: number } | null {
+  const supplement = SUPPLEMENT_FORMULE[devis.dossier.formule];
+  if (supplement === 0) return null;
+  const base = HONORAIRES[Math.min(Math.max(1, devis.dossier.personnes || 1), PALIER_MAX)];
+  return base + supplement === devis.honoraires ? { base, supplement } : null;
+}
+
 export default function DocumentDevis({ devis }: { devis: Devis }) {
   const t = totaliser(devis);
   const incomplet = agenceIncomplete();
+  const detailHonoraires = decomposerHonoraires(devis);
 
   return (
     <article className="bg-[#0d0d0d] print:bg-white text-gray-300 print:text-black rounded-2xl print:rounded-none border border-white/10 print:border-0 overflow-hidden">
@@ -152,7 +180,7 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">Formule</dt>
-              <dd className="text-white print:text-black mt-1 capitalize">{devis.dossier.formule}</dd>
+              <dd className="text-white print:text-black mt-1">{nomFormule(devis.dossier.formule)}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">Dépôt</dt>
@@ -187,24 +215,49 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
           <h3 className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold mb-4">
             1. Mes honoraires d&apos;accompagnement
           </h3>
+          {/* Le détail de la formule est la contrepartie du prix. Le document
+              décrivait auparavant l'Essentielle quelle que soit la formule
+              retenue : un client Premium ou VIP payait un supplément sans
+              jamais lire ce qu'il achetait. */}
           <div className="flex justify-between items-baseline gap-4 border-b border-white/10 print:border-gray-300 pb-3">
             <div>
               <p className="text-white print:text-black font-medium">
-                Accompagnement complet du dossier
+                Formule {nomFormule(devis.dossier.formule)}
+                {devis.dossier.personnes > 1 && ` — ${devis.dossier.personnes} dossiers`}
               </p>
               <p className="text-xs text-gray-500 print:text-gray-600 mt-1">
-                {devis.dossier.personnes > 1
-                  ? `Montage des ${devis.dossier.personnes} dossiers`
-                  : 'Montage du dossier'}
-                , vérification des justificatifs financiers,
-                {devis.dossier.softPower ? ' choix et mise en relation avec l’école certifiée,' : ''}{' '}
-                dépôt sur le portail e-Visa, relectures et suivi jusqu&apos;à la délivrance.
+                {devis.dossier.softPower ? 'Voie Soft Power' : 'Voie activité à distance'} · dépôt à
+                l&apos;ambassade de Thaïlande à Paris
               </p>
             </div>
             <p className="text-xl font-bold text-white print:text-black flex-none">
               {euros(t.honoraires)}
             </p>
           </div>
+
+          <ul className="mt-4 space-y-1.5">
+            {prestationsFormule(devis.dossier.formule, devis.dossier.softPower).map((ligne) => (
+              <li
+                key={ligne}
+                className="flex gap-2 text-sm text-gray-300 print:text-gray-800 leading-relaxed"
+              >
+                <span className="text-amber-500 print:text-amber-700 flex-none">✓</span>
+                <span>{ligne}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Le décomposé n'apparaît que s'il tombe juste. Un devis dont les
+              honoraires ont été ajustés à la main afficherait sinon une
+              addition fausse, ce qui est pire que pas d'addition du tout. */}
+          {detailHonoraires && (
+            <p className="text-xs text-gray-500 print:text-gray-600 mt-3">
+              Soit {euros(detailHonoraires.base)} d&apos;accompagnement pour{' '}
+              {devis.dossier.personnes} personne{devis.dossier.personnes > 1 ? 's' : ''}, et{' '}
+              {euros(detailHonoraires.supplement)} au titre de la formule{' '}
+              {nomFormule(devis.dossier.formule)}.
+            </p>
+          )}
           <p className="text-xs text-gray-400 print:text-gray-700 mt-3 leading-relaxed">
             <strong className="text-white print:text-black">Ferme et définitif.</strong> Ce montant
             ne varie pas, quel que soit le nombre d&apos;allers-retours avec l&apos;ambassade.{' '}

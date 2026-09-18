@@ -5,6 +5,7 @@ import {
   ECOLE_SOFT_POWER,
   TRADUCTION_THB_PAR_PAGE,
   PAGES,
+  SUPPLEMENT_FORMULE,
 } from './tarifs';
 import { fondsFoyerThb, eurosFoyer, formateThb, TAUX_SECOURS } from './taux';
 import { ACOMPTE_POURCENT } from './agence';
@@ -182,8 +183,19 @@ export function deboursParDefaut(
   return lignes;
 }
 
-export function honorairesParDefaut(personnes: number): number {
-  return HONORAIRES[Math.min(Math.max(1, personnes || 1), PALIER_MAX)];
+/**
+ * Honoraires de la grille, pour une composition et une formule données.
+ *
+ * La formule entrait nulle part avant le 18 septembre 2026 : un dossier VIP
+ * ressortait au prix d'un Essentielle, soit 1 550 € d'honoraires oubliés à
+ * chaque devis haut de gamme. Le paramètre n'a pas de valeur par défaut, pour
+ * qu'aucun appelant ne puisse la négliger de nouveau sans que la compilation
+ * le signale.
+ */
+export function honorairesParDefaut(personnes: number, formule: Dossier['formule']): number {
+  return (
+    HONORAIRES[Math.min(Math.max(1, personnes || 1), PALIER_MAX)] + SUPPLEMENT_FORMULE[formule]
+  );
 }
 
 // ─── NORMALISATION ────────────────────────────────────────────────────────────

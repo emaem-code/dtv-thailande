@@ -82,7 +82,7 @@ export async function POST(requete: Request) {
 
     dossier.personnes = Math.max(1, dossier.personnes);
 
-    const honoraires = honorairesParDefaut(dossier.personnes);
+    const honoraires = honorairesParDefaut(dossier.personnes, dossier.formule);
     const debours: Debours[] = deboursParDefaut(dossier.personnes, dossier.softPower);
 
     const devis = await creerDevis({

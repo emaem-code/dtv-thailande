@@ -1,4 +1,5 @@
 import { totaliser, type Devis } from './devis-modele';
+import { prestationsFormule } from './tarifs';
 import {
   AGENCE,
   mentionSiret,
@@ -95,7 +96,13 @@ export function texteContrat(devis: Devis): string {
   l.push('');
 
   l.push('1. HONORAIRES D’ACCOMPAGNEMENT');
-  l.push(`Accompagnement complet du dossier : ${euros(t.honoraires)}`);
+  // L'étendue de la prestation fait partie du contrat : sans elle, le texte
+  // signé fixerait un prix sans dire ce qu'il achète.
+  l.push(`Formule ${d.formule}, comprenant :`);
+  for (const prestation of prestationsFormule(d.formule, d.softPower)) {
+    l.push(`- ${prestation}`);
+  }
+  l.push(`Montant : ${euros(t.honoraires)}`);
   l.push(`Acompte à la signature (${ACOMPTE_POURCENT} %) : ${euros(t.acompte)}`);
   l.push(`Solde au dépôt du dossier : ${euros(t.solde)}`);
   l.push('');

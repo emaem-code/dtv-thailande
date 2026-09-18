@@ -36,6 +36,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [message, setMessage] = useState('');
 
   const totaux = useMemo(() => totaliser(devis), [devis]);
+  const honorairesGrille = honorairesParDefaut(devis.dossier.personnes, devis.dossier.formule);
   const modifiable = devis.statut === 'brouillon';
 
   /**
@@ -53,32 +54,56 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [etatSuivi, setEtatSuivi] = useState<'repos' | 'envoi' | 'ok' | 'erreur'>('repos');
   const [confirmeSuppression, setConfirmeSuppression] = useState(false);
   const [messageClient, setMessageClient] = useState('');
+  const [honorairesManuels, setHonorairesManuels] = useState(false);
+  const [deboursManuels, setDeboursManuels] = useState(false);
 
   const changer = (partiel: Partial<Devis>) => {
     setDevis((d) => ({ ...d, ...partiel }));
     setEtat('repos');
   };
 
+  /**
+   * Toute modification du dossier répercute la grille, sauf sur les montants
+   * saisis à la main.
+   *
+   * Sans ce recalcul, choisir « VIP » laissait les honoraires à 600 € et
+   * passer de une à trois personnes laissait des frais consulaires d'une seule
+   * — deux erreurs muettes, sur le seul écran où l'on ne peut pas se permettre
+   * d'en faire. Les drapeaux préservent en revanche un prix négocié : ce qui a
+   * été tapé à la main ne doit jamais être écrasé par un menu déroulant.
+   */
   const changerDossier = (partiel: Partial<Devis['dossier']>) => {
     setDevis((d) => {
       const dossier = { ...d.dossier, ...partiel };
       dossier.personnes = Math.max(1, (dossier.adultes || 1) + (dossier.enfants || 0));
-      return { ...d, dossier };
+      return {
+        ...d,
+        dossier,
+        honoraires: honorairesManuels
+          ? d.honoraires
+          : honorairesParDefaut(dossier.personnes, dossier.formule),
+        debours: deboursManuels
+          ? d.debours
+          : deboursParDefaut(dossier.personnes, dossier.softPower),
+      };
     });
     setEtat('repos');
   };
 
-  /** Remet honoraires et débours aux valeurs de la grille, pour la composition en cours. */
+  /** Reprend la main sur la grille, y compris après une saisie manuelle. */
   const recalculer = () => {
+    setHonorairesManuels(false);
+    setDeboursManuels(false);
     setDevis((d) => ({
       ...d,
-      honoraires: honorairesParDefaut(d.dossier.personnes),
+      honoraires: honorairesParDefaut(d.dossier.personnes, d.dossier.formule),
       debours: deboursParDefaut(d.dossier.personnes, d.dossier.softPower),
     }));
     setEtat('repos');
   };
 
   const changerLigne = (index: number, partiel: Partial<Debours>) => {
+    setDeboursManuels(true);
     setDevis((d) => ({
       ...d,
       debours: d.debours.map((l, i) => (i === index ? { ...l, ...partiel } : l)),
@@ -437,13 +462,29 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           <label className={ETIQUETTE} htmlFor="hono">Mes honoraires (entrent dans le CA)</label>
           <div className="flex items-center gap-2">
             <input id="hono" type="number" min={0} step={50} className={CHAMP} value={devis.honoraires}
-              onChange={(e) => changer({ honoraires: Math.max(0, Number(e.target.value) || 0) })} />
+              onChange={(e) => {
+                setHonorairesManuels(true);
+                changer({ honoraires: Math.max(0, Number(e.target.value) || 0) });
+              }} />
             <span className="text-gray-500 text-sm flex-none">€</span>
           </div>
           <p className="text-[11px] text-gray-500 mt-2">
             Acompte à la signature : <strong className="text-amber-500">{euros(totaux.acompte)}</strong>
             {' · '}solde {euros(totaux.solde)}
           </p>
+          {/* L'écart avec la grille doit se voir. Un devis VIP parti au tarif
+              Essentielle, c'est 1 550 € qui ne se rattrapent pas. */}
+          {devis.honoraires !== honorairesGrille && (
+            <p className="text-[11px] text-amber-400 mt-2 leading-relaxed">
+              La grille donne {euros(honorairesGrille)} pour cette formule et cette composition.{' '}
+              <button
+                onClick={recalculer}
+                className="underline hover:text-amber-300 transition-colors"
+              >
+                Appliquer
+              </button>
+            </p>
+          )}
         </section>
 
         {/* Débours */}
