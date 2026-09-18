@@ -1,5 +1,5 @@
 import React from 'react';
-import { totaliser, type Devis } from '../lib/devis-modele';
+import { totaliser, devisSelonOption, type Devis } from '../lib/devis-modele';
 import {
   AGENCE,
   agenceIncomplete,
@@ -19,6 +19,7 @@ import {
   HONORAIRES,
   PALIER_MAX,
   prestationsFormule,
+  CLAUSE_VOYAGE,
 } from '../lib/tarifs';
 import { empreinteLisible } from '../lib/signature';
 
@@ -87,10 +88,105 @@ function decomposerHonoraires(
   return base + supplement === devis.honoraires ? { base, supplement } : null;
 }
 
+/**
+ * Les formules mises en regard, sur un devis à options.
+ *
+ * Remplace le détail des honoraires, les frais externes et la synthèse : un
+ * document qui présenterait une formule en détail puis un comparatif des
+ * trois obligerait le client à se demander laquelle fait foi. Ici, rien ne
+ * fait foi tant qu'il n'a pas choisi — et il choisit en signant.
+ *
+ * Les cartes s'empilent plutôt que de former des colonnes : trois colonnes
+ * dans la largeur d'un téléphone sont illisibles, et à l'impression elles se
+ * couperaient en deux.
+ */
+function ComparatifOptions({ devis }: { devis: Devis }) {
+  return (
+    <section className="py-8">
+      <h3 className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold mb-2">
+        Les formules proposées
+      </h3>
+      <p className="text-xs text-gray-400 print:text-gray-700 mb-5 leading-relaxed">
+        Trois niveaux d&apos;accompagnement pour le même dossier. Prenez le temps de les comparer :
+        vous choisirez celle que vous retenez au moment de signer, en bas de cette page. Aucune
+        n&apos;est engagée avant.
+      </p>
+
+      <div className="space-y-5">
+        {devis.options.map((option) => {
+          const variante = devisSelonOption(devis, option);
+          const to = totaliser(variante);
+          const vedette = option.formule === 'premium';
+          return (
+            <div
+              key={option.formule}
+              className={`rounded-xl border p-5 print:break-inside-avoid ${
+                vedette
+                  ? 'border-amber-500/40 bg-amber-500/[0.04] print:border-amber-300 print:bg-amber-50'
+                  : 'border-white/10 print:border-gray-300'
+              }`}
+            >
+              <div className="flex justify-between items-baseline gap-4 flex-wrap">
+                <p className="text-white print:text-black font-bold text-lg">
+                  Formule {nomFormule(option.formule)}
+                </p>
+                <p className="text-xl font-black text-white print:text-black whitespace-nowrap">
+                  {euros(to.total)}
+                </p>
+              </div>
+              <p className="text-xs text-gray-500 print:text-gray-600 mt-1">
+                Dont {euros(to.honoraires)} d&apos;honoraires et {euros(to.debours)} de frais
+                externes réglés par vos soins · acompte à la signature {euros(to.acompte)}
+              </p>
+
+              <ul className="mt-4 space-y-1.5">
+                {prestationsFormule(option.formule, devis.dossier.softPower).map((ligne) => (
+                  <li
+                    key={ligne}
+                    className="flex gap-2 text-sm text-gray-300 print:text-gray-800 leading-relaxed"
+                  >
+                    <span className="text-amber-500 print:text-amber-700 flex-none">✓</span>
+                    <span>{ligne}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <details className="mt-4 print:hidden">
+                <summary className="text-xs text-gray-500 hover:text-gray-300 cursor-pointer transition-colors">
+                  Détail des frais externes
+                </summary>
+                <table className="w-full text-sm mt-3">
+                  <tbody className="divide-y divide-white/5">
+                    {option.debours.map((ligne, i) => (
+                      <tr key={`${ligne.libelle}-${i}`}>
+                        <td className="py-2 pr-4">
+                          <p className="text-white">{ligne.libelle}</p>
+                          {ligne.detail && (
+                            <p className="text-xs text-gray-500 mt-0.5">{ligne.detail}</p>
+                          )}
+                        </td>
+                        <td className="py-2 pl-2 text-right text-white whitespace-nowrap">
+                          {euros(Math.round(ligne.quantite * ligne.unitaire))}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </details>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function DocumentDevis({ devis }: { devis: Devis }) {
   const t = totaliser(devis);
   const incomplet = agenceIncomplete();
   const detailHonoraires = decomposerHonoraires(devis);
+  /** Un devis signé a tranché : il redevient un devis à formule unique. */
+  const aOptions = devis.options.length > 0 && !devis.signature;
 
   return (
     <article className="bg-[#0d0d0d] print:bg-white text-gray-300 print:text-black rounded-2xl print:rounded-none border border-white/10 print:border-0 overflow-hidden">
@@ -180,7 +276,9 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">Formule</dt>
-              <dd className="text-white print:text-black mt-1">{nomFormule(devis.dossier.formule)}</dd>
+              <dd className="text-white print:text-black mt-1">
+                {aOptions ? 'Au choix, voir ci-dessous' : nomFormule(devis.dossier.formule)}
+              </dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">Dépôt</dt>
@@ -210,6 +308,10 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
           </div>
         </section>
 
+        {aOptions ? (
+          <ComparatifOptions devis={devis} />
+        ) : (
+        <>
         {/* ── HONORAIRES ── */}
         <section className="py-8">
           <h3 className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold mb-4">
@@ -309,6 +411,16 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
           <p className="text-xs text-gray-400 print:text-gray-700 mt-3 leading-relaxed">
             {CLAUSE_DEBOURS} {MENTION_TRADUCTIONS}
           </p>
+          {/* La clause voyage n'a de sens que sur les formules qui organisent
+              l'arrivée. Elle dit ce que le prestataire ne fait pas, et c'est
+              le plus important : ni réservation en son nom, ni encaissement,
+              ni commission. */}
+          {devis.dossier.formule !== 'essentielle' && (
+            <p className="text-xs text-gray-400 print:text-gray-700 mt-2 leading-relaxed">
+              <strong className="text-white print:text-black">Voyage d&apos;installation.</strong>{' '}
+              {CLAUSE_VOYAGE}
+            </p>
+          )}
         </section>
 
         {/* ── SYNTHÈSE ── */}
@@ -336,6 +448,8 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             </p>
           </div>
         </section>
+        </>
+        )}
 
         {/* ── CONDITIONS ── */}
         <section className="pt-8 text-xs text-gray-400 print:text-gray-700 leading-relaxed space-y-3">

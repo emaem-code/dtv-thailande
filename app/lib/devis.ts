@@ -1,7 +1,16 @@
 import { randomBytes } from 'crypto';
 import { requete, transaction, assurerSchema } from './db';
 import { PREMIER_NUMERO } from './agence';
-import { suiviVide, type Client, type Dossier, type Debours, type Devis, type Signature, type Suivi } from './devis-modele';
+import {
+  suiviVide,
+  type Client,
+  type Dossier,
+  type Debours,
+  type Devis,
+  type Option,
+  type Signature,
+  type Suivi,
+} from './devis-modele';
 
 /**
  * Lecture et écriture des devis.
@@ -28,6 +37,7 @@ type LigneDevis = {
   dossier: Dossier;
   honoraires: number;
   debours: Debours[];
+  options: Option[] | null;
   signature: Signature | null;
   suivi: Partial<Suivi> | null;
 };
@@ -46,6 +56,7 @@ function versDevis(l: LigneDevis): Devis {
     dossier: l.dossier,
     honoraires: l.honoraires,
     debours: l.debours,
+    options: l.options ?? [],
     signature: l.signature ?? null,
     // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
     // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
@@ -136,7 +147,7 @@ export class DevisSigneError extends Error {
 
 export async function majDevis(
   id: number,
-  champs: Partial<Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut'>>,
+  champs: Partial<Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options'>>,
 ): Promise<Devis | null> {
   await assurerSchema();
 
@@ -153,6 +164,7 @@ export async function majDevis(
        honoraires = COALESCE($4, honoraires),
        debours    = COALESCE($5, debours),
        statut     = COALESCE($6, statut),
+       options    = COALESCE($7, options),
        maj_le     = now()
      WHERE id = $1 RETURNING *`,
     [
@@ -162,6 +174,7 @@ export async function majDevis(
       champs.honoraires ?? null,
       champs.debours ? JSON.stringify(champs.debours) : null,
       champs.statut ?? null,
+      champs.options ? JSON.stringify(champs.options) : null,
     ],
   );
   return ligne ? versDevis(ligne) : null;
@@ -220,21 +233,35 @@ export async function supprimerDevis(id: number): Promise<void> {
 export async function enregistrerSignature(
   jeton: string,
   signature: Signature,
+  option?: Option,
 ): Promise<Devis | null> {
   await assurerSchema();
+
+  // Sur un devis à options, la variante retenue devient le devis lui-même :
+  // honoraires, débours et formule sont figés dans la même écriture que la
+  // signature. Le document signé cesse ainsi d'être une offre à plusieurs
+  // branches pour devenir un contrat unique, et tout ce qui le relit ensuite
+  // — le PDF, la facture, l'espace client — n'a plus à choisir.
   const [ligne] = await requete<LigneDevis>(
     `UPDATE devis SET
-       signature = $2,
-       statut    = 'accepte',
-       envoye_le = COALESCE(envoye_le, now()),
-       suivi     = COALESCE(suivi, '{}'::jsonb) || $3::jsonb,
-       maj_le    = now()
+       signature  = $2,
+       statut     = 'accepte',
+       envoye_le  = COALESCE(envoye_le, now()),
+       suivi      = COALESCE(suivi, '{}'::jsonb) || $3::jsonb,
+       honoraires = COALESCE($4, honoraires),
+       debours    = COALESCE($5, debours),
+       dossier    = CASE WHEN $6::text IS NULL THEN dossier
+                         ELSE jsonb_set(dossier, '{formule}', to_jsonb($6::text)) END,
+       maj_le     = now()
      WHERE jeton = $1 AND signature IS NULL
      RETURNING *`,
     [
       jeton,
       JSON.stringify(signature),
       JSON.stringify({ etape: 0, majLe: signature.signeLe }),
+      option?.honoraires ?? null,
+      option ? JSON.stringify(option.debours) : null,
+      option?.formule ?? null,
     ],
   );
   return ligne ? versDevis(ligne) : null;

@@ -7,9 +7,12 @@ import {
   totaliser,
   deboursParDefaut,
   honorairesParDefaut,
+  construireOptions,
+  devisSelonOption,
   type Devis,
   type Debours,
 } from '../../../lib/devis-modele';
+import { FORMULES } from '../../../lib/tarifs';
 import { empreinteLisible } from '../../../lib/signature';
 import { ETAPES } from '../../../lib/parcours';
 
@@ -79,12 +82,18 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
       return {
         ...d,
         dossier,
+        // Les options sont recalculées elles aussi : une famille qui passe de
+        // deux à quatre ne doit pas se voir proposer d'anciens montants.
+        options:
+          d.options.length > 0
+            ? construireOptions(dossier, d.options.map((o) => o.formule))
+            : [],
         honoraires: honorairesManuels
           ? d.honoraires
           : honorairesParDefaut(dossier.personnes, dossier.formule),
         debours: deboursManuels
           ? d.debours
-          : deboursParDefaut(dossier.personnes, dossier.softPower),
+          : deboursParDefaut(dossier.personnes, dossier.softPower, dossier.formule),
       };
     });
     setEtat('repos');
@@ -97,7 +106,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     setDevis((d) => ({
       ...d,
       honoraires: honorairesParDefaut(d.dossier.personnes, d.dossier.formule),
-      debours: deboursParDefaut(d.dossier.personnes, d.dossier.softPower),
+      debours: deboursParDefaut(d.dossier.personnes, d.dossier.softPower, d.dossier.formule),
     }));
     setEtat('repos');
   };
@@ -123,6 +132,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           dossier: devis.dossier,
           honoraires: devis.honoraires,
           debours: devis.debours,
+          options: devis.options,
         }),
       });
       const corps = (await reponse.json()) as { devis?: Devis; erreur?: string };
@@ -453,6 +463,66 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
             <p className="text-[11px] text-amber-400 leading-relaxed">
               Plus de quatre personnes : la grille ne couvre pas ce cas. Fixez les honoraires
               manuellement ci-dessous.
+            </p>
+          )}
+        </section>
+
+        {/* Formules proposées au choix */}
+        <section className="border border-white/10 rounded-xl p-4 space-y-3">
+          <h2 className="text-sm font-bold text-white">Proposer plusieurs formules</h2>
+          <p className="text-[11px] text-gray-500 leading-relaxed">
+            Pour un client qui hésite : un seul devis, un seul numéro, les formules cochées
+            présentées côte à côte. Il tranche en signant. Ne rien cocher revient au devis
+            classique, sur la seule formule du dossier ci-dessus.
+          </p>
+          <div className="space-y-2">
+            {FORMULES.map((f) => {
+              const cochee = devis.options.some((o) => o.formule === f.id);
+              return (
+                <label key={f.id} className="flex gap-2.5 items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={cochee}
+                    onChange={(e) => {
+                      const retenues = new Set(devis.options.map((o) => o.formule));
+                      if (e.target.checked) retenues.add(f.id);
+                      else retenues.delete(f.id);
+                      // Une seule formule cochée n'est pas un choix : on
+                      // retombe alors sur le devis classique.
+                      const liste = [...retenues];
+                      changer({
+                        options: liste.length >= 2 ? construireOptions(devis.dossier, liste) : [],
+                      });
+                    }}
+                    className="w-4 h-4 flex-none accent-amber-500"
+                  />
+                  <span className="text-sm text-gray-300">
+                    {f.nom}
+                    <span className="text-gray-600 ml-2 text-xs">
+                      {euros(
+                        totaliser(
+                          devisSelonOption(devis, {
+                            formule: f.id,
+                            honoraires: honorairesParDefaut(devis.dossier.personnes, f.id),
+                            debours: deboursParDefaut(
+                              devis.dossier.personnes,
+                              devis.dossier.softPower,
+                              f.id,
+                            ),
+                          }),
+                        ).total,
+                      )}
+                    </span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+          {devis.options.length > 0 && (
+            <p className="text-[11px] text-amber-400 leading-relaxed border-t border-white/5 pt-3">
+              {devis.options.length} formules proposées. Les honoraires et frais ci-dessous ne
+              servent plus qu&apos;au calcul de secours : c&apos;est l&apos;option retenue par le
+              client qui deviendra le contrat.
             </p>
           )}
         </section>

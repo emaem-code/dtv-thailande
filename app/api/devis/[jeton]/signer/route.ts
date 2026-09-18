@@ -7,7 +7,7 @@ import {
   enregistrerSignature,
   totaliser,
 } from '../../../../lib/devis';
-import type { Signature } from '../../../../lib/devis-modele';
+import { devisSelonOption, type Option, type Signature } from '../../../../lib/devis-modele';
 import {
   texteContrat,
   empreinte,
@@ -47,6 +47,8 @@ type Corps = {
   code?: unknown;
   bonPourAccord?: unknown;
   renonciationRetractation?: unknown;
+  /** Formule retenue, sur un devis qui en proposait plusieurs. */
+  option?: unknown;
 };
 
 function texteNettoye(valeur: unknown, longueurMax: number): string {
@@ -167,9 +169,28 @@ export async function POST(requete: Request, { params }: Contexte) {
     );
   }
 
+  // ── Choix de la formule, sur un devis à options ────────────────────────────
+  // L'option est validée contre celles réellement proposées : un appelant ne
+  // doit pas pouvoir se composer un prix en soumettant une formule absente du
+  // document qu'il a lu.
+  let option: Option | undefined;
+  if (devis.options.length > 0) {
+    const demandee = typeof corps.option === 'string' ? corps.option : '';
+    option = devis.options.find((o) => o.formule === demandee);
+    if (!option) {
+      return NextResponse.json(
+        { erreur: 'Choisissez l’une des formules proposées avant de signer.' },
+        { status: 400 },
+      );
+    }
+  }
+
   // ── Scellement ─────────────────────────────────────────────────────────────
-  const t = totaliser(devis);
-  const contrat = texteContrat(devis);
+  // Le contrat est établi sur le devis tel qu'il sera après application du
+  // choix : c'est ce texte-là, et lui seul, que le client accepte.
+  const devisRetenu = option ? devisSelonOption(devis, option) : devis;
+  const t = totaliser(devisRetenu);
+  const contrat = texteContrat(devisRetenu);
   const signeLe = new Date().toISOString();
 
   const signature: Signature = {
@@ -185,9 +206,10 @@ export async function POST(requete: Request, { params }: Contexte) {
     renonciationRetractation: corps.renonciationRetractation === true,
     honoraires: t.honoraires,
     total: t.total,
+    ...(option ? { formuleChoisie: option.formule } : {}),
   };
 
-  const signe = await enregistrerSignature(jeton, signature);
+  const signe = await enregistrerSignature(jeton, signature, option);
   if (!signe) {
     // La condition « pas encore signé » a échoué : un autre envoi est passé
     // entre-temps. Le premier fait foi, celui-ci n'écrase rien.

@@ -23,7 +23,7 @@ export async function PATCH(requete: Request, { params }: Contexte) {
   try {
     const { id } = await params;
     const corps = (await requete.json()) as Partial<
-      Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut'>
+      Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options'>
     >;
 
     // Les lignes de débours viennent d'un formulaire : on les remet au propre

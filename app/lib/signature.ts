@@ -1,5 +1,5 @@
 import { totaliser, type Devis } from './devis-modele';
-import { prestationsFormule } from './tarifs';
+import { prestationsFormule, CLAUSE_VOYAGE } from './tarifs';
 import {
   AGENCE,
   mentionSiret,
@@ -124,6 +124,7 @@ export function texteContrat(devis: Devis): string {
   l.push('CONDITIONS');
   l.push(`Paiement. ${CLAUSE_PAIEMENT}`);
   l.push(`Frais externes. ${CLAUSE_DEBOURS}`);
+  if (d.formule !== 'essentielle') l.push(`Voyage d'installation. ${CLAUSE_VOYAGE}`);
   l.push(`Refus consulaire. ${CLAUSE_REFUS}`);
   l.push(`Droit de rétractation. ${CLAUSE_RETRACTATION}`);
   l.push(

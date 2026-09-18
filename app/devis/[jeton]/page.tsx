@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import DocumentDevis from '../../components/DocumentDevis';
 import { lireDevisParJeton } from '../../lib/devis';
-import { totaliser } from '../../lib/devis-modele';
+import { totaliser, devisSelonOption } from '../../lib/devis-modele';
+import { FORMULES } from '../../lib/tarifs';
 import { AGENCE, ACOMPTE_POURCENT, RETRACTATION_JOURS } from '../../lib/agence';
 import { devisExpire, dateLimite, finRetractation, empreinteLisible } from '../../lib/signature';
 import { ETAPES, piecesAReunir } from '../../lib/parcours';
@@ -73,6 +74,18 @@ export default async function PageEspaceClient({
   const signature = devis.signature;
   const expire = !signature && devisExpire(devis);
   const groupes = piecesAReunir(devis.dossier);
+
+  // Les formules soumises au choix, chiffrées telles qu'elles seront signées.
+  const choix = devis.options.map((option) => {
+    const to = totaliser(devisSelonOption(devis, option));
+    return {
+      formule: option.formule,
+      nom: FORMULES.find((f) => f.id === option.formule)?.nom ?? option.formule,
+      honoraires: to.honoraires,
+      total: to.total,
+      acompte: to.acompte,
+    };
+  });
   const etapeCourante = devis.suivi.etape;
 
   return (
@@ -126,9 +139,11 @@ export default async function PageEspaceClient({
           <section className="mb-6 border border-white/10 rounded-2xl p-6 print:hidden">
             <p className="text-white font-semibold">À lire, puis à signer en bas de page</p>
             <p className="text-sm text-gray-400 mt-1.5 leading-relaxed">
-              Prenez le temps de tout relire. Un point à ajuster ? Répondez au courriel qui vous a
-              transmis ce lien — mieux vaut corriger avant qu&apos;après. Valable jusqu&apos;au{' '}
-              {dateFr(dateLimite(devis))}.
+              {choix.length > 0
+                ? 'Comparez les formules, puis choisissez celle que vous retenez au moment de signer. Rien n’est engagé avant.'
+                : 'Prenez le temps de tout relire.'}{' '}
+              Un point à ajuster ? Répondez au courriel qui vous a transmis ce lien — mieux vaut
+              corriger avant qu&apos;après. Valable jusqu&apos;au {dateFr(dateLimite(devis))}.
             </p>
           </section>
         )}
@@ -144,6 +159,7 @@ export default async function PageEspaceClient({
             acompte={t.acompte}
             nomPreRempli={devis.client.nom}
             adressePreRemplie={devis.client.adresse}
+            choix={choix}
           />
         )}
 

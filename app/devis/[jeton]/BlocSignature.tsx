@@ -27,6 +27,14 @@ function euros(m: number): string {
   return `${m.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
 }
 
+export type ChoixFormule = {
+  formule: string;
+  nom: string;
+  honoraires: number;
+  total: number;
+  acompte: number;
+};
+
 export default function BlocSignature({
   jeton,
   honoraires,
@@ -34,6 +42,7 @@ export default function BlocSignature({
   acompte,
   nomPreRempli,
   adressePreRemplie,
+  choix = [],
 }: {
   jeton: string;
   honoraires: number;
@@ -41,6 +50,8 @@ export default function BlocSignature({
   acompte: number;
   nomPreRempli: string;
   adressePreRemplie: string;
+  /** Formules au choix. Vide sur un devis à formule unique. */
+  choix?: ChoixFormule[];
 }) {
   const router = useRouter();
 
@@ -57,6 +68,18 @@ export default function BlocSignature({
   const [renonciation, setRenonciation] = useState(false);
   const [code, setCode] = useState('');
 
+  /**
+   * Aucune formule n'est présélectionnée.
+   *
+   * Cocher d'avance la plus chère serait vendeur et malhonnête ; cocher la
+   * moins chère déciderait à la place du client. Tant qu'il n'a pas tranché,
+   * le bouton reste inerte et le récapitulatif reste vide.
+   */
+  const [formuleChoisie, setFormuleChoisie] = useState<string>('');
+  const retenue = choix.find((c) => c.formule === formuleChoisie);
+  const montants = retenue ?? { honoraires, total, acompte, nom: '', formule: '' };
+  const enAttenteDeChoix = choix.length > 0 && !retenue;
+
   const [etape, setEtape] = useState<'identite' | 'code'>('identite');
   const [destinataire, setDestinataire] = useState('');
   const [occupe, setOccupe] = useState(false);
@@ -66,6 +89,10 @@ export default function BlocSignature({
   const demanderCode = async () => {
     setErreur('');
     setAvis('');
+    if (choix.length > 0 && !retenue) {
+      setErreur('Choisissez la formule que vous retenez.');
+      return;
+    }
     if (prenom.trim().length < 2 || nom.trim().length < 2) {
       setErreur('Indiquez votre prénom et votre nom.');
       return;
@@ -117,6 +144,7 @@ export default function BlocSignature({
           code,
           bonPourAccord: accord,
           renonciationRetractation: renonciation,
+          option: formuleChoisie || undefined,
         }),
       });
       const corps = (await reponse.json()) as { erreur?: string };
@@ -146,6 +174,50 @@ export default function BlocSignature({
 
       {etape === 'identite' ? (
         <div className="mt-6 space-y-4">
+          {choix.length > 0 && (
+            <div>
+              <p className={ETIQUETTE}>La formule que vous retenez</p>
+              <div className="space-y-2">
+                {choix.map((c) => (
+                  <label
+                    key={c.formule}
+                    className={`flex gap-3 items-start cursor-pointer border rounded-xl p-4 transition-colors ${
+                      formuleChoisie === c.formule
+                        ? 'border-amber-500/60 bg-amber-500/10'
+                        : 'border-white/10 hover:border-white/20'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="formule"
+                      checked={formuleChoisie === c.formule}
+                      onChange={() => {
+                        setFormuleChoisie(c.formule);
+                        // Changer de formule change le montant approuvé :
+                        // l'accord doit être redonné en connaissance de cause.
+                        setAccord(false);
+                      }}
+                      className="mt-1 w-4 h-4 flex-none accent-amber-500"
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex justify-between gap-3 items-baseline">
+                        <span className="text-white font-semibold">Formule {c.nom}</span>
+                        <span className="text-white font-bold whitespace-nowrap">
+                          {euros(c.total)}
+                        </span>
+                      </span>
+                      <span className="block text-xs text-gray-500 mt-1 leading-relaxed">
+                        {euros(c.honoraires)} d&apos;honoraires, dont {euros(c.acompte)} à la
+                        signature · {euros(c.total - c.honoraires)} de frais externes réglés par vos
+                        soins
+                      </span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={ETIQUETTE} htmlFor="sig-prenom">
@@ -192,19 +264,37 @@ export default function BlocSignature({
             </p>
           </div>
 
-          <label className="flex gap-3 items-start cursor-pointer border border-white/10 rounded-xl p-4 hover:border-white/20 transition-colors">
+          {/* Tant qu'aucune formule n'est retenue, la case ne peut pas porter
+              de montant : afficher celui d'une formule que le client n'a pas
+              choisie lui ferait approuver un chiffre au hasard. */}
+          <label
+            className={`flex gap-3 items-start border rounded-xl p-4 transition-colors ${
+              enAttenteDeChoix
+                ? 'border-white/5 opacity-50 cursor-not-allowed'
+                : 'border-white/10 hover:border-white/20 cursor-pointer'
+            }`}
+          >
             <input
               type="checkbox"
               checked={accord}
+              disabled={enAttenteDeChoix}
               onChange={(e) => setAccord(e.target.checked)}
               className="mt-1 w-4 h-4 flex-none accent-amber-500"
             />
             <span className="text-sm text-gray-300 leading-relaxed">
-              <strong className="text-white">Bon pour accord.</strong> J&apos;accepte ce devis et
-              m&apos;engage à régler {euros(honoraires)} d&apos;honoraires, dont{' '}
-              {euros(acompte)} ({ACOMPTE_POURCENT} %) à la signature. Je comprends que les frais
-              externes, estimés à {euros(total - honoraires)}, sont réglés séparément par mes soins
-              aux organismes concernés.
+              <strong className="text-white">Bon pour accord.</strong>{' '}
+              {enAttenteDeChoix ? (
+                'Choisissez d’abord la formule que vous retenez, ci-dessus.'
+              ) : (
+                <>
+                  J&apos;accepte ce devis et m&apos;engage à régler{' '}
+                  {euros(montants.honoraires)} d&apos;honoraires
+                  {retenue ? ` au titre de la formule ${retenue.nom}` : ''}, dont{' '}
+                  {euros(montants.acompte)} ({ACOMPTE_POURCENT} %) à la signature. Je comprends que
+                  les frais externes, estimés à {euros(montants.total - montants.honoraires)}, sont
+                  réglés séparément par mes soins aux organismes concernés.
+                </>
+              )}
             </span>
           </label>
 
@@ -261,7 +351,8 @@ export default function BlocSignature({
             <strong className="text-white">
               {prenom} {nom}
             </strong>
-            , pour {euros(honoraires)} d&apos;honoraires.
+            {retenue ? `, formule ${retenue.nom}` : ''}, pour {euros(montants.honoraires)}{' '}
+            d&apos;honoraires.
             {renonciation && ' Démarrage immédiat demandé.'}{' '}
             <button
               onClick={() => {

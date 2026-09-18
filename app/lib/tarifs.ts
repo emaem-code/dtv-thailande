@@ -152,13 +152,49 @@ export const PRESTATIONS: Record<Formule['id'], string[]> = {
     'Traductions pilotées de bout en bout avec le traducteur assermenté',
     'Attestation bancaire obtenue en anglais auprès de votre banque',
     'Préparation de l’arrivée : carte TDAC, déclaration TM30, rapport des 90 jours',
-  ],
+    'Sélection de votre vol et de vos premières nuits d’hôtel, transfert depuis l’aéroport organisé',
+  ] as string[],
   vip: [
-    'Accueil à votre arrivée en Thaïlande',
+    'Vol et hébergement haut de gamme sélectionnés selon vos horaires et vos exigences',
+    'Chauffeur privé qui vous accueille à la sortie de l’aéroport',
     'Recherche de logement et ouverture de compte bancaire',
     'École des enfants, assurance santé et démarches locales',
   ],
 };
+
+/**
+ * La ligne de voyage Premium, que la VIP remplace au lieu de la répéter.
+ *
+ * Les listes étant cumulatives, un devis VIP affichait coup sur coup
+ * « sélection de votre vol » puis « vol haut de gamme sélectionné ». Deux
+ * lignes pour une même prestation donnent l'impression d'un document gonflé
+ * à la ligne, exactement l'inverse de ce qu'on veut inspirer.
+ */
+const PRESTATION_VOYAGE_PREMIUM =
+  'Sélection de votre vol et de vos premières nuits d’hôtel, transfert depuis l’aéroport organisé';
+
+/**
+ * Ce que le prestataire ne fait pas, et qui doit être écrit noir sur blanc.
+ *
+ * Organiser un voyage et le vendre sont deux métiers que le droit distingue
+ * nettement. Dès qu'on combine un transport et un hébergement pour un même
+ * séjour, on vend un forfait touristique au sens de l'article L211-2 du code
+ * du tourisme, ce qui impose une immatriculation à Atout France, une garantie
+ * financière et une assurance dédiée. Et en micro-entreprise, l'argent qui
+ * transiterait par le compte deviendrait du chiffre d'affaires imposable —
+ * plusieurs milliers d'euros par dossier familial, pour des sommes qui ne
+ * sont pas les siennes.
+ *
+ * La règle tient en trois lignes, et cette clause l'énonce au client :
+ * la réservation est à son nom, il règle directement le prestataire, et
+ * aucune commission n'est prise au passage.
+ */
+export const CLAUSE_VOYAGE =
+  'Le vol, l’hébergement et les transferts sont sélectionnés et organisés pour ' +
+  'vous, mais réservés à votre nom et réglés directement par vos soins auprès ' +
+  'de la compagnie, de l’hôtel et du chauffeur. Aucune somme ne transite par ' +
+  'nous et aucune commission n’est prise. Les montants indiqués sont des ' +
+  'estimations, données à titre de repère budgétaire.';
 
 /** La mise en relation avec l'école n'existe que sur la voie Soft Power. */
 const PRESTATION_ECOLE = 'Choix de l’école certifiée et mise en relation';
@@ -173,7 +209,10 @@ export function prestationsFormule(formule: Formule['id'], estSoftPower: boolean
   const base = [...PRESTATIONS.essentielle];
   if (estSoftPower) base.splice(1, 0, PRESTATION_ECOLE);
   if (formule === 'premium') return [...base, ...PRESTATIONS.premium];
-  if (formule === 'vip') return [...base, ...PRESTATIONS.premium, ...PRESTATIONS.vip];
+  if (formule === 'vip') {
+    const premium = PRESTATIONS.premium.filter((l) => l !== PRESTATION_VOYAGE_PREMIUM);
+    return [...base, ...premium, ...PRESTATIONS.vip];
+  }
   return base;
 }
 
@@ -207,6 +246,26 @@ export const TRADUCTION_THB_PAR_PAGE = 900;
  * d'imposition, lettre d'activité — d'où l'écart.
  */
 export const PAGES = { standard: 12, softPower: 4, rattache: 3 };
+
+/**
+ * Coûts indicatifs du voyage d'installation, en euros.
+ *
+ * Ce ne sont pas des tarifs mais des repères budgétaires : un vol varie du
+ * simple au double selon la saison et l'anticipation. Ils sont pré-remplis
+ * dans le devis pour éviter la page blanche, et chaque ligne reste modifiable
+ * avant l'envoi — c'est Matthieu, qui vit à Phuket, qui sait ce que coûte
+ * réellement une nuit d'hôtel ou une course depuis l'aéroport.
+ *
+ * Le vol se compte par personne, le transfert une fois par foyer — une
+ * voiture suffit — et l'hôtel par chambre, à raison de deux personnes par
+ * chambre.
+ *
+ * Ces sommes ne transitent jamais par l'entreprise : voir CLAUSE_VOYAGE.
+ */
+export const VOYAGE = {
+  premium: { vol: 650, transfert: 20, nuit: 40, nuits: 4 },
+  vip: { vol: 1150, transfert: 45, nuit: 125, nuits: 4 },
+} as const;
 
 /**
  * Volume de référence servant à formuler la mention publique.

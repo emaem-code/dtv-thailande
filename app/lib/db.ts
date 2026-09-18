@@ -122,6 +122,9 @@ export function assurerSchema(): Promise<void> {
     // migration pour les bases où la table existe déjà, sans rien casser.
     await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS signature JSONB`);
     await requete(
+      `ALTER TABLE devis ADD COLUMN IF NOT EXISTS options JSONB NOT NULL DEFAULT '[]'::jsonb`,
+    );
+    await requete(
       `ALTER TABLE devis ADD COLUMN IF NOT EXISTS suivi JSONB NOT NULL DEFAULT '{}'::jsonb`,
     );
 

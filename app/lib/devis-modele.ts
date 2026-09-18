@@ -6,6 +6,7 @@ import {
   TRADUCTION_THB_PAR_PAGE,
   PAGES,
   SUPPLEMENT_FORMULE,
+  VOYAGE,
 } from './tarifs';
 import { fondsFoyerThb, eurosFoyer, formateThb, TAUX_SECOURS } from './taux';
 import { ACOMPTE_POURCENT } from './agence';
@@ -74,11 +75,26 @@ export type Signature = {
   navigateur: string;
   empreinte: string;
   contrat: string;
+  /** Renseignée lorsque le devis proposait plusieurs formules au choix. */
+  formuleChoisie?: Dossier['formule'];
   /** Demande expresse d'exécution avant la fin du délai de rétractation. */
   renonciationRetractation: boolean;
   /** Montants au moment de l'acceptation, pour les retrouver sans recalcul. */
   honoraires: number;
   total: number;
+};
+
+/**
+ * Une variante proposée au client, dans un devis à options.
+ *
+ * Les montants sont figés à l'établissement du devis et non recalculés à la
+ * signature : entre les deux, la grille ou le cours du baht ont pu bouger, et
+ * le client doit obtenir exactement le prix qu'il a lu.
+ */
+export type Option = {
+  formule: Dossier['formule'];
+  honoraires: number;
+  debours: Debours[];
 };
 
 /** Étapes franchies et pièces réunies, tenus à jour après la signature. */
@@ -108,6 +124,18 @@ export type Devis = {
   dossier: Dossier;
   honoraires: number;
   debours: Debours[];
+  /**
+   * Variantes soumises au choix du client.
+   *
+   * Vide pour un devis classique. Non vide, le document présente les formules
+   * côte à côte et le client tranche au moment de signer — un seul numéro, un
+   * seul document, au lieu de trois devis concurrents dont personne ne sait
+   * plus lequel fait foi. À la signature, l'option retenue est recopiée dans
+   * `honoraires`, `debours` et `dossier.formule` : le devis signé redevient un
+   * devis ordinaire, et tout ce qui le lit ensuite n'a pas à connaître
+   * l'existence des options.
+   */
+  options: Option[];
   signature: Signature | null;
   suivi: Suivi;
 };
@@ -149,6 +177,7 @@ export function totaliser(d: Pick<Devis, 'honoraires' | 'debours' | 'dossier'>):
 export function deboursParDefaut(
   personnes: number,
   softPower: boolean,
+  formule: Dossier['formule'] = 'essentielle',
   tauxThbParEuro = TAUX_SECOURS,
 ): Debours[] {
   const n = Math.max(1, personnes || 1);
@@ -179,6 +208,39 @@ export function deboursParDefaut(
     unitaire: pageEuros,
     detail: `${TRADUCTION_THB_PAR_PAGE} THB la page — estimation, refacturée au coût réel`,
   });
+
+  // ── Voyage d'installation, sur les formules qui l'organisent ──────────────
+  // Réservé au nom du client et réglé par lui : ces lignes sont un repère
+  // budgétaire, jamais une facturation. Les faire transiter par l'entreprise
+  // les transformerait en chiffre d'affaires imposable et ferait basculer
+  // l'activité dans le régime des opérateurs de voyages.
+  if (formule === 'premium' || formule === 'vip') {
+    const v = VOYAGE[formule];
+    const chambres = Math.ceil(n / 2);
+    const gamme = formule === 'vip' ? 'haut de gamme' : 'entrée de gamme';
+
+    lignes.push({
+      libelle: `Vol vers la Thaïlande — ${gamme}`,
+      quantite: n,
+      unitaire: v.vol,
+      detail: 'Sélectionné pour vous, réservé à votre nom et réglé par vos soins',
+    });
+    lignes.push({
+      libelle:
+        formule === 'vip'
+          ? 'Chauffeur privé depuis l’aéroport'
+          : 'Transfert depuis l’aéroport',
+      quantite: 1,
+      unitaire: v.transfert,
+      detail: 'Une prise en charge pour le foyer, réglée sur place',
+    });
+    lignes.push({
+      libelle: `Hôtel des premières nuits — ${gamme}`,
+      quantite: v.nuits * chambres,
+      unitaire: v.nuit,
+      detail: `${v.nuits} nuits${chambres > 1 ? ` × ${chambres} chambres` : ''}, le temps de trouver votre logement`,
+    });
+  }
 
   return lignes;
 }
@@ -224,6 +286,37 @@ export function capitaliserLieu(valeur: string): string {
  * montré au client et le texte canonique signé lisent la même valeur stockée,
  * sans risque de divergence entre les deux.
  */
+/**
+ * Construit les variantes d'un devis à options, aux valeurs de la grille.
+ *
+ * L'ordre suit celui des formules, du moins cher au plus cher : un client qui
+ * compare lit d'abord le prix d'appel, et chaque colonne suivante se justifie
+ * par rapport à la précédente.
+ */
+export function construireOptions(
+  dossier: Dossier,
+  formules: Dossier['formule'][],
+): Option[] {
+  const ordre: Dossier['formule'][] = ['essentielle', 'premium', 'vip'];
+  return ordre
+    .filter((f) => formules.includes(f))
+    .map((formule) => ({
+      formule,
+      honoraires: honorairesParDefaut(dossier.personnes, formule),
+      debours: deboursParDefaut(dossier.personnes, dossier.softPower, formule),
+    }));
+}
+
+/** Le devis tel qu'il serait si le client retenait cette option. */
+export function devisSelonOption(devis: Devis, option: Option): Devis {
+  return {
+    ...devis,
+    dossier: { ...devis.dossier, formule: option.formule },
+    honoraires: option.honoraires,
+    debours: option.debours,
+  };
+}
+
 export function normaliserDossier(dossier: Dossier): Dossier {
   return { ...dossier, destination: capitaliserLieu(dossier.destination ?? '') };
 }
