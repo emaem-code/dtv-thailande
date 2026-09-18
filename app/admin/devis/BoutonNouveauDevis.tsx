@@ -37,7 +37,7 @@ export default function BoutonNouveauDevis({ leadId }: { leadId?: number }) {
         className={
           leadId
             ? 'text-xs bg-white/10 hover:bg-white/15 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50'
-            : 'bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm px-5 py-2.5 rounded-xl transition-colors disabled:opacity-50'
+            : 'bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm px-5 py-2.5 rounded-xl transition-colors disabled:opacity-50 whitespace-nowrap'
         }
       >
         {enCours ? 'Création…' : leadId ? 'Créer le devis' : 'Nouveau devis'}

@@ -79,7 +79,68 @@ export default async function PageDevis() {
           </p>
         </div>
       ) : (
-        <div className="border border-white/10 rounded-2xl overflow-hidden">
+        <>
+        {/* ── TÉLÉPHONE : une carte par devis ──────────────────────────────
+            Six colonnes dans 390 px de large n'ont pas de bonne réponse. Le
+            tableau débordait de près du double et le conteneur, en
+            `overflow-hidden`, coupait honoraires, budget et état sans même
+            laisser défiler : trois informations sur six devenaient
+            inatteignables depuis un téléphone. Faire défiler un tableau
+            horizontalement n'aurait pas mieux valu — cet écran se consulte
+            debout, d'une main. La carte entière est cliquable. */}
+        <ul className="sm:hidden space-y-3">
+          {devis.map((d) => {
+            const t = totaliser(d);
+            const et = ETIQUETTES[d.statut] ?? ETIQUETTES.brouillon;
+            return (
+              <li key={d.id}>
+                <Link
+                  href={`/admin/devis/${d.id}`}
+                  className="block border border-white/10 rounded-2xl p-4 active:bg-white/5 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-amber-500 font-medium">{d.numero}</p>
+                      <p className="text-[11px] text-gray-600 mt-0.5">
+                        {new Date(d.creeLe).toLocaleDateString('fr-FR')}
+                      </p>
+                    </div>
+                    <span
+                      className={`flex-none text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${et.classe}`}
+                    >
+                      {d.signature ? 'Signé' : et.texte}
+                    </span>
+                  </div>
+
+                  <p className="text-white mt-3 truncate">
+                    {d.client.nom || <span className="text-gray-600">sans nom</span>}
+                  </p>
+                  <p className="text-[11px] text-gray-600 truncate">{d.client.email}</p>
+
+                  <div className="flex items-baseline justify-between gap-3 mt-3 pt-3 border-t border-white/5">
+                    <span className="text-xs text-gray-500">
+                      {d.dossier.personnes} pers. · {d.dossier.softPower ? 'Soft Power' : 'À distance'}
+                    </span>
+                    <span className="text-sm text-white font-medium whitespace-nowrap">
+                      {euros(t.honoraires)}{' '}
+                      <span className="text-xs text-gray-600 font-normal">/ {euros(t.total)}</span>
+                    </span>
+                  </div>
+
+                  {d.signature && (
+                    <p className="text-[11px] text-gray-600 mt-2">
+                      Signé le {new Date(d.signature.signeLe).toLocaleDateString('fr-FR')} par{' '}
+                      {d.signature.prenom} {d.signature.nom}
+                    </p>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* ── ÉCRAN LARGE : le tableau ── */}
+        <div className="hidden sm:block border border-white/10 rounded-2xl overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-black/40 border-b border-white/10 text-left">
@@ -134,6 +195,7 @@ export default async function PageDevis() {
             </tbody>
           </table>
         </div>
+        </>
       )}
     </>
   );
