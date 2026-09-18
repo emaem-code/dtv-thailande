@@ -11,6 +11,7 @@ import {
   CLAUSE_RETRACTATION,
   CLAUSE_DEBOURS,
   CLAUSE_PAIEMENT,
+  MEDIATEUR,
 } from '../lib/agence';
 import {
   MENTION_TRADUCTIONS,
@@ -533,6 +534,20 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             appartient au seul poste consulaire. Le présent document ne constitue pas un contrat de
             voyage.
           </p>
+          {/* Article R616-1 du code de la consommation : les coordonnées du
+              médiateur figurent sur les documents contractuels, pas seulement
+              sur les mentions légales. Tant que l'adhésion n'est pas prise, le
+              paragraphe reste absent — mieux vaut un devis muet qu'un devis qui
+              renvoie vers un médiateur qui ne traiterait pas le litige. */}
+          {MEDIATEUR && (
+            <p>
+              <strong className="text-white print:text-black">
+                Médiation de la consommation.
+              </strong>{' '}
+              En cas de litige non résolu directement avec moi, vous pouvez saisir gratuitement
+              le médiateur {MEDIATEUR.nom}, {MEDIATEUR.adresse} — {MEDIATEUR.site}.
+            </p>
+          )}
           {siretEnAttente() && (
             <p>
               <strong className="text-white print:text-black">Immatriculation en cours.</strong>{' '}
