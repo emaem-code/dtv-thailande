@@ -106,6 +106,16 @@ export const ACOMPTE_POURCENT = 40;
 export const VALIDITE_JOURS = 30;
 
 /**
+ * Délai avant la relance unique, en jours.
+ *
+ * Sept jours : assez pour ne pas presser quelqu'un qui réfléchit, assez tôt
+ * pour qu'il reste trois semaines de validité au devis quand le courriel
+ * arrive. Une seule relance, jamais deux : au-delà, ce n'est plus un rappel,
+ * c'est du harcèlement commercial, et ça se retourne contre l'expéditeur.
+ */
+export const RELANCE_JOURS = 7;
+
+/**
  * Premier numéro de devis attribué.
  *
  * La numérotation ne démarre pas à 1. Un premier client qui reçoit le devis

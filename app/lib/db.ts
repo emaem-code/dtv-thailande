@@ -131,6 +131,10 @@ export function assurerSchema(): Promise<void> {
     // disparaissait au rechargement de la page : cinq mille caractères écrits
     // à la main, perdus parce qu'on avait fermé l'onglet.
     await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS message TEXT NOT NULL DEFAULT ''`);
+    // Date de la relance unique. NULL tant qu'elle n'est pas partie : c'est
+    // cette colonne, et non un compteur, qui garantit qu'un client ne sera
+    // jamais relancé deux fois pour le même devis.
+    await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS relance_le TIMESTAMPTZ`);
 
     /**
      * Codes à usage unique de la signature électronique.

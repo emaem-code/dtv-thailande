@@ -143,6 +143,8 @@ export type Devis = {
    * qu'on y avait écrit.
    */
   message: string;
+  /** Date de la relance envoyée, ou null si aucune ne l'a encore été. */
+  relanceLe: string | null;
   signature: Signature | null;
   suivi: Suivi;
 };

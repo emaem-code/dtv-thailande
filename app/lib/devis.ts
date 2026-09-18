@@ -39,6 +39,7 @@ type LigneDevis = {
   debours: Debours[];
   options: Option[] | null;
   message: string | null;
+  relance_le: Date | null;
   signature: Signature | null;
   suivi: Partial<Suivi> | null;
 };
@@ -59,6 +60,7 @@ function versDevis(l: LigneDevis): Devis {
     debours: l.debours,
     options: l.options ?? [],
     message: l.message ?? '',
+    relanceLe: l.relance_le ? l.relance_le.toISOString() : null,
     signature: l.signature ?? null,
     // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
     // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
@@ -204,6 +206,63 @@ export async function listerDevis(limite = 100): Promise<Devis[]> {
     [limite],
   );
   return lignes.map(versDevis);
+}
+
+/**
+ * Les devis qu'il est temps de relancer, et eux seuls.
+ *
+ * Quatre conditions, et chacune évite un courriel qu'on regretterait :
+ * le devis a bien été envoyé ; le client n'a pas signé ; la relance n'est pas
+ * déjà partie ; et le devis n'est pas périmé — relancer sur un document qui
+ * n'est plus valable ferait perdre son temps à tout le monde.
+ *
+ * Le filtre est écrit en SQL plutôt qu'en JavaScript après lecture : ce qui
+ * décide d'envoyer du courrier à un client doit être exprimé une seule fois,
+ * là où la donnée se trouve.
+ */
+export async function devisARelancer(apresJours: number, validiteJours: number): Promise<Devis[]> {
+  await assurerSchema();
+  const lignes = await requete<LigneDevis>(
+    `SELECT * FROM devis
+      WHERE envoye_le IS NOT NULL
+        AND signature IS NULL
+        AND relance_le IS NULL
+        AND envoye_le <= now() - ($1 || ' days')::interval
+        AND envoye_le >  now() - ($2 || ' days')::interval
+      ORDER BY envoye_le ASC`,
+    [apresJours, validiteJours],
+  );
+  return lignes.map(versDevis);
+}
+
+/**
+ * Marque la relance comme partie.
+ *
+ * `AND relance_le IS NULL` fait de l'écriture la garde : si deux exécutions
+ * du cron se chevauchaient, la seconde ne mettrait rien à jour et n'enverrait
+ * rien, puisque l'appelant s'arrête quand aucune ligne n'est touchée.
+ */
+export async function marquerRelance(id: number): Promise<boolean> {
+  await assurerSchema();
+  const lignes = await requete<{ id: number }>(
+    `UPDATE devis SET relance_le = now() WHERE id = $1 AND relance_le IS NULL RETURNING id`,
+    [id],
+  );
+  return lignes.length > 0;
+}
+
+/**
+ * Rend le devis à la file des relances, après un envoi qui n'a pas eu lieu.
+ *
+ * Appelé seulement quand on sait que rien n'est parti — clé absente, refus
+ * explicite du service. Sur un échec ambigu, où le courriel a pu partir avant
+ * que la réponse se perde, on ne libère rien : entre un client qui ne reçoit
+ * pas de relance et un client qui en reçoit deux, le second est la faute la
+ * plus visible.
+ */
+export async function libererRelance(id: number): Promise<void> {
+  await assurerSchema();
+  await requete(`UPDATE devis SET relance_le = NULL WHERE id = $1`, [id]);
 }
 
 export async function lireDevis(id: number): Promise<Devis | null> {

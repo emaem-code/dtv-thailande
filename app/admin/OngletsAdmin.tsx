@@ -49,6 +49,17 @@ export default function OngletsAdmin() {
           })}
         </nav>
 
+        {/* Lien plutôt que bouton : le navigateur télécharge le fichier sans
+            que la page bouge, et il est toujours à portée de main — une
+            sauvegarde qu'il faut aller chercher dans un menu ne se fait pas. */}
+        <a
+          href="/api/admin/sauvegarde"
+          download
+          title="Télécharger une copie complète de la base : devis, signatures et demandes."
+          className="text-xs text-gray-500 hover:text-amber-400 transition-colors"
+        >
+          Sauvegarder
+        </a>
         <Link
           href="/"
           className="text-xs text-gray-500 hover:text-gray-300 transition-colors hidden sm:block"

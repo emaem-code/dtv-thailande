@@ -14,12 +14,16 @@ const EXPEDITEUR = `${AGENCE.enseigne} <${AGENCE.email}>`;
 
 export type Resultat = { ok: true } | { ok: false; erreur: string; statut: number };
 
+/** Fichier joint : contenu brut, encodé en base64 au moment de l'envoi. */
+export type PieceJointe = { nom: string; contenu: string };
+
 export type Courriel = {
   a: string | string[];
   sujet: string;
   texte: string;
   html: string;
   repondreA?: string;
+  pieces?: PieceJointe[];
 };
 
 export async function envoyerCourriel(c: Courriel): Promise<Resultat> {
@@ -44,6 +48,14 @@ export async function envoyerCourriel(c: Courriel): Promise<Resultat> {
         subject: c.sujet,
         text: c.texte,
         html: c.html,
+        ...(c.pieces?.length
+          ? {
+              attachments: c.pieces.map((p) => ({
+                filename: p.nom,
+                content: Buffer.from(p.contenu, 'utf8').toString('base64'),
+              })),
+            }
+          : {}),
       }),
     });
   } catch {
