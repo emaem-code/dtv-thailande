@@ -60,6 +60,35 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [honorairesManuels, setHonorairesManuels] = useState(false);
   const [deboursManuels, setDeboursManuels] = useState(false);
 
+  /**
+   * Les formules cochées, tenues à part des options calculées.
+   *
+   * Les déduire de `devis.options` rendait la première case impossible à
+   * cocher : une seule formule ne produit aucune option, donc la case se
+   * relevait aussitôt. L'intention de l'utilisateur et le résultat du calcul
+   * sont deux choses différentes, et confondre les deux fabrique un bouton
+   * mort.
+   */
+  const [formulesProposees, setFormulesProposees] = useState<Devis['dossier']['formule'][]>(
+    () => initial.options.map((o) => o.formule),
+  );
+
+  /** Ordre stable, du moins cher au plus cher, quel que soit l'ordre des clics. */
+  const ordonner = (liste: Devis['dossier']['formule'][]) =>
+    (['essentielle', 'premium', 'vip'] as const).filter((f) => liste.includes(f));
+
+  const basculerFormule = (formule: Devis['dossier']['formule'], cochee: boolean) => {
+    const liste = ordonner(
+      cochee
+        ? [...formulesProposees, formule]
+        : formulesProposees.filter((f) => f !== formule),
+    );
+    setFormulesProposees(liste);
+    // En dessous de deux, il n'y a rien à comparer : le devis redevient
+    // classique, sur la seule formule du dossier.
+    changer({ options: liste.length >= 2 ? construireOptions(devis.dossier, liste) : [] });
+  };
+
   const changer = (partiel: Partial<Devis>) => {
     setDevis((d) => ({ ...d, ...partiel }));
     setEtat('repos');
@@ -85,9 +114,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
         // Les options sont recalculées elles aussi : une famille qui passe de
         // deux à quatre ne doit pas se voir proposer d'anciens montants.
         options:
-          d.options.length > 0
-            ? construireOptions(dossier, d.options.map((o) => o.formule))
-            : [],
+          formulesProposees.length >= 2 ? construireOptions(dossier, formulesProposees) : [],
         honoraires: honorairesManuels
           ? d.honoraires
           : honorairesParDefaut(dossier.personnes, dossier.formule),
@@ -477,23 +504,13 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           </p>
           <div className="space-y-2">
             {FORMULES.map((f) => {
-              const cochee = devis.options.some((o) => o.formule === f.id);
+              const cochee = formulesProposees.includes(f.id);
               return (
                 <label key={f.id} className="flex gap-2.5 items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={cochee}
-                    onChange={(e) => {
-                      const retenues = new Set(devis.options.map((o) => o.formule));
-                      if (e.target.checked) retenues.add(f.id);
-                      else retenues.delete(f.id);
-                      // Une seule formule cochée n'est pas un choix : on
-                      // retombe alors sur le devis classique.
-                      const liste = [...retenues];
-                      changer({
-                        options: liste.length >= 2 ? construireOptions(devis.dossier, liste) : [],
-                      });
-                    }}
+                    onChange={(e) => basculerFormule(f.id, e.target.checked)}
                     className="w-4 h-4 flex-none accent-amber-500"
                   />
                   <span className="text-sm text-gray-300">
@@ -518,7 +535,13 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
               );
             })}
           </div>
-          {devis.options.length > 0 && (
+          {formulesProposees.length === 1 && (
+            <p className="text-[11px] text-gray-500 leading-relaxed border-t border-white/5 pt-3">
+              Une seule formule cochée ne laisse aucun choix : le devis reste classique. Cochez-en
+              une seconde pour le transformer en devis à options.
+            </p>
+          )}
+          {devis.options.length > 1 && (
             <p className="text-[11px] text-amber-400 leading-relaxed border-t border-white/5 pt-3">
               {devis.options.length} formules proposées. Les honoraires et frais ci-dessous ne
               servent plus qu&apos;au calcul de secours : c&apos;est l&apos;option retenue par le

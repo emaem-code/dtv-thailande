@@ -55,14 +55,18 @@ export default function BlocSignature({
 }) {
   const router = useRouter();
 
-  // Le nom enregistré au devis est souvent « Prénom Nom » : on le découpe pour
-  // éviter au client de retaper ce qu'il m'a déjà donné, tout en le laissant
-  // corriger. C'est lui qui sait comment il s'appelle.
-  const morceaux = nomPreRempli.trim().split(/\s+/);
-  const [prenom, setPrenom] = useState(morceaux.length > 1 ? morceaux[0] : '');
-  const [nom, setNom] = useState(
-    morceaux.length > 1 ? morceaux.slice(1).join(' ') : nomPreRempli.trim(),
-  );
+  /**
+   * Le nom enregistré au devis est découpé en prénom et nom.
+   *
+   * Le premier mot va toujours au prénom, jamais au nom. Le formulaire
+   * d'éligibilité ne demande que le prénom : un seul mot est donc presque
+   * toujours celui-là, et le placer dans le nom obligeait le client à corriger
+   * deux champs au lieu d'en remplir un. Matthieu ne connaît pas toujours le
+   * patronyme — c'est précisément ce que la signature vient chercher.
+   */
+  const morceaux = nomPreRempli.trim().split(/\s+/).filter(Boolean);
+  const [prenom, setPrenom] = useState(morceaux[0] ?? '');
+  const [nom, setNom] = useState(morceaux.slice(1).join(' '));
   const [adresse, setAdresse] = useState(adressePreRemplie);
   const [accord, setAccord] = useState(false);
   const [renonciation, setRenonciation] = useState(false);
@@ -233,7 +237,7 @@ export default function BlocSignature({
             </div>
             <div>
               <label className={ETIQUETTE} htmlFor="sig-nom">
-                Nom
+                Nom de famille
               </label>
               <input
                 id="sig-nom"
