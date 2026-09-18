@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { AGENCE, mentionSiret } from "../lib/agence";
 
 // ─── MÉTADONNÉES SEO DE LA PAGE CONTACT (Résout l'erreur Codex) ───
 export const metadata: Metadata = {
@@ -48,9 +49,28 @@ export default function Contact() {
           </a>
         </div>
 
-        <div className="pt-8">
+        {/* L'adresse du siège rassure autant qu'elle oblige : un prestataire
+            qui encaisse un acompte à distance doit dire où il est établi. */}
+        <div className="border-t border-white/10 pt-8 text-sm text-gray-500 leading-relaxed">
+          <p className="text-gray-300 font-medium">{AGENCE.nom} — {AGENCE.enseigne}</p>
+          <p>{AGENCE.activite}</p>
+          <p className="mt-2">
+            {AGENCE.adresse}
+            <br />
+            {AGENCE.codePostal} {AGENCE.ville}, {AGENCE.pays}
+          </p>
+          <p className="mt-2">
+            {mentionSiret()} · {AGENCE.mentionTva}
+          </p>
+          <p className="mt-2 text-gray-600">
+            Activité exercée depuis {AGENCE.lieu}, en Thaïlande — d&apos;où des réponses parfois
+            décalées de quelques heures.
+          </p>
+        </div>
+
+        <div className="pt-4">
           <Link href="/" className="text-gray-500 hover:text-white transition-colors uppercase tracking-wide text-sm font-bold">
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
         </div>
       </div>

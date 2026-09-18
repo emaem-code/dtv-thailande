@@ -1,4 +1,4 @@
-import { AGENCE } from './agence';
+import { AGENCE, adresseUneLigne, mentionSiret } from './agence';
 
 /**
  * Envoi de courriels via Resend.
@@ -92,12 +92,26 @@ ${corps}
 </body></html>`;
 }
 
-/** Le pied de signature, identique dans tous les messages. */
+/**
+ * Le pied de signature, identique dans tous les messages.
+ *
+ * Il porte l'adresse du siège et le numéro SIRET, et ce n'est pas une
+ * coquetterie : un courriel professionnel adressé à un particulier doit
+ * permettre d'identifier son auteur — raison sociale, adresse, immatriculation
+ * — au titre de l'article 19 de la LCEN. Le lieu d'exercice, lui, n'a aucune
+ * valeur légale : il dit seulement d'où l'on répond.
+ */
 export function signatureHtml(): string {
   return `<p style="margin:0 0 4px 0;">Bien à vous,</p>
-<p style="margin:0;font-size:14px;color:#57534e;">
+<p style="margin:0 0 20px 0;font-size:14px;color:#57534e;">
   ${echapper(AGENCE.nom)}<br>${echapper(AGENCE.enseigne)} — ${echapper(AGENCE.lieu)}<br>
   <a href="mailto:${AGENCE.email}" style="color:#b45309;">${AGENCE.email}</a>
+</p>
+<p style="margin:0;padding-top:16px;border-top:1px solid #e7e5e4;font-size:11px;line-height:1.6;color:#a8a29e;">
+  ${echapper(AGENCE.nom)} — ${echapper(AGENCE.enseigne)} · ${echapper(AGENCE.activite)}<br>
+  ${echapper(adresseUneLigne())}<br>
+  ${echapper(mentionSiret())} · ${echapper(AGENCE.mentionTva)}<br>
+  <a href="https://${AGENCE.site}/mentions-legales" style="color:#a8a29e;">Mentions légales</a>
 </p>`;
 }
 
@@ -107,5 +121,11 @@ export function signatureTexte(): string {
 ${AGENCE.nom}
 ${AGENCE.enseigne} — ${AGENCE.lieu}
 ${AGENCE.email}
-https://${AGENCE.site}`;
+https://${AGENCE.site}
+
+--
+${AGENCE.nom} — ${AGENCE.enseigne} · ${AGENCE.activite}
+${adresseUneLigne()}
+${mentionSiret()} · ${AGENCE.mentionTva}
+https://${AGENCE.site}/mentions-legales`;
 }

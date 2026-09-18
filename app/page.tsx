@@ -8,6 +8,7 @@ import MobileVideoCarousel from './components/MobileVideoCarousel';
 import HomeContent from "./components/HomeContent";
 import SiteHeader from "./components/SiteHeader";
 import { PRIX_APPEL, prix } from "./lib/tarifs";
+import { AGENCE, mentionSiret } from "./lib/agence";
 import { useApparitionAuScroll } from "./components/useApparitionAuScroll";
 import { useModales } from "./components/ModalesProvider";
 import { getSortedBlogPosts } from "./blog/posts";
@@ -392,7 +393,15 @@ export default function Home() {
           <Link href="/contact" className="hover:text-gray-300 transition-colors">Nous contacter</Link>
           <Link href="/mentions-legales" className="hover:text-gray-300 transition-colors">Mentions légales</Link>
         </div>
-        <span className="text-xs text-gray-700 mt-2">© {new Date().getFullYear()} Visa DTV Thaïlande.</span>
+        {/* L'identité de l'éditeur doit être accessible depuis toute page. Le
+            lien vers les mentions légales y suffit en droit, mais une ligne
+            visible fait aussi son travail commercial : elle dit qu'il y a
+            quelqu'un de réel et de localisable derrière le site. */}
+        <span className="text-xs text-gray-700 mt-2 text-center px-4 leading-relaxed">
+          {AGENCE.nom} — {AGENCE.enseigne} · {AGENCE.adresse}, {AGENCE.codePostal} {AGENCE.ville},{' '}
+          {AGENCE.pays} · {mentionSiret()}
+        </span>
+        <span className="text-xs text-gray-700">© {new Date().getFullYear()} Visa DTV Thaïlande.</span>
       </footer>
 
       {/* ── BANDEAU DE PRIX FLOTTANT ──

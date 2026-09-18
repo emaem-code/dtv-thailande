@@ -76,6 +76,27 @@ export function siretEnAttente(): boolean {
   return !AGENCE.siret && AGENCE.immatriculationEnCours;
 }
 
+/** L'adresse du siège sur une seule ligne, pour les pieds de courriel. */
+export function adresseUneLigne(): string {
+  return `${AGENCE.adresse}, ${AGENCE.codePostal} ${AGENCE.ville}, ${AGENCE.pays}`;
+}
+
+/**
+ * Médiateur de la consommation.
+ *
+ * L'article L612-1 du code de la consommation impose à tout professionnel qui
+ * vend à des particuliers d'adhérer à un dispositif de médiation et d'en
+ * publier les coordonnées : sur le site, dans les conditions de vente et sur
+ * les devis. L'adhésion se souscrit auprès d'un médiateur référencé par la
+ * CECMC, pour quelques dizaines d'euros par an.
+ *
+ * Tant que ce champ vaut null, les mentions légales annoncent que la
+ * désignation est en cours plutôt que de taire une mention obligatoire — même
+ * logique que « SIRET en cours d'attribution ». Le jour de l'adhésion, il n'y
+ * a que ces trois lignes à renseigner.
+ */
+export const MEDIATEUR: { nom: string; adresse: string; site: string } | null = null;
+
 // ─── CONDITIONS COMMERCIALES ─────────────────────────────────────────────────
 
 /** Part des honoraires exigible à la signature. Le solde est dû au dépôt. */

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { enregistrerLead } from '../../lib/leads';
+import { AGENCE, adresseUneLigne, mentionSiret } from '../../lib/agence';
 
 /**
  * Accusé de réception au prospect, et enregistrement de la demande.
@@ -23,7 +24,7 @@ const EMAIL_VALIDE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
  * Le nom affiché est celui de la marque, pas une personne : ce message part
  * d'une adresse de contact générique, et le site s'adresse au « nous ».
  */
-const EXPEDITEUR = 'DTV Thaïlande <contact@dtv-thailande.fr>';
+const EXPEDITEUR = `${AGENCE.enseigne} <${AGENCE.email}>`;
 
 type Corps = {
   prenom?: unknown;
@@ -61,13 +62,18 @@ ${secondLien}
 
 À très bientôt,
 
-L'équipe DTV Thaïlande
-Kathu, Phuket
-contact@dtv-thailande.fr
-https://dtv-thailande.fr
+L'équipe ${AGENCE.enseigne}
+${AGENCE.lieu}
+${AGENCE.email}
+https://${AGENCE.site}
 
----
-Vous recevez ce message parce que vous avez rempli le test d'éligibilité sur dtv-thailande.fr.
+--
+${AGENCE.nom} — ${AGENCE.enseigne} · ${AGENCE.activite}
+${adresseUneLigne()}
+${mentionSiret()} · ${AGENCE.mentionTva}
+https://${AGENCE.site}/mentions-legales
+
+Vous recevez ce message parce que vous avez rempli le test d'éligibilité sur ${AGENCE.site}.
 `;
 }
 
@@ -114,15 +120,21 @@ function corpsHtml(prenom: string, softPower: boolean): string {
 
         </td></tr>
         <tr><td style="padding:0 32px 32px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;color:#57534e;border-top:1px solid #e7e5e4;padding-top:20px;">
-          <p style="margin:0;"><strong style="color:#1c1917;">L'équipe DTV Thaïlande</strong><br>
-          Kathu, Phuket<br>
-          <a href="mailto:contact@dtv-thailande.fr" style="color:#b45309;">contact@dtv-thailande.fr</a> ·
-          <a href="https://dtv-thailande.fr" style="color:#b45309;">dtv-thailande.fr</a></p>
+          <p style="margin:0 0 16px 0;"><strong style="color:#1c1917;">L'équipe ${echapper(AGENCE.enseigne)}</strong><br>
+          ${echapper(AGENCE.lieu)}<br>
+          <a href="mailto:${AGENCE.email}" style="color:#b45309;">${AGENCE.email}</a> ·
+          <a href="https://${AGENCE.site}" style="color:#b45309;">${AGENCE.site}</a></p>
+          <p style="margin:0;padding-top:16px;border-top:1px solid #e7e5e4;font-size:11px;line-height:1.6;color:#a8a29e;">
+            ${echapper(AGENCE.nom)} — ${echapper(AGENCE.enseigne)} · ${echapper(AGENCE.activite)}<br>
+            ${echapper(adresseUneLigne())}<br>
+            ${echapper(mentionSiret())} · ${echapper(AGENCE.mentionTva)}<br>
+            <a href="https://${AGENCE.site}/mentions-legales" style="color:#a8a29e;">Mentions légales</a>
+          </p>
         </td></tr>
       </table>
 
       <p style="max-width:560px;margin:16px auto 0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;color:#a8a29e;text-align:center;">
-        Vous recevez ce message parce que vous avez rempli le test d'éligibilité sur dtv-thailande.fr.
+        Vous recevez ce message parce que vous avez rempli le test d'éligibilité sur ${AGENCE.site}.
       </p>
     </td></tr>
   </table>
