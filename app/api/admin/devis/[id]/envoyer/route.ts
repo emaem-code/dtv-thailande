@@ -54,7 +54,7 @@ export async function POST(requete: Request, { params }: Contexte) {
     const corps = (await requete.json()) as { message?: unknown };
     if (typeof corps.message === 'string') message = corps.message.trim().slice(0, 5000);
   } catch {
-    /* pas de corps : envoi sans mot personnel, c'est le cas courant */
+    /* pas de corps : on retombe sur le mot enregistré avec le devis */
   }
 
   // Un devis dépourvu d'adresse de siège n'est pas opposable : on refuse
@@ -76,6 +76,10 @@ export async function POST(requete: Request, { params }: Contexte) {
   if (!devis.client.email) {
     return NextResponse.json({ erreur: 'Ce devis n’a pas d’adresse e-mail client.' }, { status: 400 });
   }
+
+  // L'éditeur envoie le mot avec l'appel ; un appel qui n'en porte pas — une
+  // relance, un envoi depuis la liste — reprend celui enregistré sur le devis.
+  if (!message) message = devis.message;
 
   const t = totaliser(devis);
   const origine = new URL(requete.url).origin;

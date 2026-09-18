@@ -136,6 +136,13 @@ export type Devis = {
    * l'existence des options.
    */
   options: Option[];
+  /**
+   * Le mot personnel placé en tête du courriel, à la place de la formule
+   * d'ouverture type. Conservé avec le devis, et non dans l'éditeur : on le
+   * rédige rarement d'un trait, et un brouillon qu'on rouvre doit retrouver ce
+   * qu'on y avait écrit.
+   */
+  message: string;
   signature: Signature | null;
   suivi: Suivi;
 };

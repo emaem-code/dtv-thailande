@@ -55,7 +55,9 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [noteSuivi, setNoteSuivi] = useState(devis.suivi.note);
   const [etatSuivi, setEtatSuivi] = useState<'repos' | 'envoi' | 'ok' | 'erreur'>('repos');
   const [confirmeSuppression, setConfirmeSuppression] = useState(false);
-  const [messageClient, setMessageClient] = useState('');
+  /* Repris du devis enregistré : rouvrir un brouillon doit rendre ce qu'on y
+     avait écrit, pas une zone vide. */
+  const [messageClient, setMessageClient] = useState(initial.message);
   const [honorairesManuels, setHonorairesManuels] = useState(false);
   const [deboursManuels, setDeboursManuels] = useState(false);
 
@@ -159,6 +161,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           honoraires: devis.honoraires,
           debours: devis.debours,
           options: devis.options,
+          message: messageClient,
         }),
       });
       const corps = (await reponse.json()) as { devis?: Devis; erreur?: string };

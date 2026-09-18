@@ -24,7 +24,7 @@ export async function PATCH(requete: Request, { params }: Contexte) {
   try {
     const { id } = await params;
     const corps = (await requete.json()) as Partial<
-      Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options'>
+      Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options' | 'message'>
     >;
 
     // Les lignes de débours viennent d'un formulaire : on les remet au propre
@@ -39,6 +39,9 @@ export async function PATCH(requete: Request, { params }: Contexte) {
     const devis = await majDevis(Number(id), {
       ...corps,
       client: corps.client ? normaliserClient(corps.client) : undefined,
+      // Même plafond que la route d'envoi : ce qui est enregistré est
+      // exactement ce qui partira.
+      message: corps.message === undefined ? undefined : String(corps.message).slice(0, 5000),
       dossier: corps.dossier ? normaliserDossier(corps.dossier) : undefined,
       honoraires: corps.honoraires === undefined ? undefined : Math.max(0, Number(corps.honoraires) || 0),
       debours,

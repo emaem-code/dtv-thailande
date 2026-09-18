@@ -127,6 +127,10 @@ export function assurerSchema(): Promise<void> {
     await requete(
       `ALTER TABLE devis ADD COLUMN IF NOT EXISTS suivi JSONB NOT NULL DEFAULT '{}'::jsonb`,
     );
+    // Le mot personnel adressé au client. Il vivait en mémoire de l'éditeur et
+    // disparaissait au rechargement de la page : cinq mille caractères écrits
+    // à la main, perdus parce qu'on avait fermé l'onglet.
+    await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS message TEXT NOT NULL DEFAULT ''`);
 
     /**
      * Codes à usage unique de la signature électronique.

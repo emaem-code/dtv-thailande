@@ -38,6 +38,7 @@ type LigneDevis = {
   honoraires: number;
   debours: Debours[];
   options: Option[] | null;
+  message: string | null;
   signature: Signature | null;
   suivi: Partial<Suivi> | null;
 };
@@ -57,6 +58,7 @@ function versDevis(l: LigneDevis): Devis {
     honoraires: l.honoraires,
     debours: l.debours,
     options: l.options ?? [],
+    message: l.message ?? '',
     signature: l.signature ?? null,
     // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
     // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
@@ -147,7 +149,9 @@ export class DevisSigneError extends Error {
 
 export async function majDevis(
   id: number,
-  champs: Partial<Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options'>>,
+  champs: Partial<
+    Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options' | 'message'>
+  >,
 ): Promise<Devis | null> {
   await assurerSchema();
 
@@ -165,6 +169,7 @@ export async function majDevis(
        debours    = COALESCE($5, debours),
        statut     = COALESCE($6, statut),
        options    = COALESCE($7, options),
+       message    = COALESCE($8, message),
        maj_le     = now()
      WHERE id = $1 RETURNING *`,
     [
@@ -175,6 +180,9 @@ export async function majDevis(
       champs.debours ? JSON.stringify(champs.debours) : null,
       champs.statut ?? null,
       champs.options ? JSON.stringify(champs.options) : null,
+      // `?? null` et non `|| null` : une chaîne vide est un effacement voulu,
+      // pas une absence de valeur.
+      champs.message ?? null,
     ],
   );
   return ligne ? versDevis(ligne) : null;
