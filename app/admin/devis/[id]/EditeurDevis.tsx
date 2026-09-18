@@ -52,6 +52,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [noteSuivi, setNoteSuivi] = useState(devis.suivi.note);
   const [etatSuivi, setEtatSuivi] = useState<'repos' | 'envoi' | 'ok' | 'erreur'>('repos');
   const [confirmeSuppression, setConfirmeSuppression] = useState(false);
+  const [messageClient, setMessageClient] = useState('');
 
   const changer = (partiel: Partial<Devis>) => {
     setDevis((d) => ({ ...d, ...partiel }));
@@ -124,7 +125,11 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     setMessage('');
     try {
       await enregistrer();
-      const reponse = await fetch(`/api/admin/devis/${devis.id}/envoyer`, { method: 'POST' });
+      const reponse = await fetch(`/api/admin/devis/${devis.id}/envoyer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: messageClient }),
+      });
       const corps = (await reponse.json()) as { erreur?: string; lien?: string };
       if (reponse.ok) {
         setDevis((d) => ({ ...d, statut: 'envoye', envoyeLe: new Date().toISOString() }));
@@ -484,6 +489,31 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
         {/* Actions qui touchent au contenu contractuel */}
         <section className="space-y-3">
+          {/* Le mot personnel évite le double envoi : sans lui, il fallait
+              expédier le courriel du site, impersonnel, puis le sien avec ce
+              qui compte — un rétroplanning, une échéance. Deux messages pour
+              une seule affaire, et le client ne sait plus lequel fait foi. */}
+          <div>
+            <label className={ETIQUETTE} htmlFor="mot">
+              Votre mot au client (facultatif)
+            </label>
+            <textarea
+              id="mot"
+              rows={6}
+              className={CHAMP}
+              value={messageClient}
+              onChange={(e) => setMessageClient(e.target.value)}
+              placeholder={
+                'Bonjour Matteo,\n\nVoici le devis dont nous avons parlé…\n\nUn point important sur le calendrier : vos fonds doivent être\nsur le compte au plus tard le 5 novembre.'
+              }
+            />
+            <p className="text-[11px] text-gray-500 mt-1.5 leading-relaxed">
+              Placé en tête du courriel, à la place de la formule d&apos;ouverture standard. Le
+              récapitulatif des montants et le bouton de signature suivent automatiquement. Laissez
+              vide pour le message type.
+            </p>
+          </div>
+
           <div className="flex gap-2">
             <button onClick={enregistrer} disabled={etat === 'envoi'}
               className="flex-1 border border-white/15 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-white/5 transition-colors disabled:opacity-50">

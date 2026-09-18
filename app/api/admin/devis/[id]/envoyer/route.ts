@@ -21,10 +21,41 @@ function euros(montant: number): string {
   return `${montant.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
 }
 
+/**
+ * Le mot personnel, rendu en HTML.
+ *
+ * Une ligne vide sépare deux paragraphes, un simple retour à la ligne reste un
+ * retour à la ligne : c'est la convention que tout le monde applique sans y
+ * penser en écrivant un courriel. Le texte est échappé avant toute chose — il
+ * vient d'une saisie, et il finit dans du HTML envoyé à un tiers.
+ */
+function messageEnHtml(message: string): string {
+  return echapper(message)
+    .split(/\n{2,}/)
+    .map((p) => `<p style="margin:0 0 16px 0;">${p.replace(/\n/g, '<br>')}</p>`)
+    .join('\n');
+}
+
 type Contexte = { params: Promise<{ id: string }> };
 
 export async function POST(requete: Request, { params }: Contexte) {
   const { id } = await params;
+
+  /**
+   * Mot personnel facultatif, placé en tête du courriel.
+   *
+   * Sans lui, il fallait envoyer deux messages : celui du site, impersonnel,
+   * puis le sien avec ce qui compte vraiment — un rétroplanning, une échéance,
+   * une précision sur le dossier. Deux courriels pour une seule affaire, c'est
+   * une de trop, et le client ne sait plus lequel fait foi.
+   */
+  let message = '';
+  try {
+    const corps = (await requete.json()) as { message?: unknown };
+    if (typeof corps.message === 'string') message = corps.message.trim().slice(0, 5000);
+  } catch {
+    /* pas de corps : envoi sans mot personnel, c'est le cas courant */
+  }
 
   // Un devis dépourvu d'adresse de siège n'est pas opposable : on refuse
   // l'envoi plutôt que de laisser partir une pièce non conforme.
@@ -51,9 +82,13 @@ export async function POST(requete: Request, { params }: Contexte) {
   const lien = `${origine}/devis/${devis.jeton}`;
   const prenom = devis.client.nom.split(' ')[0] || '';
 
-  const texte = `${prenom ? `Bonjour ${prenom},` : 'Bonjour,'}
+  // Le mot personnel remplace la formule d'ouverture : Matthieu écrit son
+  // propre « Bonjour Matteo », et deux salutations d'affilée feraient robot.
+  const ouverture = message || `${prenom ? `Bonjour ${prenom},` : 'Bonjour,'}
 
-Voici le devis correspondant à votre projet, réf. ${devis.numero}.
+Voici le devis correspondant à votre projet, réf. ${devis.numero}.`;
+
+  const texte = `${ouverture}
 
 Il se consulte, s'imprime et se signe ici :
 ${lien}
@@ -84,9 +119,13 @@ répondez simplement à ce message — mieux vaut corriger avant signature.
 ${signatureTexte()}
 `;
 
+  const ouvertureHtml = message
+    ? messageEnHtml(message)
+    : `<p style="margin:0 0 16px 0;">${prenom ? `Bonjour ${echapper(prenom)},` : 'Bonjour,'}</p>
+<p style="margin:0 0 24px 0;">Voici le devis correspondant à votre projet, réf. <strong>${echapper(devis.numero)}</strong>.</p>`;
+
   const html = gabarit(`
-<p style="margin:0 0 16px 0;">${prenom ? `Bonjour ${echapper(prenom)},` : 'Bonjour,'}</p>
-<p style="margin:0 0 24px 0;">Voici le devis correspondant à votre projet, réf. <strong>${echapper(devis.numero)}</strong>.</p>
+${ouvertureHtml}
 <p style="margin:0 0 20px 0;text-align:center;">
   <a href="${lien}" style="display:inline-block;background:#b45309;color:#ffffff;text-decoration:none;font-weight:bold;padding:14px 28px;border-radius:999px;">Consulter et signer le devis</a>
 </p>
