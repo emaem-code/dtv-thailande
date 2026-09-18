@@ -19,9 +19,8 @@ import { RETRACTATION_JOURS, ACOMPTE_POURCENT } from '../../lib/agence';
  * fin du délai de rétractation.
  */
 
-const CHAMP =
-  'w-full bg-[#111111] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white outline-none focus:border-amber-500/60 transition-colors placeholder:text-gray-600';
-const ETIQUETTE = 'block text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1.5';
+const CHAMP = 'champ';
+const ETIQUETTE = 'block text-[11px] uppercase tracking-wider text-gray-400 font-bold mb-2';
 
 function euros(m: number): string {
   return `${m.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
@@ -201,7 +200,7 @@ export default function BlocSignature({
                         // l'accord doit être redonné en connaissance de cause.
                         setAccord(false);
                       }}
-                      className="mt-1 w-4 h-4 flex-none accent-amber-500"
+                      className="bouton-radio mt-0.5"
                     />
                     <span className="min-w-0 flex-1">
                       <span className="flex justify-between gap-3 items-baseline">
@@ -283,7 +282,7 @@ export default function BlocSignature({
               checked={accord}
               disabled={enAttenteDeChoix}
               onChange={(e) => setAccord(e.target.checked)}
-              className="mt-1 w-4 h-4 flex-none accent-amber-500"
+              className="case-a-cocher mt-0.5"
             />
             <span className="text-sm text-gray-300 leading-relaxed">
               <strong className="text-white">Bon pour accord.</strong>{' '}
@@ -307,7 +306,7 @@ export default function BlocSignature({
               type="checkbox"
               checked={renonciation}
               onChange={(e) => setRenonciation(e.target.checked)}
-              className="mt-1 w-4 h-4 flex-none accent-amber-500"
+              className="case-a-cocher mt-0.5"
             />
             <span className="text-sm text-gray-300 leading-relaxed">
               <strong className="text-white">Je demande à ce que le travail commence tout de
@@ -324,7 +323,7 @@ export default function BlocSignature({
           <button
             onClick={demanderCode}
             disabled={occupe}
-            className="w-full bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold py-3.5 rounded-xl transition-colors disabled:opacity-50"
+            className="bouton-principal text-sm"
           >
             {occupe ? 'Envoi du code…' : 'Recevoir mon code par courriel'}
           </button>
@@ -337,7 +336,8 @@ export default function BlocSignature({
             </label>
             <input
               id="sig-code"
-              className={`${CHAMP} text-center text-2xl tracking-[0.4em] font-mono`}
+              className="champ text-center text-3xl tracking-[0.35em] font-mono py-4"
+
               value={code}
               inputMode="numeric"
               autoComplete="one-time-code"
@@ -373,7 +373,7 @@ export default function BlocSignature({
           <button
             onClick={signer}
             disabled={occupe || code.length !== 6}
-            className="w-full bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold py-3.5 rounded-xl transition-colors disabled:opacity-50"
+            className="bouton-principal text-sm"
           >
             {occupe ? 'Signature en cours…' : 'Signer le devis'}
           </button>
@@ -381,7 +381,7 @@ export default function BlocSignature({
           <button
             onClick={demanderCode}
             disabled={occupe}
-            className="w-full text-xs text-gray-400 hover:text-white py-2 transition-colors disabled:opacity-50"
+            className="w-full text-xs text-gray-500 hover:text-gray-300 py-2.5 transition-colors disabled:opacity-50"
           >
             Je n&apos;ai rien reçu — renvoyer un code
           </button>

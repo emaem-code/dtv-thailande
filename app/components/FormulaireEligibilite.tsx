@@ -91,7 +91,7 @@ const LIBELLES: Record<string, Record<string, string>> = {
   formule: {
     essentielle: 'Essentielle',
     premium: 'Premium',
-    conseil: '❓ Ne sait pas encore — envoyer les trois formules',
+    conseil: '❓ Ne sait pas encore — envoyer les deux formules',
   },
   source: {
     google: 'Recherche Google',
@@ -436,16 +436,30 @@ export default function FormulaireEligibilite({
     const isSelected = formData[field as keyof typeof formData] === value;
     return (
       <div
+        role="radio"
+        aria-checked={isSelected}
+        tabIndex={0}
         onClick={() => handleChange(field, value)}
-        className={`p-4 rounded-xl border cursor-pointer transition-all duration-200 flex items-center gap-3
-          ${isSelected ? 'bg-amber-500/10 border-amber-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10 hover:border-white/20'}`}
+        onKeyDown={(e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            handleChange(field, value);
+          }
+        }}
+        className={`p-4 rounded-xl border cursor-pointer select-none transition-all duration-200 flex items-center gap-3 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/25
+          ${
+            isSelected
+              ? 'bg-amber-500/10 border-amber-500 text-white shadow-[0_8px_22px_-14px_rgba(245,158,11,0.9)]'
+              : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/[0.09] hover:border-white/25'
+          }`}
       >
+        {/* Anneau épais plutôt que pastille centrée : rien à recentrer, donc
+            rien qui se décale d'un navigateur à l'autre. */}
         <div
-          className={`w-5 h-5 rounded-full border flex items-center justify-center flex-none
-          ${isSelected ? 'border-amber-500' : 'border-gray-500'}`}
-        >
-          {isSelected && <div className="w-2.5 h-2.5 bg-amber-500 rounded-full" />}
-        </div>
+          className={`w-5 h-5 rounded-full flex-none transition-all duration-150 ${
+            isSelected ? 'border-[6px] border-amber-500 bg-[#0a0a0a]' : 'border border-gray-500'
+          }`}
+        />
         <span className="text-sm md:text-base font-medium leading-tight">{label}</span>
       </div>
     );
@@ -652,7 +666,7 @@ export default function FormulaireEligibilite({
                   placeholder="Précisez votre nationalité..."
                   value={formData.nationaliteAutre}
                   onChange={(e) => handleChange('nationaliteAutre', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3 mt-2 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 text-sm"
+                  className="champ mt-2"
                 />
               )}
             </div>
@@ -668,7 +682,7 @@ export default function FormulaireEligibilite({
                     placeholder="Votre prénom"
                     value={formData.prenom}
                     onChange={(e) => handleChange('prenom', e.target.value)}
-                    className={`w-full bg-white/5 border rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-1 transition-colors ${erreurs.prenom ? 'border-red-500/60 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-amber-500 focus:ring-amber-500'}`}
+                    className={`champ ${erreurs.prenom ? 'champ-erreur' : ''}`}
                   />
                   <Erreur champ="prenom" />
                 </div>
@@ -679,7 +693,7 @@ export default function FormulaireEligibilite({
                     placeholder="votre@email.com"
                     value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
-                    className={`w-full bg-white/5 border rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-1 transition-colors ${erreurs.email ? 'border-red-500/60 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-amber-500 focus:ring-amber-500'}`}
+                    className={`champ ${erreurs.email ? 'champ-erreur' : ''}`}
                   />
                   <Erreur champ="email" />
                 </div>
@@ -689,7 +703,7 @@ export default function FormulaireEligibilite({
             <div className="pt-4">
               <button
                 onClick={nextStep}
-                className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
+                className="bouton-principal text-lg"
               >
                 Vérifier mon profil →
               </button>
@@ -736,7 +750,7 @@ export default function FormulaireEligibilite({
                     min={AUJOURDHUI}
                     value={formData.dateStart}
                     onChange={(e) => handleChange('dateStart', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
+                    className="champ [color-scheme:dark]"
                   />
                 </div>
                 <div className="w-full flex-1">
@@ -746,7 +760,7 @@ export default function FormulaireEligibilite({
                     min={formData.dateStart || AUJOURDHUI}
                     value={formData.dateEnd}
                     onChange={(e) => handleChange('dateEnd', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-amber-500 text-sm [color-scheme:dark]"
+                    className="champ [color-scheme:dark]"
                   />
                 </div>
               </div>
@@ -775,7 +789,7 @@ export default function FormulaireEligibilite({
                 }
                 value={formData.locationDetails}
                 onChange={(e) => handleChange('locationDetails', e.target.value)}
-                className={`w-full bg-white/5 border rounded-xl px-5 py-3 mt-2 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.locationDetails ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                className={`champ mt-2 ${erreurs.locationDetails ? 'champ-erreur' : ''}`}
               />
               <Erreur champ="locationDetails" />
             </div>
@@ -793,7 +807,7 @@ export default function FormulaireEligibilite({
                 placeholder="Bangkok, Chiang Mai, Pattaya, Phuket, je ne sais pas encore..."
                 value={formData.villeThailande}
                 onChange={(e) => handleChange('villeThailande', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 text-sm"
+                className="champ"
               />
             </div>
 
@@ -868,7 +882,7 @@ export default function FormulaireEligibilite({
                     placeholder="Nombre d'adultes concernés, vous compris"
                     value={formData.adultesCount}
                     onChange={(e) => handleChange('adultesCount', e.target.value)}
-                    className={`w-full bg-white/5 border rounded-xl px-5 py-3 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.adultesCount ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                    className={`champ ${erreurs.adultesCount ? 'champ-erreur' : ''}`}
                   />
                   <Erreur champ="adultesCount" />
                 </div>
@@ -883,7 +897,7 @@ export default function FormulaireEligibilite({
                     placeholder="Combien d'enfants vous accompagnent ?"
                     value={formData.childrenCount}
                     onChange={(e) => handleChange('childrenCount', e.target.value)}
-                    className={`w-full bg-white/5 border rounded-xl px-5 py-3 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.childrenCount ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                    className={`champ ${erreurs.childrenCount ? 'champ-erreur' : ''}`}
                   />
                   <Erreur champ="childrenCount" />
 
@@ -995,7 +1009,7 @@ export default function FormulaireEligibilite({
                 placeholder="+33 6 12 34 56 78"
                 value={formData.telephone}
                 onChange={(e) => handleChange('telephone', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 text-sm"
+                className="champ"
               />
               {formData.telephone.trim() !== '' && (
                 <label className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
@@ -1003,7 +1017,7 @@ export default function FormulaireEligibilite({
                     type="checkbox"
                     checked={formData.whatsapp === 'yes'}
                     onChange={(e) => handleChange('whatsapp', e.target.checked ? 'yes' : '')}
-                    className="w-4 h-4 flex-none accent-amber-500"
+                    className="case-a-cocher"
                   />
                   <span className="text-sm text-gray-300">Je suis joignable sur WhatsApp</span>
                 </label>
@@ -1031,7 +1045,7 @@ export default function FormulaireEligibilite({
                 value={formData.remarks}
                 onChange={(e) => handleChange('remarks', e.target.value)}
                 placeholder="Dites-nous en plus sur votre projet..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
+                className="champ"
               />
             </div>
 
@@ -1041,7 +1055,7 @@ export default function FormulaireEligibilite({
                 type="checkbox"
                 checked={formData.consentement === 'yes'}
                 onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
-                className="mt-0.5 w-4 h-4 flex-none accent-amber-500"
+                className="case-a-cocher mt-0.5"
               />
               <span className="text-xs text-gray-400 leading-relaxed">
                 J&apos;accepte que ces informations soient utilisées uniquement pour établir mon
@@ -1056,17 +1070,19 @@ export default function FormulaireEligibilite({
             <Erreur champ="consentement" />
             <Erreur champ="envoi" />
 
-            <div className="pt-4 flex gap-4">
+            {/* Sur téléphone les deux boutons s'empilent, l'action principale
+                en premier : « Découvrir mes tarifs » sur une seule ligne. */}
+            <div className="pt-4 flex flex-col-reverse gap-3 sm:flex-row sm:gap-4">
               <button
                 onClick={prevStep}
-                className="px-6 py-4 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                className="bouton-secondaire bouton-auto"
               >
                 ← Retour
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold text-lg py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2"
+                className="bouton-principal flex-1 text-lg"
               >
                 {isSubmitting ? (
                   <>
@@ -1202,7 +1218,7 @@ export default function FormulaireEligibilite({
                       placeholder="Paris, Lyon, Genève, Bangkok..."
                       value={formData.villeDepart}
                       onChange={(e) => handleChange('villeDepart', e.target.value)}
-                      className={`w-full bg-white/5 border rounded-xl px-5 py-3.5 text-white placeholder-gray-500 focus:outline-none text-sm ${erreurs.villeDepart ? 'border-red-500/60 focus:border-red-500' : 'border-white/10 focus:border-amber-500'}`}
+                      className={`champ ${erreurs.villeDepart ? 'champ-erreur' : ''}`}
                     />
                     <Erreur champ="villeDepart" />
                   </div>
@@ -1211,7 +1227,7 @@ export default function FormulaireEligibilite({
                 <button
                   onClick={envoyerFormule}
                   disabled={envoiFormule}
-                  className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-4 rounded-xl transition-all active:scale-95 disabled:opacity-70 flex justify-center items-center gap-2"
+                  className="bouton-principal"
                 >
                   {envoiFormule ? (
                     <>
@@ -1228,7 +1244,7 @@ export default function FormulaireEligibilite({
                   <p className="text-emerald-400 font-bold text-sm mb-1">✓ C&apos;est noté</p>
                   <p className="text-sm text-gray-300">
                     {formData.formule === 'conseil'
-                      ? 'Nous vous adresserons les trois formules chiffrées pour votre situation, avec nos recommandations.'
+                      ? 'Nous vous adresserons les deux formules chiffrées pour votre situation, avec nos recommandations.'
                       : 'Votre estimation chiffrée arrivera avec notre premier message.'}
                   </p>
                 </div>

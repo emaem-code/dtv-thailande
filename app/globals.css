@@ -24,3 +24,193 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTRÔLES DE FORMULAIRE
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Écrits ici plutôt qu'en utilitaires recopiés dans chaque composant : ces
+   styles portent des sélecteurs d'état (:checked, :focus-visible) et une
+   coche en SVG, que Tailwind ne compose qu'au prix d'une ligne de classes
+   illisible et impossible à maintenir à l'identique sur cinq écrans. */
+
+/* Safari iOS zoome sur le champ dès que sa police descend sous 16 px, et ne
+   dézoome jamais : la page reste décalée pour le reste de la visite. La parade
+   courante — maximum-scale=1 dans le viewport — interdit aussi le zoom à deux
+   doigts, ce qui pénalise ceux qui en ont besoin pour lire. On garantit donc
+   16 px sur les petits écrans et on rend la main à Tailwind au-delà. */
+@media (max-width: 639px) {
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* ── Champs de saisie ───────────────────────────────────────────────────── */
+.champ {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(0 0 0 / 0.35);
+  padding: 0.75rem 1rem;
+  color: #fff;
+  line-height: 1.5;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+  outline: none;
+}
+.champ::placeholder {
+  color: rgb(255 255 255 / 0.28);
+}
+.champ:hover {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.champ:focus {
+  border-color: rgb(245 158 11 / 0.7);
+  background: rgb(0 0 0 / 0.5);
+  box-shadow: 0 0 0 4px rgb(245 158 11 / 0.12);
+}
+.champ:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Une seule taille déclarée ici plutôt qu'une classe utilitaire par champ :
+   sinon un champ oublié retombe sur la taille héritée et rouvre la porte au
+   zoom iOS. Sur grand écran on resserre, l'écran n'est plus le facteur. */
+.champ {
+  font-size: 16px;
+}
+@media (min-width: 640px) {
+  .champ {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ── Cases à cocher et boutons radio ────────────────────────────────────
+   Les contrôles natifs ne se ressemblent d'un système à l'autre ni d'un
+   navigateur à l'autre : carré blanc plein sous Chromium, contour gris sous
+   iOS. Sur fond sombre, le premier fait une tache. On les redessine. */
+.case-a-cocher,
+.bouton-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  border: 1.5px solid rgb(255 255 255 / 0.3);
+  background: rgb(255 255 255 / 0.06);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.case-a-cocher {
+  border-radius: 0.375rem;
+}
+.bouton-radio {
+  border-radius: 9999px;
+}
+.case-a-cocher:hover,
+.bouton-radio:hover {
+  border-color: rgb(245 158 11 / 0.6);
+}
+.case-a-cocher:focus-visible,
+.bouton-radio:focus-visible {
+  box-shadow: 0 0 0 4px rgb(245 158 11 / 0.25);
+}
+.case-a-cocher:checked {
+  background-color: #f59e0b;
+  border-color: #f59e0b;
+  /* Coche noire, comme le texte des boutons ambre : même famille visuelle. */
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3.5 8.4l3 3 6-6' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+  background-size: 0.85rem;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Un anneau épais laisse apparaître le fond au centre : pas de pastille à
+   positionner, donc rien qui se décale d'un navigateur à l'autre. */
+.bouton-radio:checked {
+  border-width: 0.375rem;
+  border-color: #f59e0b;
+  background: #0a0a0a;
+}
+.case-a-cocher:disabled,
+.bouton-radio:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Boutons ────────────────────────────────────────────────────────────── */
+.bouton-principal,
+.bouton-secondaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s, transform 0.08s, border-color 0.15s;
+}
+/* Le liseré clair en haut et la lueur ambrée en dessous donnent au bouton une
+   épaisseur que l'aplat n'avait pas. L'enfoncement d'un pixel au clic fait le
+   reste : on sent que le bouton répond. */
+.bouton-principal {
+  background: #f59e0b;
+  color: #000;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    0 10px 24px -10px rgb(245 158 11 / 0.75);
+}
+.bouton-principal:hover:not(:disabled) {
+  background: #fbbf24;
+}
+.bouton-principal:active:not(:disabled) {
+  background: #d97706;
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.25);
+}
+.bouton-principal:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.bouton-secondaire {
+  background: rgb(255 255 255 / 0.04);
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  font-weight: 600;
+}
+.bouton-secondaire:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.09);
+  border-color: rgb(255 255 255 / 0.25);
+}
+.bouton-secondaire:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.bouton-secondaire:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Champ en erreur : le liseré rouge remplace le liseré ambré, et le halo de
+   focus suit, pour que l'erreur reste visible pendant qu'on corrige. */
+.champ-erreur {
+  border-color: rgb(239 68 68 / 0.6);
+}
+.champ-erreur:focus {
+  border-color: rgb(239 68 68 / 0.9);
+  box-shadow: 0 0 0 4px rgb(239 68 68 / 0.12);
+}
+
+/* Un bouton placé à côté d'un autre dans une rangée ne doit pas prendre toute
+   la largeur : « Retour » se dimensionne sur son texte. Sur téléphone, où les
+   deux boutons s'empilent, la pleine largeur reprend ses droits. */
+@media (min-width: 640px) {
+  .bouton-principal.bouton-auto,
+  .bouton-secondaire.bouton-auto {
+    width: auto;
+  }
+}

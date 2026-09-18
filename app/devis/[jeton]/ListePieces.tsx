@@ -87,7 +87,7 @@ export default function ListePieces({
                         type="checkbox"
                         checked={coche}
                         onChange={() => basculer(piece.id)}
-                        className="mt-1 w-4 h-4 flex-none accent-amber-500"
+                        className="case-a-cocher mt-0.5"
                       />
                       <span className="min-w-0">
                         <span

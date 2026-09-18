@@ -28,9 +28,8 @@ function euros(m: number): string {
   return `${m.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
 }
 
-const CHAMP =
-  'w-full bg-[#111111] border border-white/10 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-amber-500/60 transition-colors';
-const ETIQUETTE = 'block text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1.5';
+const CHAMP = 'champ !py-2.5';
+const ETIQUETTE = 'block text-[11px] uppercase tracking-wider text-gray-400 font-bold mb-2';
 
 export default function EditeurDevis({ initial }: { initial: Devis }) {
   const router = useRouter();
@@ -510,7 +509,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
                     type="checkbox"
                     checked={cochee}
                     onChange={(e) => basculerFormule(f.id, e.target.checked)}
-                    className="w-4 h-4 flex-none accent-amber-500"
+                    className="case-a-cocher"
                   />
                   <span className="text-sm text-gray-300">
                     {f.nom}
@@ -649,11 +648,11 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
           <div className="flex gap-2">
             <button onClick={enregistrer} disabled={etat === 'envoi'}
-              className="flex-1 border border-white/15 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-white/5 transition-colors disabled:opacity-50">
+              className="bouton-secondaire flex-1 text-sm !py-2.5">
               {etat === 'envoi' ? 'Enregistrement…' : 'Enregistrer'}
             </button>
             <button onClick={envoyer} disabled={etat === 'envoi'}
-              className="flex-1 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold py-2.5 rounded-xl transition-colors disabled:opacity-50">
+              className="bouton-principal flex-1 text-sm !py-2.5">
               Envoyer au client
             </button>
           </div>

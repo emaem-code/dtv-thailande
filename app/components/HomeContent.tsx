@@ -1,6 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { FORMULES as formules, prix, MENTION_TRADUCTIONS } from '../lib/tarifs';
+// La grille publique ne montre que les formules encore vendues : la VIP reste
+// dans FORMULES pour que les devis déjà signés continuent de s'afficher, mais
+// l'annoncer au visiteur reviendrait à vendre ce qu'on ne fait plus.
+import { FORMULES_VENDUES as formules, prix, MENTION_TRADUCTIONS } from '../lib/tarifs';
 import { getSortedBlogPosts } from '../blog/posts';
 import MontantFonds from './MontantFonds';
 import { MARGE_CONSEILLEE } from '../lib/taux';
