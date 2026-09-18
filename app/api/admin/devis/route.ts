@@ -5,6 +5,7 @@ import {
   deboursParDefaut,
   honorairesParDefaut,
   normaliserDossier,
+  normaliserClient,
   type Client,
   type Dossier,
   type Debours,
@@ -86,7 +87,7 @@ export async function POST(requete: Request) {
     const debours: Debours[] = deboursParDefaut(dossier.personnes, dossier.softPower, dossier.formule);
 
     const devis = await creerDevis({
-      client,
+      client: normaliserClient(client),
       dossier: normaliserDossier(dossier),
       honoraires,
       debours,

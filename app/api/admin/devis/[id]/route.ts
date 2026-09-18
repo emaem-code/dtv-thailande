@@ -5,6 +5,7 @@ import {
   supprimerDevis,
   DevisSigneError,
   normaliserDossier,
+  normaliserClient,
   type Devis,
 } from '../../../../lib/devis';
 
@@ -37,6 +38,7 @@ export async function PATCH(requete: Request, { params }: Contexte) {
 
     const devis = await majDevis(Number(id), {
       ...corps,
+      client: corps.client ? normaliserClient(corps.client) : undefined,
       dossier: corps.dossier ? normaliserDossier(corps.dossier) : undefined,
       honoraires: corps.honoraires === undefined ? undefined : Math.max(0, Number(corps.honoraires) || 0),
       debours,

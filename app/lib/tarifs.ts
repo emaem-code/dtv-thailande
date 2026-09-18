@@ -237,8 +237,8 @@ export function mentionVoyage(formule: Formule['id']): string {
   const v = VOYAGE[formule];
   const g = GAMME_VOYAGE[formule];
   return (
-    `À titre de repère, comptez de l'ordre de ${v.vol} € le vol par personne ` +
-    `(${g.vol}), ${v.transfert} € le transfert depuis l'aéroport, et ${v.nuit} € ` +
+    `À titre de repère, comptez de l'ordre de ${prix(v.vol)} le vol par personne ` +
+    `(${g.vol}), ${prix(v.transfert)} le transfert depuis l'aéroport, et ${prix(v.nuit)} ` +
     `la nuit d'hôtel ${g.hotel} le temps de trouver votre logement. Ces montants ` +
     'varient fortement selon la saison et l\'anticipation ; ils ne sont pas ' +
     'compris dans le budget ci-dessus.'

@@ -107,10 +107,14 @@ function ComparatifOptions({ devis }: { devis: Devis }) {
       <h3 className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold mb-2">
         Les formules proposées
       </h3>
+      {/* Le compte s'écrit à partir des options réellement proposées : annoncer
+          « trois niveaux » au-dessus de deux cartes suffit à faire douter le
+          lecteur du reste du document. */}
       <p className="text-xs text-gray-400 print:text-gray-700 mb-5 leading-relaxed">
-        Trois niveaux d&apos;accompagnement pour le même dossier. Prenez le temps de les comparer :
-        vous choisirez celle que vous retenez au moment de signer, en bas de cette page. Aucune
-        n&apos;est engagée avant.
+        {devis.options.length === 2 ? 'Deux' : devis.options.length === 3 ? 'Trois' : devis.options.length}{' '}
+        niveaux d&apos;accompagnement pour le même dossier. Prenez le temps de les comparer : vous
+        choisirez celle que vous retenez au moment de signer, en bas de cette page. Aucune n&apos;est
+        engagée avant.
       </p>
 
       <div className="space-y-5">
@@ -178,8 +182,30 @@ function ComparatifOptions({ devis }: { devis: Devis }) {
           );
         })}
       </div>
+
+      {/* La formule qui organise l'arrivée annonce « transfert depuis
+          l'aéroport organisé » : sans cette clause, rien sur la page ne dit
+          que le vol, l'hôtel et le chauffeur restent à la charge du client.
+          Elle se trouvait plus bas, dans le bloc des frais externes — que le
+          comparatif remplace justement. */}
+      {formuleAvecVoyage(devis) && (
+        <p className="text-xs text-gray-400 print:text-gray-700 mt-5 leading-relaxed">
+          <strong className="text-white print:text-black">Voyage d&apos;installation.</strong>{' '}
+          Si vous retenez la formule {nomFormule(formuleAvecVoyage(devis)!)} :{' '}
+          {CLAUSE_VOYAGE} {mentionVoyage(formuleAvecVoyage(devis)!)}
+        </p>
+      )}
     </section>
   );
+}
+
+/**
+ * La formule, parmi celles soumises au client, au titre de laquelle le voyage
+ * doit être expliqué : la première de la grille qui organise l'arrivée, donc
+ * la moins chère des concernées.
+ */
+function formuleAvecVoyage(devis: Devis): Devis['dossier']['formule'] | undefined {
+  return devis.options.map((o) => o.formule).find((f) => f !== 'essentielle');
 }
 
 export default function DocumentDevis({ devis }: { devis: Devis }) {
@@ -188,6 +214,15 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
   const detailHonoraires = decomposerHonoraires(devis);
   /** Un devis signé a tranché : il redevient un devis à formule unique. */
   const aOptions = devis.options.length > 0 && !devis.signature;
+
+  /**
+   * La formule au titre de laquelle le voyage doit être expliqué, hors
+   * comparatif. En mode comparatif, la clause est portée par le comparatif
+   * lui-même, qui remplace tout ce bloc.
+   */
+  const formuleVoyage = aOptions ? undefined : devis.dossier.formule === 'essentielle'
+    ? undefined
+    : devis.dossier.formule;
 
   return (
     <article className="bg-[#0d0d0d] print:bg-white text-gray-300 print:text-black rounded-2xl print:rounded-none border border-white/10 print:border-0 overflow-hidden">
@@ -415,11 +450,17 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
           {/* La clause voyage n'a de sens que sur les formules qui organisent
               l'arrivée. Elle dit ce que le prestataire ne fait pas, et c'est
               le plus important : ni réservation en son nom, ni encaissement,
-              ni commission. */}
-          {devis.dossier.formule !== 'essentielle' && (
+              ni commission.
+
+              Elle se lisait sur `dossier.formule`, qui reste « essentielle »
+              tant qu'aucune option n'est retenue : un devis proposant la
+              Premium annonçait donc « transfert depuis l'aéroport organisé »
+              sans dire nulle part qui paie le vol. On regarde les formules
+              réellement soumises au client, pas celle du dossier. */}
+          {formuleVoyage && (
             <p className="text-xs text-gray-400 print:text-gray-700 mt-2 leading-relaxed">
               <strong className="text-white print:text-black">Voyage d&apos;installation.</strong>{' '}
-              {CLAUSE_VOYAGE} {mentionVoyage(devis.dossier.formule)}
+              {CLAUSE_VOYAGE} {mentionVoyage(formuleVoyage)}
             </p>
           )}
         </section>

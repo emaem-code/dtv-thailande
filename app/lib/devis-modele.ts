@@ -238,18 +238,31 @@ export function honorairesParDefaut(personnes: number, formule: Dossier['formule
 // ─── NORMALISATION ────────────────────────────────────────────────────────────
 
 /**
- * Met une majuscule à un nom de lieu saisi entièrement en minuscules.
+ * Remet en forme un nom propre saisi tout en minuscules ou tout en capitales.
  *
- * « bangkok » sur un document remis à un client fait négligé, et se corriger à
- * la main s'oublie une fois sur deux. La retouche ne s'applique que si rien
- * n'est déjà capitalisé : une saisie volontaire — « Koh Pha Ngan », un sigle,
- * un nom composé — reste intacte. Corriger ce que l'utilisateur a écrit
- * exprès serait pire que le défaut qu'on répare.
+ * « bangkok » sur un document remis à un client fait négligé, « BANGKOK » fait
+ * crier — et les deux se corrigent à la main une fois sur deux seulement. Les
+ * formulaires en sont la source : un visiteur qui tape son prénom au clavier
+ * d'un téléphone laisse la majuscule verrouillée sans y penser.
+ *
+ * La retouche ne s'applique qu'aux deux cas sans ambiguïté : tout en bas de
+ * casse, ou tout en capitales. Une saisie déjà mixte — « Koh Pha Ngan »,
+ * « McDonald », un nom composé — reste intacte, parce qu'elle a été voulue.
+ * Corriger ce que l'utilisateur a écrit exprès serait pire que le défaut qu'on
+ * répare.
  */
 export function capitaliserLieu(valeur: string): string {
   const texte = valeur.trim();
-  if (!texte || texte !== texte.toLowerCase()) return texte;
-  return texte.replace(/(^|[\s'’-])([a-zà-ÿ])/g, (_, avant: string, lettre: string) =>
+  if (!texte) return texte;
+
+  const toutEnBas = texte === texte.toLowerCase();
+  const toutEnHaut = texte === texte.toUpperCase();
+  // Un texte sans aucune lettre (« 75011 ») satisfait les deux tests : rien à
+  // faire, et surtout rien à casser.
+  if (toutEnBas === toutEnHaut) return texte;
+
+  const base = toutEnHaut ? texte.toLowerCase() : texte;
+  return base.replace(/(^|[\s'’-])([a-zà-ÿ])/g, (_, avant: string, lettre: string) =>
     avant + lettre.toUpperCase(),
   );
 }
@@ -294,4 +307,16 @@ export function devisSelonOption(devis: Devis, option: Option): Devis {
 
 export function normaliserDossier(dossier: Dossier): Dossier {
   return { ...dossier, destination: capitaliserLieu(dossier.destination ?? '') };
+}
+
+/**
+ * Remet le nom du client au propre avant enregistrement.
+ *
+ * Il ne sert pas qu'à l'en-tête du devis : c'est lui qui ouvre le courriel
+ * (« Bonjour MATTEO, ») et qui pré-remplit le prénom de la signature. Une
+ * capitale verrouillée au moment de remplir le formulaire se propageait donc
+ * partout d'un coup.
+ */
+export function normaliserClient(client: Client): Client {
+  return { ...client, nom: capitaliserLieu(client.nom ?? '') };
 }
