@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/images/_a_supprimer/
+
+# Sorties de travail et corbeille locale : le dépôt est public, et ces
+# dossiers contiennent des documents clients (prénoms, calendriers, devis).
+# Sans ces deux lignes, un « git add . » distrait les publierait.
+Claude outputs/
+_to_delete/
