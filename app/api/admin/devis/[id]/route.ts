@@ -1,5 +1,12 @@
 import { NextResponse } from 'next/server';
-import { lireDevis, majDevis, supprimerDevis, DevisSigneError, type Devis } from '../../../../lib/devis';
+import {
+  lireDevis,
+  majDevis,
+  supprimerDevis,
+  DevisSigneError,
+  normaliserDossier,
+  type Devis,
+} from '../../../../lib/devis';
 
 export const runtime = 'nodejs';
 
@@ -30,6 +37,7 @@ export async function PATCH(requete: Request, { params }: Contexte) {
 
     const devis = await majDevis(Number(id), {
       ...corps,
+      dossier: corps.dossier ? normaliserDossier(corps.dossier) : undefined,
       honoraires: corps.honoraires === undefined ? undefined : Math.max(0, Number(corps.honoraires) || 0),
       debours,
     });

@@ -51,6 +51,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [etapeSuivi, setEtapeSuivi] = useState(devis.suivi.etape);
   const [noteSuivi, setNoteSuivi] = useState(devis.suivi.note);
   const [etatSuivi, setEtatSuivi] = useState<'repos' | 'envoi' | 'ok' | 'erreur'>('repos');
+  const [confirmeSuppression, setConfirmeSuppression] = useState(false);
 
   const changer = (partiel: Partial<Devis>) => {
     setDevis((d) => ({ ...d, ...partiel }));
@@ -158,6 +159,38 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
       setEtatSuivi('erreur');
     } catch {
       setEtatSuivi('erreur');
+    }
+  };
+
+  /**
+   * Suppression d'un brouillon.
+   *
+   * Réservée aux brouillons, et la route le revérifie : un devis transmis à un
+   * client appartient à la suite comptable, qui doit rester continue. Un
+   * brouillon jamais sorti d'ici n'a en revanche aucune existence légale — le
+   * garder ne sert qu'à encombrer la liste.
+   *
+   * Confirmation en deux clics plutôt qu'une fenêtre système : moins brutal,
+   * et ça marche aussi sur un téléphone.
+   */
+  const supprimer = async () => {
+    if (!confirmeSuppression) {
+      setConfirmeSuppression(true);
+      return;
+    }
+    setEtat('envoi');
+    try {
+      const reponse = await fetch(`/api/admin/devis/${devis.id}`, { method: 'DELETE' });
+      if (reponse.ok) {
+        router.push('/admin/devis');
+        router.refresh();
+        return;
+      }
+      setEtat('erreur');
+      setMessage('Suppression impossible.');
+    } catch {
+      setEtat('erreur');
+      setMessage('Le serveur n’a pas répondu.');
     }
   };
 
@@ -477,7 +510,9 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
             </a>
           </div>
 
-          {!modifiable && (
+          {/* Un devis signé est déjà accepté, et son statut ne se force plus :
+              le verrou de `majDevis` refuserait de toute façon. */}
+          {!modifiable && !signe && (
             <div className="flex gap-2">
               <button onClick={() => changerStatut('accepte')}
                 className="flex-1 text-xs text-emerald-400 border border-emerald-500/25 py-2 rounded-lg hover:bg-emerald-500/10 transition-colors">
@@ -488,6 +523,22 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
                 Marquer refusé
               </button>
             </div>
+          )}
+
+          {modifiable && (
+            <button
+              onClick={supprimer}
+              onBlur={() => setConfirmeSuppression(false)}
+              className={`w-full text-xs py-2 rounded-lg border transition-colors ${
+                confirmeSuppression
+                  ? 'text-red-300 border-red-500/50 bg-red-500/10'
+                  : 'text-gray-600 border-transparent hover:text-red-400 hover:border-red-500/25'
+              }`}
+            >
+              {confirmeSuppression
+                ? 'Confirmer la suppression définitive'
+                : 'Supprimer ce brouillon'}
+            </button>
           )}
 
           {message && (

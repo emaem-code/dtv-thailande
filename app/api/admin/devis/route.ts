@@ -4,6 +4,7 @@ import {
   listerDevis,
   deboursParDefaut,
   honorairesParDefaut,
+  normaliserDossier,
   type Client,
   type Dossier,
   type Debours,
@@ -84,7 +85,13 @@ export async function POST(requete: Request) {
     const honoraires = honorairesParDefaut(dossier.personnes);
     const debours: Debours[] = deboursParDefaut(dossier.personnes, dossier.softPower);
 
-    const devis = await creerDevis({ client, dossier, honoraires, debours, leadId });
+    const devis = await creerDevis({
+      client,
+      dossier: normaliserDossier(dossier),
+      honoraires,
+      debours,
+      leadId,
+    });
 
     // Une demande transformée en devis n'a plus à figurer parmi les demandes à
     // traiter : le suivi se poursuit sur le devis.

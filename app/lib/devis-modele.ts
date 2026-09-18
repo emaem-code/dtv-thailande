@@ -185,3 +185,33 @@ export function deboursParDefaut(
 export function honorairesParDefaut(personnes: number): number {
   return HONORAIRES[Math.min(Math.max(1, personnes || 1), PALIER_MAX)];
 }
+
+// ─── NORMALISATION ────────────────────────────────────────────────────────────
+
+/**
+ * Met une majuscule à un nom de lieu saisi entièrement en minuscules.
+ *
+ * « bangkok » sur un document remis à un client fait négligé, et se corriger à
+ * la main s'oublie une fois sur deux. La retouche ne s'applique que si rien
+ * n'est déjà capitalisé : une saisie volontaire — « Koh Pha Ngan », un sigle,
+ * un nom composé — reste intacte. Corriger ce que l'utilisateur a écrit
+ * exprès serait pire que le défaut qu'on répare.
+ */
+export function capitaliserLieu(valeur: string): string {
+  const texte = valeur.trim();
+  if (!texte || texte !== texte.toLowerCase()) return texte;
+  return texte.replace(/(^|[\s'’-])([a-zà-ÿ])/g, (_, avant: string, lettre: string) =>
+    avant + lettre.toUpperCase(),
+  );
+}
+
+/**
+ * Remet un dossier au propre avant enregistrement.
+ *
+ * La normalisation se fait à l'écriture et non à l'affichage : le document
+ * montré au client et le texte canonique signé lisent la même valeur stockée,
+ * sans risque de divergence entre les deux.
+ */
+export function normaliserDossier(dossier: Dossier): Dossier {
+  return { ...dossier, destination: capitaliserLieu(dossier.destination ?? '') };
+}
