@@ -6,7 +6,6 @@ import {
   TRADUCTION_THB_PAR_PAGE,
   PAGES,
   SUPPLEMENT_FORMULE,
-  VOYAGE,
 } from './tarifs';
 import { fondsFoyerThb, eurosFoyer, formateThb, TAUX_SECOURS } from './taux';
 import { ACOMPTE_POURCENT } from './agence';
@@ -209,38 +208,13 @@ export function deboursParDefaut(
     detail: `${TRADUCTION_THB_PAR_PAGE} THB la page — estimation, refacturée au coût réel`,
   });
 
-  // ── Voyage d'installation, sur les formules qui l'organisent ──────────────
-  // Réservé au nom du client et réglé par lui : ces lignes sont un repère
-  // budgétaire, jamais une facturation. Les faire transiter par l'entreprise
-  // les transformerait en chiffre d'affaires imposable et ferait basculer
-  // l'activité dans le régime des opérateurs de voyages.
-  if (formule === 'premium' || formule === 'vip') {
-    const v = VOYAGE[formule];
-    const chambres = Math.ceil(n / 2);
-    const gamme = formule === 'vip' ? 'haut de gamme' : 'entrée de gamme';
-
-    lignes.push({
-      libelle: `Vol vers la Thaïlande — ${gamme}`,
-      quantite: n,
-      unitaire: v.vol,
-      detail: 'Sélectionné pour vous, réservé à votre nom et réglé par vos soins',
-    });
-    lignes.push({
-      libelle:
-        formule === 'vip'
-          ? 'Chauffeur privé depuis l’aéroport'
-          : 'Transfert depuis l’aéroport',
-      quantite: 1,
-      unitaire: v.transfert,
-      detail: 'Une prise en charge pour le foyer, réglée sur place',
-    });
-    lignes.push({
-      libelle: `Hôtel des premières nuits — ${gamme}`,
-      quantite: v.nuits * chambres,
-      unitaire: v.nuit,
-      detail: `${v.nuits} nuits${chambres > 1 ? ` × ${chambres} chambres` : ''}, le temps de trouver votre logement`,
-    });
-  }
+  // Le voyage ne figure pas ici, et c'est délibéré. Les frais consulaires et
+  // les traductions sont causés par la prestation : sans le dossier de visa,
+  // ils n'existent pas. Le vol, lui, est causé par le déménagement — le client
+  // le paiera que le prestataire soit là ou non. Les mêler gonflait le budget
+  // affiché de 2 000 € par personne pour de l'argent qui n'a rien à voir avec
+  // l'opération facturée. L'ordre de grandeur est donné en note (voir
+  // `mentionVoyage`), hors de tout total.
 
   return lignes;
 }

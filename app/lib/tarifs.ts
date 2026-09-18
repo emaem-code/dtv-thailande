@@ -155,7 +155,8 @@ export const PRESTATIONS: Record<Formule['id'], string[]> = {
     'Sélection de votre vol et de vos premières nuits d’hôtel, transfert depuis l’aéroport organisé',
   ] as string[],
   vip: [
-    'Vol et hébergement haut de gamme sélectionnés selon vos horaires et vos exigences',
+    'Vol direct ou à escale courte, choisi pour la durée du trajet et le confort de l’attente',
+    'Hébergement haut de gamme pour vos premières nuits',
     'Chauffeur privé qui vous accueille à la sortie de l’aéroport',
     'Recherche de logement et ouverture de compte bancaire',
     'École des enfants, assurance santé et démarches locales',
@@ -189,6 +190,27 @@ const PRESTATION_VOYAGE_PREMIUM =
  * la réservation est à son nom, il règle directement le prestataire, et
  * aucune commission n'est prise au passage.
  */
+/**
+ * L'ordre de grandeur du voyage, donné en note et jamais additionné.
+ *
+ * Le client a besoin d'un repère pour calibrer son budget d'installation, pas
+ * d'une ligne de devis : le nombre de nuits, le standard de l'hôtel et la date
+ * du vol lui appartiennent, et un forfait ferait croire à un engagement de
+ * prix que personne ne peut tenir six semaines à l'avance.
+ */
+export function mentionVoyage(formule: Formule['id']): string {
+  if (formule === 'essentielle') return '';
+  const v = VOYAGE[formule];
+  const g = GAMME_VOYAGE[formule];
+  return (
+    `À titre de repère, comptez de l'ordre de ${v.vol} € le vol par personne ` +
+    `(${g.vol}), ${v.transfert} € le transfert depuis l'aéroport, et ${v.nuit} € ` +
+    `la nuit d'hôtel ${g.hotel} le temps de trouver votre logement. Ces montants ` +
+    'varient fortement selon la saison et l\'anticipation ; ils ne sont pas ' +
+    'compris dans le budget ci-dessus.'
+  );
+}
+
 export const CLAUSE_VOYAGE =
   'Le vol, l’hébergement et les transferts sont sélectionnés et organisés pour ' +
   'vous, mais réservés à votre nom et réglés directement par vos soins auprès ' +
@@ -263,8 +285,21 @@ export const PAGES = { standard: 12, softPower: 4, rattache: 3 };
  * Ces sommes ne transitent jamais par l'entreprise : voir CLAUSE_VOYAGE.
  */
 export const VOYAGE = {
-  premium: { vol: 650, transfert: 20, nuit: 40, nuits: 4 },
-  vip: { vol: 1150, transfert: 45, nuit: 125, nuits: 4 },
+  premium: { vol: 1000, transfert: 25, nuit: 30, nuits: 4 },
+  vip: { vol: 1500, transfert: 45, nuit: 125, nuits: 4 },
+} as const;
+
+/**
+ * Ce qui distingue les deux voyages, en clair.
+ *
+ * L'écart VIP ne porte pas sur une classe de cabine mais sur le trajet : un
+ * vol direct ou à escale courte, choisi pour la durée et le confort de
+ * l'attente. Dire « haut de gamme » pour un vol laisserait entendre une
+ * business class qu'on ne vend pas — l'hôtel, lui, l'est réellement.
+ */
+export const GAMME_VOYAGE = {
+  premium: { vol: 'entrée de gamme', hotel: 'entrée de gamme' },
+  vip: { vol: 'direct ou escale courte', hotel: 'haut de gamme' },
 } as const;
 
 /**

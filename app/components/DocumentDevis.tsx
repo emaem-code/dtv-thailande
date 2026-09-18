@@ -20,6 +20,7 @@ import {
   PALIER_MAX,
   prestationsFormule,
   CLAUSE_VOYAGE,
+  mentionVoyage,
 } from '../lib/tarifs';
 import { empreinteLisible } from '../lib/signature';
 
@@ -418,7 +419,7 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
           {devis.dossier.formule !== 'essentielle' && (
             <p className="text-xs text-gray-400 print:text-gray-700 mt-2 leading-relaxed">
               <strong className="text-white print:text-black">Voyage d&apos;installation.</strong>{' '}
-              {CLAUSE_VOYAGE}
+              {CLAUSE_VOYAGE} {mentionVoyage(devis.dossier.formule)}
             </p>
           )}
         </section>
