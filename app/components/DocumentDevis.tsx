@@ -156,28 +156,22 @@ function ComparatifOptions({ devis }: { devis: Devis }) {
                 ))}
               </ul>
 
+              {/* À l'écran le détail se replie, pour que les formules se
+                  comparent d'un coup d'œil. À l'impression il se déplie : un
+                  devis papier qui annonce « 631 € de frais externes » sans dire
+                  lesquels demande au client de croire sur parole. */}
               <details className="mt-4 print:hidden">
                 <summary className="text-xs text-gray-500 hover:text-gray-300 cursor-pointer transition-colors">
                   Détail des frais externes
                 </summary>
-                <table className="w-full text-sm mt-3">
-                  <tbody className="divide-y divide-white/5">
-                    {option.debours.map((ligne, i) => (
-                      <tr key={`${ligne.libelle}-${i}`}>
-                        <td className="py-2 pr-4">
-                          <p className="text-white">{ligne.libelle}</p>
-                          {ligne.detail && (
-                            <p className="text-xs text-gray-500 mt-0.5">{ligne.detail}</p>
-                          )}
-                        </td>
-                        <td className="py-2 pl-2 text-right text-white whitespace-nowrap">
-                          {euros(Math.round(ligne.quantite * ligne.unitaire))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <DetailDebours option={option} />
               </details>
+              <div className="hidden print:block mt-4">
+                <p className="text-[10px] uppercase tracking-widest text-gray-600 font-bold">
+                  Détail des frais externes
+                </p>
+                <DetailDebours option={option} />
+              </div>
             </div>
           );
         })}
@@ -188,14 +182,45 @@ function ComparatifOptions({ devis }: { devis: Devis }) {
           que le vol, l'hôtel et le chauffeur restent à la charge du client.
           Elle se trouvait plus bas, dans le bloc des frais externes — que le
           comparatif remplace justement. */}
+      {/* Le bloc « 1. Mes honoraires » porte ces conditions hors comparatif ;
+          ici il n'existe pas. Sans elles, le devis chiffrait l'acompte sans
+          jamais dire quand le solde est dû — une condition de prix absente
+          d'un document contractuel. */}
+      <p className="text-xs text-gray-400 print:text-gray-700 mt-5 leading-relaxed">
+        <strong className="text-white print:text-black">Paiement.</strong> {CLAUSE_PAIEMENT}
+      </p>
+
       {formuleAvecVoyage(devis) && (
-        <p className="text-xs text-gray-400 print:text-gray-700 mt-5 leading-relaxed">
+        <p className="text-xs text-gray-400 print:text-gray-700 mt-2 leading-relaxed">
           <strong className="text-white print:text-black">Voyage d&apos;installation.</strong>{' '}
           Si vous retenez la formule {nomFormule(formuleAvecVoyage(devis)!)} :{' '}
           {CLAUSE_VOYAGE} {mentionVoyage(formuleAvecVoyage(devis)!)}
         </p>
       )}
     </section>
+  );
+}
+
+/** Les lignes de frais externes d'une option, écran et impression. */
+function DetailDebours({ option }: { option: Devis['options'][number] }) {
+  return (
+    <table className="w-full text-sm mt-3">
+      <tbody className="divide-y divide-white/5 print:divide-gray-200">
+        {option.debours.map((ligne, i) => (
+          <tr key={`${ligne.libelle}-${i}`}>
+            <td className="py-2 pr-4">
+              <p className="text-white print:text-black">{ligne.libelle}</p>
+              {ligne.detail && (
+                <p className="text-xs text-gray-500 print:text-gray-600 mt-0.5">{ligne.detail}</p>
+              )}
+            </td>
+            <td className="py-2 pl-2 text-right text-white print:text-black whitespace-nowrap">
+              {euros(Math.round(ligne.quantite * ligne.unitaire))}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
