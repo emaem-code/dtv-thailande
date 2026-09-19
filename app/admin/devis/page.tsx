@@ -37,6 +37,7 @@ function versLigne(d: Devis): LigneDevis {
     total: t.total,
     signeLe: d.signature ? d.signature.signeLe : null,
     signePar: d.signature ? `${d.signature.prenom} ${d.signature.nom}`.trim() : '',
+    archive: d.archive,
   };
 }
 

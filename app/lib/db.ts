@@ -140,6 +140,18 @@ export function assurerSchema(): Promise<void> {
     // mérite une alerte — le moment où quelqu'un découvre la proposition. Les
     // suivantes n'apprennent rien de plus et ne doivent pas faire vibrer le
     // téléphone dix fois pour un seul dossier.
+    /**
+     * Rangé, et non détruit.
+     *
+     * Un devis envoyé appartient à la suite comptable : il ne s'efface pas,
+     * même quand c'est un essai fait pour vérifier qu'un bouton fonctionne.
+     * Mais laisser ces essais encombrer la liste rend le travail réel plus
+     * difficile à lire, et fausse les totaux. L'archivage les sort de la vue
+     * et des compteurs sans toucher à la ligne.
+     */
+    await requete(
+      `ALTER TABLE devis ADD COLUMN IF NOT EXISTS archive BOOLEAN NOT NULL DEFAULT FALSE`,
+    );
     await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS consulte_le TIMESTAMPTZ`);
     await requete(
       `ALTER TABLE devis ADD COLUMN IF NOT EXISTS consultations INTEGER NOT NULL DEFAULT 0`,

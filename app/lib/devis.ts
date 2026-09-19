@@ -42,6 +42,7 @@ type LigneDevis = {
   relance_le: Date | null;
   consulte_le: Date | null;
   consultations: number | null;
+  archive: boolean | null;
   signature: Signature | null;
   suivi: Partial<Suivi> | null;
 };
@@ -65,6 +66,7 @@ function versDevis(l: LigneDevis): Devis {
     relanceLe: l.relance_le ? l.relance_le.toISOString() : null,
     consulteLe: l.consulte_le ? l.consulte_le.toISOString() : null,
     consultations: l.consultations ?? 0,
+    archive: l.archive ?? false,
     signature: l.signature ?? null,
     // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
     // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
@@ -231,6 +233,7 @@ export async function devisARelancer(apresJours: number, validiteJours: number):
       WHERE envoye_le IS NOT NULL
         AND signature IS NULL
         AND relance_le IS NULL
+        AND NOT archive
         AND envoye_le <= now() - ($1 || ' days')::interval
         AND envoye_le >  now() - ($2 || ' days')::interval
       ORDER BY envoye_le ASC`,
@@ -284,6 +287,25 @@ export async function lireDevisParJeton(jeton: string): Promise<Devis | null> {
 export async function supprimerDevis(id: number): Promise<void> {
   await assurerSchema();
   await requete(`DELETE FROM devis WHERE id = $1 AND statut = 'brouillon'`, [id]);
+}
+
+/**
+ * Range un devis hors de la liste de travail, ou l'en ressort.
+ *
+ * C'est la réponse à un besoin que la suppression ne peut pas couvrir. Un
+ * devis envoyé ne s'efface pas : il porte un numéro dans une suite continue et
+ * il est parti chez quelqu'un. Mais un essai de recette n'a rien à faire au
+ * milieu des dossiers en cours, ni dans le total des honoraires signés du
+ * mois — et refuser toute solution au nom du principe revient à laisser le
+ * bruit gagner.
+ *
+ * Rien n'est perdu : la ligne, son numéro, sa signature et ses preuves restent
+ * en base et dans les sauvegardes. Seule la vue change, et l'opération se
+ * défait.
+ */
+export async function archiverDevis(id: number, archive: boolean): Promise<void> {
+  await assurerSchema();
+  await requete(`UPDATE devis SET archive = $2 WHERE id = $1`, [id, archive]);
 }
 
 // ─── SIGNATURE ────────────────────────────────────────────────────────────────

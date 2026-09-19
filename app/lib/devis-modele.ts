@@ -177,6 +177,8 @@ export type Devis = {
   consulteLe: string | null;
   /** Nombre d'ouvertures de la page client. */
   consultations: number;
+  /** Rangé hors de la liste de travail. Le document reste intact en base. */
+  archive: boolean;
   signature: Signature | null;
   suivi: Suivi;
 };

@@ -3,6 +3,7 @@ import {
   lireDevis,
   majDevis,
   supprimerDevis,
+  archiverDevis,
   DevisSigneError,
   normaliserDossier,
   normaliserClient,
@@ -65,4 +66,26 @@ export async function DELETE(_requete: Request, { params }: Contexte) {
   // client fait partie de la suite comptable et ne s'efface pas.
   await supprimerDevis(Number(id));
   return NextResponse.json({ ok: true });
+}
+
+/**
+ * Ranger ou ressortir un devis.
+ *
+ * Volontairement distinct de PATCH, qui modifie le contenu du document et se
+ * heurte — à juste titre — au refus de toucher à un devis signé. Archiver ne
+ * change rien à ce que le client a accepté : c'est un réglage d'affichage, et
+ * il doit rester possible précisément sur les devis qu'on ne peut pas
+ * supprimer.
+ */
+export async function PUT(requete: Request, { params }: Contexte) {
+  const { id } = await params;
+  let archive = true;
+  try {
+    const corps = (await requete.json()) as { archive?: unknown };
+    if (typeof corps.archive === 'boolean') archive = corps.archive;
+  } catch {
+    /* corps absent : on range, c'est le cas courant */
+  }
+  await archiverDevis(Number(id), archive);
+  return NextResponse.json({ ok: true, archive });
 }

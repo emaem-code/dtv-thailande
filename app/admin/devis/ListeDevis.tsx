@@ -36,9 +36,10 @@ export type LigneDevis = {
   total: number;
   signeLe: string | null;
   signePar: string;
+  archive: boolean;
 };
 
-type Filtre = 'tous' | 'brouillon' | 'envoye' | 'signe';
+type Filtre = 'tous' | 'brouillon' | 'envoye' | 'signe' | 'archive';
 
 function euros(m: number): string {
   return `${m.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
@@ -169,19 +170,69 @@ function BoutonSupprimer({ d, onFait }: { d: LigneDevis; onFait: () => void }) {
   );
 }
 
+/**
+ * Range un devis hors de la liste, ou l'en ressort.
+ *
+ * Le seul geste disponible sur un devis envoyé, puisqu'on ne peut pas le
+ * supprimer. Il sort aussi des compteurs, des totaux et des relances — c'est
+ * ce dernier point qui compte le plus : un devis d'essai rangé ne déclenchera
+ * pas de courriel de relance à J+7.
+ */
+function BoutonArchiver({ d, onFait }: { d: LigneDevis; onFait: () => void }) {
+  const [enCours, setEnCours] = useState(false);
+
+  const basculer = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setEnCours(true);
+    try {
+      await fetch(`/api/admin/devis/${d.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ archive: !d.archive }),
+      });
+      onFait();
+    } catch {
+      window.alert('Opération impossible : le serveur n’a pas répondu.');
+    }
+    setEnCours(false);
+  };
+
+  return (
+    <button
+      onClick={basculer}
+      disabled={enCours}
+      title={d.archive ? 'Remettre dans la liste' : 'Ranger hors de la liste'}
+      className="text-[11px] px-2 py-1 rounded-lg border border-white/10 text-gray-500 hover:text-white hover:border-white/25 transition-colors disabled:opacity-40 whitespace-nowrap"
+    >
+      {enCours ? '…' : d.archive ? 'Restaurer' : 'Ranger'}
+    </button>
+  );
+}
+
 export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
   const router = useRouter();
   const [filtre, setFiltre] = useState<Filtre>('tous');
   const [recherche, setRecherche] = useState('');
 
+  /**
+   * Les devis rangés ne comptent nulle part, sauf dans leur propre onglet.
+   *
+   * C'est tout l'objet de l'archivage : un essai de recette ne doit ni
+   * encombrer la liste, ni gonfler « signés ce mois-ci ». Les compter dans
+   * « Tous » aurait reproduit le problème à l'identique.
+   */
+  const actifs = useMemo(() => lignes.filter((d) => !d.archive), [lignes]);
+
   const comptes = useMemo(
     () => ({
-      tous: lignes.length,
-      brouillon: lignes.filter((d) => !d.envoyeLe && !d.signeLe).length,
-      envoye: lignes.filter((d) => d.envoyeLe && !d.signeLe).length,
-      signe: lignes.filter((d) => d.signeLe).length,
+      tous: actifs.length,
+      brouillon: actifs.filter((d) => !d.envoyeLe && !d.signeLe).length,
+      envoye: actifs.filter((d) => d.envoyeLe && !d.signeLe).length,
+      signe: actifs.filter((d) => d.signeLe).length,
+      archive: lignes.length - actifs.length,
     }),
-    [lignes],
+    [lignes, actifs],
   );
 
   /**
@@ -198,7 +249,7 @@ export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
 
     let signeCeMois = 0;
     let enAttente = 0;
-    for (const d of lignes) {
+    for (const d of actifs) {
       if (d.signeLe) {
         if (new Date(d.signeLe) >= debutDuMois) signeCeMois += d.honoraires;
       } else if (d.envoyeLe) {
@@ -206,11 +257,17 @@ export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
       }
     }
     return { signeCeMois, enAttente };
-  }, [lignes]);
+  }, [actifs]);
 
   const visibles = useMemo(() => {
     const q = recherche.trim().toLowerCase();
     return lignes.filter((d) => {
+      // Un devis rangé n'apparaît que dans l'onglet qui lui est réservé.
+      if (filtre === 'archive') {
+        if (!d.archive) return false;
+      } else if (d.archive) {
+        return false;
+      }
       if (filtre === 'brouillon' && (d.envoyeLe || d.signeLe)) return false;
       if (filtre === 'envoye' && (!d.envoyeLe || d.signeLe)) return false;
       if (filtre === 'signe' && !d.signeLe) return false;
@@ -228,6 +285,7 @@ export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
     { cle: 'brouillon', libelle: 'Brouillons' },
     { cle: 'envoye', libelle: 'En attente' },
     { cle: 'signe', libelle: 'Signés' },
+    { cle: 'archive', libelle: 'Rangés' },
   ];
 
   return (
@@ -321,6 +379,7 @@ export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
                     {!d.envoyeLe && !d.signeLe && (
                       <BoutonSupprimer d={d} onFait={() => router.refresh()} />
                     )}
+                    <BoutonArchiver d={d} onFait={() => router.refresh()} />
                     <span className="ml-auto text-[11px] text-gray-600">
                       {d.personnes} pers. · {d.softPower ? 'Soft Power' : 'À distance'}
                     </span>
@@ -381,6 +440,7 @@ export default function ListeDevis({ lignes }: { lignes: LigneDevis[] }) {
                           {!d.envoyeLe && !d.signeLe && (
                             <BoutonSupprimer d={d} onFait={() => router.refresh()} />
                           )}
+                          <BoutonArchiver d={d} onFait={() => router.refresh()} />
                         </div>
                       </td>
                     </tr>
