@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requete } from '../../../lib/db';
 import { alerter } from '../../../lib/alerte';
+import { compterAbonnes } from '../../../lib/abonnes';
 import { AGENCE } from '../../../lib/agence';
 
 /**
@@ -93,6 +94,25 @@ export async function GET(requeteHttp: Request) {
 
   detail.push('');
   detail.push(`${compte(n(c.en_attente), 'devis en attente', 'devis en attente')} de signature`);
+
+  /**
+   * La liste d'alertes, en une ligne.
+   *
+   * Elle ne sert à rien tant qu'elle est vide, et c'est justement pour ça
+   * qu'elle figure ici : voir le chiffre stagner est le seul rappel utile que
+   * le bloc d'inscription mérite d'être mieux placé, ou mieux formulé.
+   */
+  try {
+    const abonnes = await compterAbonnes();
+    if (abonnes.confirmes > 0 || abonnes.enAttente > 0) {
+      detail.push(
+        `${compte(abonnes.confirmes, 'abonné', 'abonnés')} aux alertes` +
+          (abonnes.enAttente > 0 ? ` · ${abonnes.enAttente} en attente de confirmation` : ''),
+      );
+    }
+  } catch {
+    /* la liste n'existe pas encore : ce n'est pas une panne */
+  }
 
   /**
    * Le seul chiffre de ce message qui appelle une action.

@@ -100,6 +100,33 @@ export function assurerSchema(): Promise<void> {
     `);
     await requete(`CREATE INDEX IF NOT EXISTS leads_cree_le_idx ON leads (cree_le DESC)`);
 
+    /**
+     * Les abonnés aux alertes réglementaires.
+     *
+     * `consentement` conserve le texte exact soumis à la personne, et non un
+     * simple booléen : le RGPD demande de pouvoir démontrer À QUOI elle a
+     * consenti, ce qu'un `true` ne dira jamais — surtout le jour où la phrase
+     * change sur le site.
+     *
+     * `jeton` sert à la fois à confirmer et à se désinscrire. Un seul secret
+     * par personne, envoyé dans chaque message : c'est ce qui permet une
+     * désinscription en un clic, sans compte ni mot de passe, comme l'exige
+     * l'article L34-5 du code des postes.
+     */
+    await requete(`
+      CREATE TABLE IF NOT EXISTS abonnes (
+        id            SERIAL PRIMARY KEY,
+        email         TEXT UNIQUE NOT NULL,
+        jeton         TEXT UNIQUE NOT NULL,
+        cree_le       TIMESTAMPTZ NOT NULL DEFAULT now(),
+        confirme_le   TIMESTAMPTZ,
+        desinscrit_le TIMESTAMPTZ,
+        source        TEXT,
+        consentement  TEXT NOT NULL
+      )
+    `);
+    await requete(`CREATE INDEX IF NOT EXISTS abonnes_cree_le_idx ON abonnes (cree_le DESC)`);
+
     await requete(`
       CREATE TABLE IF NOT EXISTS devis (
         id         SERIAL PRIMARY KEY,
