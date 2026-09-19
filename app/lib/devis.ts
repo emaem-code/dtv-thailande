@@ -40,6 +40,8 @@ type LigneDevis = {
   options: Option[] | null;
   message: string | null;
   relance_le: Date | null;
+  consulte_le: Date | null;
+  consultations: number | null;
   signature: Signature | null;
   suivi: Partial<Suivi> | null;
 };
@@ -61,6 +63,8 @@ function versDevis(l: LigneDevis): Devis {
     options: l.options ?? [],
     message: l.message ?? '',
     relanceLe: l.relance_le ? l.relance_le.toISOString() : null,
+    consulteLe: l.consulte_le ? l.consulte_le.toISOString() : null,
+    consultations: l.consultations ?? 0,
     signature: l.signature ?? null,
     // Les devis antérieurs à la signature en ligne ont un suivi vide, et la
     // colonne vaut `{}`. On complète plutôt que de laisser des champs absents
@@ -438,4 +442,36 @@ export async function compterTentative(jeton: string): Promise<number> {
 
 export async function supprimerCode(jeton: string): Promise<void> {
   await requete(`DELETE FROM codes_signature WHERE jeton = $1`, [jeton]);
+}
+
+
+/**
+ * Enregistre l'ouverture de la page client, et dit si c'était la première.
+ *
+ * Tout se joue dans une seule requête, et ce n'est pas une optimisation : deux
+ * requêtes — lire puis écrire — laisseraient passer deux « premières »
+ * ouvertures si le client rafraîchissait sa page au mauvais moment, et Matthieu
+ * recevrait deux fois la même alerte. Ici, `consultations = 0` dans la clause
+ * WHERE du CASE est évalué au sein de la même opération atomique.
+ *
+ * Retourne null si le jeton ne correspond à rien, ou si le devis n'a jamais
+ * été envoyé : un brouillon que l'on prévisualise n'est pas une consultation.
+ */
+export async function marquerConsulte(
+  jeton: string,
+): Promise<{ premiere: boolean; devis: Devis } | null> {
+  await assurerSchema();
+
+  const [ligne] = await requete<LigneDevis & { etait_vierge: boolean }>(
+    `UPDATE devis
+        SET consultations = consultations + 1,
+            consulte_le   = COALESCE(consulte_le, now())
+      WHERE jeton = $1
+        AND envoye_le IS NOT NULL
+      RETURNING *, (consultations = 1) AS etait_vierge`,
+    [jeton],
+  );
+
+  if (!ligne) return null;
+  return { premiere: ligne.etait_vierge, devis: versDevis(ligne) };
 }

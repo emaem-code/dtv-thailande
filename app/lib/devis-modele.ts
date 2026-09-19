@@ -173,6 +173,10 @@ export type Devis = {
   message: string;
   /** Date de la relance envoyée, ou null si aucune ne l'a encore été. */
   relanceLe: string | null;
+  /** Première ouverture de la page client, ou null si le devis n'a jamais été lu. */
+  consulteLe: string | null;
+  /** Nombre d'ouvertures de la page client. */
+  consultations: number;
   signature: Signature | null;
   suivi: Suivi;
 };

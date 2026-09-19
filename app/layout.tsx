@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import FloatingCTA from './components/FloatingCTA';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import ModalesProvider from './components/ModalesProvider';
 
 // ─── MÉTADONNÉES ULTRA-OPTIMISÉES (RÈGLE TOUT L'AUDIT CODEX) ──────────────────
@@ -81,6 +83,18 @@ export default function RootLayout({
           {/* Bouton flottant présent sur toutes les pages sauf l'accueil */}
           <FloatingCTA />
         </ModalesProvider>
+        {/* Mesure d'audience sans cookie ni identifiant persistant : le
+            comptage se fait côté serveur à partir d'une empreinte renouvelée
+            chaque jour. Rien n'est écrit dans le navigateur du visiteur, donc
+            l'article 82 de la loi Informatique et Libertés ne s'applique pas
+            et aucun bandeau de consentement n'est requis. Le jour où l'on
+            ajoute un outil qui pose un cookie, cette phrase cesse d'être vraie
+            et le bandeau devient obligatoire. */}
+        <Analytics />
+        {/* Core Web Vitals mesurés sur les vrais visiteurs, et non en
+            laboratoire : c'est ce que Search Console reproche sans jamais dire
+            sur quelle page. */}
+        <SpeedInsights />
       </body>
     </html>
   );

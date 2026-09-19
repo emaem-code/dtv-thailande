@@ -135,6 +135,15 @@ export function assurerSchema(): Promise<void> {
     // cette colonne, et non un compteur, qui garantit qu'un client ne sera
     // jamais relancé deux fois pour le même devis.
     await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS relance_le TIMESTAMPTZ`);
+    // Première ouverture de la page client, et nombre total d'ouvertures.
+    // Les deux, et pas seulement un compteur : c'est la PREMIÈRE lecture qui
+    // mérite une alerte — le moment où quelqu'un découvre la proposition. Les
+    // suivantes n'apprennent rien de plus et ne doivent pas faire vibrer le
+    // téléphone dix fois pour un seul dossier.
+    await requete(`ALTER TABLE devis ADD COLUMN IF NOT EXISTS consulte_le TIMESTAMPTZ`);
+    await requete(
+      `ALTER TABLE devis ADD COLUMN IF NOT EXISTS consultations INTEGER NOT NULL DEFAULT 0`,
+    );
 
     /**
      * Codes à usage unique de la signature électronique.

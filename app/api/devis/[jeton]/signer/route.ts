@@ -20,6 +20,7 @@ import {
 } from '../../../../lib/signature';
 import { egalConstant } from '../../../../lib/session';
 import { envoyerCourriel, gabarit, echapper, signatureHtml, signatureTexte } from '../../../../lib/courriel';
+import { alerter, euros as eurosAlerte, heureLocale } from '../../../../lib/alerte';
 import { AGENCE, ACOMPTE_POURCENT, RETRACTATION_JOURS } from '../../../../lib/agence';
 
 export const runtime = 'nodejs';
@@ -225,6 +226,24 @@ export async function POST(requete: Request, { params }: Contexte) {
   await Promise.allSettled([
     accuserReceptionClient(signe.numero, signature, lien),
     prevenirPrestataire(signe.numero, signature, devis.client.email, lien),
+    // La seule alerte qui mérite de sonner à n'importe quelle heure : un
+    // contrat vient d'être accepté, et un acompte est dû.
+    alerter({
+      icone: '✅',
+      titre: `DEVIS SIGNÉ — ${signe.numero}`,
+      detail: [
+        `${signature.prenom} ${signature.nom}`,
+        signature.email,
+        `${eurosAlerte(signature.honoraires)} d’honoraires · ${eurosAlerte(signature.total)} au total`,
+        signature.formuleChoisie ? `Formule retenue : ${signature.formuleChoisie}` : '',
+        signature.renonciationRetractation
+          ? '⚡ Exécution immédiate demandée — renonciation au délai de rétractation'
+          : `Rétractation possible pendant ${RETRACTATION_JOURS} jours`,
+        `Signé à ${heureLocale()} (Phuket)`,
+      ].filter(Boolean),
+      lien: { libelle: 'Ouvrir le dossier', url: lien },
+      urgence: 'critique',
+    }),
   ]);
 
   return NextResponse.json({ ok: true, signeLe, empreinte: signature.empreinte });

@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { enregistrerLead } from '../../lib/leads';
+import { classerLead, type Criteres } from '../../lib/eligibilite';
+import { alerter, heureLocale } from '../../lib/alerte';
 import { AGENCE, adresseUneLigne, mentionSiret } from '../../lib/agence';
 
 /**
@@ -33,6 +35,15 @@ type Corps = {
   /** Demande complète, telle qu'envoyée à Formspree. Sert à alimenter l'admin. */
   demande?: unknown;
   personnes?: unknown;
+  /**
+   * Valeurs brutes des critères bloquants, pour le classement de l'alerte.
+   *
+   * Elles doublent des informations déjà présentes dans `demande`, mais sous
+   * leur forme technique — « soon » plutôt que « Pas encore, en cours de
+   * constitution ». Classer sur le libellé afficherait un lead éligible en
+   * rouge le jour où l'on reformule une phrase, et personne ne le verrait.
+   */
+  criteres?: unknown;
 };
 
 /** Neutralise le HTML : le prénom vient d'un champ libre, il ne doit rien injecter. */
@@ -179,6 +190,36 @@ export async function POST(requete: Request) {
       softPower,
       formule: demande['Formule choisie'] ?? '',
       donnees: demande,
+    });
+
+    // Alerte Telegram. Après l'écriture en base, jamais avant, et sans `await`
+    // bloquant sur le reste : prévenir Matthieu est une commodité, enregistrer
+    // le lead est le travail.
+    const criteres =
+      corps.criteres && typeof corps.criteres === 'object' ? (corps.criteres as Criteres) : {};
+    const classement = classerLead(criteres);
+
+    const detail = [
+      `${prenom || 'Sans prénom'} — ${email}`,
+      demande['Téléphone'] ? `Tél. ${demande['Téléphone']}` : '',
+      `${demande['Statut Pro'] ?? 'Statut inconnu'} · ${demande['Expatriation'] ?? '—'}`,
+      demande['Période de départ'] ? `Départ : ${demande['Période de départ']}` : '',
+      demande['Destination en Thaïlande'] ? `Vers ${demande['Destination en Thaïlande']}` : '',
+      `Reçu à ${heureLocale()} (Phuket)`,
+    ].filter(Boolean);
+
+    if (classement.reserves.length > 0) {
+      detail.push('');
+      for (const r of classement.reserves) detail.push(`• ${r}`);
+    }
+
+    await alerter({
+      icone: classement.icone,
+      titre: `Nouveau lead — ${classement.libelle}`,
+      detail,
+      lien: { libelle: 'Ouvrir l’administration', url: 'https://dtv-thailande.fr/admin/leads' },
+      // Un dossier faisable interrompt ; un dossier bloqué attend son tour.
+      urgence: classement.niveau === 'eligible' ? 'critique' : 'normale',
     });
   } catch (erreur) {
     console.error('[lead] Enregistrement en base impossible :', erreur);

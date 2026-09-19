@@ -11,6 +11,7 @@ import { ETAPES, piecesAReunir } from '../../lib/parcours';
 import BoutonImprimer from './BoutonImprimer';
 import BlocSignature from './BlocSignature';
 import ListePieces from './ListePieces';
+import SignalLecture from './SignalLecture';
 
 /**
  * L'espace du client.
@@ -90,6 +91,11 @@ export default async function PageEspaceClient({
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] print:bg-white py-10 print:py-0 px-4 print:px-0">
+      {/* Prévient qu'un humain a ouvert la page. Ne rend rien, ne bloque rien.
+          Voir SignalLecture : c'est le navigateur qui émet, précisément pour
+          écarter les antivirus de messagerie qui ouvrent les liens avant le
+          destinataire. */}
+      <SignalLecture jeton={devis.jeton} />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between gap-4 mb-6 print:hidden">
           <p className="text-sm text-gray-500">

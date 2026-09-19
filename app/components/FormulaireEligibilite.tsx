@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MontantFonds from './MontantFonds';
 import { lireAttribution } from '../lib/attribution';
 import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
-import { TAUX_SECOURS } from '../lib/taux';
+import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
+import { track } from '@vercel/analytics';
 
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
@@ -161,6 +162,22 @@ export default function FormulaireEligibilite({
   // Messages d'erreur affichés sous les champs concernés, plutôt qu'en alerte système
   const [erreurs, setErreurs] = useState<Record<string, string>>({});
 
+  /**
+   * Entonnoir du test d'éligibilité.
+   *
+   * Savoir combien de visiteurs vient le site n'apprend rien. Savoir combien
+   * ouvrent le test, combien franchissent l'étape 1, et combien se heurtent au
+   * critère financier dit exactement quoi corriger — et ce sont des données
+   * qu'aucune mesure d'audience générique ne donne.
+   *
+   * Aucune donnée personnelle n'est transmise : uniquement des compteurs et la
+   * raison d'un abandon. Le prénom et l'adresse restent entre le formulaire, la
+   * base et Formspree.
+   */
+  useEffect(() => {
+    track('eligibilite_ouverte', { variante });
+  }, [variante]);
+
   const AUJOURDHUI = new Date().toISOString().slice(0, 10);
   const emailValide = (v: string) => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim());
 
@@ -217,7 +234,7 @@ export default function FormulaireEligibilite({
             email: formData.email,
             Nationalité: nationaliteLisible(),
             'Statut Pro': lisible('job', formData.job),
-            'Épargne 500 000 THB': lisible('funds', formData.funds),
+            'Épargne 15 000 € par personne': lisible('funds', formData.funds),
             'Canal détecté': attribution.canal,
             "Page d'entrée": attribution.pageEntree,
           }),
@@ -243,12 +260,16 @@ export default function FormulaireEligibilite({
     // Seule l'absence définitive de fonds est disqualifiante. Ne pas avoir
     // encore de passeport n'en est pas une : c'est quelques semaines de délai.
     if (formData.funds === 'no') {
+      // L'abandon le plus coûteux, et celui qu'on veut chiffrer : le seuil est
+      // passé de 13 100 à 15 000 € et personne ne sait encore ce que ça change.
+      track('eligibilite_bloquee_fonds');
       envoyerLeadPartiel('Profil non éligible (fonds insuffisants) — à recontacter');
       setStep(0);
       remonter();
       return;
     }
 
+    track('eligibilite_etape1', { softPower: formData.job === 'softpower' });
     envoyerLeadPartiel('Lead qualifié — étape 1 franchie');
     setStep(2);
     remonter();
@@ -316,7 +337,7 @@ export default function FormulaireEligibilite({
               : '',
             Nationalité: nationaliteLisible(),
             'Statut Pro': lisible('job', formData.job),
-            'Épargne 500 000 THB': lisible('funds', formData.funds),
+            'Épargne 15 000 € par personne': lisible('funds', formData.funds),
             Passeport: lisible('passport', formData.passport),
             'Période de départ': `Entre le ${dateFr(formData.dateStart)} et le ${dateFr(formData.dateEnd)}`,
             'Pays de résidence': lisible('location', formData.location),
@@ -327,7 +348,7 @@ export default function FormulaireEligibilite({
             'Situation conjugale': lisible('situationConjugale', formData.situationConjugale),
             'Épargne exigée pour le foyer':
               nbPersonnesFoyer > 1
-                ? `${(500000 * nbPersonnesFoyer).toLocaleString('fr-FR')} THB (${nbPersonnesFoyer} demandeurs)`
+                ? `${(FONDS_EUR_PARIS * nbPersonnesFoyer).toLocaleString('fr-FR')} € (${nbPersonnesFoyer} demandeurs)`
                 : '',
             "Nombre d'adultes": formData.family === 'solo' ? '1' : formData.adultesCount,
             "Nombre d'enfants": formData.childrenCount,
@@ -367,11 +388,24 @@ export default function FormulaireEligibilite({
             softPower: isSoftPower,
             personnes: nbPersonnesFoyer,
             demande,
+            // Valeurs techniques, en plus des libellés déjà dans `demande` :
+            // c'est sur elles que le serveur décide si l'alerte doit sonner.
+            criteres: {
+              funds: formData.funds,
+              passport: formData.passport,
+              dejaDepose: formData.dejaDepose,
+              enfantsMoins20: formData.enfantsMoins20,
+              situationConjugale: formData.situationConjugale,
+            },
           }),
         }).catch(() => {
           /* silencieux : ne doit jamais gêner le visiteur */
         });
 
+        track('eligibilite_terminee', {
+          personnes: nbPersonnesFoyer,
+          softPower: isSoftPower,
+        });
         setStep(3);
         remonter();
       } else {
@@ -419,6 +453,7 @@ export default function FormulaireEligibilite({
         ),
       });
       if (!reponse.ok) throw new Error('envoi refusé');
+      track('formule_choisie', { formule: formData.formule || 'non précisée' });
       setFormuleEnvoyee(true);
     } catch {
       setErreurs({ formule: 'L’envoi a échoué. Merci de réessayer dans un instant.' });

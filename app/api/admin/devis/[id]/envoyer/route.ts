@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { lireDevis, marquerEnvoye, totaliser } from '../../../../../lib/devis';
-import { prenomClient } from '../../../../../lib/devis-modele';
+import { prenomClient, nomComplet } from '../../../../../lib/devis-modele';
+import { alerter, euros as eurosAlerte } from '../../../../../lib/alerte';
 import { FONDS_EUR_PARIS, MARGE_CONSEILLEE } from '../../../../../lib/taux';
 import {
   AGENCE,
@@ -169,5 +170,23 @@ ${signatureHtml()}`);
   if (!envoi.ok) return NextResponse.json({ erreur: envoi.erreur }, { status: envoi.statut });
 
   await marquerEnvoye(devis.id);
+
+  // Confirmation dans le canal d'alertes. Elle n'a pas à interrompre — c'est
+  // Matthieu lui-même qui vient de cliquer — mais elle horodate l'envoi au
+  // même endroit que la lecture et la signature qui suivront, ce qui donne
+  // l'historique du dossier d'un seul coup d'œil.
+  await alerter({
+    icone: '📤',
+    titre: `Devis ${devis.numero} envoyé`,
+    detail: [
+      `${nomComplet(devis.client) || 'Client sans nom'} — ${devis.client.email}`,
+      `${eurosAlerte(t.honoraires)} d’honoraires · ${eurosAlerte(t.total)} au total`,
+      devis.message ? 'Avec un mot personnel' : '⚠️ Sans mot personnel',
+      `Relance automatique dans 7 jours si pas de signature`,
+    ],
+    lien: { libelle: 'Voir la page client', url: lien },
+    urgence: 'normale',
+  });
+
   return NextResponse.json({ ok: true, lien });
 }
