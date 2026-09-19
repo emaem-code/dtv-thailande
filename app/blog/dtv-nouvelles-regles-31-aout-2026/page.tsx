@@ -923,6 +923,64 @@ export default function ArticleNouvellesReglesDTV() {
         </ul>
       </section>
 
+      {/* ── APRÈS LE VISA ──
+          Cette page est la plus solide du site — quatrième position, un lecteur
+          sur six qui clique — et elle ne renvoyait vers aucun autre article.
+          Le crédit qu'elle a gagné ne profitait à rien. Les quatre liens qui
+          suivent vont vers les pages qui en ont le plus besoin, et ils suivent
+          l'ordre réel des questions : on entre, on prolonge, on se déclare, et
+          on évite le dépassement. */}
+      <section className="mb-14">
+        <h2 className="text-2xl font-bold text-white mb-4">Et une fois le visa obtenu</h2>
+        <p className="text-gray-400 text-sm leading-relaxed mb-4">
+          Les règles d&apos;obtention ne sont que la première moitié du sujet. Les formalités
+          qui suivent l&apos;arrivée surprennent plus de monde que le dossier lui-même, et
+          chacune a sa propre échéance.
+        </p>
+        <ul className="space-y-3 pl-4 border-l-2 border-red-500/40 text-gray-400 text-sm">
+          <li>
+            Avant même d&apos;embarquer, la{' '}
+            <LienArticle
+              slug="tdac-thailande-carte-arrivee"
+              className="text-red-400 hover:underline font-medium"
+            >
+              carte d&apos;arrivée numérique TDAC
+            </LienArticle>{' '}
+            est obligatoire — gratuite, mais refusée à l&apos;embarquement si elle manque.
+          </li>
+          <li>
+            Sur place, l&apos;
+            <LienArticle
+              slug="extension-180-jours-visa-dtv-thailande"
+              className="text-red-400 hover:underline font-medium"
+            >
+              extension de 180 jours
+            </LienArticle>{' '}
+            se demande une seule fois par entrée, contre 1 900 THB.
+          </li>
+          <li>
+            Tous les trois mois, le{' '}
+            <LienArticle
+              slug="tm47-rapport-90-jours-thailande"
+              className="text-red-400 hover:underline font-medium"
+            >
+              rapport des 90 jours (TM47)
+            </LienArticle>{' '}
+            doit être déposé, en ligne ou au bureau d&apos;immigration.
+          </li>
+          <li>
+            Et si une date est dépassée, l&apos;
+            <LienArticle
+              slug="overstay-thailande-amende-blacklist-visa-dtv"
+              className="text-red-400 hover:underline font-medium"
+            >
+              overstay coûte 500 THB par jour
+            </LienArticle>{' '}
+            jusqu&apos;au seuil qui déclenche l&apos;interdiction de territoire.
+          </li>
+        </ul>
+      </section>
+
       {/* ── ENCART AUTEUR ── */}
       <div className="my-14 bg-[#111111] border border-gray-800 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
         <PhotoAuteur accent="red" />

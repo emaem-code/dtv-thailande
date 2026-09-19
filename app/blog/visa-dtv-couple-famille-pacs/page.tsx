@@ -13,14 +13,14 @@ const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-fam
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV famille : conjoint et enfants accompagnants",
+  title: "Visa DTV en famille : conjoint, enfants et le cas du PACS",
   description:
     "La catégorie « conjoint et enfants accompagnants » du Visa DTV : le seuil de 500 000 THB s'applique à chaque personne, y compris aux enfants. Le PACS, lui, n'ouvre aucun droit au rattachement.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs',
   },
   openGraph: {
-    title: "Visa DTV famille : conjoint et enfants accompagnants",
+    title: "Visa DTV en famille : conjoint, enfants et le cas du PACS",
     description:
       "Faire venir son conjoint et ses enfants avec le Visa DTV : la catégorie accompagnants, la lettre de sponsoring, et pourquoi le PACS bloque tout.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Visa DTV famille : conjoint et enfants accompagnants',
+    title: 'Visa DTV en famille : conjoint, enfants et le cas du PACS',
     description: '500 000 THB par personne, enfants compris. Le PACS n\'ouvre aucun droit au rattachement.',
     images: ['/images/blog/visa-dtv-couple-famille-pacs.jpg'],
   },

@@ -12,13 +12,13 @@ import PhotoAuteur from '../../components/PhotoAuteur';
 
 // ─── 1. MÉTADONNÉES SEO OPTIMISÉES (NEXT.JS) ─────────────────────────────────
 export const metadata: Metadata = {
-  title: "TDAC Thaïlande : guide de la carte d'arrivée",
-  description: "Le guide étape par étape pour remplir le formulaire TDAC obligatoire avant d'entrer en Thaïlande. Évitez le refus d'embarquement aux douanes.",
+  title: "Formulaire TDAC Thaïlande en français : comment le remplir",
+  description: "Le TDAC est gratuit et obligatoire avant d'entrer en Thaïlande. Quand le remplir, chaque champ traduit en français, et comment reconnaître les sites qui vous le facturent.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee',
   },
   openGraph: {
-    title: "TDAC Thaïlande : guide de la carte d'arrivée",
+    title: "Formulaire TDAC Thaïlande en français : comment le remplir",
     description: "Formulaire TDAC obligatoire : tutoriel pas-à-pas pour les détenteurs de visa DTV et touristes.",
     url: "https://dtv-thailande.fr/blog/tdac-thailande-carte-arrivee",
     siteName: "DTV Thaïlande",

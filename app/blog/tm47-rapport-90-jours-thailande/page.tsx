@@ -17,14 +17,14 @@ const breadcrumbSchema = createBreadcrumbSchema(post);
 
 // ─── MÉTADONNÉES SEO ─────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
+  title: 'TM47 Thaïlande : faire son rapport des 90 jours en ligne',
   description:
     "Le rapport des 90 jours (TM47) est obligatoire et méconnu. Qui doit le faire, quand, comment, et les amendes encourues. Le guide complet 2026.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/tm47-rapport-90-jours-thailande',
   },
   openGraph: {
-    title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
+    title: 'TM47 Thaïlande : faire son rapport des 90 jours en ligne',
     description:
       "L'obligation légale que personne ne vous annonce. Qui est concerné, comment le faire, et les amendes en cas d'oubli.",
     url: 'https://dtv-thailande.fr/blog/tm47-rapport-90-jours-thailande',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TM47 : le rapport des 90 jours en Thaïlande (2026)',
+    title: 'TM47 Thaïlande : faire son rapport des 90 jours en ligne',
     description:
       "L'obligation légale que personne ne vous annonce. Le guide complet pour détenteurs de visa long séjour.",
     images: ['/images/blog/tm47-rapport-90-jours-thailande.jpg'],

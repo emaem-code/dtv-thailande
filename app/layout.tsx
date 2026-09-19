@@ -7,10 +7,11 @@ import ModalesProvider from './components/ModalesProvider';
 export const metadata: Metadata = {
   metadataBase: new URL('https://dtv-thailande.fr'), // Résout l'absence d'URL canonique de base
   title: {
-    default: 'Visa DTV Thaïlande : accompagnement 5 ans',
+    default: 'Visa DTV Thaïlande : conditions, tarifs et accompagnement',
     template: '%s',
   },
-  description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles : dossiers, conformité bancaire et Visa Run.',
+  description:
+    'Visa DTV Thaïlande : conditions d’éligibilité, épargne exigée, frais réels et accompagnement complet du dossier, pour les freelances, les salariés à distance et les familles.',
  
   alternates: {
     canonical: '/',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   // Déclarer les icônes manuellement écrasait ce mécanisme.
 
   openGraph: {
-    title: 'Visa DTV Thaïlande : accompagnement 5 ans',
+    title: 'Visa DTV Thaïlande : conditions, tarifs et accompagnement',
     description: 'Obtenez votre Visa Destination Thailand en toute sécurité. Accompagnement sur-mesure pour freelances et familles.',
     url: 'https://dtv-thailande.fr',
     siteName: 'DTV Thaïlande',

@@ -5,7 +5,20 @@ export const baseUrl = 'https://dtv-thailande.fr';
 export type BlogPost = {
   slug: string;
   title: string;
+  /** Libellé court, pour les cartes de l'accueil et la navigation. */
   shortTitle: string;
+  /**
+   * Titre de la balise <title>, quand il doit différer du libellé de
+   * navigation.
+   *
+   * Les deux ne servent pas le même lecteur. Une carte veut trois mots qui
+   * tiennent dans un encadré ; un résultat Google veut les mots que la
+   * personne vient de taper. Faire porter les deux rôles au même champ
+   * donnait des titres de recherche écrits comme des entrées de menu —
+   * « Extension de 180 jours du DTV » — vus en quatrième position et jamais
+   * cliqués. Absent, on retombe sur shortTitle.
+   */
+  titreSeo?: string;
   description: string;
   excerpt: string;
   date: string;
@@ -36,6 +49,7 @@ export const blogPosts = [
   slug: 'extension-180-jours-visa-dtv-thailande',
   title: "Extension du Visa DTV : 180 + 180 jours, et pourquoi vous n'en aurez peut-être jamais besoin",
   shortTitle: 'Extension de 180 jours du DTV',
+  titreSeo: 'Extension du DTV en Thaïlande : +180 jours, TM7, 1 900 THB',
   description: "TM7, 1 900 THB, une seule extension par entrée : la procédure réelle de l'extension du Visa DTV, et le calcul qui montre qu'une sortie du pays est souvent préférable.",
   excerpt: "Sortir de Thaïlande annule votre séjour en cours mais vous rend 180 jours neufs. Si vous rentrez en Europe une fois par an, l'extension ne vous servira jamais.",
   date: '24 Août 2026',
@@ -50,6 +64,7 @@ export const blogPosts = [
   slug: 'overstay-thailande-amende-blacklist-visa-dtv',
   title: "Overstay en Thaïlande : 500 THB par jour, et l'erreur qui coûte 5 ans",
   shortTitle: 'Overstay en Thaïlande : amendes et blacklist',
+  titreSeo: 'Overstay Thaïlande : 500 THB par jour, plafond et blacklist',
   description: "500 THB par jour, plafond à 20 000 THB, et le seuil des 90 jours qui déclenche l'interdiction de retour. Le barème officiel de l'overstay en Thaïlande, source à l'appui.",
   excerpt: "Se présenter de soi-même ou être contrôlé : le même dépassement de 30 jours coûte une amende dans un cas, cinq ans d'interdiction dans l'autre.",
   date: '20 Août 2026',
@@ -324,7 +339,7 @@ export function createArticleMetadata(post: BlogPost): Metadata {
   const articleUrl = `/blog/${post.slug}`;
 
   return {
-    title: post.shortTitle,
+    title: post.titreSeo ?? post.shortTitle,
     description: post.description,
     alternates: {
       canonical: articleUrl,
