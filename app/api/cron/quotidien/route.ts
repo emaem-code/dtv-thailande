@@ -4,16 +4,19 @@ import { envoyerCourriel } from '../../../lib/courriel';
 import { courrielRelance } from '../../../lib/relance';
 import { construireSauvegarde, nomFichierSauvegarde, sauvegardeEnJson } from '../../../lib/sauvegarde';
 import { AGENCE, RELANCE_JOURS, VALIDITE_JOURS } from '../../../lib/agence';
-import { alerter } from '../../../lib/alerte';
-import { requete } from '../../../lib/db';
 
 /**
- * La tâche quotidienne : relances dues, et sauvegarde le lundi.
+ * La tâche du matin des CLIENTS : relances dues, et sauvegarde le lundi.
  *
- * Une seule route pour les deux, parce que l'offre Vercel dont dépend le site
- * n'autorise qu'un déclenchement par jour, à l'heure près seulement. Les deux
- * traitements tolèrent ce flou : une relance qui part à 8 h 40 plutôt qu'à
- * 8 h 00 ne change rien, et une sauvegarde non plus.
+ * Elle est calée sur 8 h UTC, soit 10 h à Paris : c'est l'heure à laquelle un
+ * prospect français ouvre sa boîte. Le résumé destiné à Matthieu vit dans une
+ * route séparée, parce qu'il obéit à un fuseau et à un besoin différents — son
+ * matin à Phuket, pas celui de ses clients. Les fondre dans une seule tâche
+ * obligeait à sacrifier l'un des deux horaires.
+ *
+ * Les deux traitements tolèrent l'imprécision de l'ordonnanceur : une relance
+ * qui part à 8 h 40 plutôt qu'à 8 h 00 ne change rien, et une sauvegarde non
+ * plus.
  *
  * L'exécution est séquentielle et tolérante : un envoi qui échoue n'interrompt
  * pas les suivants, et le devis repasse demain lorsqu'on sait que rien n'est
@@ -124,68 +127,6 @@ export async function GET(requete: Request) {
     }
   }
 
-  // Le point du matin, en silence. C'est le pendant indispensable des alertes
-  // immédiates : ce qui n'a pas mérité d'interrompre la veille se retrouve ici,
-  // en un seul message. Sans ce résumé, la tentation serait de faire sonner
-  // davantage d'événements, et le canal perdrait sa valeur.
-  try {
-    journal.resume = await resumeQuotidien(journal);
-  } catch (erreur) {
-    console.error('[cron] résumé impossible :', erreur);
-  }
-
   return NextResponse.json(journal);
 }
 
-
-/**
- * Compte ce qui s'est passé depuis 24 heures et l'envoie en une fois.
- *
- * Volontairement chiffré et sec : ce message se lit au réveil, en trois
- * secondes. Tout ce qui demandait une action a déjà alerté au moment où c'est
- * arrivé ; ceci n'est qu'un état des lieux.
- */
-async function resumeQuotidien(journal: Record<string, unknown>): Promise<boolean> {
-  const [compte] = await requete<{
-    leads: string;
-    envoyes: string;
-    consultes: string;
-    signes: string;
-    en_attente: string;
-  }>(
-    `SELECT
-       (SELECT count(*) FROM leads WHERE cree_le  > now() - interval '24 hours') AS leads,
-       (SELECT count(*) FROM devis WHERE envoye_le > now() - interval '24 hours') AS envoyes,
-       (SELECT count(*) FROM devis WHERE consulte_le > now() - interval '24 hours') AS consultes,
-       (SELECT count(*) FROM devis
-         WHERE signature IS NOT NULL
-           AND (signature->>'signeLe')::timestamptz > now() - interval '24 hours') AS signes,
-       (SELECT count(*) FROM devis
-         WHERE envoye_le IS NOT NULL AND signature IS NULL) AS en_attente`,
-  );
-
-  if (!compte) return false;
-
-  const relances = journal.relances as { envoyes?: unknown[] } | undefined;
-  const nbRelances = Array.isArray(relances?.envoyes) ? relances.envoyes.length : 0;
-
-  const detail = [
-    `${compte.leads} lead${Number(compte.leads) > 1 ? 's' : ''}`,
-    `${compte.envoyes} devis envoyé${Number(compte.envoyes) > 1 ? 's' : ''}`,
-    `${compte.consultes} consulté${Number(compte.consultes) > 1 ? 's' : ''}`,
-    `${compte.signes} signé${Number(compte.signes) > 1 ? 's' : ''}`,
-    '',
-    `${compte.en_attente} devis en attente de signature`,
-  ];
-
-  if (nbRelances > 0) detail.push(`${nbRelances} relance${nbRelances > 1 ? 's' : ''} partie${nbRelances > 1 ? 's' : ''} ce matin`);
-  if (journal.sauvegarde) detail.push('Sauvegarde de la base effectuée');
-
-  return alerter({
-    icone: '📊',
-    titre: 'Les dernières 24 heures',
-    detail,
-    lien: { libelle: 'Ouvrir l’administration', url: `https://${AGENCE.site}/admin` },
-    urgence: 'normale',
-  });
-}
