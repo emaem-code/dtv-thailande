@@ -95,7 +95,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-white/5 p-5 rounded-2xl border border-white/5">
                 <h4 className="font-bold text-white mb-2">L'Épargne de garantie</h4>
-                <p className="text-sm text-gray-400">Un relevé bancaire démontrant un solde de 500 000 THB maintenu sur les 3 à 6 derniers mois (selon l'ambassade).</p>
+                <p className="text-sm text-gray-400">Un relevé bancaire officiel montrant un solde créditeur non bloqué d'au moins 15 000 € par personne, et ce chacun des trois derniers mois. C'est le montant que l'ambassade de Paris affiche elle-même, en euros — pas la contre-valeur des 500 000 THB de la règle nationale.</p>
               </div>
               <div className="bg-white/5 p-5 rounded-2xl border border-white/5">
                 <h4 className="font-bold text-white mb-2">Le Revenu Mensuel</h4>

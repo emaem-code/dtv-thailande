@@ -233,7 +233,7 @@ export default function ArticleDtvFamille() {
         <div className="border border-fuchsia-500/30 bg-fuchsia-500/5 rounded-xl p-5 mt-4">
           <p className="text-fuchsia-400 font-semibold mb-2">💡 Ce que ça change concrètement</p>
           <p className="text-gray-400 text-sm">
-            Une famille mariée de quatre personnes justifie de <strong>2 000 000 THB</strong>, soit <MontantFonds prefixe="environ " personnes={4} /> : 500 000 THB pour chacun, enfants compris. Le mariage ne réduit pas la somme, il évite au conjoint d&apos;avoir à prouver sa propre activité professionnelle. Pour un couple pacsé, la somme est identique par tête, mais <strong>chaque adulte doit en plus justifier de sa propre voie d&apos;éligibilité</strong> — c&apos;est tout l&apos;objet de la section suivante.
+            Une famille mariée de quatre personnes justifie de <strong><MontantFonds prefixe="" personnes={4} /></strong> : l&apos;ambassade de Paris exige 15 000 € par demandeur, enfants compris, sur chacun des trois derniers relevés mensuels. Le mariage ne réduit pas la somme, il évite au conjoint d&apos;avoir à prouver sa propre activité professionnelle. Pour un couple pacsé, la somme est identique par tête, mais <strong>chaque adulte doit en plus justifier de sa propre voie d&apos;éligibilité</strong> — c&apos;est tout l&apos;objet de la section suivante.
           </p>
         </div>
       </section>

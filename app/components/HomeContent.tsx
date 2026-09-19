@@ -6,19 +6,19 @@ import Link from 'next/link';
 import { FORMULES_VENDUES as formules, prix, MENTION_TRADUCTIONS } from '../lib/tarifs';
 import { getSortedBlogPosts } from '../blog/posts';
 import MontantFonds from './MontantFonds';
-import { MARGE_CONSEILLEE } from '../lib/taux';
+import { MARGE_CONSEILLEE, FONDS_EUR_PARIS, formateEuros } from '../lib/taux';
 
 // ─── FAQ : source unique, sert à l'affichage ET au balisage JSON-LD ───
 export const homeFaqs = [
   {
     category: 'Finances & Épargne',
-    q: 'Les 500 000 THB valent-ils pour tout le foyer, ou par personne ?',
-    a: `Par personne. Chaque demandeur doit justifier individuellement du seuil, accompagnants compris : un couple marié avec deux enfants doit donc présenter 2 000 000 THB, et non 500 000. Seule simplification admise, un compte joint permet au titulaire et à son conjoint de produire le même justificatif — le montant reste cumulé, c'est la pièce qui est unique. Comptez ${MARGE_CONSEILLEE} par personne pour absorber les variations de change.`,
+    q: 'Le seuil d’épargne vaut-il pour tout le foyer, ou par personne ?',
+    a: `Par personne. Chaque demandeur doit justifier individuellement du seuil, accompagnants compris : un couple marié avec deux enfants doit donc présenter quatre fois le seuil, et non une. Seule simplification admise, un compte joint permet au titulaire et à son conjoint de produire le même justificatif — le montant reste cumulé, c'est la pièce qui est unique. L'ambassade de Paris fixe ce seuil à ${formateEuros(FONDS_EUR_PARIS)} par personne, exprimés en euros sur sa propre page de documents requis — ce n'est pas la contre-valeur du jour des 500 000 THB de la règle nationale, et c'est plus élevé. Comptez ${MARGE_CONSEILLEE} par personne pour n'être jamais au ras du seuil.`,
   },
   {
     category: 'Finances & Épargne',
-    q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-    a: `Non. L'administration exige de prouver la liquidité de 500 000 THB uniquement lors de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est jamais bloqué, mais l'historique des 3 derniers mois est examiné avec attention. Prévoyez plutôt ${MARGE_CONSEILLEE} PAR PERSONNE que le strict minimum : le seuil qui fait foi est celui en bahts, le taux de change bouge en permanence, et un solde confortable est mieux perçu.`,
+    q: 'Faut-il bloquer cette somme sur mon compte pendant les 5 ans du visa ?',
+    a: `Non. La preuve n'est exigée qu'au dépôt de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est jamais bloqué. En revanche l'ambassade de Paris demande un solde d'au moins ${formateEuros(FONDS_EUR_PARIS)} par personne sur CHACUN des trois derniers relevés mensuels : ce n'est pas un solde atteint une fois, c'est un solde tenu. Prévoyez ${MARGE_CONSEILLEE} par personne plutôt que le strict minimum — un compte qui frôle le seuil un mois sur trois se lit comme un dossier fragile.`,
   },
   {
     category: 'Finances & Épargne',
@@ -140,7 +140,7 @@ export default function HomeContent() {
           {[
             { chiffre: '5 ans', label: 'de validité, entrées multiples' },
             { chiffre: '180 jours', label: 'de séjour par entrée, extensibles' },
-            { chiffre: '500 000 THB', label: 'd’épargne à justifier', euros: true },
+            { chiffre: formateEuros(FONDS_EUR_PARIS), label: 'd’épargne à justifier, par personne' },
           ].map((item) => (
             <div
               key={item.chiffre}
@@ -149,12 +149,6 @@ export default function HomeContent() {
               <p className="text-2xl font-black text-amber-500 mb-1">{item.chiffre}</p>
               <p className="text-xs text-gray-500 leading-snug">
                 {item.label}
-                {item.euros && (
-                  <>
-                    {' '}
-                    (<MontantFonds />)
-                  </>
-                )}
               </p>
             </div>
           ))}
@@ -197,17 +191,16 @@ export default function HomeContent() {
               href="/blog/fonds-bancaires-visa-dtv"
               className="text-amber-500 hover:underline font-medium"
             >
-              500 000 THB d&apos;épargne disponible
+              <MontantFonds prefixe="" /> d&apos;épargne disponible par personne
             </Link>{' '}
-            — soit <MontantFonds prefixe="environ " /> au cours du jour. Une somme qui n&apos;est
-            jamais bloquée, mais dont l&apos;historique est examiné.
+            — sur chacun des trois derniers relevés mensuels. Une somme qui n&apos;est jamais
+            bloquée, mais dont l&apos;historique est examiné.
           </p>
           <p className="text-xs text-gray-500 leading-relaxed">
             <strong className="text-gray-300">Notre conseil :</strong> prévoyez plutôt{' '}
-            <strong className="text-white">{MARGE_CONSEILLEE}</strong>. Le seuil qui fait foi est
-            celui en bahts, et le taux de change bouge en permanence — présenter un solde
-            nettement au-dessus du minimum est aussi bien mieux perçu par l&apos;officier
-            consulaire qu&apos;un montant calculé au plus juste.
+            <strong className="text-white">{MARGE_CONSEILLEE}</strong> par personne. Le montant
+            exigé par Paris est un plancher, pas une cible : un solde calculé au plus juste ne
+            résiste ni à un agio prélevé la veille, ni à un officier consulaire tatillon.
           </p>
         </div>
       </section>
@@ -336,11 +329,12 @@ export default function HomeContent() {
           <p className="text-sm leading-relaxed mt-3 pt-3 border-t border-white/10">
             <strong className="text-amber-400">En revanche, l&apos;épargne à justifier, elle, se
             multiplie.</strong>{' '}
-            Le seuil de 500 000 THB s&apos;applique à chaque demandeur, accompagnants compris. Une
-            famille de quatre doit donc présenter{' '}
-            <strong className="text-white">2 000 000 THB</strong>, soit{' '}
-            <MontantFonds prefixe="environ " personnes={4} /> — c&apos;est le point le plus souvent
-            découvert trop tard.
+            Le seuil s&apos;applique à chaque demandeur, accompagnants compris. Une famille de
+            quatre doit donc présenter{' '}
+            <strong className="text-white">
+              <MontantFonds prefixe="" personnes={4} />
+            </strong>{' '}
+            — c&apos;est le point le plus souvent découvert trop tard.
           </p>
         </div>
 

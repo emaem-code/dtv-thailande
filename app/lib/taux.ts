@@ -1,14 +1,36 @@
 /**
- * Conversion du seuil bancaire du Visa DTV, exprimé en bahts.
+ * Seuil bancaire du Visa DTV.
  *
- * Le montant qui fait foi pour l'ambassade est celui en THB. Sa contre-valeur
- * en euros n'est qu'indicative et bouge tous les jours : on la calcule donc à
- * partir du cours réel, et on l'arrondit toujours à la centaine SUPÉRIEURE
- * pour ne jamais afficher un montant qui laisserait le lecteur sous le seuil.
+ * ATTENTION — deux montants coexistent, et les confondre coûte un refus :
+ *
+ *   • 500 000 THB est la règle NATIONALE thaïlandaise. C'est elle qui
+ *     s'applique dans les postes qui raisonnent en bahts.
+ *
+ *   • 15 000 € est le montant que l'AMBASSADE DE PARIS affiche sur sa propre
+ *     page de documents requis, en euros et non en bahts :
+ *       « Relevé bancaire officiel d'un solde créditeur (non bloqué) minimum
+ *         de 15 000 euros/par mois, au cours des 3 derniers mois »
+ *
+ * Ce n'est donc PAS une conversion : Paris a figé sa propre équivalence, et
+ * elle est supérieure à la contre-valeur du jour des 500 000 THB (de l'ordre
+ * de 13 100 € à 38,4 THB/€). Un dossier calibré sur la conversion passe donc
+ * sous l'exigence du poste d'environ deux mille euros.
+ *
+ * Depuis la règle du 31 août 2026, un ressortissant français dépose à Paris —
+ * le montant à afficher au client est donc celui de Paris, en euros. La
+ * mécanique de change ci-dessous ne sert plus qu'aux montants réellement
+ * libellés en bahts (les traductions assermentées, facturées à la page).
  */
 
-/** Seuil exigé par l'ambassade, en bahts. */
+/** Règle nationale thaïlandaise, en bahts. Conservée pour mémoire et contexte. */
 export const FONDS_THB = 500_000;
+
+/**
+ * Seuil affiché par l'ambassade de Thaïlande à Paris, en euros et PAR PERSONNE.
+ * Source : thaiembassy.fr, page « DTV », rubrique documents requis.
+ * Vérifié le 19 septembre 2026. À recontrôler à chaque changement de règles.
+ */
+export const FONDS_EUR_PARIS = 15_000;
 
 /**
  * Cours de repli si l'API est injoignable (1 EUR = X THB).
@@ -16,8 +38,14 @@ export const FONDS_THB = 500_000;
  */
 export const TAUX_SECOURS = 38.4;
 
-/** Marge conseillée, en euros et PAR PERSONNE, pour absorber les variations de change. */
-export const MARGE_CONSEILLEE = '15 000 à 16 000 €';
+/**
+ * Montant conseillé au client, en euros et PAR PERSONNE.
+ *
+ * Au-dessus du seuil de Paris, jamais à son niveau exact : présenter
+ * 15 000,00 € pile à un guichet qui en exige 15 000 ne laisse aucune place à
+ * un arrondi, à un agio prélevé la veille ou à une lecture tatillonne.
+ */
+export const MARGE_CONSEILLEE = '16 000 €';
 
 /**
  * Le seuil s'applique à CHAQUE personne du foyer, accompagnants compris.
@@ -38,6 +66,17 @@ export function fondsFoyerThb(nbPersonnes: number): number {
 /** Contre-valeur en euros du seuil applicable à un foyer, arrondie à la centaine supérieure. */
 export function eurosFoyer(tauxThbParEuro: number, nbPersonnes: number): number {
   return Math.ceil(fondsFoyerThb(nbPersonnes) / tauxThbParEuro / 100) * 100;
+}
+
+/**
+ * Montant exigé par l'ambassade de Paris pour un foyer, en euros.
+ *
+ * C'est la fonction à utiliser partout où l'on annonce au client ce qu'il doit
+ * justifier : elle ne dépend d'aucun cours de change, parce que l'exigence du
+ * poste n'en dépend pas non plus.
+ */
+export function eurosFoyerParis(nbPersonnes: number): number {
+  return FONDS_EUR_PARIS * Math.max(1, Math.floor(nbPersonnes) || 1);
 }
 
 /** Format thaï : 2 000 000 THB */

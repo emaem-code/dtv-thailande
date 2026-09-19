@@ -421,11 +421,29 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
         {/* Client */}
         <section className="border border-white/10 rounded-xl p-4 space-y-3">
           <h2 className="text-sm font-bold text-white">Client</h2>
-          <div>
-            <label className={ETIQUETTE} htmlFor="nom">Nom complet</label>
-            <input id="nom" className={CHAMP} value={devis.client.nom}
-              onChange={(e) => changer({ client: { ...devis.client, nom: e.target.value } })} />
+          {/* Prénom et nom séparés : le formulaire du site ne recueille qu'une
+              seule case, et le client y met le plus souvent son prénom. Adresser
+              un document contractuel à « Theo » fait négligé — mais forcer le
+              nom de famille dans le formulaire ajouterait un champ à franchir
+              avant même la première réponse. On le complète donc ici, quand on
+              le connaît, et le client le confirme lui-même à la signature. */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className={ETIQUETTE} htmlFor="nom">Prénom</label>
+              <input id="nom" className={CHAMP} value={devis.client.nom}
+                onChange={(e) => changer({ client: { ...devis.client, nom: e.target.value } })} />
+            </div>
+            <div>
+              <label className={ETIQUETTE} htmlFor="nomFamille">Nom de famille</label>
+              <input id="nomFamille" className={CHAMP} value={devis.client.nomFamille ?? ''}
+                onChange={(e) => changer({ client: { ...devis.client, nomFamille: e.target.value } })} />
+            </div>
           </div>
+          <p className="text-xs text-gray-500 -mt-1">
+            Le formulaire du site ne demande que la première case. Complétez la seconde si vous
+            connaissez le nom : il apparaîtra sur le devis. Le client le ressaisira de toute façon
+            à la signature, et c&apos;est sa saisie qui fait foi.
+          </p>
           <div>
             <label className={ETIQUETTE} htmlFor="email">E-mail</label>
             <input id="email" type="email" className={CHAMP} value={devis.client.email}

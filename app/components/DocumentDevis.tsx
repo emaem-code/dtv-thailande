@@ -1,5 +1,6 @@
 import React from 'react';
-import { totaliser, devisSelonOption, type Devis } from '../lib/devis-modele';
+import { totaliser, devisSelonOption, nomComplet, type Devis } from '../lib/devis-modele';
+import { FONDS_EUR_PARIS, MARGE_CONSEILLEE } from '../lib/taux';
 import {
   AGENCE,
   agenceIncomplete,
@@ -313,7 +314,7 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               Client
             </p>
             <p className="text-white print:text-black font-semibold">
-              {devis.client.nom || '—'}
+              {nomComplet(devis.client) || '—'}
             </p>
             <p className="text-gray-400 print:text-gray-700 leading-relaxed whitespace-pre-line">
               {devis.client.adresse}
@@ -323,6 +324,27 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             </p>
           </div>
         </section>
+
+        {/* ── MOT AU CLIENT ──
+            Le même texte part en tête du courriel. Le répéter ici n'est pas une
+            redondance : le devis est la pièce qu'on imprime, qu'on transfère à
+            son conjoint ou qu'on relit trois semaines plus tard, et le courriel
+            qui le portait est alors perdu de vue. Ce qui a été dit au client
+            doit voyager avec le document qui l'engage. */}
+        {(devis.message ?? '').trim() && (
+          <section className="py-8 border-b border-white/10 print:border-gray-300">
+            <div className="text-sm text-gray-300 print:text-gray-800 leading-relaxed space-y-4 max-w-2xl">
+              {(devis.message ?? '')
+                .trim()
+                .split(/\n{2,}/)
+                .map((paragraphe, i) => (
+                  <p key={i} className="whitespace-pre-line">
+                    {paragraphe}
+                  </p>
+                ))}
+            </div>
+          </section>
+        )}
 
         {/* ── PROFIL DU DOSSIER ── */}
         <section className="py-8 border-b border-white/10 print:border-gray-300">
@@ -358,14 +380,21 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               peut rendre le dossier infaisable, et mieux vaut le découvrir ici. */}
           <div className="mt-6 border border-amber-500/30 bg-amber-500/5 print:bg-amber-50 print:border-amber-300 rounded-xl p-5">
             <p className="text-amber-400 print:text-amber-800 font-semibold text-sm mb-1">
-              Épargne à justifier pour votre foyer : {t.fondsThb}
+              Épargne à justifier pour votre foyer : {euros(t.fondsEuros)}
             </p>
             <p className="text-xs text-gray-400 print:text-gray-700 leading-relaxed">
-              Soit environ {euros(t.fondsEuros)} au cours actuel. Le seuil de 500 000 THB
-              s&apos;apprécie <strong className="text-white print:text-black">par personne</strong>,
-              conjoint et enfants rattachés compris. Les fonds peuvent être réunis sur le compte du
-              demandeur principal, ne sont jamais bloqués, et doivent être présents depuis au moins
-              trois mois au moment du dépôt.
+              L&apos;ambassade de Thaïlande à Paris exige un relevé bancaire officiel faisant
+              apparaître un solde créditeur non bloqué d&apos;au moins{' '}
+              <strong className="text-white print:text-black">
+                {euros(FONDS_EUR_PARIS)} par personne
+              </strong>
+              , et ce <strong className="text-white print:text-black">chacun des trois derniers
+              mois</strong>. Le montant est affiché en euros par le poste, et non converti depuis
+              les {t.fondsThb} de la règle nationale : c&apos;est la somme en euros qui vous sera
+              opposée au guichet. Le seuil s&apos;apprécie par demandeur, conjoint et enfants
+              rattachés compris. Les fonds peuvent être réunis sur le compte du demandeur principal
+              et ne sont jamais bloqués. Prévoyez {MARGE_CONSEILLEE} par personne plutôt que le
+              strict minimum : un solde à l&apos;euro près ne laisse aucune marge.
             </p>
           </div>
         </section>

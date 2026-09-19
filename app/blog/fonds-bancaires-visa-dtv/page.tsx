@@ -15,8 +15,8 @@ import PhotoAuteur from '../../components/PhotoAuteur';
 
 // ─── MÉTADONNÉES SEO DE L’ARTICLE ───
 export const metadata: Metadata = {
-  title: 'Preuve bancaire visa DTV : 500 000 THB, 3 ou 6 mois ?',
-  description: "Faut-il bloquer 15 000 € pour le Visa DTV Thaïlande ? La vérité sur l'historique bancaire de 3 mois, les comptes acceptés et l'erreur qui fait refuser les dossiers.",
+  title: 'Preuve bancaire visa DTV : 15 000 € par personne, 3 mois',
+  description: "L'ambassade de Paris exige 15 000 € par personne sur chacun des 3 derniers mois — en euros, et non la contre-valeur des 500 000 THB. Les comptes acceptés et l'erreur qui fait refuser les dossiers.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/fonds-bancaires-visa-dtv', // <-- AJOUT DU CANONICAL ICI
   },
@@ -252,11 +252,12 @@ export default function BlogArticleDTV() {
         </p>
         <p>
           Cependant, un critère précis cristallise toutes les angoisses et sature les groupes
-          d&apos;entraide : la fameuse preuve financière des{' '}
+          d&apos;entraide : la preuve financière, que l&apos;ambassade de Paris fixe à{' '}
           <strong className="text-white">
-            500 000 Bahts (<MontantFonds prefixe="environ " />)
-          </strong>
-          . Pourquoi tant
+            <MontantFonds prefixe="" /> par personne
+          </strong>{' '}
+          — en euros sur sa propre page, et non en contre-valeur des 500 000 THB de la règle
+          nationale. Pourquoi tant
           de candidats sont-ils convaincus qu&apos;il faut six mois d&apos;historique ? Un virement
           de dernière minute passe-t-il ? L&apos;ambassade de Paris est-elle vraiment plus stricte
           que celle de Vientiane ?
@@ -503,18 +504,32 @@ export default function BlogArticleDTV() {
       {/* ── SECTION 5 ── */}
       <section className="mb-12">
         <h2 id="taux-change" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          5. La règle d&apos;or du taux de change (EUR / THB)
+          5. Euros ou bahts ? L&apos;erreur de conversion qui coûte un refus
         </h2>
         <p className="mb-4">
-          Une erreur fréquente consiste à viser le strict minimum. Si le taux du jour indique
-          que 500 000 THB équivalent à <MontantFonds prefixe="" />, et que vous présentez un relevé
-          à <MontantFonds prefixe="" ajout={50} />, vous jouez avec le feu.
+          C&apos;est le piège le plus coûteux de tout le dossier, et il ne vient pas des banques
+          mais d&apos;un raisonnement de bon sens. La règle nationale thaïlandaise parle de
+          500 000 THB. On convertit donc au cours du jour, on trouve environ 13 100 €, et on
+          calibre son relevé là-dessus.
         </p>
         <p className="mb-4">
-          Le taux fluctue constamment. Entre le moment où vous imprimez votre relevé et le jour
-          où l&apos;officier traite votre dossier, l&apos;euro peut baisser par rapport au baht. Si
-          l&apos;ambassade calcule ce jour-là que vos <MontantFonds prefixe="" ajout={50} /> ne
-          valent plus que 495 000 THB, le visa est refusé pour manque de fonds.
+          <strong className="text-white">C&apos;est faux pour un dépôt à Paris.</strong>{' '}
+          L&apos;ambassade de Thaïlande en France ne convertit rien : elle publie son propre
+          montant, en euros, sur sa page de documents requis — un solde créditeur non bloqué
+          d&apos;au moins <MontantFonds prefixe="" /> par personne, et ce chacun des trois
+          derniers mois. Soit près de deux mille euros de plus que la contre-valeur des
+          500 000 THB.
+        </p>
+        <p className="mb-4">
+          Un dossier calibré sur la conversion se présente donc sous le seuil du poste, avec des
+          relevés parfaitement propres et une somme parfaitement insuffisante. Les frais
+          consulaires ne sont pas remboursés, et le refus n&apos;est pas motivé : vous repartez
+          sans savoir que votre erreur tenait à une unité de compte.
+        </p>
+        <p className="mb-4">
+          Et ne visez pas le montant exact. Un relevé à{' '}
+          <MontantFonds prefixe="" ajout={50} /> laisse cinquante euros de marge à un agio
+          prélevé la veille de l&apos;édition du relevé.
         </p>
         <div className="bg-teal-500/8 border border-teal-500/20 rounded-2xl p-5">
           <p className="text-teal-300 font-semibold text-sm">

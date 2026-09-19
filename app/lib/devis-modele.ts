@@ -8,7 +8,7 @@ import {
   SUPPLEMENT_FORMULE,
   FORMULES_VENDUES,
 } from './tarifs';
-import { fondsFoyerThb, eurosFoyer, formateThb, TAUX_SECOURS } from './taux';
+import { fondsFoyerThb, eurosFoyerParis, formateThb, TAUX_SECOURS } from './taux';
 import { ACOMPTE_POURCENT } from './agence';
 
 /**
@@ -40,11 +40,39 @@ export type Debours = {
 };
 
 export type Client = {
+  /**
+   * Le prénom — ou, sur les devis anciens, le nom tel que le formulaire du
+   * site l'a reçu d'un seul tenant.
+   *
+   * La propriété garde son nom historique à dessein : elle est sérialisée en
+   * JSON dans la colonne `client`, et la renommer imposerait de réécrire les
+   * devis déjà signés, dont le contenu ne doit plus bouger. L'éditeur
+   * l'étiquette « Prénom », ce qui est ce qu'elle contient en pratique.
+   */
   nom: string;
+  /**
+   * Le nom de famille, quand on le connaît.
+   *
+   * Le formulaire du site ne le demande pas : il ne sert qu'à éviter d'adresser
+   * un document contractuel à un prénom seul. Facultatif, et de toute façon
+   * confirmé par le client lui-même au moment de la signature — c'est sa
+   * saisie qui fait foi dans le contrat, pas celle-ci.
+   */
+  nomFamille?: string;
   email: string;
   telephone: string;
   adresse: string;
 };
+
+/** Le nom à imprimer sur le document : « Théo Do Campo », ou « Théo » seul. */
+export function nomComplet(client: Client): string {
+  return [client.nom?.trim(), client.nomFamille?.trim()].filter(Boolean).join(' ');
+}
+
+/** Le prénom, pour ouvrir un courriel : « Bonjour Théo, ». */
+export function prenomClient(client: Client): string {
+  return (client.nom ?? '').trim().split(/\s+/)[0] ?? '';
+}
 
 export type Dossier = {
   personnes: number;
@@ -156,7 +184,9 @@ export type Totaux = {
   debours: number;
   total: number;
   parPersonne: number;
+  /** La règle nationale, en bahts. Conservée pour le contexte, pas pour le seuil annoncé. */
   fondsThb: string;
+  /** Le montant réellement exigé par l'ambassade de Paris, en euros. C'est celui qui fait foi. */
   fondsEuros: number;
   surDevis: boolean;
 };
@@ -177,7 +207,7 @@ export function totaliser(d: Pick<Devis, 'honoraires' | 'debours' | 'dossier'>):
     total,
     parPersonne: Math.round(total / n),
     fondsThb: formateThb(fondsFoyerThb(n)),
-    fondsEuros: eurosFoyer(TAUX_SECOURS, n),
+    fondsEuros: eurosFoyerParis(n),
     surDevis: n > PALIER_MAX,
   };
 }

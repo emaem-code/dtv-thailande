@@ -559,10 +559,11 @@ export default function FormulaireEligibilite({
               Le critère financier n&apos;est pas encore rempli
             </h3>
             <p className="text-gray-400 text-base max-w-lg mx-auto mb-4">
-              L&apos;ambassade exige de prouver une épargne disponible de 500 000 THB, soit environ{' '}
-              <MontantFonds prefixe="" />. C&apos;est une condition légale sur laquelle aucune agence
-              ne peut passer outre — et se le faire dire franchement vaut mieux que de payer des
-              frais consulaires non remboursables pour un refus.
+              L&apos;ambassade de Paris exige de prouver une épargne disponible de{' '}
+              <MontantFonds prefixe="" /> par personne, présente chacun des trois derniers mois.
+              C&apos;est une condition sur laquelle aucune agence ne peut passer outre — et se le
+              faire dire franchement vaut mieux que de payer des frais consulaires non
+              remboursables pour un refus.
             </p>
             <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
               Mais rien n&apos;est définitif. Beaucoup de nos clients ont constitué cette épargne en
@@ -603,8 +604,7 @@ export default function FormulaireEligibilite({
           <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
             <div className="space-y-3">
               <label className="text-white font-bold text-lg">
-                1. Disposez-vous de l&apos;équivalent de 500 000 THB (
-                <MontantFonds prefixe="" />) d&apos;épargne ?{' '}
+                1. Disposez-vous de <MontantFonds prefixe="" /> d&apos;épargne disponible ?{' '}
                 <span className="text-amber-500">*</span>
               </label>
               <div className="grid grid-cols-1 gap-3">
@@ -957,14 +957,14 @@ export default function FormulaireEligibilite({
                 <div className="mt-4 p-5 rounded-2xl bg-amber-500/5 border border-amber-500/30">
                   <p className="text-white font-semibold text-sm mb-2">
                     Pour {nbPersonnesFoyer} personnes, l&apos;épargne à justifier est de{' '}
-                    {(500000 * nbPersonnesFoyer).toLocaleString('fr-FR').replace(/ | /g, ' ')} THB
+                    <MontantFonds prefixe="" personnes={nbPersonnesFoyer} />
                   </p>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    Soit <MontantFonds prefixe="environ " personnes={nbPersonnesFoyer} />. Le seuil
-                    de 500 000 THB s&apos;applique à{' '}
+                    Le seuil fixé par l&apos;ambassade de Paris s&apos;applique à{' '}
                     <strong className="text-white">chaque demandeur</strong>, accompagnants compris
-                    — conjoint et enfants inclus. Un compte joint permet de ne produire qu&apos;un
-                    seul justificatif pour vous deux, mais le montant reste cumulé.
+                    — conjoint et enfants inclus, et il doit être atteint chacun des trois derniers
+                    mois. Un compte joint permet de ne produire qu&apos;un seul justificatif pour
+                    vous deux, mais le montant reste cumulé.
                   </p>
                 </div>
               )}
