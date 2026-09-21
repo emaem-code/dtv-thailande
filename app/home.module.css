@@ -322,7 +322,10 @@
 }
 .heroImage {
   object-fit: cover;
-  object-position: center 43%;
+  /* Cadrage pense pour l'image 16/9 du heros : le conteneur est plus proche
+     du carre, donc la photo est recadree sur les cotes. 50 % garde le plan
+     de travail et la vue, la ou 43 % remontait et coupait la table. */
+  object-position: center 50%;
   border-radius: inherit;
 }
 .locationTag {

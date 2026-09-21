@@ -65,8 +65,8 @@ export default function Home() {
           </div>
           <div className={s.heroVisual}>
             <Image
-              src="/poster-dtv.jpg"
-              alt="Mer turquoise et paysage tropical en Thaïlande"
+              src="/images/hero-accueil.jpg"
+              alt="Ordinateur portable ouvert sur une table en bois, terrasse donnant sur la végétation tropicale et la mer"
               fill
               priority
               sizes="(max-width: 760px) 100vw, 48vw"
