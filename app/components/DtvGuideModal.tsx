@@ -3,6 +3,8 @@
 import React from 'react';
 import { prix, tarif } from '../lib/tarifs';
 import { useModalA11y } from './useModalA11y';
+import { REGLE_DEPOT_DTV, SOURCES_PROCEDURE } from '../lib/methode-dtv';
+import SourcesProcedure from './SourcesProcedure';
 
 interface DtvGuideModalProps {
   isOpen: boolean;
@@ -102,8 +104,9 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
                 <p className="text-sm text-gray-400">Contrairement aux rumeurs, <strong className="text-white">aucun revenu mensuel minimum n'est exigé</strong>. C'est l'épargne de garantie qui prime.</p>
               </div>
               <div className="bg-white/5 p-5 rounded-2xl border border-white/5">
-                <h4 className="font-bold text-white mb-2">La Localisation</h4>
-                <p className="text-sm text-gray-400">La demande doit obligatoirement être déposée et traitée depuis l'extérieur de la Thaïlande.</p>
+                <h4 className="font-bold text-white mb-2">Le pays de dépôt</h4>
+                <p className="text-sm text-gray-400">{REGLE_DEPOT_DTV}</p>
+                <SourcesProcedure sources={[SOURCES_PROCEDURE.reglesAout2026]} className="text-xs text-gray-400 mt-3" />
               </div>
               <div className="bg-white/5 p-5 rounded-2xl border border-white/5">
                 <h4 className="font-bold text-white mb-2">L'Âge minimum</h4>

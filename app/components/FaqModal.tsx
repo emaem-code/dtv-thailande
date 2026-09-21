@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { useModalA11y } from './useModalA11y';
+import { VERIFICATION_ECOLE, SOURCES_PROCEDURE } from '../lib/methode-dtv';
+import SourcesProcedure from './SourcesProcedure';
 
 interface FaqModalProps {
   isOpen: boolean;
@@ -32,8 +34,9 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     },
     {
       category: "Soft Power (Écoles & Immersion)",
-      q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-      a: "Le risque d'utiliser une école 'fantôme' ou non agréée est une interdiction de territoire. C'est pourquoi nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l'Éducation). Votre lettre d'acceptation est garantie conforme à 100%."
+      q: VERIFICATION_ECOLE.question,
+      a: VERIFICATION_ECOLE.reponse,
+      sources: [SOURCES_PROCEDURE.parisDtv],
     },
     {
       category: "Famille & PACS",
@@ -104,7 +107,8 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
                   
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="p-5 pt-0 text-gray-400 text-sm md:text-base leading-relaxed border-t border-white/5 mt-2">
-                      {faq.a}
+                      <p>{faq.a}</p>
+                      {faq.sources && <SourcesProcedure sources={faq.sources} className="text-xs text-gray-400 mt-3" />}
                     </div>
                   </div>
                 </div>

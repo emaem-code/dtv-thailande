@@ -1864,3 +1864,10 @@
     scroll-behavior: auto !important;
   }
 }
+
+.page .procedureSources {
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+}

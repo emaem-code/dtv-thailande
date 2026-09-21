@@ -6,6 +6,14 @@ import Image from "next/image";
 import HomeVideos from "./HomeVideos";
 import { useModales } from "./ModalesProvider";
 import s from "../home.module.css";
+import {
+  ETAPES_DTV,
+  REGLE_DEPOT_DTV,
+  VERIFICATION_ECOLE,
+  SOURCES_PROCEDURE,
+  DATE_VERIFICATION_PROCEDURE,
+} from "../lib/methode-dtv";
+import SourcesProcedure from "./SourcesProcedure";
 // La grille publique ne montre que les formules encore vendues : la VIP reste
 // dans FORMULES pour que les devis déjà signés continuent de s'afficher, mais
 // l'annoncer au visiteur reviendrait à vendre ce qu'on ne fait plus.
@@ -42,8 +50,9 @@ export const homeFaqs = [
   },
   {
     category: "Soft Power (écoles & immersion)",
-    q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-    a: "Le risque d'utiliser une école fantôme ou non agréée est une interdiction de territoire. Nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de cuisine thaïlandaise disposant d'une double homologation officielle : licence DBD et accréditation du ministère. Votre lettre d'acceptation est garantie conforme.",
+    q: VERIFICATION_ECOLE.question,
+    a: VERIFICATION_ECOLE.reponse,
+    sources: [SOURCES_PROCEDURE.parisDtv],
   },
   {
     category: "Famille & PACS",
@@ -54,39 +63,6 @@ export const homeFaqs = [
     category: "Fiscalité & impôts",
     q: "Vais-je payer des impôts en Thaïlande avec le Visa DTV ?",
     a: "Le DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année civile et que vous y rapatriez des revenus. Nous vous fournissons les repères de base pour comprendre la convention fiscale franco-thaïlandaise et organiser votre calendrier de voyage.",
-  },
-];
-
-const etapes = [
-  {
-    num: "01",
-    titre: "L'engagement et le dossier",
-    desc: "Une fois votre devis validé, nous analysons et certifions vos pièces sous 3 à 5 jours ouvrés pour vous livrer un dossier formaté selon les exigences consulaires.",
-  },
-  {
-    num: "02",
-    titre: "Géolocalisation et arrivée sur place",
-    desc: "Vous voyagez vers le pays de dépôt. Le tampon d'entrée de cette immigration est indispensable pour prouver votre géolocalisation au moment de la demande.",
-  },
-  {
-    num: "03",
-    titre: "Soumission et règlement consulaire",
-    desc: "Vous vous connectez au portail officiel e-Visa et déposez le dossier. Selon l'ambassade, le règlement se fait en ligne ou sur place en bahts. Nous restons joignables pendant toute l'opération.",
-  },
-  {
-    num: "04",
-    titre: "Approbation",
-    desc: "Sous 3 à 5 jours, l'e-mail « Visa Approved » arrive. En formule Premium, nous vous aidons alors à choisir votre vol et nous organisons votre transfert depuis l'aéroport.",
-  },
-  {
-    num: "05",
-    titre: "Préparation au départ",
-    desc: "Impression de l'e-Visa, enregistrement en ligne et carte d'arrivée numérique TDAC préparée sur votre mobile. Ces documents sont exigés à l'embarquement.",
-  },
-  {
-    num: "06",
-    titre: "Arrivée en Thaïlande",
-    desc: "Passeport, e-Visa imprimé et TDAC à l'officier d'immigration, qui appose votre tampon de 180 jours. Ensuite, une sortie du territoire ou une extension sur place relance le compteur, pendant cinq ans.",
   },
 ];
 
@@ -227,23 +203,36 @@ export default function HomeContent() {
       {/* ── MÉTHODE ── */}
       <section id="methode" className={s.methodSection}>
         <p className={s.eyebrow}>Vous avancez. Nous vous accompagnons.</p>
-        <h2>Notre méthode, en six étapes</h2>
+        <h2>Notre méthode, en cinq étapes</h2>
         <p>
-          De la validation de votre devis au tampon de 180 jours dans votre
-          passeport, voici exactement ce qui se passe et dans quel ordre.
+          De la préparation de votre dossier à votre arrivée après accord du
+          visa, voici les étapes de notre accompagnement.
         </p>
 
+        <p>{REGLE_DEPOT_DTV}</p>
+        <SourcesProcedure
+          sources={[SOURCES_PROCEDURE.reglesAout2026]}
+          className={s.procedureSources}
+        />
         <ol>
-          {etapes.map((e) => (
-            <li key={e.num}>
-              <span>{e.num}</span>
+          {ETAPES_DTV.map((e, index) => (
+            <li key={e.id}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h3>{e.titre}</h3>
                 <p>{e.desc}</p>
+                <SourcesProcedure
+                  sources={e.sources}
+                  className={s.procedureSources}
+                />
               </div>
             </li>
           ))}
         </ol>
+        <p className={s.procedureSources}>
+          Sources consultées le {DATE_VERIFICATION_PROCEDURE}. Les exigences du
+          poste consulaire compétent font foi.
+        </p>
       </section>
 
       {/* ── TARIFS ── */}
@@ -257,12 +246,19 @@ export default function HomeContent() {
           l&apos;école certifiée, ce qui explique l&apos;écart.
         </p>
         <p>
-          Grille révisée le 2 septembre 2026. Depuis le 31 août, un demandeur
-          français relève obligatoirement de l&apos;ambassade de Paris, où les
-          frais consulaires sont plus élevés qu&apos;en Asie et où la traduction
-          assermentée est exigée. {MENTION_TRADUCTIONS}
+          Grille révisée le 2 septembre 2026. Le poste consulaire compétent
+          dépend de votre pays de nationalité ou de résidence officielle ; la
+          nationalité française ne signifie pas, à elle seule, un dépôt
+          obligatoire à Paris. {MENTION_TRADUCTIONS}
         </p>
 
+        <SourcesProcedure
+          sources={[
+            SOURCES_PROCEDURE.reglesAout2026,
+            SOURCES_PROCEDURE.parisProcedure,
+          ]}
+          className={s.procedureSources}
+        />
         <div className={s.priceGrid}>
           {formules.map((f) => (
             <article
@@ -334,8 +330,8 @@ export default function HomeContent() {
         </div>
 
         <p>
-          Tarifs à partir de, hors frais de visa d&apos;entrée du pays de dépôt
-          le cas échéant.
+          Tarifs à partir de, selon les pièces et les prestations prévues au
+          devis.
         </p>
       </section>
 
@@ -361,6 +357,12 @@ export default function HomeContent() {
               </summary>
               <div>
                 <p>{faq.a}</p>
+                {faq.sources && (
+                  <SourcesProcedure
+                    sources={faq.sources}
+                    className={s.procedureSources}
+                  />
+                )}
               </div>
             </details>
           ))}
