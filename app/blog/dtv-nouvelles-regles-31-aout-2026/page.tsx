@@ -95,7 +95,7 @@ const faqSchema = {
       name: 'Le montant des fonds à justifier change-t-il au 31 août 2026 ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Non, il reste de 500 000 THB. Ce qui s'est durci ces derniers mois, indépendamment de cette réforme, c'est la vérification de l'ancienneté du solde : les postes examinent les relevés sur plusieurs mois afin d'écarter les dépôts de complaisance effectués la veille de la demande.",
+        text: "Non, la règle nationale reste de 500 000 THB — étant entendu que l'ambassade de Paris publie son propre seuil en euros, 15 000 € par personne, qui est plus élevé que la contre-valeur de ce montant et qui prime pour un dépôt à Paris. Ce qui s'est durci ces derniers mois, indépendamment de cette réforme, c'est la vérification de l'ancienneté du solde : les postes examinent les relevés sur plusieurs mois afin d'écarter les dépôts de complaisance effectués la veille de la demande.",
       },
     },
     {

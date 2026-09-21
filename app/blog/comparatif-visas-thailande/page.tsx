@@ -283,7 +283,7 @@ revenus mensuels.</p>
         <ul className="space-y-3 mb-6 pl-4 border-l-2 border-indigo-500/50 text-gray-300 text-sm bg-indigo-500/5 p-4 rounded-r-xl">
           <li>✅ <strong className="text-white">Coût :</strong> 10 000 à 13 000 THB de frais consulaires en Asie, 350 € à l'ambassade de Paris.</li>
           <li>✅ <strong className="text-white">Durée :</strong> 5 ans (entrées multiples). Séjours de 180 jours, prolongeables à 360 jours sans quitter le pays.</li>
-          <li>✅ <strong className="text-white">Finances :</strong> Preuve de 500 000 THB (<MontantFonds />) sur un compte (qui peut rester en France). Pas d'investissement requis.</li>
+          <li>✅ <strong className="text-white">Finances :</strong> 500 000 THB selon la règle nationale — mais l'ambassade de Paris publie son propre seuil en euros, <MontantFonds /> par personne, plus élevé que la contre-valeur du jour. Ne convertissez pas : retenez le montant du poste dont vous relevez. Les fonds peuvent rester sur un compte en France. Pas d'investissement requis.</li>
           <li>✅ <strong className="text-white">Légalité :</strong> Autorise expressément le télétravail pour des clients hors Thaïlande sans permis de travail.</li>
         </ul>
         <p className="text-amber-400 font-medium">💡 Verdict de l'expert : La solution absolue pour les entrepreneurs du web, offrant la liberté du LTR pour le coût d'un visa classique.</p>
