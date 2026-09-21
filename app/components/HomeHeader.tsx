@@ -31,7 +31,7 @@ export default function HomeHeader() {
             aria-label="DTV Thaïlande — accueil"
           >
             <Image
-              src="/logo.svg?v=3"
+              src="/logo.svg?v=4"
               alt=""
               width={44}
               height={35}

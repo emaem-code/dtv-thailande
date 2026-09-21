@@ -57,7 +57,7 @@ export default function SiteHeader() {
                 est paysage (1024×806), d'où une largeur libre et une hauteur
                 fixe, plutôt qu'un carré qui l'aurait réduit d'un tiers. */}
             <Image
-              src="/logo.svg?v=3"
+              src="/logo.svg?v=4"
               alt="DTV Destination Thaïlande"
               width={48}
               height={38}
