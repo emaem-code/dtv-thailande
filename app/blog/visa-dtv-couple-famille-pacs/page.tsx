@@ -390,7 +390,7 @@ export default function ArticleDtvFamille() {
         </ol>
 
         <p>
-          Concernant la question géographique du dépôt, il est fortement recommandé de soumettre votre demande auprès de l'ambassade de votre pays de résidence officielle (via la plateforme e-Visa à Paris pour les résidents français). Tenter de régulariser des documents d'état civil européens auprès d'ambassades thaïlandaises situées dans des pays limitrophes en Asie s'avère souvent complexe et source de blocages administratifs.
+          Concernant la question géographique du dépôt, ce n'est plus une question de préférence depuis le 31 août 2026 : la demande doit être déposée auprès du poste consulaire dont vous relevez par votre nationalité ou par votre résidence légale — la plateforme e-Visa rattachée à Paris pour un Français vivant en France. Déposer auprès d'une ambassade thaïlandaise d'un pays limitrophe en Asie n'est plus une option pour qui ne réside pas dans ce pays : ce n'est pas seulement plus compliqué qu'avant, c'est fermé.
         </p>
       </section>
 

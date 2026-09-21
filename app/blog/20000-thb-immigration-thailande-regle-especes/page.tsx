@@ -1,5 +1,6 @@
 import React from 'react';
 import BoutonEligibilite from '../../components/BoutonEligibilite';
+import MontantFonds from '../../components/MontantFonds';
 import LienArticle from '../../components/LienArticle';
 import BlogNavigation from '../../components/BlogNavigation';
 import PartageArticle from '../../components/PartageArticle';
@@ -239,7 +240,10 @@ export default function BlogArticleImmigration20000THB() {
               </Link>{' '}
               détaille l&apos;autre règle financière, celle-là bien plus lourde : les
               500 000 THB de preuve bancaire, qui s&apos;appliquent eux{' '}
-              <em>par demandeur</em> et non par foyer.
+              <em>par demandeur</em> et non par foyer. Attention, ce chiffre est
+              la règle nationale : l&apos;ambassade de Paris, elle, publie son
+              seuil directement en euros, <MontantFonds /> par personne, et il
+              est plus élevé que la contre-valeur des bahts.
             </p>
           </div>
         </div>
@@ -397,7 +401,7 @@ export default function BlogArticleImmigration20000THB() {
           6. Le Visa DTV est-il concerné ?
         </h2>
         <p className="mb-4">
-          Question légitime : le dossier DTV exige déjà une preuve de 500 000 THB d&apos;épargne. L&apos;immigration peut-elle encore vous demander 20 000 THB en espèces à l&apos;entrée ?
+          Question légitime : le dossier DTV exige déjà une preuve d&apos;épargne — 500 000 THB selon la règle nationale, <MontantFonds /> par personne pour un dépôt à Paris. L&apos;immigration peut-elle encore vous demander 20 000 THB en espèces à l&apos;entrée ?
         </p>
         <p className="mb-4">
           <strong className="text-white">Réponse : oui, légalement.</strong> La section 12(2) s&apos;applique à tout étranger qui se présente à la frontière, quel que soit son visa. Le fait d&apos;avoir prouvé votre solvabilité à l&apos;ambassade il y a six mois ne dispense pas de présenter des moyens de subsistance le jour de l&apos;entrée si l&apos;agent le demande.
