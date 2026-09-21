@@ -4,6 +4,7 @@ import FloatingCTA from './components/FloatingCTA';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import ModalesProvider from './components/ModalesProvider';
+import BandeauBacASable from './components/BandeauBacASable';
 
 // ─── MÉTADONNÉES ULTRA-OPTIMISÉES (RÈGLE TOUT L'AUDIT CODEX) ──────────────────
 export const metadata: Metadata = {
@@ -90,6 +91,8 @@ export default function RootLayout({
             et aucun bandeau de consentement n'est requis. Le jour où l'on
             ajoute un outil qui pose un cookie, cette phrase cesse d'être vraie
             et le bandeau devient obligatoire. */}
+        {/* Ne s'affiche jamais en production : voir le fichier du composant. */}
+        <BandeauBacASable />
         <Analytics />
         {/* Core Web Vitals mesurés sur les vrais visiteurs, et non en
             laboratoire : c'est ce que Search Console reproche sans jamais dire
