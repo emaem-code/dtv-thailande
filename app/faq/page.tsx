@@ -92,7 +92,7 @@ const groupes: Groupe[] = [
     questions: [
       {
         q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-        a: "Non. L'administration exige de prouver la liquidité de 500 000 THB par demandeur, soit environ {EUROS} au cours du jour, uniquement au moment de la demande et lors d'une éventuelle extension sur place. L'argent n'est jamais bloqué ni consigné. En revanche, l'historique du compte est examiné avec attention. Nous conseillons de prévoir plutôt {MARGE} par personne : le seuil qui fait foi est celui en bahts, et le taux de change bouge en permanence.",
+        a: "Non. La preuve n'est exigée qu'au moment de la demande, et lors d'une éventuelle extension sur place : l'argent n'est jamais bloqué ni consigné. Sur le montant, attention à une confusion répandue — l'ambassade de Paris publie son seuil directement en euros, {EUROS} par demandeur, et ce n'est pas la contre-valeur des 500 000 THB de la règle nationale, qui est plus basse. Ne convertissez pas : pour un dépôt à Paris, c'est le montant en euros qui fait foi. L'historique du compte, lui, est examiné avec attention, et nous conseillons de prévoir plutôt {MARGE} par personne pour n'être jamais au ras du seuil.",
         lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Le décryptage complet des fonds bancaires' },
       },
       {
@@ -297,9 +297,15 @@ const groupes: Groupe[] = [
 const toutes = groupes.flatMap((g) => g.questions);
 
 /**
- * Les montants en euros sont recalculés au cours du jour, à la fois dans le
- * texte affiché et dans le balisage structuré — les deux restent donc toujours
- * identiques, condition pour que Google accepte le balisage FAQ.
+ * Le même montant est injecté dans le texte affiché et dans le balisage
+ * structuré : les deux restent donc identiques, condition pour que Google
+ * accepte le balisage FAQ.
+ *
+ * Ce montant ne dépend d'aucun taux de change. Le commentaire précédent
+ * parlait d'un recalcul « au cours du jour » : c'était l'ancien
+ * fonctionnement, et il était faux. L'ambassade de Paris publie son seuil en
+ * euros ; le convertir depuis les 500 000 THB de la règle nationale donne un
+ * montant plus bas, sous l'exigence réelle.
  */
 function avecMontants(texte: string, euros: string): string {
   return texte.replace('{EUROS}', euros).replace('{MARGE}', MARGE_CONSEILLEE);
