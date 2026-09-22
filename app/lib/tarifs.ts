@@ -286,8 +286,10 @@ export const ECOLE_SOFT_POWER = 910;
 /**
  * Traduction, en bahts par page (Alliance française de Phuket).
  *
- * Stocké en THB et converti au cours du jour, comme le seuil bancaire : c'est
- * un prix thaïlandais, sa contre-valeur en euros n'est qu'indicative. Environ
+ * Stocké en THB et converti au cours du jour : c'est un prix thaïlandais, sa
+ * contre-valeur en euros n'est qu'indicative. À ne surtout pas confondre avec
+ * le seuil bancaire, qui lui n'est jamais converti — l'ambassade de Paris le
+ * publie en euros. Environ
  * trois fois moins qu'un traducteur assermenté français, qui facture 40 à
  * 60 € la page.
  */

@@ -90,8 +90,9 @@ export default function PageEligibilite() {
               <span className="text-amber-500 flex-none font-bold">01</span>
               <span>
                 <strong className="text-white">L&apos;épargne disponible.</strong> L&apos;ambassade
-                demande de prouver l&apos;équivalent de 500 000 THB, soit{' '}
-                <MontantFonds prefixe="environ " /> au cours du jour. C&apos;est le seul critère
+                de Paris demande <MontantFonds /> par personne, un montant qu&apos;elle publie
+                elle-même en euros — et non la contre-valeur des 500 000 THB de la règle
+                nationale, qui est plus basse. Ne convertissez pas. C&apos;est le seul critère
                 réellement bloquant, et aucune agence ne peut passer outre.
               </span>
             </li>

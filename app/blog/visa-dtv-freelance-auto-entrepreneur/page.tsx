@@ -329,7 +329,7 @@ export default function ArticleFreelanceDTV() {
                   <p className="text-white font-bold mb-1">Relevés bancaires personnels (3 à 6 mois)</p>
                   <p className="text-xs font-semibold mb-2 text-emerald-400">→ Preuve de la solvabilité des 500 000 THB</p>
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    C’est la pièce maîtresse. Le solde de votre compte personnel doit maintenir l’équivalent de 500 000 THB (<MontantFonds />) sur la période demandée. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
+                    C’est la pièce maîtresse. Pour un dépôt à Paris, le solde de votre compte personnel doit se maintenir à <MontantFonds /> par personne sur la période demandée — le montant que le poste publie en euros, et non la contre-valeur des 500 000 THB de la règle nationale, qui est plus basse. Revolut et Boursorama sont acceptés à condition de fournir des relevés PDF officiels avec IBAN.
                   </p>
                 </div>
               </div>
