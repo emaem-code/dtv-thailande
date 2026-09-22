@@ -351,6 +351,9 @@ export default function FormulaireEligibilite({
     if (!formData.prenom.trim()) e.prenom = 'Merci d’indiquer votre prénom.';
     if (!formData.email.trim()) e.email = 'Merci d’indiquer votre adresse e-mail.';
     else if (!emailValide(formData.email)) e.email = 'Cette adresse ne semble pas valide.';
+    if (formData.consentement !== 'yes') {
+      e.consentement = 'Merci d’accepter l’utilisation de vos informations pour traiter votre demande et vous recontacter.';
+    }
 
     setErreurs(e);
     if (Object.keys(e).length > 0) return;
@@ -405,9 +408,6 @@ export default function FormulaireEligibilite({
       if (!formData.situationConjugale) {
         err.situationConjugale = 'Merci de préciser votre situation conjugale.';
       }
-    }
-    if (formData.consentement !== 'yes') {
-      err.consentement = 'Merci d’accepter l’utilisation de vos données pour établir le devis.';
     }
 
     setErreurs(err);
@@ -824,6 +824,25 @@ export default function FormulaireEligibilite({
               </div>
             </div>
 
+            {/* ── ACCORD AVANT TRANSMISSION ── */}
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
+              <input {...attributsChamp('consentement')}
+                type="checkbox"
+                checked={formData.consentement === 'yes'}
+                onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
+                className="case-a-cocher mt-0.5"
+              />
+              <span className="text-xs text-gray-400 leading-relaxed">
+                J&apos;accepte que mes informations soient utilisées pour traiter ma demande et me
+                recontacter à ce sujet. Elles ne sont pas revendues et sont conservées trois ans
+                maximum. Je peux demander leur suppression à tout moment par e-mail.{' '}
+                <a href="/mentions-legales" target="_blank" className="text-amber-500 hover:underline">
+                  Mentions légales
+                </a>
+              </span>
+            </label>
+            {afficherErreur('consentement')}
+
             <div className="pt-4">
               <button
                 onClick={nextStep}
@@ -1174,25 +1193,6 @@ export default function FormulaireEligibilite({
               />
             </div>
 
-            {/* ── CONSENTEMENT RGPD ── */}
-            <label className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
-              <input {...attributsChamp('consentement')}
-                type="checkbox"
-                checked={formData.consentement === 'yes'}
-                onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
-                className="case-a-cocher mt-0.5"
-              />
-              <span className="text-xs text-gray-400 leading-relaxed">
-                J&apos;accepte que ces informations soient utilisées uniquement pour établir mon
-                devis et me recontacter à ce sujet. Elles ne sont ni revendues ni transmises à des
-                tiers, et sont conservées trois ans maximum. Je peux demander leur suppression à tout
-                moment par simple e-mail.{' '}
-                <a href="/mentions-legales" target="_blank" className="text-amber-500 hover:underline">
-                  Mentions légales
-                </a>
-              </span>
-            </label>
-            {afficherErreur('consentement')}
             {afficherErreur('envoi')}
 
             {/* Sur téléphone les deux boutons s'empilent, l'action principale
