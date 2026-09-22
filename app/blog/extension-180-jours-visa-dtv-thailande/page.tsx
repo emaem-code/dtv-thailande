@@ -933,7 +933,7 @@ export default function ArticleExtension180Jours() {
           </li>
           <li>
             <a
-              href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
+              href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sky-400 hover:text-sky-300 hover:underline text-sm transition-colors"

@@ -570,7 +570,7 @@ export default function ArticleFreelanceDTV() {
         </h2>
         <p className="mb-6">
           Le poste de dépôt n’est plus un choix depuis le 31 août 2026 : il découle de votre nationalité ou de votre résidence légale.
-          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
+          Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
           Pour un freelance français, voici notre recommandation selon votre
           situation :
         </p>

@@ -442,7 +442,7 @@ function FaqContenu({
           <p className="text-gray-500 text-sm mb-4">Sources officielles :</p>
           <div className="flex flex-wrap justify-center gap-6">
             <a
-              href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
+              href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-amber-500 hover:underline text-sm font-medium"

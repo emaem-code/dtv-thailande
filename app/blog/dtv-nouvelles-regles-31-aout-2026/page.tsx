@@ -1006,7 +1006,7 @@ export default function ArticleNouvellesReglesDTV() {
         <ul className="space-y-3">
           <li>
             <a
-              href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
+              href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-red-400 hover:text-red-300 hover:underline text-sm transition-colors"

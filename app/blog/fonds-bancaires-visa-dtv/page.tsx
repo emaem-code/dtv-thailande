@@ -330,7 +330,7 @@ export default function BlogArticleDTV() {
         <p className="mb-5">
           Si vous faites vos démarches depuis la France, comme l&apos;indique{' '}
           <a 
-            href="http://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
+            href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-teal-500 hover:underline font-medium inline-flex items-center gap-1"
