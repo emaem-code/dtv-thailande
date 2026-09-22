@@ -39,7 +39,7 @@ export default function FloatingCTA() {
     >
       <button
         onClick={ouvrirEligibilite}
-        className={`group flex items-center gap-2.5 bg-white text-black pl-3.5 pr-5 py-3 rounded-full font-bold text-sm shadow-[0_10px_35px_rgba(0,0,0,0.6)] ring-1 ring-black/10 hover:bg-amber-400 active:scale-95 transition-all duration-300 ${pathname.startsWith('/blog') ? blog.floatingBlog : ''}`}
+        className={`group flex items-center gap-2.5 bg-white text-black pl-3.5 pr-5 py-3 rounded-full font-bold text-sm shadow-[0_10px_35px_rgba(0,0,0,0.6)] ring-1 ring-black/10 hover:bg-amber-400 active:scale-95 transition-all duration-300 ${(pathname.startsWith('/blog') || ['/faq', '/contact', '/mentions-legales', '/eligibilite'].includes(pathname)) ? blog.floatingBlog : ''}`}
       >
         <svg className="w-4 h-4 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

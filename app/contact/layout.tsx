@@ -1,11 +1,8 @@
 import React from 'react';
-import SiteHeader from '../components/SiteHeader';
+import PageClaire from '../components/PageClaire';
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <SiteHeader />
-      {children}
-    </>
+    <PageClaire page="contact">{children}</PageClaire>
   );
 }
