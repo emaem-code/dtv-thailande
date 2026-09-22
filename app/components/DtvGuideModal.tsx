@@ -5,21 +5,23 @@ import { prix, tarif } from '../lib/tarifs';
 import { useModalA11y } from './useModalA11y';
 import { REGLE_DEPOT_DTV, SOURCES_PROCEDURE } from '../lib/methode-dtv';
 import SourcesProcedure from './SourcesProcedure';
+import s from '../parcours.module.css';
 
 interface DtvGuideModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onEligibility: () => void;
 }
 
-export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
+export default function DtvGuideModal({ isOpen, onClose, onEligibility }: DtvGuideModalProps) {
   const { dialogRef, handleDialogKeyDown } = useModalA11y(isOpen, onClose);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
+    <div className={s.voile}>
       <div 
-        className="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity duration-300" 
+        className={s.fond}
         onClick={onClose}
       />
 
@@ -30,10 +32,10 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
         aria-labelledby="dtv-guide-title"
         tabIndex={-1}
         onKeyDown={handleDialogKeyDown}
-        className="relative bg-[#0d0d0d] w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300"
+        className={`${s.fenetre} ${s.guide}`}
       >
         
-        <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
+        <div className={s.enteteGuide}>
           <h2 id="dtv-guide-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Le Guide DTV <span className="text-amber-500">2025-2026</span>
           </h2>
@@ -46,10 +48,10 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 md:p-10 text-gray-300 space-y-10 custom-scrollbar">
+        <div className={s.corpsGuide}>
           
           {/* Bouton Télécharger PDF */}
-          <div className="flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 p-6 rounded-2xl gap-4">
+          <div className={s.telechargement}>
             <div>
               <h3 className="text-white font-bold text-lg">Emportez ce guide avec vous</h3>
               <p className="text-sm text-gray-400 mt-1">Téléchargez la version PDF complète pour la lire hors ligne.</p>
@@ -57,7 +59,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
             <a 
               href="/guide-dtv-2025.pdf" 
               download
-              className="flex-none flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-colors active:scale-95"
+              className={s.boutonTelecharger}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Télécharger le PDF
@@ -268,7 +270,7 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
               De l'audit de vos relevés à la certification de vos traductions. Vous faites vos valises, nous faisons le reste.
             </p>
             <button 
-              onClick={onClose}
+              onClick={onEligibility}
               className="px-8 py-4 bg-white hover:bg-gray-200 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95"
             >
               Fermer et vérifier mon éligibilité
@@ -277,24 +279,6 @@ export default function DtvGuideModal({ isOpen, onClose }: DtvGuideModalProps) {
 
         </div>
       </div>
-      
-      {/* Styles CSS personnalisés pour la barre de défilement du modal */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.02);
-          border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-      `}} />
     </div>
   );
 }

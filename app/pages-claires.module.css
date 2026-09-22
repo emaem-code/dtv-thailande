@@ -148,13 +148,13 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.contenu :is(button, a)[class*="bg-white"]:not([role="radio"]) {
+.contenu :is(button, a)[class~="bg-white"]:not([role="radio"]) {
   background: var(--ink);
   color: white;
   border-color: var(--ink);
   border-radius: 6px;
 }
-.contenu :is(button, a)[class*="bg-white"]:not([role="radio"]):hover {
+.contenu :is(button, a)[class~="bg-white"]:not([role="radio"]):hover {
   background: #395847;
   color: white;
 }
@@ -455,8 +455,7 @@
   border-width: 1px 0 0;
   border-radius: 0;
   background: transparent;
-  position: sticky;
-  top: 122px;
+  position: static;
   margin: 0;
 }
 .eligibilite main > div > section:first-of-type h2 {
@@ -491,101 +490,6 @@
   background: #e5ebdb;
   border-color: #9caa8d;
   text-decoration: none;
-}
-.eligibilite main > div > div > div > div {
-  background: transparent;
-  border-color: var(--line);
-  border-radius: 0;
-}
-.eligibilite main > div > div > div > div:first-child {
-  background: #edf1e4;
-  padding: 23px 28px;
-}
-.eligibilite #eligibility-modal-title {
-  font-size: 21px;
-  line-height: 1.4;
-  font-weight: 500;
-  letter-spacing: -0.4px;
-}
-.eligibilite label {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.6;
-}
-.eligibilite [role="radio"] {
-  background: #f7f8f2;
-  border: 1px solid #dce2d2;
-  border-radius: 7px;
-  padding: 15px;
-  color: #52634f;
-  box-shadow: none;
-}
-.eligibilite [role="radio"]:hover {
-  background: #eef2e5;
-  border-color: #a7b49a;
-}
-.eligibilite [role="radio"][aria-checked="true"] {
-  background: #e7eddc;
-  border-color: #708565;
-  color: var(--ink);
-}
-.eligibilite [role="radio"][aria-checked="true"] > div {
-  border-color: #526e45;
-  background: #f7f7f2;
-}
-.eligibilite [role="radio"] > span {
-  font-size: 13px;
-  line-height: 1.55;
-}
-.eligibilite
-  :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
-  border: 1px solid #cdd6c2;
-  color: var(--ink);
-  background: #fdfef9;
-  border-radius: 6px;
-  box-shadow: none;
-}
-.eligibilite input::placeholder,
-.eligibilite textarea::placeholder {
-  color: #768170;
-}
-.eligibilite :is(input, textarea, select):focus {
-  border-color: #708565;
-  box-shadow: 0 0 0 3px #dce5d2;
-}
-.eligibilite :global(.champ-erreur) {
-  border-color: #b45349;
-  background: #fff9f5;
-}
-.eligibilite input[type="checkbox"],
-.eligibilite input[type="radio"] {
-  background-color: #fffef9;
-  border-color: #a1af92;
-}
-.eligibilite input:checked {
-  background-color: #476440;
-  border-color: #476440;
-}
-.eligibilite :is(button, a)[class*="bg-amber-"],
-.eligibilite :global(.bouton-principal) {
-  background: var(--ink);
-  color: white;
-  border: 1px solid var(--ink);
-  box-shadow: none;
-  border-radius: 6px;
-  font-size: 13px;
-}
-.eligibilite :is(button, a)[class*="bg-amber-"]:hover,
-.eligibilite :global(.bouton-principal):hover {
-  background: #385947;
-  color: white;
-}
-.eligibilite div[style][class*="bg-amber-"] {
-  background: #789366;
-}
-.eligibilite :is(button, a):disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .pied {
@@ -946,16 +850,6 @@
   .eligibilite main > div > section:first-of-type li > span:first-child {
     display: block;
     margin-bottom: 6px;
-  }
-  .eligibilite main > div > div > div > div {
-    padding: 22px 20px;
-  }
-  .eligibilite #eligibility-modal-title {
-    font-size: 19px;
-  }
-  .eligibilite
-    :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
-    font-size: 16px;
   }
   .pied {
     padding: 30px 24px 100px;

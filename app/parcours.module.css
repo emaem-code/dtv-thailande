@@ -1,0 +1,414 @@
+/* Une seule palette pour le questionnaire intégré, sa fenêtre et le guide. */
+.voile,
+.formulaire,
+.guide {
+  --papier: #f7f7f2;
+  --encre: #243f35;
+  --secondaire: #657168;
+  --bordure: #dfe2d7;
+  --sauge: #718264;
+  color: var(--encre);
+  font:
+    15px/1.7 Arial,
+    Helvetica,
+    sans-serif;
+  color-scheme: light;
+}
+.voile {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+.fond {
+  position: absolute;
+  inset: 0;
+  background: rgb(25 45 36 / 65%);
+  backdrop-filter: blur(8px);
+}
+.fenetre {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  max-height: calc(100dvh - 56px);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--papier);
+  border: 1px solid #e0e4d8;
+  border-radius: 14px;
+  box-shadow: 0 30px 100px #152b3440;
+}
+.fenetre:focus {
+  outline: none;
+}
+.guide {
+  max-width: 940px;
+}
+.formulaire {
+  background: #fffef9;
+  scroll-margin-top: 112px;
+}
+.formulaire *,
+.guide * {
+  box-sizing: border-box;
+}
+.formulaire :is(button, [role="radio"]),
+.guide button {
+  cursor: pointer;
+}
+.formulaire
+  :is(a, button, input, textarea, select, [role="radio"]):focus-visible,
+.guide :is(a, button):focus-visible {
+  outline: 3px solid #718264;
+  outline-offset: 4px;
+  box-shadow: none;
+}
+.formulaire :where([class*="text-white"], [class*="text-black"]),
+.guide :where([class*="text-white"], [class*="text-black"]) {
+  color: var(--encre);
+}
+.formulaire :where([class*="text-gray-"]),
+.guide :where([class*="text-gray-"]) {
+  color: var(--secondaire);
+}
+.formulaire :where([class*="text-amber-"], [class*="text-emerald-"]),
+.guide :where([class*="text-amber-"], [class*="text-emerald-"]) {
+  color: #48633e;
+}
+.formulaire :where([class*="text-red-"]),
+.guide :where([class*="text-red-"]) {
+  color: #a73f39;
+}
+.formulaire :where([class*="border-"]),
+.guide :where([class*="border-"]) {
+  border-color: var(--bordure);
+}
+.formulaire
+  :where(
+    [class*="bg-white/"],
+    [class*="bg-[#"],
+    [class*="bg-amber-"],
+    [class*="bg-emerald-"]
+  ),
+.guide
+  :where(
+    [class*="bg-white/"],
+    [class*="bg-[#"],
+    [class*="bg-amber-"],
+    [class*="bg-emerald-"]
+  ) {
+  background-color: #edf1e4;
+}
+.formulaire :where([class*="bg-red-"]),
+.guide :where([class*="bg-red-"]) {
+  background-color: #f8eee8;
+}
+.formulaire :where([class*="rounded-2xl"]),
+.guide :where([class*="rounded-2xl"]) {
+  border-radius: 9px;
+}
+.formulaire :is(h2, h3, h4),
+.guide :is(h2, h3, h4, h5) {
+  color: var(--encre);
+  font-weight: 500;
+  letter-spacing: -0.4px;
+}
+.formulaire p,
+.guide p {
+  overflow-wrap: break-word;
+}
+.formulaire a:hover,
+.guide a:hover {
+  text-underline-offset: 4px;
+}
+.formulaire .enteteFormulaire,
+.enteteGuide {
+  flex: none;
+  padding: 25px 30px;
+  background: #edf1e4;
+  border-bottom: 1px solid var(--bordure);
+  border-radius: 0;
+}
+.formulaire .enteteFormulaire h2 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  padding-right: 14px;
+}
+.formulaire .enteteFormulaire button,
+.guide .enteteGuide button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #cbd5c0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--encre);
+}
+.formulaire .enteteFormulaire button:hover,
+.guide .enteteGuide button:hover {
+  background: #dce5cf;
+}
+.formulaire .progression {
+  background: #718264;
+}
+.formulaire .corpsFormulaire {
+  min-height: 0;
+  padding: 30px;
+  background: #fffef9;
+  border-radius: 0;
+  overscroll-behavior: contain;
+}
+.corpsFormulaire,
+.corpsGuide {
+  scrollbar-width: thin;
+  scrollbar-color: #a7b69c #eef0e6;
+}
+.formulaire label {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.formulaire [role="radio"] {
+  border: 1px solid #c9d3c0;
+  border-radius: 7px;
+  padding: 15px;
+  color: #52634f;
+  background: #f7f8f2;
+  box-shadow: none;
+}
+.formulaire [role="radio"]:hover {
+  background: #eef2e5;
+  border-color: #91a180;
+}
+.formulaire [role="radio"][aria-checked="true"] {
+  background: #e7eddc;
+  border-color: #708565;
+  color: var(--encre);
+}
+.formulaire [role="radio"] > div {
+  border-color: #91a180;
+}
+.formulaire [role="radio"][aria-checked="true"] > div {
+  background: #f7f7f2;
+  border-color: #526e45;
+}
+.formulaire [role="radio"] > span {
+  font-size: 14px;
+  line-height: 1.55;
+}
+.formulaire
+  :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+  min-width: 0;
+  border: 1px solid #bdcbb0;
+  border-radius: 6px;
+  background: #fdfef9;
+  color: var(--encre);
+  color-scheme: light;
+  box-shadow: none;
+}
+.formulaire input::placeholder,
+.formulaire textarea::placeholder {
+  color: #6c7964;
+  opacity: 1;
+}
+.formulaire :is(input, textarea, select):focus {
+  border-color: #708565;
+  box-shadow: 0 0 0 3px #dce5d2;
+}
+.formulaire :global(.champ-erreur) {
+  border-color: #b45349;
+  background: #fff9f5;
+}
+.formulaire :global(.champ-erreur):focus {
+  box-shadow: 0 0 0 3px #f4ddd4;
+}
+.formulaire input[type="checkbox"] {
+  border-color: #91a180;
+  background-color: #fffef9;
+}
+.formulaire input[type="checkbox"]:checked {
+  background-color: #476440;
+  border-color: #476440;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3.5 8.4l3 3 6-6' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+}
+.formulaire :global(.bouton-principal),
+.formulaire :is(a, button)[class~="bg-amber-500"],
+.formulaire :is(a, button)[class~="bg-white"],
+.guide :is(a, button)[class~="bg-white"],
+.guide .boutonTelecharger {
+  background: var(--encre);
+  color: white;
+  border: 1px solid var(--encre);
+  border-radius: 6px;
+  box-shadow: none;
+  font-size: 14px;
+  text-decoration: none;
+}
+.formulaire :global(.bouton-principal):is(:hover, :active):not(:disabled),
+.formulaire :is(a, button)[class~="bg-amber-500"]:hover,
+.formulaire :is(a, button)[class~="bg-white"]:hover,
+.guide :is(a, button)[class~="bg-white"]:hover,
+.guide .boutonTelecharger:hover {
+  background: #385947;
+  color: white;
+  box-shadow: none;
+}
+.formulaire :global(.bouton-secondaire) {
+  background: transparent;
+  color: var(--encre);
+  border-color: #b9c7ac;
+  border-radius: 6px;
+  box-shadow: none;
+}
+.formulaire :global(.bouton-secondaire):hover:not(:disabled) {
+  background: #edf1e4;
+  border-color: #718264;
+}
+.formulaire button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.enteteGuide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.guide .enteteGuide h2 {
+  font-size: 25px;
+  line-height: 1.3;
+  letter-spacing: -0.6px;
+}
+.guide .enteteGuide h2 span {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #657954;
+}
+.corpsGuide {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 32px 40px 42px;
+  overscroll-behavior: contain;
+}
+.corpsGuide > section {
+  padding-top: 34px;
+  margin-top: 34px;
+  border-top: 1px solid var(--bordure);
+}
+.guide .corpsGuide h3 {
+  font-size: 23px;
+  line-height: 1.4;
+}
+.guide .corpsGuide h3 > span {
+  flex: none;
+  color: #526744;
+  background: #e4ebd8;
+  border-radius: 6px;
+  font:
+    12px Arial,
+    sans-serif;
+}
+.guide .corpsGuide h4 {
+  font-size: 18px;
+}
+.guide .corpsGuide h5 {
+  font-size: 17px;
+}
+.guide .telechargement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 27px;
+  border: 1px solid #cfdac3;
+  border-radius: 10px;
+  background: #eaf0df;
+}
+.guide .telechargement h3 {
+  font-size: 24px;
+  letter-spacing: -0.6px;
+}
+.boutonTelecharger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 10px;
+  padding: 14px 20px;
+  font-weight: 600;
+}
+@media (max-width: 760px) {
+  .voile {
+    padding: 12px;
+  }
+  .fenetre {
+    max-height: calc(100dvh - 24px);
+    border-radius: 11px;
+  }
+  .formulaire {
+    scroll-margin-top: 90px;
+  }
+  .formulaire .enteteFormulaire,
+  .enteteGuide {
+    padding: 20px;
+  }
+  .formulaire .enteteFormulaire h2 {
+    font-size: 19px;
+  }
+  .guide .enteteGuide h2 {
+    font-size: 22px;
+  }
+  .formulaire .corpsFormulaire,
+  .corpsGuide {
+    padding: 24px 20px;
+  }
+  .formulaire [role="radio"] {
+    padding: 13px;
+    gap: 10px;
+  }
+  .formulaire [role="radio"] > span {
+    font-size: 13px;
+  }
+  .formulaire
+    :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+    font-size: 16px;
+  }
+  .guide .telechargement {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 22px;
+    gap: 20px;
+  }
+  .guide .telechargement h3 {
+    font-size: 23px;
+  }
+  .guide .corpsGuide h3 {
+    font-size: 21px;
+    align-items: flex-start;
+  }
+  .guide .corpsGuide h3 > span {
+    margin-top: 3px;
+  }
+  .corpsGuide > section {
+    padding-top: 28px;
+    margin-top: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .voile *,
+  .formulaire * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

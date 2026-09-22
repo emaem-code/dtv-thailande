@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useModales } from "./ModalesProvider";
 import { useModalA11y } from "./useModalA11y";
@@ -17,6 +18,7 @@ const liens = [
 
 export default function HomeHeader() {
   const { ouvrirGuide, ouvrirEligibilite } = useModales();
+  const surPageEligibilite = usePathname() === "/eligibilite";
   const [ouvert, setOuvert] = useState(false);
   const fermer = useCallback(() => setOuvert(false), []);
   const { dialogRef, handleDialogKeyDown } = useModalA11y(ouvert, fermer);
@@ -53,9 +55,15 @@ export default function HomeHeader() {
             <button className={s.guideLink} onClick={ouvrirGuide}>
               Le guide gratuit ↗
             </button>
-            <button className={s.headerCta} onClick={ouvrirEligibilite}>
-              Mon éligibilité <span aria-hidden="true">↗</span>
-            </button>
+            {surPageEligibilite ? (
+              <a className={s.headerCta} href="#formulaire-eligibilite">
+                Mon éligibilité <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <button className={s.headerCta} onClick={ouvrirEligibilite}>
+                Mon éligibilité <span aria-hidden="true">↗</span>
+              </button>
+            )}
             <button
               className={s.menuButton}
               onClick={() => setOuvert(true)}

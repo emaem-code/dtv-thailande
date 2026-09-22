@@ -6,6 +6,7 @@ import { lireAttribution } from '../lib/attribution';
 import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
 import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
 import { track } from '@vercel/analytics';
+import s from '../parcours.module.css';
 
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
@@ -528,24 +529,24 @@ export default function FormulaireEligibilite({
   const enModale = variante === 'modal';
 
   return (
-    <div ref={racineRef} className={enModale ? 'flex flex-col min-h-0 flex-1' : ''}>
+    <div ref={racineRef} className={`${s.formulaire} ${enModale ? 'flex flex-col min-h-0 flex-1' : ''}`}>
       {/* ── EN-TÊTE ET BARRE DE PROGRESSION ── */}
       <div
-        className={`p-6 border-b border-white/10 relative overflow-hidden ${
+        className={`${s.enteteFormulaire} p-6 border-b border-white/10 relative overflow-hidden ${
           enModale ? 'flex-none' : 'rounded-t-3xl bg-[#0d0d0d]'
         }`}
       >
         {step === 1 || step === 2 ? (
           <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
             <div
-              className="h-full bg-amber-500 transition-all duration-500"
+              className={`${s.progression} h-full bg-amber-500 transition-all duration-500`}
               style={{ width: step === 1 ? '50%' : '100%' }}
             />
           </div>
         ) : null}
         <div className="flex justify-between items-center">
           <h2
-            id="eligibility-modal-title"
+            id={enModale ? "eligibility-modal-title" : "eligibility-page-title"}
             className="text-xl md:text-2xl font-extrabold text-white tracking-wide"
           >
             {step === 0
@@ -578,11 +579,11 @@ export default function FormulaireEligibilite({
       {/* ── CORPS ── */}
       <div
         ref={conteneurScroll}
-        className={
+        className={`${s.corpsFormulaire} ${
           enModale
             ? 'flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar scroll-smooth'
             : 'p-6 md:p-8 bg-[#0d0d0d] rounded-b-3xl'
-        }
+        }`}
       >
         {/* ÉTAPE 0 */}
         {step === 0 && (

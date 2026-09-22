@@ -23,7 +23,8 @@ export default function FloatingCTA() {
   const passeSeuilDesktop = useApparitionAuScroll(1200);
 
   // L'accueil a son propre bandeau de prix, on n'en ajoute pas un second
-  if (pathname === '/') return null;
+  // Sur la page du test, garder le questionnaire visible sans bouton qui le recouvre.
+  if (pathname === '/' || pathname === '/eligibilite') return null;
   // L'espace d'administration et les devis remis aux clients ne sont pas des
   // pages de vente : un bouton « Vérifier mon éligibilité » y serait déplacé,
   // et il se retrouverait imprimé en travers du devis.
