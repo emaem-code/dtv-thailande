@@ -21,18 +21,18 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
     },
     {
       num: "02",
-      title: "Géolocalisation & Arrivée sur place",
-      desc: "Vous voyagez vers le pays convenu pour le dépôt. Note : Si vous passez par un pays tiers en Asie (ex: Laos, Cambodge), prévoyez jusqu'à 50 € pour régler le visa d'entrée local à la frontière. Le tampon de cette immigration est indispensable pour prouver votre géolocalisation."
+      title: "Dépôt en ligne sur le portail e-Visa",
+      desc: "Vous déposez le dossier sur le portail officiel thaievisa.go.th, auprès du poste dont vous relevez par votre nationalité ou par votre résidence légale. Depuis le 31 août 2026, déposer depuis un pays tiers n'est plus ouvert aux non-résidents : il n'y a donc ni voyage à prévoir, ni tampon d'entrée à aller chercher. Au moindre doute pendant l'opération, nous restons joignables."
     },
     {
       num: "03",
-      title: "Soumission & Règlement Consulaire",
-      desc: "Vous vous connectez au portail officiel e-Visa et uploadez notre dossier. Selon l'ambassade choisie, le règlement du Visa DTV se fait soit 100% en ligne, soit sur place en espèces (en Bahts). Au moindre doute, notre équipe intervient en urgence absolue pour vous assister."
+      title: "Instruction et décision consulaire",
+      desc: "L'ambassade de Paris annonce environ quatre semaines d'instruction, parfois davantage si votre dossier appelle des compléments. Ce délai est celui du poste, pas le nôtre : nous ne pouvons pas le garantir. L'ambassade se réserve par ailleurs le droit de convoquer le demandeur en entretien, au cas par cas."
     },
     {
       num: "04",
-      title: "Approbation & préparation de l'arrivée",
-      desc: "Sous 3 à 5 jours, le précieux e-mail « Visa Approved » tombe. Si vous avez opté pour la formule Premium, prévenez-nous : nous vous aidons à choisir votre vol vers la Thaïlande et nous organisons votre transfert depuis l'aéroport."
+      title: "Le visa accordé, et la suite",
+      desc: "L'e-mail « Visa Approved » arrive. Si vous avez opté pour la formule Premium, prévenez-nous : nous vous aidons à choisir votre vol vers la Thaïlande et nous organisons votre transfert depuis l'aéroport."
     },
     {
       num: "05",

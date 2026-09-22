@@ -33,7 +33,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     {
       category: "Soft Power (Écoles & Immersion)",
       q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-      a: "Le risque d'utiliser une école 'fantôme' ou non agréée est une interdiction de territoire. C'est pourquoi nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l'Éducation). Votre lettre d'acceptation est garantie conforme à 100%."
+      a: "Le risque d'utiliser une école 'fantôme' ou non agréée est une interdiction de territoire. C'est pourquoi nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l'Éducation). Nous vérifions ces agréments avant de vous orienter vers un établissement — sans nous substituer à lui pour autant : la délivrance de la lettre d'acceptation reste son fait."
     },
     {
       category: "Famille & PACS",

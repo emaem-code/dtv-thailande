@@ -33,7 +33,7 @@ export const homeFaqs = [
   {
     category: 'Soft Power (écoles & immersion)',
     q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-    a: "Le risque d'utiliser une école fantôme ou non agréée est une interdiction de territoire. Nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de cuisine thaïlandaise disposant d'une double homologation officielle : licence DBD et accréditation du ministère. Votre lettre d'acceptation est garantie conforme.",
+    a: "Le risque d'utiliser une école fantôme ou non agréée est une interdiction de territoire. Nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de cuisine thaïlandaise disposant d'une double homologation officielle : licence DBD et accréditation du ministère. Nous vérifions ces agréments avant de vous orienter vers un établissement — sans pour autant nous substituer à lui : la délivrance de la lettre d'acceptation reste son fait.",
   },
   {
     category: 'Famille & PACS',
@@ -51,30 +51,25 @@ const etapes = [
   {
     num: '01',
     titre: "L'engagement et le dossier",
-    desc: "Une fois votre devis validé, nous analysons et certifions vos pièces sous 3 à 5 jours ouvrés pour vous livrer un dossier formaté selon les exigences consulaires.",
+    desc: "Une fois votre devis validé, nous analysons et certifions vos pièces pour vous livrer un dossier formaté selon les exigences du poste consulaire compétent. Cette préparation nous prend 3 à 5 jours ouvrés ; elle est distincte de l'instruction par l'ambassade, qui vient ensuite.",
   },
   {
     num: '02',
-    titre: 'Géolocalisation et arrivée sur place',
-    desc: "Vous voyagez vers le pays de dépôt. Le tampon d'entrée de cette immigration est indispensable pour prouver votre géolocalisation au moment de la demande.",
+    titre: 'Dépôt en ligne sur le portail e-Visa',
+    desc: "Vous déposez votre dossier sur le portail officiel thaievisa.go.th, auprès du poste dont vous relevez par votre nationalité ou votre résidence légale. Aucun voyage dans un pays tiers, aucun tampon d'entrée à aller chercher : depuis le 31 août 2026, cette voie est fermée aux non-résidents.",
   },
   {
     num: '03',
-    titre: 'Soumission et règlement consulaire',
-    desc: "Vous vous connectez au portail officiel e-Visa et déposez le dossier. Selon l'ambassade, le règlement se fait en ligne ou sur place en bahts. Nous restons joignables pendant toute l'opération.",
+    titre: 'Instruction et décision consulaire',
+    desc: "L'ambassade de Paris annonce un délai d'instruction d'environ quatre semaines, qui peut être plus long si le dossier appelle des compléments. Ce délai est indicatif et nous ne le garantissons pas. Le poste se réserve le droit de convoquer le demandeur en entretien.",
   },
   {
     num: '04',
-    titre: 'Approbation',
-    desc: "Sous 3 à 5 jours, l'e-mail « Visa Approved » arrive. En formule Premium, nous vous aidons alors à choisir votre vol et nous organisons votre transfert depuis l'aéroport.",
+    titre: 'Préparation au départ, une fois le visa accordé',
+    desc: "Impression de l'e-Visa, enregistrement en ligne et carte d'arrivée numérique TDAC préparée sur votre mobile. Ces documents sont exigés à l'embarquement. En formule Premium, nous vous aidons à choisir votre vol et organisons votre transfert depuis l'aéroport.",
   },
   {
     num: '05',
-    titre: 'Préparation au départ',
-    desc: "Impression de l'e-Visa, enregistrement en ligne et carte d'arrivée numérique TDAC préparée sur votre mobile. Ces documents sont exigés à l'embarquement.",
-  },
-  {
-    num: '06',
     titre: 'Arrivée en Thaïlande',
     desc: "Passeport, e-Visa imprimé et TDAC à l'officier d'immigration, qui appose votre tampon de 180 jours. Ensuite, une sortie du territoire ou une extension sur place relance le compteur, pendant cinq ans.",
   },
@@ -208,7 +203,7 @@ export default function HomeContent() {
       {/* ── MÉTHODE ── */}
       <section>
         <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Notre méthode, en six étapes
+          Notre méthode, en cinq étapes
         </h2>
         <p className="mb-8">
           De la validation de votre devis au tampon de 180 jours dans votre passeport, voici
