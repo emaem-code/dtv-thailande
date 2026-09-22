@@ -296,10 +296,17 @@
   border-radius: 6px;
 }
 .faq main > div > div:last-child a {
+  /* Écarter le fond clair appliqué aussi à la classe hover:bg-white/5. */
+  background: transparent;
   color: var(--paper);
   border-color: #738274;
   border-radius: 6px;
   font-size: 12px;
+}
+.faq main > div > div:last-child a:is(:hover, :focus-visible) {
+  background: #385947;
+  color: var(--paper);
+  border-color: #cbd5c6;
 }
 
 /* Contact : le courriel reste l'action principale et toutes les mentions restent visibles. */
