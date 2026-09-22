@@ -87,6 +87,7 @@ export default function AlertesReglementaires() {
         <form onSubmit={envoyer} className="space-y-4 max-w-md">
           <input
             type="email"
+            aria-label="Votre adresse e-mail"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}

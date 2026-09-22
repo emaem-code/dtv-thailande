@@ -148,7 +148,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     setEtat('repos');
   };
 
-  const enregistrer = async () => {
+  const enregistrer = async (): Promise<{ ok: true } | { ok: false; erreur: string }> => {
     setEtat('envoi');
     setMessage('');
     try {
@@ -169,13 +169,17 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
         setDevis(corps.devis);
         setEtat('enregistre');
         router.refresh();
-        return;
+        return { ok: true };
       }
+      const erreur = corps.erreur || 'Enregistrement impossible.';
       setEtat('erreur');
-      setMessage(corps.erreur || 'Enregistrement impossible.');
+      setMessage(erreur);
+      return { ok: false, erreur };
     } catch {
+      const erreur = 'Le serveur n’a pas répondu.';
       setEtat('erreur');
-      setMessage('Le serveur n’a pas répondu.');
+      setMessage(erreur);
+      return { ok: false, erreur };
     }
   };
 
@@ -188,7 +192,12 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     setEtat('envoi');
     setMessage('');
     try {
-      await enregistrer();
+      const sauvegarde = await enregistrer();
+      if (!sauvegarde.ok) {
+        setEtat('erreur');
+        setMessage(`Envoi annulé : la sauvegarde a échoué. ${sauvegarde.erreur} Aucun e-mail n’a été envoyé. Vous pouvez réessayer.`);
+        return;
+      }
       const reponse = await fetch(`/api/admin/devis/${devis.id}/envoyer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

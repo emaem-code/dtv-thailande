@@ -129,7 +129,7 @@ export default function PageEligibilite() {
         </section>
 
         {/* ── FORMULAIRE ── */}
-        <div className="rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden mb-12">
+        <div id="formulaire-eligibilite" className="rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden mb-12">
           <FormulaireEligibilite variante="page" />
         </div>
 

@@ -220,13 +220,17 @@ export default function EVisaGuidePage() {
         </p>
         <div className="border border-sky-500/30 bg-sky-500/5 rounded-xl p-5 mb-4">
           <p className="mb-3">
-            <strong className="text-white">La règle stricte :</strong> vous devez sélectionner
-            l'ambassade du pays dans lequel vous vous trouvez physiquement au moment de la demande.
+            <strong className="text-white">La règle stricte :</strong> depuis le 31 août 2026, le
+            poste compétent ne dépend plus de l'endroit où vous vous trouvez, mais de votre
+            nationalité ou de votre résidence légale. Un Français résidant en France relève de
+            Paris ; un Français installé en Asie en relève également, faute d'y résider
+            légalement. Déposer depuis un pays tiers n'est plus ouvert aux non-résidents de ce
+            pays.
           </p>
           <p>
-            <strong className="text-white">Le piège :</strong> ne tentez jamais de mentir sur votre
-            géolocalisation pour contourner une règle. Les officiers vérifient les tampons d'entrée
-            et de sortie sur les scans de passeport.
+            <strong className="text-white">Le piège :</strong> ne tentez jamais de déclarer une
+            résidence que vous n'avez pas. Le poste demande un justificatif, et les tampons
+            d'entrée et de sortie du passeport racontent le reste.
           </p>
         </div>
       </section>

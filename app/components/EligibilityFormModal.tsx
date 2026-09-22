@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { useModalA11y } from './useModalA11y';
 import FormulaireEligibilite from './FormulaireEligibilite';
+import s from '../parcours.module.css';
 
 interface EligibilityFormModalProps {
   isOpen: boolean;
@@ -23,8 +24,8 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-md" onClick={onClose} />
+    <div className={s.voile}>
+      <div className={s.fond} onClick={onClose} />
 
       <div
         ref={dialogRef}
@@ -33,21 +34,10 @@ export default function EligibilityFormModal({ isOpen, onClose }: EligibilityFor
         aria-labelledby="eligibility-modal-title"
         tabIndex={-1}
         onKeyDown={handleDialogKeyDown}
-        className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300"
+        className={s.fenetre}
       >
         <FormulaireEligibilite variante="modal" onClose={onClose} conteneurScroll={scrollRef} />
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-      `,
-        }}
-      />
     </div>
   );
 }

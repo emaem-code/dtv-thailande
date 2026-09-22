@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { useModalA11y } from './useModalA11y';
+import { VERIFICATION_ECOLE, SOURCES_PROCEDURE } from '../lib/methode-dtv';
+import SourcesProcedure from './SourcesProcedure';
+import s from '../parcours.module.css';
 
 interface FaqModalProps {
   isOpen: boolean;
@@ -32,8 +35,9 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     },
     {
       category: "Soft Power (Écoles & Immersion)",
-      q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-      a: "Le risque d'utiliser une école 'fantôme' ou non agréée est une interdiction de territoire. C'est pourquoi nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de Cuisine Thaïlandaise qui possèdent une double homologation officielle (DBD et Ministère de l'Éducation). Nous vérifions ces agréments avant de vous orienter vers un établissement — sans nous substituer à lui pour autant : la délivrance de la lettre d'acceptation reste son fait."
+      q: VERIFICATION_ECOLE.question,
+      a: VERIFICATION_ECOLE.reponse,
+      sources: [SOURCES_PROCEDURE.parisDtv],
     },
     {
       category: "Famille & PACS",
@@ -52,8 +56,8 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity duration-300" onClick={onClose} />
+    <div className={s.voile}>
+      <div className={s.fond} onClick={onClose} />
 
       <div
         ref={dialogRef}
@@ -62,11 +66,11 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
         aria-labelledby="faq-modal-title"
         tabIndex={-1}
         onKeyDown={handleDialogKeyDown}
-        className="relative bg-[#0d0d0d] w-full max-w-3xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300"
+        className={`${s.fenetre} ${s.faq}`}
       >
         
         {/* Header */}
-        <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
+        <div className={s.enteteModale}>
           <h2 id="faq-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Foire Aux Questions <span className="text-amber-500">(FAQ)</span>
           </h2>
@@ -76,7 +80,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
         </div>
 
         {/* Contenu FAQ */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+        <div className={`${s.corpsModale} flex-1 overflow-y-auto p-6 md:p-8`}>
           <p className="text-gray-400 mb-8 text-sm md:text-base">
             L'immigration thaïlandaise est stricte et les rumeurs sur internet sont nombreuses. Voici les réponses claires de nos experts aux questions les plus fréquentes concernant l'obtention du Visa DTV.
           </p>
@@ -104,7 +108,8 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
                   
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="p-5 pt-0 text-gray-400 text-sm md:text-base leading-relaxed border-t border-white/5 mt-2">
-                      {faq.a}
+                      <p>{faq.a}</p>
+                      {faq.sources && <SourcesProcedure sources={faq.sources} className="text-xs text-gray-400 mt-3" />}
                     </div>
                   </div>
                 </div>
@@ -126,12 +131,6 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-      `}} />
     </div>
   );
 }

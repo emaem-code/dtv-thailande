@@ -2,53 +2,25 @@
 
 import React from 'react';
 import { useModalA11y } from './useModalA11y';
+import { ETAPES_DTV, REGLE_DEPOT_DTV, SOURCES_PROCEDURE, DATE_VERIFICATION_PROCEDURE } from '../lib/methode-dtv';
+import SourcesProcedure from './SourcesProcedure';
+import s from '../parcours.module.css';
 
 interface ProcessModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onEligibility: () => void;
 }
 
-export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
+export default function ProcessModal({ isOpen, onClose, onEligibility }: ProcessModalProps) {
   const { dialogRef, handleDialogKeyDown } = useModalA11y(isOpen, onClose);
 
   if (!isOpen) return null;
 
-  const steps = [
-    {
-      num: "01",
-      title: "L'Engagement & Le Dossier Béton",
-      desc: "Une fois votre devis validé, vous réglez nos honoraires de conciergerie (incluant traductions et école si applicable). Sous 3 à 5 jours ouvrés, nous analysons et certifions vos pièces pour vous livrer un dossier PDF « zéro défaut », formaté pour les exigences consulaires."
-    },
-    {
-      num: "02",
-      title: "Dépôt en ligne sur le portail e-Visa",
-      desc: "Vous déposez le dossier sur le portail officiel thaievisa.go.th, auprès du poste dont vous relevez par votre nationalité ou par votre résidence légale. Depuis le 31 août 2026, déposer depuis un pays tiers n'est plus ouvert aux non-résidents : il n'y a donc ni voyage à prévoir, ni tampon d'entrée à aller chercher. Au moindre doute pendant l'opération, nous restons joignables."
-    },
-    {
-      num: "03",
-      title: "Instruction et décision consulaire",
-      desc: "L'ambassade de Paris annonce environ quatre semaines d'instruction, parfois davantage si votre dossier appelle des compléments. Ce délai est celui du poste, pas le nôtre : nous ne pouvons pas le garantir. L'ambassade se réserve par ailleurs le droit de convoquer le demandeur en entretien, au cas par cas."
-    },
-    {
-      num: "04",
-      title: "Le visa accordé, et la suite",
-      desc: "L'e-mail « Visa Approved » arrive. Si vous avez opté pour la formule Premium, prévenez-nous : nous vous aidons à choisir votre vol vers la Thaïlande et nous organisons votre transfert depuis l'aéroport."
-    },
-    {
-      num: "05",
-      title: "Enregistrement & Préparation au départ",
-      desc: "Avant votre vol, effectuez votre check-in en ligne. Il est indispensable d'imprimer le e-Visa que vous avez reçu par e-mail. Préparez également votre DTAC (accessible sur votre mobile ou imprimé sur papier). Ces documents vous seront demandés pour l'embarquement."
-    },
-    {
-      num: "06",
-      title: "Bienvenue en Thaïlande",
-      desc: "À votre atterrissage, présentez à l'officier de l'immigration votre passeport, votre e-Visa imprimé et votre DTAC. Il apposera instantanément votre tampon de 180 jours. Notez que pour profiter des 5 ans du visa, il suffit de sortir du territoire (le temps d'un week-end) ou de faire une extension sur place tous les 180 jours. Votre nouvelle vie de liberté commence ici !"
-    }
-  ];
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity duration-300" onClick={onClose} />
+    <div className={s.voile}>
+      <div className={s.fond} onClick={onClose} />
 
       <div
         ref={dialogRef}
@@ -57,11 +29,11 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
         aria-labelledby="process-modal-title"
         tabIndex={-1}
         onKeyDown={handleDialogKeyDown}
-        className="relative bg-[#0d0d0d] w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300"
+        className={`${s.fenetre} ${s.methode}`}
       >
         
         {/* Header */}
-        <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
+        <div className={s.enteteModale}>
           <h2 id="process-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Notre Méthode <span className="text-amber-500">Pas à Pas</span>
           </h2>
@@ -71,25 +43,28 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
         </div>
 
         {/* Contenu - Timeline */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
+        <div className={`${s.corpsModale} flex-1 overflow-y-auto p-6 md:p-10`}>
           <p className="text-gray-400 mb-10 text-sm md:text-base max-w-2xl">
-            De la validation de votre devis jusqu'à votre premier pas sur le sol thaïlandais, voici exactement comment nous transformons une procédure administrative complexe en une expérience fluide et maîtrisée.
+            Cinq étapes, de la préparation du dossier à votre arrivée après accord du visa.
           </p>
 
-          <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+          <p className="text-gray-400 mb-4 text-sm">{REGLE_DEPOT_DTV}</p>
+          <SourcesProcedure sources={[SOURCES_PROCEDURE.reglesAout2026]} className="text-xs text-gray-400 mb-8" />
+          <div className={`${s.frise} relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent`}>
             
-            {steps.map((step, index) => (
-              <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            {ETAPES_DTV.map((step, index) => (
+              <div key={step.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
                 
                 {/* Icône centrale */}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0d0d0d] bg-white/5 group-hover:bg-amber-500 text-gray-500 group-hover:text-black transition-colors duration-300 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_0_4px_#0d0d0d] z-10 font-bold text-sm">
-                  {step.num}
+                <div className={`${s.pastilleEtape} flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0d0d0d] bg-white/5 group-hover:bg-amber-500 text-gray-500 group-hover:text-black transition-colors duration-300 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_0_4px_#0d0d0d] z-10 font-bold text-sm`}>
+                  {String(index + 1).padStart(2, "0")}
                 </div>
                 
                 {/* Carte de contenu */}
                 <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] p-5 rounded-2xl border border-white/10 bg-white/5 hover:border-amber-500/30 hover:bg-white/10 transition-all duration-300 text-left">
-                  <h3 className="font-bold text-white text-lg mb-2">{step.title}</h3>
+                  <h3 className="font-bold text-white text-lg mb-2">{step.titre}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed">{step.desc}</p>
+                  <SourcesProcedure sources={step.sources} className="text-xs text-gray-400 mt-3" />
                 </div>
 
               </div>
@@ -97,10 +72,11 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
 
           </div>
 
+          <p className="text-xs text-gray-400 mt-6">Sources consultées le {DATE_VERIFICATION_PROCEDURE}. Les exigences du poste consulaire compétent font foi.</p>
           <div className="mt-12 text-center pt-8 border-t border-white/10">
             <h4 className="text-2xl font-black text-white mb-4">Prêt à démarrer l'aventure ?</h4>
             <button 
-              onClick={() => { onClose(); }} 
+              onClick={onEligibility}
               className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
             >
               Fermer et vérifier mon éligibilité
@@ -110,12 +86,6 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-      `}} />
     </div>
   );
 }

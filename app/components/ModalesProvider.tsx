@@ -49,9 +49,23 @@ export default function ModalesProvider({ children }: { children: React.ReactNod
     >
       {children}
 
-      <DtvGuideModal isOpen={guide} onClose={() => setGuide(false)} />
+      <DtvGuideModal
+        isOpen={guide}
+        onClose={() => setGuide(false)}
+        onEligibility={() => {
+          setGuide(false);
+          setEligibilite(true);
+        }}
+      />
       <EligibilityFormModal isOpen={eligibilite} onClose={() => setEligibilite(false)} />
-      <ProcessModal isOpen={methode} onClose={() => setMethode(false)} />
+      <ProcessModal
+        isOpen={methode}
+        onClose={() => setMethode(false)}
+        onEligibility={() => {
+          setMethode(false);
+          setEligibilite(true);
+        }}
+      />
     </Contexte.Provider>
   );
 }

@@ -1,11 +1,65 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useId } from 'react';
 import MontantFonds from './MontantFonds';
 import { lireAttribution } from '../lib/attribution';
 import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
 import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
 import { track } from '@vercel/analytics';
+import s from '../parcours.module.css';
+
+async function envoyerFormspree(options: RequestInit & { body: string }) {
+  // Même critère que BandeauBacASable ; next.config.ts l'intègre au code client.
+  if (process.env.VERCEL_ENV !== 'production') {
+    console.info('[Formspree — simulation, aucun envoi]', JSON.parse(options.body));
+    return { ok: true };
+  }
+
+  return fetch('https://formspree.io/f/mreyokzj', options);
+}
+
+interface RadioCardProps {
+  label: string;
+  field: string;
+  value: string;
+  selection: string;
+  onChange: (field: string, value: string) => void;
+  errorId?: string;
+}
+
+function RadioCard({ label, field, value, selection, onChange, errorId }: RadioCardProps) {
+  const isSelected = selection === value;
+  return (
+    <div
+      role="radio"
+      aria-checked={isSelected}
+      aria-describedby={errorId}
+      tabIndex={0}
+      onClick={() => onChange(field, value)}
+      onKeyDown={(e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          onChange(field, value);
+        }
+      }}
+      className={`p-4 rounded-xl border cursor-pointer select-none transition-all duration-200 flex items-center gap-3 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/25
+        ${
+          isSelected
+            ? 'bg-amber-500/10 border-amber-500 text-white shadow-[0_8px_22px_-14px_rgba(245,158,11,0.9)]'
+            : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/[0.09] hover:border-white/25'
+        }`}
+    >
+      {/* Anneau épais plutôt que pastille centrée : rien à recentrer, donc
+          rien qui se décale d'un navigateur à l'autre. */}
+      <div
+        className={`w-5 h-5 rounded-full flex-none transition-all duration-150 ${
+          isSelected ? 'border-[6px] border-amber-500 bg-[#0a0a0a]' : 'border border-gray-500'
+        }`}
+      />
+      <span className="text-sm md:text-base font-medium leading-tight">{label}</span>
+    </div>
+  );
+}
 
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
@@ -119,6 +173,7 @@ export default function FormulaireEligibilite({
   onClose,
   conteneurScroll,
 }: Props) {
+  const idFormulaire = useId();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Choix de formule : recueilli APRÈS l'affichage des tarifs, quand le visiteur
@@ -127,6 +182,19 @@ export default function FormulaireEligibilite({
   const [envoiFormule, setEnvoiFormule] = useState(false);
   const [formuleEnvoyee, setFormuleEnvoyee] = useState(false);
   const racineRef = useRef<HTMLDivElement>(null);
+  const titreRef = useRef<HTMLHeadingElement>(null);
+  const confirmationFormuleRef = useRef<HTMLParagraphElement>(null);
+  const etapePrecedenteRef = useRef(step);
+
+  useEffect(() => {
+    // Le bouton de l’étape précédente disparaît : garder le focus dans le test.
+    if (etapePrecedenteRef.current !== step) {
+      titreRef.current?.focus({ preventScroll: true });
+      etapePrecedenteRef.current = step;
+    } else if (formuleEnvoyee) {
+      confirmationFormuleRef.current?.focus({ preventScroll: true });
+    }
+  }, [step, formuleEnvoyee]);
 
   const [formData, setFormData] = useState({
     prenom: '',
@@ -204,9 +272,39 @@ export default function FormulaireEligibilite({
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    // L'erreur s'efface dès que le visiteur corrige le champ concerné
-    setErreurs((prev) => (prev[field] ? { ...prev, [field]: '' } : prev));
+    const suivant = { ...formData, [field]: value };
+    const champsMasques: (keyof typeof formData)[] = [];
+    const effacer = (...champs: (keyof typeof formData)[]) => {
+      for (const champ of champs) {
+        suivant[champ] = '';
+        champsMasques.push(champ);
+      }
+    };
+
+    // Mêmes conditions que les questions affichées, indépendamment de l'étape.
+    if (suivant.nationalite !== 'autre') effacer('nationaliteAutre');
+    if (suivant.job === 'softpower') effacer('softPowerInteret');
+    if (suivant.job !== 'softpower' && suivant.softPowerInteret !== 'yes') {
+      effacer('softPower');
+    }
+    if (suivant.family === '' || suivant.family === 'solo') effacer('adultesCount');
+    if (suivant.family !== 'family') {
+      effacer('childrenCount', 'enfantsMoins20', 'situationConjugale');
+    }
+    if (suivant.telephone.trim() === '') effacer('whatsapp');
+    if (suivant.formule !== 'premium') effacer('villeDepart');
+
+    setFormData(suivant);
+    setErreurs((prev) => {
+      const suivantes = { ...prev };
+      delete suivantes[field];
+      for (const champ of champsMasques) delete suivantes[champ];
+      // La précision de résidence reste visible, mais n'est plus obligatoire.
+      if (field === 'location' && value !== 'asia' && value !== 'other') {
+        delete suivantes.locationDetails;
+      }
+      return suivantes;
+    });
   };
 
   /** Retire les lignes vides : un e-mail de lead ne doit contenir que du signal. */
@@ -221,7 +319,7 @@ export default function FormulaireEligibilite({
   const envoyerLeadPartiel = async (typeDeLead: string) => {
     const attribution = lireAttribution();
     try {
-      await fetch('https://formspree.io/f/mreyokzj', {
+      await envoyerFormspree({
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(
@@ -237,6 +335,7 @@ export default function FormulaireEligibilite({
             'Épargne 15 000 € par personne': lisible('funds', formData.funds),
             'Canal détecté': attribution.canal,
             "Page d'entrée": attribution.pageEntree,
+            'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
           }),
         ),
       });
@@ -253,6 +352,9 @@ export default function FormulaireEligibilite({
     if (!formData.prenom.trim()) e.prenom = 'Merci d’indiquer votre prénom.';
     if (!formData.email.trim()) e.email = 'Merci d’indiquer votre adresse e-mail.';
     else if (!emailValide(formData.email)) e.email = 'Cette adresse ne semble pas valide.';
+    if (formData.consentement !== 'yes') {
+      e.consentement = 'Merci d’accepter l’utilisation de vos informations pour traiter votre demande et vous recontacter.';
+    }
 
     setErreurs(e);
     if (Object.keys(e).length > 0) return;
@@ -307,9 +409,6 @@ export default function FormulaireEligibilite({
       if (!formData.situationConjugale) {
         err.situationConjugale = 'Merci de préciser votre situation conjugale.';
       }
-    }
-    if (formData.consentement !== 'yes') {
-      err.consentement = 'Merci d’accepter l’utilisation de vos données pour établir le devis.';
     }
 
     setErreurs(err);
@@ -366,7 +465,7 @@ export default function FormulaireEligibilite({
             'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
       });
 
-      const response = await fetch('https://formspree.io/f/mreyokzj', {
+      const response = await envoyerFormspree({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -394,8 +493,12 @@ export default function FormulaireEligibilite({
               funds: formData.funds,
               passport: formData.passport,
               dejaDepose: formData.dejaDepose,
-              enfantsMoins20: formData.enfantsMoins20,
-              situationConjugale: formData.situationConjugale,
+              ...(formData.family === 'family'
+                ? {
+                    enfantsMoins20: formData.enfantsMoins20,
+                    situationConjugale: formData.situationConjugale,
+                  }
+                : {}),
             },
           }),
         }).catch(() => {
@@ -438,7 +541,7 @@ export default function FormulaireEligibilite({
 
     setEnvoiFormule(true);
     try {
-      const reponse = await fetch('https://formspree.io/f/mreyokzj', {
+      const reponse = await envoyerFormspree({
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(
@@ -462,43 +565,28 @@ export default function FormulaireEligibilite({
     }
   };
 
-  const Erreur = ({ champ }: { champ: string }) =>
+  const idChamp = (champ: string) => idFormulaire + '-champ-' + champ;
+  const idQuestion = (champ: string) => idFormulaire + '-question-' + champ;
+  const idErreur = (champ: string) => idFormulaire + '-erreur-' + champ;
+  const attributsChamp = (champ: string, erreur = champ) => ({
+    id: idChamp(champ),
+    'aria-describedby': erreurs[erreur] ? idErreur(erreur) : undefined,
+    'aria-invalid': Boolean(erreurs[erreur]),
+  });
+  const attributsGroupe = (champ: string) => ({
+    ...attributsChamp(champ),
+    role: 'radiogroup' as const,
+    'aria-labelledby': idQuestion(champ),
+  });
+  const attributsChoix = (champ: keyof typeof formData) => ({
+    selection: formData[champ],
+    onChange: handleChange,
+    errorId: erreurs[champ] ? idErreur(champ) : undefined,
+  });
+  const afficherErreur = (champ: string) =>
     erreurs[champ] ? (
-      <p className="text-red-400 text-xs font-medium mt-1 ml-1">{erreurs[champ]}</p>
+      <p id={idErreur(champ)} role="alert" className="text-red-400 text-xs font-medium mt-1 ml-1">{erreurs[champ]}</p>
     ) : null;
-
-  const RadioCard = ({ label, field, value }: { label: string; field: string; value: string }) => {
-    const isSelected = formData[field as keyof typeof formData] === value;
-    return (
-      <div
-        role="radio"
-        aria-checked={isSelected}
-        tabIndex={0}
-        onClick={() => handleChange(field, value)}
-        onKeyDown={(e) => {
-          if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            handleChange(field, value);
-          }
-        }}
-        className={`p-4 rounded-xl border cursor-pointer select-none transition-all duration-200 flex items-center gap-3 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/25
-          ${
-            isSelected
-              ? 'bg-amber-500/10 border-amber-500 text-white shadow-[0_8px_22px_-14px_rgba(245,158,11,0.9)]'
-              : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/[0.09] hover:border-white/25'
-          }`}
-      >
-        {/* Anneau épais plutôt que pastille centrée : rien à recentrer, donc
-            rien qui se décale d'un navigateur à l'autre. */}
-        <div
-          className={`w-5 h-5 rounded-full flex-none transition-all duration-150 ${
-            isSelected ? 'border-[6px] border-amber-500 bg-[#0a0a0a]' : 'border border-gray-500'
-          }`}
-        />
-        <span className="text-sm md:text-base font-medium leading-tight">{label}</span>
-      </div>
-    );
-  };
 
   // La voie Soft Power ne dépend plus du seul statut professionnel : un
   // freelance peut parfaitement choisir de passer par une école certifiée.
@@ -528,24 +616,26 @@ export default function FormulaireEligibilite({
   const enModale = variante === 'modal';
 
   return (
-    <div ref={racineRef} className={enModale ? 'flex flex-col min-h-0 flex-1' : ''}>
+    <div ref={racineRef} className={`${s.formulaire} ${enModale ? 'flex flex-col min-h-0 flex-1' : ''}`}>
       {/* ── EN-TÊTE ET BARRE DE PROGRESSION ── */}
       <div
-        className={`p-6 border-b border-white/10 relative overflow-hidden ${
+        className={`${s.enteteFormulaire} p-6 border-b border-white/10 relative overflow-hidden ${
           enModale ? 'flex-none' : 'rounded-t-3xl bg-[#0d0d0d]'
         }`}
       >
         {step === 1 || step === 2 ? (
           <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
             <div
-              className="h-full bg-amber-500 transition-all duration-500"
+              className={`${s.progression} h-full bg-amber-500 transition-all duration-500`}
               style={{ width: step === 1 ? '50%' : '100%' }}
             />
           </div>
         ) : null}
         <div className="flex justify-between items-center">
           <h2
-            id="eligibility-modal-title"
+            ref={titreRef}
+            tabIndex={-1}
+            id={enModale ? "eligibility-modal-title" : "eligibility-page-title"}
             className="text-xl md:text-2xl font-extrabold text-white tracking-wide"
           >
             {step === 0
@@ -578,11 +668,11 @@ export default function FormulaireEligibilite({
       {/* ── CORPS ── */}
       <div
         ref={conteneurScroll}
-        className={
+        className={`${s.corpsFormulaire} ${
           enModale
             ? 'flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar scroll-smooth'
             : 'p-6 md:p-8 bg-[#0d0d0d] rounded-b-3xl'
-        }
+        }`}
       >
         {/* ÉTAPE 0 */}
         {step === 0 && (
@@ -638,65 +728,65 @@ export default function FormulaireEligibilite({
         {step === 1 && (
           <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('funds')} className="text-white font-bold text-lg">
                 1. Disposez-vous de <MontantFonds prefixe="" /> d&apos;épargne disponible ?{' '}
                 <span className="text-amber-500">*</span>
               </label>
-              <div className="grid grid-cols-1 gap-3">
-                <RadioCard label="Oui, sur un compte accessible" field="funds" value="yes" />
-                <RadioCard
+              <div {...attributsGroupe('funds')} className="grid grid-cols-1 gap-3">
+                <RadioCard {...attributsChoix('funds')} label="Oui, sur un compte accessible" field="funds" value="yes" />
+                <RadioCard {...attributsChoix('funds')}
                   label="Pas encore, mais je m'organise pour les avoir bientôt"
                   field="funds"
                   value="soon"
                 />
-                <RadioCard label="Non, et je ne pourrai pas les réunir" field="funds" value="no" />
+                <RadioCard {...attributsChoix('funds')} label="Non, et je ne pourrai pas les réunir" field="funds" value="no" />
               </div>
-              <Erreur champ="funds" />
+              {afficherErreur('funds')}
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('job')} className="text-white font-bold text-lg">
                 2. Quelle est votre situation professionnelle actuelle ?{' '}
                 <span className="text-amber-500">*</span>
               </label>
-              <div className="grid grid-cols-1 gap-3">
-                <RadioCard
+              <div {...attributsGroupe('job')} className="grid grid-cols-1 gap-3">
+                <RadioCard {...attributsChoix('job')}
                   label="Freelance / Indépendant (Clients hors Thaïlande)"
                   field="job"
                   value="freelance"
                 />
-                <RadioCard
+                <RadioCard {...attributsChoix('job')}
                   label="Salarié en télétravail (Avec autorisation de l'employeur)"
                   field="job"
                   value="remote"
                 />
-                <RadioCard
+                <RadioCard {...attributsChoix('job')}
                   label="Je n'ai pas de travail à distance / Je veux passer par une école"
                   field="job"
                   value="softpower"
                 />
               </div>
-              <Erreur champ="job" />
+              {afficherErreur('job')}
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('nationalite')} className="text-white font-bold text-lg">
                 3. Quelle est votre nationalité ? <span className="text-amber-500">*</span>
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
                 Croisée avec votre pays de résidence, elle détermine les postes consulaires auxquels
                 vous pouvez déposer votre demande.
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <RadioCard label="Française" field="nationalite" value="France" />
-                <RadioCard label="Belge" field="nationalite" value="Belgique" />
-                <RadioCard label="Suisse" field="nationalite" value="Suisse" />
-                <RadioCard label="Canadienne" field="nationalite" value="Canada" />
-                <RadioCard label="Autre" field="nationalite" value="autre" />
+              <div {...attributsGroupe('nationalite')} className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <RadioCard {...attributsChoix('nationalite')} label="Française" field="nationalite" value="France" />
+                <RadioCard {...attributsChoix('nationalite')} label="Belge" field="nationalite" value="Belgique" />
+                <RadioCard {...attributsChoix('nationalite')} label="Suisse" field="nationalite" value="Suisse" />
+                <RadioCard {...attributsChoix('nationalite')} label="Canadienne" field="nationalite" value="Canada" />
+                <RadioCard {...attributsChoix('nationalite')} label="Autre" field="nationalite" value="autre" />
               </div>
-              <Erreur champ="nationalite" />
+              {afficherErreur('nationalite')}
               {formData.nationalite === 'autre' && (
-                <input
+                <input {...attributsChamp('nationaliteAutre')} aria-label="Précisez votre nationalité"
                   type="text"
                   placeholder="Précisez votre nationalité..."
                   value={formData.nationaliteAutre}
@@ -712,17 +802,17 @@ export default function FormulaireEligibilite({
               </label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
-                  <input
+                  <input {...attributsChamp('prenom')} aria-label="Votre prénom"
                     type="text"
                     placeholder="Votre prénom"
                     value={formData.prenom}
                     onChange={(e) => handleChange('prenom', e.target.value)}
                     className={`champ ${erreurs.prenom ? 'champ-erreur' : ''}`}
                   />
-                  <Erreur champ="prenom" />
+                  {afficherErreur('prenom')}
                 </div>
                 <div>
-                  <input
+                  <input {...attributsChamp('email')} aria-label="Adresse e-mail"
                     type="email"
                     required
                     placeholder="votre@email.com"
@@ -730,10 +820,29 @@ export default function FormulaireEligibilite({
                     onChange={(e) => handleChange('email', e.target.value)}
                     className={`champ ${erreurs.email ? 'champ-erreur' : ''}`}
                   />
-                  <Erreur champ="email" />
+                  {afficherErreur('email')}
                 </div>
               </div>
             </div>
+
+            {/* ── ACCORD AVANT TRANSMISSION ── */}
+            <label className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
+              <input {...attributsChamp('consentement')}
+                type="checkbox"
+                checked={formData.consentement === 'yes'}
+                onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
+                className="case-a-cocher mt-0.5"
+              />
+              <span className="text-xs text-gray-400 leading-relaxed">
+                J&apos;accepte que mes informations soient utilisées pour traiter ma demande et me
+                recontacter à ce sujet. Elles ne sont pas revendues et sont conservées trois ans
+                maximum. Je peux demander leur suppression à tout moment par e-mail.{' '}
+                <a href="/mentions-legales" target="_blank" className="text-amber-500 hover:underline">
+                  Mentions légales
+                </a>
+              </span>
+            </label>
+            {afficherErreur('consentement')}
 
             <div className="pt-4">
               <button
@@ -760,27 +869,27 @@ export default function FormulaireEligibilite({
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('passport')} className="text-white font-bold text-lg">
                 Votre passeport est-il valable encore au moins 12 mois ?
               </label>
-              <div className="grid grid-cols-1 gap-3">
-                <RadioCard label="Oui, il est à jour" field="passport" value="yes" />
-                <RadioCard
+              <div {...attributsGroupe('passport')} className="grid grid-cols-1 gap-3">
+                <RadioCard {...attributsChoix('passport')} label="Oui, il est à jour" field="passport" value="yes" />
+                <RadioCard {...attributsChoix('passport')}
                   label="Pas encore, mais je vais le refaire rapidement"
                   field="passport"
                   value="soon"
                 />
-                <RadioCard label="Non, je n'ai pas de passeport" field="passport" value="no" />
+                <RadioCard {...attributsChoix('passport')} label="Non, je n'ai pas de passeport" field="passport" value="no" />
               </div>
-              <Erreur champ="passport" />
+              {afficherErreur('passport')}
             </div>
 
             <div className="space-y-3">
               <label className="text-white font-bold text-lg">Fourchette de dates de départ :</label>
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <div className="w-full flex-1">
-                  <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tôt</label>
-                  <input
+                  <label htmlFor={idChamp('dateStart')} className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tôt</label>
+                  <input {...attributsChamp('dateStart', 'dates')}
                     type="date"
                     min={AUJOURDHUI}
                     value={formData.dateStart}
@@ -789,8 +898,8 @@ export default function FormulaireEligibilite({
                   />
                 </div>
                 <div className="w-full flex-1">
-                  <label className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tard</label>
-                  <input
+                  <label htmlFor={idChamp('dateEnd')} className="text-xs text-gray-400 mb-1.5 block ml-1">Départ au plus tard</label>
+                  <input {...attributsChamp('dateEnd', 'dates')}
                     type="date"
                     min={formData.dateStart || AUJOURDHUI}
                     value={formData.dateEnd}
@@ -799,23 +908,23 @@ export default function FormulaireEligibilite({
                   />
                 </div>
               </div>
-              <Erreur champ="dates" />
+              {afficherErreur('dates')}
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">Où résidez-vous actuellement ?</label>
+              <label id={idQuestion('location')} className="text-white font-bold text-lg">Où résidez-vous actuellement ?</label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
                 C&apos;est à nous de vous conseiller le meilleur poste de dépôt : nous avons
                 seulement besoin de savoir d&apos;où vous partez.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <RadioCard label="Europe (France, Suisse, etc.)" field="location" value="europe" />
-                <RadioCard label="Asie (Thaïlande ou frontalier)" field="location" value="asia" />
-                <RadioCard label="Amérique du Nord" field="location" value="america" />
-                <RadioCard label="Autre" field="location" value="other" />
+              <div {...attributsGroupe('location')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <RadioCard {...attributsChoix('location')} label="Europe (France, Suisse, etc.)" field="location" value="europe" />
+                <RadioCard {...attributsChoix('location')} label="Asie (Thaïlande ou frontalier)" field="location" value="asia" />
+                <RadioCard {...attributsChoix('location')} label="Amérique du Nord" field="location" value="america" />
+                <RadioCard {...attributsChoix('location')} label="Autre" field="location" value="other" />
               </div>
-              <Erreur champ="location" />
-              <input
+              {afficherErreur('location')}
+              <input {...attributsChamp('locationDetails')} aria-label="Pays et ville de résidence"
                 type="text"
                 placeholder={
                   residenceDetailleeRequise
@@ -826,18 +935,18 @@ export default function FormulaireEligibilite({
                 onChange={(e) => handleChange('locationDetails', e.target.value)}
                 className={`champ mt-2 ${erreurs.locationDetails ? 'champ-erreur' : ''}`}
               />
-              <Erreur champ="locationDetails" />
+              {afficherErreur('locationDetails')}
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label htmlFor={idChamp('villeThailande')} className="text-white font-bold text-lg">
                 Où comptez-vous vous installer en Thaïlande ?
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
                 Même une simple intention nous aide : la région oriente les solutions que nous
                 pouvons vous proposer sur place.
               </p>
-              <input
+              <input {...attributsChamp('villeThailande')}
                 type="text"
                 placeholder="Bangkok, Chiang Mai, Pattaya, Phuket, je ne sais pas encore..."
                 value={formData.villeThailande}
@@ -848,42 +957,42 @@ export default function FormulaireEligibilite({
 
             {formData.job !== 'softpower' && (
               <div className="space-y-3">
-                <label className="text-white font-bold text-lg">
+                <label id={idQuestion('softPowerInteret')} className="text-white font-bold text-lg">
                   Souhaitez-vous passer par la voie Soft Power (école certifiée) ?
                 </label>
                 <p className="text-xs text-gray-500 -mt-1 ml-1">
                   Cette voie n&apos;exige aucun justificatif de revenus, mais suppose
                   l&apos;inscription à un cursus de cuisine ou de Muay Thaï.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <RadioCard label="Oui, cela m'intéresse" field="softPowerInteret" value="yes" />
-                  <RadioCard
+                <div {...attributsGroupe('softPowerInteret')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <RadioCard {...attributsChoix('softPowerInteret')} label="Oui, cela m'intéresse" field="softPowerInteret" value="yes" />
+                  <RadioCard {...attributsChoix('softPowerInteret')}
                     label="Non, je passe par mon activité"
                     field="softPowerInteret"
                     value="no"
                   />
                 </div>
-                <Erreur champ="softPowerInteret" />
+                {afficherErreur('softPowerInteret')}
               </div>
             )}
 
             {isSoftPower && (
               <div className="space-y-3 p-5 bg-white/5 rounded-2xl border border-white/10">
-                <label className="font-bold text-lg text-emerald-400">
+                <label id={idQuestion('softPower')} className="font-bold text-lg text-emerald-400">
                   Programme Soft Power souhaité :
                 </label>
-                <div className="grid grid-cols-1 gap-3">
-                  <RadioCard
+                <div {...attributsGroupe('softPower')} className="grid grid-cols-1 gap-3">
+                  <RadioCard {...attributsChoix('softPower')}
                     label="Cuisine Thaïlandaise traditionnelle (9 mois)"
                     field="softPower"
                     value="cuisine"
                   />
-                  <RadioCard
+                  <RadioCard {...attributsChoix('softPower')}
                     label="Entraînement Muay Thaï certifié (9 mois)"
                     field="softPower"
                     value="muaythai"
                   />
-                  <RadioCard
+                  <RadioCard {...attributsChoix('softPower')}
                     label="Je ne sais pas encore, j'ai besoin de conseils"
                     field="softPower"
                     value="unsure"
@@ -893,16 +1002,16 @@ export default function FormulaireEligibilite({
             )}
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('family')} className="text-white font-bold text-lg">
                 Comment envisagez-vous cette expatriation ?
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <RadioCard label="Seul(e)" field="family" value="solo" />
-                <RadioCard label="En couple (Mariés)" field="family" value="married" />
-                <RadioCard label="En couple (Non mariés)" field="family" value="concubinage" />
-                <RadioCard label="En famille (Avec enfants)" field="family" value="family" />
+              <div {...attributsGroupe('family')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <RadioCard {...attributsChoix('family')} label="Seul(e)" field="family" value="solo" />
+                <RadioCard {...attributsChoix('family')} label="En couple (Mariés)" field="family" value="married" />
+                <RadioCard {...attributsChoix('family')} label="En couple (Non mariés)" field="family" value="concubinage" />
+                <RadioCard {...attributsChoix('family')} label="En famille (Avec enfants)" field="family" value="family" />
               </div>
-              <Erreur champ="family" />
+              {afficherErreur('family')}
 
               {formData.family !== '' && formData.family !== 'solo' && (
                 <div className="space-y-3 pt-2">
@@ -910,7 +1019,7 @@ export default function FormulaireEligibilite({
                     Chaque personne dépose son propre dossier et règle ses propres frais
                     consulaires : ces nombres nous permettent de chiffrer précisément.
                   </p>
-                  <input
+                  <input {...attributsChamp('adultesCount')} aria-label="Nombre d’adultes concernés, vous compris"
                     type="number"
                     min={1}
                     max={10}
@@ -919,13 +1028,13 @@ export default function FormulaireEligibilite({
                     onChange={(e) => handleChange('adultesCount', e.target.value)}
                     className={`champ ${erreurs.adultesCount ? 'champ-erreur' : ''}`}
                   />
-                  <Erreur champ="adultesCount" />
+                  {afficherErreur('adultesCount')}
                 </div>
               )}
 
               {formData.family === 'family' && (
                 <div className="space-y-3 pt-1">
-                  <input
+                  <input {...attributsChamp('childrenCount')} aria-label="Combien d’enfants vous accompagnent ?"
                     type="number"
                     min={1}
                     max={12}
@@ -934,15 +1043,16 @@ export default function FormulaireEligibilite({
                     onChange={(e) => handleChange('childrenCount', e.target.value)}
                     className={`champ ${erreurs.childrenCount ? 'champ-erreur' : ''}`}
                   />
-                  <Erreur champ="childrenCount" />
+                  {afficherErreur('childrenCount')}
 
-                  <p className="text-sm text-gray-400 ml-1">
+                  <p id={idQuestion('enfantsMoins20')} className="text-sm text-gray-400 ml-1">
                     Ont-ils tous moins de 20 ans ?
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <RadioCard label="Oui, tous" field="enfantsMoins20" value="oui" />
-                    <RadioCard label="Non, l'un d'eux a 20 ans ou plus" field="enfantsMoins20" value="non" />
+                  <div {...attributsGroupe('enfantsMoins20')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioCard {...attributsChoix('enfantsMoins20')} label="Oui, tous" field="enfantsMoins20" value="oui" />
+                    <RadioCard {...attributsChoix('enfantsMoins20')} label="Non, l'un d'eux a 20 ans ou plus" field="enfantsMoins20" value="non" />
                   </div>
+                  {afficherErreur('enfantsMoins20')}
                   {formData.enfantsMoins20 === 'non' && (
                     <p className="text-xs text-amber-400/90 ml-1">
                       Au-delà de 20 ans, un enfant ne relève plus de la catégorie
@@ -957,25 +1067,25 @@ export default function FormulaireEligibilite({
                   la question n'a de sens que pour un départ en famille. */}
               {formData.family === 'family' && (
                 <div className="space-y-3 pt-1">
-                  <p className="text-sm text-gray-400 ml-1">
+                  <p id={idQuestion('situationConjugale')} className="text-sm text-gray-400 ml-1">
                     Quelle est votre situation conjugale ?{' '}
                     <span className="text-amber-500">*</span>
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <RadioCard label="Marié(e)" field="situationConjugale" value="marie" />
-                    <RadioCard label="PACS" field="situationConjugale" value="pacs" />
-                    <RadioCard
+                  <div {...attributsGroupe('situationConjugale')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <RadioCard {...attributsChoix('situationConjugale')} label="Marié(e)" field="situationConjugale" value="marie" />
+                    <RadioCard {...attributsChoix('situationConjugale')} label="PACS" field="situationConjugale" value="pacs" />
+                    <RadioCard {...attributsChoix('situationConjugale')}
                       label="Union libre / concubinage"
                       field="situationConjugale"
                       value="union-libre"
                     />
-                    <RadioCard
+                    <RadioCard {...attributsChoix('situationConjugale')}
                       label="En cours de mariage"
                       field="situationConjugale"
                       value="mariage-en-cours"
                     />
                   </div>
-                  <Erreur champ="situationConjugale" />
+                  {afficherErreur('situationConjugale')}
                   <p className="text-xs text-gray-500 ml-1">
                     Le DTV ne rattache comme dépendant que le conjoint légalement marié. Le PACS
                     et l&apos;union libre ne sont pas reconnus pour le rattachement — dans ce cas,
@@ -1006,23 +1116,23 @@ export default function FormulaireEligibilite({
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('translations')} className="text-white font-bold text-lg">
                 Vos documents nécessitent-ils des traductions certifiées ?
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <RadioCard label="Oui, j'aurai besoin de traductions" field="translations" value="yes" />
-                <RadioCard label="Non, tout est déjà en anglais" field="translations" value="no" />
+              <div {...attributsGroupe('translations')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <RadioCard {...attributsChoix('translations')} label="Oui, j'aurai besoin de traductions" field="translations" value="yes" />
+                <RadioCard {...attributsChoix('translations')} label="Non, tout est déjà en anglais" field="translations" value="no" />
               </div>
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('dejaDepose')} className="text-white font-bold text-lg">
                 Avez-vous déjà déposé une demande de visa pour la Thaïlande ?
               </label>
-              <div className="grid grid-cols-1 gap-3">
-                <RadioCard label="Non, c'est ma première demande" field="dejaDepose" value="premiere" />
-                <RadioCard label="Oui, une demande est en cours" field="dejaDepose" value="en-cours" />
-                <RadioCard label="Oui, et elle a été refusée" field="dejaDepose" value="refus" />
+              <div {...attributsGroupe('dejaDepose')} className="grid grid-cols-1 gap-3">
+                <RadioCard {...attributsChoix('dejaDepose')} label="Non, c'est ma première demande" field="dejaDepose" value="premiere" />
+                <RadioCard {...attributsChoix('dejaDepose')} label="Oui, une demande est en cours" field="dejaDepose" value="en-cours" />
+                <RadioCard {...attributsChoix('dejaDepose')} label="Oui, et elle a été refusée" field="dejaDepose" value="refus" />
               </div>
               {formData.dejaDepose === 'refus' && (
                 <p className="text-xs text-amber-400/90 ml-1">
@@ -1033,13 +1143,13 @@ export default function FormulaireEligibilite({
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label htmlFor={idChamp('telephone')} className="text-white font-bold text-lg">
                 Un numéro pour vous joindre ? (Optionnel)
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
                 Utile pour les questions rapides. Nous répondons par e-mail par défaut.
               </p>
-              <input
+              <input {...attributsChamp('telephone')}
                 type="tel"
                 placeholder="+33 6 12 34 56 78"
                 value={formData.telephone}
@@ -1048,7 +1158,7 @@ export default function FormulaireEligibilite({
               />
               {formData.telephone.trim() !== '' && (
                 <label className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
-                  <input
+                  <input {...attributsChamp('whatsapp')}
                     type="checkbox"
                     checked={formData.whatsapp === 'yes'}
                     onChange={(e) => handleChange('whatsapp', e.target.checked ? 'yes' : '')}
@@ -1060,22 +1170,22 @@ export default function FormulaireEligibilite({
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label id={idQuestion('source')} className="text-white font-bold text-lg">
                 Comment nous avez-vous connus ? (Optionnel)
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <RadioCard label="Recherche Google" field="source" value="google" />
-                <RadioCard label="Réseaux sociaux" field="source" value="reseaux" />
-                <RadioCard label="Forum ou groupe d'expatriés" field="source" value="forum" />
-                <RadioCard label="Bouche-à-oreille" field="source" value="recommandation" />
+              <div {...attributsGroupe('source')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <RadioCard {...attributsChoix('source')} label="Recherche Google" field="source" value="google" />
+                <RadioCard {...attributsChoix('source')} label="Réseaux sociaux" field="source" value="reseaux" />
+                <RadioCard {...attributsChoix('source')} label="Forum ou groupe d'expatriés" field="source" value="forum" />
+                <RadioCard {...attributsChoix('source')} label="Bouche-à-oreille" field="source" value="recommandation" />
               </div>
             </div>
 
             <div className="space-y-3">
-              <label className="text-white font-bold text-lg">
+              <label htmlFor={idChamp('remarks')} className="text-white font-bold text-lg">
                 Des remarques ou besoins spécifiques ? (Optionnel)
               </label>
-              <textarea
+              <textarea {...attributsChamp('remarks')}
                 rows={3}
                 value={formData.remarks}
                 onChange={(e) => handleChange('remarks', e.target.value)}
@@ -1084,26 +1194,7 @@ export default function FormulaireEligibilite({
               />
             </div>
 
-            {/* ── CONSENTEMENT RGPD ── */}
-            <label className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.consentement === 'yes'}
-                onChange={(e) => handleChange('consentement', e.target.checked ? 'yes' : '')}
-                className="case-a-cocher mt-0.5"
-              />
-              <span className="text-xs text-gray-400 leading-relaxed">
-                J&apos;accepte que ces informations soient utilisées uniquement pour établir mon
-                devis et me recontacter à ce sujet. Elles ne sont ni revendues ni transmises à des
-                tiers, et sont conservées trois ans maximum. Je peux demander leur suppression à tout
-                moment par simple e-mail.{' '}
-                <a href="/mentions-legales" target="_blank" className="text-amber-500 hover:underline">
-                  Mentions légales
-                </a>
-              </span>
-            </label>
-            <Erreur champ="consentement" />
-            <Erreur champ="envoi" />
+            {afficherErreur('envoi')}
 
             {/* Sur téléphone les deux boutons s'empilent, l'action principale
                 en premier : « Découvrir mes tarifs » sur une seule ligne. */}
@@ -1114,7 +1205,7 @@ export default function FormulaireEligibilite({
               >
                 ← Retour
               </button>
-              <button
+              <button aria-describedby={erreurs.envoi ? idErreur('envoi') : undefined}
                 onClick={handleSubmit}
                 disabled={isSubmitting}
                 className="bouton-principal flex-1 text-lg"
@@ -1227,7 +1318,7 @@ export default function FormulaireEligibilite({
             {!formuleEnvoyee ? (
               <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
                 <div>
-                  <label className="text-white font-bold text-lg">
+                  <label id={idQuestion('formule')} className="text-white font-bold text-lg">
                     Laquelle correspond le mieux à votre projet ?
                   </label>
                   <p className="text-xs text-gray-500 mt-1">
@@ -1236,26 +1327,26 @@ export default function FormulaireEligibilite({
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3">
-                  <RadioCard label={`Formule Essentielle — à partir de ${priceBasic}`} field="formule" value="essentielle" />
-                  <RadioCard label={`Formule Premium — à partir de ${pricePremium}`} field="formule" value="premium" />
-                  <RadioCard label="Je ne sais pas encore, conseillez-moi" field="formule" value="conseil" />
+                <div {...attributsGroupe('formule')} className="grid grid-cols-1 gap-3">
+                  <RadioCard {...attributsChoix('formule')} label={`Formule Essentielle — à partir de ${priceBasic}`} field="formule" value="essentielle" />
+                  <RadioCard {...attributsChoix('formule')} label={`Formule Premium — à partir de ${pricePremium}`} field="formule" value="premium" />
+                  <RadioCard {...attributsChoix('formule')} label="Je ne sais pas encore, conseillez-moi" field="formule" value="conseil" />
                 </div>
-                <Erreur champ="formule" />
+                {afficherErreur('formule')}
 
                 {formData.formule === 'premium' && (
                   <div className="space-y-2 pt-1">
-                    <label className="text-sm text-gray-300 ml-1">
+                    <label htmlFor={idChamp('villeDepart')} className="text-sm text-gray-300 ml-1">
                       Cette formule organise votre vol : d&apos;où partiriez-vous ?
                     </label>
-                    <input
+                    <input {...attributsChamp('villeDepart')}
                       type="text"
                       placeholder="Paris, Lyon, Genève, Bangkok..."
                       value={formData.villeDepart}
                       onChange={(e) => handleChange('villeDepart', e.target.value)}
                       className={`champ ${erreurs.villeDepart ? 'champ-erreur' : ''}`}
                     />
-                    <Erreur champ="villeDepart" />
+                    {afficherErreur('villeDepart')}
                   </div>
                 )}
 
@@ -1276,7 +1367,7 @@ export default function FormulaireEligibilite({
             ) : (
               <div className="mt-8 pt-8 border-t border-white/10">
                 <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 text-center">
-                  <p className="text-emerald-400 font-bold text-sm mb-1">✓ C&apos;est noté</p>
+                  <p ref={confirmationFormuleRef} tabIndex={-1} className="text-emerald-400 font-bold text-sm mb-1">✓ C&apos;est noté</p>
                   <p className="text-sm text-gray-300">
                     {formData.formule === 'conseil'
                       ? 'Nous vous adresserons les deux formules chiffrées pour votre situation, avec nos recommandations.'

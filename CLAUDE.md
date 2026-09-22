@@ -1,6 +1,6 @@
 # DTV Thaïlande — contexte projet
 
-Dernière mise à jour : 21 septembre 2026.
+Dernière mise à jour : 22 septembre 2026.
 
 Matthieu Moretti, Kathu (Phuket). Site `dtv-thailande.fr` : accompagnement
 administratif de francophones pour le visa DTV thaïlandais. Activité lancée en
@@ -141,7 +141,40 @@ réessayer.
 
 ---
 
-## 6. Technique
+## 6. Le bac à sable
+
+Depuis le 22 septembre 2026, le dépôt a une copie de travail complète et
+isolée. Elle sert à tout ce qu'on n'ose pas faire en ligne : refonte,
+migration de schéma, faux devis, essais d'envoi.
+
+- **Branche git** : `bac-a-sable`. Elle ne déploie jamais en production —
+  seule `main` le fait. C'est structurel, pas une convention.
+- **Adresse** : `dtv-thailande-git-bac-a-sable-emaem-codes-projects.vercel.app`,
+  stable, protégée par le SSO Vercel.
+- **Base** : une branche Neon distincte, copie des vraies données au
+  22 septembre. Écrire dedans ne touche pas la production.
+- **Envois coupés** : sur cette branche, `RESEND_API_KEY`,
+  `TELEGRAM_BOT_TOKEN` et `TELEGRAM_CHAT_ID` sont **volontairement vides**.
+  Le code lit l'absence de clé comme « ne pas envoyer ». Ne jamais les
+  remplir.
+- **Admin** : `ADMIN_SECRET` propre à la branche, distinct de la production.
+- **Repère visuel** : `app/components/BandeauBacASable.tsx` affiche une
+  pastille en bas à gauche. Elle teste `VERCEL_ENV`, donc elle ne peut pas
+  apparaître sur le site public.
+- Les crons ne tournent que sur la production : la copie n'envoie aucune
+  relance.
+
+**Le geste à ne jamais faire** : en créant une variable propre à une
+branche dans Vercel, ne cocher que **Preview**. Cocher Production
+brancherait `dtv-thailande.fr` sur la base de test.
+
+Pour rafraîchir les données de la copie : supprimer la branche Neon et en
+recréer une depuis la production, puis remplacer le `DATABASE_URL` de la
+branche.
+
+---
+
+## 7. Technique
 
 Next.js 16.1.6 (App Router), Tailwind v4, PostgreSQL via `pg`, Resend pour le
 transactionnel, hébergement Vercel, Telegram pour les alertes.
@@ -164,12 +197,24 @@ transactionnel, hébergement Vercel, Telegram pour les alertes.
 - Vérifier le travail d'interface avec une route jetable + capture Playwright,
   puis supprimer la route avant de livrer.
 
+Depuis la refonte de l'accueil (septembre 2026), **deux systèmes de style
+cohabitent** : le reste du site est en Tailwind, l'accueil en CSS module
+(`app/home.module.css`, 1 866 lignes). Les deux fonctionnent, mais il faut
+savoir lequel on modifie avant de chercher. La charte y est déclarée en
+variables sur `.page` : `--paper` #f7f7f2, `--ink` #243f35, `--muted`
+#657168, `--line` #dfe2d7. L'`--accent` terre cuite #b56b37 y figure mais
+n'est utilisé nulle part — code mort, la charte réelle est ivoire et verte.
+
+Les vignettes de la nouvelle page demandent des images en `w=3840` là où
+elles s'affichent en petit : il manque un attribut `sizes` sur les
+`next/image`. À corriger, Search Console le reprochera.
+
 Le langage du code est le français (noms de fonctions, commentaires). Les
 commentaires expliquent **pourquoi**, pas quoi.
 
 ---
 
-## 7. Dossiers clients
+## 8. Dossiers clients
 
 | Client | État | Prochain pas |
 |---|---|---|
@@ -183,7 +228,7 @@ commentaires expliquent **pourquoi**, pas quoi.
 
 ---
 
-## 8. Chantiers ouverts
+## 9. Chantiers ouverts
 
 1. **Appeler le service des visas de l'ambassade** : modalités de convocation
    (stade, préavis, systématique ou non), et conditions financières d'un Non-ED
@@ -191,11 +236,21 @@ commentaires expliquent **pourquoi**, pas quoi.
 2. **SIRET** : dès réception INSEE, renseigner `app/lib/agence.ts` et repasser
    `immatriculationEnCours` à `false`. Débloque le médiateur (CM2C, 48 € / 3 ans),
    Stripe, et TikTok Shop pour Universbags.
-3. **Corriger le site** : la page d'accueil décrit encore le déplacement vers le
-   pays de dépôt selon la logique d'avant le 31 août (visa run, tampon d'entrée).
+3. **Corriger la procédure sur l'accueil** — le plus urgent. L'étape « vous
+   voyagez vers le pays de dépôt » et son tampon d'entrée datent d'avant le
+   31 août. La refonte de septembre a repris ce texte tel quel et l'a promu en
+   étape numérotée : l'erreur est désormais plus visible qu'avant. Deux autres
+   du même ordre sur la même page : « sous 3 à 5 jours, l'e-mail Visa Approved
+   arrive » alors que Paris annonce 3 à 4 semaines, et « votre lettre
+   d'acceptation est garantie conforme », une garantie de résultat sur le
+   travail d'un tiers. Consigne transmise à l'assistant qui a fait la refonte
+   le 22 septembre ; à vérifier sur pièce.
 4. **Supprimer les créneaux fictifs** du calendrier de rendez-vous.
-5. **Supprimer `_to_delete/`** à la racine du dépôt (l'assistant ne peut pas
-   supprimer sur le Mac).
+5. **Finir la bascule de la charte** : la refonte de l'accueil est ivoire et
+   verte, le reste du site est encore noir. Tant que la migration n'est pas
+   faite, le logo — passé au vert — reste peu lisible sur les pages en fond
+   noir. Restent aussi à refaire, en orange et non vectoriels : `favicon.ico`,
+   `icon.png`, `apple-icon.png`, `logo.png`, `og-image.jpg`.
 6. Journal des courriels envoyés dans l'admin (aujourd'hui, seule trace : le
    tableau de bord Resend).
 7. Outil d'envoi en nombre — différé jusqu'à ~100 abonnés. Sous-domaine d'envoi

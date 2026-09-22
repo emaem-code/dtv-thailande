@@ -1,426 +1,410 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import HomeVideos from "./HomeVideos";
+import { useModales } from "./ModalesProvider";
+import s from "../home.module.css";
+import {
+  ETAPES_DTV,
+  REGLE_DEPOT_DTV,
+  VERIFICATION_ECOLE,
+  SOURCES_PROCEDURE,
+  DATE_VERIFICATION_PROCEDURE,
+} from "../lib/methode-dtv";
+import SourcesProcedure from "./SourcesProcedure";
 // La grille publique ne montre que les formules encore vendues : la VIP reste
 // dans FORMULES pour que les devis déjà signés continuent de s'afficher, mais
 // l'annoncer au visiteur reviendrait à vendre ce qu'on ne fait plus.
-import { FORMULES_VENDUES as formules, prix, MENTION_TRADUCTIONS } from '../lib/tarifs';
-import { getSortedBlogPosts } from '../blog/posts';
-import MontantFonds from './MontantFonds';
-import { MARGE_CONSEILLEE, FONDS_EUR_PARIS, formateEuros } from '../lib/taux';
+import {
+  FORMULES_VENDUES as formules,
+  prix,
+  MENTION_TRADUCTIONS,
+} from "../lib/tarifs";
+import { getSortedBlogPosts } from "../blog/posts";
+import MontantFonds from "./MontantFonds";
+import { MARGE_CONSEILLEE, FONDS_EUR_PARIS, formateEuros } from "../lib/taux";
 
 // ─── FAQ : source unique, sert à l'affichage ET au balisage JSON-LD ───
 export const homeFaqs = [
   {
-    category: 'Finances & Épargne',
-    q: 'Le seuil d’épargne vaut-il pour tout le foyer, ou par personne ?',
+    category: "Finances & Épargne",
+    q: "Le seuil d’épargne vaut-il pour tout le foyer, ou par personne ?",
     a: `Par personne. Chaque demandeur doit justifier individuellement du seuil, accompagnants compris : un couple marié avec deux enfants doit donc présenter quatre fois le seuil, et non une. Seule simplification admise, un compte joint permet au titulaire et à son conjoint de produire le même justificatif — le montant reste cumulé, c'est la pièce qui est unique. L'ambassade de Paris fixe ce seuil à ${formateEuros(FONDS_EUR_PARIS)} par personne, exprimés en euros sur sa propre page de documents requis — ce n'est pas la contre-valeur du jour des 500 000 THB de la règle nationale, et c'est plus élevé. Comptez ${MARGE_CONSEILLEE} par personne pour n'être jamais au ras du seuil.`,
   },
   {
-    category: 'Finances & Épargne',
-    q: 'Faut-il bloquer cette somme sur mon compte pendant les 5 ans du visa ?',
+    category: "Finances & Épargne",
+    q: "Faut-il bloquer cette somme sur mon compte pendant les 5 ans du visa ?",
     a: `Non. La preuve n'est exigée qu'au dépôt de la demande initiale, et lors d'éventuelles extensions locales. L'argent n'est jamais bloqué. En revanche l'ambassade de Paris demande un solde d'au moins ${formateEuros(FONDS_EUR_PARIS)} par personne sur CHACUN des trois derniers relevés mensuels : ce n'est pas un solde atteint une fois, c'est un solde tenu. Prévoyez ${MARGE_CONSEILLEE} par personne plutôt que le strict minimum — un compte qui frôle le seuil un mois sur trois se lit comme un dossier fragile.`,
   },
   {
-    category: 'Finances & Épargne',
-    q: 'Mes investissements (crypto, PEA, actions) comptent-ils comme garantie ?',
+    category: "Finances & Épargne",
+    q: "Mes investissements (crypto, PEA, actions) comptent-ils comme garantie ?",
     a: "Non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Nous vous accompagnons sur la présentation de vos relevés, y compris de néobanques comme Revolut ou Boursorama, pour qu'ils respectent les standards consulaires.",
   },
   {
-    category: 'Statut freelance & télétravail',
+    category: "Statut freelance & télétravail",
     q: "Je suis auto-entrepreneur et je n'ai pas d'employeur. Est-ce un problème ?",
     a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus quand le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Notre travail consiste à traduire la réalité de votre micro-entreprise — Kbis, URSSAF, SIRENE, portfolio — en un dossier administratif irréfutable aux yeux des officiers consulaires.",
   },
   {
-    category: 'Soft Power (écoles & immersion)',
-    q: "Comment être certain que l'école choisie ne fera pas annuler mon visa ?",
-    a: "Le risque d'utiliser une école fantôme ou non agréée est une interdiction de territoire. Nous ne travaillons qu'avec un réseau fermé d'établissements de Muay Thaï et de cuisine thaïlandaise disposant d'une double homologation officielle : licence DBD et accréditation du ministère. Nous vérifions ces agréments avant de vous orienter vers un établissement — sans pour autant nous substituer à lui : la délivrance de la lettre d'acceptation reste son fait.",
+    category: "Soft Power (écoles & immersion)",
+    q: VERIFICATION_ECOLE.question,
+    a: VERIFICATION_ECOLE.reponse,
+    sources: [SOURCES_PROCEDURE.parisDtv],
   },
   {
-    category: 'Famille & PACS',
-    q: 'Mon partenaire et moi sommes pacsés. Le visa s’étend-il à mon conjoint ?',
+    category: "Famille & PACS",
+    q: "Mon partenaire et moi sommes pacsés. Le visa s’étend-il à mon conjoint ?",
     a: "Attention, c'est un piège majeur : le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Sans mariage, une demande de visa « accompagnant » est automatiquement rejetée. Il existe cependant des stratégies légales permettant aux couples pacsés de sécuriser leur départ ensemble, via des dossiers individuels synchronisés.",
   },
   {
-    category: 'Fiscalité & impôts',
-    q: 'Vais-je payer des impôts en Thaïlande avec le Visa DTV ?',
+    category: "Fiscalité & impôts",
+    q: "Vais-je payer des impôts en Thaïlande avec le Visa DTV ?",
     a: "Le DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année civile et que vous y rapatriez des revenus. Nous vous fournissons les repères de base pour comprendre la convention fiscale franco-thaïlandaise et organiser votre calendrier de voyage.",
-  },
-];
-
-const etapes = [
-  {
-    num: '01',
-    titre: "L'engagement et le dossier",
-    desc: "Une fois votre devis validé, nous analysons et certifions vos pièces pour vous livrer un dossier formaté selon les exigences du poste consulaire compétent. Cette préparation nous prend 3 à 5 jours ouvrés ; elle est distincte de l'instruction par l'ambassade, qui vient ensuite.",
-  },
-  {
-    num: '02',
-    titre: 'Dépôt en ligne sur le portail e-Visa',
-    desc: "Vous déposez votre dossier sur le portail officiel thaievisa.go.th, auprès du poste dont vous relevez par votre nationalité ou votre résidence légale. Aucun voyage dans un pays tiers, aucun tampon d'entrée à aller chercher : depuis le 31 août 2026, cette voie est fermée aux non-résidents.",
-  },
-  {
-    num: '03',
-    titre: 'Instruction et décision consulaire',
-    desc: "L'ambassade de Paris annonce un délai d'instruction d'environ quatre semaines, qui peut être plus long si le dossier appelle des compléments. Ce délai est indicatif et nous ne le garantissons pas. Le poste se réserve le droit de convoquer le demandeur en entretien.",
-  },
-  {
-    num: '04',
-    titre: 'Préparation au départ, une fois le visa accordé',
-    desc: "Impression de l'e-Visa, enregistrement en ligne et carte d'arrivée numérique TDAC préparée sur votre mobile. Ces documents sont exigés à l'embarquement. En formule Premium, nous vous aidons à choisir votre vol et organisons votre transfert depuis l'aéroport.",
-  },
-  {
-    num: '05',
-    titre: 'Arrivée en Thaïlande',
-    desc: "Passeport, e-Visa imprimé et TDAC à l'officier d'immigration, qui appose votre tampon de 180 jours. Ensuite, une sortie du territoire ou une extension sur place relance le compteur, pendant cinq ans.",
   },
 ];
 
 const voies = [
   {
-    titre: 'Télétravail et freelance',
-    accent: 'text-purple-400',
-    bord: 'border-purple-500/25',
+    titre: "Télétravail et freelance",
+    accent: "text-purple-400",
+    bord: "border-purple-500/25",
     desc: "Vous travaillez à distance pour un employeur étranger, ou à votre compte. C'est la voie la plus fréquente — et celle qui concentre le plus de refus, car un statut d'indépendant français ne ressemble à rien de connu pour un officier consulaire.",
-    lien: '/blog/visa-dtv-freelance-auto-entrepreneur',
-    ancre: 'Monter son dossier en tant qu’indépendant',
+    lien: "/blog/visa-dtv-freelance-auto-entrepreneur",
+    ancre: "Monter son dossier en tant qu’indépendant",
   },
   {
-    titre: 'Soft Power',
-    accent: 'text-orange-400',
-    bord: 'border-orange-500/25',
+    titre: "Soft Power",
+    accent: "text-orange-400",
+    bord: "border-orange-500/25",
     desc: "Vous suivez un cursus certifié de cuisine thaïlandaise ou de Muay Thaï. Aucune condition de revenus n'est exigée par cette voie, ce qui la rend accessible à des profils que les autres excluent — à condition que l'école soit réellement homologuée.",
-    lien: '/blog/visa-dtv-soft-power-ecoles',
-    ancre: 'Écoles certifiées, tarifs et pièges',
+    lien: "/blog/visa-dtv-soft-power-ecoles",
+    ancre: "Écoles certifiées, tarifs et pièges",
   },
   {
-    titre: 'Famille et conjoint accompagnant',
-    accent: 'text-fuchsia-400',
-    bord: 'border-fuchsia-500/25',
+    titre: "Famille et conjoint accompagnant",
+    accent: "text-fuchsia-400",
+    bord: "border-fuchsia-500/25",
     desc: "Vous partez à deux, ou avec vos enfants. La règle est stricte et mal connue : seul le mariage civil ouvre le statut d'accompagnant. Le PACS et le concubinage imposent une autre stratégie, parfaitement légale mais qui se prépare en amont.",
-    lien: '/blog/visa-dtv-couple-famille-pacs',
-    ancre: 'Conjoint et enfants accompagnants',
+    lien: "/blog/visa-dtv-couple-famille-pacs",
+    ancre: "Conjoint et enfants accompagnants",
   },
 ];
 
-
 export default function HomeContent() {
+  const { ouvrirEligibilite } = useModales();
   const guides = getSortedBlogPosts()
     .filter((p) => new Date(p.publishedAt) <= new Date())
     .slice(0, 6);
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 mt-24 space-y-24 text-gray-400 leading-relaxed">
+    <div className={s.homeContent}>
       {/* ── LE DTV EN BREF ── */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Le Visa DTV en bref
-        </h2>
-        <p className="mb-4">
-          Le <strong className="text-white">Destination Thailand Visa</strong>, ou DTV, est le visa
-          long séjour créé par la Thaïlande en 2024 pour les travailleurs à distance, les
-          indépendants et les personnes venant suivre une activité culturelle ou sportive. Il a
-          remplacé, dans les faits, la vie en enchaînant les exemptions touristiques.
+      <section id="visa-dtv" className={s.briefSection}>
+        <p className={s.eyebrow}>La liberté commence par la clarté.</p>
+        <h2>Le Visa DTV en bref</h2>
+        <p>
+          Le <strong>Destination Thailand Visa</strong>, ou DTV, est le visa
+          long séjour créé par la Thaïlande en 2024 pour les travailleurs à
+          distance, les indépendants et les personnes venant suivre une activité
+          culturelle ou sportive. Il a remplacé, dans les faits, la vie en
+          enchaînant les exemptions touristiques.
         </p>
-        <p className="mb-8">
-          Sa mécanique tient en trois nombres, qu&apos;il ne faut pas confondre :{' '}
-          <strong className="text-white">cinq ans de validité</strong>, à entrées multiples ;{' '}
-          <strong className="text-white">180 jours de séjour</strong> à chaque entrée, extensibles
-          une fois sur place ; et une{' '}
-          <strong className="text-white">déclaration d&apos;adresse tous les 90 jours</strong> si
-          vous restez sans sortir. Un DTV valable cinq ans ne vous autorise donc pas à rester cinq
-          ans d&apos;affilée.
+        <p>
+          Sa mécanique tient en trois nombres, qu&apos;il ne faut pas confondre
+          : <strong>cinq ans de validité</strong>, à entrées multiples ;{" "}
+          <strong>180 jours de séjour</strong> à chaque entrée, extensibles une
+          fois sur place ; et une{" "}
+          <strong>déclaration d&apos;adresse tous les 90 jours</strong> si vous
+          restez sans sortir. Un DTV valable cinq ans ne vous autorise donc pas
+          à rester cinq ans d&apos;affilée.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className={s.keyFigures}>
           {[
-            { chiffre: '5 ans', label: 'de validité, entrées multiples' },
-            { chiffre: '180 jours', label: 'de séjour par entrée, extensibles' },
-            { chiffre: formateEuros(FONDS_EUR_PARIS), label: 'd’épargne à justifier, par personne' },
+            { chiffre: "5 ans", label: "de validité, entrées multiples" },
+            {
+              chiffre: "180 jours",
+              label: "de séjour par entrée, extensibles",
+            },
+            {
+              chiffre: formateEuros(FONDS_EUR_PARIS),
+              label: "d’épargne à justifier, par personne",
+            },
           ].map((item) => (
-            <div
-              key={item.chiffre}
-              className="bg-[#111111] border border-white/10 rounded-2xl p-5 text-center"
-            >
-              <p className="text-2xl font-black text-amber-500 mb-1">{item.chiffre}</p>
-              <p className="text-xs text-gray-500 leading-snug">
-                {item.label}
-              </p>
+            <div key={item.chiffre}>
+              <p>{item.chiffre}</p>
+              <p>{item.label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── ÉLIGIBILITÉ ── */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Êtes-vous éligible au Visa DTV ?
-        </h2>
-        <p className="mb-8">
-          Il existe trois voies d&apos;accès, et la difficulté n&apos;est presque jamais de remplir
-          le formulaire : elle est de déterminer laquelle vous concerne réellement. Beaucoup de
-          candidats se croient inéligibles parce qu&apos;ils ont regardé la mauvaise porte.
+      <section id="profils" className={s.profilesSection}>
+        <p className={s.eyebrow}>À chaque projet, sa voie.</p>
+        <h2>Êtes-vous éligible au Visa DTV ?</h2>
+        <p>
+          Il existe trois voies d&apos;accès, et la difficulté n&apos;est
+          presque jamais de remplir le formulaire : elle est de déterminer
+          laquelle vous concerne réellement. Beaucoup de candidats se croient
+          inéligibles parce qu&apos;ils ont regardé la mauvaise porte.
         </p>
 
-        <div className="space-y-4">
-          {voies.map((v) => (
-            <div
-              key={v.titre}
-              className={`bg-[#111111] border ${v.bord} rounded-2xl p-6 transition-colors hover:bg-[#161616]`}
-            >
-              <h3 className={`text-lg font-bold ${v.accent} mb-2`}>{v.titre}</h3>
-              <p className="text-sm mb-4">{v.desc}</p>
-              <Link
-                href={v.lien}
-                className="text-sm font-semibold text-white hover:text-amber-500 transition-colors"
-              >
+        <div className={s.profileGrid}>
+          {voies.map((v, i) => (
+            <div key={v.titre}>
+              <span className={s.profileNumber}>
+                0{i + 1}
+                <span aria-hidden="true">↗</span>
+              </span>
+              <h3>{v.titre}</h3>
+              <p>{v.desc}</p>
+              <Link href={v.lien}>
                 {v.ancre} <span aria-hidden="true">→</span>
               </Link>
             </div>
           ))}
         </div>
 
-        <div className="mt-6 bg-[#111111] border border-white/10 rounded-2xl p-5">
-          <p className="text-sm mb-3">
-            Dans les trois cas, vous devrez justifier{' '}
-            <Link
-              href="/blog/fonds-bancaires-visa-dtv"
-              className="text-amber-500 hover:underline font-medium"
-            >
+        <div className={s.fundsNote}>
+          <p>
+            Dans les trois cas, vous devrez justifier{" "}
+            <Link href="/blog/fonds-bancaires-visa-dtv">
               <MontantFonds prefixe="" /> d&apos;épargne disponible par personne
-            </Link>{' '}
-            — sur chacun des trois derniers relevés mensuels. Une somme qui n&apos;est jamais
-            bloquée, mais dont l&apos;historique est examiné.
+            </Link>{" "}
+            — sur chacun des trois derniers relevés mensuels. Une somme qui
+            n&apos;est jamais bloquée, mais dont l&apos;historique est examiné.
           </p>
-          <p className="text-xs text-gray-500 leading-relaxed">
-            <strong className="text-gray-300">Notre conseil :</strong> prévoyez plutôt{' '}
-            <strong className="text-white">{MARGE_CONSEILLEE}</strong> par personne. Le montant
-            exigé par Paris est un plancher, pas une cible : un solde calculé au plus juste ne
-            résiste ni à un agio prélevé la veille, ni à un officier consulaire tatillon.
+          <p>
+            <strong>Notre conseil :</strong> prévoyez plutôt{" "}
+            <strong>{MARGE_CONSEILLEE}</strong> par personne. Le montant exigé
+            par Paris est un plancher, pas une cible : un solde calculé au plus
+            juste ne résiste ni à un agio prélevé la veille, ni à un officier
+            consulaire tatillon.
           </p>
         </div>
       </section>
 
+      <div className={s.inlineCta}>
+        <p>
+          Vous vous reconnaissez dans l’un de ces profils ?
+          <span>Faisons le point sur votre situation.</span>
+        </p>
+        <button onClick={ouvrirEligibilite} className={s.primary}>
+          Vérifier mon éligibilité ↗
+        </button>
+      </div>
+
+      <HomeVideos />
+
       {/* ── MÉTHODE ── */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Notre méthode, en cinq étapes
-        </h2>
-        <p className="mb-8">
-          De la validation de votre devis au tampon de 180 jours dans votre passeport, voici
-          exactement ce qui se passe et dans quel ordre.
+      <section id="methode" className={s.methodSection}>
+        <p className={s.eyebrow}>Vous avancez. Nous vous accompagnons.</p>
+        <h2>Notre méthode, en cinq étapes</h2>
+        <p>
+          De la préparation de votre dossier à votre arrivée après accord du
+          visa, voici les étapes de notre accompagnement.
         </p>
 
-        <ol className="space-y-4">
-          {etapes.map((e) => (
-            <li
-              key={e.num}
-              className="bg-[#111111] border border-white/10 rounded-2xl p-5 flex gap-5"
-            >
-              <span className="text-amber-500 font-black text-lg flex-none tabular-nums">
-                {e.num}
-              </span>
+        <p>{REGLE_DEPOT_DTV}</p>
+        <SourcesProcedure
+          sources={[SOURCES_PROCEDURE.reglesAout2026]}
+          className={s.procedureSources}
+        />
+        <ol>
+          {ETAPES_DTV.map((e, index) => (
+            <li key={e.id}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
-                <h3 className="text-white font-bold mb-1">{e.titre}</h3>
-                <p className="text-sm">{e.desc}</p>
+                <h3>{e.titre}</h3>
+                <p>{e.desc}</p>
+                <SourcesProcedure
+                  sources={e.sources}
+                  className={s.procedureSources}
+                />
               </div>
             </li>
           ))}
         </ol>
+        <p className={s.procedureSources}>
+          Sources consultées le {DATE_VERIFICATION_PROCEDURE}. Les exigences du
+          poste consulaire compétent font foi.
+        </p>
       </section>
 
       {/* ── TARIFS ── */}
-      <section id="tarifs" className="scroll-mt-24">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Nos formules et nos tarifs
-        </h2>
-        <p className="mb-8">
-          Nos prix sont publics et dépendent uniquement de la{' '}
-          <strong className="text-white">voie d&apos;éligibilité</strong> par laquelle vous obtenez
-          le visa. La colonne Soft Power inclut les frais d&apos;inscription à l&apos;école
-          certifiée, ce qui explique l&apos;écart.
+      <section id="tarifs" className={s.pricingSection}>
+        <p className={s.eyebrow}>Un projet clair. Un budget transparent.</p>
+        <h2>Nos formules et nos tarifs</h2>
+        <p>
+          Nos prix sont publics et dépendent uniquement de la{" "}
+          <strong>voie d&apos;éligibilité</strong> par laquelle vous obtenez le
+          visa. Le tarif Soft Power inclut les frais d&apos;inscription à
+          l&apos;école certifiée, ce qui explique l&apos;écart.
         </p>
-        <p className="mb-8 text-sm text-gray-500 border-l-2 border-amber-500/40 pl-4">
-          Grille révisée le 2 septembre 2026. Depuis le 31 août, un demandeur français relève
-          obligatoirement de l&apos;ambassade de Paris, où les frais consulaires sont plus élevés
-          qu&apos;en Asie et où la traduction assermentée est exigée. {MENTION_TRADUCTIONS}
+        <p>
+          Grille révisée le 2 septembre 2026. Le poste consulaire compétent
+          dépend de votre pays de nationalité ou de résidence officielle ; la
+          nationalité française ne signifie pas, à elle seule, un dépôt
+          obligatoire à Paris. {MENTION_TRADUCTIONS}
         </p>
 
-        {/* ── MOBILE : une carte par formule, les deux prix côte à côte ── */}
-        <div className="md:hidden space-y-3">
+        <SourcesProcedure
+          sources={[
+            SOURCES_PROCEDURE.reglesAout2026,
+            SOURCES_PROCEDURE.parisProcedure,
+          ]}
+          className={s.procedureSources}
+        />
+        <div className={s.priceGrid}>
           {formules.map((f) => (
-            <div
-              key={f.nom}
-              className={`rounded-2xl border p-5 ${
-                f.vedette ? 'border-amber-500/30 bg-amber-500/5' : 'border-white/10 bg-[#111111]'
-              }`}
+            <article
+              key={f.id}
+              className={s.priceCard}
+              data-featured={f.vedette}
             >
-              <p className={`font-bold text-base ${f.vedette ? 'text-amber-500' : 'text-white'}`}>
-                {f.nom}
-              </p>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">{f.description}</p>
-
-              <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/10">
+              <div className={s.priceCardHeading}>
+                <h3>{f.nom}</h3>
+                <span>
+                  {f.vedette
+                    ? "Pour préparer aussi l’arrivée"
+                    : "Pour préparer votre visa"}
+                </span>
+              </div>
+              <p>{f.description}</p>
+              <div className={s.priceAmounts}>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">
-                    Télétravail
-                  </p>
-                  <p className="text-lg font-black text-white">{prix(f.standard)}</p>
+                  <span>Télétravail / freelance</span>
+                  <strong>{prix(f.standard)}</strong>
+                  <small>à partir de / personne</small>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-amber-500/70 font-bold mb-1">
-                    Soft Power
-                  </p>
-                  <p className="text-lg font-black text-amber-500">{prix(f.softPower)}</p>
+                  <span>Soft Power</span>
+                  <strong>{prix(f.softPower)}</strong>
+                  <small>à partir de / personne</small>
                 </div>
               </div>
-            </div>
+              <ul className={s.priceIncludes}>
+                <li>Montage et suivi de votre dossier</li>
+                <li>Budget avec frais consulaires</li>
+                <li>Estimation des traductions incluse</li>
+                {f.vedette && (
+                  <li>Préparation de votre arrivée en Thaïlande</li>
+                )}
+              </ul>
+              <button onClick={ouvrirEligibilite} className={s.primary}>
+                Préparer mon projet <span aria-hidden="true">↗</span>
+              </button>
+              <small>Commençons par vérifier votre éligibilité.</small>
+            </article>
           ))}
         </div>
 
-        {/* ── ORDINATEUR : tableau comparatif ── */}
-        <div className="hidden md:block rounded-2xl border border-white/10 overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-[#111111] border-b border-white/10">
-                <th className="text-left px-5 py-4 text-gray-400 font-semibold">Formule</th>
-                <th className="text-left px-5 py-4 text-gray-400 font-semibold">
-                  Voie télétravail ou freelance
-                </th>
-                <th className="text-left px-5 py-4 text-amber-500 font-semibold">Voie Soft Power</th>
-              </tr>
-            </thead>
-            <tbody>
-              {formules.map((f, i) => (
-                <tr
-                  key={f.nom}
-                  className={`border-b border-white/5 last:border-0 ${
-                    f.vedette ? 'bg-amber-500/5' : i % 2 === 0 ? 'bg-[#0d0d0d]' : ''
-                  }`}
-                >
-                  <td className="px-5 py-4">
-                    <span className="text-white font-bold">{f.nom}</span>
-                    <span className="block text-xs text-gray-500 mt-1 max-w-xs">{f.description}</span>
-                  </td>
-                  <td className="px-5 py-4 text-white font-bold whitespace-nowrap">{prix(f.standard)}</td>
-                  <td className="px-5 py-4 text-amber-500 font-bold whitespace-nowrap">
-                    {prix(f.softPower)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-5 bg-[#111111] border border-white/10 rounded-2xl p-5">
-          <p className="text-white font-semibold text-sm mb-2">Et si vous partez en famille ?</p>
-          <p className="text-sm leading-relaxed">
-            Le fait de partir seul, en couple ou avec des enfants{' '}
-            <strong className="text-white">ne change pas le tarif unitaire</strong>. Chaque personne
-            dépose son propre dossier et relève de sa propre voie d&apos;éligibilité : un conjoint
-            qui suit un cursus Soft Power sera au tarif Soft Power, un conjoint télétravailleur au
-            tarif correspondant. Nous établissons un devis global quand plusieurs dossiers sont
-            montés ensemble.
+        <div className={s.familyNote}>
+          <p>
+            <strong>Et si vous partez en famille ?</strong>
           </p>
-          <p className="text-sm leading-relaxed mt-3 pt-3 border-t border-white/10">
-            <strong className="text-amber-400">En revanche, l&apos;épargne à justifier, elle, se
-            multiplie.</strong>{' '}
-            Le seuil s&apos;applique à chaque demandeur, accompagnants compris. Une famille de
-            quatre doit donc présenter{' '}
-            <strong className="text-white">
+          <p>
+            Le fait de partir seul, en couple ou avec des enfants{" "}
+            <strong>ne change pas le tarif unitaire</strong>. Chaque personne
+            dépose son propre dossier et relève de sa propre voie
+            d&apos;éligibilité : un conjoint qui suit un cursus Soft Power sera
+            au tarif Soft Power, un conjoint télétravailleur au tarif
+            correspondant. Nous établissons un devis global quand plusieurs
+            dossiers sont montés ensemble.
+          </p>
+          <p>
+            <strong>
+              En revanche, l&apos;épargne à justifier, elle, se multiplie.
+            </strong>{" "}
+            Le seuil s&apos;applique à chaque demandeur, accompagnants compris.
+            Une famille de quatre doit donc présenter{" "}
+            <strong>
               <MontantFonds prefixe="" personnes={4} />
-            </strong>{' '}
+            </strong>{" "}
             — c&apos;est le point le plus souvent découvert trop tard.
           </p>
         </div>
 
-        <p className="mt-4 text-xs text-gray-500">
-          Tarifs à partir de, hors frais de visa d&apos;entrée du pays de dépôt le cas échéant.
+        <p>
+          Tarifs à partir de, selon les pièces et les prestations prévues au
+          devis.
         </p>
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="scroll-mt-24">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Questions fréquentes sur le Visa DTV
-        </h2>
-        <p className="mb-8">
-          L&apos;immigration thaïlandaise est stricte et les rumeurs circulent vite. Voici des
-          réponses claires aux questions qui reviennent à chaque accompagnement.
+      <section id="faq" className={s.faqSection}>
+        <p className={s.eyebrow}>Les bonnes réponses, avant le départ.</p>
+        <h2>Questions fréquentes sur le Visa DTV</h2>
+        <p>
+          L&apos;immigration thaïlandaise est stricte et les rumeurs circulent
+          vite. Voici des réponses claires aux questions qui reviennent à chaque
+          accompagnement.
         </p>
 
-        <div className="space-y-4">
+        <div className={s.faqList}>
           {homeFaqs.map((faq) => (
-            <details
-              key={faq.q}
-              className="group border border-white/10 rounded-2xl overflow-hidden bg-[#111111]"
-            >
-              <summary className="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-[#161616] transition-colors">
+            <details key={faq.q}>
+              <summary>
                 <span>
-                  <span className="block text-[10px] uppercase tracking-widest text-amber-500 font-bold mb-1">
-                    {faq.category}
-                  </span>
-                  <span className="text-white font-semibold text-sm md:text-base">{faq.q}</span>
+                  <span>{faq.category}</span>
+                  <span>{faq.q}</span>
                 </span>
-                <span
-                  aria-hidden="true"
-                  className="text-gray-500 text-lg flex-none mt-4 transition-transform group-open:rotate-45"
-                >
-                  +
-                </span>
+                <span aria-hidden="true">+</span>
               </summary>
-              <div className="px-5 py-4 bg-[#0d0d0d] border-t border-white/5">
-                <p className="text-sm leading-relaxed">{faq.a}</p>
+              <div>
+                <p>{faq.a}</p>
+                {faq.sources && (
+                  <SourcesProcedure
+                    sources={faq.sources}
+                    className={s.procedureSources}
+                  />
+                )}
               </div>
             </details>
           ))}
         </div>
 
-        <div className="mt-6 text-center">
-          <Link
-            href="/faq"
-            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-3 px-7 rounded-full hover:bg-white/5 transition-all"
-          >
-            Toutes les questions
-          </Link>
+        <div>
+          <Link href="/faq">Toutes les questions</Link>
         </div>
       </section>
 
       {/* ── GUIDES ── */}
-      <section>
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-tight">
-          Nos guides de terrain
-        </h2>
-        <p className="mb-8">
-          Nous documentons publiquement ce que nous rencontrons sur le terrain : montants réels,
-          textes officiels et pièges constatés. Aucun de ces guides n&apos;est réservé aux clients.
+      <section id="guides" className={s.guidesSection}>
+        <p className={s.eyebrow}>Le journal de votre future vie.</p>
+        <h2>Nos guides de terrain</h2>
+        <p>
+          Nous documentons publiquement ce que nous rencontrons sur le terrain :
+          montants réels, textes officiels et pièges constatés. Aucun de ces
+          guides n&apos;est réservé aux clients.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className={s.guideGrid}>
           {guides.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className={`group bg-[#111111] border border-white/10 rounded-2xl p-5 transition-all ${post.hoverBorder} hover:bg-[#161616]`}
-            >
-              <span
-                className={`inline-block text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-full border mb-3 ${post.tagColor}`}
-              >
-                {post.category}
+            <Link key={post.slug} href={`/blog/${post.slug}`}>
+              <div className={s.guideImage}>
+                <Image
+                  src={post.image}
+                  alt={post.shortTitle}
+                  fill
+                  sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 30vw"
+                />
+              </div>
+              <span>{post.category}</span>
+              <h3>{post.shortTitle}</h3>
+              <span className={s.articleLink}>
+                Lire le guide <span aria-hidden="true">↗</span>
               </span>
-              <h3 className="text-white font-bold text-sm leading-snug group-hover:text-amber-500 transition-colors">
-                {post.shortTitle}
-              </h3>
             </Link>
           ))}
         </div>
 
-        <div className="mt-6 text-center">
-          <Link
-            href="/blog"
-            className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-3 px-7 rounded-full hover:bg-white/5 transition-all"
-          >
-            Voir tous les guides
-          </Link>
+        <div>
+          <Link href="/blog">Voir tous les guides</Link>
         </div>
       </section>
     </div>

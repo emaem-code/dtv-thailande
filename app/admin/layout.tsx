@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import OngletsAdmin from './OngletsAdmin';
+import s from '../pages-claires.module.css';
 
 /**
  * L'espace d'administration ne doit jamais être indexé, ni suivi par un
@@ -15,9 +16,9 @@ export const metadata: Metadata = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className={s.admin}>
       <OngletsAdmin />
-      <main className="max-w-6xl mx-auto px-5 sm:px-6 py-8">{children}</main>
+      <div className={s.adminContenu}>{children}</div>
     </div>
   );
 }
