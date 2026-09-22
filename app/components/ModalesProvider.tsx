@@ -58,7 +58,14 @@ export default function ModalesProvider({ children }: { children: React.ReactNod
         }}
       />
       <EligibilityFormModal isOpen={eligibilite} onClose={() => setEligibilite(false)} />
-      <ProcessModal isOpen={methode} onClose={() => setMethode(false)} />
+      <ProcessModal
+        isOpen={methode}
+        onClose={() => setMethode(false)}
+        onEligibility={() => {
+          setMethode(false);
+          setEligibilite(true);
+        }}
+      />
     </Contexte.Provider>
   );
 }

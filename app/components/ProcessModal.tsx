@@ -8,9 +8,10 @@ import SourcesProcedure from './SourcesProcedure';
 interface ProcessModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onEligibility: () => void;
 }
 
-export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
+export default function ProcessModal({ isOpen, onClose, onEligibility }: ProcessModalProps) {
   const { dialogRef, handleDialogKeyDown } = useModalA11y(isOpen, onClose);
 
   if (!isOpen) return null;
@@ -74,7 +75,7 @@ export default function ProcessModal({ isOpen, onClose }: ProcessModalProps) {
           <div className="mt-12 text-center pt-8 border-t border-white/10">
             <h4 className="text-2xl font-black text-white mb-4">Prêt à démarrer l'aventure ?</h4>
             <button 
-              onClick={() => { onClose(); }} 
+              onClick={onEligibility}
               className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.2)] active:scale-95"
             >
               Fermer et vérifier mon éligibilité
