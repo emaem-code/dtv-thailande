@@ -8,6 +8,16 @@ import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
 import { track } from '@vercel/analytics';
 import s from '../parcours.module.css';
 
+async function envoyerFormspree(options: RequestInit & { body: string }) {
+  // Même critère que BandeauBacASable ; next.config.ts l'intègre au code client.
+  if (process.env.VERCEL_ENV !== 'production') {
+    console.info('[Formspree — simulation, aucun envoi]', JSON.parse(options.body));
+    return { ok: true };
+  }
+
+  return fetch('https://formspree.io/f/mreyokzj', options);
+}
+
 /**
  * Corps du test d'éligibilité, partagé par deux contenants :
  *  — la fenêtre modale ouverte depuis les boutons du site (variante « modal ») ;
@@ -222,7 +232,7 @@ export default function FormulaireEligibilite({
   const envoyerLeadPartiel = async (typeDeLead: string) => {
     const attribution = lireAttribution();
     try {
-      await fetch('https://formspree.io/f/mreyokzj', {
+      await envoyerFormspree({
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(
@@ -367,7 +377,7 @@ export default function FormulaireEligibilite({
             'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
       });
 
-      const response = await fetch('https://formspree.io/f/mreyokzj', {
+      const response = await envoyerFormspree({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -439,7 +449,7 @@ export default function FormulaireEligibilite({
 
     setEnvoiFormule(true);
     try {
-      const reponse = await fetch('https://formspree.io/f/mreyokzj', {
+      const reponse = await envoyerFormspree({
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(
