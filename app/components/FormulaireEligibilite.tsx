@@ -335,6 +335,7 @@ export default function FormulaireEligibilite({
             'Épargne 15 000 € par personne': lisible('funds', formData.funds),
             'Canal détecté': attribution.canal,
             "Page d'entrée": attribution.pageEntree,
+            'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
           }),
         ),
       });
