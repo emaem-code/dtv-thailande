@@ -215,9 +215,39 @@ export default function FormulaireEligibilite({
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    // L'erreur s'efface dès que le visiteur corrige le champ concerné
-    setErreurs((prev) => (prev[field] ? { ...prev, [field]: '' } : prev));
+    const suivant = { ...formData, [field]: value };
+    const champsMasques: (keyof typeof formData)[] = [];
+    const effacer = (...champs: (keyof typeof formData)[]) => {
+      for (const champ of champs) {
+        suivant[champ] = '';
+        champsMasques.push(champ);
+      }
+    };
+
+    // Mêmes conditions que les questions affichées, indépendamment de l'étape.
+    if (suivant.nationalite !== 'autre') effacer('nationaliteAutre');
+    if (suivant.job === 'softpower') effacer('softPowerInteret');
+    if (suivant.job !== 'softpower' && suivant.softPowerInteret !== 'yes') {
+      effacer('softPower');
+    }
+    if (suivant.family === '' || suivant.family === 'solo') effacer('adultesCount');
+    if (suivant.family !== 'family') {
+      effacer('childrenCount', 'enfantsMoins20', 'situationConjugale');
+    }
+    if (suivant.telephone.trim() === '') effacer('whatsapp');
+    if (suivant.formule !== 'premium') effacer('villeDepart');
+
+    setFormData(suivant);
+    setErreurs((prev) => {
+      const suivantes = { ...prev };
+      delete suivantes[field];
+      for (const champ of champsMasques) delete suivantes[champ];
+      // La précision de résidence reste visible, mais n'est plus obligatoire.
+      if (field === 'location' && value !== 'asia' && value !== 'other') {
+        delete suivantes.locationDetails;
+      }
+      return suivantes;
+    });
   };
 
   /** Retire les lignes vides : un e-mail de lead ne doit contenir que du signal. */
@@ -405,8 +435,12 @@ export default function FormulaireEligibilite({
               funds: formData.funds,
               passport: formData.passport,
               dejaDepose: formData.dejaDepose,
-              enfantsMoins20: formData.enfantsMoins20,
-              situationConjugale: formData.situationConjugale,
+              ...(formData.family === 'family'
+                ? {
+                    enfantsMoins20: formData.enfantsMoins20,
+                    situationConjugale: formData.situationConjugale,
+                  }
+                : {}),
             },
           }),
         }).catch(() => {
