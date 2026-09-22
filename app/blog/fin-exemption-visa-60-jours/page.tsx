@@ -293,7 +293,7 @@ export default function ArticleFinExemption() {
           </li>
         </ul>
         <p className="text-sm text-gray-400">
-          Pour suivre les annonces officielles, il est prudent de consulter régulièrement les mises à jour de <a href="http://www.thaiembassy.fr" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.
+          Pour suivre les annonces officielles, il est prudent de consulter régulièrement les mises à jour de <a href="https://www.thaiembassy.fr" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">l'Ambassade Royale de Thaïlande à Paris</a>.
         </p>
       </section>
 
