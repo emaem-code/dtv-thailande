@@ -20,9 +20,16 @@ export default function BandeauBacASable() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed bottom-3 left-3 z-[9999] rounded-full
-                 border border-amber-400/60 bg-amber-950/90 px-3 py-1.5
-                 text-xs font-medium text-amber-200 shadow-lg backdrop-blur-sm"
+      /* Couleurs en style direct, et non en classes utilitaires : les feuilles
+         de la refonte repeignent toute classe de couleur pour harmoniser les
+         anciens articles, et la pastille y perdait son contraste — texte et
+         fond finissaient a la meme teinte. */
+      style={{
+        position: 'fixed', bottom: 12, left: 12, zIndex: 9999,
+        background: '#2a1a05', color: '#fcd9a0', border: '1px solid #b4802f',
+        borderRadius: 9999, padding: '6px 12px', fontSize: 12, fontWeight: 500,
+        pointerEvents: 'none', boxShadow: '0 4px 14px rgb(0 0 0 / 0.35)',
+      }}
     >
       Bac à sable — base de test, aucun envoi
     </div>
