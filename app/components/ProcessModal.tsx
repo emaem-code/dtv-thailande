@@ -4,6 +4,7 @@ import React from 'react';
 import { useModalA11y } from './useModalA11y';
 import { ETAPES_DTV, REGLE_DEPOT_DTV, SOURCES_PROCEDURE, DATE_VERIFICATION_PROCEDURE } from '../lib/methode-dtv';
 import SourcesProcedure from './SourcesProcedure';
+import s from '../parcours.module.css';
 
 interface ProcessModalProps {
   isOpen: boolean;
@@ -18,8 +19,8 @@ export default function ProcessModal({ isOpen, onClose, onEligibility }: Process
 
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity duration-300" onClick={onClose} />
+    <div className={s.voile}>
+      <div className={s.fond} onClick={onClose} />
 
       <div
         ref={dialogRef}
@@ -28,11 +29,11 @@ export default function ProcessModal({ isOpen, onClose, onEligibility }: Process
         aria-labelledby="process-modal-title"
         tabIndex={-1}
         onKeyDown={handleDialogKeyDown}
-        className="relative bg-[#0d0d0d] w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300"
+        className={`${s.fenetre} ${s.methode}`}
       >
         
         {/* Header */}
-        <div className="flex-none flex items-center justify-between p-6 border-b border-white/10 bg-[#0d0d0d]/95 backdrop-blur z-10">
+        <div className={s.enteteModale}>
           <h2 id="process-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
             Notre Méthode <span className="text-amber-500">Pas à Pas</span>
           </h2>
@@ -42,20 +43,20 @@ export default function ProcessModal({ isOpen, onClose, onEligibility }: Process
         </div>
 
         {/* Contenu - Timeline */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
+        <div className={`${s.corpsModale} flex-1 overflow-y-auto p-6 md:p-10`}>
           <p className="text-gray-400 mb-10 text-sm md:text-base max-w-2xl">
             Cinq étapes, de la préparation du dossier à votre arrivée après accord du visa.
           </p>
 
           <p className="text-gray-400 mb-4 text-sm">{REGLE_DEPOT_DTV}</p>
           <SourcesProcedure sources={[SOURCES_PROCEDURE.reglesAout2026]} className="text-xs text-gray-400 mb-8" />
-          <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+          <div className={`${s.frise} relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent`}>
             
             {ETAPES_DTV.map((step, index) => (
               <div key={step.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
                 
                 {/* Icône centrale */}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0d0d0d] bg-white/5 group-hover:bg-amber-500 text-gray-500 group-hover:text-black transition-colors duration-300 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_0_4px_#0d0d0d] z-10 font-bold text-sm">
+                <div className={`${s.pastilleEtape} flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0d0d0d] bg-white/5 group-hover:bg-amber-500 text-gray-500 group-hover:text-black transition-colors duration-300 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_0_4px_#0d0d0d] z-10 font-bold text-sm`}>
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 
@@ -85,12 +86,6 @@ export default function ProcessModal({ isOpen, onClose, onEligibility }: Process
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-      `}} />
     </div>
   );
 }

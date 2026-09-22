@@ -1,7 +1,9 @@
-/* Une seule palette pour le questionnaire intégré, sa fenêtre et le guide. */
+/* Une seule palette pour le questionnaire et les fenêtres du site. */
 .voile,
 .formulaire,
-.guide {
+.guide,
+.methode,
+.faq {
   --papier: #f7f7f2;
   --encre: #243f35;
   --secondaire: #657168;
@@ -49,43 +51,54 @@
 .guide {
   max-width: 940px;
 }
+.methode {
+  max-width: 896px;
+}
+.faq {
+  max-width: 768px;
+}
+.methode,
+.faq {
+  /* Contraste supérieur à 4,5:1 sur les panneaux sauge. */
+  --secondaire: #59675d;
+}
 .formulaire {
   background: #fffef9;
   scroll-margin-top: 112px;
 }
 .formulaire *,
-.guide * {
+:is(.guide, .methode, .faq) * {
   box-sizing: border-box;
 }
 .formulaire :is(button, [role="radio"]),
-.guide button {
+:is(.guide, .methode, .faq) button {
   cursor: pointer;
 }
 .formulaire
   :is(a, button, input, textarea, select, [role="radio"]):focus-visible,
-.guide :is(a, button):focus-visible {
+:is(.guide, .methode, .faq) :is(a, button):focus-visible {
   outline: 3px solid #718264;
   outline-offset: 4px;
   box-shadow: none;
 }
 .formulaire :where([class*="text-white"], [class*="text-black"]),
-.guide :where([class*="text-white"], [class*="text-black"]) {
+:is(.guide, .methode, .faq) :where([class*="text-white"], [class*="text-black"]) {
   color: var(--encre);
 }
 .formulaire :where([class*="text-gray-"]),
-.guide :where([class*="text-gray-"]) {
+:is(.guide, .methode, .faq) :where([class*="text-gray-"]) {
   color: var(--secondaire);
 }
 .formulaire :where([class*="text-amber-"], [class*="text-emerald-"]),
-.guide :where([class*="text-amber-"], [class*="text-emerald-"]) {
+:is(.guide, .methode, .faq) :where([class*="text-amber-"], [class*="text-emerald-"]) {
   color: #48633e;
 }
 .formulaire :where([class*="text-red-"]),
-.guide :where([class*="text-red-"]) {
+:is(.guide, .methode, .faq) :where([class*="text-red-"]) {
   color: #a73f39;
 }
 .formulaire :where([class*="border-"]),
-.guide :where([class*="border-"]) {
+:is(.guide, .methode, .faq) :where([class*="border-"]) {
   border-color: var(--bordure);
 }
 .formulaire
@@ -95,7 +108,7 @@
     [class*="bg-amber-"],
     [class*="bg-emerald-"]
   ),
-.guide
+:is(.guide, .methode, .faq)
   :where(
     [class*="bg-white/"],
     [class*="bg-[#"],
@@ -105,29 +118,30 @@
   background-color: #edf1e4;
 }
 .formulaire :where([class*="bg-red-"]),
-.guide :where([class*="bg-red-"]) {
+:is(.guide, .methode, .faq) :where([class*="bg-red-"]) {
   background-color: #f8eee8;
 }
 .formulaire :where([class*="rounded-2xl"]),
-.guide :where([class*="rounded-2xl"]) {
+:is(.guide, .methode, .faq) :where([class*="rounded-2xl"]) {
   border-radius: 9px;
 }
 .formulaire :is(h2, h3, h4),
-.guide :is(h2, h3, h4, h5) {
+:is(.guide, .methode, .faq) :is(h2, h3, h4, h5) {
   color: var(--encre);
   font-weight: 500;
   letter-spacing: -0.4px;
 }
 .formulaire p,
-.guide p {
+:is(.guide, .methode, .faq) p {
   overflow-wrap: break-word;
 }
 .formulaire a:hover,
-.guide a:hover {
+:is(.guide, .methode, .faq) a:hover {
   text-underline-offset: 4px;
 }
 .formulaire .enteteFormulaire,
-.enteteGuide {
+.enteteGuide,
+.enteteModale {
   flex: none;
   padding: 25px 30px;
   background: #edf1e4;
@@ -142,7 +156,8 @@
   padding-right: 14px;
 }
 .formulaire .enteteFormulaire button,
-.guide .enteteGuide button {
+.guide .enteteGuide button,
+.enteteModale button {
   flex: none;
   display: grid;
   place-items: center;
@@ -154,7 +169,8 @@
   color: var(--encre);
 }
 .formulaire .enteteFormulaire button:hover,
-.guide .enteteGuide button:hover {
+.guide .enteteGuide button:hover,
+.enteteModale button:hover {
   background: #dce5cf;
 }
 .formulaire .progression {
@@ -168,9 +184,30 @@
   overscroll-behavior: contain;
 }
 .corpsFormulaire,
-.corpsGuide {
+.corpsGuide,
+.corpsModale {
   scrollbar-width: thin;
   scrollbar-color: #a7b69c #eef0e6;
+}
+.corpsModale {
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+:is(.methode, .faq) :where([class*="shadow-"]) {
+  box-shadow: none;
+}
+.methode .frise::before {
+  background: #bdcbb0;
+}
+.methode .pastilleEtape {
+  color: var(--encre);
+  background: #e4ebd8;
+  border-color: var(--papier);
+  box-shadow: 0 0 0 4px var(--papier);
+}
+.methode :global(.group):hover .pastilleEtape {
+  color: var(--encre);
+  background: #dce5cf;
 }
 .formulaire label {
   font-weight: 500;
@@ -243,7 +280,8 @@
 .formulaire :global(.bouton-principal),
 .formulaire :is(a, button)[class~="bg-amber-500"],
 .formulaire :is(a, button)[class~="bg-white"],
-.guide :is(a, button)[class~="bg-white"],
+:is(.guide, .methode, .faq) :is(a, button)[class~="bg-white"],
+.methode :is(a, button)[class~="bg-amber-500"],
 .guide .boutonTelecharger {
   background: var(--encre);
   color: white;
@@ -256,7 +294,8 @@
 .formulaire :global(.bouton-principal):is(:hover, :active):not(:disabled),
 .formulaire :is(a, button)[class~="bg-amber-500"]:hover,
 .formulaire :is(a, button)[class~="bg-white"]:hover,
-.guide :is(a, button)[class~="bg-white"]:hover,
+:is(.guide, .methode, .faq) :is(a, button)[class~="bg-white"]:hover,
+.methode :is(a, button)[class~="bg-amber-500"]:hover,
 .guide .boutonTelecharger:hover {
   background: #385947;
   color: white;
@@ -277,7 +316,8 @@
   cursor: not-allowed;
   opacity: 0.5;
 }
-.enteteGuide {
+.enteteGuide,
+.enteteModale {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -359,7 +399,8 @@
     scroll-margin-top: 90px;
   }
   .formulaire .enteteFormulaire,
-  .enteteGuide {
+  .enteteGuide,
+  .enteteModale {
     padding: 20px;
   }
   .formulaire .enteteFormulaire h2 {
