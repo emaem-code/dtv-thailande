@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 function Section({ titre, children }: { titre: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="text-xl font-bold text-white mb-2">{titre}</h2>
+      <h2 className="text-xl font-bold text-white mb-2" data-reveal="">{titre}</h2>
       <div className="space-y-2">{children}</div>
     </div>
   );

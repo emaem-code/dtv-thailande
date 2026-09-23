@@ -2,14 +2,26 @@
 
 import { useEffect, useRef } from "react";
 
+type Options = {
+  pageKey?: string;
+  prepare?: (root: HTMLDivElement) => void;
+  preserveFirstScreen?: boolean;
+  observeChanges?: boolean;
+};
+
 /** Les éléments sont visibles par défaut ; seule leur entrée déclenche le CSS. */
-export function useHomeMotion() {
+export function useHomeMotion({
+  pageKey = "",
+  prepare,
+  preserveFirstScreen = false,
+  observeChanges = false,
+}: Options = {}) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!window.IntersectionObserver || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(({ isIntersecting, target }) => {
-        if (!isIntersecting || target.hasAttribute("data-in-view")) return;
+        if (!isIntersecting || target.hasAttribute("data-in-view") || target.hasAttribute("data-motion-static")) return;
         // Un en-tête partage son déclenchement ; le CSS garde les trois temps.
         const elements = target.hasAttribute("data-heading-part")
           ? target.closest("[data-motion-heading]")!.querySelectorAll("[data-heading-part]")
@@ -31,9 +43,34 @@ export function useHomeMotion() {
       // Les % de rootMargin se basent sur la largeur : convertir la hauteur.
       rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.15)}px 0px`,
     });
-    ref.current?.querySelectorAll('[data-reveal], [data-hero-image], [data-sparkle="scroll"]')
-      .forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, []);
+    const root = ref.current;
+    if (!root) return () => observer.disconnect();
+    const registered = new WeakSet<Element>();
+    const register = () => {
+      prepare?.(root);
+      root.querySelectorAll('[data-reveal], [data-hero-image], [data-sparkle="scroll"]').forEach((element) => {
+        if (element.hasAttribute("data-in-view") || element.hasAttribute("data-motion-static")) return;
+        const group = element.hasAttribute("data-heading-part")
+          ? Array.from(element.closest("[data-motion-heading]")!.querySelectorAll("[data-heading-part]"))
+          : [element];
+        // Ne jamais faire disparaître un contenu déjà visible, même après un filtre.
+        if (preserveFirstScreen && element.hasAttribute("data-reveal") && group.some((part) => part.getBoundingClientRect().top < window.innerHeight)) {
+          group.forEach((part) => {
+            part.setAttribute("data-motion-static", "");
+            registered.add(part);
+            observer.unobserve(part);
+          });
+        } else if (!registered.has(element)) {
+          registered.add(element);
+          observer.observe(element);
+        }
+      });
+    };
+    register();
+    // Le blog peut changer de page ou filtrer ses cartes sans recharger le layout.
+    const mutations = observeChanges ? new MutationObserver(register) : null;
+    mutations?.observe(root, { childList: true, subtree: true });
+    return () => { observer.disconnect(); mutations?.disconnect(); };
+  }, [pageKey, prepare, preserveFirstScreen, observeChanges]);
   return ref;
 }

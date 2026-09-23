@@ -37,7 +37,7 @@ export default function Contact() {
           Notre équipe vous répond sous 24h à 48h.
         </p>
 
-        <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm mt-8">
+        <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm mt-8" data-reveal="">
           <p className="text-xl font-medium">
             Envoyez-nous un e-mail à :
           </p>
@@ -51,7 +51,7 @@ export default function Contact() {
 
         {/* L'adresse du siège rassure autant qu'elle oblige : un prestataire
             qui encaisse un acompte à distance doit dire où il est établi. */}
-        <div className="border-t border-white/10 pt-8 text-sm text-gray-500 leading-relaxed">
+        <div className="border-t border-white/10 pt-8 text-sm text-gray-500 leading-relaxed" data-reveal="">
           <p className="text-gray-300 font-medium">{AGENCE.nom} — {AGENCE.enseigne}</p>
           <p>{AGENCE.activite}</p>
           <p className="mt-2">

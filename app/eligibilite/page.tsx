@@ -84,7 +84,7 @@ export default function PageEligibilite() {
 
         {/* ── CE QUE LE TEST VÉRIFIE ── */}
         <section className="mb-12 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-          <h2 className="text-xl font-bold text-white mb-5">Ce que le test vérifie</h2>
+          <h2 className="text-xl font-bold text-white mb-5" data-reveal="">Ce que le test vérifie</h2>
           <ul className="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
             <li className="flex gap-3">
               <span className="text-amber-500 flex-none font-bold">01</span>
@@ -134,15 +134,16 @@ export default function PageEligibilite() {
         </div>
 
         {/* ── POUR ALLER PLUS LOIN ── */}
-        <section className="border-t border-white/10 pt-10">
-          <h2 className="text-xl font-bold text-white mb-5">Avant de vous lancer</h2>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+        <section className="border-t border-white/10 pt-10" data-motion-heading="">
+          <h2 className="text-xl font-bold text-white mb-5" data-reveal="" data-heading-part="0">Avant de vous lancer</h2>
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6" data-reveal="" data-heading-part="1">
             Si vous préférez comprendre les règles avant de remplir quoi que ce soit, ces trois
             guides couvrent les questions qui reviennent le plus souvent.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" data-motion-group="">
             <Link
               href="/blog/fonds-bancaires-visa-dtv"
+              data-reveal=""
               className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/40 transition-colors"
             >
               <p className="text-white font-bold text-sm mb-1">La preuve bancaire</p>
@@ -153,6 +154,7 @@ export default function PageEligibilite() {
             </Link>
             <Link
               href="/blog/comparatif-visas-thailande"
+              data-reveal=""
               className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/40 transition-colors"
             >
               <p className="text-white font-bold text-sm mb-1">DTV ou autre visa ?</p>
@@ -163,6 +165,7 @@ export default function PageEligibilite() {
             </Link>
             <Link
               href="/blog/visa-dtv-couple-famille-pacs"
+              data-reveal=""
               className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/40 transition-colors"
             >
               <p className="text-white font-bold text-sm mb-1">Partir en famille</p>

@@ -1,4 +1,4 @@
-/* Vocabulaire de mouvement : actif uniquement sur l'accueil. */
+/* Vocabulaire de mouvement partagé par les pages publiques. */
 .motion {
   --motion-ease: cubic-bezier(.16, 1, .3, 1);
   --motion-block-duration: 560ms;
@@ -2236,7 +2236,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .motion [data-reveal][data-in-view] {
+  .motion [data-reveal][data-in-view]:not([data-motion-static]) {
     animation: rise var(--motion-block-duration) var(--motion-ease)
       calc(var(--motion-order, 0) * var(--motion-block-stagger)) backwards;
   }
