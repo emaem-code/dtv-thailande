@@ -6,6 +6,7 @@ import HomeContent from "./components/HomeContent";
 import HomeHeader from "./components/HomeHeader";
 import { useModales } from "./components/ModalesProvider";
 import { useApparitionAuScroll } from "./components/useApparitionAuScroll";
+import { useHomeMotion } from "./components/useHomeMotion";
 import { PRIX_APPEL, prix } from "./lib/tarifs";
 import { AGENCE, mentionSiret } from "./lib/agence";
 import s from "./home.module.css";
@@ -13,9 +14,10 @@ import s from "./home.module.css";
 export default function Home() {
   const { ouvrirGuide, ouvrirEligibilite, ouvrirMethode } = useModales();
   const afficherRappel = useApparitionAuScroll(720);
+  const motionRef = useHomeMotion();
 
   return (
-    <div className={s.page}>
+    <div className={`${s.page} ${s.motion}`} ref={motionRef}>
       <a className={s.skipLink} href="#contenu">
         Aller au contenu
       </a>
@@ -37,7 +39,7 @@ export default function Home() {
               arrivée.
             </p>
             <div className={s.heroActions}>
-              <button onClick={ouvrirEligibilite} className={s.primary}>
+              <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
                 Vérifier mon éligibilité <span aria-hidden="true">↗</span>
               </button>
               <a href="#accompagnement" className={s.textLink}>
@@ -64,14 +66,17 @@ export default function Home() {
             </div>
           </div>
           <div className={s.heroVisual}>
-            <Image
-              src="/images/hero-accueil.jpg"
-              alt="Ordinateur portable ouvert sur une table en bois, terrasse donnant sur la végétation tropicale et la mer"
-              fill
-              priority
-              sizes="(max-width: 760px) 100vw, 48vw"
-              className={s.heroImage}
-            />
+            <div className={s.heroImageFrame}>
+              <Image
+                src="/images/hero-accueil.jpg"
+                alt="Ordinateur portable ouvert sur une table en bois, terrasse donnant sur la végétation tropicale et la mer"
+                fill
+                priority
+                sizes="(max-width: 760px) 100vw, 48vw"
+                className={s.heroImage}
+                data-hero-image=""
+              />
+            </div>
             <span className={s.locationTag}>
               <span aria-hidden="true">◎</span> Destination Thaïlande
             </span>
@@ -98,19 +103,20 @@ export default function Home() {
 
         <div
           className={s.trustStrip}
+          data-motion-group=""
           aria-label="Les repères de votre accompagnement"
         >
-          <p>
+          <p data-reveal="">
             <span aria-hidden="true">01</span>
             <strong>Un accompagnement humain</strong>
             <small>Un interlocuteur francophone à Phuket</small>
           </p>
-          <p>
+          <p data-reveal="">
             <span aria-hidden="true">02</span>
             <strong>Un budget annoncé dès le départ</strong>
             <small>À partir de {prix(PRIX_APPEL)} par personne</small>
           </p>
-          <p>
+          <p data-reveal="">
             <span aria-hidden="true">03</span>
             <strong>Votre dossier, de bout en bout</strong>
             <small>Préparation, dépôt et suivi consulaire</small>
@@ -122,8 +128,8 @@ export default function Home() {
         </h2>
         <HomeContent />
 
-        <section className={s.advisorSection} aria-labelledby="titre-matthieu">
-          <div className={s.advisorPortrait}>
+        <section className={s.advisorSection} aria-labelledby="titre-matthieu" data-motion-group="">
+          <div className={s.advisorPortrait} data-reveal="">
             <Image
               src="/images/matthieu-moretti.jpg"
               alt="Matthieu Moretti, fondateur de DTV Thaïlande"
@@ -131,7 +137,7 @@ export default function Home() {
               sizes="(max-width: 760px) 90vw, 400px"
             />
           </div>
-          <div>
+          <div data-reveal="">
             <p className={s.eyebrow}>Derrière le site, une personne.</p>
             <h2 id="titre-matthieu">
               Le terrain, avant
@@ -155,8 +161,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={s.finalCta} aria-labelledby="titre-depart">
-          <div>
+        <section className={s.finalCta} aria-labelledby="titre-depart" data-motion-group="">
+          <div data-reveal="">
             <p className={s.eyebrow}>Le premier pas est le plus simple.</p>
             <h2 id="titre-depart">
               Et si votre projet
@@ -168,8 +174,8 @@ export default function Home() {
               ensemble.
             </p>
           </div>
-          <div className={s.finalActions}>
-            <button onClick={ouvrirEligibilite} className={s.primary}>
+          <div className={s.finalActions} data-reveal="">
+            <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
               Vérifier mon éligibilité <span aria-hidden="true">↗</span>
             </button>
             <span>Gratuit · Sans engagement · En français</span>
@@ -259,7 +265,7 @@ export default function Home() {
             Votre projet commence ici
             <small>Accompagnement dès {prix(PRIX_APPEL)}</small>
           </span>
-          <button onClick={ouvrirEligibilite}>
+          <button onClick={ouvrirEligibilite} data-sparkle="ready">
             Mon éligibilité <span aria-hidden="true">↗</span>
           </button>
         </aside>

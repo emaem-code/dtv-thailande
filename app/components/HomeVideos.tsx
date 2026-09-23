@@ -77,7 +77,7 @@ export default function HomeVideos() {
       className={s.videosSection}
       aria-labelledby="titre-videos"
     >
-      <div className={s.sectionIntro}>
+      <div className={s.sectionIntro} data-reveal="">
         <div>
           <p className={s.eyebrow}>Quelques images valent mille questions.</p>
           <h2 id="titre-videos">
@@ -90,12 +90,13 @@ export default function HomeVideos() {
           Tout comprendre en 5 vidéos, à votre rythme.
         </p>
       </div>
-      <div className={s.videoGrid}>
+      <div className={s.videoGrid} data-motion-group="">
         {videos.map((v, i) => (
           <article
             key={v.src}
             className={s.videoCard}
             aria-labelledby={`titre-video-${i}`}
+            data-reveal=""
           >
             <button
               onClick={() => setActive(i)}

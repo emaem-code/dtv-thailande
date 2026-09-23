@@ -1,3 +1,24 @@
+/* Vocabulaire de mouvement : actif uniquement sur l'accueil. */
+.motion {
+  --motion-ease: cubic-bezier(.16, 1, .3, 1);
+  --motion-block-duration: 560ms;
+  --motion-line-duration: 460ms;
+  --motion-interaction-duration: 180ms;
+  --motion-block-distance: 14px;
+  --motion-line-distance: 7px;
+  --motion-block-stagger: 80ms;
+  --motion-line-stagger: 90ms;
+  --motion-hero-duration: 1200ms;
+  --motion-hero-scale: 1.04;
+  --motion-arrow-distance: 4px;
+  --motion-press-distance: 1px;
+  --motion-sparkle-delay: 1800ms;
+  --motion-sparkle-cycle: 6000ms;
+  --motion-sparkle-size: 5px;
+  --motion-sparkle-top: 6px;
+  --motion-sparkle-right: 8px;
+  --motion-sparkle-halo: 9px;
+}
 .page {
   --paper: #f7f7f2;
   --ink: #243f35;
@@ -326,6 +347,12 @@
      du carre, donc la photo est recadree sur les cotes. 50 % garde le plan
      de travail et la vue, la ou 43 % remontait et coupait la table. */
   object-position: center 50%;
+  border-radius: inherit;
+}
+.heroImageFrame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   border-radius: inherit;
 }
 .locationTag {
@@ -1273,24 +1300,6 @@
   opacity: 0.35;
   cursor: default;
 }
-@media (min-width: 761px) {
-  .heroCopy {
-    animation: arrive 0.65s ease-out both;
-  }
-  .heroVisual {
-    animation: arrive 0.85s ease-out both;
-  }
-}
-@keyframes arrive {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @media (max-width: 1400px) {
   .homeContent,
   .trustStrip {
@@ -2145,10 +2154,146 @@
     border: 0;
   }
 }
+/* Pas d'état caché au repos. L'observateur ajoute seulement data-in-view,
+   une fois ; le CSS termine seul, même si le script s'arrête ensuite. */
+.motion [data-motion-group] > :nth-child(2) { --motion-order: 1; }
+.motion [data-motion-group] > :nth-child(3) { --motion-order: 2; }
+.motion [data-motion-group] > :nth-child(4) { --motion-order: 3; }
+.motion [data-motion-group] > :nth-child(5) { --motion-order: 4; }
+.motion [data-motion-group] > :nth-child(6) { --motion-order: 5; }
+.motion [data-motion-group] > :nth-child(7) { --motion-order: 6; }
+.motion .videoPhrases li:nth-child(2) { --motion-line-order: 1; }
+.motion .videoPhrases li:nth-child(3) { --motion-line-order: 2; }
+
+/* Les anciens gestes de survol cèdent la place à un seul vocabulaire. */
+.motion :is(.desktopNav a, .announcement a, .announcement button,
+  .visaTicket, .profileGrid > div, .videoThumbnail img, .guideImage img) {
+  transition: none;
+}
+.motion :is(.visaTicket:hover, .profileGrid > div:hover,
+  .videoThumbnail:hover img, .guideGrid > a:hover img) {
+  transform: none;
+}
+.motion .faqList summary > span:last-child {
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+
+.motion [data-sparkle] {
+  position: relative;
+  isolation: isolate;
+  background: var(--ink);
+  color: var(--paper);
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover {
+  background: var(--ink);
+  transform: none;
+}
+/* Le CTA du dernier encart garde sa séparation sur le fond vert. */
+.motion .finalActions [data-sparkle] {
+  box-shadow: inset 0 0 0 1px var(--paper);
+}
+.motion .finalActions [data-sparkle]::before {
+  inset: 1px;
+}
+.motion [data-sparkle]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: #182e26;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover::before { opacity: 1; }
+.motion [data-sparkle] > span {
+  display: inline-block;
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover > span {
+  transform: translateX(var(--motion-arrow-distance));
+}
+.motion [data-sparkle]:active {
+  transform: translateY(var(--motion-press-distance));
+}
+.motion [data-sparkle]::after {
+  content: "";
+  position: absolute;
+  top: var(--motion-sparkle-top);
+  right: var(--motion-sparkle-right);
+  width: var(--motion-sparkle-size);
+  height: var(--motion-sparkle-size);
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 var(--motion-sparkle-halo) var(--paper);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion [data-reveal][data-in-view] {
+    animation: rise var(--motion-block-duration) var(--motion-ease)
+      calc(var(--motion-order, 0) * var(--motion-block-stagger)) backwards;
+  }
+  .motion .videoCard[data-in-view] .videoPhrases li {
+    --motion-distance: var(--motion-line-distance);
+    animation: rise var(--motion-line-duration) var(--motion-ease)
+      calc(var(--motion-order, 0) * var(--motion-block-stagger)
+        + var(--motion-block-duration)
+        + var(--motion-line-order, 0) * var(--motion-line-stagger)) backwards;
+  }
+  .motion [data-hero-image][data-in-view] {
+    animation: settle var(--motion-hero-duration) var(--motion-ease) backwards;
+  }
+  .motion :is([data-sparkle="ready"], [data-sparkle="scroll"][data-in-view])::after {
+    animation: sparkle var(--motion-sparkle-cycle) var(--motion-ease)
+      calc(var(--motion-arrival-wait, 0ms) + var(--motion-sparkle-delay)) infinite;
+  }
+}
+/* Le clavier et le pointeur prennent toujours la priorité sur le décor. */
+.motion [data-reveal]:focus-within,
+.motion [data-reveal]:focus-within .videoPhrases li {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.motion [data-sparkle]:is(:hover, :focus-visible)::after {
+  animation: none;
+  opacity: 0;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-distance, var(--motion-block-distance)));
+  }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes settle {
+  from { transform: scale(var(--motion-hero-scale)); }
+  to { transform: scale(1); }
+}
+@keyframes sparkle {
+  0% { opacity: 0; }
+  /* 400 ms d'allumage, 440 ms d'extinction, 5 160 ms invisible (86 %). */
+  6.666667% { opacity: 1; }
+  14%, 100% { opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
+  :global(html):has(.motion) {
+    scroll-behavior: auto !important;
+  }
+  .motion [data-sparkle]:is(:hover, :active) > span,
+  .motion [data-sparkle]:active {
+    transform: none;
+  }
   .page *,
   .page *:before,
-  .page *:after {
+  .page *:after,
+  /* Les fenêtres du fournisseur sont montées hors de .page. */
+  :global(body):has(.motion) *,
+  :global(body):has(.motion) *::before,
+  :global(body):has(.motion) *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;

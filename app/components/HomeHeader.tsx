@@ -60,7 +60,7 @@ export default function HomeHeader() {
                 Mon éligibilité <span aria-hidden="true">↗</span>
               </a>
             ) : (
-              <button className={s.headerCta} onClick={ouvrirEligibilite}>
+              <button className={s.headerCta} onClick={ouvrirEligibilite} data-sparkle="ready">
                 Mon éligibilité <span aria-hidden="true">↗</span>
               </button>
             )}
@@ -113,8 +113,8 @@ export default function HomeHeader() {
                 </Link>
               ))}
             </nav>
-            <Link href="/eligibilite" className={s.primary} onClick={fermer}>
-              Vérifier mon éligibilité →
+            <Link href="/eligibilite" className={s.primary} onClick={fermer} data-sparkle="ready">
+              Vérifier mon éligibilité <span aria-hidden="true">→</span>
             </Link>
             <a href="/guide-dtv-2025.pdf" download className={s.textLink}>
               Télécharger le guide gratuit ↓
