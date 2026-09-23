@@ -1007,6 +1007,96 @@
     display: flex;
   }
 }
+/* Lecture mobile : même contenu, sans petits caractères ni commandes serrées. */
+@media (max-width: 760px) {
+  .introIndex,
+  .texteCarte > p,
+  .conversion p,
+  .alertes p,
+  .articleContent > article,
+  .articleContent :is(p, li) {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .articleContent header > p,
+  .articleContent figcaption {
+    font-size: 14px;
+  }
+  .eyebrow,
+  .metaCarte,
+  .metaCarte > span:first-child,
+  .aLaUne,
+  .articleContent header > span {
+    font-size: 12px;
+  }
+  .articleContent header h1 {
+    font-size: clamp(32px, 8.5vw, 39px);
+    overflow-wrap: break-word;
+  }
+  .articleContent :is(h2, h3),
+  .titreIndex,
+  .vedette h2 {
+    text-wrap: balance;
+  }
+  .vedette .texteCarte,
+  .conversion,
+  .alertes > section > div {
+    padding: 24px 20px;
+  }
+  .lire,
+  .boutonConversion,
+  .articleContent :is(a, button)[class*="bg-"]:not([aria-label]),
+  .articleContent article > nav:not([aria-label]) a {
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .articleContent article > nav:not([aria-label]) a {
+    display: inline-flex;
+    align-items: center;
+  }
+  .articleContent article > nav:not([aria-label]) {
+    padding: 20px;
+  }
+  .articleContent article > nav[aria-label="Navigation de fin d'article"] a {
+    font-size: 15px;
+  }
+  .articleContent :is(a, button)[aria-label] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .articleContent header > div:has([aria-label^="Partager"]) {
+    flex-wrap: wrap;
+  }
+  .articleContent table {
+    font-size: 15px;
+  }
+  .articleContent [class*="overflow-x-auto"] {
+    overscroll-behavior-x: contain;
+  }
+  .alertes label {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .alertes button {
+    min-height: 48px;
+    font-size: 16px;
+  }
+  .footer nav {
+    font-size: 14px;
+  }
+  .footer nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer > p {
+    font-size: 13px;
+  }
+  /* L'en-tête fixe conserve le bouton d'éligibilité, sans masquer la lecture. */
+  .floatingBlog {
+    display: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .blog *,
   .blog *::before,

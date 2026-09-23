@@ -1930,6 +1930,221 @@
     font-size: 7px;
   }
 }
+/* Confort de lecture et commandes tactiles, sans modifier le rendu ordinateur. */
+@media (max-width: 760px) {
+  .page {
+    --muted: #526357;
+  }
+  .headerInner {
+    gap: 8px;
+  }
+  .headerActions {
+    gap: 4px;
+  }
+  .headerCta {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .menuButton,
+  .menuTitle button,
+  .videoDialogHeader button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .announcement p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .announcement button {
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .heroActions > .textLink {
+    justify-content: center;
+    font-size: 15px;
+  }
+  .primary {
+    font-size: 16px;
+    min-height: 48px;
+  }
+  .textLink {
+    min-height: 44px;
+  }
+  .heroDescription,
+  .homeContent section > p:not(.eyebrow),
+  .profileGrid p,
+  .fundsNote p,
+  .methodSection li p,
+  .priceCard > p,
+  .priceIncludes,
+  .familyNote p,
+  .faqList details > div,
+  .advisorSection p:not(.eyebrow),
+  .finalCta p:not(.eyebrow) {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .locationTag,
+  .photoCaption > span {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+  }
+  .photoCaption > span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  .visaTicket small {
+    font-size: 12px;
+  }
+  .visaTicket strong {
+    font-size: 14px;
+  }
+  .homeContent .procedureSources {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+  .pricingSection > p:last-child {
+    font-size: 14px !important;
+  }
+  .hero .eyebrow,
+  .homeContent .eyebrow,
+  .advisorSection .eyebrow {
+    font-size: 12px;
+    color: #526357;
+  }
+  .finalCta .eyebrow {
+    font-size: 12px;
+  }
+  .microcopy,
+  .trustStrip p > span,
+  .profileNumber,
+  .methodSection li > span,
+  .priceCardHeading span {
+    color: #526357;
+  }
+  .microcopy,
+  .advisorMini div > span,
+  .trustStrip small,
+  .keyFigures p:last-child,
+  .priceAmounts small,
+  .priceCard > small,
+  .finalActions > span {
+    font-size: 13px;
+  }
+  .advisorMini strong,
+  .trustStrip strong,
+  .priceAmounts span {
+    font-size: 14px;
+  }
+  .homeContent :is(h2, h3),
+  .hero h1,
+  .finalCta h2 {
+    text-wrap: balance;
+  }
+  .profileGrid > div {
+    padding: 24px 20px;
+  }
+  .profileGrid a {
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .methodSection ol {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .methodSection li h3 {
+    font-size: 20px;
+  }
+  .priceCardHeading span {
+    font-size: 12px;
+    max-width: none;
+  }
+  .priceCardHeading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .faqList summary > span:first-child > span:first-child,
+  .guideGrid > a > span:not(.articleLink) {
+    font-size: 12px;
+    color: #526357;
+  }
+  .faqList summary > span:first-child > span:last-child {
+    font-size: 17px;
+  }
+  .guideGrid {
+    grid-template-columns: 1fr;
+  }
+  .guideGrid h3 {
+    font-size: 21px;
+    max-width: none;
+  }
+  .articleLink,
+  .faqSection > div:last-child a,
+  .guidesSection > div:last-child a,
+  .finalActions .textLink {
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .footerTop nav,
+  .officialResources > div {
+    font-size: 14px;
+  }
+  .footerTop nav :is(a, button),
+  .officialResources a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footerTop > p,
+  .officialResources :is(h2, p),
+  .footerBottom {
+    font-size: 13px;
+  }
+  /* Le même accès est désormais permanent et tactile dans l'en-tête. */
+  .stickyCta {
+    display: none;
+  }
+  .menuPanel {
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+  .menuPanel nav a {
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .videoDialogFooter button {
+    min-height: 44px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .brand > span > span {
+    display: none;
+  }
+  .priceAmounts {
+    grid-template-columns: 1fr;
+  }
+  .priceAmounts > div + div {
+    padding: 16px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .keyFigures {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .keyFigures > div {
+    padding: 0;
+    border: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .page *,
   .page *:before,

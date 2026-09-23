@@ -904,6 +904,91 @@
     font-size: 16px;
   }
 }
+/* Pages publiques sur téléphone ; administration et documents clients inchangés. */
+@media (max-width: 760px) {
+  .surface {
+    --muted: #526357;
+  }
+  .contenu h1 {
+    font-size: clamp(36px, 10vw, 43px);
+    text-wrap: balance;
+  }
+  .faq main > div > div:first-child > p,
+  .faq details > div p,
+  .faq main > div > div:last-child p,
+  .contact .contenu > div > div > p,
+  .contact .contenu > div > div > div:nth-of-type(2),
+  .mentions section > div > div,
+  .eligibilite .contenu header > p,
+  .eligibilite main > div > section:first-of-type li,
+  .eligibilite main > div > section p {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .faq nav[aria-label="Thèmes"] a {
+    font-size: 13px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .faq summary h3 {
+    font-size: 17px;
+  }
+  .faq section > div:first-child p,
+  .eligibilite .contenu header > span {
+    font-size: 12px;
+  }
+  .faq details > div {
+    padding: 18px 16px 24px;
+  }
+  .faq details a {
+    font-size: inherit;
+  }
+  .faq main > div > div:last-child {
+    padding: 28px 20px;
+  }
+  .faq main > div > div:last-child :is(button, a) {
+    min-height: 48px;
+    font-size: 15px;
+  }
+  .contact .contenu > div > div > div:nth-of-type(1) p {
+    font-size: 14px;
+  }
+  .contact .contenu > div > div > div:nth-of-type(2) {
+    padding: 24px 20px;
+  }
+  .contact .contenu > div > div > div:last-child a,
+  .mentions .contenu > div > div > a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  .eligibilite .contenu header h1 {
+    font-size: clamp(36px, 10vw, 42px);
+  }
+  .eligibilite main > div > section:first-of-type li > span:first-child {
+    color: #526357;
+    font-size: 12px;
+  }
+  .pied nav {
+    font-size: 14px;
+  }
+  .pied nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .pied > p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 520px) {
+  .eligibilite main > div > section:first-of-type ul {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .surface *,
   .surface *::before,

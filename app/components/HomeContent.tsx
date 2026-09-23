@@ -391,7 +391,7 @@ export default function HomeContent() {
                   src={post.image}
                   alt={post.shortTitle}
                   fill
-                  sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 30vw"
+                  sizes="(max-width: 760px) 90vw, (max-width: 900px) 45vw, 30vw"
                 />
               </div>
               <span>{post.category}</span>
