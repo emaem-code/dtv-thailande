@@ -102,10 +102,10 @@ export default function HomeContent() {
   return (
     <div className={s.homeContent}>
       {/* ── LE DTV EN BREF ── */}
-      <section id="visa-dtv" className={s.briefSection}>
-        <p className={s.eyebrow}>La liberté commence par la clarté.</p>
-        <h2 data-reveal="">Le Visa DTV en bref</h2>
-        <p>
+      <section id="visa-dtv" className={s.briefSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">La liberté commence par la clarté.</p>
+        <h2 data-reveal="" data-heading-part="1">Le Visa DTV en bref</h2>
+        <p data-reveal="" data-heading-part="2">
           Le <strong>Destination Thailand Visa</strong>, ou DTV, est le visa
           long séjour créé par la Thaïlande en 2024 pour les travailleurs à
           distance, les indépendants et les personnes venant suivre une activité
@@ -143,10 +143,10 @@ export default function HomeContent() {
       </section>
 
       {/* ── ÉLIGIBILITÉ ── */}
-      <section id="profils" className={s.profilesSection}>
-        <p className={s.eyebrow}>À chaque projet, sa voie.</p>
-        <h2 data-reveal="">Êtes-vous éligible au Visa DTV ?</h2>
-        <p>
+      <section id="profils" className={s.profilesSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">À chaque projet, sa voie.</p>
+        <h2 data-reveal="" data-heading-part="1">Êtes-vous éligible au Visa DTV ?</h2>
+        <p data-reveal="" data-heading-part="2">
           Il existe trois voies d&apos;accès, et la difficulté n&apos;est
           presque jamais de remplir le formulaire : elle est de déterminer
           laquelle vous concerne réellement. Beaucoup de candidats se croient
@@ -201,10 +201,10 @@ export default function HomeContent() {
       <HomeVideos />
 
       {/* ── MÉTHODE ── */}
-      <section id="methode" className={s.methodSection}>
-        <p className={s.eyebrow}>Vous avancez. Nous vous accompagnons.</p>
-        <h2 data-reveal="">Notre méthode, en cinq étapes</h2>
-        <p>
+      <section id="methode" className={s.methodSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Vous avancez. Nous vous accompagnons.</p>
+        <h2 data-reveal="" data-heading-part="1">Notre méthode, en cinq étapes</h2>
+        <p data-reveal="" data-heading-part="2">
           De la préparation de votre dossier à votre arrivée après accord du
           visa, voici les étapes de notre accompagnement.
         </p>
@@ -236,10 +236,10 @@ export default function HomeContent() {
       </section>
 
       {/* ── TARIFS ── */}
-      <section id="tarifs" className={s.pricingSection}>
-        <p className={s.eyebrow}>Un projet clair. Un budget transparent.</p>
-        <h2 data-reveal="">Nos formules et nos tarifs</h2>
-        <p>
+      <section id="tarifs" className={s.pricingSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Un projet clair. Un budget transparent.</p>
+        <h2 data-reveal="" data-heading-part="1">Nos formules et nos tarifs</h2>
+        <p data-reveal="" data-heading-part="2">
           Nos prix sont publics et dépendent uniquement de la{" "}
           <strong>voie d&apos;éligibilité</strong> par laquelle vous obtenez le
           visa. Le tarif Soft Power inclut les frais d&apos;inscription à
@@ -337,10 +337,10 @@ export default function HomeContent() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className={s.faqSection}>
-        <p className={s.eyebrow}>Les bonnes réponses, avant le départ.</p>
-        <h2 data-reveal="">Questions fréquentes sur le Visa DTV</h2>
-        <p>
+      <section id="faq" className={s.faqSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Les bonnes réponses, avant le départ.</p>
+        <h2 data-reveal="" data-heading-part="1">Questions fréquentes sur le Visa DTV</h2>
+        <p data-reveal="" data-heading-part="2">
           L&apos;immigration thaïlandaise est stricte et les rumeurs circulent
           vite. Voici des réponses claires aux questions qui reviennent à chaque
           accompagnement.
@@ -375,10 +375,10 @@ export default function HomeContent() {
       </section>
 
       {/* ── GUIDES ── */}
-      <section id="guides" className={s.guidesSection}>
-        <p className={s.eyebrow}>Le journal de votre future vie.</p>
-        <h2 data-reveal="">Nos guides de terrain</h2>
-        <p>
+      <section id="guides" className={s.guidesSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Le journal de votre future vie.</p>
+        <h2 data-reveal="" data-heading-part="1">Nos guides de terrain</h2>
+        <p data-reveal="" data-heading-part="2">
           Nous documentons publiquement ce que nous rencontrons sur le terrain :
           montants réels, textes officiels et pièges constatés. Aucun de ces
           guides n&apos;est réservé aux clients.

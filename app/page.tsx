@@ -137,39 +137,39 @@ export default function Home() {
               sizes="(max-width: 760px) 90vw, 400px"
             />
           </div>
-          <div data-reveal="">
-            <p className={s.eyebrow}>Derrière le site, une personne.</p>
-            <h2 id="titre-matthieu">
+          <div data-motion-heading="">
+            <p className={s.eyebrow} data-reveal="" data-heading-part="0">Derrière le site, une personne.</p>
+            <h2 id="titre-matthieu" data-reveal="" data-heading-part="1">
               Le terrain, avant
               <br />
               <em>la théorie.</em>
             </h2>
-            <p>
+            <p data-reveal="" data-heading-part="2">
               Je suis Matthieu, installé à Kathu, Phuket. J’ai moi-même fait la
               démarche du Visa DTV. Aujourd’hui, j’accompagne les francophones
               qui veulent préparer leur installation avec un dossier clair et un
               interlocuteur sur place.
             </p>
-            <p>
+            <p data-reveal="">
               Nous montons votre dossier consulaire de bout en bout. Trois voies
               d’accès, un tarif public, et un accompagnement par quelqu’un qui a
               fait la démarche lui-même.
             </p>
-            <Link href="/contact" className={s.textLink}>
+            <Link href="/contact" className={s.textLink} data-reveal="">
               Parlons de votre projet <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </section>
 
         <section className={s.finalCta} aria-labelledby="titre-depart" data-motion-group="">
-          <div data-reveal="">
-            <p className={s.eyebrow}>Le premier pas est le plus simple.</p>
-            <h2 id="titre-depart">
+          <div data-motion-heading="">
+            <p className={s.eyebrow} data-reveal="" data-heading-part="0">Le premier pas est le plus simple.</p>
+            <h2 id="titre-depart" data-reveal="" data-heading-part="1">
               Et si votre projet
               <br />
               prenait <em>vraiment forme ?</em>
             </h2>
-            <p>
+            <p data-reveal="" data-heading-part="2">
               Commençons par votre situation. Le reste, nous le préparons
               ensemble.
             </p>

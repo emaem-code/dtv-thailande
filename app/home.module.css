@@ -2156,8 +2156,11 @@
 }
 /* Pas d'état caché au repos. L'observateur ajoute seulement data-in-view,
    une fois ; le CSS termine seul, même si le script s'arrête ensuite. */
-.motion [data-motion-group] > :nth-child(2) { --motion-order: 1; }
-.motion [data-motion-group] > :nth-child(3) { --motion-order: 2; }
+.motion [data-heading-part="0"] { --motion-order: 0; }
+.motion [data-motion-group] > :nth-child(2),
+.motion [data-heading-part="1"] { --motion-order: 1; }
+.motion [data-motion-group] > :nth-child(3),
+.motion [data-heading-part="2"] { --motion-order: 2; }
 .motion [data-motion-group] > :nth-child(4) { --motion-order: 3; }
 .motion [data-motion-group] > :nth-child(5) { --motion-order: 4; }
 .motion [data-motion-group] > :nth-child(6) { --motion-order: 5; }

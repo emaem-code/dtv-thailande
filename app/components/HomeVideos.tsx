@@ -77,14 +77,14 @@ export default function HomeVideos() {
       className={s.videosSection}
       aria-labelledby="titre-videos"
     >
-      <div className={s.sectionIntro} data-reveal="">
+      <div className={s.sectionIntro} data-motion-heading="">
         <div>
-          <p className={s.eyebrow}>Quelques images valent mille questions.</p>
-          <h2 id="titre-videos">
+          <p className={s.eyebrow} data-reveal="" data-heading-part="0">Quelques images valent mille questions.</p>
+          <h2 id="titre-videos" data-reveal="" data-heading-part="1">
             On vous montre <em>le chemin.</em>
           </h2>
         </div>
-        <p>
+        <p data-reveal="" data-heading-part="2">
           Votre projet, nos réponses.
           <br />{" "}
           Tout comprendre en 5 vidéos, à votre rythme.
