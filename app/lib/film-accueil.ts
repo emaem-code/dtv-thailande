@@ -11,8 +11,6 @@ export type SceneFilmAccueil = {
   alt: string;
   points: string[];
   narration: string;
-  /** Durée de la scène en secondes. */
-  duration: number;
 };
 
 /**
@@ -35,7 +33,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Vous imaginez votre vie en Thaïlande ? Commençons par rendre votre projet plus clair. Voici les repères pour comprendre le visa DTV, vérifier votre profil et préparer votre dossier avec notre accompagnement.",
-    duration: 12,
   },
   {
     id: "reperes",
@@ -51,7 +48,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Le DTV est valable cinq ans, à entrées multiples. Chaque séjour dure jusqu’à cent quatre-vingts jours, prolongeable une fois sur place. Cette validité n’autorise pas cinq ans de séjour continu.",
-    duration: 12,
   },
   {
     id: "profils",
@@ -67,7 +63,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Vous travaillez à distance, vous êtes indépendant, ou vous souhaitez suivre une activité culturelle ou sportive ? Plusieurs voies existent. Certains proches peuvent aussi vous accompagner. Les conditions et les justificatifs dépendent de votre situation.",
-    duration: 12,
   },
   {
     id: "dossier",
@@ -83,7 +78,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Avant le dépôt, nous examinons vos justificatifs d’activité, de résidence et vos documents financiers. À Paris, l’historique des trois derniers mois compte. Votre épargne doit être disponible ; elle n’est pas bloquée.",
-    duration: 12,
   },
   {
     id: "methode",
@@ -99,7 +93,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Nous préparons votre dossier et vous accompagnons pour le déposer en ligne. L’ambassade reste seule décisionnaire : à Paris, l’instruction prend environ quatre semaines, parfois davantage. Un entretien peut être demandé.",
-    duration: 12,
   },
   {
     id: "budget",
@@ -115,7 +108,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Nos tarifs sont publics. Le budget comprend les frais consulaires et une estimation des traductions. La formule Essentielle accompagne votre demande de visa ; Premium prépare aussi votre arrivée. Le devis précise votre budget.",
-    duration: 12,
   },
   {
     id: "premier-pas",
@@ -131,7 +123,6 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     ],
     narration:
       "Votre projet commence par votre situation, pas par un dossier standard. Faites le point avec notre test d’éligibilité. Et si vous souhaitez approfondir un sujet, nos guides et notre FAQ restent à votre disposition.",
-    duration: 12,
   },
 ];
 
