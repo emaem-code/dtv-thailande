@@ -21,6 +21,7 @@ export default function HomeExplainer() {
   const [notice, setNotice] = useState("");
   const [replayKey, setReplayKey] = useState(0);
   const playerRef = useRef<HTMLDivElement>(null);
+  const chaptersRef = useRef<HTMLElement>(null);
   const playButtonRef = useRef<HTMLButtonElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const pendingSeek = useRef<number | null>(null);
@@ -103,6 +104,38 @@ export default function HomeExplainer() {
     };
   }, [pause]);
 
+  useEffect(() => {
+    const navigation = chaptersRef.current;
+    const active = navigation?.querySelector<HTMLElement>('[aria-current="step"]');
+    if (!navigation || !active) return;
+    // Suivre le chapitre dans sa barre, sans déplacer la page ni le focus.
+    const left = active.offsetLeft;
+    const right = left + active.offsetWidth;
+    if (left < navigation.scrollLeft || right > navigation.scrollLeft + navigation.clientWidth) {
+      navigation.scrollTo({
+        left: left < navigation.scrollLeft ? left : right - navigation.clientWidth,
+        behavior: "instant",
+      });
+    }
+  }, [scene]);
+
+  useEffect(() => {
+    const alignAnchor = () => {
+      if (window.location.hash === "#film-dtv" || window.location.hash === "#accompagnement") {
+        playerRef.current?.scrollIntoView({ block: "start", behavior: "instant" });
+      }
+    };
+    // Recaler aussi l’arrivée directe après l’hydratation et les médias initiaux.
+    const frame = window.requestAnimationFrame(alignAnchor);
+    window.addEventListener("hashchange", alignAnchor);
+    window.addEventListener("load", alignAnchor, { once: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", alignAnchor);
+      window.removeEventListener("load", alignAnchor);
+    };
+  }, []);
+
   const goToChapter = (index: number) => {
     void playFrom(FILM_AUDIO_CHAPTERS[index].start);
     playerRef.current?.scrollIntoView({
@@ -112,7 +145,7 @@ export default function HomeExplainer() {
   };
 
   return (
-    <section id="film-dtv" className={s.section} aria-labelledby="titre-film-dtv">
+    <section className={s.section} aria-labelledby="titre-film-dtv">
       <header className={s.heading}>
         <div>
           <p className={s.eyebrow}>Regarder. Comprendre. Se projeter.</p>
@@ -122,6 +155,8 @@ export default function HomeExplainer() {
       </header>
 
       <div id="accompagnement" className={s.player} ref={playerRef} role="region" aria-label="Présentation animée du Visa DTV" data-playing={lecture === "playing"}>
+        {/* Les deux liens historiques arrivent au même endroit : le lecteur. */}
+        <span id="film-dtv" className={s.anchor} aria-hidden="true" />
         <audio
           ref={audioRef}
           preload="none"
@@ -178,7 +213,7 @@ export default function HomeExplainer() {
 
         {captions && <p className={s.captions} aria-live="off">{lecture === "ready" ? "Lancez la présentation pour découvrir l’essentiel, avec une narration française et des sous-titres." : captionParts[captionIndex]}</p>}
         <p className={s.notice} role="status">{notice || (lecture === "loading" ? "Chargement du son…" : "")}</p>
-        <nav className={s.chapters} aria-label="Chapitres de l’explication">{FILM_ACCUEIL.map((part, index) => <button key={part.id} onClick={() => goToChapter(index)} aria-current={scene === index ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span>{part.chapitre}</button>)}</nav>
+        <nav ref={chaptersRef} className={s.chapters} aria-label="Chapitres de l’explication">{FILM_ACCUEIL.map((part, index) => <button key={part.id} onClick={() => goToChapter(index)} aria-current={scene === index ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span>{part.chapitre}</button>)}</nav>
       </div>
 
       <div className={s.below}>
