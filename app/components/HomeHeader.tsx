@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useModales } from "./ModalesProvider";
 import { useModalA11y } from "./useModalA11y";
 import BandeauAnnonce from "./BandeauAnnonce";
+import ActionIcon from "./ActionIcon";
 import s from "../home.module.css";
 
 const liens = [
@@ -53,15 +54,15 @@ export default function HomeHeader() {
           </nav>
           <div className={s.headerActions}>
             <button className={s.guideLink} onClick={ouvrirGuide}>
-              Le guide gratuit ↗
+              Le guide gratuit <ActionIcon name="book" />
             </button>
             {surPageEligibilite ? (
               <a className={s.headerCta} href="#formulaire-eligibilite">
-                Mon éligibilité <span aria-hidden="true">↗</span>
+                Mon éligibilité <ActionIcon name="eligibility" />
               </a>
             ) : (
               <button className={s.headerCta} onClick={ouvrirEligibilite} data-sparkle="ready">
-                Mon éligibilité <span aria-hidden="true">↗</span>
+                Mon éligibilité <ActionIcon name="eligibility" />
               </button>
             )}
             <button
@@ -111,16 +112,15 @@ export default function HomeHeader() {
                 return (
                   <Lien href={l.href} key={l.href} onClick={fermer}>
                     {l.label}
-                    <span aria-hidden="true">↗</span>
                   </Lien>
                 );
               })}
             </nav>
             <Link href="/eligibilite" className={s.primary} onClick={fermer} data-sparkle="ready">
-              Vérifier mon éligibilité <span aria-hidden="true">→</span>
+              Vérifier mon éligibilité <ActionIcon name="eligibility" />
             </Link>
             <a href="/guide-dtv-2025.pdf" download className={s.textLink}>
-              Télécharger le guide gratuit ↓
+              Télécharger le guide gratuit <ActionIcon name="book" />
             </a>
           </div>
         </div>

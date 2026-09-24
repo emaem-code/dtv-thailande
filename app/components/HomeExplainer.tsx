@@ -6,6 +6,7 @@ import { FILM_ACCUEIL, FILM_ACCUEIL_SOURCES, DATE_VERIFICATION_FILM_ACCUEIL } fr
 import { FILM_AUDIO_SRC, FILM_AUDIO_DURATION, FILM_AUDIO_CHAPTERS, getFilmPosition } from "../lib/film-accueil-audio";
 import { useModales } from "./ModalesProvider";
 import SourcesProcedure from "./SourcesProcedure";
+import ActionIcon from "./ActionIcon";
 import s from "./HomeExplainer.module.css";
 
 type Lecture = "ready" | "loading" | "playing" | "paused" | "ended";
@@ -187,18 +188,17 @@ export default function HomeExplainer() {
             <div className={s.photo}>
               <Image src={current.image} alt={current.alt} fill sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 660px" />
               <div className={s.photoFrame} aria-hidden="true" />
-              <span className={s.location}>Destination Thaïlande ↗</span>
+              <span className={s.location}><ActionIcon name="location" size={14} /> Destination Thaïlande</span>
             </div>
             <div className={s.sceneCopy}>
               <div className={s.sceneTop}><span>DTV · Le film</span><span>{String(scene + 1).padStart(2, "0")} / 07</span></div>
               <p className={s.chapterName}>{current.chapitre}</p>
               <h3 className={s.sceneTitle}>{current.titre}<em>{current.accent}</em></h3>
-              <div className={s.path} aria-hidden="true"><span /><span /><span /></div>
               <ul className={s.points}>{current.points.map((point, index) => <li key={point} data-current={index === Math.min(current.points.length - 1, Math.floor(progress * current.points.length))}><span aria-hidden="true">0{index + 1}</span>{point}</li>)}</ul>
             </div>
           </div>
           {lecture === "ready" && <button className={s.start} onClick={() => { togglePlay(); playButtonRef.current?.focus({ preventScroll: true }); }}><span aria-hidden="true">▶</span> Regarder l’explication <small>7 chapitres · à votre rythme</small></button>}
-          {lecture === "ended" && <div className={s.end}><span>Le premier pas est le plus simple.</span><button onClick={() => { pause(); ouvrirEligibilite(); }}>Vérifier mon éligibilité ↗</button></div>}
+          {lecture === "ended" && <div className={s.end}><span>Le premier pas est le plus simple.</span><button onClick={() => { pause(); ouvrirEligibilite(); }}>Vérifier mon éligibilité <ActionIcon name="eligibility" /></button></div>}
         </div>
 
         <div className={s.controls}>
@@ -218,7 +218,7 @@ export default function HomeExplainer() {
 
       <div className={s.below}>
         <p>Un projet personnel mérite une réponse personnelle.</p>
-        <button onClick={() => { pause(); ouvrirEligibilite(); }}>Vérifier mon éligibilité <span aria-hidden="true">↗</span></button>
+        <button onClick={() => { pause(); ouvrirEligibilite(); }}>Vérifier mon éligibilité <ActionIcon name="eligibility" /></button>
       </div>
       <details className={s.transcript}>
         <summary>Lire la transcription et les sources</summary>

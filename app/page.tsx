@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HomeContent from "./components/HomeContent";
 import HomeHeader from "./components/HomeHeader";
+import ActionIcon from "./components/ActionIcon";
 import { useModales } from "./components/ModalesProvider";
 import { useApparitionAuScroll } from "./components/useApparitionAuScroll";
 import { useHomeMotion } from "./components/useHomeMotion";
@@ -40,7 +41,7 @@ export default function Home() {
             </p>
             <div className={s.heroActions}>
               <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
-                Vérifier mon éligibilité <span aria-hidden="true">↗</span>
+                Vérifier mon éligibilité <ActionIcon name="eligibility" />
               </button>
               <a href="#accompagnement" className={s.textLink}>
                 <span className={s.smallPlay} aria-hidden="true">
@@ -78,7 +79,7 @@ export default function Home() {
               />
             </div>
             <span className={s.locationTag}>
-              <span aria-hidden="true">◎</span> Destination Thaïlande
+              <ActionIcon name="location" /> Destination Thaïlande
             </span>
             <div className={s.photoCaption}>
               <span>PLUS QU’UN VOYAGE.</span>
@@ -90,13 +91,12 @@ export default function Home() {
             </div>
             <a href="#visa-dtv" className={s.visaTicket}>
               <span className={s.ticketIcon} aria-hidden="true">
-                ↗
+                <ActionIcon name="passport" size={24} />
               </span>
               <span>
                 <strong>Votre prochain chapitre</strong>
                 <small>DTV · 5 ans de validité · entrées multiples</small>
               </span>
-              <span aria-hidden="true">→</span>
             </a>
           </div>
         </section>
@@ -156,7 +156,7 @@ export default function Home() {
               fait la démarche lui-même.
             </p>
             <Link href="/contact" className={s.textLink} data-reveal="">
-              Parlons de votre projet <span aria-hidden="true">↗</span>
+              Parlons de votre projet <ActionIcon name="message" />
             </Link>
           </div>
         </section>
@@ -176,11 +176,11 @@ export default function Home() {
           </div>
           <div className={s.finalActions} data-reveal="">
             <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
-              Vérifier mon éligibilité <span aria-hidden="true">↗</span>
+              Vérifier mon éligibilité <ActionIcon name="eligibility" />
             </button>
             <span>Gratuit · Sans engagement · En français</span>
             <button onClick={ouvrirGuide} className={s.textLink}>
-              Je préfère commencer par le guide →
+              Je préfère commencer par le guide <ActionIcon name="book" />
             </button>
           </div>
         </section>
@@ -230,21 +230,21 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Ambassade Royale de Thaïlande ↗
+              Ambassade Royale de Thaïlande <ActionIcon name="window" size={14} />
             </a>
             <a
               href="https://www.tatnews.org"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Tourism Authority of Thailand ↗
+              Tourism Authority of Thailand <ActionIcon name="window" size={14} />
             </a>
             <a
               href="https://www.thaievisa.go.th/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Portail officiel Thai e-Visa ↗
+              Portail officiel Thai e-Visa <ActionIcon name="window" size={14} />
             </a>
           </div>
         </div>
@@ -266,7 +266,7 @@ export default function Home() {
             <small>Accompagnement dès {prix(PRIX_APPEL)}</small>
           </span>
           <button onClick={ouvrirEligibilite} data-sparkle="ready">
-            Mon éligibilité <span aria-hidden="true">↗</span>
+            Mon éligibilité <ActionIcon name="eligibility" />
           </button>
         </aside>
       )}

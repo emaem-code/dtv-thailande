@@ -126,6 +126,9 @@
   gap: 22px;
 }
 .guideLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
 }
 .headerCta {
@@ -352,15 +355,15 @@
   border-radius: inherit;
 }
 .locationTag {
+  align-items: center;
   position: absolute;
   z-index: 1;
   top: 25px;
   left: 25px;
-  color: #fff;
+  color: #f7f7f2;
   border: 1px solid #ffffff6b;
   border-radius: 30px;
-  background: #142f292b;
-  backdrop-filter: blur(8px);
+  background: #243f35;
   padding: 7px 13px;
   font-size: 10px;
   display: flex;
@@ -405,6 +408,7 @@
   transform: translateY(-3px);
 }
 .ticketIcon {
+  flex-shrink: 0;
   width: 38px;
   height: 38px;
   border: 1px solid var(--line);
@@ -423,9 +427,6 @@
   color: var(--muted);
   font-size: 9px;
   margin-top: 4px;
-}
-.visaTicket > span:last-child {
-  margin-left: auto;
 }
 .trustStrip {
   max-width: 1304px;
@@ -1065,7 +1066,7 @@
   font-size: 12px;
   white-space: nowrap;
 }
-.stickyCta button > span {
+.stickyCta button > svg {
   margin-left: 18px;
 }
 .menuOverlay,
@@ -1713,7 +1714,7 @@
     font-size: 11px;
     padding: 11px 14px;
   }
-  .stickyCta button > span {
+  .stickyCta button > svg {
     margin-left: 6px;
   }
 }
