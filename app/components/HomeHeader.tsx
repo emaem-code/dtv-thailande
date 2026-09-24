@@ -45,11 +45,11 @@ export default function HomeHeader() {
             </span>
           </Link>
           <nav className={s.desktopNav} aria-label="Navigation principale">
-            {liens.map((l) => (
-              <Link key={l.href} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
+            {liens.map((l) => {
+              // Une ancre native se replace aussi lors d’un second clic sur la même rubrique.
+              const Lien = l.href.startsWith("/#") ? "a" : Link;
+              return <Lien key={l.href} href={l.href}>{l.label}</Lien>;
+            })}
           </nav>
           <div className={s.headerActions}>
             <button className={s.guideLink} onClick={ouvrirGuide}>
@@ -106,12 +106,15 @@ export default function HomeHeader() {
                 { href: "/faq", label: "Questions fréquentes" },
                 { href: "/contact", label: "Nous contacter" },
                 { href: "/mentions-legales", label: "Mentions légales" },
-              ].map((l) => (
-                <Link href={l.href} key={l.href} onClick={fermer}>
-                  {l.label}
-                  <span aria-hidden="true">↗</span>
-                </Link>
-              ))}
+              ].map((l) => {
+                const Lien = l.href.startsWith("/#") ? "a" : Link;
+                return (
+                  <Lien href={l.href} key={l.href} onClick={fermer}>
+                    {l.label}
+                    <span aria-hidden="true">↗</span>
+                  </Lien>
+                );
+              })}
             </nav>
             <Link href="/eligibilite" className={s.primary} onClick={fermer} data-sparkle="ready">
               Vérifier mon éligibilité <span aria-hidden="true">→</span>

@@ -47,7 +47,8 @@
   outline-offset: 5px;
 }
 .page :is(section, main)[id] {
-  scroll-margin-top: 110px;
+  /* Aligner le début de la section sous l’en-tête (92px + sa bordure). */
+  scroll-margin-top: 93px;
 }
 .page button {
   font-family: inherit;
@@ -1484,7 +1485,8 @@
 }
 @media (max-width: 760px) {
   .page :is(section, main)[id] {
-    scroll-margin-top: 86px;
+    /* En-tête mobile : 74px + sa bordure. */
+    scroll-margin-top: 75px;
   }
   .headerInner {
     min-height: 74px;
