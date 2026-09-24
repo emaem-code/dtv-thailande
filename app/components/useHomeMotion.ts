@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { observeEligibilitySheen } from "./observeEligibilitySheen";
 
 type Options = {
   pageKey?: string;
@@ -30,13 +31,6 @@ export function useHomeMotion({
           element.setAttribute("data-in-view", "");
           observer.unobserve(element);
         });
-        // L'étincelle attend la fin d'une éventuelle arrivée de sa carte.
-        if (target.matches("[data-sparkle]")) {
-          const arrival = target.parentElement?.closest("[data-reveal]")?.getAnimations()[0];
-          const remaining = arrival
-            ? Math.max(0, Number(arrival.effect?.getComputedTiming().endTime) - Number(arrival.currentTime)) : 0;
-          (target as HTMLElement).style.setProperty("--motion-arrival-wait", `${remaining}ms`);
-        }
       });
     }, {
       threshold: 0.08,
@@ -45,10 +39,11 @@ export function useHomeMotion({
     });
     const root = ref.current;
     if (!root) return () => observer.disconnect();
+    const stopSheen = observeEligibilitySheen(root);
     const registered = new WeakSet<Element>();
     const register = () => {
       prepare?.(root);
-      root.querySelectorAll('[data-reveal], [data-hero-image], [data-sparkle="scroll"]').forEach((element) => {
+      root.querySelectorAll('[data-reveal], [data-hero-image]').forEach((element) => {
         if (element.hasAttribute("data-in-view") || element.hasAttribute("data-motion-static")) return;
         const group = element.hasAttribute("data-heading-part")
           ? Array.from(element.closest("[data-motion-heading]")!.querySelectorAll("[data-heading-part]"))
@@ -73,7 +68,7 @@ export function useHomeMotion({
     // Le blog peut changer de page ou filtrer ses cartes sans recharger le layout.
     const mutations = observeChanges ? new MutationObserver(register) : null;
     mutations?.observe(root, { childList: true, subtree: true });
-    return () => { observer.disconnect(); mutations?.disconnect(); };
+    return () => { observer.disconnect(); mutations?.disconnect(); stopSheen(); };
   }, [pageKey, prepare, preserveFirstScreen, observeChanges]);
   return ref;
 }

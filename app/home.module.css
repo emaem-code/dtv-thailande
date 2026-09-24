@@ -10,7 +10,7 @@
   --motion-arrow-distance: 4px;
   --motion-press-distance: 1px;
   --motion-sparkle-delay: 1800ms;
-  --motion-sparkle-cycle: 7000ms;
+  --motion-sparkle-cycle: 14000ms;
   --motion-sparkle-size: 45%;
   --motion-sparkle-top: -50%;
 }
@@ -2239,7 +2239,7 @@
   .motion [data-hero-image][data-in-view] {
     animation: settle var(--motion-hero-duration) var(--motion-ease) backwards;
   }
-  .motion :is([data-sparkle="ready"], [data-sparkle="scroll"][data-in-view])::after {
+  .motion [data-sparkle-active]::after {
     animation: sparkle var(--motion-sparkle-cycle) linear
       calc(var(--motion-arrival-wait, 0ms) + var(--motion-sparkle-delay)) infinite;
   }
@@ -2257,9 +2257,10 @@
   opacity: 1 !important;
   transform: none !important;
 }
-.motion [data-sparkle]:is(:hover, :focus-visible)::after {
-  animation: none;
-  opacity: 0;
+.motion [data-sparkle]:is(:hover, :focus-visible)::after,
+:global(body):has(:global([role="dialog"][aria-modal="true"])) .motion [data-sparkle]::after {
+  /* L'horloge continue pendant l'interaction, sans relancer un passage ensuite. */
+  visibility: hidden;
 }
 @keyframes rise {
   from { transform: translateY(var(--motion-block-distance)); }
@@ -2271,10 +2272,10 @@
 }
 @keyframes sparkle {
   0% { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
-  3% { opacity: 1; }
-  23% { transform: translateX(340%) skewX(-18deg); opacity: 1; }
-  /* Après le passage, plus de cinq secondes sans mouvement. */
-  26%, 100% { transform: translateX(340%) skewX(-18deg); opacity: 0; }
+  1.5% { opacity: 1; }
+  11.5% { transform: translateX(340%) skewX(-18deg); opacity: 1; }
+  /* Même durée de passage, puis plus de douze secondes sans mouvement. */
+  13%, 100% { transform: translateX(340%) skewX(-18deg); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   :global(html):has(.motion) {
