@@ -1,5 +1,9 @@
 "use client";
 
+// En sommeil : cartes conservées pour de futurs témoignages clients.
+// Ce composant n’est plus appelé. Les anciens films et affiches ont été retirés
+// de public/ ; remplacer leurs références ci-dessous avant toute réactivation.
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useModalA11y } from "./useModalA11y";

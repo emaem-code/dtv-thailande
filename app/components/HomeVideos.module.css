@@ -1,4 +1,5 @@
 /* Une collection de films : les arguments restent dans la page, hors des images. */
+/* En sommeil avec HomeVideos.tsx, en attente de nouveaux témoignages clients. */
 .section {
   color: var(--ink);
 }

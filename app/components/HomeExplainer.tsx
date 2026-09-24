@@ -116,12 +116,12 @@ export default function HomeExplainer() {
       <header className={s.heading}>
         <div>
           <p className={s.eyebrow}>Regarder. Comprendre. Se projeter.</p>
-          <h2 id="titre-film-dtv">Votre projet, <em>en quelques images.</em></h2>
+          <h2 id="titre-film-dtv">Le DTV, <em>en images.</em></h2>
         </div>
         <p>Le visa, le dossier, l’accompagnement.<br />L’essentiel de cette page, raconté simplement.</p>
       </header>
 
-      <div className={s.player} ref={playerRef} role="region" aria-label="Présentation animée du Visa DTV" data-playing={lecture === "playing"}>
+      <div id="accompagnement" className={s.player} ref={playerRef} role="region" aria-label="Présentation animée du Visa DTV" data-playing={lecture === "playing"}>
         <audio
           ref={audioRef}
           preload="none"

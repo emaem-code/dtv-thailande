@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import HomeVideos from "./HomeVideos";
 import HomeExplainer from "./HomeExplainer";
 import { useModales } from "./ModalesProvider";
 import s from "../home.module.css";
@@ -102,7 +101,6 @@ export default function HomeContent() {
 
   return (
     <div className={s.homeContent}>
-      <HomeExplainer />
       {/* ── LE DTV EN BREF ── */}
       <section id="visa-dtv" className={s.briefSection} data-motion-heading="">
         <p className={s.eyebrow} data-reveal="" data-heading-part="0">La liberté commence par la clarté.</p>
@@ -200,7 +198,7 @@ export default function HomeContent() {
         </button>
       </div>
 
-      <HomeVideos />
+      <HomeExplainer />
 
       {/* ── MÉTHODE ── */}
       <section id="methode" className={s.methodSection} data-motion-heading="">
