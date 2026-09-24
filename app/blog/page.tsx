@@ -94,7 +94,7 @@ export default function BlogIndex() {
           )}
         />
 
-        <div className={s.conversion}>
+        <div className={s.conversion} data-reveal="">
           <h3 className={s.titreConversion}>
             Passez de la théorie à la pratique
           </h3>
@@ -110,11 +110,11 @@ export default function BlogIndex() {
         </div>
       </div>
 
-      <section className={s.ressources}>
-        <h2 className="text-xl font-bold text-white mb-4">
+      <section className={s.ressources} data-motion-heading="">
+        <h2 className="text-xl font-bold text-white mb-4" data-reveal="" data-heading-part="0">
           Ressources Officielles
         </h2>
-        <p className="text-gray-400 text-sm mb-6">
+        <p className="text-gray-400 text-sm mb-6" data-reveal="" data-heading-part="1">
           Pour approfondir vos démarches, consultez les plateformes
           gouvernementales :
         </p>

@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import { useModalA11y } from "./useModalA11y";
+import { PRIX_APPEL, prix } from "../lib/tarifs";
 import s from "../home.module.css";
 
 const videos = [
@@ -11,30 +12,55 @@ const videos = [
     poster: "/poster-dtv.jpg",
     title: "Et si c’était déjà fait ?",
     label: "Le projet",
+    phrases: [
+      "5 ans de liberté totale",
+      "Votre vie d'après commence",
+      "On s'en est occupé pour vous",
+    ],
   },
   {
     src: "/video-erreur.mp4",
     poster: "/poster-erreur.jpg",
     title: "Les erreurs à éviter",
     label: "Le dossier",
+    phrases: [
+      "Un simple détail peut valoir un refus",
+      "Une case mal remplie suffit",
+      "Ne laissez rien au hasard",
+    ],
   },
   {
     src: "/video-temoignage.mp4",
     poster: "/poster-temoignage.jpg",
     title: "Leur nouvelle vie",
     label: "Le témoignage",
+    phrases: [
+      "Dossier géré à 100%",
+      "Zéro aller-retour ambassade",
+      "Ils sont déjà en Thaïlande",
+    ],
   },
   {
     src: "/video-accompagnement.mp4",
     poster: "/poster-accompagnement.jpg",
     title: "À vos côtés, à chaque étape",
     label: "La méthode",
+    phrases: [
+      "Audit, traductions, dépôt",
+      "Vous faites vos valises",
+      "Nous faisons le reste",
+    ],
   },
   {
     src: "/video-budget.mp4",
     poster: "/poster-budget.jpg",
     title: "Parlons budget",
     label: "Les tarifs",
+    phrases: [
+      `Budget complet dès ${prix(PRIX_APPEL)} par personne`,
+      "Frais consulaires et traductions compris",
+      "Dégressif dès la deuxième personne",
+    ],
   },
 ];
 
@@ -48,46 +74,60 @@ export default function HomeVideos() {
   return (
     <section
       id="accompagnement"
+      className={s.videosSection}
       aria-labelledby="titre-videos"
     >
-      <div className={s.sectionIntro}>
+      <div className={s.sectionIntro} data-motion-heading="">
         <div>
-          <p className={s.eyebrow}>Quelques images valent mille questions.</p>
-          <h2 id="titre-videos">
+          <p className={s.eyebrow} data-reveal="" data-heading-part="0">Quelques images valent mille questions.</p>
+          <h2 id="titre-videos" data-reveal="" data-heading-part="1">
             On vous montre <em>le chemin.</em>
           </h2>
         </div>
-        <p>
+        <p data-reveal="" data-heading-part="2">
           Votre projet, nos réponses.
-          <br />
+          <br />{" "}
           Tout comprendre en 5 vidéos, à votre rythme.
         </p>
       </div>
-      <div className={s.videoGrid}>
+      <div className={s.videoGrid} data-motion-group="">
         {videos.map((v, i) => (
-          <button
+          <article
             key={v.src}
-            onClick={() => setActive(i)}
             className={s.videoCard}
-            aria-label={`Lire la vidéo : ${v.title}`}
+            aria-labelledby={`titre-video-${i}`}
+            data-reveal=""
           >
-            <Image
-              src={v.poster}
-              alt={`Aperçu vidéo ${v.title} pour l’accompagnement Visa DTV Thaïlande`}
-              fill
-              sizes="(max-width: 760px) 55vw, 20vw"
-            />
-            <span className={s.videoNumber}>
-              0{i + 1} / {v.label}
-            </span>
-            <span className={s.playIcon} aria-hidden="true">
-              ▶
-            </span>
-            <span className={s.videoTitle}>
-              {v.title}
-              <span aria-hidden="true">↗</span>
-            </span>
-          </button>
+            <button
+              onClick={() => setActive(i)}
+              className={s.videoThumbnail}
+              aria-label={`Lire la vidéo : ${v.title}`}
+              aria-haspopup="dialog"
+            >
+              <Image
+                src={v.poster}
+                alt={`Aperçu vidéo ${v.title} pour l’accompagnement Visa DTV Thaïlande`}
+                fill
+                sizes={
+                  i === 0
+                    ? "(max-width: 760px) 88px, (max-width: 1400px) 30vw, 424px"
+                    : "(max-width: 760px) 88px, 112px"
+                }
+              />
+              <span className={s.playIcon} aria-hidden="true">▶</span>
+            </button>
+            <div className={s.videoCopy}>
+              <div className={s.videoHeading}>
+                <p className={s.videoNumber}>0{i + 1} / {v.label}</p>
+                <h3 id={`titre-video-${i}`} className={s.videoTitle}>{v.title}</h3>
+              </div>
+              <ul className={s.videoPhrases}>
+                {v.phrases.map((phrase) => (
+                  <li key={phrase}>{phrase}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
         ))}
       </div>
       {active !== null && (
@@ -114,9 +154,8 @@ export default function HomeVideos() {
               poster={videos[active].poster}
               controls
               tabIndex={0}
-              autoPlay
               playsInline
-              preload="metadata"
+              preload="none"
               aria-label={videos[active].title}
             />
             <div className={s.videoDialogFooter}>

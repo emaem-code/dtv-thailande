@@ -445,6 +445,68 @@
     margin-top: 28px;
   }
 }
+/* Fenêtres et questionnaire : lecture confortable même sur un petit téléphone. */
+@media (max-width: 760px) {
+  .formulaire,
+  .guide {
+    --secondaire: #59675d;
+  }
+  .guide .enteteGuide h2 span {
+    color: #48633e;
+  }
+  .formulaire .enteteFormulaire,
+  .enteteGuide,
+  .enteteModale {
+    padding: 16px;
+    gap: 12px;
+  }
+  .formulaire .enteteFormulaire button,
+  .guide .enteteGuide button,
+  .enteteModale button {
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .formulaire .corpsFormulaire,
+  .corpsGuide {
+    padding: 24px 16px;
+  }
+  .formulaire [role="radio"] {
+    min-height: 48px;
+  }
+  .formulaire [role="radio"] > span,
+  .formulaire label,
+  .formulaire p:not([class~="text-2xl"]),
+  :is(.guide, .methode, .faq) :is(p, li) {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .formulaire label span,
+  .formulaire [role="alert"] {
+    font-size: 14px;
+  }
+  .formulaire :is(button, a)[class~="bg-white"],
+  .formulaire :global(.bouton-principal),
+  .formulaire :global(.bouton-secondaire),
+  .guide .boutonTelecharger {
+    min-height: 48px;
+    font-size: 16px;
+  }
+  .guide .telechargement {
+    padding: 20px 16px;
+  }
+  .corpsModale {
+    padding-inline: 16px;
+  }
+  :is(.guide, .methode, .faq) :is(h2, h3, h4) {
+    text-wrap: balance;
+  }
+}
+@media (max-width: 480px) {
+  .formulaire [role="radiogroup"] {
+    grid-template-columns: 1fr;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .voile *,
   .formulaire * {

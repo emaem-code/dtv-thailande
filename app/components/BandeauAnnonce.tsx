@@ -55,6 +55,22 @@ export default function BandeauAnnonce() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (!visible || window.location.pathname !== '/') return;
+    // Un retour arrière ou un rechargement doit conserver sa position de lecture.
+    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    if (navigation?.type !== 'navigate') return;
+    const ancre = document.getElementById(window.location.hash.slice(1));
+    if (ancre?.matches('section[id], main[id]')) {
+      // À l’arrivée depuis une autre page, le défilement peut précéder le bandeau.
+      // Rejoindre l’ancre avec sa hauteur définitive, sans second défilement animé.
+      const frame = window.requestAnimationFrame(() => {
+        ancre.scrollIntoView({ block: 'start', behavior: 'instant' });
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, [visible]);
+
+  useEffect(() => {
     if (new Date() > FIN_ANNONCE) return;
     try {
       if (window.localStorage.getItem(CLE_STOCKAGE) === '1') return;

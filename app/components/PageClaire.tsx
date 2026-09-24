@@ -1,5 +1,6 @@
 import Link from "next/link";
 import HomeHeader from "./HomeHeader";
+import PageMotion from "./PageMotion";
 import { AGENCE, mentionSiret } from "../lib/agence";
 import s from "../pages-claires.module.css";
 
@@ -14,7 +15,7 @@ export default function PageClaire({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${s.surface} ${s[page]}`}>
+    <PageMotion className={`${s.surface} ${s[page]}`}>
       <a className={s.evitement} href="#contenu-page">
         Aller au contenu
       </a>
@@ -38,6 +39,6 @@ export default function PageClaire({
           {AGENCE.nom} — {AGENCE.enseigne} · {mentionSiret()}
         </p>
       </footer>
-    </div>
+    </PageMotion>
   );
 }

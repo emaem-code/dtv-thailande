@@ -1,3 +1,19 @@
+/* Vocabulaire de mouvement partagé par les pages publiques. */
+.motion {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-block-duration: 640ms;
+  --motion-interaction-duration: 180ms;
+  --motion-block-distance: 18px;
+  --motion-block-stagger: 50ms;
+  --motion-hero-duration: 1200ms;
+  --motion-hero-scale: 1.025;
+  --motion-arrow-distance: 4px;
+  --motion-press-distance: 1px;
+  --motion-sparkle-delay: 1800ms;
+  --motion-sparkle-cycle: 14000ms;
+  --motion-sparkle-size: 45%;
+  --motion-sparkle-top: -50%;
+}
 .page {
   --paper: #f7f7f2;
   --ink: #243f35;
@@ -31,7 +47,8 @@
   outline-offset: 5px;
 }
 .page :is(section, main)[id] {
-  scroll-margin-top: 110px;
+  /* Aligner le début de la section sous l’en-tête (92px + sa bordure). */
+  scroll-margin-top: 93px;
 }
 .page button {
   font-family: inherit;
@@ -326,6 +343,12 @@
      du carre, donc la photo est recadree sur les cotes. 50 % garde le plan
      de travail et la vue, la ou 43 % remontait et coupait la table. */
   object-position: center 50%;
+  border-radius: inherit;
+}
+.heroImageFrame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   border-radius: inherit;
 }
 .locationTag {
@@ -632,73 +655,135 @@
   flex-shrink: 0;
   padding-bottom: 4px;
 }
+/* Textes permanents : les vidéos restent un complément à la lecture. */
+.videosSection .eyebrow,
+.videosSection .sectionIntro > p {
+  color: #526357;
+}
+.homeContent .videosSection .eyebrow {
+  font-size: 12px;
+}
+.videosSection .sectionIntro > p {
+  font-size: 16px;
+}
 .videoGrid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 .videoCard {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffef9;
+  color: var(--ink);
+}
+.videoCard:first-child {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.videoCard:nth-child(3),
+.videoCard:nth-child(5) {
+  background: #eef0e6;
+}
+.videoThumbnail {
   position: relative;
-  aspect-ratio: 9 / 15;
+  min-height: 180px;
   overflow: hidden;
-  border-radius: 9px;
-  color: white;
-  background: #1d332b;
-  text-align: left;
-  isolation: isolate;
+  border-radius: 11px 0 0 11px;
+  background: #243f35;
+  color: #243f35;
 }
-.videoCard img {
+.videoCard:first-child .videoThumbnail {
+  flex: 1;
+  min-height: 320px;
+  border-radius: 11px 11px 0 0;
+}
+.videoThumbnail img {
   object-fit: cover;
-  transition: transform 0.5s;
-  z-index: -2;
+  transition: transform 0.3s;
 }
-.videoCard:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, #10251c73, #0000 35%, #0c201fda);
-  z-index: -1;
+.videoThumbnail:hover img {
+  transform: scale(1.04);
 }
-.videoCard:hover img {
-  transform: scale(1.05);
-}
-.videoNumber {
-  position: absolute;
-  left: 15px;
-  top: 17px;
-  font-size: 9px;
-  letter-spacing: 0.6px;
+.page .videoThumbnail:focus-visible {
+  outline: 3px solid #f7f7f2;
+  outline-offset: -7px;
 }
 .playIcon {
   position: absolute;
-  top: 42%;
-  left: 50%;
+  inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   padding-left: 3px;
-  background: #ffffff1f;
-  border: 1px solid #ffffff91;
+  background: #f7f7f2;
+  border: 1px solid #243f35;
   border-radius: 50%;
-  backdrop-filter: blur(5px);
-  font-size: 11px;
-}
-.videoTitle {
-  position: absolute;
-  bottom: 21px;
-  left: 17px;
-  right: 17px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
   font-size: 14px;
-  line-height: 1.3;
 }
-.videoTitle > span {
-  font-size: 20px;
-  align-self: flex-end;
+.videoThumbnail:focus-visible .playIcon {
+  outline: 3px solid #243f35;
+  outline-offset: 3px;
+}
+.videoCopy {
+  min-width: 0;
+  padding: 24px 20px;
+}
+.videoHeading {
+  min-width: 0;
+}
+.videoNumber {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.homeContent .videoTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.videoCard:first-child .videoCopy {
+  padding: 28px;
+}
+.videoCard:first-child .videoTitle {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+}
+.videoPhrases {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.videoPhrases li {
+  position: relative;
+  padding-left: 14px;
+}
+.videoPhrases li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
 }
 .methodSection ol {
   display: grid;
@@ -1211,24 +1296,6 @@
   opacity: 0.35;
   cursor: default;
 }
-@media (min-width: 761px) {
-  .heroCopy {
-    animation: arrive 0.65s ease-out both;
-  }
-  .heroVisual {
-    animation: arrive 0.85s ease-out both;
-  }
-}
-@keyframes arrive {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @media (max-width: 1400px) {
   .homeContent,
   .trustStrip {
@@ -1245,6 +1312,20 @@
   }
 }
 @media (max-width: 1150px) {
+  .videoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .videoCard:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    display: grid;
+    grid-template-columns: 30% minmax(0, 1fr);
+  }
+  .videoCard:first-child .videoThumbnail {
+    min-height: 240px;
+    border-radius: 11px 0 0 11px;
+  }
+
   .headerInner {
     padding: 0 32px;
   }
@@ -1369,18 +1450,6 @@
   .profileGrid p {
     font-size: 11px;
   }
-  .videoGrid {
-    gap: 10px;
-  }
-  .videoNumber {
-    left: 10px;
-    font-size: 8px;
-  }
-  .videoTitle {
-    left: 10px;
-    right: 10px;
-    font-size: 12px;
-  }
   .sectionIntro {
     align-items: flex-start;
     flex-direction: column;
@@ -1416,7 +1485,8 @@
 }
 @media (max-width: 760px) {
   .page :is(section, main)[id] {
-    scroll-margin-top: 86px;
+    /* En-tête mobile : 74px + sa bordure. */
+    scroll-margin-top: 75px;
   }
   .headerInner {
     min-height: 74px;
@@ -1644,28 +1714,36 @@
     font-size: 11px;
   }
   .videoGrid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 13px;
-    padding: 5px 3px 17px;
-    margin: -5px -3px -17px;
-    scrollbar-color: #879778 #e9ecdf;
-    scrollbar-width: thin;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
-  .videoCard {
-    flex: 0 0 48%;
-    scroll-snap-align: start;
-    aspect-ratio: 9 / 14;
+  .videoCard,
+  .videoCard:first-child {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-column: auto;
+    grid-row: auto;
   }
-  .videoNumber {
-    font-size: 9px;
-    left: 15px;
+  .videoThumbnail,
+  .videoCard:first-child .videoThumbnail {
+    min-height: 128px;
+    border-radius: 11px 0 0 0;
   }
-  .videoTitle {
-    font-size: 14px;
-    left: 15px;
-    right: 15px;
+  .videoCopy,
+  .videoCard:first-child .videoCopy {
+    display: contents;
+  }
+  .videoHeading {
+    align-self: center;
+    padding: 22px 18px;
+  }
+  .videoCard:first-child .videoTitle {
+    font-size: 26px;
+  }
+  .videoPhrases {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 20px;
   }
   .methodSection ol {
     gap: 27px;
@@ -1858,10 +1936,364 @@
     font-size: 7px;
   }
 }
+/* Confort de lecture et commandes tactiles, sans modifier le rendu ordinateur. */
+@media (max-width: 760px) {
+  .page {
+    --muted: #526357;
+  }
+  .headerInner {
+    gap: 8px;
+  }
+  .headerActions {
+    gap: 4px;
+  }
+  .headerCta {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .menuButton,
+  .menuTitle button,
+  .videoDialogHeader button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .announcement p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .announcement button {
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .heroActions > .textLink {
+    justify-content: center;
+    font-size: 15px;
+  }
+  .primary {
+    font-size: 16px;
+    min-height: 48px;
+  }
+  .textLink {
+    min-height: 44px;
+  }
+  .heroDescription,
+  .homeContent section > p:not(.eyebrow),
+  .profileGrid p,
+  .fundsNote p,
+  .methodSection li p,
+  .priceCard > p,
+  .priceIncludes,
+  .familyNote p,
+  .faqList details > div,
+  .advisorSection p:not(.eyebrow),
+  .finalCta p:not(.eyebrow) {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .locationTag,
+  .photoCaption > span {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+  }
+  .photoCaption > span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  .visaTicket small {
+    font-size: 12px;
+  }
+  .visaTicket strong {
+    font-size: 14px;
+  }
+  .homeContent .procedureSources {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+  .pricingSection > p:last-child {
+    font-size: 14px !important;
+  }
+  .hero .eyebrow,
+  .homeContent .eyebrow,
+  .advisorSection .eyebrow {
+    font-size: 12px;
+    color: #526357;
+  }
+  .finalCta .eyebrow {
+    font-size: 12px;
+  }
+  .microcopy,
+  .trustStrip p > span,
+  .profileNumber,
+  .methodSection li > span,
+  .priceCardHeading span {
+    color: #526357;
+  }
+  .microcopy,
+  .advisorMini div > span,
+  .trustStrip small,
+  .keyFigures p:last-child,
+  .priceAmounts small,
+  .priceCard > small,
+  .finalActions > span {
+    font-size: 13px;
+  }
+  .advisorMini strong,
+  .trustStrip strong,
+  .priceAmounts span {
+    font-size: 14px;
+  }
+  .homeContent :is(h2, h3),
+  .hero h1,
+  .finalCta h2 {
+    text-wrap: balance;
+  }
+  .profileGrid > div {
+    padding: 24px 20px;
+  }
+  .profileGrid a {
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .methodSection ol {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .methodSection li h3 {
+    font-size: 20px;
+  }
+  .priceCardHeading span {
+    font-size: 12px;
+    max-width: none;
+  }
+  .priceCardHeading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .faqList summary > span:first-child > span:first-child,
+  .guideGrid > a > span:not(.articleLink) {
+    font-size: 12px;
+    color: #526357;
+  }
+  .faqList summary > span:first-child > span:last-child {
+    font-size: 17px;
+  }
+  .guideGrid {
+    grid-template-columns: 1fr;
+  }
+  .guideGrid h3 {
+    font-size: 21px;
+    max-width: none;
+  }
+  .articleLink,
+  .faqSection > div:last-child a,
+  .guidesSection > div:last-child a,
+  .finalActions .textLink {
+    font-size: 15px;
+    min-height: 44px;
+  }
+  .footerTop nav,
+  .officialResources > div {
+    font-size: 14px;
+  }
+  .footerTop nav :is(a, button),
+  .officialResources a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footerTop > p,
+  .officialResources :is(h2, p),
+  .footerBottom {
+    font-size: 13px;
+  }
+  /* Le même accès est désormais permanent et tactile dans l'en-tête. */
+  .stickyCta {
+    display: none;
+  }
+  .menuPanel {
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+  .menuPanel nav a {
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .videoDialogFooter button {
+    min-height: 44px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .brand > span > span {
+    display: none;
+  }
+  .priceAmounts {
+    grid-template-columns: 1fr;
+  }
+  .priceAmounts > div + div {
+    padding: 16px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .keyFigures {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .keyFigures > div {
+    padding: 0;
+    border: 0;
+  }
+}
+/* Le contenu reste opaque. Le décalage est préparé hors écran ; data-in-view
+   déclenche une seule arrivée, que le CSS termine sans autre intervention. */
+.motion [data-heading-part="0"] { --motion-order: 0; }
+.motion [data-motion-group] > :nth-child(2),
+.motion [data-heading-part="1"] { --motion-order: 1; }
+.motion [data-motion-group] > :nth-child(3),
+.motion [data-heading-part="2"] { --motion-order: 2; }
+/* Les grandes grilles ne doivent pas faire attendre leurs dernières cartes. */
+.motion [data-motion-group] > :nth-child(n + 4) { --motion-order: 2; }
+
+/* Les anciens gestes de survol cèdent la place à un seul vocabulaire. */
+.motion :is(.desktopNav a, .announcement a, .announcement button,
+  .visaTicket, .profileGrid > div, .videoThumbnail img, .guideImage img) {
+  transition: none;
+}
+.motion :is(.visaTicket:hover, .profileGrid > div:hover,
+  .videoThumbnail:hover img, .guideGrid > a:hover img) {
+  transform: none;
+}
+.motion .faqList summary > span:last-child {
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+
+.motion [data-sparkle] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover {
+  background: var(--ink);
+  transform: none;
+}
+/* Le CTA du dernier encart garde sa séparation sur le fond vert. */
+.motion .finalActions [data-sparkle] {
+  box-shadow: inset 0 0 0 1px var(--paper);
+}
+.motion .finalActions [data-sparkle]::before {
+  inset: 1px;
+}
+.motion [data-sparkle]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: #182e26;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover::before { opacity: 1; }
+.motion [data-sparkle] > span {
+  display: inline-block;
+  transition: transform var(--motion-interaction-duration) var(--motion-ease);
+}
+.motion [data-sparkle]:hover > span {
+  transform: translateX(var(--motion-arrow-distance));
+}
+.motion [data-sparkle]:active {
+  transform: translateY(var(--motion-press-distance));
+}
+.motion [data-sparkle]::after {
+  content: "";
+  position: absolute;
+  top: var(--motion-sparkle-top);
+  left: 0;
+  z-index: -1;
+  width: var(--motion-sparkle-size);
+  height: 200%;
+  /* Un reflet derrière le texte, limité aux contours du bouton. */
+  background: linear-gradient(90deg, transparent, rgb(247 247 242 / 16%), transparent);
+  transform: translateX(-160%) skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion [data-reveal][data-motion-prepared]:not([data-in-view]):not([data-motion-static]) {
+    transform: translateY(var(--motion-block-distance));
+  }
+  .motion [data-reveal][data-in-view]:not([data-motion-static]) {
+    animation: rise var(--motion-block-duration) var(--motion-ease)
+      calc(var(--motion-order, 0) * var(--motion-block-stagger)) backwards;
+  }
+  .motion [data-hero-image][data-in-view] {
+    animation: settle var(--motion-hero-duration) var(--motion-ease) backwards;
+  }
+  .motion [data-sparkle-active]::after {
+    animation: sparkle var(--motion-sparkle-cycle) linear
+      calc(var(--motion-arrival-wait, 0ms) + var(--motion-sparkle-delay)) infinite;
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion :is(.videoThumbnail, .guideImage) img {
+    transition: transform var(--motion-block-duration) var(--motion-ease);
+  }
+  .motion :is(.videoThumbnail:hover img, .guideGrid > a:hover img) {
+    transform: scale(var(--motion-hero-scale));
+  }
+}
+/* Le clavier et le pointeur prennent toujours la priorité sur le décor. */
+.motion [data-reveal]:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.motion [data-sparkle]:is(:hover, :focus-visible)::after,
+:global(body):has(:global([role="dialog"][aria-modal="true"])) .motion [data-sparkle]::after {
+  /* L'horloge continue pendant l'interaction, sans relancer un passage ensuite. */
+  visibility: hidden;
+}
+@keyframes rise {
+  from { transform: translateY(var(--motion-block-distance)); }
+  to { transform: translateY(0); }
+}
+@keyframes settle {
+  from { transform: scale(var(--motion-hero-scale)); }
+  to { transform: scale(1); }
+}
+@keyframes sparkle {
+  0% { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+  1.5% { opacity: 1; }
+  11.5% { transform: translateX(340%) skewX(-18deg); opacity: 1; }
+  /* Même durée de passage, puis plus de douze secondes sans mouvement. */
+  13%, 100% { transform: translateX(340%) skewX(-18deg); opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
+  :global(html):has(.motion) {
+    scroll-behavior: auto !important;
+  }
+  .motion [data-sparkle]:is(:hover, :active) > span,
+  .motion [data-sparkle]:active {
+    transform: none;
+  }
   .page *,
   .page *:before,
-  .page *:after {
+  .page *:after,
+  /* Les fenêtres du fournisseur sont montées hors de .page. */
+  :global(body):has(.motion) *,
+  :global(body):has(.motion) *::before,
+  :global(body):has(.motion) *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;

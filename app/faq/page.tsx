@@ -384,11 +384,11 @@ function FaqContenu({
                     {g.icone}
                   </svg>
                 </span>
-                <div>
-                  <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight leading-tight">
+                <div data-motion-heading="">
+                  <h2 className="text-xl md:text-2xl font-extrabold text-white tracking-tight leading-tight" data-reveal="" data-heading-part="0">
                     {g.titre}
                   </h2>
-                  <p className={`text-[11px] font-bold uppercase tracking-[0.14em] mt-0.5 ${g.texte}`}>
+                  <p className={`text-[11px] font-bold uppercase tracking-[0.14em] mt-0.5 ${g.texte}`} data-reveal="" data-heading-part="1">
                     {g.questions.length} questions
                   </p>
                 </div>
@@ -461,12 +461,12 @@ function FaqContenu({
         </div>
 
         {/* ── CTA FINAL ── */}
-        <div className="mt-14 p-8 bg-[#111111] border border-gray-800 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+        <div className="mt-14 p-8 bg-[#111111] border border-gray-800 rounded-3xl text-center shadow-2xl relative overflow-hidden" data-motion-heading="">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500 opacity-10 rounded-full blur-3xl" />
-          <h2 className="text-2xl text-white font-bold mb-4 relative z-10">
+          <h2 className="text-2xl text-white font-bold mb-4 relative z-10" data-reveal="" data-heading-part="0">
             Une question non abordée ici ?
           </h2>
-          <p className="text-gray-400 mb-8 relative z-10 max-w-xl mx-auto">
+          <p className="text-gray-400 mb-8 relative z-10 max-w-xl mx-auto" data-reveal="" data-heading-part="1">
             Chaque situation est particulière, et c&apos;est souvent le détail qui décide.
             Faites analyser votre profil avant de déposer.
           </p>

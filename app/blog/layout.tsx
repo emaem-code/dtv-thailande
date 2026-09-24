@@ -2,6 +2,7 @@ import React from "react";
 import HomeHeader from "../components/HomeHeader";
 import AlertesReglementaires from "../components/AlertesReglementaires";
 import LectureBlog from "../components/LectureBlog";
+import PageMotion from "../components/PageMotion";
 import Link from "next/link";
 import { AGENCE, mentionSiret } from "../lib/agence";
 import accueil from "../home.module.css";
@@ -22,7 +23,7 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${accueil.page} ${s.blog}`}>
+    <PageMotion className={`${accueil.page} ${s.blog}`}>
       <a href="#contenu-blog" className={accueil.skipLink}>
         Aller au contenu
       </a>
@@ -47,6 +48,6 @@ export default function BlogLayout({
           {AGENCE.nom} — {AGENCE.enseigne} · {mentionSiret()}
         </p>
       </footer>
-    </div>
+    </PageMotion>
   );
 }

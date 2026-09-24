@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { BlogPost } from "../blog/posts";
@@ -19,12 +19,15 @@ const normaliser = (texte: string) =>
 function Carte({
   post,
   vedette = false,
+  ordre = 0,
 }: {
   post: ArticleCarte;
   vedette?: boolean;
+  ordre?: number;
 }) {
   return (
-    <Link href={`/blog/${post.slug}`} className={vedette ? s.vedette : s.carte}>
+    <Link href={`/blog/${post.slug}`} className={vedette ? s.vedette : s.carte}
+      data-reveal="" style={{ "--motion-order": ordre } as CSSProperties}>
       <div className={s.imageArticle}>
         <Image
           src={post.image}
@@ -76,9 +79,9 @@ export default function IndexBlog({ posts }: { posts: ArticleCarte[] }) {
       {!filtresActifs && posts[0] && <Carte post={posts[0]} vedette />}
       <section className={s.bibliotheque} aria-labelledby="titre-bibliotheque">
         <div className={s.enteteBibliotheque}>
-          <div>
-            <p className={s.eyebrow}>À votre rythme</p>
-            <h2 id="titre-bibliotheque">Explorez les guides.</h2>
+          <div data-motion-heading="">
+            <p className={s.eyebrow} data-reveal="" data-heading-part="0">À votre rythme</p>
+            <h2 id="titre-bibliotheque" data-reveal="" data-heading-part="1">Explorez les guides.</h2>
           </div>
           <p aria-live="polite" aria-atomic="true">
             {selection.length} article{selection.length > 1 ? "s" : ""}
@@ -138,8 +141,8 @@ export default function IndexBlog({ posts }: { posts: ArticleCarte[] }) {
           )}
         </div>
         <div className={s.grille}>
-          {grille.map((post) => (
-            <Carte key={post.slug} post={post} />
+          {grille.map((post, index) => (
+            <Carte key={post.slug} post={post} ordre={index % 3} />
           ))}
         </div>
         {grille.length === 0 && (

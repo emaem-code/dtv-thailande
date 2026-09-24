@@ -102,10 +102,10 @@ export default function HomeContent() {
   return (
     <div className={s.homeContent}>
       {/* ── LE DTV EN BREF ── */}
-      <section id="visa-dtv" className={s.briefSection}>
-        <p className={s.eyebrow}>La liberté commence par la clarté.</p>
-        <h2>Le Visa DTV en bref</h2>
-        <p>
+      <section id="visa-dtv" className={s.briefSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">La liberté commence par la clarté.</p>
+        <h2 data-reveal="" data-heading-part="1">Le Visa DTV en bref</h2>
+        <p data-reveal="" data-heading-part="2">
           Le <strong>Destination Thailand Visa</strong>, ou DTV, est le visa
           long séjour créé par la Thaïlande en 2024 pour les travailleurs à
           distance, les indépendants et les personnes venant suivre une activité
@@ -122,7 +122,7 @@ export default function HomeContent() {
           à rester cinq ans d&apos;affilée.
         </p>
 
-        <div className={s.keyFigures}>
+        <div className={s.keyFigures} data-motion-group="">
           {[
             { chiffre: "5 ans", label: "de validité, entrées multiples" },
             {
@@ -134,7 +134,7 @@ export default function HomeContent() {
               label: "d’épargne à justifier, par personne",
             },
           ].map((item) => (
-            <div key={item.chiffre}>
+            <div key={item.chiffre} data-reveal="">
               <p>{item.chiffre}</p>
               <p>{item.label}</p>
             </div>
@@ -143,19 +143,19 @@ export default function HomeContent() {
       </section>
 
       {/* ── ÉLIGIBILITÉ ── */}
-      <section id="profils" className={s.profilesSection}>
-        <p className={s.eyebrow}>À chaque projet, sa voie.</p>
-        <h2>Êtes-vous éligible au Visa DTV ?</h2>
-        <p>
+      <section id="profils" className={s.profilesSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">À chaque projet, sa voie.</p>
+        <h2 data-reveal="" data-heading-part="1">Êtes-vous éligible au Visa DTV ?</h2>
+        <p data-reveal="" data-heading-part="2">
           Il existe trois voies d&apos;accès, et la difficulté n&apos;est
           presque jamais de remplir le formulaire : elle est de déterminer
           laquelle vous concerne réellement. Beaucoup de candidats se croient
           inéligibles parce qu&apos;ils ont regardé la mauvaise porte.
         </p>
 
-        <div className={s.profileGrid}>
+        <div className={s.profileGrid} data-motion-group="">
           {voies.map((v, i) => (
-            <div key={v.titre}>
+            <div key={v.titre} data-reveal="">
               <span className={s.profileNumber}>
                 0{i + 1}
                 <span aria-hidden="true">↗</span>
@@ -169,7 +169,7 @@ export default function HomeContent() {
           ))}
         </div>
 
-        <div className={s.fundsNote}>
+        <div className={s.fundsNote} data-reveal="">
           <p>
             Dans les trois cas, vous devrez justifier{" "}
             <Link href="/blog/fonds-bancaires-visa-dtv">
@@ -188,23 +188,23 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <div className={s.inlineCta}>
+      <div className={s.inlineCta} data-reveal="">
         <p>
           Vous vous reconnaissez dans l’un de ces profils ?
           <span>Faisons le point sur votre situation.</span>
         </p>
-        <button onClick={ouvrirEligibilite} className={s.primary}>
-          Vérifier mon éligibilité ↗
+        <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
+          Vérifier mon éligibilité <span aria-hidden="true">↗</span>
         </button>
       </div>
 
       <HomeVideos />
 
       {/* ── MÉTHODE ── */}
-      <section id="methode" className={s.methodSection}>
-        <p className={s.eyebrow}>Vous avancez. Nous vous accompagnons.</p>
-        <h2>Notre méthode, en cinq étapes</h2>
-        <p>
+      <section id="methode" className={s.methodSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Vous avancez. Nous vous accompagnons.</p>
+        <h2 data-reveal="" data-heading-part="1">Notre méthode, en cinq étapes</h2>
+        <p data-reveal="" data-heading-part="2">
           De la préparation de votre dossier à votre arrivée après accord du
           visa, voici les étapes de notre accompagnement.
         </p>
@@ -214,9 +214,9 @@ export default function HomeContent() {
           sources={[SOURCES_PROCEDURE.reglesAout2026]}
           className={s.procedureSources}
         />
-        <ol>
+        <ol data-motion-group="">
           {ETAPES_DTV.map((e, index) => (
-            <li key={e.id}>
+            <li key={e.id} data-reveal="">
               <span>{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <h3>{e.titre}</h3>
@@ -236,10 +236,10 @@ export default function HomeContent() {
       </section>
 
       {/* ── TARIFS ── */}
-      <section id="tarifs" className={s.pricingSection}>
-        <p className={s.eyebrow}>Un projet clair. Un budget transparent.</p>
-        <h2>Nos formules et nos tarifs</h2>
-        <p>
+      <section id="tarifs" className={s.pricingSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Un projet clair. Un budget transparent.</p>
+        <h2 data-reveal="" data-heading-part="1">Nos formules et nos tarifs</h2>
+        <p data-reveal="" data-heading-part="2">
           Nos prix sont publics et dépendent uniquement de la{" "}
           <strong>voie d&apos;éligibilité</strong> par laquelle vous obtenez le
           visa. Le tarif Soft Power inclut les frais d&apos;inscription à
@@ -259,12 +259,13 @@ export default function HomeContent() {
           ]}
           className={s.procedureSources}
         />
-        <div className={s.priceGrid}>
+        <div className={s.priceGrid} data-motion-group="">
           {formules.map((f) => (
             <article
               key={f.id}
               className={s.priceCard}
               data-featured={f.vedette}
+              data-reveal=""
             >
               <div className={s.priceCardHeading}>
                 <h3>{f.nom}</h3>
@@ -295,7 +296,7 @@ export default function HomeContent() {
                   <li>Préparation de votre arrivée en Thaïlande</li>
                 )}
               </ul>
-              <button onClick={ouvrirEligibilite} className={s.primary}>
+              <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
                 Préparer mon projet <span aria-hidden="true">↗</span>
               </button>
               <small>Commençons par vérifier votre éligibilité.</small>
@@ -303,7 +304,7 @@ export default function HomeContent() {
           ))}
         </div>
 
-        <div className={s.familyNote}>
+        <div className={s.familyNote} data-reveal="">
           <p>
             <strong>Et si vous partez en famille ?</strong>
           </p>
@@ -336,18 +337,18 @@ export default function HomeContent() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className={s.faqSection}>
-        <p className={s.eyebrow}>Les bonnes réponses, avant le départ.</p>
-        <h2>Questions fréquentes sur le Visa DTV</h2>
-        <p>
+      <section id="faq" className={s.faqSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Les bonnes réponses, avant le départ.</p>
+        <h2 data-reveal="" data-heading-part="1">Questions fréquentes sur le Visa DTV</h2>
+        <p data-reveal="" data-heading-part="2">
           L&apos;immigration thaïlandaise est stricte et les rumeurs circulent
           vite. Voici des réponses claires aux questions qui reviennent à chaque
           accompagnement.
         </p>
 
-        <div className={s.faqList}>
+        <div className={s.faqList} data-motion-group="">
           {homeFaqs.map((faq) => (
-            <details key={faq.q}>
+            <details key={faq.q} data-reveal="">
               <summary>
                 <span>
                   <span>{faq.category}</span>
@@ -374,24 +375,24 @@ export default function HomeContent() {
       </section>
 
       {/* ── GUIDES ── */}
-      <section id="guides" className={s.guidesSection}>
-        <p className={s.eyebrow}>Le journal de votre future vie.</p>
-        <h2>Nos guides de terrain</h2>
-        <p>
+      <section id="guides" className={s.guidesSection} data-motion-heading="">
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Le journal de votre future vie.</p>
+        <h2 data-reveal="" data-heading-part="1">Nos guides de terrain</h2>
+        <p data-reveal="" data-heading-part="2">
           Nous documentons publiquement ce que nous rencontrons sur le terrain :
           montants réels, textes officiels et pièges constatés. Aucun de ces
           guides n&apos;est réservé aux clients.
         </p>
 
-        <div className={s.guideGrid}>
+        <div className={s.guideGrid} data-motion-group="">
           {guides.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
+            <Link key={post.slug} href={`/blog/${post.slug}`} data-reveal="">
               <div className={s.guideImage}>
                 <Image
                   src={post.image}
                   alt={post.shortTitle}
                   fill
-                  sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 30vw"
+                  sizes="(max-width: 760px) 90vw, (max-width: 900px) 45vw, 30vw"
                 />
               </div>
               <span>{post.category}</span>
