@@ -10,11 +10,9 @@
   --motion-arrow-distance: 4px;
   --motion-press-distance: 1px;
   --motion-sparkle-delay: 1800ms;
-  --motion-sparkle-cycle: 6000ms;
-  --motion-sparkle-size: 5px;
-  --motion-sparkle-top: 6px;
-  --motion-sparkle-right: 8px;
-  --motion-sparkle-halo: 9px;
+  --motion-sparkle-cycle: 7000ms;
+  --motion-sparkle-size: 45%;
+  --motion-sparkle-top: -50%;
 }
 .page {
   --paper: #f7f7f2;
@@ -2177,6 +2175,7 @@
 .motion [data-sparkle] {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   background: var(--ink);
   color: var(--paper);
   transition: transform var(--motion-interaction-duration) var(--motion-ease);
@@ -2218,12 +2217,13 @@
   content: "";
   position: absolute;
   top: var(--motion-sparkle-top);
-  right: var(--motion-sparkle-right);
+  left: 0;
+  z-index: -1;
   width: var(--motion-sparkle-size);
-  height: var(--motion-sparkle-size);
-  border-radius: 50%;
-  background: var(--paper);
-  box-shadow: 0 0 var(--motion-sparkle-halo) var(--paper);
+  height: 200%;
+  /* Un reflet derrière le texte, limité aux contours du bouton. */
+  background: linear-gradient(90deg, transparent, rgb(247 247 242 / 16%), transparent);
+  transform: translateX(-160%) skewX(-18deg);
   opacity: 0;
   pointer-events: none;
 }
@@ -2240,7 +2240,7 @@
     animation: settle var(--motion-hero-duration) var(--motion-ease) backwards;
   }
   .motion :is([data-sparkle="ready"], [data-sparkle="scroll"][data-in-view])::after {
-    animation: sparkle var(--motion-sparkle-cycle) var(--motion-ease)
+    animation: sparkle var(--motion-sparkle-cycle) linear
       calc(var(--motion-arrival-wait, 0ms) + var(--motion-sparkle-delay)) infinite;
   }
 }
@@ -2270,10 +2270,11 @@
   to { transform: scale(1); }
 }
 @keyframes sparkle {
-  0% { opacity: 0; }
-  /* 400 ms d'allumage, 440 ms d'extinction, 5 160 ms invisible (86 %). */
-  6.666667% { opacity: 1; }
-  14%, 100% { opacity: 0; }
+  0% { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+  3% { opacity: 1; }
+  23% { transform: translateX(340%) skewX(-18deg); opacity: 1; }
+  /* Après le passage, plus de cinq secondes sans mouvement. */
+  26%, 100% { transform: translateX(340%) skewX(-18deg); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   :global(html):has(.motion) {
