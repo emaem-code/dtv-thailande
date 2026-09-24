@@ -86,6 +86,14 @@
 .imageArticle img {
   object-fit: cover;
 }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .imageArticle img {
+    transition: transform var(--motion-block-duration) var(--motion-ease);
+  }
+  :is(.vedette, .carte):hover .imageArticle img {
+    transform: scale(var(--motion-hero-scale));
+  }
+}
 .aLaUne {
   position: absolute;
   left: 25px;

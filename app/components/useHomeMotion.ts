@@ -13,7 +13,7 @@ type Options = {
 export function useHomeMotion({
   pageKey = "",
   prepare,
-  preserveFirstScreen = false,
+  preserveFirstScreen = true,
   observeChanges = false,
 }: Options = {}) {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,8 +40,8 @@ export function useHomeMotion({
       });
     }, {
       threshold: 0.08,
-      // Les % de rootMargin se basent sur la largeur : convertir la hauteur.
-      rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.15)}px 0px`,
+      // Le mouvement commence à l'entrée dans l'écran, sans attente au bas de page.
+      rootMargin: "0px",
     });
     const root = ref.current;
     if (!root) return () => observer.disconnect();
@@ -61,6 +61,9 @@ export function useHomeMotion({
             observer.unobserve(part);
           });
         } else if (!registered.has(element)) {
+          // Préparer le décalage hors écran évite tout saut au déclenchement.
+          // Le contenu garde son opacité normale, même si le script s'arrête.
+          if (element.hasAttribute("data-reveal")) element.setAttribute("data-motion-prepared", "");
           registered.add(element);
           observer.observe(element);
         }

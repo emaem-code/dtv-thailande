@@ -1,15 +1,12 @@
 /* Vocabulaire de mouvement partagé par les pages publiques. */
 .motion {
-  --motion-ease: cubic-bezier(.16, 1, .3, 1);
-  --motion-block-duration: 560ms;
-  --motion-line-duration: 460ms;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-block-duration: 640ms;
   --motion-interaction-duration: 180ms;
-  --motion-block-distance: 14px;
-  --motion-line-distance: 7px;
-  --motion-block-stagger: 80ms;
-  --motion-line-stagger: 90ms;
+  --motion-block-distance: 18px;
+  --motion-block-stagger: 50ms;
   --motion-hero-duration: 1200ms;
-  --motion-hero-scale: 1.04;
+  --motion-hero-scale: 1.025;
   --motion-arrow-distance: 4px;
   --motion-press-distance: 1px;
   --motion-sparkle-delay: 1800ms;
@@ -2154,19 +2151,15 @@
     border: 0;
   }
 }
-/* Pas d'état caché au repos. L'observateur ajoute seulement data-in-view,
-   une fois ; le CSS termine seul, même si le script s'arrête ensuite. */
+/* Le contenu reste opaque. Le décalage est préparé hors écran ; data-in-view
+   déclenche une seule arrivée, que le CSS termine sans autre intervention. */
 .motion [data-heading-part="0"] { --motion-order: 0; }
 .motion [data-motion-group] > :nth-child(2),
 .motion [data-heading-part="1"] { --motion-order: 1; }
 .motion [data-motion-group] > :nth-child(3),
 .motion [data-heading-part="2"] { --motion-order: 2; }
-.motion [data-motion-group] > :nth-child(4) { --motion-order: 3; }
-.motion [data-motion-group] > :nth-child(5) { --motion-order: 4; }
-.motion [data-motion-group] > :nth-child(6) { --motion-order: 5; }
-.motion [data-motion-group] > :nth-child(7) { --motion-order: 6; }
-.motion .videoPhrases li:nth-child(2) { --motion-line-order: 1; }
-.motion .videoPhrases li:nth-child(3) { --motion-line-order: 2; }
+/* Les grandes grilles ne doivent pas faire attendre leurs dernières cartes. */
+.motion [data-motion-group] > :nth-child(n + 4) { --motion-order: 2; }
 
 /* Les anciens gestes de survol cèdent la place à un seul vocabulaire. */
 .motion :is(.desktopNav a, .announcement a, .announcement button,
@@ -2236,16 +2229,12 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .motion [data-reveal][data-motion-prepared]:not([data-in-view]):not([data-motion-static]) {
+    transform: translateY(var(--motion-block-distance));
+  }
   .motion [data-reveal][data-in-view]:not([data-motion-static]) {
     animation: rise var(--motion-block-duration) var(--motion-ease)
       calc(var(--motion-order, 0) * var(--motion-block-stagger)) backwards;
-  }
-  .motion .videoCard[data-in-view] .videoPhrases li {
-    --motion-distance: var(--motion-line-distance);
-    animation: rise var(--motion-line-duration) var(--motion-ease)
-      calc(var(--motion-order, 0) * var(--motion-block-stagger)
-        + var(--motion-block-duration)
-        + var(--motion-line-order, 0) * var(--motion-line-stagger)) backwards;
   }
   .motion [data-hero-image][data-in-view] {
     animation: settle var(--motion-hero-duration) var(--motion-ease) backwards;
@@ -2255,9 +2244,16 @@
       calc(var(--motion-arrival-wait, 0ms) + var(--motion-sparkle-delay)) infinite;
   }
 }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion :is(.videoThumbnail, .guideImage) img {
+    transition: transform var(--motion-block-duration) var(--motion-ease);
+  }
+  .motion :is(.videoThumbnail:hover img, .guideGrid > a:hover img) {
+    transform: scale(var(--motion-hero-scale));
+  }
+}
 /* Le clavier et le pointeur prennent toujours la priorité sur le décor. */
-.motion [data-reveal]:focus-within,
-.motion [data-reveal]:focus-within .videoPhrases li {
+.motion [data-reveal]:focus-within {
   opacity: 1 !important;
   transform: none !important;
 }
@@ -2266,11 +2262,8 @@
   opacity: 0;
 }
 @keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(var(--motion-distance, var(--motion-block-distance)));
-  }
-  to { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(var(--motion-block-distance)); }
+  to { transform: translateY(0); }
 }
 @keyframes settle {
   from { transform: scale(var(--motion-hero-scale)); }
