@@ -14,7 +14,7 @@ type Lecture = "ready" | "loading" | "playing" | "paused" | "ended";
 export default function HomeExplainer() {
   const [scene, setScene] = useState(0);
   const [lecture, setLecture] = useState<Lecture>("ready");
-  const [progress, setProgress] = useState(0);
+  const [pointIndex, setPointIndex] = useState(-1);
   const [elapsed, setElapsed] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [captions, setCaptions] = useState(true);
@@ -36,7 +36,7 @@ export default function HomeExplainer() {
     const position = getFilmPosition(time);
     setElapsed(time);
     setScene(position.scene);
-    setProgress(position.progress);
+    setPointIndex(position.pointIndex);
     setCaptionIndex(position.captionIndex);
   }, []);
 
@@ -194,7 +194,14 @@ export default function HomeExplainer() {
               <div className={s.sceneTop}><span>DTV · Le film</span><span>{String(scene + 1).padStart(2, "0")} / 07</span></div>
               <p className={s.chapterName}>{current.chapitre}</p>
               <h3 className={s.sceneTitle}>{current.titre}<em>{current.accent}</em></h3>
-              <ul className={s.points}>{current.points.map((point, index) => <li key={point} data-current={index === Math.min(current.points.length - 1, Math.floor(progress * current.points.length))}><span aria-hidden="true">0{index + 1}</span>{point}</li>)}</ul>
+              <ul className={s.points}>
+                {current.points.map((point, index) => (
+                  <li key={point} data-current={index === Math.max(0, pointIndex)} data-speaking={lecture !== "ready" && index === pointIndex}>
+                    <span className={s.pointNumber} aria-hidden="true">0{index + 1}</span>
+                    <span className={s.pointText}>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           {lecture === "ready" && <button className={s.start} onClick={() => { togglePlay(); playButtonRef.current?.focus({ preventScroll: true }); }}><span aria-hidden="true">▶</span> Regarder l’explication <small>7 chapitres · à votre rythme</small></button>}
@@ -215,6 +222,12 @@ export default function HomeExplainer() {
         <p className={s.notice} role="status">{notice || (lecture === "loading" ? "Chargement du son…" : "")}</p>
         <nav ref={chaptersRef} className={s.chapters} aria-label="Chapitres de l’explication">{FILM_ACCUEIL.map((part, index) => <button key={part.id} onClick={() => goToChapter(index)} aria-current={scene === index ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span>{part.chapitre}</button>)}</nav>
       </div>
+
+      {/* Sur mobile, le complément non lu reste accessible sans réduire la photo
+          ni prendre la place de l’argument que la voix est en train d’aborder. */}
+      {current.points.map((point, index) => FILM_AUDIO_CHAPTERS[scene].points[index] === null && (
+        <p className={s.supplement} key={point}><strong>À retenir.</strong> {point}</p>
+      ))}
 
       <div className={s.below}>
         <p>Un projet personnel mérite une réponse personnelle.</p>

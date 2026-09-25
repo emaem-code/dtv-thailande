@@ -8,13 +8,15 @@ export const FILM_AUDIO_SRC = "/audio/film-dtv-voix-musique-9a369745a5.mp3";
 export const FILM_AUDIO_DURATION = 90.25;
 
 export const FILM_AUDIO_CHAPTERS = [
-  { id: "projet", start: 0, captions: [0, 2.48, 5.02] },
-  { id: "reperes", start: 12.27, captions: [12.27, 15.56, 19.86] },
-  { id: "profils", start: 22.81, captions: [22.81, 28.98, 29.90, 32.82] },
-  { id: "dossier", start: 36.83, captions: [36.83, 43.16, 46.06, 48.18] },
-  { id: "methode", start: 49.45, captions: [49.45, 53.42, 59.72] },
-  { id: "budget", start: 62.11, captions: [62.11, 63.64, 67.56, 70.96, 73.02] },
-  { id: "premier-pas", start: 75.01, captions: [75.01, 79.14, 82.06] },
+  // Les points suivent les idées prononcées, pas trois fractions du chapitre.
+  // null : complément écrit, absent de la voix off, donc sans animation parlée.
+  { id: "projet", start: 0, captions: [0, 2.48, 5.02], points: [6.31, 8.27, 9.75] },
+  { id: "reperes", start: 12.27, captions: [12.27, 15.56, 19.86], points: [12.27, 15.56, 19.86] },
+  { id: "profils", start: 22.81, captions: [22.81, 28.98, 29.90, 32.82], points: [22.81, 25.67, 29.90] },
+  { id: "dossier", start: 36.83, captions: [36.83, 43.16, 46.06, 48.18], points: [36.83, 43.16, 46.06] },
+  { id: "methode", start: 49.45, captions: [49.45, 53.42, 59.72], points: [49.45, null, 55.87] },
+  { id: "budget", start: 62.11, captions: [62.11, 63.64, 67.56, 70.96, 73.02], points: [62.11, 63.64, 67.56] },
+  { id: "premier-pas", start: 75.01, captions: [75.01, 79.14, 82.06], points: [75.01, 79.14, 84.49] },
 ] as const;
 
 /** L’audio est l’unique horloge, y compris après une pause ou un saut de chapitre. */
@@ -34,9 +36,14 @@ export function getFilmPosition(currentTime: number) {
     if (time < chapter.captions[index]) break;
     captionIndex = index;
   }
+  let pointIndex = -1;
+  chapter.points.forEach((start, index) => {
+    if (start !== null && time >= start) pointIndex = index;
+  });
   return {
     scene,
     captionIndex,
+    pointIndex,
     progress: (time - chapter.start) / (end - chapter.start),
   };
 }

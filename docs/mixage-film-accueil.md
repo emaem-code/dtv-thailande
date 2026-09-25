@@ -47,3 +47,29 @@ En cas de remplacement de la voix ou de modification du texte lu, refaire le mix
 - Contrôle des sept frontières de chapitre, des 25 débuts de sous-titre et de la correspondance avec les phrases ; positions vérifiées sur toute la durée du film.
 - Navigateur : aucune source audio au repos, lecture au clic, pause stable puis reprise avec Espace, saut au chapitre Budget, coupure du son, fin à 90,25 s / 100 %, bouton Revoir et pause automatique lorsque le lecteur sort du champ.
 - Affichage mobile contrôlé à 390 px : scène carrée, sous-titres et commandes visibles. Aucune erreur du lecteur relevée dans la console pendant ce parcours.
+
+## Animation des arguments — 25 septembre 2026
+
+Les `points` de `FILM_AUDIO_CHAPTERS` donnent les débuts des idées prononcées,
+calés sur le mixage existant. L’introduction distingue notamment « comprendre »
+(6,31 s), « vérifier votre profil » (8,27 s) et « préparer votre dossier » (9,75 s).
+Ces repères viennent du relevé local des mots de la voix fournie, avec les 350 ms
+ajoutées au montage. Ils complètent les sous-titres sans en modifier les repères.
+
+L’argument courant suit `audio.currentTime`, via les événements du lecteur,
+avec la granularité de `timeupdate` du navigateur. Lui seul reçoit le glissement
+horizontal de 8 px et le fond sauge. La durée (640 ms) et la courbe sont celles
+déjà définies par le site. Les autres arguments restent lisibles et immobiles ;
+aucun texte ne part d’une opacité nulle. Pause, attente réseau et navigation par
+chapitre conservent l’audio comme unique horloge. Aucun chargement supplémentaire
+au repos et aucune dépendance ajoutée au site.
+
+Le deuxième argument du chapitre Accompagnement, sur le pays de dépôt, n’est pas
+prononcé : son repère est `null`. Il reste fixe dans la liste sur ordinateur et
+s’affiche en complément « À retenir » sous le lecteur sur téléphone, pour garder
+la place de la photo et de l’argument prononcé. Son texte n’est pas modifié.
+
+En mouvement réduit, le glissement et la transition de fond sont désactivés ;
+la mise en évidence statique suit toujours la voix. Contrastes : texte courant
+#526357 sur #eef0e6 = 5,56:1 ; argument actif #243f35 sur #dfe7d8 = 9,01:1 ;
+numéro actif #f7f7f2 sur #243f35 = 10,64:1.

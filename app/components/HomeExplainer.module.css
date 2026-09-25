@@ -23,8 +23,14 @@
 /* Le titre et les phrases gardent leur hauteur, même quand le son attend.
    L’espace libre remplace le trait et absorbe aussi le déplacement animé. */
 .points { display: grid; flex-shrink: 0; gap: 10px; margin: 24px 0 auto; padding: 0; list-style: none; }
-.points li { display: flex; gap: 12px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.4; }
-.points li > span { flex-shrink: 0; padding-top: 3px; color: #526357; font-size: 12px; font-variant-numeric: tabular-nums; }
+.points li { position: relative; isolation: isolate; display: flex; gap: 12px; color: #526357; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.4; }
+.points li::before { content: ""; position: absolute; z-index: -1; inset: -4px -8px; border-radius: 6px; background: #dfe7d8; opacity: 0; }
+.points li[data-speaking="true"] { color: #243f35; }
+.points li[data-speaking="true"]::before { opacity: 1; }
+.pointNumber { align-self: flex-start; flex-shrink: 0; margin-top: 3px; color: #526357; font-size: 12px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.points li[data-speaking="true"] .pointNumber { border-radius: 3px; background: #243f35; box-shadow: 0 0 0 3px #243f35; color: #f7f7f2; }
+.pointText { min-width: 0; }
+.supplement { display: none; }
 .start { position: absolute; left: 24px; bottom: 24px; width: calc(48% - 48px); display: grid; grid-template-columns: 44px 1fr; align-items: center; column-gap: 12px; min-height: 76px; padding: 14px 18px; border-radius: 10px; background: #f7f7f2; color: #243f35; text-align: left; font-size: 16px; font-weight: 600; box-shadow: 0 4px 24px rgb(0 0 0 / 12%); }
 .start > span { display: grid; place-items: center; grid-row: span 2; height: 44px; border: 1px solid #526357; border-radius: 50%; font-size: 15px; }
 .start small { grid-column: 2; margin-top: 4px; color: #526357; font-size: 12px; font-weight: 400; }
@@ -58,13 +64,15 @@
 .transcript p { margin: 8px 0; }
 @keyframes pictureDrift { from { transform: scale(1); } to { transform: scale(1.06); } }
 @keyframes wordRise { from { transform: translateY(16px); } to { transform: translateY(0); } }
+@keyframes argumentFocus { from { transform: translateX(8px); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: no-preference) {
   .scene[data-started="true"] .photo img { animation: pictureDrift 12s linear both; }
   .scene[data-started="true"] .sceneTitle { animation: wordRise var(--motion-block-duration) var(--motion-ease) both; }
-  .scene[data-started="true"] .points li { animation: wordRise var(--motion-block-duration) var(--motion-ease) both; }
-  .scene[data-started="true"] .points li:nth-child(2) { animation-delay: 160ms; }
-  .scene[data-started="true"] .points li:nth-child(3) { animation-delay: 320ms; }
-  .player:not([data-playing="true"]) .scene * { animation-play-state: paused; }
+  /* Un seul geste au repère vocal, sans cascade ni minuterie indépendante. */
+  .scene[data-started="true"] .points li[data-speaking="true"] .pointText { animation: argumentFocus var(--motion-block-duration) var(--motion-ease) both; }
+  .points li::before { transition: opacity var(--motion-block-duration) var(--motion-ease); }
+  .player:not([data-playing="true"]) .scene *,
+  .player:not([data-playing="true"]) .scene[data-started="true"] .points li[data-speaking="true"] .pointText { animation-play-state: paused; }
   .track > span { transition: transform 100ms linear; }
 }
 @media (max-width: 1000px) {
@@ -96,7 +104,8 @@
   .points { min-height: 2.7em; }
   .points li { display: none; font-size: 16px; gap: 8px; line-height: 1.35; }
   .points li[data-current="true"] { display: flex; }
-  .points li > span { font-size: 10px; }
+  .pointNumber { font-size: 10px; }
+  .section .supplement { display: block; margin: 16px 0 0; color: #526357; font-size: 16px; line-height: 1.5; }
   .start { inset: 12px 12px auto; width: auto; min-height: 60px; padding: 8px 12px; grid-template-columns: 36px 1fr; font-size: 15px; }
   .start > span { height: 36px; }
   .start small { font-size: 11px; }
