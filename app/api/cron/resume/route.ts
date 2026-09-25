@@ -3,6 +3,7 @@ import { requete } from '../../../lib/db';
 import { alerter } from '../../../lib/alerte';
 import { compterAbonnes } from '../../../lib/abonnes';
 import { AGENCE } from '../../../lib/agence';
+import { lireAudience } from '../../../lib/audience';
 
 /**
  * Le point du matin, à 9 h heure de Phuket.
@@ -48,6 +49,7 @@ export async function GET(requeteHttp: Request) {
   }
 
   const [c] = await requete<{
+    fin_periode: Date;
     leads: string;
     leads_traites: string;
     envoyes: string;
@@ -57,7 +59,7 @@ export async function GET(requeteHttp: Request) {
     en_attente: string;
     jamais_ouverts: string;
   }>(
-    `SELECT
+    `SELECT now() AS fin_periode,
        (SELECT count(*) FROM leads WHERE cree_le    > now() - interval '24 hours') AS leads,
        (SELECT count(*) FROM leads WHERE cree_le    > now() - interval '24 hours'
                                      AND traite)                                   AS leads_traites,
@@ -77,9 +79,14 @@ export async function GET(requeteHttp: Request) {
 
   if (!c) return NextResponse.json({ erreur: 'Décompte impossible.' }, { status: 500 });
 
+  // now() est identique dans tout le SELECT : l'audience reprend exactement
+  // l'instant de référence des décomptes, même si la requête a pris du temps.
+  const { fin_periode, ...compteurs } = c;
+  const audience = await lireAudience(fin_periode);
   const n = (v: string) => Number(v) || 0;
 
   const detail = [
+    ...(audience ? [audience.page, audience.provenance, audience.total] : []),
     `${compte(n(c.leads), 'nouveau lead', 'nouveaux leads')}${
       n(c.leads) > 0 ? ` · ${n(c.leads_traites)} traité${n(c.leads_traites) > 1 ? 's' : ''}` : ''
     }`,
@@ -138,5 +145,5 @@ export async function GET(requeteHttp: Request) {
     urgence: 'normale',
   });
 
-  return NextResponse.json({ ok: true, envoye, compte: c });
+  return NextResponse.json({ ok: true, envoye, compte: compteurs });
 }
