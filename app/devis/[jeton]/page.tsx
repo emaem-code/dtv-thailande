@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import DocumentDevis from '../../components/DocumentDevis';
+import RendezVous from '../../components/RendezVous';
 import { lireDevisParJeton } from '../../lib/devis';
 import { totaliser, devisSelonOption } from '../../lib/devis-modele';
 import { FORMULES } from '../../lib/tarifs';
@@ -155,6 +156,13 @@ export default async function PageEspaceClient({
         )}
 
         <DocumentDevis devis={devis} />
+
+        {!signature && (
+          <RendezVous
+            titre="Une question sur votre devis ?"
+            description="Le budget, les prestations, votre situation : faisons le point en visio avant votre décision."
+          />
+        )}
 
         {/* ── SIGNATURE ── */}
         {!signature && !expire && (

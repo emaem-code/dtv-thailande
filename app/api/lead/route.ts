@@ -63,7 +63,7 @@ function corpsTexte(prenom: string, softPower: boolean): string {
 
   return `${salutation}
 
-Votre demande nous est bien parvenue. Nous l'étudions et revenons vers vous sous 24 heures ouvrées avec une estimation chiffrée pour votre situation.
+Votre demande nous est bien parvenue. Nous l'étudions et revenons vers vous sous 48 heures avec une estimation chiffrée pour votre situation.
 
 Si un élément vous est revenu depuis — une date qui bouge, un doute sur un document, une question que le formulaire ne posait pas — répondez simplement à ce message. Ce que vous nous direz maintenant nous fera gagner du temps ensuite.
 
@@ -73,7 +73,7 @@ ${secondLien}
 
 À très bientôt,
 
-L'équipe ${AGENCE.enseigne}
+${AGENCE.nom}
 ${AGENCE.lieu}
 ${AGENCE.email}
 https://${AGENCE.site}
@@ -106,7 +106,7 @@ function corpsHtml(prenom: string, softPower: boolean): string {
 
           <p style="margin:0 0 20px 0;">
             Votre demande nous est bien parvenue. Nous l'étudions et revenons vers vous
-            <strong>sous 24 heures ouvrées</strong> avec une estimation chiffrée pour votre
+            <strong>sous 48 heures</strong> avec une estimation chiffrée pour votre
             situation.
           </p>
 
@@ -131,7 +131,7 @@ function corpsHtml(prenom: string, softPower: boolean): string {
 
         </td></tr>
         <tr><td style="padding:0 32px 32px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;color:#57534e;border-top:1px solid #e7e5e4;padding-top:20px;">
-          <p style="margin:0 0 16px 0;"><strong style="color:#1c1917;">L'équipe ${echapper(AGENCE.enseigne)}</strong><br>
+          <p style="margin:0 0 16px 0;"><strong style="color:#1c1917;">${echapper(AGENCE.nom)}</strong><br>
           ${echapper(AGENCE.lieu)}<br>
           <a href="mailto:${AGENCE.email}" style="color:#b45309;">${AGENCE.email}</a> ·
           <a href="https://${AGENCE.site}" style="color:#b45309;">${AGENCE.site}</a></p>

@@ -433,7 +433,7 @@ export default function ArticleDtvFamille() {
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-fuchsia-500 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Mobilité</p>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Entrepreneur et consultant basé à Phuket, j'accompagne les familles et les professionnels indépendants dans la structuration légale de leur départ. En contact direct avec la réalité administrative, notre équipe garantit un montage de dossier irréprochable pour sécuriser votre arrivée sur le territoire thaïlandais.
+            Entrepreneur et consultant basé à Phuket, j'accompagne les familles et les professionnels indépendants dans la structuration légale de leur départ. En contact direct avec la réalité administrative, je prépare un dossier sans approximation pour sécuriser votre arrivée.
           </p>
         </div>
       </div>

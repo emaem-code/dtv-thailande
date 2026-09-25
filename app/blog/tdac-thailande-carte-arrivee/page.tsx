@@ -483,7 +483,7 @@ export default function BlogArticleTdac() {
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Un dossier DTV sécurisé de A à Z</h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base">
-          Ne laissez pas un formulaire mal rempli ou une mauvaise synchronisation douanière gâcher votre projet d’expatriation. Nos équipes gèrent la conformité globale de votre dossier pour le Visa DTV et vous guident pas-à-pas à travers toutes les formalités d’arrivée obligatoires.
+          Ne laissez pas un formulaire mal rempli ou une mauvaise synchronisation douanière gâcher votre projet d’expatriation. Je gère la conformité de votre dossier pour le Visa DTV et je vous guide pas à pas dans les formalités d'arrivée.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">

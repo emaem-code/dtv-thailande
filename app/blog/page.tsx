@@ -41,7 +41,7 @@ const blogSchema = {
   "@type": "Blog",
   name: "Blog DTV Thaïlande",
   description:
-    "Guides, stratégies et conseils d'experts pour obtenir le Visa DTV et réussir son expatriation en Thaïlande.",
+    "Guides, stratégies et conseils pratiques pour obtenir le Visa DTV et réussir son expatriation en Thaïlande.",
   url: "https://dtv-thailande.fr/blog",
   publisher: {
     "@type": "Organization",

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useId } from 'react';
 import MontantFonds from './MontantFonds';
+import RendezVous from './RendezVous';
 import { lireAttribution } from '../lib/attribution';
 import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
 import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
@@ -1235,7 +1236,7 @@ export default function FormulaireEligibilite({
                   : 'Demande transmise avec succès !'}
               </h3>
               <p className="text-gray-400 text-sm">
-                Notre équipe va analyser votre projet et vous envoyer un devis exact par e-mail. En
+                J'analyse votre projet et je vous envoie un devis par e-mail. En
                 attendant, voici la base tarifaire pour le profil{' '}
                 <strong className="text-amber-500">
                   {isSoftPower ? 'Soft Power' : 'Digital Nomad'}
@@ -1313,6 +1314,12 @@ export default function FormulaireEligibilite({
               </div>
 
             </div>
+
+            <RendezVous
+              niveau="h3"
+              titre="Faisons le point sur votre projet"
+              description="Votre demande est transmise. Prenons un moment en visio pour en parler et répondre à vos questions avant de choisir votre accompagnement."
+            />
 
             {/* ── CHOIX DE LA FORMULE ── */}
             {!formuleEnvoyee ? (

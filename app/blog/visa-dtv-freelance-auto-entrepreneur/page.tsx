@@ -757,7 +757,7 @@ export default function ArticleFreelanceDTV() {
       <div className="mt-4 bg-[#111111] border border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500 opacity-5 rounded-full blur-3xl" />
         <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 relative z-10">
-          Votre dossier freelance, géré par des experts terrain
+          Votre dossier freelance, un accompagnement de terrain
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
           Kbis, URSSAF, portfolio, lettre consulaire : nous montons votre

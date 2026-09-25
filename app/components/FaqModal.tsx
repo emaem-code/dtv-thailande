@@ -82,7 +82,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
         {/* Contenu FAQ */}
         <div className={`${s.corpsModale} flex-1 overflow-y-auto p-6 md:p-8`}>
           <p className="text-gray-400 mb-8 text-sm md:text-base">
-            L'immigration thaïlandaise est stricte et les rumeurs sur internet sont nombreuses. Voici les réponses claires de nos experts aux questions les plus fréquentes concernant l'obtention du Visa DTV.
+            L'immigration thaïlandaise est stricte et les rumeurs sur internet sont nombreuses. Voici des réponses claires et vérifiées aux questions les plus fréquentes concernant l'obtention du Visa DTV.
           </p>
 
           <div className="space-y-4">
