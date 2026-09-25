@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import HomeVideos from "./HomeVideos";
+import HomeExplainer from "./HomeExplainer";
+import ActionIcon from "./ActionIcon";
 import { useModales } from "./ModalesProvider";
 import s from "../home.module.css";
 import {
@@ -158,12 +159,11 @@ export default function HomeContent() {
             <div key={v.titre} data-reveal="">
               <span className={s.profileNumber}>
                 0{i + 1}
-                <span aria-hidden="true">↗</span>
               </span>
               <h3>{v.titre}</h3>
               <p>{v.desc}</p>
               <Link href={v.lien}>
-                {v.ancre} <span aria-hidden="true">→</span>
+                {v.ancre} <ActionIcon name="book" />
               </Link>
             </div>
           ))}
@@ -194,11 +194,11 @@ export default function HomeContent() {
           <span>Faisons le point sur votre situation.</span>
         </p>
         <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
-          Vérifier mon éligibilité <span aria-hidden="true">↗</span>
+          Vérifier mon éligibilité <ActionIcon name="eligibility" />
         </button>
       </div>
 
-      <HomeVideos />
+      <HomeExplainer />
 
       {/* ── MÉTHODE ── */}
       <section id="methode" className={s.methodSection} data-motion-heading="">
@@ -297,7 +297,7 @@ export default function HomeContent() {
                 )}
               </ul>
               <button onClick={ouvrirEligibilite} className={s.primary} data-sparkle="scroll">
-                Préparer mon projet <span aria-hidden="true">↗</span>
+                Préparer mon projet <ActionIcon name="eligibility" />
               </button>
               <small>Commençons par vérifier votre éligibilité.</small>
             </article>
@@ -398,7 +398,7 @@ export default function HomeContent() {
               <span>{post.category}</span>
               <h3>{post.shortTitle}</h3>
               <span className={s.articleLink}>
-                Lire le guide <span aria-hidden="true">↗</span>
+                Lire le guide <ActionIcon name="book" />
               </span>
             </Link>
           ))}

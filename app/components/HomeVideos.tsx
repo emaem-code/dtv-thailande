@@ -1,10 +1,15 @@
 "use client";
 
-import { useCallback, useState } from "react";
+// En sommeil : cartes conservées pour de futurs témoignages clients.
+// Ce composant n’est plus appelé. Les anciens films et affiches ont été retirés
+// de public/ ; remplacer leurs références ci-dessous avant toute réactivation.
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useModalA11y } from "./useModalA11y";
 import { PRIX_APPEL, prix } from "../lib/tarifs";
 import s from "../home.module.css";
+import film from "./HomeVideos.module.css";
 
 const videos = [
   {
@@ -65,65 +70,97 @@ const videos = [
 ];
 
 export default function HomeVideos() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const fermer = useCallback(() => setActive(null), []);
   const { dialogRef, handleDialogKeyDown } = useModalA11y(
     active !== null,
     fermer,
   );
+
+  useEffect(() => {
+    if (
+      !sectionRef.current ||
+      !("IntersectionObserver" in window) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+
+    // Une seule lecture visuelle, quand les phrases sont réellement dans le champ.
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.55) continue;
+        entry.target.setAttribute("data-phrases-active", "");
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.55, rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.08)}px 0px` });
+
+    sectionRef.current.querySelectorAll("[data-film-phrases]").forEach((list) => observer.observe(list));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="accompagnement"
-      className={s.videosSection}
+      className={film.section}
       aria-labelledby="titre-videos"
     >
-      <div className={s.sectionIntro} data-motion-heading="">
+      <div className={film.intro} data-motion-heading="">
         <div>
-          <p className={s.eyebrow} data-reveal="" data-heading-part="0">Quelques images valent mille questions.</p>
+          <p className={film.eyebrow} data-reveal="" data-heading-part="0">Quelques images valent mille questions.</p>
           <h2 id="titre-videos" data-reveal="" data-heading-part="1">
             On vous montre <em>le chemin.</em>
           </h2>
         </div>
-        <p data-reveal="" data-heading-part="2">
-          Votre projet, nos réponses.
-          <br />{" "}
-          Tout comprendre en 5 vidéos, à votre rythme.
-        </p>
+        <div className={film.introAside} data-reveal="" data-heading-part="2">
+          <span className={film.collection}>La collection DTV <span aria-hidden="true">01 — 05</span></span>
+          <p>Quatre films pour se projeter.<br />Un client raconte son expérience.</p>
+        </div>
       </div>
-      <div className={s.videoGrid} data-motion-group="">
+      <div className={film.collectionRule} aria-hidden="true" data-reveal="" />
+      <div className={film.grid}>
         {videos.map((v, i) => (
           <article
             key={v.src}
-            className={s.videoCard}
+            className={film.card}
             aria-labelledby={`titre-video-${i}`}
-            data-reveal=""
+            data-film={i + 1}
+            data-testimonial={i === 2 || undefined}
           >
             <button
               onClick={() => setActive(i)}
-              className={s.videoThumbnail}
+              className={film.thumbnail}
               aria-label={`Lire la vidéo : ${v.title}`}
+              aria-describedby={`type-video-${i}`}
               aria-haspopup="dialog"
+              data-reveal=""
             >
               <Image
                 src={v.poster}
                 alt={`Aperçu vidéo ${v.title} pour l’accompagnement Visa DTV Thaïlande`}
                 fill
-                sizes={
-                  i === 0
-                    ? "(max-width: 760px) 88px, (max-width: 1400px) 30vw, 424px"
-                    : "(max-width: 760px) 88px, 112px"
-                }
+                sizes="(max-width: 600px) calc(100vw - 42px), (max-width: 900px) 46vw, (max-width: 1199px) 30vw, 260px"
               />
-              <span className={s.playIcon} aria-hidden="true">▶</span>
+              <span id={`type-video-${i}`} className={film.type}>
+                {i === 2 ? "Avis client" : "Film d’illustration"}
+              </span>
+              <span className={film.play} aria-hidden="true">
+                <span className={film.playIcon}>▶</span>
+                {i === 2 ? "Écouter l’avis" : "Voir le film"}
+                <span className={film.playArrow}>↗</span>
+              </span>
             </button>
-            <div className={s.videoCopy}>
-              <div className={s.videoHeading}>
-                <p className={s.videoNumber}>0{i + 1} / {v.label}</p>
-                <h3 id={`titre-video-${i}`} className={s.videoTitle}>{v.title}</h3>
+            <div className={film.copy}>
+              <div>
+                <p className={film.chapter}>
+                  <span className={film.number} aria-hidden="true">0{i + 1}</span>
+                  <span>{v.label}</span>
+                </p>
+                <h3 id={`titre-video-${i}`} className={film.title}>{v.title}</h3>
               </div>
-              <ul className={s.videoPhrases}>
+              <ul className={film.phrases} data-film-phrases="">
                 {v.phrases.map((phrase) => (
-                  <li key={phrase}>{phrase}</li>
+                  <li key={phrase}><span>{phrase}</span></li>
                 ))}
               </ul>
             </div>

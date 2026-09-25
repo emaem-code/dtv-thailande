@@ -126,6 +126,9 @@
   gap: 22px;
 }
 .guideLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
 }
 .headerCta {
@@ -352,15 +355,15 @@
   border-radius: inherit;
 }
 .locationTag {
+  align-items: center;
   position: absolute;
   z-index: 1;
   top: 25px;
   left: 25px;
-  color: #fff;
+  color: #f7f7f2;
   border: 1px solid #ffffff6b;
   border-radius: 30px;
-  background: #142f292b;
-  backdrop-filter: blur(8px);
+  background: #243f35;
   padding: 7px 13px;
   font-size: 10px;
   display: flex;
@@ -405,6 +408,7 @@
   transform: translateY(-3px);
 }
 .ticketIcon {
+  flex-shrink: 0;
   width: 38px;
   height: 38px;
   border: 1px solid var(--line);
@@ -423,9 +427,6 @@
   color: var(--muted);
   font-size: 9px;
   margin-top: 4px;
-}
-.visaTicket > span:last-child {
-  margin-left: auto;
 }
 .trustStrip {
   max-width: 1304px;
@@ -654,136 +655,6 @@
   font-size: 12px;
   flex-shrink: 0;
   padding-bottom: 4px;
-}
-/* Textes permanents : les vidéos restent un complément à la lecture. */
-.videosSection .eyebrow,
-.videosSection .sectionIntro > p {
-  color: #526357;
-}
-.homeContent .videosSection .eyebrow {
-  font-size: 12px;
-}
-.videosSection .sectionIntro > p {
-  font-size: 16px;
-}
-.videoGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-.videoCard {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #fffef9;
-  color: var(--ink);
-}
-.videoCard:first-child {
-  grid-row: span 2;
-  display: flex;
-  flex-direction: column;
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.videoCard:nth-child(3),
-.videoCard:nth-child(5) {
-  background: #eef0e6;
-}
-.videoThumbnail {
-  position: relative;
-  min-height: 180px;
-  overflow: hidden;
-  border-radius: 11px 0 0 11px;
-  background: #243f35;
-  color: #243f35;
-}
-.videoCard:first-child .videoThumbnail {
-  flex: 1;
-  min-height: 320px;
-  border-radius: 11px 11px 0 0;
-}
-.videoThumbnail img {
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-.videoThumbnail:hover img {
-  transform: scale(1.04);
-}
-.page .videoThumbnail:focus-visible {
-  outline: 3px solid #f7f7f2;
-  outline-offset: -7px;
-}
-.playIcon {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding-left: 3px;
-  background: #f7f7f2;
-  border: 1px solid #243f35;
-  border-radius: 50%;
-  font-size: 14px;
-}
-.videoThumbnail:focus-visible .playIcon {
-  outline: 3px solid #243f35;
-  outline-offset: 3px;
-}
-.videoCopy {
-  min-width: 0;
-  padding: 24px 20px;
-}
-.videoHeading {
-  min-width: 0;
-}
-.videoNumber {
-  margin: 0 0 12px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-.homeContent .videoTitle {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-wrap: balance;
-}
-.videoCard:first-child .videoCopy {
-  padding: 28px;
-}
-.videoCard:first-child .videoTitle {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 32px;
-}
-.videoPhrases {
-  display: grid;
-  gap: 8px;
-  margin: 20px 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 16px;
-  line-height: 1.5;
-}
-.videoPhrases li {
-  position: relative;
-  padding-left: 14px;
-}
-.videoPhrases li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.65em;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
 }
 .methodSection ol {
   display: grid;
@@ -1195,7 +1066,7 @@
   font-size: 12px;
   white-space: nowrap;
 }
-.stickyCta button > span {
+.stickyCta button > svg {
   margin-left: 18px;
 }
 .menuOverlay,
@@ -1312,20 +1183,6 @@
   }
 }
 @media (max-width: 1150px) {
-  .videoGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .videoCard:first-child {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    display: grid;
-    grid-template-columns: 30% minmax(0, 1fr);
-  }
-  .videoCard:first-child .videoThumbnail {
-    min-height: 240px;
-    border-radius: 11px 0 0 11px;
-  }
-
   .headerInner {
     padding: 0 32px;
   }
@@ -1713,38 +1570,6 @@
   .sectionIntro > p {
     font-size: 11px;
   }
-  .videoGrid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
-  .videoCard,
-  .videoCard:first-child {
-    display: grid;
-    grid-template-columns: 88px minmax(0, 1fr);
-    grid-column: auto;
-    grid-row: auto;
-  }
-  .videoThumbnail,
-  .videoCard:first-child .videoThumbnail {
-    min-height: 128px;
-    border-radius: 11px 0 0 0;
-  }
-  .videoCopy,
-  .videoCard:first-child .videoCopy {
-    display: contents;
-  }
-  .videoHeading {
-    align-self: center;
-    padding: 22px 18px;
-  }
-  .videoCard:first-child .videoTitle {
-    font-size: 26px;
-  }
-  .videoPhrases {
-    grid-column: 1 / -1;
-    margin: 0;
-    padding: 20px;
-  }
   .methodSection ol {
     gap: 27px;
     margin-top: 30px;
@@ -1889,7 +1714,7 @@
     font-size: 11px;
     padding: 11px 14px;
   }
-  .stickyCta button > span {
+  .stickyCta button > svg {
     margin-left: 6px;
   }
 }
@@ -2163,11 +1988,11 @@
 
 /* Les anciens gestes de survol cèdent la place à un seul vocabulaire. */
 .motion :is(.desktopNav a, .announcement a, .announcement button,
-  .visaTicket, .profileGrid > div, .videoThumbnail img, .guideImage img) {
+  .visaTicket, .profileGrid > div, .guideImage img) {
   transition: none;
 }
 .motion :is(.visaTicket:hover, .profileGrid > div:hover,
-  .videoThumbnail:hover img, .guideGrid > a:hover img) {
+  .guideGrid > a:hover img) {
   transform: none;
 }
 .motion .faqList summary > span:last-child {
@@ -2247,10 +2072,10 @@
   }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .motion :is(.videoThumbnail, .guideImage) img {
+  .motion .guideImage img {
     transition: transform var(--motion-block-duration) var(--motion-ease);
   }
-  .motion :is(.videoThumbnail:hover img, .guideGrid > a:hover img) {
+  .motion :is(.guideGrid > a:hover img) {
     transform: scale(var(--motion-hero-scale));
   }
 }
