@@ -88,6 +88,7 @@ test('périodes glissantes identiques au décompte, production uniquement, totau
     assert.equal(p.get('filter'), "environment eq 'production'");
     assert.equal(p.get('projectId'), 'dtv-thailande');
     assert.equal(p.get('slug'), 'emaem-codes-projects');
+    assert.equal(p.get('limit'), '10');
     assert.equal(options.cache, 'no-store');
     assert.equal(options.headers.Authorization, 'Bearer jeton-de-test');
   }

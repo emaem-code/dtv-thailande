@@ -59,7 +59,7 @@ export async function lireAudience(fin: Date): Promise<Audience | null> {
         // Aucun regroupement horaire : il arrondirait les bornes demandées.
         by: groupe,
         filter: "environment eq 'production'",
-        limit: '250',
+        limit: '10',
       });
       const reponse = await fetch(`${API}?${parametres}`, {
         headers: { Authorization: `Bearer ${jeton}` },
