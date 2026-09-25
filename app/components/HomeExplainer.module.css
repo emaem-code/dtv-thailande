@@ -30,7 +30,6 @@
 .pointNumber { align-self: flex-start; flex-shrink: 0; margin-top: 3px; color: #526357; font-size: 12px; line-height: 1.5; font-variant-numeric: tabular-nums; }
 .points li[data-speaking="true"] .pointNumber { border-radius: 3px; background: #243f35; box-shadow: 0 0 0 3px #243f35; color: #f7f7f2; }
 .pointText { min-width: 0; }
-.supplement { display: none; }
 .start { position: absolute; left: 24px; bottom: 24px; width: calc(48% - 48px); display: grid; grid-template-columns: 44px 1fr; align-items: center; column-gap: 12px; min-height: 76px; padding: 14px 18px; border-radius: 10px; background: #f7f7f2; color: #243f35; text-align: left; font-size: 16px; font-weight: 600; box-shadow: 0 4px 24px rgb(0 0 0 / 12%); }
 .start > span { display: grid; place-items: center; grid-row: span 2; height: 44px; border: 1px solid #526357; border-radius: 50%; font-size: 15px; }
 .start small { grid-column: 2; margin-top: 4px; color: #526357; font-size: 12px; font-weight: 400; }
@@ -44,8 +43,9 @@
 .chapterCount { color: #526357; font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .track { flex: 1; height: 4px; overflow: hidden; border-radius: 4px; background: #d1d9cb; }
 .track > span { display: block; width: 100%; height: 100%; background: #243f35; transform-origin: left; }
+.options { display: flex; gap: 8px; }
 .option { border: 1px solid #c9d2c5; white-space: nowrap; }
-.option[aria-pressed="true"] { background: #eef0e6; }
+.option[data-enabled="true"] { background: #eef0e6; }
 .player .captions { display: grid; flex-shrink: 0; align-items: center; min-height: 64px; margin: 0; padding: 10px 24px; border-top: 1px solid #d8dfd2; background: #f7f7f2; color: #243f35; font-size: 16px; line-height: 1.45; text-align: center; }
 .notice { flex-shrink: 0; margin: 0; padding: 0 24px; color: #526357; font-size: 13px; line-height: 1.6; }
 .notice:not(:empty) { padding-block: 12px; }
@@ -105,18 +105,18 @@
   .points li { display: none; font-size: 16px; gap: 8px; line-height: 1.35; }
   .points li[data-current="true"] { display: flex; }
   .pointNumber { font-size: 10px; }
-  .section .supplement { display: block; margin: 16px 0 0; color: #526357; font-size: 16px; line-height: 1.5; }
   .start { inset: 12px 12px auto; width: auto; min-height: 60px; padding: 8px 12px; grid-template-columns: 36px 1fr; font-size: 15px; }
   .start > span { height: 36px; }
   .start small { font-size: 11px; }
   .end { inset: 12px 12px auto; width: auto; justify-content: center; padding: 10px; }
   .end > span { display: none; }
   .end button { width: 100%; min-height: 44px; font-size: 14px; }
-  .controls { gap: 6px; min-height: 64px; padding: 8px; flex-wrap: wrap; }
-  .controls button { padding: 8px 10px; font-size: 13px; }
+  .controls { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 6px 10px; min-height: 64px; padding: 8px; }
+  .controls button { padding: 6px 8px; font-size: 14px; line-height: 1.3; }
   .playButton { min-width: 88px; gap: 4px; }
-  .chapterCount { margin-right: auto; }
-  .track { order: 5; flex-basis: 100%; margin-top: 4px; }
+  .track { min-width: 0; }
+  .options { display: grid; grid-column: 1 / -1; grid-template-columns: 1fr 1.35fr; gap: 6px; }
+  .option { white-space: normal; text-wrap: balance; }
   .player .captions { min-height: 64px; padding: 10px 14px; text-align: left; line-height: 1.4; }
   .chapters { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: max-content; }
   .chapters button { min-height: 56px; padding: 8px 14px; font-size: 12px; white-space: nowrap; }
@@ -126,9 +126,7 @@
   .transcript { font-size: 14px; }
 }
 @media (max-width: 380px) {
-  .chapterCount { display: none; }
   .chapterName { display: none; }
-  .controls { justify-content: space-between; }
 }
 /* Sur les petits écrans en hauteur, le texte conserve sa place naturelle.
    La photo absorbe le manque de place plutôt que de couper les mots. */

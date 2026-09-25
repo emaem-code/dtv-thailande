@@ -214,20 +214,16 @@ export default function HomeExplainer() {
           </button>
           <span className={s.chapterCount}>{scene + 1} / {FILM_ACCUEIL.length}</span>
           <div className={s.track} role="progressbar" aria-label="Avancement de l’explication" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round((Math.min(1, elapsed / FILM_AUDIO_DURATION)) * 100)}><span style={{ transform: `scaleX(${Math.min(1, elapsed / FILM_AUDIO_DURATION)})` }} /></div>
-          <button onClick={toggleSound} aria-pressed={soundEnabled} aria-label="Son de la présentation" className={s.option}>Son <span aria-hidden="true">{soundEnabled ? "✓" : "—"}</span></button>
-          <button onClick={() => setCaptions(!captions)} aria-pressed={captions} aria-label="Sous-titres" className={s.option}>ST <span aria-hidden="true">{captions ? "✓" : "—"}</span></button>
+          <div className={s.options}>
+            <button onClick={toggleSound} data-enabled={soundEnabled} className={s.option}>{soundEnabled ? "Désactiver le son" : "Activer le son"}</button>
+            <button onClick={() => setCaptions(!captions)} data-enabled={captions} className={s.option}>{captions ? "Désactiver les sous-titres" : "Activer les sous-titres"}</button>
+          </div>
         </div>
 
         {captions && <p className={s.captions} aria-live="off">{lecture === "ready" ? "Lancez la présentation pour découvrir l’essentiel, avec une narration française et des sous-titres." : captionParts[captionIndex]}</p>}
         <p className={s.notice} role="status">{notice || (lecture === "loading" ? "Chargement du son…" : "")}</p>
         <nav ref={chaptersRef} className={s.chapters} aria-label="Chapitres de l’explication">{FILM_ACCUEIL.map((part, index) => <button key={part.id} onClick={() => goToChapter(index)} aria-current={scene === index ? "step" : undefined}><span>{String(index + 1).padStart(2, "0")}</span>{part.chapitre}</button>)}</nav>
       </div>
-
-      {/* Sur mobile, le complément non lu reste accessible sans réduire la photo
-          ni prendre la place de l’argument que la voix est en train d’aborder. */}
-      {current.points.map((point, index) => FILM_AUDIO_CHAPTERS[scene].points[index] === null && (
-        <p className={s.supplement} key={point}><strong>À retenir.</strong> {point}</p>
-      ))}
 
       <div className={s.below}>
         <p>Un projet personnel mérite une réponse personnelle.</p>

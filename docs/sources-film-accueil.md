@@ -72,6 +72,15 @@ Scène `methode`.
 
 ### Rôle de l’agence
 
+**Complément du 25 septembre 2026 :** le deuxième argument affiché reprend, à la
+demande du propriétaire, la phrase déjà narrée « L’ambassade reste seule
+décisionnaire. ». La page « Informations générales » de l’ambassade de Paris,
+France, https://www.thaiembassy.fr/fr/visa-rdv/infos-generales/, a été relue ce jour :
+la section 2.3 attribue à l’ambassade le droit de refuser une demande et de modifier
+le visa accordé, et la section 7 décrit ses motifs de refus. Le lien déjà présent
+dans les sources du lecteur est conservé. L’ancien argument territorial est retiré
+de cette scène ; le relevé précédent ci-dessus reste l’historique de sa vérification.
+
 Le libellé « Nous préparons le dossier. Vous le déposez sur e-Visa » reprend les prestations de `app/lib/tarifs.ts` : préparation de la demande et accompagnement au dépôt, écran par écran. Il ne prétend pas que l’agence dispose d’une autorisation pour se substituer au demandeur sur le portail.
 
 ## 5. Budget et formules

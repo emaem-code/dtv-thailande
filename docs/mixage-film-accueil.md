@@ -64,10 +64,11 @@ aucun texte ne part d’une opacité nulle. Pause, attente réseau et navigation
 chapitre conservent l’audio comme unique horloge. Aucun chargement supplémentaire
 au repos et aucune dépendance ajoutée au site.
 
-Le deuxième argument du chapitre Accompagnement, sur le pays de dépôt, n’est pas
-prononcé : son repère est `null`. Il reste fixe dans la liste sur ordinateur et
-s’affiche en complément « À retenir » sous le lecteur sur téléphone, pour garder
-la place de la photo et de l’argument prononcé. Son texte n’est pas modifié.
+Le deuxième argument du chapitre Accompagnement reprend désormais la voix :
+« L’ambassade reste seule décisionnaire. », à 53,47 s. Les trois arguments de ce
+chapitre suivent donc la narration, sur ordinateur comme sur téléphone ; le
+complément « À retenir » n’est plus nécessaire. Les boutons de commande nomment
+l’action disponible : activer ou désactiver le son / les sous-titres.
 
 En mouvement réduit, le glissement et la transition de fond sont désactivés ;
 la mise en évidence statique suit toujours la voix. Contrastes : texte courant

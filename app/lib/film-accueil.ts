@@ -88,7 +88,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     alt: "Préparation d’une demande en ligne sur le portail e-Visa",
     points: [
       "Nous préparons le dossier. Vous le déposez sur e-Visa.",
-      "Pays de nationalité ou de résidence répondant aux exigences du poste.",
+      "L’ambassade reste seule décisionnaire.",
       "Paris : environ 4 semaines, parfois plus. Entretien possible.",
     ],
     narration:
