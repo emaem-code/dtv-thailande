@@ -3,6 +3,7 @@ import { lireDevis, marquerEnvoye, totaliser } from '../../../../../lib/devis';
 import { prenomClient, nomComplet } from '../../../../../lib/devis-modele';
 import { alerter, euros as eurosAlerte } from '../../../../../lib/alerte';
 import { FONDS_EUR_PARIS, MARGE_CONSEILLEE } from '../../../../../lib/taux';
+import { RENDEZ_VOUS } from '../../../../../lib/rendez-vous';
 import {
   AGENCE,
   agenceIncomplete,
@@ -116,6 +117,10 @@ Le document distingue deux choses, et c'est important :
 
 Soit un budget d'ensemble de ${euros(t.total)} pour ${devis.dossier.personnes} personne${devis.dossier.personnes > 1 ? 's' : ''}.
 
+Une question sur ce devis ? Faisons le point en visio pendant ${RENDEZ_VOUS.dureeMinutes} minutes
+sur le budget, les prestations et votre situation, avant votre décision.
+${RENDEZ_VOUS.libelle} : ${RENDEZ_VOUS.url}
+
 Point à vérifier avant toute chose : l'ambassade de Paris exige un relevé
 bancaire officiel montrant un solde non bloqué d'au moins ${euros(FONDS_EUR_PARIS)} PAR
 PERSONNE, et ce chacun des trois derniers mois — soit ${euros(t.fondsEuros)} pour votre
@@ -154,6 +159,11 @@ ${ouvertureHtml}
   </td></tr>
 </table>
 <p style="margin:0 0 24px 0;font-size:15px;">Budget d’ensemble : <strong>${euros(t.total)}</strong> pour ${devis.dossier.personnes} personne${devis.dossier.personnes > 1 ? 's' : ''}.</p>
+<div style="margin:0 0 24px 0;padding:20px;background:#f7f7f2;border:1px solid #c9d2c5;border-radius:8px;color:#243f35;">
+  <p style="margin:0 0 8px 0;font-size:16px;font-weight:bold;">Une question sur votre devis ?</p>
+  <p style="margin:0 0 16px 0;font-size:15px;line-height:1.6;color:#526357;">Faisons le point en visio pendant ${RENDEZ_VOUS.dureeMinutes} minutes sur le budget, les prestations et votre situation, avant votre décision.</p>
+  <a href="${RENDEZ_VOUS.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 20px;border:1px solid #243f35;border-radius:6px;color:#243f35;font-size:16px;line-height:1.5;text-decoration:underline;">${RENDEZ_VOUS.libelle}</a>
+</div>
 <p style="margin:0 0 24px 0;padding:14px 16px;background:#fef3c7;border-radius:8px;font-size:14px;line-height:1.6;">
   <strong>À vérifier avant tout :</strong> l’ambassade de Paris exige un relevé bancaire officiel montrant un solde non bloqué d’au moins <strong>${euros(FONDS_EUR_PARIS)} par personne</strong>, et ce <strong>chacun des trois derniers mois</strong> — soit ${euros(t.fondsEuros)} pour votre foyer. Le poste affiche ce montant en euros : ce n’est pas une conversion des ${echapper(t.fondsThb)} de la règle nationale, et il est plus élevé. Prévoyez ${MARGE_CONSEILLEE} par personne plutôt que le strict minimum. C’est le seul critère réellement bloquant.
 </p>

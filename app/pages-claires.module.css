@@ -309,7 +309,7 @@
   border-color: #cbd5c6;
 }
 
-/* Contact : le courriel reste l'action principale et toutes les mentions restent visibles. */
+/* Contact : rendez-vous et courriel, avec toutes les mentions visibles. */
 .contact .contenu > div {
   padding: 80px 48px 90px;
   display: block;

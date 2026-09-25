@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AGENCE, mentionSiret } from "../lib/agence";
+import RendezVous from "../components/RendezVous";
 
 // ─── MÉTADONNÉES SEO DE LA PAGE CONTACT (Résout l'erreur Codex) ───
 export const metadata: Metadata = {
@@ -36,6 +37,11 @@ export default function Contact() {
           Une question spécifique sur votre dossier ? <br/> 
           Notre équipe vous répond sous 24h à 48h.
         </p>
+
+        <RendezVous
+          titre="Parlons de votre projet DTV"
+          description="Vous préférez en parler de vive voix ? Réservez un créneau pour faire le point sur votre situation et poser vos questions."
+        />
 
         <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm mt-8" data-reveal="">
           <p className="text-xl font-medium">
