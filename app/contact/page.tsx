@@ -8,13 +8,13 @@ import s from "./contact.module.css";
 // ─── MÉTADONNÉES SEO DE LA PAGE CONTACT (Résout l'erreur Codex) ───
 export const metadata: Metadata = {
   title: 'Contactez-nous | DTV Thaïlande',
-  description: 'Une question spécifique sur votre dossier de Visa DTV ? Notre équipe vous répond sous 24h à 48h.',
+  description: 'Une question spécifique sur votre dossier de Visa DTV ? Je vous réponds sous 48 heures.',
   alternates: {
     canonical: 'https://dtv-thailande.fr/contact',
   },
   openGraph: {
     title: 'Contactez-nous | DTV Thaïlande',
-    description: 'Prenez contact avec notre équipe pour votre dossier de Visa DTV.',
+    description: 'Contactez-moi directement pour votre dossier de Visa DTV.',
     url: 'https://dtv-thailande.fr/contact',
     siteName: 'DTV Thaïlande',
     locale: 'fr_FR',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contactez-nous | DTV Thaïlande',
-    description: 'Prenez contact avec notre équipe pour votre dossier de Visa DTV.',
+    description: 'Contactez-moi directement pour votre dossier de Visa DTV.',
     images: ['/og-image.jpg'],
   },
 };
@@ -79,7 +79,7 @@ export default function Contact() {
             <h2 id="contact-email" className={s.cardTitle}>Écrivez-nous simplement</h2>
             <p className={s.description}>
               Une question précise ou un dossier à nous expliquer ?
-              Décrivez votre projet par e-mail. Notre équipe vous répond sous 24h à 48h.
+              Décrivez votre projet par e-mail. Je vous réponds sous 48 heures.
             </p>
             <div className={s.action}>
               <a className={s.secondary} href={`mailto:${AGENCE.email}`}>Écrire un e-mail</a>

@@ -1236,7 +1236,7 @@ export default function FormulaireEligibilite({
                   : 'Demande transmise avec succès !'}
               </h3>
               <p className="text-gray-400 text-sm">
-                Notre équipe va analyser votre projet et vous envoyer un devis exact par e-mail. En
+                J'analyse votre projet et je vous envoie un devis par e-mail. En
                 attendant, voici la base tarifaire pour le profil{' '}
                 <strong className="text-amber-500">
                   {isSoftPower ? 'Soft Power' : 'Digital Nomad'}
