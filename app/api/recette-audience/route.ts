@@ -35,10 +35,13 @@ export async function GET() {
       diagnostic = { ...diagnostic, indisponible: true };
     }
   }
-  return NextResponse.json({
+  const resultat = {
     configure: Boolean(process.env.VERCEL_ANALYTICS_TOKEN),
     ok: audience !== null,
     dureeMs: Date.now() - debut,
     diagnostic,
-  }, { headers: { 'Cache-Control': 'private, no-store' } });
+  };
+  return new NextResponse(`<!doctype html><html lang="fr"><title>Contrôle audience</title><body><h1>Contrôle audience</h1><pre>${JSON.stringify(resultat, null, 2)}</pre></body></html>`, {
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'private, no-store' },
+  });
 }
