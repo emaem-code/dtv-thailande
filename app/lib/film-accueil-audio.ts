@@ -1,21 +1,21 @@
 /**
- * Repères en secondes dans le mixage voix off + musique du 24 septembre 2026.
+ * Repères en secondes dans le mixage voix off + musique du 26 septembre 2026.
  * Chaque tableau de sous-titres suit les phrases de FILM_ACCUEIL.narration.
  * Le mixage ajoute 350 ms avant la voix ; les repères incluent ce décalage.
  * Recaler ces repères si l’enregistrement change (docs/mixage-film-accueil.md).
  */
-export const FILM_AUDIO_SRC = "/audio/film-dtv-voix-musique-9a369745a5.mp3";
-export const FILM_AUDIO_DURATION = 90.25;
+export const FILM_AUDIO_SRC = "/audio/film-dtv-voix-musique-358b5067a0.mp3";
+export const FILM_AUDIO_DURATION = 88.25;
 
 export const FILM_AUDIO_CHAPTERS = [
   // Les points suivent les idées prononcées, pas trois fractions du chapitre.
-  { id: "projet", start: 0, captions: [0, 2.48, 5.02], points: [6.31, 8.27, 9.75] },
-  { id: "reperes", start: 12.27, captions: [12.27, 15.56, 19.86], points: [12.27, 15.56, 19.86] },
-  { id: "profils", start: 22.81, captions: [22.81, 28.98, 29.90, 32.82], points: [22.81, 25.67, 29.90] },
-  { id: "dossier", start: 36.83, captions: [36.83, 43.16, 46.06, 48.18], points: [36.83, 43.16, 46.06] },
-  { id: "methode", start: 49.45, captions: [49.45, 53.42, 59.72], points: [49.45, 53.47, 55.87] },
-  { id: "budget", start: 62.11, captions: [62.11, 63.64, 67.56, 70.96, 73.02], points: [62.11, 63.64, 67.56] },
-  { id: "premier-pas", start: 75.01, captions: [75.01, 79.14, 82.06], points: [75.01, 79.14, 84.49] },
+  { id: "projet", start: 0, captions: [0.44, 2.72, 5.30], points: [6.43, 8.28, 9.82] },
+  { id: "reperes", start: 13.12, captions: [13.12, 16.41, 20.89], points: [13.12, 16.41, 20.89] },
+  { id: "profils", start: 24.53, captions: [24.53, 30.08, 31.45, 33.64], points: [24.53, 27.07, 31.45] },
+  { id: "dossier", start: 37.75, captions: [37.75, 43.48, 46.40, 48.40], points: [37.75, 43.48, 46.40] },
+  { id: "methode", start: 49.93, captions: [49.93, 53.73, 60.04], points: [49.93, 53.73, 56.00] },
+  { id: "budget", start: 62.15, captions: [62.15, 63.64, 67.28, 70.47, 72.61], points: [62.15, 63.64, 67.28] },
+  { id: "premier-pas", start: 74.95, captions: [74.95, 78.90, 81.36], points: [74.95, 78.90, 83.28] },
 ] as const;
 
 /** L’audio est l’unique horloge, y compris après une pause ou un saut de chapitre. */

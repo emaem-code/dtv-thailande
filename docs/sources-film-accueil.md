@@ -2,6 +2,8 @@
 
 Consultation des pages officielles : **24 septembre 2026**.
 
+**26 septembre 2026 :** narration réécrite à la première personne, avec la nouvelle voix de Matthieu, sans modifier une seule affirmation factuelle ; le relevé de sources ci-dessous reste valable.
+
 Périmètre : les sept scènes de `app/lib/film-accueil.ts`, leurs textes affichés et leur narration. Ce relevé ne constitue pas une nouvelle vérification des autres pages, des anciens films ou de toutes les réponses de FAQ.
 
 Les liens exportés par `FILM_ACCUEIL_SOURCES` doivent apparaître à proximité du lecteur. Les règles consulaires sont distinctes des prestations de l’agence. Les montants affichés proviennent des sources de données communes ; aucune somme n’est enregistrée dans la narration.
