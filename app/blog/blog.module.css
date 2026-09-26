@@ -149,9 +149,9 @@
 }
 .lire {
   margin-top: 26px;
-  padding-top: 14px;
+  padding-bottom: 14px;
   width: 100%;
-  border-top: 1px solid #d1d8c9;
+  border-bottom: 1px solid #d1d8c9;
   display: flex;
   justify-content: space-between;
   align-items: center;
