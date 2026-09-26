@@ -26,14 +26,14 @@ export const REGLE_DEPOT_DTV =
 export const VERIFICATION_ECOLE = {
   question: "Comment vérifiez-vous l’école choisie ?",
   reponse:
-    "Nous vérifions les agréments de l’établissement et écartons les écoles non homologuées. Nous examinons les justificatifs fournis par l’école avant leur intégration au dossier. L’établissement reste responsable des documents qu’il émet ; la décision sur le visa appartient à l’autorité consulaire.",
+    "Je vérifie les agréments de l’établissement et écarte les écoles non homologuées. J’examine les justificatifs fournis par l’école avant leur intégration au dossier. L’établissement reste responsable des documents qu’il émet ; la décision sur le visa appartient à l’autorité consulaire.",
 };
 
 export const ETAPES_DTV = [
   {
     id: "preparation",
     titre: "L’engagement et le dossier",
-    desc: "Après validation de votre devis, nous examinons vos pièces et préparons votre dossier selon les exigences du poste consulaire compétent. Cette préparation est distincte de l’instruction menée par l’ambassade.",
+    desc: "Après validation de votre devis, j’examine vos pièces et prépare votre dossier selon les exigences du poste consulaire compétent. Cette préparation est distincte de l’instruction menée par l’ambassade.",
     sources: [SOURCES_PROCEDURE.parisDtv],
   },
   {
@@ -48,13 +48,13 @@ export const ETAPES_DTV = [
   {
     id: "instruction",
     titre: "Instruction et décision consulaire",
-    desc: "L’ambassade de Paris indique un délai d’instruction d’environ 4 semaines, qui peut être plus long, notamment si le dossier est incomplet. Ce délai est indicatif : nous ne garantissons ni la date de réponse ni l’approbation. Nous vous accompagnons dans le suivi du dossier et les éventuelles demandes de pièces complémentaires.",
+    desc: "L’ambassade de Paris indique un délai d’instruction d’environ 4 semaines, qui peut être plus long, notamment si le dossier est incomplet. Ce délai est indicatif : je ne garantis ni la date de réponse ni l’approbation. Je vous accompagne dans le suivi du dossier et les éventuelles demandes de pièces complémentaires.",
     sources: [SOURCES_PROCEDURE.parisDtv, SOURCES_PROCEDURE.parisProcedure],
   },
   {
     id: "depart",
     titre: "Préparation au départ, après accord",
-    desc: "Une fois le visa accordé, téléchargez et imprimez votre e-Visa pour le voyage. Préparez également votre carte d’arrivée numérique TDAC dans les trois jours précédant l’arrivée. En formule Premium, nous vous aidons à préparer votre arrivée en Thaïlande.",
+    desc: "Une fois le visa accordé, téléchargez et imprimez votre e-Visa pour le voyage. Préparez également votre carte d’arrivée numérique TDAC dans les trois jours précédant l’arrivée. En formule Premium, je vous aide à préparer votre arrivée en Thaïlande.",
     sources: [SOURCES_PROCEDURE.parisProcedure],
   },
   {

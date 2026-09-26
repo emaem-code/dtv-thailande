@@ -3,6 +3,7 @@
 import { useId, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ActionIcon from "./ActionIcon";
 import type { BlogPost } from "../blog/posts";
 import s from "../blog/blog.module.css";
 
@@ -50,7 +51,7 @@ function Carte({
         <h2>{post.title}</h2>
         <p>{post.excerpt}</p>
         <span className={s.lire}>
-          Lire l&apos;article <span aria-hidden="true">↗</span>
+          Lire l&apos;article <span aria-hidden="true"><ActionIcon name="book" /></span>
         </span>
       </div>
     </Link>

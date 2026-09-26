@@ -266,7 +266,7 @@ export default function BlogArticleTm47() {
           </strong>
           , la loi sur l&apos;immigration de 1979 — la même que celle qui permet
           à un agent de vous refuser l&apos;entrée faute de moyens de
-          subsistance, sujet que nous avons traité dans notre{' '}
+          subsistance, un sujet expliqué dans l’
           <Link
             href="/blog/20000-thb-immigration-thailande-regle-especes"
             className="text-sky-400 hover:underline"
@@ -465,8 +465,8 @@ export default function BlogArticleTm47() {
           <strong className="text-white">propriétaire</strong> doit effectuer
           dans les 24 heures suivant votre arrivée dans le logement. C&apos;est
           son obligation, pas la vôtre — mais c&apos;est vous qui en subissez
-          les conséquences s&apos;il ne la fait pas. Nous détaillons ce mécanisme
-          dans notre{' '}
+          les conséquences s&apos;il ne la fait pas. Ce mécanisme est détaillé
+          dans le{' '}
           <Link
             href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv"
             className="text-sky-400 hover:underline"
@@ -588,7 +588,7 @@ export default function BlogArticleTm47() {
           votre numéro TDAC — celui de la carte d&apos;arrivée numérique remplie
           avant votre vol — pour utiliser le système en ligne. Si vous ne
           l&apos;avez plus, vous pouvez le récupérer sur tdac.immigration.go.th.
-          Sans lui, retour au guichet. Notre{' '}
+          Sans lui, retour au guichet. Le{' '}
           <Link
             href="/blog/tdac-thailande-carte-arrivee"
             className="text-sky-400 hover:underline"
@@ -917,8 +917,8 @@ export default function BlogArticleTm47() {
         </h3>
         <p className="text-gray-400 mb-8 relative z-10 text-sm md:text-base">
           TM30, TM47, extension de 180 jours : les formalités s&apos;enchaînent
-          et se conditionnent les unes les autres. Nous préparons votre dossier
-          DTV et sécurisons vos premières démarches sur place.
+          et se conditionnent les unes les autres. Je prépare votre dossier
+          DTV et sécurise vos premières démarches sur place.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
@@ -929,7 +929,7 @@ export default function BlogArticleTm47() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

@@ -7,6 +7,8 @@ import { getTauxThb, eurosArrondis, formateEuros, MARGE_CONSEILLEE } from '../li
 type Faq = {
   q: string;
   a: string;
+  /** Variante éditoriale visible, sans modifier le texte structuré existant. */
+  aAffichee?: string;
   lien?: { href: string; label: string };
 };
 
@@ -92,7 +94,8 @@ const groupes: Groupe[] = [
     questions: [
       {
         q: 'Faut-il bloquer 15 000 € sur mon compte pendant les 5 ans du visa ?',
-        a: "Non. La preuve n'est exigée qu'au moment de la demande, et lors d'une éventuelle extension sur place : l'argent n'est jamais bloqué ni consigné. Sur le montant, attention à une confusion répandue — l'ambassade de Paris publie son seuil directement en euros, {EUROS} par demandeur, et ce n'est pas la contre-valeur des 500 000 THB de la règle nationale, qui est plus basse. Ne convertissez pas : pour un dépôt à Paris, c'est le montant en euros qui fait foi. L'historique du compte, lui, est examiné avec attention, et nous conseillons de prévoir plutôt {MARGE} par personne pour n'être jamais au ras du seuil.",
+        a: "Non. La preuve n'est exigée qu'au moment de la demande, et lors d'une éventuelle extension sur place : l'argent n'est jamais bloqué ni consigné. Sur le montant, attention à une confusion répandue — l'ambassade de Paris publie son seuil directement en euros, {EUROS} par demandeur, et ce n'est pas la contre-valeur des 500 000 THB de la règle nationale, qui est plus basse. Ne convertissez pas : pour un dépôt à Paris, c'est le montant en euros qui fait foi. L'historique du compte, lui, est examiné avec attention, et je conseille de prévoir plutôt {MARGE} par personne pour n'être jamais au ras du seuil.",
+        aAffichee: "Non. La preuve n'est exigée qu'au moment de la demande, et lors d'une éventuelle extension sur place : l'argent n'est jamais bloqué ni consigné. Sur le montant, attention à une confusion répandue — l'ambassade de Paris publie son seuil directement en euros, {EUROS} par demandeur, et ce n'est pas la contre-valeur des 500 000 THB de la règle nationale, qui est plus basse. Ne convertissez pas : pour un dépôt à Paris, c'est le montant en euros qui fait foi. L'historique du compte, lui, est examiné avec attention, et je vous conseille de prévoir plutôt {MARGE} par personne pour n'être jamais au ras du seuil.",
         lien: { href: '/blog/fonds-bancaires-visa-dtv', label: 'Le décryptage complet des fonds bancaires' },
       },
       {
@@ -349,7 +352,7 @@ function FaqContenu({
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             L&apos;immigration thaïlandaise est stricte et les rumeurs circulent vite.{' '}
-            {toutes.length} réponses documentées, tirées de nos dossiers et des textes officiels.
+            {toutes.length} réponses documentées, tirées des dossiers accompagnés et des textes officiels.
           </p>
         </div>
 
@@ -417,7 +420,7 @@ function FaqContenu({
                     </summary>
                     <div className={`px-5 py-4 border-t border-white/5 bg-[#0a0a0a] ${g.fond}`}>
                       <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                        {avecMontants(f.a, euros)}
+                        {avecMontants(f.aAffichee ?? f.a, euros)}
                       </p>
                       {/* Le lien n'apparaît qu'une fois l'article réellement en ligne :
                           un article programmé renvoie un 404 avant sa date. */}
@@ -478,7 +481,7 @@ function FaqContenu({
               href="/contact"
               className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-8 rounded-full hover:bg-white/5 transition-all"
             >
-              Nous contacter
+              Me contacter
             </Link>
           </div>
         </div>

@@ -154,7 +154,7 @@ export default function ArticleComparatifVisas() {
           Quel est le visa le plus économique sur le long terme ? Peut-on légalement travailler à distance depuis Bangkok ou Phuket ? Quels sont les pièges financiers cachés de chaque option ?
         </p>
         <p>
-          Pour vous aider à y voir clair, notre agence spécialisée décrypte et compare objectivement les 5 grands visas de long séjour disponibles en Thaïlande. Critères financiers, flexibilité, coûts réels et contraintes : voici la vérité du terrain pour sécuriser votre expatriation.
+          Pour vous aider à y voir clair, je décrypte et compare les 5 grands visas de long séjour disponibles en Thaïlande. Critères financiers, flexibilité, coûts réels et contraintes : voici la vérité du terrain pour sécuriser votre expatriation.
         </p>
       </div>
 
@@ -333,7 +333,7 @@ revenus mensuels.</p>
           <p className="mt-6 text-sm text-gray-400">
             Une fois le visa choisi, reste la vraie question : où poser ses valises ?{' '}
             <Link href="/blog/ou-vivre-thailande-2026-phuket-pattaya-bangkok-huahin" className="text-indigo-400 hover:underline font-medium">
-              Notre comparatif terrain de Phuket, Pattaya, Bangkok et Hua Hin
+              Le comparatif de terrain de Phuket, Pattaya, Bangkok et Hua Hin
             </Link>{' '}
             détaille les budgets réels et les loyers 2026 ville par ville.
           </p>
@@ -347,7 +347,7 @@ revenus mensuels.</p>
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-indigo-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Visas & Stratégie</p>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Basé en Thaïlande, j'accompagne les professionnels indépendants dans le choix et la structuration de leur visa. Face à la complexité des exigences consulaires, notre agence audite votre profil et monte votre dossier DTV de A à Z pour une expatriation en toute sérénité.
+            Basé en Thaïlande, j'accompagne les professionnels indépendants dans le choix et la structuration de leur visa. Face à la complexité des exigences consulaires, j’audite votre profil et monte votre dossier DTV de A à Z pour une expatriation en toute sérénité.
           </p>
         </div>
       </div>
@@ -399,7 +399,7 @@ revenus mensuels.</p>
           Sécurisez votre visa DTV
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          Si le DTV est le grand gagnant de ce comparatif, son obtention nécessite un dossier irréprochable. Confiez-nous l'analyse et le montage de vos documents consulaires.
+          Si le DTV est le grand gagnant de ce comparatif, son obtention nécessite un dossier irréprochable. Confiez-moi l'analyse et le montage de vos documents consulaires.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -409,7 +409,7 @@ revenus mensuels.</p>
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

@@ -692,9 +692,9 @@ export default function FormulaireEligibilite({
               remboursables pour un refus.
             </p>
             <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
-              Mais rien n&apos;est définitif. Beaucoup de nos clients ont constitué cette épargne en
+              Mais rien n&apos;est définitif. Beaucoup de personnes que j’accompagne ont constitué cette épargne en
               quelques mois avant de déposer. Gardez votre projet au chaud : téléchargez le guide
-              gratuit, et revenez nous voir le moment venu.
+              gratuit, et reprenez contact avec moi le moment venu.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
@@ -864,7 +864,7 @@ export default function FormulaireEligibilite({
                 🎉 Félicitations, votre profil semble éligible !
               </p>
               <p className="text-sm text-gray-300">
-                Afin de vous présenter immédiatement nos tarifs personnalisés, veuillez préciser
+                Pour vous présenter un tarif adapté à votre situation, j’ai besoin de quelques précisions sur
                 votre projet.
               </p>
             </div>
@@ -915,8 +915,8 @@ export default function FormulaireEligibilite({
             <div className="space-y-3">
               <label id={idQuestion('location')} className="text-white font-bold text-lg">Où résidez-vous actuellement ?</label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
-                C&apos;est à nous de vous conseiller le meilleur poste de dépôt : nous avons
-                seulement besoin de savoir d&apos;où vous partez.
+                Pour vous conseiller sur le poste de dépôt, j’ai besoin de savoir
+                d&apos;où vous partez.
               </p>
               <div {...attributsGroupe('location')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <RadioCard {...attributsChoix('location')} label="Europe (France, Suisse, etc.)" field="location" value="europe" />
@@ -944,8 +944,8 @@ export default function FormulaireEligibilite({
                 Où comptez-vous vous installer en Thaïlande ?
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
-                Même une simple intention nous aide : la région oriente les solutions que nous
-                pouvons vous proposer sur place.
+                Même une simple intention m’aide : la région oriente les solutions que je
+                peux vous proposer sur place.
               </p>
               <input {...attributsChamp('villeThailande')}
                 type="text"
@@ -1018,7 +1018,7 @@ export default function FormulaireEligibilite({
                 <div className="space-y-3 pt-2">
                   <p className="text-xs text-gray-500 ml-1">
                     Chaque personne dépose son propre dossier et règle ses propres frais
-                    consulaires : ces nombres nous permettent de chiffrer précisément.
+                    consulaires : ces nombres me permettent de chiffrer précisément.
                   </p>
                   <input {...attributsChamp('adultesCount')} aria-label="Nombre d’adultes concernés, vous compris"
                     type="number"
@@ -1058,7 +1058,7 @@ export default function FormulaireEligibilite({
                     <p className="text-xs text-amber-400/90 ml-1">
                       Au-delà de 20 ans, un enfant ne relève plus de la catégorie
                       « accompagnant » : son dossier devient autonome, avec ses propres
-                      conditions. Nous vous expliquerons ce que cela implique.
+                      conditions. Je vous expliquerai ce que cela implique.
                     </p>
                   )}
                 </div>
@@ -1090,7 +1090,7 @@ export default function FormulaireEligibilite({
                   <p className="text-xs text-gray-500 ml-1">
                     Le DTV ne rattache comme dépendant que le conjoint légalement marié. Le PACS
                     et l&apos;union libre ne sont pas reconnus pour le rattachement — dans ce cas,
-                    chaque adulte fait sa propre demande. Cette information nous permet de vous
+                    chaque adulte fait sa propre demande. Cette information me permet de vous
                     orienter vers la bonne voie.
                   </p>
                 </div>
@@ -1138,7 +1138,7 @@ export default function FormulaireEligibilite({
               {formData.dejaDepose === 'refus' && (
                 <p className="text-xs text-amber-400/90 ml-1">
                   Un refus antérieur ne ferme aucune porte, mais il change la manière de construire
-                  le dossier. Précisez-nous le motif dans les remarques si vous le connaissez.
+                  le dossier. Précisez-moi le motif dans les remarques si vous le connaissez.
                 </p>
               )}
             </div>
@@ -1148,7 +1148,7 @@ export default function FormulaireEligibilite({
                 Un numéro pour vous joindre ? (Optionnel)
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
-                Utile pour les questions rapides. Nous répondons par e-mail par défaut.
+                Utile pour les questions rapides. Je réponds par e-mail par défaut.
               </p>
               <input {...attributsChamp('telephone')}
                 type="tel"
@@ -1172,7 +1172,7 @@ export default function FormulaireEligibilite({
 
             <div className="space-y-3">
               <label id={idQuestion('source')} className="text-white font-bold text-lg">
-                Comment nous avez-vous connus ? (Optionnel)
+                Comment avez-vous découvert DTV Thaïlande ? (Optionnel)
               </label>
               <div {...attributsGroupe('source')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <RadioCard {...attributsChoix('source')} label="Recherche Google" field="source" value="google" />
@@ -1190,7 +1190,7 @@ export default function FormulaireEligibilite({
                 rows={3}
                 value={formData.remarks}
                 onChange={(e) => handleChange('remarks', e.target.value)}
-                placeholder="Dites-nous en plus sur votre projet..."
+                placeholder="Dites-m’en plus sur votre projet..."
                 className="champ"
               />
             </div>
@@ -1254,7 +1254,7 @@ export default function FormulaireEligibilite({
                   {nbPersonnesFoyer > PALIER_MAX ? (
                     <p className="text-xs text-gray-300 leading-relaxed">
                       Chaque personne dépose une demande distincte. Au-delà de quatre dossiers,
-                      le budget est établi au cas par cas : nous le chiffrons dans votre devis,
+                      le budget est établi au cas par cas : je le chiffre dans votre devis,
                       poste par poste et sans forfait imposé.
                     </p>
                   ) : (
@@ -1329,8 +1329,8 @@ export default function FormulaireEligibilite({
                     Laquelle correspond le mieux à votre projet ?
                   </label>
                   <p className="text-xs text-gray-500 mt-1">
-                    Cette réponse nous permet de vous adresser une estimation chiffrée dès notre
-                    premier message, au lieu d&apos;une simple prise de contact.
+                    Votre choix me permet de chiffrer votre projet dès la première réponse,
+                    au lieu d&apos;une simple prise de contact.
                   </p>
                 </div>
 
@@ -1377,8 +1377,8 @@ export default function FormulaireEligibilite({
                   <p ref={confirmationFormuleRef} tabIndex={-1} className="text-emerald-400 font-bold text-sm mb-1">✓ C&apos;est noté</p>
                   <p className="text-sm text-gray-300">
                     {formData.formule === 'conseil'
-                      ? 'Nous vous adresserons les deux formules chiffrées pour votre situation, avec nos recommandations.'
-                      : 'Votre estimation chiffrée arrivera avec notre premier message.'}
+                      ? 'Je vous adresserai les deux formules chiffrées pour votre situation et vous aiderai à les comparer.'
+                      : 'Je vous enverrai votre estimation chiffrée dès le premier message.'}
                   </p>
                 </div>
               </div>
@@ -1397,7 +1397,7 @@ export default function FormulaireEligibilite({
                   href="/blog"
                   className="inline-block bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full font-bold transition-all active:scale-95"
                 >
-                  Lire nos guides en attendant
+                  Lire les guides en attendant
                 </a>
               )}
             </div>

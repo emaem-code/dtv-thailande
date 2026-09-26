@@ -26,12 +26,12 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     {
       category: "Finances & Épargne",
       q: "Mes investissements (Crypto, PEA, Actions) comptent-ils comme garantie ?",
-      a: "Malheureusement, non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Nous vous accompagnons sur la présentation de vos relevés (y compris de néobanques comme Revolut ou Boursorama) pour qu'ils respectent les stricts standards consulaires."
+      a: "Malheureusement, non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Je vous accompagne dans la présentation de vos relevés (y compris de néobanques comme Revolut ou Boursorama) pour qu'ils respectent les stricts standards consulaires."
     },
     {
       category: "Statut Freelance & Télétravail",
       q: "Je suis Auto-entrepreneur / Indépendant et n'ai pas d'employeur. Est-ce un problème ?",
-      a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus si le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Notre agence se charge de 'traduire' la réalité de votre micro-entreprise (Kbis, URSSAF, Sirene, portfolio) en un dossier administratif irréfutable aux yeux des officiers d'immigration thaïlandais."
+      a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus si le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Je me charge de 'traduire' la réalité de votre micro-entreprise (Kbis, URSSAF, Sirene, portfolio) en un dossier administratif irréfutable aux yeux des officiers d'immigration thaïlandais."
     },
     {
       category: "Soft Power (Écoles & Immersion)",
@@ -42,12 +42,12 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
     {
       category: "Famille & PACS",
       q: "Mon partenaire et moi sommes pacsés. Le visa s'étend-il à mon conjoint ?",
-      a: "Attention, piège majeur : le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Si vous n'êtes pas mariés, la demande d'un visa 'accompagnant' sera automatiquement rejetée. Mais rassurez-vous, nous avons des stratégies d'optimisation pour permettre aux couples pacsés de sécuriser leurs départs ensemble via des dossiers individuels synchronisés."
+      a: "Attention, piège majeur : le droit thaïlandais ne reconnaît pas le PACS, uniquement le mariage civil. Si vous n'êtes pas mariés, la demande d'un visa 'accompagnant' sera automatiquement rejetée. Mais rassurez-vous, je vous aide à préparer des dossiers individuels synchronisés pour organiser votre départ ensemble."
     },
     {
       category: "Fiscalité & Impôts",
       q: "Vais-je payer des impôts en Thaïlande avec le DTV ?",
-      a: "Le visa DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année ET que vous y rapatriez des revenus. Dans le cadre de nos offres, nous vous fournissons les recommandations de base pour comprendre la convention fiscale franco-thaïlandaise et optimiser votre calendrier de voyage."
+      a: "Le visa DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année ET que vous y rapatriez des revenus. Dans le cadre de l’accompagnement, je vous donne les recommandations de base pour comprendre la convention fiscale franco-thaïlandaise et optimiser votre calendrier de voyage."
     }
   ];
 
@@ -119,7 +119,7 @@ export default function FaqModal({ isOpen, onClose }: FaqModalProps) {
 
           <div className="mt-10 p-6 bg-white/5 border border-white/10 rounded-2xl text-center">
             <h4 className="text-white font-bold mb-2">Une question non abordée ici ?</h4>
-            <p className="text-sm text-gray-400 mb-4">Chaque situation est unique. Confiez-nous l'analyse de votre profil.</p>
+            <p className="text-sm text-gray-400 mb-4">Chaque situation est unique. Confiez-moi l'analyse de votre profil.</p>
             <button 
               onClick={onClose} 
               className="px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all active:scale-95 text-sm"

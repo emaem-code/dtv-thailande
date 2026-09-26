@@ -53,7 +53,7 @@ const videos = [
     phrases: [
       "Audit, traductions, dépôt",
       "Vous faites vos valises",
-      "Nous faisons le reste",
+      "Je m’occupe du reste",
     ],
   },
   {

@@ -352,7 +352,7 @@ export default function BlogArticleTdac() {
           Imprimez toujours une copie papier de votre QR Code de confirmation. Les infrastructures réseau aux frontières terrestres étant parfois capricieuses, afficher un PDF sur votre smartphone peut s’avérer complexe en zone blanche. De plus, gardez à l’esprit que les contrôles s’y durcissent de manière drastique.
         </p>
         <p className="mt-4">
-          👉 Pour comprendre l’évolution des pratiques douanières à ces frontières, lisez notre enquête exclusive : <Link href="/blog/fin-exemption-visa-60-jours" className="text-red-400 hover:underline font-medium">Durcissement des frontières : pourquoi l’immigration ne donne plus que 30 jours aux visa runners</Link>.
+          👉 Pour comprendre l’évolution des pratiques douanières à ces frontières, lisez l’enquête détaillée : <Link href="/blog/fin-exemption-visa-60-jours" className="text-red-400 hover:underline font-medium">Durcissement des frontières : pourquoi l’immigration ne donne plus que 30 jours aux visa runners</Link>.
         </p>
       </section>
 
@@ -493,7 +493,7 @@ export default function BlogArticleTdac() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

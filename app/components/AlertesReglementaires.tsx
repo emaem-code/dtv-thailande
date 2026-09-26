@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
  * 31 août sait déjà pourquoi il voudrait être prévenu la prochaine fois. Sur
  * la page d'accueil, la même proposition n'aurait aucun contexte.
  *
- * La promesse est chiffrée plutôt que vague. « Recevez nos actualités » ne dit
+ * La promesse est chiffrée plutôt que vague. « Recevez les actualités » ne dit
  * rien ; « quatre messages entre mai et septembre » dit à la fois la fréquence
  * et la raison d'être. C'est aussi une promesse tenable — s'il n'y a pas de
  * changement de règle, il n'y a pas de message, et c'est très bien ainsi.

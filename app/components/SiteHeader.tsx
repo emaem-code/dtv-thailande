@@ -31,7 +31,7 @@ export default function SiteHeader() {
   const fermer = () => setOuvert(false);
 
   const liens = [
-    { label: 'Notre méthode', action: ouvrirMethode, href: '/' },
+    { label: 'La méthode', action: ouvrirMethode, href: '/' },
     // Lien réel, et non ouverture de la modale : la page /eligibilite doit
     // recevoir un lien interne depuis chaque page du site pour être indexée.
     { label: 'Éligibilité', href: '/eligibilite' },

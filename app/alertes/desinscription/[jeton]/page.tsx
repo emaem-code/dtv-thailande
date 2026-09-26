@@ -40,8 +40,8 @@ export default async function PageDesinscription({
         </h1>
         <p className="text-sm text-gray-400 leading-relaxed mb-8">
           {email
-            ? `${email} ne recevra plus aucune alerte. Aucune confirmation ne vous sera demandée, et nous ne vous écrirons pas pour vous faire changer d’avis.`
-            : 'Il a peut-être déjà servi. Si vous continuez à recevoir des messages, répondez simplement à l’un d’eux et nous nous en occuperons.'}
+            ? `${email} ne recevra plus aucune alerte. Aucune confirmation ne vous sera demandée, et je ne vous écrirai pas pour vous faire changer d’avis.`
+            : 'Il a peut-être déjà servi. Si vous continuez à recevoir des messages, répondez simplement à l’un d’eux et je m’en occuperai.'}
         </p>
         <Link href="/" className="text-sm text-amber-500 hover:underline">
           Retour au site

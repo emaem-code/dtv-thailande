@@ -35,7 +35,7 @@ export default function ProcessModal({ isOpen, onClose, onEligibility }: Process
         {/* Header */}
         <div className={s.enteteModale}>
           <h2 id="process-modal-title" className="text-xl md:text-2xl font-extrabold text-white tracking-wide">
-            Notre Méthode <span className="text-amber-500">Pas à Pas</span>
+            La méthode <span className="text-amber-500">Pas à Pas</span>
           </h2>
           <button onClick={onClose} aria-label="Fermer la méthode" className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>

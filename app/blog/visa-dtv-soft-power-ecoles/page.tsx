@@ -183,7 +183,7 @@ export default function BlogArticleSoftPower() {
         <p>
           Si vous hésitez encore entre les différents statuts,{' '}
           <Link href="/blog/comparatif-visas-thailande" className="text-orange-500 hover:underline font-medium">
-            notre comparatif des visas longue durée
+            le comparatif des visas longue durée
           </Link>{' '}
           situe le DTV face au LTR, au Non-ED et au METV. Et pour voir ce que donne cette voie sur un
           cas réel, lisez{' '}
@@ -211,7 +211,7 @@ export default function BlogArticleSoftPower() {
           <li><a href="#arnaques-ecoles" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">3. Le péril des "écoles fantômes" et l'annulation du visa</a></li>
           <li><a href="#passage-douane" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">4. Le passage à la douane : maintenir la validité du visa</a></li>
           <li><a href="#visa-run-asie" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">5. Déposer à Paris : l'avantage caché du dossier Soft Power</a></li>
-          <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : le décryptage de notre tarif Soft Power</a></li>
+          <li><a href="#transparence-prix" className="text-orange-500 hover:text-orange-400 hover:underline transition-colors text-sm md:text-base">6. Transparence : le décryptage du tarif Soft Power</a></li>
         </ul>
       </nav>
 
@@ -245,7 +245,7 @@ export default function BlogArticleSoftPower() {
           </figcaption>
         </figure>
         <p className="mb-6">
-          <strong className="text-white">C'est pourquoi nous recommandons systématiquement les écoles de cuisine.</strong>{' '}
+          <strong className="text-white">C'est pourquoi je recommande systématiquement les écoles de cuisine.</strong>{' '}
           La gestion du temps y est infiniment plus souple : vous groupez vos séances, vous les
           espacez, vous les calez entre deux missions. Les cursus vont aujourd'hui de six à douze
           mois selon l'école et le volume de cours retenu.
@@ -340,8 +340,8 @@ export default function BlogArticleSoftPower() {
             Thaï démarre à 28 000 THB et grimpe à 50 000 THB sur douze mois. Pour un digital nomad
             qui cherche un statut légal et non une carrière sportive, la différence de 8 000 à
             30 000 THB s'ajoute à une contrainte physique quotidienne que la plupart abandonnent en
-            quelques semaines. C'est la raison, très prosaïque, pour laquelle nous orientons
-            systématiquement vers la cuisine.
+            quelques semaines. C'est pour cette raison concrète que j’oriente
+            systématiquement les personnes que j’accompagne vers la cuisine.
           </p>
         </div>
       </section>
@@ -356,7 +356,7 @@ export default function BlogArticleSoftPower() {
           L'administration thaïlandaise a pris conscience des abus et exige des preuves d'assiduité.
         </p>
         <p className="mb-4">
-          Certaines de nos écoles de cuisine partenaires permettent de réaliser plusieurs cours dans une
+          Certaines écoles de cuisine partenaires permettent de réaliser plusieurs cours dans une
           même journée, en utilisant tous les créneaux proposés (matin, après-midi, soir), tandis que
           d'autres exigent un rythme plus espacé.
         </p>
@@ -454,7 +454,7 @@ export default function BlogArticleSoftPower() {
           <code className="text-orange-400">.ac.th</code> est bien réservée aux établissements
           d'enseignement accrédités en Thaïlande, et sa présence est un signal positif. Mais son
           absence ne prouve strictement rien. Beaucoup d'écoles parfaitement en règle — y compris
-          celles de notre réseau — opèrent sous un domaine en{' '}
+          celles avec lesquelles je travaille — opèrent sous un domaine en{' '}
           <code className="text-amber-400">.com</code>, tout simplement parce qu'elles s'adressent à
           une clientèle internationale. Ne rejetez jamais une école sur ce seul critère, et ne lui
           faites jamais confiance sur ce seul critère non plus.
@@ -471,7 +471,7 @@ export default function BlogArticleSoftPower() {
           </p>
         </div>
 
-        <h3 className="text-xl font-bold text-white mt-8 mb-3">« Un cursus à 20 000 THB fait refuser le dossier » : ce que disent nos dépôts</h3>
+        <h3 className="text-xl font-bold text-white mt-8 mb-3">« Un cursus à 20 000 THB fait refuser le dossier » : ce que montrent les dossiers déposés</h3>
         <p className="mb-4">
           Certaines agences affirment qu'un programme à moins de 30 000 THB éveille les soupçons du
           consulat, au motif qu'un tel montant ne justifierait pas un visa de cinq ans. L'argument
@@ -479,7 +479,7 @@ export default function BlogArticleSoftPower() {
           packages à 38 000 THB et plus.
         </p>
         <p className="mb-4">
-          Notre expérience de terrain raconte autre chose. <strong className="text-white">En février,
+          Les dossiers que j’ai suivis racontent autre chose. <strong className="text-white">En février,
           en mai et en juin 2026</strong>, des dossiers déposés avec des écoles de cuisine certifiées
           facturant environ 20 000 THB pour 8 à 10 cours ont été acceptés sans difficulté.
         </p>
@@ -495,7 +495,7 @@ export default function BlogArticleSoftPower() {
           <div className="text-sm text-gray-300 leading-relaxed space-y-3">
             <p>
               Cette question est désormais tranchée. Interrogée directement, l&apos;école où j&apos;ai
-              suivi mon propre cursus nous a confirmé par écrit avoir{' '}
+              suivi mon propre cursus m’a confirmé par écrit avoir{' '}
               <strong className="text-white">retiré le programme de 6 mois de son offre</strong> :
               <em className="text-white"> « nous ne proposons actuellement que le programme de
               9 mois »</em>. Les inscriptions déjà réglées sous l&apos;ancien format restent honorées,
@@ -614,15 +614,15 @@ export default function BlogArticleSoftPower() {
       {/* ── SECTION 6 ── */}
       <section className="mb-12">
         <h2 id="transparence-prix" className="text-2xl font-bold text-white mb-4 scroll-mt-24">
-          6. Transparence : le décryptage de notre tarif Soft Power
+          6. Transparence : le décryptage du tarif Soft Power
         </h2>
         <p className="mb-4">
-          La transparence est au cœur de notre méthode. Pour les profils freelances qui ont déjà tous leurs
-          documents, notre prestation d&apos;accompagnement est à{' '}
+          Le tarif est annoncé dès le départ. Pour les profils freelances qui ont déjà tous leurs
+          documents, la prestation d&apos;accompagnement est à{' '}
           <strong>{prix(tarif('essentielle', false))}</strong>.
         </p>
         <p className="mb-4">
-          Pour la voie Soft Power, nous proposons un{' '}
+          Pour la voie Soft Power, je propose un{' '}
           <strong>package global à {prix(tarif('essentielle', true))}</strong> sur la base d&apos;un
           cursus de 9 mois — le format aujourd&apos;hui recommandé. Voici exactement ce que comprend
           cette différence tarifaire :
@@ -663,7 +663,7 @@ export default function BlogArticleSoftPower() {
           </ul>
         </div>
         <p className="text-xs text-gray-500 mt-3 italic">
-          * Zéro surprise, zéro frais cachés. Nous payons directement l'école et l'ambassade pour vous.
+          * Zéro surprise, zéro frais cachés. Je paie directement l'école et l'ambassade pour vous.
         </p>
       </section>
 
@@ -676,7 +676,7 @@ export default function BlogArticleSoftPower() {
           <p className="text-gray-400 text-sm leading-relaxed">
             Installé à Phuket, mon quotidien consiste à confronter les règles théoriques de l'immigration à
             la réalité du terrain asiatique. Avec DTV-Thaïlande, je sélectionne personnellement les écoles
-            partenaires pour garantir à nos clients des dossiers irréfutables et une expatriation sans stress.
+            partenaires pour préparer les dossiers des personnes que j’accompagne et les aider à s’expatrier sereinement.
           </p>
         </div>
       </div>
@@ -721,8 +721,8 @@ export default function BlogArticleSoftPower() {
           Sécurisez votre DTV sans fournir de fiches de paie
         </h3>
         <p className="text-gray-400 mb-8 relative z-10 text-sm md:text-base">
-          Profitez de notre réseau d'écoles certifiées par le gouvernement. De l'inscription officielle
-          au dépôt sur le portail e-Visa de l'ambassade de Paris, nous gérons votre dossier de A à Z.
+          Je vous mets en relation avec des écoles certifiées par le gouvernement. De l'inscription officielle
+          au dépôt sur le portail e-Visa de l'ambassade de Paris, je gère votre dossier de A à Z.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
@@ -733,7 +733,7 @@ export default function BlogArticleSoftPower() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

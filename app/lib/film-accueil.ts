@@ -14,7 +14,7 @@ export type SceneFilmAccueil = {
 };
 
 /**
- * Résumé de l’accueil, à lire ou à écouter après un lancement volontaire.
+ * Résumé de l'accueil, à lire ou à écouter après un lancement volontaire.
  * Les montants affichés suivent les sources communes ; la voix ne les fige pas.
  * Sources relues le 24 septembre 2026 : docs/sources-film-accueil.md.
  */
@@ -32,7 +32,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
       "Préparer votre dossier et votre départ.",
     ],
     narration:
-      "Vous imaginez votre vie en Thaïlande ? Commençons par rendre votre projet plus clair. Voici les repères pour comprendre le visa DTV, vérifier votre profil et préparer votre dossier avec notre accompagnement.",
+      "Vous imaginez votre vie en Thaïlande ? Commençons par rendre votre projet plus clair. Voici les repères pour comprendre le visa DTV, vérifier votre profil et préparer votre dossier, avec moi à vos côtés.",
   },
   {
     id: "reperes",
@@ -47,7 +47,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
       "Pas cinq ans de séjour continu.",
     ],
     narration:
-      "Le DTV est valable cinq ans, à entrées multiples. Chaque séjour dure jusqu’à cent quatre-vingts jours, prolongeable une fois sur place. Cette validité n’autorise pas cinq ans de séjour continu.",
+      "Le DTV est valable cinq ans, à entrées multiples. Chaque séjour dure jusqu'à cent quatre-vingts jours, prolongeable une fois sur place. Cette validité n'autorise pas cinq ans de séjour continu.",
   },
   {
     id: "profils",
@@ -70,29 +70,29 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     titre: "Chaque pièce",
     accent: "compte.",
     image: "/images/blog/dtv-31-aout-preparation-dossier.jpg",
-    alt: "Préparation des documents d’une demande de visa DTV",
+    alt: "Préparation des documents d'une demande de visa DTV",
     points: [
       "Activité et résidence : des justificatifs adaptés à votre profil.",
       `À Paris : ${formateEuros(FONDS_EUR_PARIS)} par personne sur chacun des 3 derniers relevés mensuels.`,
       "Une épargne disponible, non bloquée.",
     ],
     narration:
-      "Avant le dépôt, nous examinons vos justificatifs d’activité, de résidence et vos documents financiers. À Paris, l’historique des trois derniers mois compte. Votre épargne doit être disponible ; elle n’est pas bloquée.",
+      "Avant le dépôt, j'examine vos justificatifs d'activité, de résidence et vos documents financiers. À Paris, l'historique des trois derniers mois compte. Votre épargne doit être disponible ; elle n'est pas bloquée.",
   },
   {
     id: "methode",
-    chapitre: "L’accompagnement",
-    titre: "Nous préparons.",
+    chapitre: "L'accompagnement",
+    titre: "Je prépare.",
     accent: "Vous déposez.",
     image: "/images/blog/guide-depot-dossier-evisa-dtv.jpg",
-    alt: "Préparation d’une demande en ligne sur le portail e-Visa",
+    alt: "Préparation d'une demande en ligne sur le portail e-Visa",
     points: [
-      "Nous préparons le dossier. Vous le déposez sur e-Visa.",
-      "L’ambassade reste seule décisionnaire.",
+      "Je prépare le dossier. Vous le déposez sur e-Visa.",
+      "L'ambassade reste seule décisionnaire.",
       "Paris : environ 4 semaines, parfois plus. Entretien possible.",
     ],
     narration:
-      "Nous préparons votre dossier et vous accompagnons pour le déposer en ligne. L’ambassade reste seule décisionnaire : à Paris, l’instruction prend environ quatre semaines, parfois davantage. Un entretien peut être demandé.",
+      "Je prépare votre dossier et je vous accompagne pour le déposer en ligne. L'ambassade reste seule décisionnaire : à Paris, l'instruction prend environ quatre semaines, parfois davantage. Un entretien peut être demandé.",
   },
   {
     id: "budget",
@@ -104,16 +104,16 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     points: [
       `Dès ${prix(PRIX_APPEL)} par personne, selon votre dossier.`,
       "Frais consulaires et estimation des traductions dans le budget.",
-      "Essentielle pour le visa. Premium pour préparer aussi l’arrivée.",
+      "Essentielle pour le visa. Premium pour préparer aussi l'arrivée.",
     ],
     narration:
-      "Nos tarifs sont publics. Le budget comprend les frais consulaires et une estimation des traductions. La formule Essentielle accompagne votre demande de visa ; Premium prépare aussi votre arrivée. Le devis précise votre budget.",
+      "Les tarifs sont publics. Le budget comprend les frais consulaires et une estimation des traductions. La formule Essentielle accompagne votre demande de visa ; Premium prépare aussi votre arrivée. Le devis précise votre budget.",
   },
   {
     id: "premier-pas",
     chapitre: "La suite",
     titre: "Votre premier pas,",
-    accent: "c’est ici.",
+    accent: "c'est ici.",
     image: "/images/matthieu-moretti.jpg",
     alt: "Matthieu Moretti, DTV Thaïlande",
     points: [
@@ -122,7 +122,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
       "Les guides et la FAQ restent à votre disposition.",
     ],
     narration:
-      "Votre projet commence par votre situation, pas par un dossier standard. Faites le point avec notre test d’éligibilité. Et si vous souhaitez approfondir un sujet, nos guides et notre FAQ restent à votre disposition.",
+      "Votre projet commence par votre situation, pas par un dossier standard. Faites le point avec le test d'éligibilité. Et si vous souhaitez approfondir un sujet, les guides et la FAQ restent à votre disposition.",
   },
 ];
 

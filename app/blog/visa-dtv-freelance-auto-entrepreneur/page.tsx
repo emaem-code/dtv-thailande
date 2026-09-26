@@ -88,7 +88,7 @@ const faqSchema = {
       "name": "Faut-il faire traduire ses documents URSSAF et Kbis pour l'ambassade ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Notre agence gère ces traductions dans le cadre de son accompagnement."
+        "text": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Je gère ces traductions dans le cadre de l'accompagnement."
       }
     },
     {
@@ -108,6 +108,11 @@ const faqSchema = {
       }
     }
   ]
+};
+
+// Ton personnel à l’écran ; le texte JSON-LD existant reste inchangé.
+const reponsesAffichees: Record<string, string> = {
+  "Faut-il faire traduire ses documents URSSAF et Kbis pour l'ambassade ?": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Je gère ces traductions dans le cadre de l’accompagnement.",
 };
 
 export default function ArticleFreelanceDTV() {
@@ -176,7 +181,7 @@ export default function ArticleFreelanceDTV() {
           ⚠️ Le profil le plus refusé à l’ambassade de Paris
         </p>
         <p className="text-gray-400 text-sm leading-relaxed">
-          D’après notre expérience terrain, les auto-entrepreneurs et freelances
+          D’après les dossiers observés sur le terrain, les auto-entrepreneurs et freelances
           français représentent la majorité des dossiers DTV refusés. Non pas
           parce que leur profil est inéligible, mais parce que leur dossier est
           mal construit. Ce guide existe pour corriger ça.
@@ -278,8 +283,8 @@ export default function ArticleFreelanceDTV() {
           2. Les 6 documents qui remplacent la fiche de paie
         </h2>
         <p className="mb-6">
-          Voici la liste des pièces que nous constituons systématiquement pour
-          nos clients freelances. Chaque document joue un rôle précis dans la
+          Voici les pièces que je réunis systématiquement avec
+          les freelances que j’accompagne. Chaque document joue un rôle précis dans la
           narration administrative.
         </p>
         <figure className="my-8">
@@ -571,7 +576,7 @@ export default function ArticleFreelanceDTV() {
         <p className="mb-6">
           Le poste de dépôt n’est plus un choix depuis le 31 août 2026 : il découle de votre nationalité ou de votre résidence légale.
           Si vous souhaitez vérifier les directives officielles françaises, vous pouvez consulter <a href="https://www.thaiembassy.fr/fr/visa-rdv/les-types-de-visa-et-les-documents-necessaires/dtv/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">le site de l'Ambassade de Thaïlande à Paris</a>.
-          Pour un freelance français, voici notre recommandation selon votre
+          Pour un freelance français, voici ce que je recommande selon votre
           situation :
         </p>
 
@@ -628,7 +633,7 @@ export default function ArticleFreelanceDTV() {
             href="/blog/visa-dtv-soft-power-ecoles"
             className="text-purple-400 hover:underline font-medium"
           >
-            notre guide des écoles Soft Power
+            le guide des écoles Soft Power
           </Link>{' '}
           détaille comment repérer les écoles fantômes qui font annuler les visas.
         </p>
@@ -745,7 +750,7 @@ export default function ArticleFreelanceDTV() {
               </summary>
               <div className="px-5 py-4 bg-[#0d0d0d] border-t border-gray-800">
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  {item.acceptedAnswer.text}
+                  {reponsesAffichees[item.name] ?? item.acceptedAnswer.text}
                 </p>
               </div>
             </details>
@@ -760,9 +765,9 @@ export default function ArticleFreelanceDTV() {
           Votre dossier freelance, un accompagnement de terrain
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          Kbis, URSSAF, portfolio, lettre consulaire : nous montons votre
-          dossier complet et le soumettons à l’ambassade de votre choix. Taux
-          d’acceptation de nos dossiers freelance : supérieur à 95%.
+          Kbis, URSSAF, portfolio, lettre consulaire : je monte votre
+          dossier complet et le soumets à l’ambassade de votre choix. Taux
+          d’acceptation des dossiers freelance que j’accompagne : supérieur à 95%.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -772,7 +777,7 @@ export default function ArticleFreelanceDTV() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

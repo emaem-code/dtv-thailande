@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'FAQ Visa DTV Thaïlande : 30 questions, 30 réponses',
-    description: 'Consultez notre FAQ complète : fonds bancaires, freelances, écoles Soft Power, famille et fiscalité pour le Visa DTV.',
+    description: 'Consultez la FAQ complète : fonds bancaires, freelances, écoles Soft Power, famille et fiscalité pour le Visa DTV.',
     url: 'https://dtv-thailande.fr/faq',
     siteName: 'DTV Thaïlande',
     images: [{ url: '/og-image.jpg' }], // Le logo s'affichera lors des partages
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FAQ Visa DTV Thaïlande : 30 questions, 30 réponses',
-    description: 'Découvrez toutes nos réponses officielles sur le Visa DTV : finances, freelances, Soft Power, famille et fiscalité.',
+    description: 'Découvrez toutes les réponses officielles sur le Visa DTV : finances, freelances, Soft Power, famille et fiscalité.',
     images: ['/og-image.jpg'],
   },
 };

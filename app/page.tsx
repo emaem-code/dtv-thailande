@@ -27,7 +27,7 @@ export default function Home() {
         <section className={s.hero} aria-labelledby="titre-accueil">
           <div className={s.heroCopy}>
             <p className={s.eyebrow}>
-              <span className={s.statusDot} /> Votre projet, notre terrain.
+              <span className={s.statusDot} /> Votre projet, un interlocuteur sur place.
             </p>
             <h1 id="titre-accueil">
               <span>Visa DTV Thaïlande</span>Votre nouvelle vie
@@ -45,7 +45,7 @@ export default function Home() {
               </button>
               <a href="#accompagnement" className={s.textLink}>
                 <span className={s.smallPlay} aria-hidden="true">
-                  ▶
+                  <ActionIcon name="play" size={14} />
                 </span>{" "}
                 Découvrir l’accompagnement
               </a>
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         <h2 className="sr-only">
-          Pourquoi choisir notre accompagnement pour le Visa DTV ?
+          Pourquoi choisir cet accompagnement pour le Visa DTV ?
         </h2>
         <HomeContent />
 
@@ -151,7 +151,7 @@ export default function Home() {
               interlocuteur sur place.
             </p>
             <p data-reveal="">
-              Nous montons votre dossier consulaire de bout en bout. Trois voies
+              Je monte votre dossier consulaire de bout en bout. Trois voies
               d’accès, un tarif public, et un accompagnement par quelqu’un qui a
               fait la démarche lui-même.
             </p>
@@ -170,8 +170,8 @@ export default function Home() {
               prenait <em>vraiment forme ?</em>
             </h2>
             <p data-reveal="" data-heading-part="2">
-              Commençons par votre situation. Le reste, nous le préparons
-              ensemble.
+              Commençons par votre situation. Je prépare la suite
+              avec vous.
             </p>
           </div>
           <div className={s.finalActions} data-reveal="">
@@ -210,11 +210,11 @@ export default function Home() {
             Un accompagnement en français.
           </p>
           <nav aria-label="Liens de pied de page">
-            <button onClick={ouvrirMethode}>Notre Méthode</button>
+            <button onClick={ouvrirMethode}>La méthode</button>
             <Link href="/eligibilite">Éligibilité</Link>
             <Link href="/blog">Le Blog</Link>
             <Link href="/faq">FAQ</Link>
-            <Link href="/contact">Nous contacter</Link>
+            <Link href="/contact">Me contacter</Link>
             <Link href="/mentions-legales">Mentions légales</Link>
           </nav>
         </div>

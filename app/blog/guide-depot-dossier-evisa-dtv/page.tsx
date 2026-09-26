@@ -248,7 +248,7 @@ export default function EVisaGuidePage() {
           </li>
           <li>
             <strong className="text-white">Workcation :</strong> choix adapté aux freelances,
-            dirigeants d'entreprise et salariés à distance. Consultez notre{' '}
+            dirigeants d'entreprise et salariés à distance. Consultez le{' '}
             <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors">
               guide détaillé pour les freelances
             </Link>.
@@ -259,7 +259,7 @@ export default function EVisaGuidePage() {
           </li>
           <li>
             <strong className="text-white">Spouse and Children :</strong> réservé aux conjoints
-            mariés civilement et aux enfants éligibles. Pour les couples, relisez notre analyse sur{' '}
+            mariés civilement et aux enfants éligibles. Pour les couples, relisez l’analyse sur{' '}
             <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors">
               le PACS et le DTV en famille
             </Link>.
@@ -323,7 +323,7 @@ export default function EVisaGuidePage() {
         <ol className="space-y-3 mb-6 pl-4 border-l-2 border-gray-800 text-gray-400 text-sm">
           <li>
             <strong className="text-white">Le virement de la veille :</strong> présenter un solde de
-            500 000 THB fraîchement viré. L'ambassade attend une stabilité bancaire. Relisez notre{' '}
+            500 000 THB fraîchement viré. L'ambassade attend une stabilité bancaire. Relisez le{' '}
             <Link href="/blog/fonds-bancaires-visa-dtv" className="text-amber-400 hover:underline">
               guide sur la preuve financière DTV
             </Link>.
@@ -440,7 +440,7 @@ export default function EVisaGuidePage() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

@@ -321,7 +321,7 @@ export default function ArticleFinExemption() {
           </figcaption>
         </figure>
         <p className="mb-4">
-          Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici notre cartographie
+          Cependant, tous les postes frontières ne font pas preuve du même niveau de tolérance. Voici une cartographie
           terrain de la sévérité constatée, relevée avant l&apos;entrée en vigueur du nouveau barème :
         </p>
 
@@ -523,7 +523,7 @@ export default function ArticleFinExemption() {
           <h3 className="text-xl font-bold text-white mb-1">Matthieu Moretti</h3>
           <p className="text-red-400 text-xs font-semibold mb-3 uppercase tracking-wider">Expertise Terrain & Formalités</p>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Basé à Phuket, j'accompagne la communauté francophone dans la sécurisation légale de leur expatriation. Face au durcissement continu de l'immigration, notre agence s'occupe de transformer vos profils atypiques en dossiers DTV irréfutables pour mettre fin à l'angoisse des frontières et aux coûts prohibitifs des Visa Runs.
+            Basé à Phuket, j'accompagne la communauté francophone dans la sécurisation légale de leur expatriation. Face au durcissement continu de l'immigration, je m’occupe de transformer vos profils atypiques en dossiers DTV irréfutables pour mettre fin à l'angoisse des frontières et aux coûts prohibitifs des Visa Runs.
           </p>
         </div>
       </div>
@@ -575,7 +575,7 @@ export default function ArticleFinExemption() {
           Arrêtez de jouer avec votre passeport
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          L'immigration thaïlandaise ferme progressivement toutes les failles. Passez au Visa DTV de 5 ans en nous déléguant la constitution de votre dossier consulaire. Moins de stress, 100% de légalité.
+          L'immigration thaïlandaise ferme progressivement toutes les failles. Passez au Visa DTV de 5 ans en me déléguant la constitution de votre dossier consulaire. Moins de stress, 100% de légalité.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -585,7 +585,7 @@ export default function ArticleFinExemption() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

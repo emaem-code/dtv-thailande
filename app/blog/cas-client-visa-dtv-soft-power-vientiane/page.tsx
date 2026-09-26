@@ -311,7 +311,7 @@ export default function ArticleCasClient() {
         <p className="mb-4">
           Le chiffre de 4 000 € comprend tout, et il est calculé{' '}
           <strong className="text-white">au tarif actuel</strong> : le cursus de neuf mois, les frais
-          consulaires, les extensions sur l&apos;ensemble de la période et notre accompagnement toutes
+          consulaires, les extensions sur l&apos;ensemble de la période et l’accompagnement toutes
           taxes comprises. Ce n&apos;est pas un prix d&apos;appel auquel il faudrait ajouter des
           suppléments.
         </p>
@@ -418,7 +418,7 @@ export default function ArticleCasClient() {
           <p className="text-sm text-gray-300 leading-relaxed">
             Il s&apos;est inscrit sous un format de six mois facturé 20 000 THB, qui existait encore
             au printemps 2026. <strong className="text-white">Ce format a depuis été retiré de
-            l&apos;offre</strong> : interrogée directement, l&apos;école nous a confirmé par écrit ne
+            l&apos;offre</strong> : interrogée directement, l&apos;école m’a confirmé par écrit ne
             plus proposer que le programme de neuf mois, les inscriptions antérieures restant
             honorées. Les chiffres du tableau ci-dessus intègrent déjà ce nouveau tarif — c&apos;est
             pourquoi la comparaison reste valable pour un dossier déposé aujourd&apos;hui.
@@ -628,7 +628,7 @@ export default function ArticleCasClient() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>
