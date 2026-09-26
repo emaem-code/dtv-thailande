@@ -204,13 +204,13 @@ export default function HomeExplainer() {
               </ul>
             </div>
           </div>
-          {lecture === "ready" && <button className={s.start} onClick={() => { togglePlay(); playButtonRef.current?.focus({ preventScroll: true }); }}><span aria-hidden="true">▶</span> Regarder l’explication <small>7 chapitres · à votre rythme</small></button>}
+          {lecture === "ready" && <button className={s.start} onClick={() => { togglePlay(); playButtonRef.current?.focus({ preventScroll: true }); }}><span aria-hidden="true"><ActionIcon name="play" size={20} /></span> Regarder l’explication <small>7 chapitres · à votre rythme</small></button>}
           {lecture === "ended" && <div className={s.end}><span>Le premier pas est le plus simple.</span><button onClick={() => { pause(); ouvrirEligibilite(); }}>Vérifier mon éligibilité <ActionIcon name="eligibility" /></button></div>}
         </div>
 
         <div className={s.controls}>
           <button ref={playButtonRef} onClick={togglePlay} aria-label={lecture === "loading" ? "Annuler le chargement" : lecture === "playing" ? "Mettre l’explication en pause" : lecture === "ended" ? "Revoir l’explication" : "Lire l’explication"} className={s.playButton}>
-            <span aria-hidden="true">{lecture === "playing" || lecture === "loading" ? "Ⅱ" : lecture === "ended" ? "↺" : "▶"}</span><span>{lecture === "loading" ? "Attente" : lecture === "playing" ? "Pause" : lecture === "ended" ? "Revoir" : "Lecture"}</span>
+            <span aria-hidden="true"><ActionIcon name={lecture === "playing" || lecture === "loading" ? "pause" : lecture === "ended" ? "replay" : "play"} /></span><span>{lecture === "loading" ? "Attente" : lecture === "playing" ? "Pause" : lecture === "ended" ? "Revoir" : "Lecture"}</span>
           </button>
           <span className={s.chapterCount}>{scene + 1} / {FILM_ACCUEIL.length}</span>
           <div className={s.track} role="progressbar" aria-label="Avancement de l’explication" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round((Math.min(1, elapsed / FILM_AUDIO_DURATION)) * 100)}><span style={{ transform: `scaleX(${Math.min(1, elapsed / FILM_AUDIO_DURATION)})` }} /></div>

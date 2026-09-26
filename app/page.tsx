@@ -45,7 +45,7 @@ export default function Home() {
               </button>
               <a href="#accompagnement" className={s.textLink}>
                 <span className={s.smallPlay} aria-hidden="true">
-                  ▶
+                  <ActionIcon name="play" size={14} />
                 </span>{" "}
                 Découvrir l’accompagnement
               </a>

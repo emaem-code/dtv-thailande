@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import ActionIcon from "./ActionIcon";
 import s from "../blog/blog.module.css";
 
 type Repere = { id: string; titre: string };
@@ -87,7 +88,7 @@ export default function LectureBlog({
             ))}
           </nav>
           <Link className={s.retourJournal} href="/blog">
-            Explorer le journal <span aria-hidden="true">↗</span>
+            Explorer le journal <span aria-hidden="true"><ActionIcon name="book" /></span>
           </Link>
         </div>
       </aside>
