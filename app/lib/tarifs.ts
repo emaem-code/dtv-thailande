@@ -249,7 +249,7 @@ export const CLAUSE_VOYAGE =
   'Le vol, l’hébergement et les transferts sont sélectionnés et organisés pour ' +
   'vous, mais réservés à votre nom et réglés directement par vos soins auprès ' +
   'de la compagnie, de l’hôtel et du chauffeur. Aucune somme ne transite par ' +
-  'nous et aucune commission n’est prise. Les montants indiqués sont des ' +
+  'moi et aucune commission n’est prise. Les montants indiqués sont des ' +
   'estimations, données à titre de repère budgétaire.';
 
 /** La mise en relation avec l'école n'existe que sur la voie Soft Power. */

@@ -14,7 +14,7 @@ export type SceneFilmAccueil = {
 };
 
 /**
- * Résumé de l’accueil, à lire ou à écouter après un lancement volontaire.
+ * Résumé de l'accueil, à lire ou à écouter après un lancement volontaire.
  * Les montants affichés suivent les sources communes ; la voix ne les fige pas.
  * Sources relues le 24 septembre 2026 : docs/sources-film-accueil.md.
  */
@@ -47,7 +47,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
       "Pas cinq ans de séjour continu.",
     ],
     narration:
-      "Le DTV est valable cinq ans, à entrées multiples. Chaque séjour dure jusqu’à cent quatre-vingts jours, prolongeable une fois sur place. Cette validité n’autorise pas cinq ans de séjour continu.",
+      "Le DTV est valable cinq ans, à entrées multiples. Chaque séjour dure jusqu'à cent quatre-vingts jours, prolongeable une fois sur place. Cette validité n'autorise pas cinq ans de séjour continu.",
   },
   {
     id: "profils",
@@ -70,7 +70,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     titre: "Chaque pièce",
     accent: "compte.",
     image: "/images/blog/dtv-31-aout-preparation-dossier.jpg",
-    alt: "Préparation des documents d’une demande de visa DTV",
+    alt: "Préparation des documents d'une demande de visa DTV",
     points: [
       "Activité et résidence : des justificatifs adaptés à votre profil.",
       `À Paris : ${formateEuros(FONDS_EUR_PARIS)} par personne sur chacun des 3 derniers relevés mensuels.`,
@@ -81,14 +81,14 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
   },
   {
     id: "methode",
-    chapitre: "L’accompagnement",
+    chapitre: "L'accompagnement",
     titre: "Je prépare.",
     accent: "Vous déposez.",
     image: "/images/blog/guide-depot-dossier-evisa-dtv.jpg",
-    alt: "Préparation d’une demande en ligne sur le portail e-Visa",
+    alt: "Préparation d'une demande en ligne sur le portail e-Visa",
     points: [
       "Je prépare le dossier. Vous le déposez sur e-Visa.",
-      "L’ambassade reste seule décisionnaire.",
+      "L'ambassade reste seule décisionnaire.",
       "Paris : environ 4 semaines, parfois plus. Entretien possible.",
     ],
     narration:
@@ -104,7 +104,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     points: [
       `Dès ${prix(PRIX_APPEL)} par personne, selon votre dossier.`,
       "Frais consulaires et estimation des traductions dans le budget.",
-      "Essentielle pour le visa. Premium pour préparer aussi l’arrivée.",
+      "Essentielle pour le visa. Premium pour préparer aussi l'arrivée.",
     ],
     narration:
       "Les tarifs sont publics. Le budget comprend les frais consulaires et une estimation des traductions. La formule Essentielle accompagne votre demande de visa ; Premium prépare aussi votre arrivée. Le devis précise votre budget.",
@@ -113,7 +113,7 @@ export const FILM_ACCUEIL: SceneFilmAccueil[] = [
     id: "premier-pas",
     chapitre: "La suite",
     titre: "Votre premier pas,",
-    accent: "c’est ici.",
+    accent: "c'est ici.",
     image: "/images/matthieu-moretti.jpg",
     alt: "Matthieu Moretti, DTV Thaïlande",
     points: [

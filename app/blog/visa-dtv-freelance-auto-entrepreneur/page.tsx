@@ -88,7 +88,7 @@ const faqSchema = {
       "name": "Faut-il faire traduire ses documents URSSAF et Kbis pour l'ambassade ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Notre agence gère ces traductions dans le cadre de son accompagnement."
+        "text": "Oui, pour un dépôt à Paris — et depuis le 31 août 2026, un freelance français n'a plus d'autre poste possible s'il ne réside pas légalement à l'étranger. La traduction assermentée y est exigée : comptez 150 à 300 € et plusieurs jours. Les postes asiatiques, où les documents en français passaient souvent, sont désormais réservés aux résidents de ces pays. Je gère ces traductions dans le cadre de l'accompagnement."
       }
     },
     {

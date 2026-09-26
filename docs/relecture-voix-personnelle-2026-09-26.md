@@ -4,52 +4,36 @@ Branche : `bac-a-sable`. Les actions d’accompagnement sont rédigées au « je
 
 ## Décompte par zone
 
-Recherche des mots entiers `nous`, `notre` et `nos`, sans distinction de casse, dans les sources de `app/`. Chaque mot compte, même si une ligne en contient plusieurs. Ce périmètre inclut les métadonnées, les commentaires, les courriels et les composants en sommeil : **210 occurrences avant, 17 après**. Le blog représentait bien **107 occurrences**, accueil compris.
+Recherche des mots entiers `nous`, `notre` et `nos`, sans distinction de casse, dans les sources de `app/`. Chaque mot compte, même si une ligne en contient plusieurs. Ce périmètre inclut les métadonnées, les commentaires, les courriels et les composants en sommeil : **210 occurrences avant, 17 après la première passe, puis 5 après les corrections complémentaires du 26 septembre 2026**. Le blog représentait bien **107 occurrences**, accueil compris.
 
 | Zone | Avant | Après |
 | --- | ---: | ---: |
 | Accueil, en-tête principal et anciennes cartes vidéo | 23 | 0 |
 | Navigation secondaire, fenêtres et méthode partagée | 18 | 0 |
-| Film explicatif | 9 | 9 |
+| Film explicatif | 9 | 0 |
 | Accueil du blog | 5 | 0 |
-| 19 articles du blog | 102 | 2 |
+| 19 articles du blog | 102 | 1 |
 | Éligibilité et commentaire d’attribution | 24 | 0 |
 | Contact | 6 | 0 |
-| FAQ et ses métadonnées | 5 | 1 |
+| FAQ et ses métadonnées | 5 | 0 |
 | Accusé de réception de la demande | 9 | 0 |
 | Alertes et désinscription | 4 | 0 |
-| Devis, clause de voyage et confirmation de signature | 4 | 4 |
+| Devis, clause de voyage et confirmation de signature | 4 | 3 |
 | Administration | 1 | 1 |
-| **Total** | **210** | **17** |
+| **Total** | **210** | **5** |
 
 Les mentions légales, les CGV et les signatures de courriel sont inchangées. Elles ne contiennent pas d’autre occurrence de ces trois mots.
 
-## Les 17 occurrences conservées
+## Corrections complémentaires du 26 septembre 2026
 
-### Film : 9 occurrences
+Le remplacement complet de la voix et des textes du film a supprimé ses neuf occurrences : le film est désormais à zéro. Les trois dernières formulations institutionnelles ont ensuite été corrigées sur demande du propriétaire : « Aucune somme ne transite par moi » dans la clause de voyage, « je conseille de prévoir » dans les données de la FAQ, et « Je gère ces traductions dans le cadre de l'accompagnement. » dans la FAQ structurée de l’article freelance.
 
-Le fichier `app/lib/film-accueil.ts` est inchangé, comme `film-accueil-audio.ts` et tous les fichiers `HomeExplainer`. Les textes restent synchronisés avec la voix enregistrée.
+Les apostrophes de `app/lib/film-accueil.ts` sont maintenant toutes droites. Cette dernière passe ne modifie ni le mixage ni les repères de chapitres, de sous-titres ou d’arguments.
 
-| Ligne | Fragment conservé | Nombre |
-| --- | --- | ---: |
-| 35 | « notre accompagnement » | 1 |
-| 80 | « nous examinons vos justificatifs » | 1 |
-| 85 | « Nous préparons. » — titre du chapitre | 1 |
-| 90 | « Nous préparons le dossier. » — argument affiché | 1 |
-| 95 | « Nous préparons votre dossier » — narration | 1 |
-| 110 | « Nos tarifs sont publics. » | 1 |
-| 125 | « notre test d’éligibilité », « nos guides », « notre FAQ » | 3 |
+## Les 5 occurrences conservées
 
-### Données structurées : 2 occurrences
+### Preuve de l’accord entre Matthieu et le client : 3 occurrences
 
-- `app/faq/page.tsx:97` : « nous conseillons de prévoir ». Le JSON-LD est conservé ; la réponse affichée dit « je vous conseille de prévoir ».
-- `app/blog/visa-dtv-freelance-auto-entrepreneur/page.tsx:91` : « Notre agence gère ces traductions dans le cadre de son accompagnement. » Le JSON-LD est conservé ; la réponse affichée dit « Je gère ces traductions dans le cadre de l’accompagnement. »
-
-Ces deux réponses disposent d’une variante de rédaction destinée uniquement à l’affichage. Si leur fond change un jour, il faudra mettre à jour les deux versions ensemble.
-
-### Contrat et preuve de l’accord : 4 occurrences
-
-- `app/lib/tarifs.ts:252` : « Aucune somme ne transite par nous » — clause contractuelle relative aux réservations de voyage.
 - `app/devis/[jeton]/BlocSignature.tsx:397` : « la teneur et la date de notre accord » — preuve de l’accord entre les parties.
 - `app/api/devis/[jeton]/signer/route.ts:266` : « le contenu exact de notre accord » — confirmation de signature en texte brut.
 - `app/api/devis/[jeton]/signer/route.ts:301` : même formulation dans la version HTML du courriel.
@@ -62,13 +46,19 @@ Ces deux réponses disposent d’une variante de rédaction destinée uniquement
 
 - `app/admin/devis/[id]/EditeurDevis.tsx:669` : « Voici le devis dont nous avons parlé… ». Exemple dans l’éditeur : ce pluriel désigne Matthieu et son interlocuteur, pas une équipe.
 
-## Vérifications
+## Vérifications de la première passe
 
 - Compilation de production et contrôle TypeScript réussis ; analyse statique des fichiers modifiés réussie.
 - Comparaison avec la version de départ : 12 fichiers protégés strictement identiques, 38 objets JSON-LD identiques et réponses sources de la FAQ inchangées.
 - Signatures des courriels, liens, images, attributs `sizes`, styles et structure du formulaire inchangés.
 - Vérification du texte généré sur 24 pages : accueil, blog, contact, éligibilité, FAQ et 19 articles. Hors film, la seule occurrence destinée au lecteur est la citation de l’école.
 - Les cartes vidéo en sommeil et les anciennes fenêtres ont également été relues ; elles ne sont pas remises en service.
+
+## Vérifications des corrections complémentaires
+
+- Nouvelle recherche des mots entiers `nous`, `notre` et `nos` dans tout `app/` : **5 occurrences**, toutes listées ci-dessus.
+- Les trois mentions de « notre accord », la citation de l’école et « le devis dont nous avons parlé » sont conservés à l’identique.
+- Le fichier audio et les repères du film restent strictement identiques à la version validée.
 
 ## Formulations de fond signalées, sans correction dans ce chantier
 
