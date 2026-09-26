@@ -24,7 +24,7 @@ const EMAIL_VALIDE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 /**
  * Expéditeur : l'alias professionnel, déjà authentifié sur le domaine.
  * Le nom affiché est celui de la marque, pas une personne : ce message part
- * d'une adresse de contact générique, et le site s'adresse au « nous ».
+ * d'une adresse de contact générique. Le corps est rédigé par Matthieu à la première personne.
  */
 const EXPEDITEUR = `${AGENCE.enseigne} <${AGENCE.email}>`;
 
@@ -63,9 +63,9 @@ function corpsTexte(prenom: string, softPower: boolean): string {
 
   return `${salutation}
 
-Votre demande nous est bien parvenue. Nous l'étudions et revenons vers vous sous 48 heures avec une estimation chiffrée pour votre situation.
+J’ai bien reçu votre demande. Je l’étudie et reviens vers vous sous 48 heures avec une estimation chiffrée pour votre situation.
 
-Si un élément vous est revenu depuis — une date qui bouge, un doute sur un document, une question que le formulaire ne posait pas — répondez simplement à ce message. Ce que vous nous direz maintenant nous fera gagner du temps ensuite.
+Si un élément vous est revenu depuis — une date qui bouge, un doute sur un document, une question que le formulaire ne posait pas — répondez simplement à ce message. Ces précisions m’aideront à préparer votre dossier et vous feront gagner du temps ensuite.
 
 En attendant, deux lectures qui répondront peut-être déjà à une partie de vos questions :
 — Les questions fréquentes sur le Visa DTV : https://dtv-thailande.fr/faq
@@ -105,7 +105,7 @@ function corpsHtml(prenom: string, softPower: boolean): string {
           <p style="margin:0 0 20px 0;">${salutation}</p>
 
           <p style="margin:0 0 20px 0;">
-            Votre demande nous est bien parvenue. Nous l'étudions et revenons vers vous
+            J’ai bien reçu votre demande. Je l’étudie et reviens vers vous
             <strong>sous 48 heures</strong> avec une estimation chiffrée pour votre
             situation.
           </p>
@@ -113,7 +113,7 @@ function corpsHtml(prenom: string, softPower: boolean): string {
           <p style="margin:0 0 20px 0;">
             Si un élément vous est revenu depuis — une date qui bouge, un doute sur un document,
             une question que le formulaire ne posait pas — répondez simplement à ce message.
-            Ce que vous nous direz maintenant nous fera gagner du temps ensuite.
+            Ces précisions m’aideront à préparer votre dossier et vous feront gagner du temps ensuite.
           </p>
 
           <p style="margin:0 0 12px 0;">

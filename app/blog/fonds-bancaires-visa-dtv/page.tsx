@@ -264,7 +264,7 @@ export default function BlogArticleDTV() {
         </p>
         <p className="text-white font-medium border-l-4 border-[#F59E0B] pl-5 py-1">
           Face à l&apos;avalanche de rumeurs et de témoignages contradictoires, voici la réponse
-          claire, officielle et basée sur notre expertise de terrain pour réussir votre
+          claire, officielle et appuyée sur les observations de terrain pour réussir votre
           expatriation sans essuyer un refus.
         </p>
       </div>
@@ -345,7 +345,7 @@ export default function BlogArticleDTV() {
           moment passer sous le seuil pendant ce trimestre. Attention : ce seuil reste exprimé en
           bahts, jamais en euros. Un compte calibré au plus juste peut donc repasser sous la barre
           sans que vous ayez touché à votre épargne, simplement parce que le cours a bougé — c&apos;est
-          la raison pour laquelle nous recommandons une marge, détaillée en fin d&apos;article.
+          la raison pour laquelle je recommande une marge, détaillée en fin d&apos;article.
         </p>
         <p className="mb-5">
           La difficulté parisienne est donc ailleurs, et elle se chiffre. D&apos;abord la{' '}
@@ -361,7 +361,7 @@ export default function BlogArticleDTV() {
           L&apos;Asie : fermée depuis le 31 août 2026
         </h3>
         <p className="mb-4">
-          C&apos;était la stratégie que nous recommandions massivement, et elle était bonne : à
+          Je recommandais alors cette stratégie, qui était pertinente : à
           exigence bancaire identique, déposer au Laos, au Cambodge ou en Malaisie faisait gagner
           la traduction assermentée et trois semaines d&apos;instruction.{' '}
           <strong className="text-white">Cette voie n&apos;existe plus.</strong> Depuis le 31 août
@@ -410,7 +410,7 @@ export default function BlogArticleDTV() {
           </table>
         </div>
         <p className="text-xs text-gray-600 italic mt-2">
-          * Données issues de notre expérience terrain 2025–2026. Les pratiques consulaires peuvent évoluer.
+          * Données issues des dossiers suivis sur le terrain en 2025–2026. Les pratiques consulaires peuvent évoluer.
         </p>
       </section>
 
@@ -495,7 +495,7 @@ export default function BlogArticleDTV() {
           est accepté mais impose de fournir l&apos;acte de mariage légalisé. Et si vos fonds
           dorment sur un compte de société,{' '}
           <Link href="/blog/visa-dtv-freelance-auto-entrepreneur" className="text-teal-500 hover:underline font-medium">
-            notre guide pour les indépendants
+            le guide pour les indépendants
           </Link>{' '}
           explique comment restructurer vos virements avant de déposer.
         </p>
@@ -533,10 +533,10 @@ export default function BlogArticleDTV() {
         </p>
         <div className="bg-teal-500/8 border border-teal-500/20 rounded-2xl p-5">
           <p className="text-teal-300 font-semibold text-sm">
-            💡 Notre conseil : prévoyez toujours une marge de 10 à 15 %.
+            💡 Le conseil pratique : prévoyez toujours une marge de 10 à 15 %.
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            Nous conseillons à nos clients de présenter un solde de{' '}
+            Je conseille aux personnes que j’accompagne de présenter un solde de{' '}
             <strong className="text-white">{MARGE_CONSEILLEE}</strong> plutôt que la stricte
             contre-valeur des 500 000 THB, aujourd&apos;hui de <MontantFonds prefixe="" />. Le seuil
             qui fait foi est celui en bahts, et le taux de change bouge en permanence : si le baht
@@ -703,7 +703,7 @@ export default function BlogArticleDTV() {
           FAQ — Vos questions les plus fréquentes
         </h2>
         <p className="text-gray-400 mb-6 text-sm">
-          Pour toute autre interrogation concernant les statuts (Freelance, Famille, Soft Power), consultez notre <Link href="/faq" className="text-teal-500 hover:underline font-medium">Foire Aux Questions complète</Link>.
+          Pour toute autre interrogation concernant les statuts (Freelance, Famille, Soft Power), consultez la <Link href="/faq" className="text-teal-500 hover:underline font-medium">Foire Aux Questions complète</Link>.
         </p>
 
         <div className="space-y-4">
@@ -738,7 +738,7 @@ export default function BlogArticleDTV() {
         </h3>
         <p className="text-gray-400 mb-8 relative z-10 text-sm md:text-base">
           Un relevé mal traduit, un historique trop court ou une mauvaise planification peuvent
-          entraîner un refus immédiat. Nous prenons en charge l&apos;analyse de vos critères
+          entraîner un refus immédiat. Je prends en charge l&apos;analyse de vos critères
           financiers, votre inscription en école certifiée et l&apos;organisation logistique de votre
           Visa Run.
         </p>
@@ -751,7 +751,7 @@ export default function BlogArticleDTV() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

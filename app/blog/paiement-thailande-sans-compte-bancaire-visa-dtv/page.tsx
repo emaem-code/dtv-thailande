@@ -287,7 +287,7 @@ export default function BlogArticlePaiements() {
           </li>
           <li className="flex items-start gap-3 text-sm text-gray-400">
             <span className="text-teal-400 mt-0.5 flex-none">→</span>
-            Changez votre cash au comptoir Superrich (Niveau B de l&apos;aéroport) — voir notre{' '}
+            Changez votre cash au comptoir Superrich (Niveau B de l&apos;aéroport) — voir le{' '}
             <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-teal-400 hover:underline font-medium">
               guide de l&apos;arrivée à l&apos;aéroport
             </Link>
@@ -446,7 +446,7 @@ export default function BlogArticlePaiements() {
           <LienArticle slug="tm47-rapport-90-jours-thailande" className="text-teal-400 hover:underline font-medium">
             vos obligations déclaratives sur place
           </LienArticle>
-          . Nous détaillons l&apos;ensemble du sujet dans notre{' '}
+          . L&apos;ensemble du sujet est détaillé dans le{' '}
           <LienArticle slug="fiscalite-thailande-expatries-residence-fiscale" className="text-teal-400 hover:underline font-medium">
             guide de la fiscalité en Thaïlande après 180 jours
           </LienArticle>
@@ -554,7 +554,7 @@ export default function BlogArticlePaiements() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

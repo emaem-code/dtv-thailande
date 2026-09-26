@@ -328,7 +328,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           <p className="text-sm text-gray-300">
             Frais de retrait, bureaux de change, plafonds, factures que Wise ne couvre pas :{' '}
             <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-sky-400 hover:underline font-medium">
-              notre guide complet des paiements en Thaïlande avec un Visa DTV
+              le guide complet des paiements en Thaïlande avec un Visa DTV
             </Link>{' '}
             détaille la stratégie testée sur le terrain.
           </p>
@@ -361,7 +361,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
             <strong className="text-white">Arriver sans assurance santé :</strong> le DTV n&apos;en
             exige aucune, mais une fracture soignée dans le privé coûte plusieurs milliers d&apos;euros.{' '}
             <LienArticle slug="assurance-sante-visa-dtv-thailande" className="text-sky-400 hover:underline font-medium">
-              Notre guide de l&apos;assurance santé
+              Le guide de l&apos;assurance santé
             </LienArticle>{' '}
             détaille les coûts réels et l&apos;exclusion deux-roues.
           </li>
@@ -455,7 +455,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
           Préparez votre arrivée sans stress
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          TDAC, e-Visa imprimé, preuves financières, TM30 et installation locale : nous pouvons
+          TDAC, e-Visa imprimé, preuves financières, TM30 et installation locale : je peux
           vérifier votre dossier avant le départ et sécuriser vos premières démarches en Thaïlande.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
@@ -466,7 +466,7 @@ export default function ArriveeThailandeAeroportImmigrationTaxiVisaDtv() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

@@ -731,7 +731,7 @@ export default function ArticleAssuranceSante() {
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
           Assurance, logement, permis, formalités d&apos;arrivée : le visa n&apos;est que la première
-          étape. Nous montons votre dossier DTV et vous orientons sur tout ce qui vient après.
+          étape. Je monte votre dossier DTV et vous oriente sur tout ce qui vient après.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -741,7 +741,7 @@ export default function ArticleAssuranceSante() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

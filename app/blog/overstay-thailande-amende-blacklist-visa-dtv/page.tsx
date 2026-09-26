@@ -543,7 +543,7 @@ export default function ArticleOverstay() {
             <strong className="text-white">enregistré dans la base de données de
             l&apos;immigration</strong>. Il sera visible par chaque officier, à chaque entrée future.
             Cela ne vous ferme aucune porte — mais cela s&apos;ajoute au reste de votre historique.
-            Nous y revenons en section 7.
+            Ce point est détaillé en section 7.
           </p>
         </div>
       </section>
@@ -1016,8 +1016,8 @@ export default function ArticleOverstay() {
           Arrêtez de compter vos jours
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          Cinq ans de séjour, 180 jours par entrée, renouvelables. Nous vérifions votre éligibilité au
-          Visa DTV et montons l&apos;intégralité de votre dossier — y compris lorsque votre passeport
+          Cinq ans de séjour, 180 jours par entrée, renouvelables. Je vérifie votre éligibilité au
+          Visa DTV et monte l&apos;intégralité de votre dossier — y compris lorsque votre passeport
           a une histoire.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
@@ -1028,7 +1028,7 @@ export default function ArticleOverstay() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

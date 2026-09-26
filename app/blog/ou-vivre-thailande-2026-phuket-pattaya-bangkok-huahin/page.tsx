@@ -373,7 +373,7 @@ export default function BlogArticleOuVivreThailande() {
             href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv"
             className="text-amber-500 hover:underline"
           >
-            notre stratégie de paiement complète
+            la stratégie de paiement complète
           </Link>
           .
         </p>
@@ -976,7 +976,7 @@ export default function BlogArticleOuVivreThailande() {
             href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv"
             className="text-amber-500 hover:underline"
           >
-            notre guide complet de l&apos;arrivée à l&apos;aéroport
+            le guide complet de l&apos;arrivée à l&apos;aéroport
           </Link>
           . Et quelle que soit la ville retenue, prévoyez la ligne budgétaire que personne
           n&apos;anticipe :{' '}
@@ -1059,7 +1059,7 @@ export default function BlogArticleOuVivreThailande() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

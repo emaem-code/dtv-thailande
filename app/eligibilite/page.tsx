@@ -123,7 +123,7 @@ export default function PageEligibilite() {
           </ul>
           <p className="text-xs text-gray-500 mt-6 leading-relaxed">
             Le test est gratuit et sans engagement. Si votre profil ne remplit pas les conditions,
-            nous vous le disons franchement plutôt que de vous laisser payer des frais non
+            je vous le dis franchement plutôt que de vous laisser payer des frais non
             remboursables.
           </p>
         </section>
@@ -178,7 +178,7 @@ export default function PageEligibilite() {
           <p className="text-sm text-gray-500 mt-8">
             Une question qui ne rentre pas dans le formulaire ?{' '}
             <Link href="/contact" className="text-amber-500 hover:underline">
-              Écrivez-nous directement
+              Écrivez-moi directement
             </Link>
             .
           </p>

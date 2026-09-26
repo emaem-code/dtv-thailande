@@ -972,8 +972,8 @@ export default function ArticleExtension180Jours() {
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
           Extension, TM30, rapport des 90 jours : ces démarches ne se posent qu&apos;une fois le visa
-          obtenu, et elles dépendent de la voie par laquelle vous l&apos;avez obtenu. Nous montons
-          votre dossier DTV et vous orientons sur tout ce qui vient après.
+          obtenu, et elles dépendent de la voie par laquelle vous l&apos;avez obtenu. Je monte
+          votre dossier DTV et vous oriente sur tout ce qui vient après.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -983,7 +983,7 @@ export default function ArticleExtension180Jours() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

@@ -236,7 +236,7 @@ export default function BlogArticleImmigration20000THB() {
             <p className="pt-1">
               Si vous partez en famille,{' '}
               <Link href="/blog/visa-dtv-couple-famille-pacs" className="text-emerald-400 hover:underline font-medium">
-                notre guide du Visa DTV en couple et en famille
+                le guide du Visa DTV en couple et en famille
               </Link>{' '}
               détaille l&apos;autre règle financière, celle-là bien plus lourde : les
               500 000 THB de preuve bancaire, qui s&apos;appliquent eux{' '}
@@ -382,7 +382,7 @@ export default function BlogArticleImmigration20000THB() {
           </figcaption>
         </figure>
         <p className="mb-4">
-          Et depuis 2026, le problème s&apos;aggrave pour les utilisateurs de Wise : les comptes enregistrés avec une adresse thaïlandaise ne peuvent plus retirer aux ATM en Thaïlande du tout — une restriction réglementaire de la Banque de Thaïlande que nous détaillons dans notre{' '}
+          Et depuis 2026, le problème s&apos;aggrave pour les utilisateurs de Wise : les comptes enregistrés avec une adresse thaïlandaise ne peuvent plus retirer aux ATM en Thaïlande du tout — une restriction réglementaire de la Banque de Thaïlande détaillée dans le{' '}
           <Link href="/blog/paiement-thailande-sans-compte-bancaire-visa-dtv" className="text-sky-500 hover:underline">
             guide des paiements en Thaïlande avec un visa DTV
           </Link>.
@@ -425,7 +425,7 @@ export default function BlogArticleImmigration20000THB() {
         <ul className="space-y-4 mb-6 list-none pl-0">
           <li className="flex items-start gap-3 text-gray-300">
             <span className="text-sky-500 mt-1 flex-none">⚠️</span>
-            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos. Nous détaillons ce durcissement dans notre <Link href="/blog/fin-exemption-visa-60-jours" className="text-sky-400 hover:underline font-medium">enquête sur les frontières terrestres</Link>.</div>
+            <div><strong className="text-white">Les enchaîneurs de visa runs.</strong> Sorties et retours rapprochés, historique d&apos;entrées multiples dans l&apos;année — c&apos;est le profil numéro un. Le voyageur refoulé cette semaine revenait précisément d&apos;un passage au Laos. Ce durcissement est détaillé dans l’<Link href="/blog/fin-exemption-visa-60-jours" className="text-sky-400 hover:underline font-medium">enquête sur les frontières terrestres</Link>.</div>
           </li>
           <li className="flex items-start gap-3 text-gray-300">
             <span className="text-sky-500 mt-1 flex-none">⚠️</span>
@@ -481,7 +481,7 @@ export default function BlogArticleImmigration20000THB() {
           <ul className="space-y-3 text-sm text-gray-300">
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
-              <span><strong>520 € minimum en espèces par personne</strong> (l&apos;équivalent de 20 000 THB), dans le bagage cabine — 1 000 à 2 000 € si vous vous installez, comme détaillé dans notre stratégie de paiement.</span>
+              <span><strong>520 € minimum en espèces par personne</strong> (l&apos;équivalent de 20 000 THB), dans le bagage cabine — 1 000 à 2 000 € si vous vous installez, comme détaillé dans la stratégie de paiement.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
@@ -497,7 +497,7 @@ export default function BlogArticleImmigration20000THB() {
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
-              <span>TDAC rempli dans les 72 heures avant l&apos;arrivée (voir notre <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-sky-500 hover:underline">guide complet de l&apos;arrivée à l&apos;aéroport</Link>).</span>
+              <span>TDAC rempli dans les 72 heures avant l&apos;arrivée (voir le <Link href="/blog/arrivee-thailande-aeroport-immigration-taxi-visa-dtv" className="text-sky-500 hover:underline">guide complet de l&apos;arrivée à l&apos;aéroport</Link>).</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-500 mt-0.5">✅</span>
@@ -587,7 +587,7 @@ export default function BlogArticleImmigration20000THB() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

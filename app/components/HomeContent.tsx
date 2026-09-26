@@ -42,12 +42,12 @@ export const homeFaqs = [
   {
     category: "Finances & Épargne",
     q: "Mes investissements (crypto, PEA, actions) comptent-ils comme garantie ?",
-    a: "Non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Nous vous accompagnons sur la présentation de vos relevés, y compris de néobanques comme Revolut ou Boursorama, pour qu'ils respectent les standards consulaires.",
+    a: "Non. L'ambassade thaïlandaise est très conservatrice et rejette les actifs volatils. La somme doit être disponible sur un compte courant ou d'épargne classique. Je vous accompagne dans la présentation de vos relevés, y compris de néobanques comme Revolut ou Boursorama, pour qu'ils respectent les standards consulaires.",
   },
   {
     category: "Statut freelance & télétravail",
     q: "Je suis auto-entrepreneur et je n'ai pas d'employeur. Est-ce un problème ?",
-    a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus quand le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Notre travail consiste à traduire la réalité de votre micro-entreprise — Kbis, URSSAF, SIRENE, portfolio — en un dossier administratif irréfutable aux yeux des officiers consulaires.",
+    a: "C'est le profil le plus courant, mais aussi celui qui subit le plus de refus quand le dossier est mal monté. L'ambassade s'attend à des fiches de paie classiques. Je traduis la réalité de votre micro-entreprise — Kbis, URSSAF, SIRENE, portfolio — en un dossier administratif irréfutable aux yeux des officiers consulaires.",
   },
   {
     category: "Soft Power (écoles & immersion)",
@@ -63,7 +63,7 @@ export const homeFaqs = [
   {
     category: "Fiscalité & impôts",
     q: "Vais-je payer des impôts en Thaïlande avec le Visa DTV ?",
-    a: "Le DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année civile et que vous y rapatriez des revenus. Nous vous fournissons les repères de base pour comprendre la convention fiscale franco-thaïlandaise et organiser votre calendrier de voyage.",
+    a: "Le DTV ne fait pas automatiquement de vous un résident fiscal. Vous ne devenez imposable en Thaïlande que si vous y séjournez plus de 180 jours dans l'année civile et que vous y rapatriez des revenus. Je vous donne les repères de base pour comprendre la convention fiscale franco-thaïlandaise et organiser votre calendrier de voyage.",
   },
 ];
 
@@ -179,7 +179,7 @@ export default function HomeContent() {
             n&apos;est jamais bloquée, mais dont l&apos;historique est examiné.
           </p>
           <p>
-            <strong>Notre conseil :</strong> prévoyez plutôt{" "}
+            <strong>Le conseil pratique :</strong> prévoyez plutôt{" "}
             <strong>{MARGE_CONSEILLEE}</strong> par personne. Le montant exigé
             par Paris est un plancher, pas une cible : un solde calculé au plus
             juste ne résiste ni à un agio prélevé la veille, ni à un officier
@@ -202,11 +202,11 @@ export default function HomeContent() {
 
       {/* ── MÉTHODE ── */}
       <section id="methode" className={s.methodSection} data-motion-heading="">
-        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Vous avancez. Nous vous accompagnons.</p>
-        <h2 data-reveal="" data-heading-part="1">Notre méthode, en cinq étapes</h2>
+        <p className={s.eyebrow} data-reveal="" data-heading-part="0">Vous avancez. Je vous accompagne.</p>
+        <h2 data-reveal="" data-heading-part="1">La méthode, en cinq étapes</h2>
         <p data-reveal="" data-heading-part="2">
           De la préparation de votre dossier à votre arrivée après accord du
-          visa, voici les étapes de notre accompagnement.
+          visa, voici les étapes de l’accompagnement.
         </p>
 
         <p>{REGLE_DEPOT_DTV}</p>
@@ -238,9 +238,9 @@ export default function HomeContent() {
       {/* ── TARIFS ── */}
       <section id="tarifs" className={s.pricingSection} data-motion-heading="">
         <p className={s.eyebrow} data-reveal="" data-heading-part="0">Un projet clair. Un budget transparent.</p>
-        <h2 data-reveal="" data-heading-part="1">Nos formules et nos tarifs</h2>
+        <h2 data-reveal="" data-heading-part="1">Essentielle et Premium</h2>
         <p data-reveal="" data-heading-part="2">
-          Nos prix sont publics et dépendent uniquement de la{" "}
+          Les prix sont publics et dépendent uniquement de la{" "}
           <strong>voie d&apos;éligibilité</strong> par laquelle vous obtenez le
           visa. Le tarif Soft Power inclut les frais d&apos;inscription à
           l&apos;école certifiée, ce qui explique l&apos;écart.
@@ -314,7 +314,7 @@ export default function HomeContent() {
             dépose son propre dossier et relève de sa propre voie
             d&apos;éligibilité : un conjoint qui suit un cursus Soft Power sera
             au tarif Soft Power, un conjoint télétravailleur au tarif
-            correspondant. Nous établissons un devis global quand plusieurs
+            correspondant. J’établis un devis global quand plusieurs
             dossiers sont montés ensemble.
           </p>
           <p>
@@ -377,9 +377,9 @@ export default function HomeContent() {
       {/* ── GUIDES ── */}
       <section id="guides" className={s.guidesSection} data-motion-heading="">
         <p className={s.eyebrow} data-reveal="" data-heading-part="0">Le journal de votre future vie.</p>
-        <h2 data-reveal="" data-heading-part="1">Nos guides de terrain</h2>
+        <h2 data-reveal="" data-heading-part="1">Les guides de terrain</h2>
         <p data-reveal="" data-heading-part="2">
-          Nous documentons publiquement ce que nous rencontrons sur le terrain :
+          Je partage ici les situations rencontrées sur le terrain :
           montants réels, textes officiels et pièges constatés. Aucun de ces
           guides n&apos;est réservé aux clients.
         </p>

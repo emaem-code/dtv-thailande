@@ -691,7 +691,7 @@ export default function ArticleFiscaliteThailande() {
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
           La question fiscale se pose une fois installé. Avant cela, il faut un dossier consulaire
-          irréprochable. Nous montons votre demande de Visa DTV de A à Z, et nous vous orientons vers
+          irréprochable. Je monte votre demande de Visa DTV de A à Z et vous oriente vers
           les bons interlocuteurs pour la suite.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
@@ -702,7 +702,7 @@ export default function ArticleFiscaliteThailande() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

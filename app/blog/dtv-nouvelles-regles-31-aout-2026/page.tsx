@@ -1109,8 +1109,8 @@ export default function ArticleNouvellesReglesDTV() {
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
           C&apos;est devenu la première question à trancher, avant même de réunir la moindre pièce.
-          Nous déterminons le poste dont vous relevez, la liste exacte des documents qu&apos;il exige,
-          et nous montons le dossier avec vous.
+          Je détermine le poste dont vous relevez, la liste exacte des documents qu&apos;il exige,
+          et je monte le dossier avec vous.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -1120,7 +1120,7 @@ export default function ArticleNouvellesReglesDTV() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>

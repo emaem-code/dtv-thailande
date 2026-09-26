@@ -198,14 +198,14 @@ export default function DtvGuideModal({ isOpen, onClose, onEligibility }: DtvGui
             </div>
           </section>
 
-          {/* 👉 NOUVELLE SECTION 6 : NOS OFFRES ET TARIFS */}
+          {/* 👉 NOUVELLE SECTION 6 : FORMULES ET TARIFS */}
           <section>
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-black text-sm">6</span>
-              Nos Formules d'Accompagnement
+              Les formules d'accompagnement
             </h3>
             <p className="leading-relaxed text-gray-400 mb-8">
-              Nous gérons votre dossier de A à Z. Les montants affichés sont des <strong className="text-gray-300">budgets complets par personne</strong> : ils intègrent les frais consulaires (≈350 €) et les traductions, détaillés ligne par ligne dans votre devis. Le tarif est dégressif dès la deuxième personne.
+              Je gère votre dossier de A à Z. Les montants affichés sont des <strong className="text-gray-300">budgets complets par personne</strong> : ils intègrent les frais consulaires (≈350 €) et les traductions, détaillés ligne par ligne dans votre devis. Le tarif est dégressif dès la deuxième personne.
             </p>
 
             {/* Grille Digital Nomad */}
@@ -267,7 +267,7 @@ export default function DtvGuideModal({ isOpen, onClose, onEligibility }: DtvGui
           <section className="pt-8 pb-4 text-center border-t border-white/10">
             <h3 className="text-2xl font-extrabold text-white mb-3">Ne laissez rien au hasard</h3>
             <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-              De l'audit de vos relevés à la certification de vos traductions. Vous faites vos valises, nous faisons le reste.
+              De l'audit de vos relevés à la certification de vos traductions. Vous faites vos valises, je m’occupe du reste.
             </p>
             <button 
               onClick={onEligibility}

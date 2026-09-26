@@ -13,7 +13,7 @@ import s from "../home.module.css";
 const liens = [
   { href: "/#visa-dtv", label: "Le visa DTV" },
   { href: "/#methode", label: "L’accompagnement" },
-  { href: "/#tarifs", label: "Nos tarifs" },
+  { href: "/#tarifs", label: "Les tarifs" },
   { href: "/blog", label: "Le journal" },
 ];
 
@@ -105,7 +105,7 @@ export default function HomeHeader() {
                 ...liens,
                 { href: "/eligibilite", label: "Éligibilité" },
                 { href: "/faq", label: "Questions fréquentes" },
-                { href: "/contact", label: "Nous contacter" },
+                { href: "/contact", label: "Me contacter" },
                 { href: "/mentions-legales", label: "Mentions légales" },
               ].map((l) => {
                 const Lien = l.href.startsWith("/#") ? "a" : Link;

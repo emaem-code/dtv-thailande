@@ -11,7 +11,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Blog Visa DTV Thaïlande : guides pratiques",
   description:
-    "Découvrez nos guides exclusifs sur le Visa DTV : conformité des fonds bancaires, sélection des écoles Soft Power et formalités d'arrivée comme le TDAC.",
+    "Découvrez les guides exclusifs sur le Visa DTV : conformité des fonds bancaires, sélection des écoles Soft Power et formalités d'arrivée comme le TDAC.",
   alternates: {
     canonical: "/blog",
   },
@@ -75,7 +75,7 @@ export default function BlogIndex() {
           </div>
           <p className={s.introIndex}>
             Décryptage légal, stratégies financières et réalités du terrain.
-            Découvrez nos guides complets pour monter un dossier consulaire
+            Découvrez les guides complets pour monter un dossier consulaire
             irréfutable et réussir votre installation en Thaïlande sans mauvaise
             surprise.
           </p>
@@ -99,13 +99,13 @@ export default function BlogIndex() {
             Passez de la théorie à la pratique
           </h3>
           <p className={s.texteConversion}>
-            Vous avez lu nos guides mais vous souhaitez déléguer la charge
-            administrative ? Nous prenons en main l&apos;intégralité de votre
+            Vous avez lu les guides et souhaitez déléguer la charge
+            administrative ? Je prends en main l&apos;intégralité de votre
             dossier DTV.
           </p>
 
           <Link href="/contact" className={s.boutonConversion}>
-            Nous confier votre dossier
+            Me confier votre dossier
           </Link>
         </div>
       </div>

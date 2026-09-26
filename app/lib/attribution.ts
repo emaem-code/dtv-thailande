@@ -1,7 +1,7 @@
 /**
  * Attribution des leads — d'où vient réellement le visiteur.
  *
- * Le champ « Comment nous avez-vous connus ? » du formulaire est déclaratif :
+ * Le champ « Comment avez-vous découvert DTV Thaïlande ? » du formulaire est déclaratif :
  * il est optionnel, souvent vide, et rarement fiable (quelqu'un qui a découvert
  * le site dans un groupe d'expatriés puis l'a retrouvé via Google cochera
  * « Google »). On capte donc en parallèle l'information technique.

@@ -7,13 +7,13 @@ import s from "./contact.module.css";
 
 // ─── MÉTADONNÉES SEO DE LA PAGE CONTACT (Résout l'erreur Codex) ───
 export const metadata: Metadata = {
-  title: 'Contactez-nous | DTV Thaïlande',
+  title: 'Contactez-moi | DTV Thaïlande',
   description: 'Une question spécifique sur votre dossier de Visa DTV ? Je vous réponds sous 48 heures.',
   alternates: {
     canonical: 'https://dtv-thailande.fr/contact',
   },
   openGraph: {
-    title: 'Contactez-nous | DTV Thaïlande',
+    title: 'Contactez-moi | DTV Thaïlande',
     description: 'Contactez-moi directement pour votre dossier de Visa DTV.',
     url: 'https://dtv-thailande.fr/contact',
     siteName: 'DTV Thaïlande',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contactez-nous | DTV Thaïlande',
+    title: 'Contactez-moi | DTV Thaïlande',
     description: 'Contactez-moi directement pour votre dossier de Visa DTV.',
     images: ['/og-image.jpg'],
   },
@@ -35,7 +35,7 @@ export default function Contact() {
       <div className={s.container}>
         <header className={s.intro}>
           <p className={s.eyebrow}>Votre projet, parlons-en.</p>
-          <h1 className={s.title}>Contactez-nous</h1>
+          <h1 className={s.title}>Contactez-moi</h1>
           <p className={s.lead}>
             Une question sur votre projet en Thaïlande ou votre dossier DTV ?
             Choisissez la façon d’échanger qui vous convient.
@@ -76,9 +76,9 @@ export default function Contact() {
               </span>
               <p className={s.format}>Par e-mail · À votre rythme</p>
             </div>
-            <h2 id="contact-email" className={s.cardTitle}>Écrivez-nous simplement</h2>
+            <h2 id="contact-email" className={s.cardTitle}>Écrivez-moi simplement</h2>
             <p className={s.description}>
-              Une question précise ou un dossier à nous expliquer ?
+              Une question précise ou un dossier à me présenter ?
               Décrivez votre projet par e-mail. Je vous réponds sous 48 heures.
             </p>
             <div className={s.action}>

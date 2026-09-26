@@ -153,7 +153,7 @@ export default function ArticleDtvFamille() {
           La bonne nouvelle d&apos;abord : la catégorie « conjoint et enfants accompagnants » existe bel et bien, et elle dispense votre conjoint de justifier d&apos;une activité professionnelle éligible. La mauvaise, en deux temps : le seuil de 500 000 THB, lui, s&apos;applique à <strong>chaque personne</strong>, enfants compris — et le <strong>PACS français</strong> n&apos;ouvre aucun droit au rattachement.
         </p>
         <p>
-          Dans ce guide exhaustif, nous décryptons le cadre légal thaïlandais et vous livrons les réalités du terrain pour vous aider à préparer sereinement votre projet d'expatriation familiale en totale conformité avec la loi.
+          Dans ce guide, je vous explique le cadre légal thaïlandais et les réalités du terrain pour vous aider à préparer sereinement votre projet d'expatriation familiale, dans le respect de la loi.
         </p>
       </div>
 
@@ -403,12 +403,12 @@ export default function ArticleDtvFamille() {
           Aligner des relevés bancaires, prouver des liens de filiation et coordonner les demandes simultanées de toute une famille exige une rigueur absolue. Une simple erreur de traduction ou l'omission d'un justificatif peut entraîner le rejet de l'ensemble des dossiers du foyer.
         </p>
         <p className="mb-4">
-          En tant qu'<strong>agence spécialisée</strong> dans l'accompagnement des expatriés et des professionnels indépendants, notre rôle est de sécuriser chaque étape de votre transition vers la Thaïlande :
+          Avec DTV Thaïlande, j'accompagne les expatriés et les professionnels indépendants pour <strong>sécuriser chaque étape</strong> de leur transition vers la Thaïlande :
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div className="border border-white/5 bg-[#111111] rounded-2xl p-6">
-            <h3 className="text-fuchsia-500 font-bold mb-3 uppercase tracking-wider text-xs">Notre Expertise</h3>
+            <h3 className="text-fuchsia-500 font-bold mb-3 uppercase tracking-wider text-xs">Un dossier préparé étape par étape</h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li>🛡️ <strong className="text-white">Audit de conformité :</strong> Analyse de votre situation familiale et validation des pièces justificatives.</li>
               <li>🛡️ <strong className="text-white">Précision technique :</strong> Respect strict des exigences financières et des déclarations (TDAC).</li>
@@ -417,7 +417,7 @@ export default function ArticleDtvFamille() {
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              L'expatriation familiale est un projet de vie majeur. Ne laissez pas un flou administratif en compromettre la réussite. Confiez-nous l'ingénierie de vos visas.
+              L'expatriation familiale est un projet de vie majeur. Ne laissez pas un flou administratif en compromettre la réussite. Confiez-moi la préparation de vos dossiers de visa.
             </p>
             <Link href="/contact" className="text-fuchsia-400 hover:underline text-sm font-semibold">
               → Discuter de mon dossier familial avec un expert
@@ -485,7 +485,7 @@ export default function ArticleDtvFamille() {
           Sécurisez votre expatriation familiale
         </h3>
         <p className="text-gray-400 mb-8 text-sm md:text-base relative z-10">
-          Ne laissez pas une erreur de traduction ou une mauvaise interprétation de la loi briser votre projet. Nous prenons en charge la vérification et le montage de votre dossier consulaire de A à Z.
+          Ne laissez pas une erreur de traduction ou une mauvaise interprétation de la loi briser votre projet. Je prends en charge la vérification et le montage de votre dossier consulaire de A à Z.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 relative z-10">
           <BoutonEligibilite className="inline-flex items-center justify-center bg-white text-black font-bold text-sm py-4 px-7 rounded-full hover:bg-gray-100 active:scale-95 transition-all duration-300">
@@ -495,7 +495,7 @@ export default function ArticleDtvFamille() {
             href="/contact"
             className="inline-flex items-center justify-center border border-white/20 text-white font-bold text-sm py-4 px-7 rounded-full hover:bg-white/5 transition-all duration-300"
           >
-            Nous contacter
+            Me contacter
           </Link>
         </div>
       </div>
