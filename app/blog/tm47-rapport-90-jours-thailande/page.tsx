@@ -70,7 +70,7 @@ const articleSchema = {
     },
   },
   datePublished: '2026-08-04',
-  dateModified: '2026-08-04',
+  dateModified: '2026-09-28',
 };
 
 // ─── SCHEMA FAQ JSON-LD ──────────────────────────────────────────────────────
@@ -99,7 +99,7 @@ const faqSchema = {
       name: 'Peut-on faire son premier TM47 en ligne ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Non. Le premier rapport doit obligatoirement être effectué en personne au bureau d'immigration de votre zone de résidence. Le portail en ligne n'est accessible qu'à partir du deuxième rapport.",
+        text: "Cela dépend de deux choses. D'abord votre TM30 : le portail en ligne lit l'adresse que votre propriétaire a déclarée, et si elle manque ou ne correspond pas exactement à celle de votre rapport, le dépôt est rejeté. Ensuite la pratique de votre bureau d'immigration : certains ouvrent le portail dès le premier rapport, d'autres exigent une première venue sur place. La méthode sûre : vérifier son TM30, puis tenter le dépôt en ligne dès l'ouverture de la fenêtre, quinze jours avant l'échéance. S'il est refusé, il reste deux semaines pour se déplacer.",
       },
     },
     {
@@ -475,7 +475,7 @@ export default function BlogArticleTm47() {
           </Link>
           .
         </p>
-        <p>
+        <p className="mb-4">
           Conséquence pratique : exigez le reçu du TM30 de votre propriétaire
           dès la signature du bail. Sans ce document, vous serez bloqué non
           seulement pour le TM47, mais aussi pour votre{' '}
@@ -483,6 +483,19 @@ export default function BlogArticleTm47() {
             extension de 180 jours
           </LienArticle>
           .
+        </p>
+        <p>
+          Et ce n&apos;est pas une formalité qu&apos;on fait une fois pour
+          toutes. Le piège le plus courant :{' '}
+          <strong className="text-white">
+            vous rentrez d&apos;un voyage à l&apos;étranger et votre
+            propriétaire ne refait pas le TM30
+          </strong>
+          . Vous avez toujours la même adresse, votre rapport est correct, et il
+          est quand même refusé — parce que l&apos;adresse au dossier ne
+          correspond plus. Le TM30 et le TM47 puisent dans la même base
+          d&apos;adresses : à chaque retour dans votre logement après une sortie
+          du territoire, redemandez le reçu.
         </p>
       </section>
 
@@ -512,17 +525,38 @@ export default function BlogArticleTm47() {
         </figure>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
-          En personne — obligatoire la première fois
+          En personne — parfois obligatoire la première fois
         </h3>
         <p className="mb-4">
-          C&apos;est le point que personne ne mentionne, et qui coûte des
-          amendes à beaucoup de gens :{' '}
+          C&apos;est le point que personne ne mentionne, et qui explique les
+          réponses contradictoires qu&apos;on lit partout :{' '}
           <strong className="text-white">
-            votre tout premier rapport doit impérativement être fait en personne
+            selon le bureau dont vous dépendez, votre premier rapport peut devoir
+            être fait en personne
           </strong>
-          , au bureau d&apos;immigration de votre zone de résidence.
-          L&apos;accès au portail en ligne n&apos;est ouvert qu&apos;à partir du
-          deuxième rapport.
+          , au bureau d&apos;immigration de votre zone de résidence. Certains
+          bureaux ouvrent le portail en ligne dès le premier rapport — c&apos;est
+          le cas à Phuket, où j&apos;ai déposé le mien en ligne en septembre
+          2026 — d&apos;autres exigent un premier passage sur place.
+        </p>
+        <p className="mb-4">
+          Avant d&apos;en conclure que votre bureau refuse le dépôt en ligne,
+          vérifiez votre TM30. Le portail lit l&apos;adresse enregistrée par
+          votre propriétaire : si elle manque ou diffère d&apos;un détail de
+          celle que vous déclarez, le rapport est rejeté — et rien, dans le
+          message d&apos;erreur, ne vous dira que c&apos;est la cause. Dans mon
+          cas à Phuket, mon TM30 et mon TDAC portaient exactement la même
+          adresse ; c&apos;est probablement ce qui a permis à mon premier rapport
+          de passer en ligne.
+        </p>
+        <p className="mb-4">
+          Restent les bureaux qui exigent réellement une première venue, TM30
+          impeccable ou non. Comme rien ne permet de les distinguer à
+          l&apos;avance, la règle pratique est simple : contrôlez votre TM30,
+          puis tentez le dépôt en ligne dès l&apos;ouverture de la fenêtre,
+          quinze jours avant l&apos;échéance. S&apos;il est refusé, il vous reste
+          deux semaines pour vous déplacer, au lieu de découvrir le problème la
+          veille.
         </p>
         <p className="mb-4">
           Mon amie l&apos;a confirmé : première fois à l&apos;immigration de Hat
@@ -532,10 +566,10 @@ export default function BlogArticleTm47() {
         <p className="mb-4">
           Un autre contact installé à Pattaya me disait de son côté que « le
           truc en ligne n&apos;existe pas encore ». En réalité, il venait
-          simplement de faire son premier rapport — donc obligatoirement en
-          personne. Il n&apos;avait pas encore atteint le suivant. Les deux
-          témoignages disent la même chose, vus depuis deux moments différents
-          du cycle.
+          simplement de faire son premier rapport en personne, comme l&apos;exige
+          son bureau. Il n&apos;avait pas encore atteint le suivant. Leurs deux
+          bureaux fonctionnent de la même façon — ce n&apos;est pas le cas
+          partout, et c&apos;est toute la difficulté du sujet.
         </p>
         <p className="mb-4">
           Ce qu&apos;il faut apporter : votre passeport original, des
@@ -569,7 +603,7 @@ export default function BlogArticleTm47() {
         </p>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
-          En ligne — à partir du deuxième rapport
+          En ligne — dès le premier rapport dans certains bureaux
         </h3>
         <p className="mb-4">
           Le portail officiel est{' '}
@@ -602,6 +636,21 @@ export default function BlogArticleTm47() {
           essayer tôt le matin heure thaïlandaise, et ne jamais attendre le
           dernier jour.
         </p>
+
+        <div className="bg-[#111111] border border-gray-800 rounded-2xl p-5 mb-6">
+          <p className="text-white font-semibold text-sm mb-2">
+            Les trois points à contrôler avant de soumettre
+          </p>
+          <p className="text-gray-400 text-sm">
+            Votre TM30 est enregistré, et il porte{' '}
+            <strong className="text-white">exactement</strong> l&apos;adresse que
+            vous allez déclarer — au caractère près. Vous avez votre numéro TDAC
+            sous la main. Vous êtes dans la fenêtre : quinze jours avant
+            l&apos;échéance, pas la veille. Ces trois points expliquent la
+            majorité des refus que l&apos;on attribue à tort à une panne du
+            système.
+          </p>
+        </div>
 
         <h3 className="text-xl font-semibold text-gray-200 mt-6 mb-3">
           Par courrier recommandé
@@ -708,11 +757,12 @@ export default function BlogArticleTm47() {
             <span className="text-amber-500 mt-1 flex-none">1.</span>
             <div>
               <strong className="text-white">
-                Le premier rapport en ligne.
+                Supposer que le premier rapport passe forcément en ligne.
               </strong>{' '}
-              Impossible. Beaucoup essaient, se font rejeter, perdent des jours
-              et se retrouvent hors délai. Première fois en personne, sans
-              exception.
+              Certains bureaux l&apos;acceptent, d&apos;autres le refusent.
+              Beaucoup essaient la veille de l&apos;échéance, se font rejeter et
+              se retrouvent hors délai. Tentez-le quinze jours avant, pas la
+              veille.
             </div>
           </li>
           <li className="flex items-start gap-3 text-gray-300 text-sm">
@@ -752,10 +802,12 @@ export default function BlogArticleTm47() {
               </strong>{' '}
               Cas documenté sur les forums : un résident de longue date dépose
               en ligne et se fait rejeter avec le motif « premier dépôt,
-              présentez-vous en personne ». La cause probable est une sortie
-              puis une réentrée sur le territoire entre-temps, qui a fait
-              repartir son dossier de zéro dans le système. Anticipez : après un
-              voyage, prévoyez de pouvoir vous déplacer.
+              présentez-vous en personne ». L&apos;explication la plus probable
+              est le TM30 : après une sortie puis une réentrée, le propriétaire
+              doit redéclarer votre logement, et sans cette redéclaration
+              l&apos;adresse au dossier ne correspond plus à celle du rapport.
+              Après chaque voyage, redemandez le reçu TM30 — et prévoyez de
+              pouvoir vous déplacer.
             </div>
           </li>
           <li className="flex items-start gap-3 text-gray-300 text-sm">
@@ -811,7 +863,8 @@ export default function BlogArticleTm47() {
           </p>
           <p className="text-gray-400 text-sm">
             Retenez trois choses. Le compteur ne tourne que si vous restez sans
-            sortir. Le premier rapport se fait obligatoirement en personne. Et
+            sortir. Le premier rapport se fait en ligne ou sur place selon
+            votre bureau. Et
             sans TM30 valide de votre propriétaire, rien n&apos;est possible.
             Programmez une alerte au 80e jour, exigez le reçu TM30 dès votre
             emménagement, et le sujet est réglé pour cinq ans.

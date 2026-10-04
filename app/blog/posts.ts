@@ -125,7 +125,7 @@ export const blogPosts = [
   excerpt: "Une obligation légale dont personne ne parle en français. Découvrez qui est vraiment concerné par le TM47 — et pourquoi beaucoup de détenteurs de DTV ne le feront jamais.",
   date: '4 Août 2026',
   publishedAt: '2026-08-04T07:00:00Z',
-  modifiedAt: '2026-08-04T07:00:00Z',
+  modifiedAt: '2026-09-28T07:00:00Z',
   category: 'Formalités',
   tagColor: 'text-sky-400 border-sky-500/25 bg-sky-500/10',
   hoverBorder: 'hover:border-sky-500/50',

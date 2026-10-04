@@ -28,9 +28,9 @@ export const AGENCE = {
   ville: 'Speloncato',
   pays: 'France',
 
-  siret: '',
+  siret: '51924704300036',
   /** Passer à false dès que l'INSEE a renvoyé le numéro. */
-  immatriculationEnCours: true,
+  immatriculationEnCours: false,
 
   /**
    * Lieu depuis lequel l'activité est exercée, pour la signature des courriels.
