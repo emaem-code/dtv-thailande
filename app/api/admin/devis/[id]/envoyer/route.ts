@@ -1,11 +1,11 @@
+import { historiquePourPoste } from '../../../../../lib/residence-consulaire';
 import { NextResponse } from 'next/server';
 import { lireDevis, marquerEnvoye, totaliser } from '../../../../../lib/devis';
 import { prenomClient, nomComplet } from '../../../../../lib/devis-modele';
 import { alerter, euros as eurosAlerte } from '../../../../../lib/alerte';
-import { FONDS_EUR_PARIS, MARGE_CONSEILLEE } from '../../../../../lib/taux';
+import { controleDevis, resumeFonds } from '../../../../../lib/controle-devis';
 import { RENDEZ_VOUS } from '../../../../../lib/rendez-vous';
 import {
-  AGENCE,
   agenceIncomplete,
   mentionsManquantes,
   ACOMPTE_POURCENT,
@@ -77,6 +77,11 @@ export async function POST(requete: Request, { params }: Contexte) {
 
   const devis = await lireDevis(Number(id));
   if (!devis) return NextResponse.json({ erreur: 'Devis introuvable.' }, { status: 404 });
+  const controle = controleDevis(devis.dossier);
+  if (!controle.autorise) return NextResponse.json({ erreur: `${controle.message} Aucun e-mail envoyé.` }, { status: 422 });
+  const fonds = resumeFonds(devis.dossier);
+  const sourceHistorique = historiquePourPoste(controle.poste!).information.sources[0].url;
+  const sourceFonds = controle.poste!.fonds.minimumPublie.sources[0].url;
   if (!devis.client.email) {
     return NextResponse.json({ erreur: 'Ce devis n’a pas d’adresse e-mail client.' }, { status: 400 });
   }
@@ -121,13 +126,9 @@ Une question sur ce devis ? Faisons le point en visio pendant ${RENDEZ_VOUS.dure
 sur le budget, les prestations et votre situation, avant votre décision.
 ${RENDEZ_VOUS.libelle} : ${RENDEZ_VOUS.url}
 
-Point à vérifier avant toute chose : l'ambassade de Paris exige un relevé
-bancaire officiel montrant un solde non bloqué d'au moins ${euros(FONDS_EUR_PARIS)} PAR
-PERSONNE, et ce chacun des trois derniers mois — soit ${euros(t.fondsEuros)} pour votre
-foyer. Ce montant est affiché en euros par le poste : ce n'est pas une
-conversion des ${t.fondsThb} de la règle nationale, et il est plus élevé.
-Prévoyez ${MARGE_CONSEILLEE} par personne plutôt que le strict minimum. C'est le
-seul critère réellement bloquant.
+À vérifier avant tout : ${fonds}
+Source officielle : ${sourceFonds}
+Historique bancaire : ${sourceHistorique}
 
 Ce devis est valable ${VALIDITE_JOURS} jours. Si un point mérite d'être ajusté,
 répondez simplement à ce message — mieux vaut corriger avant signature.
@@ -165,7 +166,7 @@ ${ouvertureHtml}
   <a href="${RENDEZ_VOUS.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 20px;border:1px solid #243f35;border-radius:6px;color:#243f35;font-size:16px;line-height:1.5;text-decoration:underline;">${RENDEZ_VOUS.libelle}</a>
 </div>
 <p style="margin:0 0 24px 0;padding:14px 16px;background:#fef3c7;border-radius:8px;font-size:14px;line-height:1.6;">
-  <strong>À vérifier avant tout :</strong> l’ambassade de Paris exige un relevé bancaire officiel montrant un solde non bloqué d’au moins <strong>${euros(FONDS_EUR_PARIS)} par personne</strong>, et ce <strong>chacun des trois derniers mois</strong> — soit ${euros(t.fondsEuros)} pour votre foyer. Le poste affiche ce montant en euros : ce n’est pas une conversion des ${echapper(t.fondsThb)} de la règle nationale, et il est plus élevé. Prévoyez ${MARGE_CONSEILLEE} par personne plutôt que le strict minimum. C’est le seul critère réellement bloquant.
+  <strong>À vérifier avant tout :</strong> ${echapper(fonds)} <a href="${echapper(sourceFonds)}">Source officielle</a>. <a href="${echapper(sourceHistorique)}">Source de l’historique bancaire</a>.
 </p>
 <p style="margin:0 0 28px 0;font-size:14px;color:#57534e;">Ce devis est valable ${VALIDITE_JOURS} jours. Si un point mérite d’être ajusté, répondez simplement à ce message — mieux vaut corriger avant signature.</p>
 ${signatureHtml()}`);

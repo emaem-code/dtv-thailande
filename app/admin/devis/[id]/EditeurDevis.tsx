@@ -14,6 +14,10 @@ import {
 } from '../../../lib/devis-modele';
 import { FORMULES_VENDUES } from '../../../lib/tarifs';
 import { empreinteLisible } from '../../../lib/signature';
+import { controleDevis } from '../../../lib/controle-devis';
+import { PAYS_RESIDENCE } from '../../../lib/residence-consulaire';
+import { regleNationaleDtv } from '../../../lib/postes-consulaires';
+import type { CoursDevis } from '../../../lib/taux';
 import { ETAPES } from '../../../lib/parcours';
 
 /**
@@ -37,6 +41,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   const [etat, setEtat] = useState<'repos' | 'envoi' | 'enregistre' | 'erreur'>('repos');
   const [message, setMessage] = useState('');
 
+  const controle = controleDevis(devis.dossier);
   const totaux = useMemo(() => totaliser(devis), [devis]);
   const honorairesGrille = honorairesParDefaut(devis.dossier.personnes, devis.dossier.formule);
   const modifiable = devis.statut === 'brouillon';
@@ -79,6 +84,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     FORMULES_VENDUES.map((f) => f.id).filter((f) => liste.includes(f));
 
   const basculerFormule = (formule: Devis['dossier']['formule'], cochee: boolean) => {
+    if (!controle.autorise) { setMessage(controle.message); setEtat('erreur'); return; }
     const liste = ordonner(
       cochee
         ? [...formulesProposees, formule]
@@ -109,6 +115,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
     setDevis((d) => {
       const dossier = { ...d.dossier, ...partiel };
       dossier.personnes = Math.max(1, (dossier.adultes || 1) + (dossier.enfants || 0));
+      if (!controleDevis(dossier).autorise) return { ...d, dossier };
       return {
         ...d,
         dossier,
@@ -121,7 +128,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           : honorairesParDefaut(dossier.personnes, dossier.formule),
         debours: deboursManuels
           ? d.debours
-          : deboursParDefaut(dossier.personnes, dossier.softPower, dossier.formule),
+          : deboursParDefaut(dossier),
       };
     });
     setEtat('repos');
@@ -129,12 +136,13 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
   /** Reprend la main sur la grille, y compris après une saisie manuelle. */
   const recalculer = () => {
+    if (!controle.autorise) { setMessage(controle.message); setEtat('erreur'); return; }
     setHonorairesManuels(false);
     setDeboursManuels(false);
     setDevis((d) => ({
       ...d,
       honoraires: honorairesParDefaut(d.dossier.personnes, d.dossier.formule),
-      debours: deboursParDefaut(d.dossier.personnes, d.dossier.softPower, d.dossier.formule),
+      debours: deboursParDefaut(d.dossier),
     }));
     setEtat('repos');
   };
@@ -273,13 +281,27 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
   };
 
   const changerStatut = async (statut: Devis['statut']) => {
-    await fetch(`/api/admin/devis/${devis.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ statut }),
-    });
-    setDevis((d) => ({ ...d, statut }));
-    router.refresh();
+    setEtat('envoi');
+    try {
+      const reponse = await fetch(`/api/admin/devis/${devis.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ statut }),
+      });
+      const corps = await reponse.json();
+      if (!reponse.ok || !corps.devis) {
+        setEtat('erreur');
+        setMessage(corps.erreur || 'Le statut n’a pas été modifié.');
+        return;
+      }
+      setDevis(corps.devis);
+      setEtat('enregistre');
+      setMessage('Statut enregistré.');
+      router.refresh();
+    } catch {
+      setEtat('erreur');
+      setMessage('Le serveur n’a pas répondu. Le changement de statut n’est pas confirmé.');
+    }
   };
 
   return (
@@ -470,6 +492,31 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
           </div>
         </section>
 
+        {!signe && <section className="border border-white/10 p-4 rounded-xl space-y-2">
+          <label htmlFor="pays-residence-devis" className={ETIQUETTE}>Résidence du client</label>
+          {initial.dossier.paysResidence ? <p>{devis.dossier.paysResidence} — {controle.poste?.nom ?? 'à confirmer'}. Un changement de résidence demande un nouveau devis.</p> : <>
+            <p className="text-sm">La confirmation du pays recalcule les débours selon le poste et retire les anciennes options. Vérifiez les montants avant d'enregistrer.</p>
+            <select id="pays-residence-devis" className={CHAMP} value={devis.dossier.paysResidence ?? ''}
+              onChange={async (e) => {
+                const paysResidence = e.target.value;
+                changer({ dossier: { ...devis.dossier, paysResidence, cours: null } });
+                const resultat = await fetch('/api/cours').then((r) => r.json()).catch(() => null);
+                const cours: CoursDevis | null = resultat?.cours ?? null;
+                setDevis((actuel) => {
+                  if (actuel.dossier.paysResidence !== paysResidence) return actuel;
+                  const dossier = { ...actuel.dossier, cours };
+                  return { ...actuel, dossier, options: [], debours: controleDevis(dossier).autorise ? deboursParDefaut(dossier) : [] };
+                });
+                setFormulesProposees([]);
+              }}>
+              <option value="">Confirmer le pays exact avant chiffrage</option>
+              {PAYS_RESIDENCE.map((p) => <option key={p.valeur} value={p.valeur}>{p.libelle}</option>)}
+              <option value="autre">Autre pays ou territoire</option>
+            </select>
+          </>}
+          {!controle.autorise && <p role="alert" className="text-sm">{controle.message}</p>}
+        </section>}
+
         {/* Dossier */}
         <section className="border border-white/10 rounded-xl p-4 space-y-3">
           <div className="flex items-center justify-between">
@@ -549,11 +596,7 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
                           devisSelonOption(devis, {
                             formule: f.id,
                             honoraires: honorairesParDefaut(devis.dossier.personnes, f.id),
-                            debours: deboursParDefaut(
-                              devis.dossier.personnes,
-                              devis.dossier.softPower,
-                              f.id,
-                            ),
+                            debours: controle.autorise ? deboursParDefaut({ ...devis.dossier, formule: f.id }) : [],
                           }),
                         ).total,
                       )}
@@ -746,7 +789,27 @@ export default function EditeurDevis({ initial }: { initial: Devis }) {
 
       {/* ── APERÇU ── */}
       <div className="print:col-span-2">
-        <DocumentDevis devis={devis} />
+        {controle.autorise || signe ? <DocumentDevis devis={devis} /> : (
+          <p role="alert" className="border border-white/20 p-5 rounded-xl">{controle.message} Aucun devis chiffré n'est présenté.</p>
+        )}
+        <section className="mt-6 p-5 border border-white/20 rounded-xl text-sm space-y-3 print:hidden">
+          <h2 className="font-bold">Vérifications consulaires — {controle.poste?.nom ?? 'poste à déterminer'}</h2>
+          {!controle.autorise && <p role="alert">{controle.message}</p>}
+          {controle.poste?.depotNationaliteOuResidence.conditionLocale.valeur && <p>
+            <strong>Recevabilité à vérifier avec le client :</strong> {controle.poste.depotNationaliteOuResidence.conditionLocale.valeur}{' '}
+            {controle.poste.depotNationaliteOuResidence.conditionLocale.sources.map((source, i) => <a key={source.url} className="underline mr-2" href={source.url} target="_blank" rel="noreferrer">Source {i + 1}</a>)}
+          </p>}
+          <p>Casier judiciaire : exigé par le portail national pour les catégories DTV. Son absence d'une liste locale n'est pas une dispense.{' '}
+            <a className="underline" href={regleNationaleDtv.casierJudiciaire.sources[0].url} target="_blank" rel="noreferrer">Source nationale</a>
+          </p>
+          {controle.reserves.length > 0 && <ul className="space-y-2">
+            {controle.reserves.map(({ champ, information }) => <li key={champ}>
+              <strong>{champ}</strong> — non publié par ce poste. {information.note}{' '}
+              {information.sources.map((source, i) => <a key={source.url} className="underline mr-2" href={source.url} target="_blank" rel="noreferrer">Source {i + 1}</a>)}
+            </li>)}
+          </ul>}
+          {controle.poste?.delaiInstruction.coherence.statut === 'divergence' && <p>{controle.poste.delaiInstruction.coherence.valeur}</p>}
+        </section>
       </div>
     </div>
   );

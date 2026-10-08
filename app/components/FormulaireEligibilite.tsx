@@ -4,8 +4,10 @@ import React, { useState, useRef, useEffect, useId } from 'react';
 import MontantFonds from './MontantFonds';
 import RendezVous from './RendezVous';
 import { lireAttribution } from '../lib/attribution';
-import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX } from '../lib/tarifs';
-import { TAUX_SECOURS, FONDS_EUR_PARIS } from '../lib/taux';
+import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX, fraisPourPoste } from '../lib/tarifs';
+import { TAUX_SECOURS, fondsPourPoste, type CoursDevis } from '../lib/taux';
+import { controleDevis } from '../lib/controle-devis';
+import { PAYS_RESIDENCE, postePourResidence, residenceAConfirmer, historiquePourPoste } from '../lib/residence-consulaire';
 import { track } from '@vercel/analytics';
 import s from '../parcours.module.css';
 
@@ -103,12 +105,6 @@ const LIBELLES: Record<string, Record<string, string>> = {
     freelance: 'Freelance / Indépendant',
     remote: 'Salarié en télétravail',
     softpower: 'Sans activité à distance → voie école',
-  },
-  location: {
-    europe: 'Europe',
-    asia: 'Asie (Thaïlande ou pays frontalier)',
-    america: 'Amérique du Nord',
-    other: 'Autre',
   },
   dejaDepose: {
     premiere: 'Non, première demande',
@@ -250,19 +246,27 @@ export default function FormulaireEligibilite({
   const AUJOURDHUI = new Date().toISOString().slice(0, 10);
   const emailValide = (v: string) => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim());
 
-  /**
-   * La nationalité et le pays de résidence déterminent ensemble les postes
-   * consulaires accessibles. On transmet donc le pays saisi à la main lorsque
-   * le visiteur a coché « Autre », faute de quoi l'information serait perdue.
-   */
   const nationaliteLisible = () =>
     formData.nationalite === 'autre'
       ? formData.nationaliteAutre.trim() || 'Autre (non précisée)'
       : formData.nationalite;
 
-  /** Le pays exact compte surtout hors d'Europe : Bangkok ou Kuala Lumpur ne donnent pas le même dossier. */
-  const residenceDetailleeRequise =
-    formData.location === 'asia' || formData.location === 'other';
+  const poste = postePourResidence(formData.location);
+  const examenManuel = residenceAConfirmer(formData.location);
+  const [cours, setCours] = useState<CoursDevis | null>(null);
+  useEffect(() => {
+    if (poste?.id !== 'berne' && poste?.id !== 'rabat') return;
+    const controleur = new AbortController();
+    fetch('/api/cours', { signal: controleur.signal })
+      .then((r) => r.ok ? r.json() : null)
+      .then((resultat) => { if (!controleur.signal.aborted) setCours(resultat?.cours ?? null); })
+      .catch(() => {});
+    return () => controleur.abort();
+  }, [poste?.id]);
+  const contexteTarif = poste ? { posteId: poste.id, cours } : null;
+  const frais = contexteTarif ? fraisPourPoste(contexteTarif) : null;
+  const budgetConnu = controleDevis({ paysResidence: formData.location, cours }).autorise;
+  const paysLisible = formData.location === 'autre' ? formData.locationDetails.trim() : formData.location;
 
   const remonter = () => {
     if (conteneurScroll?.current) {
@@ -282,6 +286,8 @@ export default function FormulaireEligibilite({
       }
     };
 
+    if (field === 'location') effacer('funds', 'formule', 'villeDepart');
+    if (suivant.location !== 'autre') effacer('locationDetails');
     // Mêmes conditions que les questions affichées, indépendamment de l'étape.
     if (suivant.nationalite !== 'autre') effacer('nationaliteAutre');
     if (suivant.job === 'softpower') effacer('softPowerInteret');
@@ -300,10 +306,6 @@ export default function FormulaireEligibilite({
       const suivantes = { ...prev };
       delete suivantes[field];
       for (const champ of champsMasques) delete suivantes[champ];
-      // La précision de résidence reste visible, mais n'est plus obligatoire.
-      if (field === 'location' && value !== 'asia' && value !== 'other') {
-        delete suivantes.locationDetails;
-      }
       return suivantes;
     });
   };
@@ -332,8 +334,12 @@ export default function FormulaireEligibilite({
             // Reply-To. Un libellé plus élégant casserait cette détection.
             email: formData.email,
             Nationalité: nationaliteLisible(),
+            'Code pays de résidence': formData.location,
+            'Pays de résidence': paysLisible,
+            'Examen du poste': examenManuel ? 'Vérification manuelle avant tout chiffrage' : poste?.nom ?? '',
             'Statut Pro': lisible('job', formData.job),
-            'Épargne 15 000 € par personne': lisible('funds', formData.funds),
+            'Épargne disponible (selon le poste)': lisible('funds', formData.funds),
+            'Montant présenté': !examenManuel && poste ? fondsPourPoste(poste.id, 1, cours).texte : '',
             'Canal détecté': attribution.canal,
             "Page d'entrée": attribution.pageEntree,
             'Consentement RGPD': formData.consentement === 'yes' ? 'Accordé' : 'Refusé',
@@ -347,7 +353,7 @@ export default function FormulaireEligibilite({
 
   const nextStep = () => {
     const e: Record<string, string> = {};
-    if (!formData.funds) e.funds = 'Merci de répondre à cette question.';
+    if (!examenManuel && !formData.funds) e.funds = 'Merci de répondre à cette question.';
     if (!formData.job) e.job = 'Merci de sélectionner votre situation.';
     if (!formData.nationalite) e.nationalite = 'Merci d’indiquer votre nationalité.';
     if (!formData.prenom.trim()) e.prenom = 'Merci d’indiquer votre prénom.';
@@ -357,12 +363,14 @@ export default function FormulaireEligibilite({
       e.consentement = 'Merci d’accepter l’utilisation de vos informations pour traiter votre demande et vous recontacter.';
     }
 
+    if (!formData.location) e.location = 'Merci de choisir votre pays de résidence.';
+    if (formData.location === 'autre' && !formData.locationDetails.trim()) e.locationDetails = 'Merci de préciser le pays ou territoire de résidence.';
     setErreurs(e);
     if (Object.keys(e).length > 0) return;
 
     // Seule l'absence définitive de fonds est disqualifiante. Ne pas avoir
     // encore de passeport n'en est pas une : c'est quelques semaines de délai.
-    if (formData.funds === 'no') {
+    if (!examenManuel && formData.funds === 'no') {
       // L'abandon le plus coûteux, et celui qu'on veut chiffrer : le seuil est
       // passé de 13 100 à 15 000 € et personne ne sait encore ce que ça change.
       track('eligibilite_bloquee_fonds');
@@ -373,7 +381,7 @@ export default function FormulaireEligibilite({
     }
 
     track('eligibilite_etape1', { softPower: formData.job === 'softpower' });
-    envoyerLeadPartiel('Lead qualifié — étape 1 franchie');
+    envoyerLeadPartiel(examenManuel ? 'Demande à examiner manuellement — étape 1 franchie' : 'Lead qualifié — étape 1 franchie');
     setStep(2);
     remonter();
   };
@@ -394,7 +402,7 @@ export default function FormulaireEligibilite({
       err.dates = 'La date de fin doit être postérieure à la date de début.';
     }
     if (!formData.location) err.location = 'Merci d’indiquer où vous résidez actuellement.';
-    else if (residenceDetailleeRequise && !formData.locationDetails.trim()) {
+    else if (formData.location === 'autre' && !formData.locationDetails.trim()) {
       err.locationDetails = 'Merci de préciser le pays : il détermine votre poste de dépôt.';
     }
     if (formData.job !== 'softpower' && !formData.softPowerInteret) {
@@ -436,19 +444,21 @@ export default function FormulaireEligibilite({
               ? `${formData.telephone}${formData.whatsapp === 'yes' ? ' — joignable sur WhatsApp' : ''}`
               : '',
             Nationalité: nationaliteLisible(),
+            'Code pays de résidence': formData.location,
+            'Pays de résidence': paysLisible,
+            'Examen du poste': examenManuel ? 'Vérification manuelle avant tout chiffrage' : poste?.nom ?? '',
             'Statut Pro': lisible('job', formData.job),
-            'Épargne 15 000 € par personne': lisible('funds', formData.funds),
+            'Épargne disponible (selon le poste)': lisible('funds', formData.funds),
+            'Montant présenté': !examenManuel && poste ? fondsPourPoste(poste.id, 1, cours).texte : '',
             Passeport: lisible('passport', formData.passport),
             'Période de départ': `Entre le ${dateFr(formData.dateStart)} et le ${dateFr(formData.dateEnd)}`,
-            'Pays de résidence': lisible('location', formData.location),
-            'Précision résidence': formData.locationDetails,
             'Destination en Thaïlande': formData.villeThailande,
             'Antécédent de demande': lisible('dejaDepose', formData.dejaDepose),
             Expatriation: lisible('family', formData.family),
             'Situation conjugale': lisible('situationConjugale', formData.situationConjugale),
             'Épargne exigée pour le foyer':
-              nbPersonnesFoyer > 1
-                ? `${(FONDS_EUR_PARIS * nbPersonnesFoyer).toLocaleString('fr-FR')} € (${nbPersonnesFoyer} demandeurs)`
+              !examenManuel && poste && nbPersonnesFoyer > 1
+                ? fondsPourPoste(poste.id, nbPersonnesFoyer, cours).texte
                 : '',
             "Nombre d'adultes": formData.family === 'solo' ? '1' : formData.adultesCount,
             "Nombre d'enfants": formData.childrenCount,
@@ -492,6 +502,7 @@ export default function FormulaireEligibilite({
             // c'est sur elles que le serveur décide si l'alerte doit sonner.
             criteres: {
               funds: formData.funds,
+              paysResidence: formData.location,
               passport: formData.passport,
               dejaDepose: formData.dejaDepose,
               ...(formData.family === 'family'
@@ -592,8 +603,11 @@ export default function FormulaireEligibilite({
   // La voie Soft Power ne dépend plus du seul statut professionnel : un
   // freelance peut parfaitement choisir de passer par une école certifiée.
   const isSoftPower = formData.job === 'softpower' || formData.softPowerInteret === 'yes';
-  const priceBasic = prix(tarif('essentielle', isSoftPower));
-  const pricePremium = prix(tarif('premium', isSoftPower));
+  const fraisReference = fraisPourPoste({ posteId: 'paris' }).euros!;
+  const prixFormule = (id: 'essentielle' | 'premium') => budgetConnu
+    ? prix(tarif(id, isSoftPower) - fraisReference + frais!.euros!) : 'À confirmer';
+  const priceBasic = prixFormule('essentielle');
+  const pricePremium = prixFormule('premium');
 
   const isGroupTravel =
     formData.family === 'married' ||
@@ -685,11 +699,10 @@ export default function FormulaireEligibilite({
               Le critère financier n&apos;est pas encore rempli
             </h3>
             <p className="text-gray-400 text-base max-w-lg mx-auto mb-4">
-              L&apos;ambassade de Paris exige de prouver une épargne disponible de{' '}
-              <MontantFonds prefixe="" /> par personne, présente chacun des trois derniers mois.
-              C&apos;est une condition sur laquelle aucune agence ne peut passer outre — et se le
-              faire dire franchement vaut mieux que de payer des frais consulaires non
-              remboursables pour un refus.
+              Le montant publié par le poste de {poste?.nom} est de{' '}
+              <MontantFonds posteId={poste?.id ?? null} cours={cours} detail />
+              {poste?.fonds.conditions.valeur}
+
             </p>
             <p className="text-gray-400 text-base max-w-lg mx-auto mb-8">
               Mais rien n&apos;est définitif. Beaucoup de personnes que j’accompagne ont constitué cette épargne en
@@ -729,10 +742,39 @@ export default function FormulaireEligibilite({
         {step === 1 && (
           <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-500">
             <div className="space-y-3">
+              <label htmlFor={idChamp('location')} className="text-white font-bold text-lg">
+                Dans quel pays résidez-vous officiellement ? <span className="text-amber-500">*</span>
+              </label>
+              <select {...attributsChamp('location')} required className="champ" value={formData.location}
+                onChange={(e) => handleChange('location', e.target.value)}>
+                <option value="">Choisir le pays de résidence</option>
+                {PAYS_RESIDENCE.map((pays) => <option key={pays.valeur} value={pays.valeur}>{pays.libelle}</option>)}
+                <option value="autre">Autre pays ou territoire (dont outre-mer français)</option>
+              </select>
+              {afficherErreur('location')}
+              {formData.location === 'autre' && <>
+                <label htmlFor={idChamp('locationDetails')} className="block text-sm">Pays ou territoire de résidence *</label>
+                <input {...attributsChamp('locationDetails')} required type="text" className="champ"
+                  value={formData.locationDetails} onChange={(e) => handleChange('locationDetails', e.target.value)} />
+                {afficherErreur('locationDetails')}
+              </>}
+              {formData.location && (examenManuel ? <p className="text-sm text-gray-400">
+                Votre résidence nécessite une vérification manuelle. Je recueille votre demande ; aucun budget ni accord d'accompagnement n'est confirmé à ce stade.
+              </p> : <p className="text-sm text-gray-400">
+                Poste correspondant à cette résidence : {poste?.nom}, sous réserve de vos justificatifs.{' '}
+                <a className="underline" href={poste?.depotNationaliteOuResidence.conditionLocale.sources[0].url} target="_blank" rel="noreferrer">
+                  Conditions officielles de résidence
+                </a>
+              </p>)}
+            </div>
+
+            {!examenManuel && <>
+            <div className="space-y-3">
               <label id={idQuestion('funds')} className="text-white font-bold text-lg">
-                1. Disposez-vous de <MontantFonds prefixe="" /> d&apos;épargne disponible ?{' '}
+                Disposez-vous du montant d&apos;épargne demandé par le poste ?{' '}
                 <span className="text-amber-500">*</span>
               </label>
+              <div className="text-sm text-gray-400"><MontantFonds posteId={poste?.id ?? null} cours={cours} detail /></div>
               <div {...attributsGroupe('funds')} className="grid grid-cols-1 gap-3">
                 <RadioCard {...attributsChoix('funds')} label="Oui, sur un compte accessible" field="funds" value="yes" />
                 <RadioCard {...attributsChoix('funds')}
@@ -745,9 +787,11 @@ export default function FormulaireEligibilite({
               {afficherErreur('funds')}
             </div>
 
+            </>}
+
             <div className="space-y-3">
               <label id={idQuestion('job')} className="text-white font-bold text-lg">
-                2. Quelle est votre situation professionnelle actuelle ?{' '}
+                Quelle est votre situation professionnelle actuelle ?{' '}
                 <span className="text-amber-500">*</span>
               </label>
               <div {...attributsGroupe('job')} className="grid grid-cols-1 gap-3">
@@ -772,11 +816,10 @@ export default function FormulaireEligibilite({
 
             <div className="space-y-3">
               <label id={idQuestion('nationalite')} className="text-white font-bold text-lg">
-                3. Quelle est votre nationalité ? <span className="text-amber-500">*</span>
+                Quelle est votre nationalité ? <span className="text-amber-500">*</span>
               </label>
               <p className="text-xs text-gray-500 -mt-1 ml-1">
-                Croisée avec votre pays de résidence, elle détermine les postes consulaires auxquels
-                vous pouvez déposer votre demande.
+                Elle précise les justificatifs à vérifier. Le poste dépend de votre résidence, pas de votre seule nationalité.
               </p>
               <div {...attributsGroupe('nationalite')} className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 <RadioCard {...attributsChoix('nationalite')} label="Française" field="nationalite" value="France" />
@@ -799,7 +842,7 @@ export default function FormulaireEligibilite({
 
             <div className="space-y-3">
               <label className="text-white font-bold text-lg">
-                4. Comment vous joindre ? <span className="text-amber-500">*</span>
+                Comment vous joindre ? <span className="text-amber-500">*</span>
               </label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
@@ -912,32 +955,7 @@ export default function FormulaireEligibilite({
               {afficherErreur('dates')}
             </div>
 
-            <div className="space-y-3">
-              <label id={idQuestion('location')} className="text-white font-bold text-lg">Où résidez-vous actuellement ?</label>
-              <p className="text-xs text-gray-500 -mt-1 ml-1">
-                Pour vous conseiller sur le poste de dépôt, j’ai besoin de savoir
-                d&apos;où vous partez.
-              </p>
-              <div {...attributsGroupe('location')} className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <RadioCard {...attributsChoix('location')} label="Europe (France, Suisse, etc.)" field="location" value="europe" />
-                <RadioCard {...attributsChoix('location')} label="Asie (Thaïlande ou frontalier)" field="location" value="asia" />
-                <RadioCard {...attributsChoix('location')} label="Amérique du Nord" field="location" value="america" />
-                <RadioCard {...attributsChoix('location')} label="Autre" field="location" value="other" />
-              </div>
-              {afficherErreur('location')}
-              <input {...attributsChamp('locationDetails')} aria-label="Pays et ville de résidence"
-                type="text"
-                placeholder={
-                  residenceDetailleeRequise
-                    ? 'Pays et ville — obligatoire pour cette zone'
-                    : 'Précisez le pays et la ville...'
-                }
-                value={formData.locationDetails}
-                onChange={(e) => handleChange('locationDetails', e.target.value)}
-                className={`champ mt-2 ${erreurs.locationDetails ? 'champ-erreur' : ''}`}
-              />
-              {afficherErreur('locationDetails')}
-            </div>
+            <p className="text-sm text-gray-400">Résidence : {paysLisible}. Pour la modifier, revenez à la première étape.</p>
 
             <div className="space-y-3">
               <label htmlFor={idChamp('villeThailande')} className="text-white font-bold text-lg">
@@ -1099,18 +1117,18 @@ export default function FormulaireEligibilite({
               {/* Le seuil bancaire s'applique à chaque demandeur : dès que la
                   composition du foyer est connue, on annonce le montant réel
                   plutôt que de laisser croire au seuil individuel. */}
-              {isGroupTravel && nbPersonnesFoyer > 1 && (
+              {!examenManuel && isGroupTravel && nbPersonnesFoyer > 1 && (
                 <div className="mt-4 p-5 rounded-2xl bg-amber-500/5 border border-amber-500/30">
                   <p className="text-white font-semibold text-sm mb-2">
                     Pour {nbPersonnesFoyer} personnes, l&apos;épargne à justifier est de{' '}
-                    <MontantFonds prefixe="" personnes={nbPersonnesFoyer} />
+                    <MontantFonds posteId={poste?.id ?? null} cours={cours} personnes={nbPersonnesFoyer} detail />
                   </p>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    Le seuil fixé par l&apos;ambassade de Paris s&apos;applique à{' '}
-                    <strong className="text-white">chaque demandeur</strong>, accompagnants compris
-                    — conjoint et enfants inclus, et il doit être atteint chacun des trois derniers
-                    mois. Un compte joint permet de ne produire qu&apos;un seul justificatif pour
-                    vous deux, mais le montant reste cumulé.
+                    {poste?.fonds.conditions.valeur}
+                    {poste?.fonds.moisDeReleves.valeur !== null && poste?.fonds.moisDeReleves.valeur !== undefined &&
+                      ` Historique demandé par ce poste : ${poste.fonds.moisDeReleves.valeur} mois.`}
+                    {poste && poste.fonds.moisDeReleves.valeur === null && ` Historique : ${historiquePourPoste(poste).information.valeur} mois, selon le portail national e-Visa, pas une durée publiée par ce poste.`}
+
                   </p>
                 </div>
               )}
@@ -1236,15 +1254,14 @@ export default function FormulaireEligibilite({
                   : 'Demande transmise avec succès !'}
               </h3>
               <p className="text-gray-400 text-sm">
-                J'analyse votre projet et je vous envoie un devis par e-mail. En
-                attendant, voici la base tarifaire pour le profil{' '}
+                {budgetConnu ? "J'analyse votre projet avant de vous adresser un devis. Voici une estimation pour le profil" : "Je vérifie les conditions applicables avant tout chiffrage. Profil reçu :"}{' '}
                 <strong className="text-amber-500">
                   {isSoftPower ? 'Soft Power' : 'Digital Nomad'}
                 </strong>{' '}
                 :
               </p>
 
-              {isGroupTravel && nbPersonnesFoyer > 1 && (
+              {budgetConnu && contexteTarif && isGroupTravel && nbPersonnesFoyer > 1 && (
                 <div className="mt-5 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-left">
                   <p className="text-sm text-amber-500 font-bold mb-1">
                     {nbPersonnesFoyer > PALIER_MAX
@@ -1262,15 +1279,15 @@ export default function FormulaireEligibilite({
                       Chaque personne dépose une demande distincte, mais le budget n&apos;est pas
                       multiplié pour autant. Pour {nbPersonnesFoyer} personnes, comptez environ{' '}
                       <strong className="text-white">
-                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS).total)}
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, 'essentielle', contexteTarif).total)}
                       </strong>{' '}
                       au total, soit{' '}
                       <strong className="text-white">
-                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS).parPersonne)}
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, 'essentielle', contexteTarif).parPersonne)}
                       </strong>{' '}
                       par personne —{' '}
                       <strong className="text-amber-500">
-                        {remiseFoyer(nbPersonnesFoyer, isSoftPower, TAUX_SECOURS)} % de moins
+                        {remiseFoyer(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, contexteTarif)} % de moins
                       </strong>{' '}
                       que {nbPersonnesFoyer} dossiers isolés. Le détail vous est remis ligne par
                       ligne dans votre devis.
@@ -1280,7 +1297,7 @@ export default function FormulaireEligibilite({
               )}
             </div>
 
-            <div className="space-y-4">
+            {budgetConnu && <div className="space-y-4">
               <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/20 transition-colors">
                 <div>
                   <h4 className="font-bold text-white text-lg">Formule Essentielle</h4>
@@ -1313,7 +1330,7 @@ export default function FormulaireEligibilite({
                 </div>
               </div>
 
-            </div>
+            </div>}
 
             <RendezVous
               niveau="h3"
@@ -1322,7 +1339,7 @@ export default function FormulaireEligibilite({
             />
 
             {/* ── CHOIX DE LA FORMULE ── */}
-            {!formuleEnvoyee ? (
+            {budgetConnu && (!formuleEnvoyee ? (
               <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
                 <div>
                   <label id={idQuestion('formule')} className="text-white font-bold text-lg">
@@ -1382,7 +1399,7 @@ export default function FormulaireEligibilite({
                   </p>
                 </div>
               </div>
-            )}
+            ))}
 
             <div className="mt-8 text-center">
               {onClose ? (

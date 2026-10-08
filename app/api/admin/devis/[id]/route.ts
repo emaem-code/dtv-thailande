@@ -1,3 +1,5 @@
+import { DevisConsulaireError } from '../../../../lib/controle-devis';
+import { getCoursDevis } from '../../../../lib/taux';
 import { NextResponse } from 'next/server';
 import {
   lireDevis,
@@ -6,6 +8,7 @@ import {
   archiverDevis,
   DevisSigneError,
   normaliserDossier,
+  deboursParDefaut,
   normaliserClient,
   type Devis,
 } from '../../../../lib/devis';
@@ -27,6 +30,22 @@ export async function PATCH(requete: Request, { params }: Contexte) {
     const corps = (await requete.json()) as Partial<
       Pick<Devis, 'client' | 'dossier' | 'honoraires' | 'debours' | 'statut' | 'options' | 'message'>
     >;
+
+    // Le navigateur ne choisit ni le cours ni sa date. Le pays change : créer
+    // un nouveau devis évite de conserver les anciens débours (même manuels).
+    const actuel = await lireDevis(Number(id));
+    if (actuel?.dossier.paysResidence && corps.dossier?.paysResidence &&
+        actuel.dossier.paysResidence !== corps.dossier.paysResidence) {
+      return NextResponse.json({ erreur: 'Le pays de résidence a changé : créez un nouveau devis pour recalculer les frais du bon poste.' }, { status: 422 });
+    }
+    if (corps.dossier) {
+      corps.dossier.cours = actuel?.dossier.cours ?? await getCoursDevis();
+      if (!actuel?.dossier.paysResidence) {
+        // Confirmation d'un ancien brouillon : pas de débours hérités de Paris.
+        corps.debours = deboursParDefaut(corps.dossier);
+        corps.options = [];
+      }
+    }
 
     // Les lignes de débours viennent d'un formulaire : on les remet au propre
     // avant de les stocker, plutôt que de faire confiance à ce qui arrive.
@@ -53,6 +72,7 @@ export async function PATCH(requete: Request, { params }: Contexte) {
   } catch (erreur) {
     // Un devis signé qui refuse d'être modifié n'est pas une panne : c'est la
     // règle qui s'applique. Le code doit le dire.
+    if (erreur instanceof DevisConsulaireError) return NextResponse.json({ erreur: erreur.message }, { status: 422 });
     if (erreur instanceof DevisSigneError) {
       return NextResponse.json({ erreur: erreur.message }, { status: 409 });
     }

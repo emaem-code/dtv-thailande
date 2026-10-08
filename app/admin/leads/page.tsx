@@ -71,7 +71,7 @@ export default async function PageLeads() {
                     {l.telephone && ` · ${l.telephone}`}
                   </p>
                 </div>
-                {!l.traite && <BoutonNouveauDevis leadId={l.id} />}
+                {!l.traite && <BoutonNouveauDevis leadId={l.id} paysResidence={l.donnees['Code pays de résidence']} />}
               </div>
 
               <details className="mt-4 group">

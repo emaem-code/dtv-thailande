@@ -63,7 +63,7 @@ function corpsTexte(prenom: string, softPower: boolean): string {
 
   return `${salutation}
 
-J’ai bien reçu votre demande. Je l’étudie et reviens vers vous sous 48 heures avec une estimation chiffrée pour votre situation.
+J’ai bien reçu votre demande. Je l’étudie et reviens vers vous sous 48 heures pour faire le point sur votre situation et les vérifications nécessaires avant le devis.
 
 Si un élément vous est revenu depuis — une date qui bouge, un doute sur un document, une question que le formulaire ne posait pas — répondez simplement à ce message. Ces précisions m’aideront à préparer votre dossier et vous feront gagner du temps ensuite.
 
@@ -106,8 +106,7 @@ function corpsHtml(prenom: string, softPower: boolean): string {
 
           <p style="margin:0 0 20px 0;">
             J’ai bien reçu votre demande. Je l’étudie et reviens vers vous
-            <strong>sous 48 heures</strong> avec une estimation chiffrée pour votre
-            situation.
+            <strong>sous 48 heures</strong> pour faire le point sur votre situation et les vérifications nécessaires avant le devis.
           </p>
 
           <p style="margin:0 0 20px 0;">
@@ -197,7 +196,7 @@ export async function POST(requete: Request) {
     // le lead est le travail.
     const criteres =
       corps.criteres && typeof corps.criteres === 'object' ? (corps.criteres as Criteres) : {};
-    const classement = classerLead(criteres);
+    const classement = classerLead({ ...criteres, paysResidence: demande['Code pays de résidence'] });
 
     const detail = [
       `${prenom || 'Sans prénom'} — ${email}`,

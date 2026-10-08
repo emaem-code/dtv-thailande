@@ -1,3 +1,5 @@
+import { residenceAConfirmer, postePourResidence, historiquePourPoste } from './residence-consulaire';
+import { fondsPourPoste } from './taux';
 /**
  * Classement d'un lead — ce qui mérite qu'on lâche ce qu'on fait.
  *
@@ -13,6 +15,7 @@
  */
 
 export type Criteres = {
+  paysResidence?: string;
   /** yes | soon | no */
   funds?: string;
   /** yes | soon | no */
@@ -51,12 +54,14 @@ export type Classement = {
 export function classerLead(c: Criteres): Classement {
   const reserves: string[] = [];
   let bloque = false;
+  const poste = postePourResidence(c.paysResidence);
+  if (residenceAConfirmer(c.paysResidence)) reserves.push('Pays de résidence / recevabilité du poste à vérifier avant chiffrage');
 
   if (c.funds === 'no') {
-    reserves.push('Épargne hors de portée — le seuil de 15 000 € par personne n’est pas atteignable');
+    reserves.push(`Épargne hors de portée — ${poste ? fondsPourPoste(poste.id).texte + ' par demandeur' : 'montant à confirmer selon le poste'}`);
     bloque = true;
   } else if (c.funds === 'soon') {
-    reserves.push('Épargne en cours de constitution — compter trois mois d’antériorité après');
+    reserves.push(`Épargne en cours de constitution — historique ${poste ? historiquePourPoste(poste).information.valeur + ' mois (' + historiquePourPoste(poste).origine + ')' : 'à vérifier selon le poste'}`);
   }
 
   if (c.passport === 'no') {

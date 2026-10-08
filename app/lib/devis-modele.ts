@@ -1,14 +1,15 @@
 import {
   HONORAIRES,
   PALIER_MAX,
-  FRAIS_CONSULAIRES,
+  fraisPourPoste,
   ECOLE_SOFT_POWER,
   TRADUCTION_THB_PAR_PAGE,
   PAGES,
   SUPPLEMENT_FORMULE,
   FORMULES_VENDUES,
 } from './tarifs';
-import { fondsFoyerThb, eurosFoyerParis, formateThb, TAUX_SECOURS } from './taux';
+import { fondsFoyerThb, formateThb, TAUX_SECOURS, type CoursDevis } from './taux';
+import { verifierDevisConsulaire } from './controle-devis';
 import { ACOMPTE_POURCENT } from './agence';
 
 /**
@@ -75,6 +76,9 @@ export function prenomClient(client: Client): string {
 }
 
 export type Dossier = {
+  /** Absent sur les anciens devis : ne jamais en déduire Paris. */
+  paysResidence?: string;
+  cours?: CoursDevis | null;
   personnes: number;
   adultes: number;
   enfants: number;
@@ -192,8 +196,6 @@ export type Totaux = {
   parPersonne: number;
   /** La règle nationale, en bahts. Conservée pour le contexte, pas pour le seuil annoncé. */
   fondsThb: string;
-  /** Le montant réellement exigé par l'ambassade de Paris, en euros. C'est celui qui fait foi. */
-  fondsEuros: number;
   surDevis: boolean;
 };
 
@@ -213,28 +215,27 @@ export function totaliser(d: Pick<Devis, 'honoraires' | 'debours' | 'dossier'>):
     total,
     parPersonne: Math.round(total / n),
     fondsThb: formateThb(fondsFoyerThb(n)),
-    fondsEuros: eurosFoyerParis(n),
     surDevis: n > PALIER_MAX,
   };
 }
 
 /** Lignes de débours pré-remplies pour un dossier donné. Toutes restent modifiables. */
-export function deboursParDefaut(
-  personnes: number,
-  softPower: boolean,
-  formule: Dossier['formule'] = 'essentielle',
-  tauxThbParEuro = TAUX_SECOURS,
-): Debours[] {
+export function deboursParDefaut(dossier: Dossier): Debours[] {
+  const poste = verifierDevisConsulaire(dossier);
+  const { personnes, softPower } = dossier;
+  const tauxThbParEuro = dossier.cours?.parEuro.THB ?? TAUX_SECOURS;
+  const frais = fraisPourPoste({ posteId: poste.id, cours: dossier.cours });
+  if (frais.euros === null) throw new Error(`Frais consulaires non chiffrables — ${poste.nom}`);
   const n = Math.max(1, personnes || 1);
   const pageEuros = Math.round((TRADUCTION_THB_PAR_PAGE / tauxThbParEuro) * 100) / 100;
   const pages = (softPower ? PAGES.softPower : PAGES.standard) + (n - 1) * PAGES.rattache;
 
   const lignes: Debours[] = [
     {
-      libelle: 'Frais consulaires — ambassade de Thaïlande à Paris',
+      libelle: `Frais consulaires — ambassade de Thaïlande à ${poste.nom}`,
       quantite: n,
-      unitaire: FRAIS_CONSULAIRES,
-      detail: `${FRAIS_CONSULAIRES} € par personne, enfants rattachés compris`,
+      unitaire: frais.euros,
+      detail: `${frais.detail} par demandeur.`,
     },
   ];
 
@@ -336,7 +337,7 @@ export function construireOptions(
     .map((formule) => ({
       formule,
       honoraires: honorairesParDefaut(dossier.personnes, formule),
-      debours: deboursParDefaut(dossier.personnes, dossier.softPower, formule),
+      debours: deboursParDefaut({ ...dossier, formule }),
     }));
 }
 

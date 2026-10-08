@@ -1,32 +1,29 @@
 /**
- * Source unique des tarifs d'accompagnement.
- *
- * Ces montants étaient auparavant recopiés dans six fichiers — page d'accueil,
- * formulaire d'éligibilité, fenêtre guide, carrousel mobile, article Soft Power.
- * Une révision en oubliait forcément un. Ils sont désormais définis ici et
- * importés partout ailleurs.
- *
- * ── Révision du 2 septembre 2026 ──────────────────────────────────────────
- * La grille précédente (850 € / 1 750 €) avait été calibrée sur un dépôt en
- * Asie : frais consulaires à 10 000 THB, soit environ 260 €, et documents en
- * français le plus souvent acceptés à Vientiane ou Kuala Lumpur.
- *
- * Depuis le 31 août 2026, un demandeur français relève obligatoirement de
- * l'ambassade de Paris. Deux coûts apparaissent :
- *   — les frais consulaires y sont d'environ 350 €, soit 90 € de plus ;
- *   — la traduction assermentée y est exigée, alors qu'elle était rarement
- *     demandée en Asie.
- *
- * L'écart n'est pas le même sur les deux voies, et c'est ce qui justifie deux
- * hausses différentes plutôt qu'une augmentation uniforme : le bloc coûteux à
- * traduire est celui des revenus (SIRENE, URSSAF, avis d'imposition, lettre
- * d'activité), soit environ 280 €. Un dossier Soft Power ne le contient pas —
- * il n'exige aucune preuve de revenus, et la lettre d'école arrive déjà en
- * anglais. Il ne lui reste que le casier judiciaire et un acte d'état civil.
- *
- *   Digital Nomad : +90 € consulaire +280 € traductions = +370 €
- *   Soft Power    : +90 € consulaire  +90 € traductions = +180 €
+ * Honoraires et estimations de prestation, distincts des montants consulaires.
+ * Les frais consulaires et leur devise viennent exclusivement du poste sourcé.
+ * La résidence, jamais la nationalité seule, détermine ce poste.
  */
+import { lirePoste, type PosteId } from './residence-consulaire';
+import { coursValide, dateCoursFr, formatMontant, type CoursDevis } from './taux';
+
+export type ContexteTarif = { posteId: PosteId; cours?: CoursDevis | null };
+
+/** Le montant publié et sa provenance accompagnent toujours le calcul en euros. */
+export function fraisPourPoste({ posteId, cours }: ContexteTarif) {
+  const poste = lirePoste(posteId);
+  const information = poste.fraisConsulaires;
+  const montant = information.valeur;
+  if (!montant) return { information, euros: null, detail: `Frais à confirmer — ${poste.nom}` };
+  if (montant.devise === 'EUR') return { information, euros: montant.montant, detail: formatMontant(montant) };
+  if (!coursValide(cours) || !(montant.devise in cours.parEuro)) {
+    return { information, euros: null, detail: `${formatMontant(montant)} — conversion en euros indisponible` };
+  }
+  const taux = cours.parEuro[montant.devise as keyof CoursDevis['parEuro']];
+  return {
+    information, euros: Math.ceil(montant.montant / taux),
+    detail: `${formatMontant(montant)} ; estimation en euros au cours du ${dateCoursFr(cours.date)}, règlement au poste dans sa devise`,
+  };
+}
 
 export type Formule = {
   /** Identifiant stable, utilisé comme valeur dans le formulaire. */
@@ -274,11 +271,7 @@ export function prestationsFormule(formule: Formule['id'], estSoftPower: boolean
 
 // ─── DÉBOURS ──────────────────────────────────────────────────────────────────
 
-/**
- * Frais consulaires de l'ambassade de Paris, PAR PERSONNE.
- * Les enfants rattachés paient le même montant que le demandeur principal.
- */
-export const FRAIS_CONSULAIRES = 350;
+// Pas de frais consulaires universels : voir fraisPourPoste et sa source officielle.
 
 /** Inscription à l'école certifiée — voie Soft Power, demandeur principal seul. */
 export const ECOLE_SOFT_POWER = 910;
@@ -391,7 +384,8 @@ export function budgetDossier(
   personnes: number,
   estSoftPower: boolean,
   tauxThbParEuro: number,
-  formule: Formule['id'] = 'essentielle',
+  formule: Formule['id'],
+  contexte: ContexteTarif,
 ): Budget {
   const n = Math.max(1, Math.floor(personnes) || 1);
   const surDevis = n > PALIER_MAX;
@@ -401,7 +395,9 @@ export function budgetDossier(
   // le client va effectivement payer, pas une borne qui l'arrangerait.
   const pages = (estSoftPower ? PAGES.softPower : PAGES.standard) + (n - 1) * PAGES.rattache;
 
-  const consulaires = FRAIS_CONSULAIRES * n;
+  const frais = fraisPourPoste(contexte);
+  if (frais.euros === null) throw new Error(`Chiffrage impossible : ${frais.detail}.`);
+  const consulaires = frais.euros * n;
   const ecole = estSoftPower ? ECOLE_SOFT_POWER : 0;
   const traductions = Math.round((pages * TRADUCTION_THB_PAR_PAGE) / tauxThbParEuro);
   const debours = consulaires + ecole + traductions;
@@ -429,11 +425,12 @@ export function remiseFoyer(
   personnes: number,
   estSoftPower: boolean,
   tauxThbParEuro: number,
+  contexte: ContexteTarif,
 ): number {
   const n = Math.max(1, Math.floor(personnes) || 1);
   if (n < 2) return 0;
-  const groupe = budgetDossier(n, estSoftPower, tauxThbParEuro).total;
-  const isole = budgetDossier(1, estSoftPower, tauxThbParEuro).total * n;
+  const groupe = budgetDossier(n, estSoftPower, tauxThbParEuro, 'essentielle', contexte).total;
+  const isole = budgetDossier(1, estSoftPower, tauxThbParEuro, 'essentielle', contexte).total * n;
   return Math.round((1 - groupe / isole) * 100);
 }
 

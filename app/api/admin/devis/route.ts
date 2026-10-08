@@ -10,6 +10,8 @@ import {
   type Dossier,
   type Debours,
 } from '../../../lib/devis';
+import { getCoursDevis } from '../../../lib/taux';
+import { DevisConsulaireError, verifierDevisConsulaire } from '../../../lib/controle-devis';
 import { lireLead, marquerTraite } from '../../../lib/leads';
 
 export const runtime = 'nodejs';
@@ -77,14 +79,18 @@ export async function POST(requete: Request) {
           enfants,
           softPower: lead.softPower,
           destination: lead.donnees['Destination en Thaïlande'] || dossier.destination,
+          paysResidence: dossier.paysResidence || lead.donnees['Code pays de résidence'] || '',
         };
       }
     }
 
     dossier.personnes = Math.max(1, dossier.personnes);
 
+    dossier.cours = await getCoursDevis();
+    verifierDevisConsulaire(dossier);
+
     const honoraires = honorairesParDefaut(dossier.personnes, dossier.formule);
-    const debours: Debours[] = deboursParDefaut(dossier.personnes, dossier.softPower, dossier.formule);
+    const debours: Debours[] = deboursParDefaut(dossier);
 
     const devis = await creerDevis({
       client: normaliserClient(client),
@@ -100,6 +106,7 @@ export async function POST(requete: Request) {
 
     return NextResponse.json({ devis }, { status: 201 });
   } catch (erreur) {
+    if (erreur instanceof DevisConsulaireError) return NextResponse.json({ erreur: erreur.message }, { status: 422 });
     return NextResponse.json({ erreur: (erreur as Error).message }, { status: 500 });
   }
 }

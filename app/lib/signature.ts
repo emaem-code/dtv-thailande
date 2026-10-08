@@ -1,3 +1,5 @@
+import { resumeFonds } from './controle-devis';
+import { postePourResidence } from './residence-consulaire';
 import { totaliser, type Devis } from './devis-modele';
 import { prestationsFormule, CLAUSE_VOYAGE, mentionVoyage } from './tarifs';
 import {
@@ -90,9 +92,9 @@ export function texteContrat(devis: Devis): string {
   l.push(`Personnes : ${d.personnes} (${d.adultes} adulte(s), ${d.enfants} enfant(s))`);
   l.push(`Voie : ${d.softPower ? 'Soft Power (école certifiée)' : 'Activité à distance'}`);
   l.push(`Formule : ${d.formule}`);
-  l.push('Lieu de dépôt : ambassade de Thaïlande à Paris');
+  l.push(`Lieu de dépôt : ${postePourResidence(d.paysResidence)?.nom ?? 'à confirmer'} — résidence : ${d.paysResidence ?? 'non renseignée'}`);
   l.push(`Destination : ${d.destination || '(non précisée)'}`);
-  l.push(`Épargne à justifier : ${t.fondsThb} pour le foyer`);
+  l.push(resumeFonds(d));
   l.push('');
 
   l.push('1. HONORAIRES D’ACCOMPAGNEMENT');

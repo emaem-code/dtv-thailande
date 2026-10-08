@@ -1,3 +1,4 @@
+import { verifierDevisConsulaire } from './controle-devis';
 import { randomBytes } from 'crypto';
 import { requete, transaction, assurerSchema } from './db';
 import { PREMIER_NUMERO } from './agence';
@@ -117,6 +118,7 @@ export async function creerDevis(base: {
   debours: Debours[];
   leadId?: number | null;
 }): Promise<Devis> {
+  verifierDevisConsulaire(base.dossier);
   await assurerSchema();
   return transaction(async (q) => {
     const numero = await prochainNumero(q);
@@ -168,6 +170,7 @@ export async function majDevis(
   const actuel = await lireDevis(id);
   if (!actuel) return null;
   if (actuel.signature) throw new DevisSigneError();
+  verifierDevisConsulaire(champs.dossier ?? actuel.dossier);
 
   const [ligne] = await requete<LigneDevis>(
     `UPDATE devis SET

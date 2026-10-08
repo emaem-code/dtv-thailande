@@ -1,6 +1,7 @@
 import React from 'react';
 import { totaliser, devisSelonOption, nomComplet, type Devis } from '../lib/devis-modele';
-import { FONDS_EUR_PARIS, MARGE_CONSEILLEE } from '../lib/taux';
+import { resumeFonds } from '../lib/controle-devis';
+import { postePourResidence, historiquePourPoste } from '../lib/residence-consulaire';
 import {
   AGENCE,
   agenceIncomplete,
@@ -366,7 +367,7 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">Dépôt</dt>
-              <dd className="text-white print:text-black mt-1">Ambassade de Paris</dd>
+              <dd className="text-white print:text-black mt-1">{postePourResidence(devis.dossier.paysResidence)?.nom ?? 'À confirmer'} — {devis.dossier.paysResidence || 'résidence non renseignée'}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-widest text-gray-500 print:text-gray-600 font-bold">
@@ -380,21 +381,18 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               peut rendre le dossier infaisable, et mieux vaut le découvrir ici. */}
           <div className="mt-6 border border-amber-500/30 bg-amber-500/5 print:bg-amber-50 print:border-amber-300 rounded-xl p-5">
             <p className="text-amber-400 print:text-amber-800 font-semibold text-sm mb-1">
-              Épargne à justifier pour votre foyer : {euros(t.fondsEuros)}
+              Épargne et conditions du poste
             </p>
             <p className="text-xs text-gray-400 print:text-gray-700 leading-relaxed">
-              L&apos;ambassade de Thaïlande à Paris exige un relevé bancaire officiel faisant
-              apparaître un solde créditeur non bloqué d&apos;au moins{' '}
-              <strong className="text-white print:text-black">
-                {euros(FONDS_EUR_PARIS)} par personne
-              </strong>
-              , et ce <strong className="text-white print:text-black">chacun des trois derniers
-              mois</strong>. Le montant est affiché en euros par le poste, et non converti depuis
-              les {t.fondsThb} de la règle nationale : c&apos;est la somme en euros qui vous sera
-              opposée au guichet. Le seuil s&apos;apprécie par demandeur, conjoint et enfants
-              rattachés compris. Les fonds peuvent être réunis sur le compte du demandeur principal
-              et ne sont jamais bloqués. Prévoyez {MARGE_CONSEILLEE} par personne plutôt que le
-              strict minimum : un solde à l&apos;euro près ne laisse aucune marge.
+              {resumeFonds(devis.dossier)}
+              {postePourResidence(devis.dossier.paysResidence) && <a className="underline block mt-2"
+                href={historiquePourPoste(postePourResidence(devis.dossier.paysResidence)!).information.sources[0].url}
+                target="_blank" rel="noreferrer">Source de l'historique bancaire</a>}
+              {postePourResidence(devis.dossier.paysResidence)?.fonds.minimumPublie.sources.slice(0, 1).map((source) => (
+                <a key={source.url} href={source.url} className="underline block mt-2" target="_blank" rel="noreferrer">
+                  Source officielle (consultée le {source.dateConsultation.split('-').reverse().join('/')})
+                </a>
+              ))}
             </p>
           </div>
         </section>
@@ -420,7 +418,7 @@ export default function DocumentDevis({ devis }: { devis: Devis }) {
               </p>
               <p className="text-xs text-gray-500 print:text-gray-600 mt-1">
                 {devis.dossier.softPower ? 'Voie Soft Power' : 'Voie activité à distance'} · dépôt à
-                l&apos;ambassade de Thaïlande à Paris
+                l&apos;ambassade de Thaïlande à {postePourResidence(devis.dossier.paysResidence)?.nom ?? 'confirmer'}
               </p>
             </div>
             <p className="text-xl font-bold text-white print:text-black flex-none">
