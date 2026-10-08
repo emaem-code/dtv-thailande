@@ -7,7 +7,7 @@ import { baseUrl, getSortedBlogPosts } from './blog/posts';
 const DATES_MODIFICATION_CONTENU = {
   '/': '2026-09-25', // Argument du film explicatif.
   '/blog': '2026-09-25', // Description du blog.
-  '/faq': '2026-09-22', // Seuil bancaire et liens vers l'ambassade.
+  '/faq': '2026-10-08', // Seuil parisien publié en euros, affichage et JSON-LD.
   '/eligibilite': '2026-09-25', // Texte de confirmation et prise de rendez-vous.
   '/contact': '2026-09-25', // Interlocuteur unique et délai de réponse.
   '/mentions-legales': '2026-09-18', // Identité légale et informations de l'entreprise.

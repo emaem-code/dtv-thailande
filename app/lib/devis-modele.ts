@@ -4,11 +4,12 @@ import {
   fraisPourPoste,
   ECOLE_SOFT_POWER,
   TRADUCTION_THB_PAR_PAGE,
+  prixPageTraduction,
   PAGES,
   SUPPLEMENT_FORMULE,
   FORMULES_VENDUES,
 } from './tarifs';
-import { fondsFoyerThb, formateThb, TAUX_SECOURS, type CoursDevis } from './taux';
+import { fondsFoyerThb, formateThb, type CoursDevis } from './taux';
 import { verifierDevisConsulaire } from './controle-devis';
 import { ACOMPTE_POURCENT } from './agence';
 
@@ -223,11 +224,10 @@ export function totaliser(d: Pick<Devis, 'honoraires' | 'debours' | 'dossier'>):
 export function deboursParDefaut(dossier: Dossier): Debours[] {
   const poste = verifierDevisConsulaire(dossier);
   const { personnes, softPower } = dossier;
-  const tauxThbParEuro = dossier.cours?.parEuro.THB ?? TAUX_SECOURS;
   const frais = fraisPourPoste({ posteId: poste.id, cours: dossier.cours });
   if (frais.euros === null) throw new Error(`Frais consulaires non chiffrables — ${poste.nom}`);
   const n = Math.max(1, personnes || 1);
-  const pageEuros = Math.round((TRADUCTION_THB_PAR_PAGE / tauxThbParEuro) * 100) / 100;
+  const pageEuros = prixPageTraduction(dossier.cours);
   const pages = (softPower ? PAGES.softPower : PAGES.standard) + (n - 1) * PAGES.rattache;
 
   const lignes: Debours[] = [

@@ -203,3 +203,16 @@ test('API modification : ancien devis recalculé, cours imposé par le serveur e
   assert.equal((await PATCH(requete('Suisse'), contexte)).status, 422);
   assert.equal(enregistre, null);
 });
+
+test('traductions estimables sans cours : Paris et Bruxelles restent chiffrables, aucun taux de secours', () => {
+  const charger = environnement();
+  const { deboursParDefaut } = charger('app/lib/devis-modele.ts');
+  const { budgetDossier, prixPageTraduction } = charger('app/lib/tarifs.ts');
+  for (const [pays, posteId] of [['France', 'paris'], ['Belgique', 'bruxelles']]) {
+    const lignes = deboursParDefaut({ ...dossier(pays), cours: null });
+    assert.equal(lignes[0].unitaire, 350);
+    assert.equal(lignes.find((l) => l.libelle === 'Traductions certifiées').unitaire, 23.44);
+    assert.equal(budgetDossier(2, false, 'essentielle', { posteId, cours: null }).traductions, 352);
+  }
+  assert.equal(prixPageTraduction(cours), Math.round(900 / cours.parEuro.THB * 100) / 100);
+});

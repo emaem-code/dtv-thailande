@@ -5,7 +5,7 @@ import MontantFonds from './MontantFonds';
 import RendezVous from './RendezVous';
 import { lireAttribution } from '../lib/attribution';
 import { prix, tarif, budgetDossier, remiseFoyer, PALIER_MAX, fraisPourPoste } from '../lib/tarifs';
-import { TAUX_SECOURS, fondsPourPoste, type CoursDevis } from '../lib/taux';
+import { fondsPourPoste, type CoursDevis } from '../lib/taux';
 import { controleDevis } from '../lib/controle-devis';
 import { PAYS_RESIDENCE, postePourResidence, residenceAConfirmer, historiquePourPoste } from '../lib/residence-consulaire';
 import { track } from '@vercel/analytics';
@@ -1279,15 +1279,15 @@ export default function FormulaireEligibilite({
                       Chaque personne dépose une demande distincte, mais le budget n&apos;est pas
                       multiplié pour autant. Pour {nbPersonnesFoyer} personnes, comptez environ{' '}
                       <strong className="text-white">
-                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, 'essentielle', contexteTarif).total)}
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, 'essentielle', contexteTarif).total)}
                       </strong>{' '}
                       au total, soit{' '}
                       <strong className="text-white">
-                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, 'essentielle', contexteTarif).parPersonne)}
+                        {prix(budgetDossier(nbPersonnesFoyer, isSoftPower, 'essentielle', contexteTarif).parPersonne)}
                       </strong>{' '}
                       par personne —{' '}
                       <strong className="text-amber-500">
-                        {remiseFoyer(nbPersonnesFoyer, isSoftPower, cours?.parEuro.THB ?? TAUX_SECOURS, contexteTarif)} % de moins
+                        {remiseFoyer(nbPersonnesFoyer, isSoftPower, contexteTarif)} % de moins
                       </strong>{' '}
                       que {nbPersonnesFoyer} dossiers isolés. Le détail vous est remis ligne par
                       ligne dans votre devis.

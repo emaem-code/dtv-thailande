@@ -288,6 +288,16 @@ export const ECOLE_SOFT_POWER = 910;
  */
 export const TRADUCTION_THB_PAR_PAGE = 900;
 
+/** Ancienne estimation par page conservée en euros, hors tout seuil consulaire. */
+const ESTIMATION_TRADUCTION_EUR_PAR_PAGE = 23.44;
+
+/** Le prix réel reste facturé sur justificatif, même sans cours disponible. */
+export function prixPageTraduction(cours?: CoursDevis | null): number {
+  return coursValide(cours)
+    ? Math.round((TRADUCTION_THB_PAR_PAGE / cours.parEuro.THB) * 100) / 100
+    : ESTIMATION_TRADUCTION_EUR_PAR_PAGE;
+}
+
 /**
  * Volume de traduction retenu dans l'estimation, en pages.
  *
@@ -359,7 +369,7 @@ export type Budget = {
   consulaires: number;
   /** Scolarité, nulle hors voie Soft Power. */
   ecole: number;
-  /** Traductions, converties au cours fourni. */
+  /** Estimation des traductions, refacturées au coût réel. */
   traductions: number;
   /** Pages retenues avant plafonnement. */
   pages: number;
@@ -376,14 +386,12 @@ export type Budget = {
 /**
  * Décompose le coût complet d'un dossier.
  *
- * Le cours est passé en paramètre plutôt que lu ici : ce module reste pur et
- * synchrone, et l'appelant décide s'il utilise le cours du jour ou celui de
- * repli.
+ * Le contexte fournit le cours daté s'il est disponible. Sans cours, seule
+ * l'estimation budgétaire des traductions subsiste, jamais un seuil converti.
  */
 export function budgetDossier(
   personnes: number,
   estSoftPower: boolean,
-  tauxThbParEuro: number,
   formule: Formule['id'],
   contexte: ContexteTarif,
 ): Budget {
@@ -399,7 +407,7 @@ export function budgetDossier(
   if (frais.euros === null) throw new Error(`Chiffrage impossible : ${frais.detail}.`);
   const consulaires = frais.euros * n;
   const ecole = estSoftPower ? ECOLE_SOFT_POWER : 0;
-  const traductions = Math.round((pages * TRADUCTION_THB_PAR_PAGE) / tauxThbParEuro);
+  const traductions = Math.round(pages * prixPageTraduction(contexte.cours));
   const debours = consulaires + ecole + traductions;
   const total = honoraires + debours;
 
@@ -424,13 +432,12 @@ export function budgetDossier(
 export function remiseFoyer(
   personnes: number,
   estSoftPower: boolean,
-  tauxThbParEuro: number,
   contexte: ContexteTarif,
 ): number {
   const n = Math.max(1, Math.floor(personnes) || 1);
   if (n < 2) return 0;
-  const groupe = budgetDossier(n, estSoftPower, tauxThbParEuro, 'essentielle', contexte).total;
-  const isole = budgetDossier(1, estSoftPower, tauxThbParEuro, 'essentielle', contexte).total * n;
+  const groupe = budgetDossier(n, estSoftPower, 'essentielle', contexte).total;
+  const isole = budgetDossier(1, estSoftPower, 'essentielle', contexte).total * n;
   return Math.round((1 - groupe / isole) * 100);
 }
 

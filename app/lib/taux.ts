@@ -6,12 +6,6 @@ export const FONDS_THB = regleNationaleDtv.fonds.valeur!.montant;
 export const FONDS_EUR_PARIS = lirePoste('paris').fonds.minimumEnDeviseLocale.valeur!.montant;
 
 /**
- * Cours de repli si l'API est injoignable (1 EUR = X THB).
- * À réactualiser une ou deux fois par an — il ne sert qu'en cas de panne.
- */
-export const TAUX_SECOURS = 38.4;
-
-/**
  * Montant conseillé au client, en euros et PAR PERSONNE.
  *
  * Au-dessus du seuil de Paris, jamais à son niveau exact : présenter
@@ -36,11 +30,6 @@ export function fondsFoyerThb(nbPersonnes: number): number {
   return FONDS_THB * Math.max(1, Math.floor(nbPersonnes) || 1);
 }
 
-/** Contre-valeur en euros du seuil applicable à un foyer, arrondie à la centaine supérieure. */
-export function eurosFoyer(tauxThbParEuro: number, nbPersonnes: number): number {
-  return Math.ceil(fondsFoyerThb(nbPersonnes) / tauxThbParEuro / 100) * 100;
-}
-
 /**
  * Montant exigé par l'ambassade de Paris pour un foyer, en euros.
  *
@@ -56,44 +45,9 @@ export function formateThb(montant: number): string {
   return `${montant.toLocaleString('fr-FR').replace(/ | | /g, ' ')} THB`;
 }
 
-/** Contre-valeur en euros, arrondie à la centaine supérieure. */
-export function eurosArrondis(tauxThbParEuro: number): number {
-  return Math.ceil(FONDS_THB / tauxThbParEuro / 100) * 100;
-}
-
 /** Format français : 13 100 € */
 export function formateEuros(montant: number): string {
   return `${montant.toLocaleString('fr-FR').replace(/ | /g, ' ')} €`;
-}
-
-/**
- * Cours du jour, mis en cache six heures par Next.
- * Retourne le cours de repli si l'API échoue : la page ne casse jamais.
- */
-export async function getTauxThb(): Promise<number> {
-  // Délai maximal : sans cela, une API lente ou injoignable bloquerait
-  // le rendu de la page indéfiniment côté serveur.
-  const controleur = new AbortController();
-  const minuteur = setTimeout(() => controleur.abort(), 2500);
-
-  try {
-    const reponse = await fetch('https://api.frankfurter.app/latest?from=EUR&to=THB', {
-      signal: controleur.signal,
-      next: { revalidate: 21600 },
-    });
-    if (!reponse.ok) return TAUX_SECOURS;
-
-    const donnees = await reponse.json();
-    const taux = donnees?.rates?.THB;
-
-    // Garde-fou : un cours EUR/THB plausible se situe entre 25 et 60.
-    // Au-delà, on considère la réponse comme corrompue.
-    return typeof taux === 'number' && taux > 25 && taux < 60 ? taux : TAUX_SECOURS;
-  } catch {
-    return TAUX_SECOURS;
-  } finally {
-    clearTimeout(minuteur);
-  }
 }
 
 export type CoursDevis = {

@@ -2,7 +2,7 @@ import React from 'react';
 import BoutonEligibilite from '../components/BoutonEligibilite';
 import Link from 'next/link';
 import { estPublie } from '../blog/posts';
-import { getTauxThb, eurosArrondis, formateEuros, MARGE_CONSEILLEE } from '../lib/taux';
+import { FONDS_EUR_PARIS, formateEuros, MARGE_CONSEILLEE } from '../lib/taux';
 
 type Faq = {
   q: string;
@@ -314,9 +314,8 @@ function avecMontants(texte: string, euros: string): string {
   return texte.replace('{EUROS}', euros).replace('{MARGE}', MARGE_CONSEILLEE);
 }
 
-export default async function FaqPage() {
-  const taux = await getTauxThb();
-  const euros = formateEuros(eurosArrondis(taux));
+export default function FaqPage() {
+  const euros = formateEuros(FONDS_EUR_PARIS);
 
   const faqSchema = {
     '@context': 'https://schema.org',
