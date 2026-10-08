@@ -30,7 +30,11 @@ export default function Home() {
               <span className={s.statusDot} /> Votre projet, un interlocuteur sur place.
             </p>
             <h1 id="titre-accueil">
-              <span>Visa DTV Thaïlande</span>Votre nouvelle vie
+              {/* L'espace est indispensable : sans elle, le texte extrait par les
+                  moteurs colle les deux blocs et fabrique « ThaïlandeVotre ».
+                  Le CSS passe le span à la ligne, donc rien ne change à l'écran. */}
+              <span>Visa DTV Thaïlande</span>{' '}
+              Votre nouvelle vie
               <br />
               commence <em>ici.</em>
             </h1>
