@@ -13,14 +13,14 @@ const breadcrumbSchema = createBreadcrumbSchema(getBlogPost('visa-dtv-couple-fam
 
 // ─── MÉTADONNÉES SEO ──────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Visa DTV en famille : conjoint, enfants et le cas du PACS",
+  title: "Visa DTV famille : conjoint et enfants accompagnants, et le cas du PACS",
   description:
-    "La catégorie « conjoint et enfants accompagnants » du Visa DTV : le seuil de 500 000 THB s'applique à chaque personne, y compris aux enfants. Le PACS, lui, n'ouvre aucun droit au rattachement.",
+    "La catégorie « conjoint et enfants accompagnants » du Visa DTV : l'ambassade de Paris exige 15 000 € par personne, enfants compris. Le PACS, lui, n'ouvre aucun droit au rattachement.",
   alternates: {
     canonical: 'https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs',
   },
   openGraph: {
-    title: "Visa DTV en famille : conjoint, enfants et le cas du PACS",
+    title: "Visa DTV famille : conjoint et enfants accompagnants, et le cas du PACS",
     description:
       "Faire venir son conjoint et ses enfants avec le Visa DTV : la catégorie accompagnants, la lettre de sponsoring, et pourquoi le PACS bloque tout.",
     url: "https://dtv-thailande.fr/blog/visa-dtv-couple-famille-pacs",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Visa DTV en famille : conjoint, enfants et le cas du PACS',
-    description: '500 000 THB par personne, enfants compris. Le PACS n\'ouvre aucun droit au rattachement.',
+    title: 'Visa DTV famille : conjoint et enfants accompagnants, et le cas du PACS',
+    description: '15 000 € par personne à Paris, enfants compris. Le PACS n\'ouvre aucun droit au rattachement.',
     images: ['/images/blog/visa-dtv-couple-famille-pacs.jpg'],
   },
 };
@@ -47,7 +47,7 @@ const articleSchema = {
   },
   "headline": "Visa DTV en famille : faire venir son conjoint et ses enfants accompagnants",
   "description":
-    "La catégorie « conjoint et enfants accompagnants » du Visa DTV, la lettre de sponsoring, le seuil de 500 000 THB exigé de chaque demandeur, et le blocage du PACS.",
+    "La catégorie « conjoint et enfants accompagnants » du Visa DTV, la lettre de sponsoring, les 15 000 € par demandeur exigés par l'ambassade de Paris, et le blocage du PACS.",
   "image": "https://dtv-thailande.fr/images/blog/visa-dtv-couple-famille-pacs.jpg",
   "author": {
     "@type": "Person",
@@ -64,7 +64,7 @@ const articleSchema = {
     },
   },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-08-08",
+  "dateModified": "2026-10-08",
 };
 
 // ─── SCHEMA FAQ JSON-LD ───────────────────────────────────────────────────────
@@ -77,7 +77,7 @@ const faqSchema = {
       "name": "Existe-t-il un Visa DTV pour le conjoint accompagnant ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Sur le portail de l'e-Visa thaïlandais, le motif de séjour « Spouse and Children under 20 years of age of DTV visa holder » est prévu pour le conjoint marié et les enfants de moins de 20 ans. Chacun dépose sa propre demande et paie ses propres frais, mais l'accompagnant n'a pas à justifier d'une activité éligible — il s'appuie sur celle du titulaire principal — mais il doit bien justifier de ses propres 500 000 THB, comme tout demandeur."
+        "text": "Oui. Sur le portail de l'e-Visa thaïlandais, le motif de séjour « Spouse and Children under 20 years of age of DTV visa holder » est prévu pour le conjoint marié et les enfants de moins de 20 ans. Chacun dépose sa propre demande et paie ses propres frais, mais l'accompagnant n'a pas à justifier d'une activité éligible — il s'appuie sur celle du titulaire principal — mais il doit bien justifier de ses propres fonds, comme tout demandeur : 15 000 € exigés par l'ambassade de Paris, sur chacun des trois derniers relevés mensuels."
       }
     },
     {
@@ -101,7 +101,7 @@ const faqSchema = {
       "name": "Quelle est l'exigence financière pour une famille avec le DTV ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non : le seuil de 500 000 THB s'applique à chaque demandeur, accompagnants compris. Un couple marié avec deux enfants doit donc présenter 2 000 000 THB, et non 500 000. Un compte joint permet au titulaire et à son conjoint de produire le même justificatif, mais le montant reste cumulé. Ce que le mariage dispense, ce n'est pas les fonds : c'est la nécessité pour le conjoint de justifier de sa propre activité éligible."
+        "text": "Non : le seuil s'applique à chaque demandeur, accompagnants compris. L'ambassade de Paris exige 15 000 € par personne, un montant qu'elle publie en euros — ce n'est pas une conversion des 500 000 THB de la règle nationale, et il est plus élevé. Une famille mariée de quatre personnes doit donc justifier de 60 000 €, et non de 15 000. Un compte joint permet au titulaire et à son conjoint de produire le même justificatif, mais le montant reste cumulé. Ce que le mariage dispense, ce n'est pas les fonds : c'est la nécessité pour le conjoint de justifier de sa propre activité éligible."
       }
     },
     {
@@ -150,7 +150,7 @@ export default function ArticleDtvFamille() {
           S’expatrier en Thaïlande avec le nouveau <strong>Destination Thailand Visa (DTV)</strong> représente une opportunité exceptionnelle pour les freelances, les télétravailleurs et les passionnés de culture. Cependant, lorsqu'il s'agit de partir à deux ou avec des enfants, les informations disponibles en ligne deviennent floues, voire contradictoires.
         </p>
         <p>
-          La bonne nouvelle d&apos;abord : la catégorie « conjoint et enfants accompagnants » existe bel et bien, et elle dispense votre conjoint de justifier d&apos;une activité professionnelle éligible. La mauvaise, en deux temps : le seuil de 500 000 THB, lui, s&apos;applique à <strong>chaque personne</strong>, enfants compris — et le <strong>PACS français</strong> n&apos;ouvre aucun droit au rattachement.
+          La bonne nouvelle d&apos;abord : la catégorie « conjoint et enfants accompagnants » existe bel et bien, et elle dispense votre conjoint de justifier d&apos;une activité professionnelle éligible. La mauvaise, en deux temps : le seuil, lui, s&apos;applique à <strong>chaque personne</strong>, enfants compris — 15 000 € par tête à l&apos;ambassade de Paris — et le <strong>PACS français</strong> n&apos;ouvre aucun droit au rattachement.
         </p>
         <p>
           Dans ce guide, je vous explique le cadre légal thaïlandais et les réalités du terrain pour vous aider à préparer sereinement votre projet d'expatriation familiale, dans le respect de la loi.
@@ -176,7 +176,7 @@ export default function ArticleDtvFamille() {
           1. La catégorie « conjoint et enfants accompagnants »
         </h2>
         <p className="mb-4">
-          Commençons par lever le malentendu le plus coûteux, celui que cet article lui-même a longtemps propagé : <strong>le seuil de 500 000 THB s&apos;applique à chaque demandeur</strong>, accompagnants compris. Ce que le statut d&apos;accompagnant dispense, ce n&apos;est pas les fonds — c&apos;est l&apos;obligation, pour le conjoint, de justifier de sa propre activité éligible.
+          Commençons par lever le malentendu le plus coûteux, celui que cet article lui-même a longtemps propagé : <strong>le seuil s&apos;applique à chaque demandeur</strong>, accompagnants compris — et à Paris il se compte en euros, 15 000 € par personne, pas en bahts. Ce que le statut d&apos;accompagnant dispense, ce n&apos;est pas les fonds — c&apos;est l&apos;obligation, pour le conjoint, de justifier de sa propre activité éligible.
         </p>
         <p className="mb-4">
           Sur le portail officiel de l&apos;e-Visa thaïlandais, une fois le <strong>Destination Thailand Visa</strong> sélectionné, un menu déroulant demande le motif du séjour. Trois options s&apos;affichent : <em>Workcation</em>, <em>Thai Soft Power</em>, et <strong>« Spouse and Children under 20 years of age of DTV visa holder »</strong>. C&apos;est cette troisième option que coche le conjoint, et chacun des enfants de moins de 20 ans.
@@ -218,7 +218,7 @@ export default function ArticleDtvFamille() {
           </li>
           <li className="flex gap-3">
             <span className="text-fuchsia-500 flex-shrink-0">📌</span>
-            <span><strong className="text-white">Un relevé bancaire justifiant de 500 000 THB pour l&apos;accompagnant.</strong> Si le compte est joint avec le titulaire, c&apos;est le même document qui est versé — mais il doit alors afficher le cumul des deux seuils.</span>
+            <span><strong className="text-white">Un relevé bancaire justifiant de 15 000 € pour l&apos;accompagnant.</strong> Si le compte est joint avec le titulaire, c&apos;est le même document qui est versé — mais il doit alors afficher le cumul des deux seuils.</span>
           </li>
           <li className="flex gap-3">
             <span className="text-fuchsia-500 flex-shrink-0">📌</span>
@@ -335,7 +335,7 @@ export default function ArticleDtvFamille() {
               <tr>
                 <td className="py-4 px-5 text-white font-medium">DTV (Destination Thailand Visa)</td>
                 <td className="py-4 px-5 text-gray-400">Valable 5 ans, entrées multiples, accessible aux indépendants et profils culturels.</td>
-                <td className="py-4 px-5 text-gray-400">Une demande et 500 000 THB par personne. Le mariage dispense le conjoint de justifier d&apos;une activité éligible, pas des fonds.</td>
+                <td className="py-4 px-5 text-gray-400">Une demande et 15 000 € par personne à Paris. Le mariage dispense le conjoint de justifier d&apos;une activité éligible, pas des fonds.</td>
               </tr>
               <tr>
                 <td className="py-4 px-5 text-white font-medium">Non-O (Conjoint de résident)</td>
